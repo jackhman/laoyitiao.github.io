@@ -1,0 +1,24 @@
+{
+  "type": "module",
+  "devDependencies": {
+    "@types/md5": "^2.3.3",
+    "@types/nprogress": "^0.2.1",
+    "cross-env": "^7.0.3",
+    "increase-memory-limit": "^1.0.7",
+    "vitepress": "^1.0.0-rc.20"
+  },
+  "scripts": {
+    "docs:dev": "vitepress dev --host",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview --host",
+    "limit": "cross-env LIMIT=12000 increase-memory-limit && node fix-memory-limit.config.cjs"
+  },
+  "dependencies": {
+    "confetti-js": "^0.0.18",
+    "gitalk": "^1.8.0",
+    "markdown-it-title": "^4.0.0",
+    "md5": "^2.3.0",
+    "nprogress": "^0.2.0",
+    "vue": "^3.3.4"
+  }
+}
