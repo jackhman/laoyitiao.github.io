@@ -7,7 +7,7 @@ App 测试框架
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/73/7C/Cgq2xl5qDceAA45DAAFaiYH-vbQ159.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/73/7C/Cgq2xl5qDceAA45DAAFaiYH-vbQ159.png"/>
 
 <br />
 
@@ -15,7 +15,7 @@ App 测试框架
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/73/7B/CgpOIF5qDceAXR2XAAOjHEYbTOM879.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/73/7B/CgpOIF5qDceAXR2XAAOjHEYbTOM879.png"/>
 
 <br />
 
@@ -48,7 +48,7 @@ Appium 实现细节
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/73/7C/Cgq2xl5qDceAQ6h9AAEsQFTJKuk505.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/73/7C/Cgq2xl5qDceAQ6h9AAEsQFTJKuk505.png"/>
 
 <br />
 
@@ -64,7 +64,7 @@ Appium 的整体理念跟 Selenium 是趋向一致的，它跟 Selenium 一样�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/73/7B/CgpOIF5qDceAb_oaAAI80IZEsiE465.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/73/7B/CgpOIF5qDceAb_oaAAI80IZEsiE465.png"/>
 
 <br />
 
@@ -76,7 +76,7 @@ Appium 的整体理念跟 Selenium 是趋向一致的，它跟 Selenium 一样�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/73/7C/Cgq2xl5qDceACqpeAAHDnWNN1yI695.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/73/7C/Cgq2xl5qDceACqpeAAHDnWNN1yI695.png"/>
 
 <br />
 
@@ -88,7 +88,7 @@ Appium 的整体理念跟 Selenium 是趋向一致的，它跟 Selenium 一样�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/73/7B/CgpOIF5qDceAEolTAAFtkSjHZCc235.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/73/7B/CgpOIF5qDceAEolTAAFtkSjHZCc235.png"/>
 
 <br />
 
@@ -122,7 +122,7 @@ Appium 安装
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/73/7C/Cgq2xl5qDciAYgtGAAPYPGG_N4A702.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/73/7C/Cgq2xl5qDciAYgtGAAPYPGG_N4A702.png"/>
 
 <br />
 
@@ -187,7 +187,7 @@ Appium 本身是使用 Node.js 开发的，它需要 Node.js 的一个运行时�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/73/7B/CgpOIF5qDciAErgXAABhgJgAlVY058.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/73/7B/CgpOIF5qDciAErgXAABhgJgAlVY058.png"/>
 
 <br />
 
@@ -199,7 +199,7 @@ Appium 本身是使用 Node.js 开发的，它需要 Node.js 的一个运行时�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/73/7C/Cgq2xl5qDciAabBgAAQPHFuaeXU658.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/73/7C/Cgq2xl5qDciAabBgAAQPHFuaeXU658.png"/>
 
 <br />
 
@@ -207,7 +207,7 @@ Appium 本身是使用 Node.js 开发的，它需要 Node.js 的一个运行时�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/73/7B/CgpOIF5qDciAcIU-AAC2PjcE0LI886.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/73/7B/CgpOIF5qDciAcIU-AAC2PjcE0LI886.png"/>
 
 <br />
 
@@ -219,7 +219,7 @@ Appium 本身是使用 Node.js 开发的，它需要 Node.js 的一个运行时�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/73/7C/Cgq2xl5qDciAIiHPAACTFTk9L20398.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/73/7C/Cgq2xl5qDciAIiHPAACTFTk9L20398.png"/>
 
 <br />
 
@@ -231,7 +231,7 @@ Appium 本身是使用 Node.js 开发的，它需要 Node.js 的一个运行时�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/73/7B/CgpOIF5qDciAWKzfAADba7BNmdo400.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/73/7B/CgpOIF5qDciAWKzfAADba7BNmdo400.png"/>
 
 <br />
 
@@ -239,7 +239,7 @@ Appium 本身是使用 Node.js 开发的，它需要 Node.js 的一个运行时�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/73/7C/Cgq2xl5qDciAFt-iAAFI__XWiiA617.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/73/7C/Cgq2xl5qDciAFt-iAAFI__XWiiA617.png"/>
 
 <br />
 
@@ -247,7 +247,7 @@ Appium 本身是使用 Node.js 开发的，它需要 Node.js 的一个运行时�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/73/7B/CgpOIF5qDciAFrcOAAHkLDUXzNY837.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/73/7B/CgpOIF5qDciAFrcOAAHkLDUXzNY837.png"/>
 
 <br />
 
@@ -263,7 +263,7 @@ Appium 本身是使用 Node.js 开发的，它需要 Node.js 的一个运行时�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/73/7C/Cgq2xl5qDcmATCOfAAI40m93B4A036.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/73/7C/Cgq2xl5qDcmATCOfAAI40m93B4A036.png"/>
 
 <br />
 
@@ -271,7 +271,7 @@ App 启动后就弹出来一个升级，我们点击关闭，页面上有一个�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/73/7B/CgpOIF5qDcmAaVlUAAK4Adx_9zA157.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/73/7B/CgpOIF5qDcmAaVlUAAK4Adx_9zA157.png"/>
 
 <br />
 
@@ -279,7 +279,7 @@ App 启动后就弹出来一个升级，我们点击关闭，页面上有一个�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/73/7C/Cgq2xl5qDcmAKljiAAIkk6pt3Wc399.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/73/7C/Cgq2xl5qDcmAKljiAAIkk6pt3Wc399.png"/>
 
 <br />
 
@@ -287,7 +287,7 @@ App 启动后就弹出来一个升级，我们点击关闭，页面上有一个�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/73/7B/CgpOIF5qDcmAd1N3AAHoOJTsDcM215.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/73/7B/CgpOIF5qDcmAd1N3AAHoOJTsDcM215.png"/>
 
 <br />
 
@@ -303,7 +303,7 @@ App 启动后就弹出来一个升级，我们点击关闭，页面上有一个�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/73/7C/Cgq2xl5qDcmAGANDAAMUJgF1WxQ137.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/73/7C/Cgq2xl5qDcmAGANDAAMUJgF1WxQ137.png"/>
 
 <br />
 
@@ -315,7 +315,7 @@ App 启动后就弹出来一个升级，我们点击关闭，页面上有一个�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/73/7C/CgpOIF5qDcmAb5M7AASgOiJZTrk232.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/73/7C/CgpOIF5qDcmAb5M7AASgOiJZTrk232.png"/>
 
 <br />
 
@@ -352,7 +352,7 @@ App 启动后就弹出来一个升级，我们点击关闭，页面上有一个�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/73/7C/Cgq2xl5qDcmAYGGsAAVH0iL2Jm8334.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/73/7C/Cgq2xl5qDcmAYGGsAAVH0iL2Jm8334.png"/>
 
 <br />
 
@@ -380,7 +380,7 @@ App 启动后就弹出来一个升级，我们点击关闭，页面上有一个�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/73/7C/CgpOIF5qDcmAUmIPAAI3FMnIHl0264.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/73/7C/CgpOIF5qDcmAUmIPAAI3FMnIHl0264.png"/>
 
 <br />
 
@@ -388,7 +388,7 @@ App 启动后就弹出来一个升级，我们点击关闭，页面上有一个�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/73/7C/Cgq2xl5qDcmAS_PQAAHzJo5IGQo822.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/73/7C/Cgq2xl5qDcmAS_PQAAHzJo5IGQo822.png"/>
 
 <br />
 

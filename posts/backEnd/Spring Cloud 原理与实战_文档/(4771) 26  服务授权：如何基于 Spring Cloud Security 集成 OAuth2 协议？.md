@@ -43,14 +43,14 @@ public class AuthApplication {
 
 在上一课时中，我们提到 OAuth2 协议存在四种授权模式。在本课程中，我们以简单但常用的密码模式为例进行展开。在密码模式下，用户向客户端提供用户名和密码，并将用户名和密码发给授权服务器从而请求 Token。授权服务器首先会对密码凭证信息进行认证，确认无误后，向客户端发放 Token。整个流程如下图所示：
 
-![1.png](https://s0.lgstatic.com/i/image/M00/8B/01/CgqCHl_bCSOAXCQEAAF6rchmB6E579.png)  
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/8B/01/CgqCHl_bCSOAXCQEAAF6rchmB6E579.png"/>  
 密码模式示意图
 
 请注意，授权服务器在这里执行认证操作的目的，是验证所传入的用户名和密码是否正确。在密码模式下，这一步是必须的，而如果采用其他授权模式，则不一定会有用户认证这一环节。
 
 确定了采用密码模式之后，我们来看为了实现这一授权模式，我们需要对授权服务器做哪些开发工作。首先我们需要设置一些基础数据，包括客户端信息和用户信息。然后基于这些基础数据，就可以通过 HTTP 请求获取所需的 Token。如下所示：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/89/6F/Ciqc1F_YZ5yAa21GAAA5jcj4Wlw391.png)  
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/89/6F/Ciqc1F_YZ5yAa21GAAA5jcj4Wlw391.png"/>  
 密码模式下的 OAuth2 协议集成开发流程
 
 #### 设置客户端信息
@@ -179,14 +179,14 @@ public class SpringHealthWebSecurityConfigurer extends WebSecurityConfigurerAdap
 
 这里使用 Postman 来模拟 HTTP 请求，客户端信息设置方式如下图所示：
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/89/7A/CgqCHl_YZ76AOxeuAABMSQ09CHU759.png)  
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/89/7A/CgqCHl_YZ76AOxeuAABMSQ09CHU759.png"/>  
 客户端信息设置示意图
 
 我们在"Authorization"请求头中指定认证类型为"Basic Auth"，然后设置客户端名称和客户端安全码分别为"springhealth"和"springhealth_secret"。
 
 接下去我们来指定针对授权模式的专用配置信息，首当其冲的是用于指定授权模式的 grant_type 属性，以及用于指定客户端访问范围的 scope 属性，这里分别设置为"password"和"webclient"。当然，既然设置了密码模式，所以也需要指定用户名和密码用于识别用户身份。这里，我们以"springhealth_user"这个用户为例进行设置，如下所示：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/89/6F/Ciqc1F_YZ8aAQ2VVAAA9E6V7PEk267.png)  
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/89/6F/Ciqc1F_YZ8aAQ2VVAAA9E6V7PEk267.png"/>  
 用户信息设置示意图
 
 在 Postman 中执行这个请求，会得到如下所示的返回结果：

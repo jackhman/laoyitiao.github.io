@@ -37,7 +37,7 @@ spring:
 
 该请求是以心跳包的方式定时向 Dashboard 发送，包含 Sentinel Core 的 AppName、IP、端口信息。这里有个重要细节：Sentinel Core为了能够持续接收到来自 Dashboard的数据，会在微服务实例设备上监听 8719 端口，在心跳包上报时也是上报这个 8719 端口，而非微服务本身的 80 端口。
 
-![图片1.png](https://s0.lgstatic.com/i/image6/M00/26/25/CioPOWBarxyAfxg4AAEytt3cAkM947.png)  
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M00/26/25/CioPOWBarxyAfxg4AAEytt3cAkM947.png"/>  
 Sentinel Core 向 Dashboard 建立连接
 
 在 Sentinel Dashboard 接收到心跳包后，来自 Sentinel Core的AppName、IP、端口信息会被封装为 MachineInfo 对象放入 ConcurrentHashMap 保存在 JVM的内存中，以备后续使用。
@@ -46,14 +46,14 @@ Sentinel Core 向 Dashboard 建立连接
 
 如果在 Dashboard 页面中设置了新的保护规则，会先从当前的 MachineInfo 中提取符合要求的微服务实例信息，之后通过 Dashboard内置的 transport 模块将新规则打包推送到微服务实例的 Sentinel Core，Sentinel Core收 到新规则在微服务应用中对本地规则进行更新，这些新规则会保存在微服务实例的 JVM 内存中。
 
-![图片22.png](https://s0.lgstatic.com/i/image6/M00/26/28/Cgp9HWBaryuANUd3AAFKoecEXLU156.png)  
+<Image alt="图片22.png" src="https://s0.lgstatic.com/i/image6/M00/26/28/Cgp9HWBaryuANUd3AAFKoecEXLU156.png"/>  
 Sentinel Dashboard 向Sentinel Core推送新规则
 
 **第三步，处理请求。**
 
 Sentinel Core 为服务限流、熔断提供了核心拦截器 SentinelWebInterceptor，这个拦截器默认对所有请求 /\*\* 进行拦截，然后开始请求的链式处理流程，在对于每一个处理请求的节点被称为 Slot（槽），通过多个槽的连接形成处理链，在请求的流转过程中，如果有任何一个 Slot 验证未通过，都会产生 BlockException，请求处理链便会中断，并返回"Blocked by sentinel" 异常信息。
 
-![图片2.png](https://s0.lgstatic.com/i/image6/M00/26/25/CioPOWBarziAOzV2AAFkVrbLros829.png)  
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M00/26/25/CioPOWBarziAOzV2AAFkVrbLros829.png"/>  
 SentinelWebInterceptor 实施请求拦截与保护
 
 那这些 Slot 都有什么作用呢？我们需要了解一下，默认 Slot 有7 个，前 3 个 Slot为前置处理，用于收集、统计、分析必要的数据；后 4 个为规则校验 Slot，从Dashboard 推送的新规则保存在"规则池"中，然后对应 Slot 进行读取并校验当前请求是否允许放行，允许放行则送入下一个 Slot 直到最终被 RestController 进行业务处理，不允许放行则直接抛出 BlockException 返回响应。
@@ -86,14 +86,14 @@ SentinelWebInterceptor 实施请求拦截与保护
 
 总结下，滑动窗口算法的理念是将整段时间均分后独立计数再汇总统计，滑动窗口算法被广泛应用在各种流控场景中，请你理解它的实现过程。
 
-![图片4.png](https://s0.lgstatic.com/i/image6/M00/26/25/CioPOWBar0iAFl_9AASda6g75YE021.png)  
+<Image alt="图片4.png" src="https://s0.lgstatic.com/i/image6/M00/26/25/CioPOWBar0iAFl_9AASda6g75YE021.png"/>  
 滑动窗口算法
 
 #### 基于 Sentinel Dashboard 的限流设置
 
 在 Sentinel Dashboard 中"簇点链路",找到需要限流的 URI，点击"+流控"进入流控设置。小提示，sentinel-dashboard 基于懒加载模式，如果在簇点链路没有找到对应的 URI，需要先访问下这个功能的功能后对应的 URI 便会出现。
 
-![图片5.png](https://s0.lgstatic.com/i/image6/M00/26/28/Cgp9HWBar1OAG6JAAAKivJHK_-k419.png)  
+<Image alt="图片5.png" src="https://s0.lgstatic.com/i/image6/M00/26/28/Cgp9HWBar1OAG6JAAAKivJHK_-k419.png"/>  
 流控设置界面
 
 流控规则项目说明主要有以下几点。
@@ -106,7 +106,7 @@ SentinelWebInterceptor 实施请求拦截与保护
 
 * 单机阈值：具体限流的数值是多少。
 
-![图片6.png](https://s0.lgstatic.com/i/image6/M00/26/28/Cgp9HWBar16Abbz2AAOQnjLspDY532.png)  
+<Image alt="图片6.png" src="https://s0.lgstatic.com/i/image6/M00/26/28/Cgp9HWBar16Abbz2AAOQnjLspDY532.png"/>  
 默认流控规则
 
 点击对话框中的"高级选项"，就会出现更为详细的设置项。
@@ -117,14 +117,14 @@ SentinelWebInterceptor 实施请求拦截与保护
 
 以下图为例，当 List 接口 QPS 超过 1个时限流，浏览器会出现"Blocked by Sentinel"。
 
-![图片7.png](https://s0.lgstatic.com/i/image6/M00/26/28/Cgp9HWBar4CARQwVAAEmI2EpwUs844.png)  
+<Image alt="图片7.png" src="https://s0.lgstatic.com/i/image6/M00/26/28/Cgp9HWBar4CARQwVAAEmI2EpwUs844.png"/>  
 流控模式-直接
 
 * **关联模式：**
 
 如下图所示，当同 List 接口关联的update 接口 QPS 超过 1 时，再次访问List 接口便会响应"Blocked by Sentinel"。
 
-![图片8.png](https://s0.lgstatic.com/i/image6/M00/26/25/CioPOWBar4qAaeVSAAEgPLPCgYU751.png)  
+<Image alt="图片8.png" src="https://s0.lgstatic.com/i/image6/M00/26/25/CioPOWBar4qAaeVSAAEgPLPCgYU751.png"/>  
 流控模式-关联
 
 * **链路模式：**
@@ -133,12 +133,12 @@ SentinelWebInterceptor 实施请求拦截与保护
 
 以下图为例，在某个微服务中 List 接口，会被 Check 接口调用。在另一个业务，List 接口也会被 Scan 接口调用。
 
-![图片99.png](https://s0.lgstatic.com/i/image6/M00/26/28/Cgp9HWBar5qAQ8kxAAB6_MghZFM405.png)  
+<Image alt="图片99.png" src="https://s0.lgstatic.com/i/image6/M00/26/28/Cgp9HWBar5qAQ8kxAAB6_MghZFM405.png"/>  
 调用链路
 
 但如果按下图配置，将入口资源设为"/check"，则只会针对 check 接口的调用链路生效。当访问 check 接口的QPS 超过 1 时，List 接口就会被限流。而另一条链路从 scan 接口到List 接口的链路则不会受到任何影响。链路模式与关联模式最大的区别是 check 接口与 List 接口必须是在同一个调用链路中才会限流，而关联模式是任意两个资源只要设置关联就可以进行限流。
 
-![图片9.png](https://s0.lgstatic.com/i/image6/M01/26/25/CioPOWBar6SAU6wQAAFdYOUQcEQ336.png)  
+<Image alt="图片9.png" src="https://s0.lgstatic.com/i/image6/M01/26/25/CioPOWBar6SAU6wQAAFdYOUQcEQ336.png"/>  
 流控模式-链路
 
 讲完了直接、关联、链路三种流控模式，下面咱们聊一聊高级选项中的"流控效果"。
@@ -149,7 +149,7 @@ SentinelWebInterceptor 实施请求拦截与保护
 
 快速失败是指流浪当过限流阈值后，直接返回响应并抛出 BlockException，快速失败是最常用的处理形式。如下图所示，当 List 接口每秒 QPS 超过 1 时，可以直接抛出"Blocked By Sentinel"异常。
 
-![图片11.png](https://s0.lgstatic.com/i/image6/M01/26/29/Cgp9HWBar7CAPY7AAAGALPdbIwo406.png)  
+<Image alt="图片11.png" src="https://s0.lgstatic.com/i/image6/M01/26/29/Cgp9HWBar7CAPY7AAAGALPdbIwo406.png"/>  
 流控效果-快速失败
 
 * **Warm Up（预热）：**
@@ -158,7 +158,7 @@ Warm Up 用于应对瞬时大并发流量冲击。当遇到突发大流量 Warm 
 
 如下图所示，List 接口平时单机阈值 QPS 处于低水位：默认为 1000/3 (冷加载因子)≈333，当瞬时大流量进来，10 秒钟内将 QPS 阈值逐渐拉升至 1000，为系统留出缓冲时间，预防突发性系统崩溃。
 
-![图片12.png](https://s0.lgstatic.com/i/image6/M01/26/25/CioPOWBar76AYECLAAKiRTkN46w430.png)  
+<Image alt="图片12.png" src="https://s0.lgstatic.com/i/image6/M01/26/25/CioPOWBar76AYECLAAKiRTkN46w430.png"/>  
 流控效果-Warm Up
 
 * **排队等待：**
@@ -175,7 +175,7 @@ Warm Up 用于应对瞬时大并发流量冲击。当遇到突发大流量 Warm 
 
 注意，匀速队列只支持 QPS 模式，且单机阈值不得大于 1000。
 
-![图片13.png](https://s0.lgstatic.com/i/image6/M01/26/25/CioPOWBar8mAA3X_AAFbifYRYio573.png)  
+<Image alt="图片13.png" src="https://s0.lgstatic.com/i/image6/M01/26/25/CioPOWBar8mAA3X_AAFbifYRYio573.png"/>  
 流控效果-排队等待
 
 讲到这，我为你讲解了从滑动窗口统计流量到 Sentinel Dashboard 如何进行流控配置。下面咱们再来讲解 Sentinel的熔断降级策略。
@@ -200,7 +200,7 @@ Warm Up 用于应对瞬时大并发流量冲击。当遇到突发大流量 Warm 
 
 * 当前请求访问出现故障，接口继续熔断。
 
-![图片14.png](https://s0.lgstatic.com/i/image6/M01/26/25/CioPOWBar9OAT7iIAADpMfE3-dw738.png)  
+<Image alt="图片14.png" src="https://s0.lgstatic.com/i/image6/M01/26/25/CioPOWBar9OAT7iIAADpMfE3-dw738.png"/>  
 Sentinel 熔断机制
 
 #### **基于SentinelDashboard的熔断设置**
@@ -209,30 +209,30 @@ Sentinel Dashboard可以设置三种不同的熔断模式：慢调用比例、�
 
 * 慢调用比例是指当接口在1秒内"慢处理"数量超过一定比例，则触发熔断。
 
-![图片15.png](https://s0.lgstatic.com/i/image6/M01/26/25/CioPOWBar92AAT0jAAHYZ6NDKjQ113.png)  
+<Image alt="图片15.png" src="https://s0.lgstatic.com/i/image6/M01/26/25/CioPOWBar92AAT0jAAHYZ6NDKjQ113.png"/>  
 熔断模式-慢调用比例
 
 结合上图的设置，介绍下"慢调用比例"熔断规则。
 
-![图片18.png](https://s0.lgstatic.com/i/image6/M01/26/25/CioPOWBar-qACeUjAALQjoYzEvE265.png)
+<Image alt="图片18.png" src="https://s0.lgstatic.com/i/image6/M01/26/25/CioPOWBar-qACeUjAALQjoYzEvE265.png"/>
 
 * 异常比例是指 1 秒内按接口调用产生异常的比例（异常调用数/总数量）触发熔断。
 
-![图片16.png](https://s0.lgstatic.com/i/image6/M01/26/29/Cgp9HWBar_SAOTw9AAFxRASYnnE809.png)  
+<Image alt="图片16.png" src="https://s0.lgstatic.com/i/image6/M01/26/29/Cgp9HWBar_SAOTw9AAFxRASYnnE809.png"/>  
 熔断模式-异常比例
 
 结合上图的设置，介绍下"异常比例"熔断规则。
 
-![图片19.png](https://s0.lgstatic.com/i/image6/M01/26/26/CioPOWBar_6AXJmYAAK3pfImZs4903.png)
+<Image alt="图片19.png" src="https://s0.lgstatic.com/i/image6/M01/26/26/CioPOWBar_6AXJmYAAK3pfImZs4903.png"/>
 
 * 异常数是指在 1 分钟内异常的数量超过阈值则触发熔断。
 
-![图片17.png](https://s0.lgstatic.com/i/image6/M01/26/29/Cgp9HWBasAmAO9LnAAFiqbTOxTs071.png)  
+<Image alt="图片17.png" src="https://s0.lgstatic.com/i/image6/M01/26/29/Cgp9HWBasAmAO9LnAAFiqbTOxTs071.png"/>  
 熔断模式-异常数
 
 结合上图的设置，介绍下"异常数"熔断规则。
 
-![图片20.png](https://s0.lgstatic.com/i/image6/M00/26/26/CioPOWBasBOAY3wPAALTmvi2q7s202.png)
+<Image alt="图片20.png" src="https://s0.lgstatic.com/i/image6/M00/26/26/CioPOWBasBOAY3wPAALTmvi2q7s202.png"/>
 
 以上就是三种熔断模式的介绍，熔断相对流控配置比较简单，只需要设置熔断检查开启条件与触发熔断条件即可。讲到这关于限流与熔断的配置暂时告一段落，下面对本讲内容进行下总结。
 

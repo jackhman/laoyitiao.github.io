@@ -21,7 +21,7 @@
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/0B/16/Ciqah16MTOCAHEBfAAPnCtCdK5Y628.png)  
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/16/Ciqah16MTOCAHEBfAAPnCtCdK5Y628.png"/>  
 
 <br />
 
@@ -31,7 +31,7 @@
 
 ### 业务日志收集排查
 
-![](https://s0.lgstatic.com/i/image3/M01/0B/16/Ciqah16MTOCAQCSAAAKhbPhNDg4966.png)  
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/16/Ciqah16MTOCAQCSAAAKhbPhNDg4966.png"/>  
 
 <br />
 
@@ -51,7 +51,7 @@ EFK 是个什么样的架构呢？E 表示 Elasticsearch，它是一个搜索存
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/0B/16/Ciqah16MTOGAGl1PAAPqPWzdVpo519.png)  
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/16/Ciqah16MTOGAGl1PAAPqPWzdVpo519.png"/>  
 
 <br />
 
@@ -162,7 +162,7 @@ data:
 
 ### 步骤一：封装应用容器
 
-![](https://s0.lgstatic.com/i/image3/M01/0B/16/Ciqah16MTOKAMC3nAADut5Hn2xI668.png)  
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/16/Ciqah16MTOKAMC3nAADut5Hn2xI668.png"/>  
 
 <br />
 
@@ -182,7 +182,7 @@ data:
 
 ### 步骤二：PV/PVC 持久化数据
 
-![](https://s0.lgstatic.com/i/image3/M01/0B/16/Ciqah16MTOKAFeWAAALlWm1EIKQ939.png)  
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/16/Ciqah16MTOKAFeWAAALlWm1EIKQ939.png"/>  
 
 <br />
 
@@ -198,7 +198,7 @@ data:
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/0B/16/Ciqah16MTOKAfz10AAHg6mVlC2E229.png)  
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/16/Ciqah16MTOKAfz10AAHg6mVlC2E229.png"/>  
 
 <br />
 
@@ -206,7 +206,7 @@ data:
 
 ### 步骤五：配置 Service
 
-![](https://s0.lgstatic.com/i/image3/M01/0B/16/Ciqah16MTOOAXFDwAAL8KTjCLf4820.png)  
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/16/Ciqah16MTOOAXFDwAAL8KTjCLf4820.png"/>  
 
 <br />
 
@@ -218,7 +218,7 @@ data:
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/0B/16/Ciqah16MTOOABerKAAQ882_XZBc624.png)  
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/16/Ciqah16MTOOABerKAAQ882_XZBc624.png"/>  
 
 <br />
 

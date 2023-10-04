@@ -420,7 +420,7 @@ Starting wordpress_wordpress_1 ... done
 
 执行完以上命令后，Docker Compose 首先会为我们启动一个 MySQL 数据库，按照 MySQL 服务中声明的环境变量来设置 MySQL 数据库的用户名和密码。然后等待 MySQL 数据库启动后，再启动 WordPress 服务。WordPress 服务启动后，我们就可以通过 <http://localhost:8080> 访问它了，访问成功后，我们就可以看到以下界面，然后按照提示一步一步设置就可以拥有属于自己的专属博客系统了。
 
-![image.png](https://s0.lgstatic.com/i/image/M00/63/AF/Ciqc1F-WuHqAMc6gAAGSco9Zyvc339.png)  
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/63/AF/Ciqc1F-WuHqAMc6gAAGSco9Zyvc339.png"/>  
 图 1 WordPress 启动界面
 
 #### 停止 WordPress

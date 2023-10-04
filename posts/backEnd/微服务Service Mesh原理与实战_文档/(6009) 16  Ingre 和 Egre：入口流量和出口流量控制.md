@@ -56,7 +56,7 @@ NodePort 的默认端口范围是 30000-32767，但是一般不建议应用程�
 
 客户端通过 Ingress 上定义的路由规则，转发到特定的 Service 上面，比如通过设置 path、header、host 等路由规则来决定具体转发到哪个 Service。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image6/M00/04/29/CioPOWAikmiAcbONAACHq-N5-0s752.png)  
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/04/29/CioPOWAikmiAcbONAACHq-N5-0s752.png"/>  
 Ingress 工作原理图
 
 通过下面的配置你可以看到，Ingress 是一种全新的资源类型，与所有其他 Kubernetes 资源一样，Ingress 需要使用 apiVersion、kind 和 metadata 字段。
@@ -353,7 +353,7 @@ Istio Egress 和 Kubernetes 中的 Egress 不同，**Istio的 Egress 本质上�
 
 通过下面的架构图，你可以看到每个服务的本地 Proxy 可以通过连接到 Egress Gateway 访问外部服务，达到精准的安全策略控制。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image6/M00/04/2D/Cgp9HWAikpmAQQN3AAP80pyzQ1o891.png)  
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/04/2D/Cgp9HWAikpmAQQN3AAP80pyzQ1o891.png"/>  
 Istio Egress 工作原理示意图
 
 下面我们通过一个简单的例子，来学习 Istio Egress。
@@ -519,7 +519,7 @@ $ kubectl delete destinationrule egressgateway-for-cnn
 
 本讲内容总结如下：
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image6/M00/04/2D/Cgp9HWAikquAESGWAAGAzMGoHMY346.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M00/04/2D/Cgp9HWAikquAESGWAAGAzMGoHMY346.png"/>
 
 今天我们学习了一种全新的设计模式：Egress，Egress 最基本的功能是做出口流量的权限控制。其实通过 Envoy 的强大七层代理实现的 Egress Gateway 可以实现很多功能，在实际项目中我就通过 Egress Gateway 提升了外部服务访问的性能，那么在你的经验里 Egress Gateway 还有哪些应用场景呢? 欢迎在留言区和我分享你的观点。
 

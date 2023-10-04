@@ -3,7 +3,9 @@ import { defineConfig } from 'vitepress'
 import dataLoader from '../posts/posts.data.js'
 
 import markdownItTitle from 'markdown-it-title'
-
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 markdownItTitle.defaults = {
   level: 0,
   excerpt: 0
@@ -15,7 +17,6 @@ export default defineConfig({
   ignoreDeadLinks: true,
   lang: 'zh-CN',
   markdown: {
-    lineNumbers: true,
     attrs: {
       disable: true
     },
@@ -24,21 +25,17 @@ export default defineConfig({
       md.use(markdownItTitle);
     }
   },
-  // vite: {
-  //   plugins: [
-  //     AutoImport({
-  //       resolvers: [ArcoResolver()],
-  //     }),
-  //     Components({
-  //       resolvers: [
-  //         ArcoResolver({
-  //           sideEffect: true
-  //         })
-  //       ]
-  //     })
-  //   ],
-  //   ssr: { noExternal: ['@arco-design/web-vue'] }
-  // },
+  vite: {
+    plugins: [
+      AutoImport({
+        resolvers: [ElementPlusResolver()],
+      }),
+      Components({
+        resolvers: [ElementPlusResolver()],
+      }),
+    ],
+    ssr: { noExternal: ['element-plus'] }
+  },
   themeConfig: {
     logo: '/logo/sloth64.png',
     outline: 'deep',
@@ -55,26 +52,12 @@ export default defineConfig({
     },
     nav: [
       { text: '首页', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' }
+      { text: '文章', link: '/posts/' },
+      { text: '阅读推荐', link: '/posts/recommend' }
     ],
     sidebar: {
-      '/': {
-        text: 'Examples',
-        items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' }
-        ]
-      },
       ...dataLoader.load().sirderBar
     },
-    footer: {
-      message: 'Released under the <a href="https://github.com/laoyitiao/docs/blob/main/LICENSE">MIT License</a>.',
-      copyright: 'Copyright © 2023-present <a href="https://github.com/laoyitiao">hhh</a>'
-    },
-
-    socialLinks: [
-      { icon: 'github', link: 'https://github.com/laoyitiao/docs',ariaLabel: 'github rep' }
-    ],
     search: {
       provider: 'local',
       options: {

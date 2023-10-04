@@ -22,7 +22,7 @@
 
 回到问题本身上来，其实思路很简单，只要能说清楚什么是同步场景，什么是异步场景，那问题自然而然就解决了。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image2/M01/01/3D/Cip5yF_YUpOAALIlAABNx0PyF94306.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image2/M01/01/3D/Cip5yF_YUpOAALIlAABNx0PyF94306.png"/>
 
 ### 入手
 
@@ -80,12 +80,12 @@
 
 * 并按组件树模拟一遍事件冒泡。
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image2/M01/01/3E/CgpVE1_YUqKAA-jWAACt3Mh2xk8536.png)  
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image2/M01/01/3E/CgpVE1_YUqKAA-jWAACt3Mh2xk8536.png"/>  
 React 17 之前的事件冒泡流程图
 
 所以这就造成了，在一个页面中，只能有一个版本的 React。如果有多个版本，事件就乱套了。值得一提的是，这个问题在 React 17 中得到了解决，事件委托不再挂在 document 上，而是挂在 DOM 容器上，也就是 ReactDom.Render 所调用的节点上。
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image2/M01/01/3E/Cip5yF_YUzCAWTyoAAB1ljK7rSM539.png)  
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image2/M01/01/3E/Cip5yF_YUzCAWTyoAAB1ljK7rSM539.png"/>  
 React 17 后的事件冒泡流程图
 
 那到底哪些事件会被捕获生成合成事件呢？可以从 React 的源码测试文件中一探究竟。下面的测试快照中罗列了大量的事件名，也只有在这份快照中的事件，才会被捕获生成合成事件。
@@ -316,7 +316,7 @@ class Test extends Component {
 
 正确的结果是 0,2。因为 setState 并不是真正的异步函数，它实际上是通过队列延迟执行操作实现的，通过 isBatchingUpdates 来判断 setState 是先存进 state 队列还是直接更新。值为 true 则执行异步操作，false 则直接同步更新。
 
-![图片1.png](https://s0.lgstatic.com/i/image2/M01/01/47/Cip5yF_YYfCAXIxiAAEJsQbj_hs785.png)  
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image2/M01/01/47/Cip5yF_YYfCAXIxiAAEJsQbj_hs785.png"/>  
 
 在 onClick、onFocus 等事件中，由于合成事件封装了一层，所以可以将 isBatchingUpdates 的状态更新为 true；在 React 的生命周期函数中，同样可以将 isBatchingUpdates 的状态更新为 true。那么在 React 自己的生命周期事件和合成事件中，可以拿到 isBatchingUpdates 的控制权，将状态放进队列，控制执行节奏。而在外部的原生事件中，并没有外层的封装与拦截，无法更新 isBatchingUpdates 的状态为 true。这就造成 isBatchingUpdates 的状态只会为 false，且立即执行。所以在 addEventListener 、setTimeout、setInterval 这些原生事件中都会同步更新。
 
@@ -339,7 +339,7 @@ class Test extends Component {
 
 综上所述，我们可以整理出下面的知识导图。
 
-![Drawing 7.png](https://s0.lgstatic.com/i/image2/M01/01/3E/CgpVE1_YU2KAStLdAAFVKxh7Dyg317.png)
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image2/M01/01/3E/CgpVE1_YU2KAStLdAAFVKxh7Dyg317.png"/>
 
 ### 进阶
 
@@ -389,7 +389,7 @@ class Test extends React.Component {
 
 下一讲我将为你介绍另一个常考点，React 的跨组件通信。
 
-[![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/72/94/Ciqc1F_EZ0eANc6tAASyC72ZqWw643.png)](https://shenceyun.lagou.com/t/mka)
+[<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/72/94/Ciqc1F_EZ0eANc6tAASyC72ZqWw643.png"/>](https://shenceyun.lagou.com/t/mka)
 
 《大前端高薪训练营》
 

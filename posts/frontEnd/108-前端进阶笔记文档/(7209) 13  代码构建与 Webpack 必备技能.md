@@ -142,7 +142,7 @@ ES6 模块的特点如下：
 
 对于前端开发来说，我们会用到各式各样的构建/打包工具，比如这些。
 
-![图片2.png](https://s0.lgstatic.com/i/image6/M01/3F/7C/Cgp9HWCeSsSAHiJFAALlqT5qxqA460.png)
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M01/3F/7C/Cgp9HWCeSsSAHiJFAALlqT5qxqA460.png"/>
 
 其中，涉及模块化代码打包的主要有 Grunt/Gulp/Webpack/Rollup。很多同学会搞混这几个工具，这里我简单介绍下它们之间的区别。
 
@@ -175,7 +175,7 @@ module.exports = {
 
 实际上， Webpack 会从 entry 开始，通过解析模块间的依赖关系，递归地构建出一个依赖图。我们如果在项目中使用`webpack-bundle-analyzer`插件，也可以看到生成的这样一个依赖图。
 
-![图片4.png](https://s0.lgstatic.com/i/image6/M00/3F/85/CioPOWCeSrqACnYnABLbVfl-Zds569.png)
+<Image alt="图片4.png" src="https://s0.lgstatic.com/i/image6/M00/3F/85/CioPOWCeSrqACnYnABLbVfl-Zds569.png"/>
 
 Webpack 会根据依赖图来对各个模块进行整合，最终打包成一个或多个的文件，来提供给浏览器进行加载。
 
@@ -204,7 +204,7 @@ module.exports = {
 
 而不同的应用场景需要不同的 Loader，比如我们经常会使用到的 CSS 相关 Loader 和其他资源 Loader。
 
-![图片3.png](https://s0.lgstatic.com/i/image6/M01/3F/7C/Cgp9HWCeSqyAWHwvAAHProznCQc246.png)
+<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image6/M01/3F/7C/Cgp9HWCeSqyAWHwvAAHProznCQc246.png"/>
 
 前面我们说到，ES6 模块需要依赖 Babel 编译和 Webpack 打包，而 Babel 在 Webpack 中就是使用 Loader 的方式来进行编译的。
 

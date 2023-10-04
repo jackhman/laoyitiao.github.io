@@ -46,7 +46,7 @@ Kubernetes 集群本身其实并没有提供日志收集的解决方案，但依
 
 先来看**直接在应用程序中将日志信息推送到采集后端，即Pod 内的应用直接将日志写到后端的日志中心**。
 
-![image (2).png](https://s0.lgstatic.com/i/image/M00/59/F7/Ciqc1F9zCLCALLfHAAA7edHbxKE531.png)
+<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/59/F7/Ciqc1F9zCLCALLfHAAA7edHbxKE531.png"/>
 
 （<https://github.com/kubernetes/website/blob/master/static/images/docs/user-guide/logging/logging-from-application.png>）
 
@@ -65,7 +65,7 @@ Logging Driver: json-file
 
 我们来看第二种方法，**在节点上运行一个 Agent 来采集节点级别的日志** 。如下图所示，我们可以在每一个 Kubernetes Node 上都部署一个 Agent，该 Agent 负责对该节点上运行的所有容器进行日志收集，并推送到后端的日志存储系统里。这个 Agent 通常需要可以访问到宿主机上的指定目录，比如`/var/lib/docker/containers/`。
 
-![image (3).png](https://s0.lgstatic.com/i/image/M00/5A/02/CgqCHl9zCNiAEVCiAABrnSxfaQg197.png)
+<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/5A/02/CgqCHl9zCNiAEVCiAABrnSxfaQg197.png"/>
 
 （<https://github.com/kubernetes/website/blob/master/static/images/docs/user-guide/logging/logging-with-node-agent.png>）
 
@@ -79,11 +79,11 @@ Logging Driver: json-file
 
 * 通过Sidecar 容器读取日志文件，并定向到自己的标准输出。如下图所示，这里`streaming container`就是一个 Sidecar 容器，可以将`app-container`的日志文件重新定向到自己的标准输出。同时还可以归并多个日志文件。而且这里也可以使用多个 Sidecar 容器，你可以参考这个[例子](https://github.com/kubernetes/website/blob/master/content/en/examples/admin/logging/two-files-counter-pod-streaming-sidecar.yaml)。
 
-![image (4).png](https://s0.lgstatic.com/i/image/M00/5A/02/CgqCHl9zCOWAI1-SAAB3nPjxdMA390.png)
+<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/5A/02/CgqCHl9zCOWAI1-SAAB3nPjxdMA390.png"/>
 
 * Sidecar容器运行一个日志代理，配置该日志代理以便从应用容器收集日志。这种方式就解决了我们上面方案一的问题，将日志处理部分和应用程序本身进行了解耦，可以方便切换到其他的日志系统中。可以参考这个[使用 fluentd 的例子](https://github.com/kubernetes/website/blob/master/content/en/examples/admin/logging/two-files-counter-pod-agent-sidecar.yaml)。
 
-![image (5).png](https://s0.lgstatic.com/i/image/M00/5A/02/CgqCHl9zCOuAFQm_AABLBPDcBz4058.png)
+<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/5A/02/CgqCHl9zCOuAFQm_AABLBPDcBz4058.png"/>
 
 （<https://github.com/kubernetes/website/blob/master/static/images/docs/user-guide/logging/logging-with-sidecar-agent.png>）
 
@@ -95,7 +95,7 @@ Logging Driver: json-file
 
 Kubernetes 社区官方推荐的方案是[使用 Fluentd+ElasticSearch+Kibana 进行日志的收集和管理](https://kubernetes.io/zh/docs/tasks/debug-application-cluster/logging-elasticsearch-kibana/)，通过[Fluentd](https://www.fluentd.org/)将日志导入到[Elasticsearch](https://www.elastic.co/products/elasticsearch)中，用户可以通过[Kibana](https://www.elastic.co/products/kibana)来查看到所有的日志。
 
-![image (6).png](https://s0.lgstatic.com/i/image/M00/59/F7/Ciqc1F9zCPSATIwRAAA_ddgWuO0667.png)
+<Image alt="image (6).png" src="https://s0.lgstatic.com/i/image/M00/59/F7/Ciqc1F9zCPSATIwRAAA_ddgWuO0667.png"/>
 
 (<https://docs.fluentd.org/container-deployment/kubernetes>)
 

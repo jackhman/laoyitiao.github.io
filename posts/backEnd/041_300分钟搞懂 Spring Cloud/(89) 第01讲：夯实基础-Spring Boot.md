@@ -78,27 +78,27 @@ Spring Boot 的项目创建方式分为两种：
 
 相比于第一种方式，方式二降低了学习难度，也是目前最简单的创建方式。
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/B8/CgoB5l16CcGASwhHAACb19MWf5Y813.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/B8/CgoB5l16CcGASwhHAACb19MWf5Y813.png"/>
 
 进入页面后，你可以选择即将创建项目的类型是 Maven 或是 Gradle, 以及开发语言，Spring Boot 版本，依赖的 Starter 等信息，最后生成项目，下载到本地，然后导入开发工具中。
 
 如果你不想在官方提供的网站中创建项目，也可以在开发工具中创建项目，下面我们搭建一个 Spring Boot 的 Web 后端服务。
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/C0/CgoB5l16F5CANbFZAMhzV5onKV0396.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/C0/CgoB5l16F5CANbFZAMhzV5onKV0396.gif"/>
 
 首先，我们需要通过脚手架创建一个 Spring Boot 项目并导入开发工具中，这里使用的是 STS, 当然你也可以选择自己熟悉的工具，比如 IDEA。
 
 这里事先创建好了一个 Spring Boot 项目，然后将项目导入了开发工具 STS 中。查看项目的 pom.xml 文件，parent 节点配置了 Spring Boot 的信息，指定了版本为 2.1.6.RELEASE，并且依赖了 spring-boot-starter-web。
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/C0/CgoB5l16F7yAfj3KAINssw4qZtI832.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/C0/CgoB5l16F7yAfj3KAINssw4qZtI832.gif"/>
 
 第二步，需要对项目进行配置，配置都在 application.properties 中进行添加，配置 Tomcat 的端口信息，令 server.port=8082，也可以不用配置，默认是 8080 端口。
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/E0/CgotOV16F8KAMXJ_AGVdCQqkM-0530.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/E0/CgotOV16F8KAMXJ_AGVdCQqkM-0530.gif"/>
 
 第三步，需要编写 RestController，开发业务接口，这里简单以 hello 接口为例，然后返回一个字符串。
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/C0/CgoB5l16F-iASQEGAQ-_KSlfEgg265.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/C0/CgoB5l16F-iASQEGAQ-_KSlfEgg265.gif"/>
 
 第四步，在 Spring Boot 中只需要执行启动类中的 Main 方法启动项目即可，启动后可以看到控制台输出 Tomcat started on port，显示当前服务的端口号，在浏览器中访问 http://localhost:8082/hello，就可以看到我们在接口中返回的内容了。
 
@@ -112,7 +112,7 @@ Spring Boot 的项目创建方式分为两种：
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/C3/CgoB5l16IDyAJGK5ADq0_nQL4t8907.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/C3/CgoB5l16IDyAJGK5ADq0_nQL4t8907.gif"/>
 
 配置完成后就可以通过 Maven 的命令进行编译打包了，最简单的方式是直接用开发工具自带的 Maven 插件进行编译，选中项目，单击右键，可以看到 Run As 菜单，选中 Maven Build 选项，输入编译的命令 clean package，编译后，进入项目源码的 target 目录，可以看到打包好了的可执行的 jar 包，部署的时候直接用这个 jar 部署启动即可。
 
@@ -130,19 +130,19 @@ Spring Boot 的项目创建方式分为两种：
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/E0/CgotOV16GBaAGEOiAH_Dc2S7jJ0705.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/E0/CgotOV16GBaAGEOiAH_Dc2S7jJ0705.gif"/>
 
 首先在 resources 目录下创建一个 application-dev.properties，配置 server.port=8082。
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/C0/CgoB5l16GBeAVp78AIMD4WizaMw065.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/C0/CgoB5l16GBeAVp78AIMD4WizaMw065.gif"/>
 
 然后再创建一个 application-test.properties，配置 server.port=8083，现在相当于有 dev 和 test 两个环境的配置。
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/C3/CgoB5l16HdGAEcguADyOblBXdxk142.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/C3/CgoB5l16HdGAEcguADyOblBXdxk142.gif"/>
 
 那么该使用哪个环境下的配置取决于 spring.profiles.active 的值，在默认的 application.properties 中配置 spring.profiles.active=dev，启动项目，可以看到当前的端口是 8082，再次将 spring.profiles.active=dev 改成 test，启动项目，端口变成 8083，这样我们就可以做到在不同环境下使用不同的配置了。
 
@@ -164,7 +164,7 @@ Spring Boot 的项目创建方式分为两种：
 
 第一种方式：Environment。
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/E0/CgotOV16GGiADV0UANCdt_kBzKo893.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/E0/CgotOV16GGiADV0UANCdt_kBzKo893.gif"/>
 
 Environment 用于管理当前的应用环境信息，定义了获取 Profile 的方法，同时继承了 PropertyResolver，PropertyResolver 提供了属性访问的相关方法。
 
@@ -180,7 +180,7 @@ Environment 用于管理当前的应用环境信息，定义了获取 Profile �
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/C0/CgoB5l16GHiAP27rAMoepDQ1FXI596.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/C0/CgoB5l16GHiAP27rAMoepDQ1FXI596.gif"/>
 
 在注解中指定配置 Key，直接可以将属性值注入到该字段中。
 
@@ -190,7 +190,7 @@ Environment 用于管理当前的应用环境信息，定义了获取 Profile �
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/C3/CgoB5l16HeyABtn8AE5Ic7f5ZlA175.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/C3/CgoB5l16HeyABtn8AE5Ic7f5ZlA175.gif"/>
 
 第三种方式：@ConfigurationProperties。
 
@@ -198,7 +198,7 @@ Environment 用于管理当前的应用环境信息，定义了获取 Profile �
 
 前面我们讲解了通过 Environment 和 @Value 注解的方式来读取配置文件中的属性值，这两种方式都是对单独的属性进行读取，使用的时候也都是散落在各个类中，然后很多场景下，我们需要有一组配置，都是服务于某个功能或者业务的，比如数据源的配置：spring.datasource.url、spring.datasource.username，这些配置我们希望能够集中管理和使用，这个时候可以使用 @ConfigurationProperties 注解将属性值注入到实体类中。
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/C0/CgoB5l16GHyAHUb1ANhD9ySCkrI105.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/C0/CgoB5l16GHyAHUb1ANhD9ySCkrI105.gif"/>
 
 这里定义了一个 User 的实体类，并定义了 name 字段和对应的 get、set 方法，在类上添加 @Configuration 和 @ConfigurationProperties(prefix="spring") 注解，并指定前缀为 spring。
 
@@ -206,7 +206,7 @@ Environment 用于管理当前的应用环境信息，定义了获取 Profile �
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/E0/CgotOV16GIaAIfPXACGjQ0529lk579.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/E0/CgotOV16GIaAIfPXACGjQ0529lk579.gif"/>
 
 最后我们在浏览器中访问 config 接口，可以看到三种方式分别读取的配置内容。
 
@@ -235,13 +235,13 @@ Starter 包可以说是 Spring Boot 中的核心功能，Starter 的出现，简
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/E3/CgotOV16HfaAI3bcAGA3upBSYqM629.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/E3/CgotOV16HfaAI3bcAGA3upBSYqM629.gif"/>
 
 首先我们需要创建一个 springboot-starter-demo 的 Spring Boot 项目，并依赖 spring-boot-starter-web，lombok 是用来简化 get、set 方法的类库，需要在开发工具中安装插件，spring-boot-configuration-processor 这个是专门配合@ConfigurationProperties 注解来使用的。
 
 接着编写配置类，也就是自定义的 Starter 需要的配置信息，直接使用 @ConfigurationProperties 来注入配置信息。
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/E5/CgotOV16JqeAV7NkAClhxNljPA4771.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/E5/CgotOV16JqeAV7NkAClhxNljPA4771.gif"/>
 
 配置完信息后，就需要开始进行自动装配工作了，新建一个 UserAutoConfigure 类，用于装配 UserClient，类上添加 @EnableConfigurationProperties 注解，作用是启用 @ConfigurationProperties 注解的类，否则无法读取到配置信息。
 
@@ -251,7 +251,7 @@ UserClient 中定义了一个 getName 方法，用于读取配置中的值。
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/C3/CgoB5l16Hp-AZy8aAGR-zCc9Gc8937.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/C3/CgoB5l16Hp-AZy8aAGR-zCc9Gc8937.gif"/>
 
 接下来需要让自动装配的类生效，很多 Starter 只要在 pom.xml 中依赖了，项目启动的时候就会自动装配，这是因为在项目的 resource 下的 META-INF 目录中有一个 spring.factories 文件，里面指定了需要被装配的类。
 
@@ -269,25 +269,25 @@ UserClient 中定义了一个 getName 方法，用于读取配置中的值。
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/C3/CgoB5l16HtiAEZE3AC6E2sTHc-4083.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/C3/CgoB5l16HtiAEZE3AC6E2sTHc-4083.gif"/>
 
 如果你不知道怎么编写，或者想知道其他更多的提示内容编写方式，可以通过查看 Spring Boot 自带的配置来参考编写。我们找到项目中 spring-boot-autoconfigure 这个 jar, 找到 spring-configuration-metadata.json 文件，可以看到里面定义了很多配置属性的提示信息。
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/E3/CgotOV16HvWAUv8UAFBYdAsnN2Y247.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/E3/CgotOV16HvWAUv8UAFBYdAsnN2Y247.gif"/>
 
 最后一步，我们需要在使用的项目中加入我们自定义的 Starter 的依赖，然后在配置文件中增加配置 spring.user.name，这样就完成了整个流程。
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/C3/CgoB5l16HwWAURJJAEi-bnY39_0581.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/C3/CgoB5l16HwWAURJJAEi-bnY39_0581.gif"/>
 
 项目在启动的时候会自动构建 UserClient，我们可以编写一个 Controller 来验证一下效果，在 Controller 中可以直接注入 UserClient，然后调用 getName 方法，这个方法返回的就是我们刚刚配置的值。就相当于你只依赖了一个 Starter，然后加了一些配置，就可以直接使用 UserClient，关于 UserClient 怎么构建的你不需要关心，逻辑都封装在 Starter 内部，降低了使用难度。
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/E3/CgotOV16HweAcDlpAF9VpJeeMRQ119.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/E3/CgotOV16HweAcDlpAF9VpJeeMRQ119.gif"/>
 
 在某些场景下，我们的 Starter 不需要被依赖就开启自动装配，而是需要使用者进行手动的开启，为了满足这个需求，我们需要去掉 spring.factories，大部分手动开启都是通过在启动类上加一个注解来开启某个功能，我们同样也可以定义一个开启 UserClient 的注解 @EnableUserClient。
 
@@ -295,7 +295,7 @@ UserClient 中定义了一个 getName 方法，用于读取配置中的值。
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/E3/CgotOV16HwKALWE1AHNGVxBJkVI623.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/E3/CgotOV16HwKALWE1AHNGVxBJkVI623.gif"/>
 
 需求总是多样化的，假如你的 Starter 自动装配，需要装配很多内容，但里面的某些内容需要进一步的满足某些条件才进行初始化，这个时候我们往往会通过配置的方式来指定需不需要开启装配。
 
@@ -320,13 +320,13 @@ Spring Boot 中提供了一个用于监控和管理自身应用信息的模块�
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/C3/CgoB5l16HxWAXRe-ACFqVH78k3Y399.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/C3/CgoB5l16HxWAXRe-ACFqVH78k3Y399.gif"/>
 
 下面我们将 actuator 整合到 Spring Boot 中，整合的过程非常简单，这就是 Spring Boot 自带的魅力，只需要在项目的 pom.xml 文件中增加 spring-boot-starter-actuator 的依赖就可以将 actuator 整合到 Spring Boot 项目中。
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/E2/CgotOV16HAOARrhIAI1UMPi_4Kc713.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/E2/CgotOV16HAOARrhIAI1UMPi_4Kc713.gif"/>
 
 然后我们启动下项目, 访问 actuator/health 这个端点，可以看到返回了 status为UP，证明当前健康状态是正常的，如果 status 为 DOWN 那就是不健康的状态。
 
@@ -344,19 +344,19 @@ Spring Boot 中集成的框架基本上都有自己的 HealthIndicator，在这�
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/E3/CgotOV16HzeAS0fdADQaFXwau68863.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/E3/CgotOV16HzeAS0fdADQaFXwau68863.gif"/>
 
 如果我们需要加入一些其他的判断来决定应用的监控状态时，可以继承 AbstractHealthIndicator 类，实现自己的 HealthIndicator。具体需要实现 doHealthCheck 方法，在 doHealthCheck 中进行健康状态的判断，健康状态使用 builder.up() 表示，不健康使用 builder.down() 方法表示，未知的状态使用 builder.unknown() 方法表示，应用已停止服务使用 builder.outOfService() 方法表示。
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/C2/CgoB5l16G9uAbVYEAHy-CeWcRWg801.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/C2/CgoB5l16G9uAbVYEAHy-CeWcRWg801.gif"/>
 
 如果需要展示详细的信息，可以使用 withDetail 方法来添加详细信息，这样在访问 /health 端点时就可以显示这些详细信息了，前提是需要打开这个详情展示的功能，默认是关闭的，我们可以通过配置management.endpoint.health.show-details=ALWAYS 开启。
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/E2/CgotOV16G-CAfpHfAFvvUPKrgJE402.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/E2/CgotOV16G-CAfpHfAFvvUPKrgJE402.gif"/>
 
 自定义完成后，我们启动项目，访问一下actuator/health端点，可以看到自定义的信息。
 
@@ -364,7 +364,7 @@ Spring Boot 中集成的框架基本上都有自己的 HealthIndicator，在这�
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/C3/CgoB5l16H0KAXtw_AD9Zu3LQPW8808.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/C3/CgoB5l16H0KAXtw_AD9Zu3LQPW8808.gif"/>
 
 需要注意的是 Spring Boot1 版本和 Spring Boot2 版本对 actuator 的访问路径和默认暴露都不太一样，我们这里是 Spring Boot2 的版本，所有开放的端点的路径都以 /actuator 开头，默认很多端点是不开放的，我们可以通过配置 management.endpoints.web.exposure.include=\* 暴露全部的端点。
 
@@ -372,7 +372,7 @@ Spring Boot 中集成的框架基本上都有自己的 HealthIndicator，在这�
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/C3/CgoB5l16H0iAVqguADsKdZyzlXg815.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/C3/CgoB5l16H0iAVqguADsKdZyzlXg815.gif"/>
 
 自定义端点也是非常简单的，只需要一个 @Endpoint 注解就可以实现，我们来实现一个名称为 springcloud 的端点，创建一个类，增加 @Endpoint(id = "springcloud") 注解，指定 id 为 springcloud，这个类需要被 Spring 管理，我们加上 @Component 注解，然后定义一个用于展示信息的方法，返回类型可以自定义，这里定义一个 Map 返回，Map 中增加一个 title 的 Key，value 为 springcloud，最后一步需要在方法上增加 @ReadOperation 注解，大功告成。
 
@@ -402,7 +402,7 @@ Spring Boot Admin 主要功能点：
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/E3/CgotOV16H1GAWLFkAEFaRNGGwc8148.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/E3/CgotOV16H1GAWLFkAEFaRNGGwc8148.gif"/>
 
 接下来体验一下 Spring Boot Admin，首先我们需要创建一个 Spring Boot 项目，我这里创建了一个 Spring Boot Admin 的项目，然后在 pom 中加入 spring-boot-admin-starter-server
 
@@ -412,13 +412,13 @@ Spring Boot Admin 主要功能点：
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/C3/CgoB5l16H1OAAdE6ADSt7V6hKic032.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/C3/CgoB5l16H1OAAdE6ADSt7V6hKic032.gif"/>
 
 刚刚介绍的时候有讲过，Spring Boot 项目需要集成 Spring Boot Admin Client 向 Spring Boot Admin Server 进行注册，那我们就在项目中增加 spring-boot-admin-starter-client 的依赖，光增加依赖可不行，需要用户必须得知道注册到哪里去了，所以我们需要在配置文件中指定 Spring Boot Admin Server 的地址才行，配置为 spring.boot.admin.client.url=http://localhost:8080
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/C2/CgoB5l16G1mASUWEAF93SfdZYCk697.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/C2/CgoB5l16G1mASUWEAF93SfdZYCk697.gif"/>
 
 启动 Spring Boot 项目后，可以看到 Spring Boot Admin Server 中已经有服务注册上来了，可以清楚的知道应用的名称和 IP 端口信息，应用名称是默认的，可以在配置文件中通过 spring.application.name 来自定义名称。
 
@@ -465,6 +465,6 @@ Filter的注册有两种方式，一种是直接用 @WebFilter 注解，另一�
 
 ###### 总结
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/C5/CgoB5l16KS-AaroPAAM--cSCVG0340.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/C5/CgoB5l16KS-AaroPAAM--cSCVG0340.png"/>
 
 在这一课时我们主要巩固了 Spring Boot 的基础知识，主要包括 Spring Boot 的基础介绍，解决的问题，以及亮点和常用的 Starter 包，并手把手的带你创建了 Spring Boot 项目，并学会了打包编译和配置管理，还自定义了 Spring Boot Starter 包，添加了自定义的 Spring Boot actuator 监控，并学习了使用了开源的 Spring Boot Admin Web 项目，了解了 Spring Boot 的常用功能点。

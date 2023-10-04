@@ -16,7 +16,7 @@
 
 首先我们先来了解一下 Kafka 的整体架构以及核心概念，如下图所示。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/2F/54/CgqCHl8GwXOAJW_TAAENpE35u5w381.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/2F/54/CgqCHl8GwXOAJW_TAAENpE35u5w381.png"/>
 
 * **消息**：Kafka 中最基本的数据单元。消息是一串主要由 key 和 value 构成的字符串，key 和 value 也都是 byte 数组。key 的主要作用是根据一定的策略，将此消息路由到指定的 Partition 中，这样就可以保证包含同一 key 的消息全部写入同一分区中。消息的真正有效负载是 value 部分的数据。为了提高网络和存储的利用率，Producer 会批量发送消息到 Kafka，并在发送之前对消息进行压缩。
 
@@ -28,7 +28,7 @@
 
 * **Partition**：每个 Topic 可以划分成一个或多个 Partition，同一 Topic 下的不同分区包含着消息是不同的。每个消息在被添加到 Partition 时，都会被分配一个 offset，它是消息在此分区中的唯一编号，Kafka 通过 offset 保证消息在分区内的顺序，offset 的顺序性不跨分区，即 Kafka 只保证在同一个分区内的消息是有序的；同一 Topic 的多个分区内的消息，Kafka 并不保证其顺序性，如下图所示。
 
-![image (3).png](https://s0.lgstatic.com/i/image/M00/2F/89/CgqCHl8G-OaAKGrhAABeWbnSWmg382.png)
+<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/2F/89/CgqCHl8G-OaAKGrhAABeWbnSWmg382.png"/>
 
 同一 Topic 的不同 Partition 会分配在不同的 Broker 上。 Partition 是 Kafka 水平扩展性的基础，我们可以通过增加服务器并在其上分配 Partition 的方式，增加 Kafka 的并行处理能力。
 
@@ -42,11 +42,11 @@ Kafka 中有两种"保留策略"：一种是根据消息保留的时间，当消
 
 除此之外，Kafka 还会进行"日志压缩"（Log Compaction）。在很多场景中，消息的 key 与 value 的值之间的对应关系是不断变化的，就像数据库中的数据会不断被修改一样，消费者只关心 key 对应的最新 value 值。此时，可以开启 Kafka 的日志压缩功能，Kafka 会在后台启动一个线程，定期将相同 key 的消息进行合并，只保留最新的 value 值。日志压缩的工作原理如下图所示，图展示了一次日志压缩过程的简化版本。
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/2F/49/Ciqc1F8GwaGAJouRAAKTqlJtZJc799.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/2F/49/Ciqc1F8GwaGAJouRAAKTqlJtZJc799.png"/>
 
 * **Replica**：一般情况下，Kafka 对消息进行了冗余备份，每个 Partition 可以有多个 Replica（副本），每个 Replica 中包含的消息是一样的。每个 Partition 的 Replica 集合中，都会选举出一个 Replica 作为 Leader Replica，Kafka 在不同的场景下会采用不同的选举策略。所有的读写请求都由选举出的 Leader Replica 处理，其他都作为 Follower Replica，Follower Replica 仅仅是从 Leader Replica 处把数据拉取到本地之后，同步更新到自己的 Log 中。每个 Partition 至少有一个 Replica，当 Partition 中只有一个 Replica 时，就只有 Leader Replica，没有 Follower Replica。下图展示了一个拥有三个 Replica 的Partition。
 
-![image (4).png](https://s0.lgstatic.com/i/image/M00/2F/89/CgqCHl8G-PqAAWyMAABTqAURrAc486.png)
+<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/2F/89/CgqCHl8G-PqAAWyMAABTqAURrAc486.png"/>
 
 一般情况下，同一 Partition 的多个 Replica 会被分配到不同的 Broker 上，这样，当 Leader 所在的 Broker 宕机之后，可以重新选举新的 Leader，继续对外提供服务。
 
@@ -64,7 +64,7 @@ LEO（Log End offset）是所有的 Replica 都会有的一个 offset 标记，�
 
 为了让你更好地理解 HW 和 LEO 之间的关系，下面通过一个示例进行分析，下图中展示了针对 offset 为 11 的消息，ISR 集合、HW 与 LEO 是如何协调工作。
 
-![image (5).png](https://s0.lgstatic.com/i/image/M00/2F/7D/Ciqc1F8G-Q6ACSq7AABvhBoNdlo220.png)
+<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/2F/7D/Ciqc1F8G-Q6ACSq7AABvhBoNdlo220.png"/>
 
 ① Producer 向此 Partition 推送消息。
 
@@ -85,7 +85,7 @@ LEO（Log End offset）是所有的 Replica 都会有的一个 offset 标记，�
 
   * 异步复制中，Leader Replica 收到生产者推送的消息后，就认为此消息提交成功。 Follower Replica 则异步地从 Leader Replica 同步消息。这种设计虽然避免了同步复制的问题，但同样也存在一定的风险，现在假设所有 Follower Replica 的同步速度都比较慢，它们保存的消息量都远远落后于 Leader Replica，如下图所示。
 
-![image (6).png](https://s0.lgstatic.com/i/image/M00/2F/7E/Ciqc1F8G-RyAAeDAAAAnkFKrwaI521.png)
+<Image alt="image (6).png" src="https://s0.lgstatic.com/i/image/M00/2F/7E/Ciqc1F8G-RyAAeDAAAAnkFKrwaI521.png"/>
 
 此时 Leader Replica 所在的 Broker 突然宕机，则会重新选举新的 Leader Replica，而新的 Leader Replica 中没有原来 Leader Replica 的消息，这就出现了消息的丢失，而有些 Consumer 则可能消费了这些丢失的消息，后续服务状态变得不可控。
 
@@ -95,7 +95,7 @@ Kafka 权衡了同步复制和异步复制两种策略，通过引入了 ISR 集
 
 * **Consumer**：从 Topic 中拉取消息，并对消息进行消费。某个消费者消费到 Partition 的哪个位置（offset）的相关信息，是 Consumer 自己维护的。在下图中，三个消费者同时消费同一个 Partition，各自管理自己的消费位置。
 
-![image (7).png](https://s0.lgstatic.com/i/image/M00/2F/7E/Ciqc1F8G-SeAbrU5AAAzthf0-to945.png)
+<Image alt="image (7).png" src="https://s0.lgstatic.com/i/image/M00/2F/7E/Ciqc1F8G-SeAbrU5AAAzthf0-to945.png"/>
 
 这样设计非常巧妙，避免了 Kafka Server 端维护消费者消费位置的开销，尤其是在消费数量较多的情况下。另一方面，如果是由 Kafka Server 端管理每个 Consumer 消费状态，一旦 Kafka Server 端出现延或是消费状态丢失时，将会影响大量的 Consumer。同时，这一设计也提高了 Consumer 的灵活性，Consumer 可以按照自己需要的顺序和模式拉取消息进行消费。例如：Consumer 可以通过修改其消费的位置实现针对某些特殊 key 的消息进行反复消费，或是跳过某些消息的需求。
 
@@ -103,21 +103,21 @@ Kafka 权衡了同步复制和异步复制两种策略，通过引入了 ISR 集
 
 下图展示了一个 Consumer Group 中消费者与 Partition 之间的对应关系，其中，Consumer1 和 Consumer2 分别消费 Partition0 和 Partition1，而 Partition2 和 Partition3 分配给了 Consumer3 进行处。
 
-![image (8).png](https://s0.lgstatic.com/i/image/M00/2F/7E/Ciqc1F8G-TOAJ2cnAABuLTyumCs642.png)
+<Image alt="image (8).png" src="https://s0.lgstatic.com/i/image/M00/2F/7E/Ciqc1F8G-TOAJ2cnAABuLTyumCs642.png"/>
 
 Consumer Group 除了实现"独占"和"广播"模式的消息处理外，Kafka 还通过 Consumer Group 实现了消费者的水平扩展和故障转移。在上图中，当 Consumer3 的处理能力不足以处理两个 Partition 中的数据时，可以通过向 Consumer Group 中添加消费者的方式，触发Rebalance 操作重新分配 Partition 与 Consumer 的对应关系，从而实现水平扩展。如下图所示，添加 Consumer4 之后，Consumer3 只消费 Partition3 中的消息，Partition4 中的消息则由 Consumer4 来消费。
 
-![image (9).png](https://s0.lgstatic.com/i/image/M00/2F/89/CgqCHl8G-T2AAoDPAAB37LzFH3w280.png)
+<Image alt="image (9).png" src="https://s0.lgstatic.com/i/image/M00/2F/89/CgqCHl8G-T2AAoDPAAB37LzFH3w280.png"/>
 
 下面来看 Consumer 出现故障的场景，当 Consumer4 宕机时，Consumer Group 会自动重新分配 Partition，如下图所示，由 Consumer3 接管 Consumer4 对应的 Partition 继续处理。
 
-![image (10).png](https://s0.lgstatic.com/i/image/M00/2F/7E/Ciqc1F8G-UuASSRJAABvDdSbF40361.png)
+<Image alt="image (10).png" src="https://s0.lgstatic.com/i/image/M00/2F/7E/Ciqc1F8G-UuASSRJAABvDdSbF40361.png"/>
 
 注意，Consumer Group 中消费者的数量并不是越多越好，当消费者数量超过 Partition 的数量时，会导致有 Consumer 分配不到 Partition，从而造成 Consumer 的浪费。
 
 介绍完 Kafka 的核心概念后，我们通过下图进行总结，并从更高的视角审视 Kafka 集群的完整架构。
 
-![Drawing 10.png](https://s0.lgstatic.com/i/image/M00/2F/4D/Ciqc1F8GxJWAWTtSAAKDvoKBlPU986.png)
+<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image/M00/2F/4D/Ciqc1F8GxJWAWTtSAAKDvoKBlPU986.png"/>
 
 在上图中，Producer 会根据业务逻辑产生消息，之后根据路由规则将消息发送到指定的分区的 Leader Replica 所在的 Broker 上。在 Kafka 服务端接收到消息后，会将消息追加到 Leader Replica 的 Log 中保存，之后 Follower Replica 会与 Leader Replica 进行同步，当 ISR 集合中所有 Replica 都完成了此消息的同步之后，则 Leader Replica 的 HW 会增加，并向 Producer 返回响应。
 
@@ -161,7 +161,7 @@ Scala code runner version 2.13.1 -- Copyright 2002-2019, LAMP/EPFL and Lightbend
 
 首先从 kafka 官网（<http://kafka.apache.org/downloads.html>）下载 Kafka 的二进制安装包，目前最新版本是 2.4.0，我们选择在 Scala 2.13 上打包出的二进制包，如下图所示：
 
-![Drawing 11.png](https://s0.lgstatic.com/i/image/M00/2F/4D/Ciqc1F8GxLqAHJWSAAGLMsqgETA207.png)
+<Image alt="Drawing 11.png" src="https://s0.lgstatic.com/i/image/M00/2F/4D/Ciqc1F8GxLqAHJWSAAGLMsqgETA207.png"/>
 
 下载完毕之后，执行如下命令解压缩：
 
@@ -216,7 +216,7 @@ Created topic test.
 
 SkyWalking Agent 在 TraceSegment 结束的时候，会通过 TraceSegmentServiceClient 将 TraceSegment 序列化并发送给后端 OAP。这里我们对其进行改造，将单一的 gRPC 上报方式修改成可配置的上报方式，可配置的方式有 gRPC 调用或是 Kafka 方式，修改后的结构如下图所示：
 
-![Drawing 12.png](https://s0.lgstatic.com/i/image/M00/2F/58/CgqCHl8GxP2AWGQxAACxh34qQEw194.png)
+<Image alt="Drawing 12.png" src="https://s0.lgstatic.com/i/image/M00/2F/58/CgqCHl8GxP2AWGQxAACxh34qQEw194.png"/>
 
 SegmentReportStrategy 接口中定义了发送 TraceSegment 数据的 report() 方法，如下所示：
 
@@ -405,8 +405,8 @@ receiver-trace:
 
 完成上述操作之后，可以请求 <http://localhost:8000/hello/xxx> ，此时 demo-provider 和 demo-provider 都会分别生成两条 TraceSegment 并通过 Kafka 方式上报。在 Kafka 的命令行 Consumer 中可以看到如下输出：
 
-![Drawing 13.png](https://s0.lgstatic.com/i/image/M00/2F/59/CgqCHl8GxVeAbpX5AAFAyMPwgYA338.png)
+<Image alt="Drawing 13.png" src="https://s0.lgstatic.com/i/image/M00/2F/59/CgqCHl8GxVeAbpX5AAFAyMPwgYA338.png"/>
 
 在 SkyWalking Rocketbot UI 中可以查找到相应的完整 Trace 信息，如下图所示，即表示上述改造成果：
 
-![Drawing 14.png](https://s0.lgstatic.com/i/image/M00/2F/4E/Ciqc1F8GxV-AWrfaAACzTk0fGVU367.png)
+<Image alt="Drawing 14.png" src="https://s0.lgstatic.com/i/image/M00/2F/4E/Ciqc1F8GxV-AWrfaAACzTk0fGVU367.png"/>

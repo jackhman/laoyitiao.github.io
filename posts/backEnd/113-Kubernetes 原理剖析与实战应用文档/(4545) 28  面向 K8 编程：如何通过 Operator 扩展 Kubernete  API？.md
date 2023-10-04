@@ -15,7 +15,7 @@
 
 这里对 Kubernetes 的控制器模式做个简要说明。**Kubernetes 通过声明式 API 来定义对象，各个控制器负责实时查看对应对象的状态，确保达到定义的期望状态**。这就是 Kubernetes 的控制器模式。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/74/A3/Ciqc1F_HAmyACHLHAAHSt7ZcZoY464.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/74/A3/Ciqc1F_HAmyACHLHAAHSt7ZcZoY464.png"/>
 
 kube-controller-manager 就是由这样一组控制器组成的。我们以 StatefulSet 为例来简单说明下控制器的具体逻辑。
 
@@ -29,7 +29,7 @@ kube-controller-manager 就是由这样一组控制器组成的。我们以 Stat
 
 Operator 工作的时候采用上述的控制器模式，会持续地观察 Kubernetes 中的自定义对象，即 CR（Custom Resource）。我们通过 CRD 来定义一个对象，CR 则是 CRD 实例化的对象。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/74/A3/Ciqc1F_HAnWAZUN3AAGfGj4K8Gw651.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/74/A3/Ciqc1F_HAnWAZUN3AAGfGj4K8Gw651.png"/>
 
 Operator 会持续跟踪这些 CR 的变化事件，比如 ADD、UPDATE、DELETE，然后采取一系列操作，使其达到期望的状态。
 
@@ -37,7 +37,7 @@ Operator 会持续跟踪这些 CR 的变化事件，比如 ADD、UPDATE、DELETE
 
 下面就是 Operator 代码层面的工作流程图：
 
-![image.png](https://s0.lgstatic.com/i/image/M00/74/ED/CgqCHl_HLoWAHjvEAAPol71Pgh8456.png)
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/74/ED/CgqCHl_HLoWAHjvEAAPol71Pgh8456.png"/>
 
 如上图所示，上半部分是一个 Informer，它的机制就是不断地 list/watch kube-apiserver 中特定的资源，比如你只关心 Pod，那么就只 list/watch Pod。Informer 主要有两个方法：一个是 ListFunc，一个是 WatchFunc。
 

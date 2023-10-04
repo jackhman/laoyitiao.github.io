@@ -54,7 +54,7 @@ Mc 在响应存储协议时，如果遇到错误，就返回前面说的3种错�
 
 Mc 对存储命令的请求及响应协议，可以参考下面的思维导图来有一个完整的印象。
 
-![](http://s0.lgstatic.com/i/image2/M01/99/E6/CgotOV2lNqOABAkvAAC0oNkHCok972.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/E6/CgotOV2lNqOABAkvAAC0oNkHCok972.png"/>
 
 ###### 获取命令
 
@@ -62,7 +62,7 @@ Mc 的获取协议，只有 get、gets 两种指令，如下图所示。格式�
 
 获取命令的响应，就是 value 字串，后面跟上 key、flag、value 字节数，以及 value 的 data block 块。最后跟一个 END\\r\\n 表明所有存在的 key/value 已经返回，如果没有返回的 key，则表明这个 key 在 Mc 中不存在。
 
-![](http://s0.lgstatic.com/i/image2/M01/99/C6/CgoB5l2lNqOAd_DsAADGwh4XXXo008.png)   
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/C6/CgoB5l2lNqOAd_DsAADGwh4XXXo008.png"/>   
 
 ###### 其他指令
 
@@ -112,13 +112,13 @@ Xmemcached 性能较好，综合表现最佳。而且社区活跃度高，近些
 
 讲到这里，Mc 的核心知识点就基本讲完了，知识点结构图如下所示。
 
-![](http://s0.lgstatic.com/i/image2/M01/99/E6/CgotOV2lNqOAbxgDAAFIRc23upk013.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/E6/CgotOV2lNqOAbxgDAAFIRc23upk013.png"/>
 
 回顾一下最近几节课的内容。首先，学习了 Mc 的系统架构，学习了 Mc 基于 libevent 的网络模型，学习了 Mc 的多线程处理，包括主线程、工作线程如何进行网络 IO 协调及处理，学习了 Mc 的状态机。然后，继续学习了 Mc 用于定位 key 的哈希表，学习了用于数据生命周期管理的 LRU，还学习 slab 分配机制，以及 Mc 数据的存储机理。最后，还完整学习了 Mc的协议，了解了以 Java 语言为例的 3 种 Mc client，以及 Mc client 在线上使用过程中，如何进行调优及改进。
 
 根据下面 Mc 协议的思维导图，查看自己是否对所有指令都有理解，可以结合 Mc 的协议文档，启动一个 Mc 实例，进行各个命令的实际操练。
 
-![](http://s0.lgstatic.com/i/image2/M01/99/C6/CgoB5l2lNqOASrF2AADzbaPtWVI518.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/C6/CgoB5l2lNqOASrF2AADzbaPtWVI518.png"/>
 
 OK，这节课就讲到这里啦，下一课时我将分享"Memcached 经典问题及解决方案"，记得按时来听课哈。好，下节课见，拜拜！
 

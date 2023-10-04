@@ -76,7 +76,7 @@ public class FutureDemo {
 ```
 
 可以看到，这个执行结果是打印 4 行语句，前面两个是速度慢的任务，后面两个是速度快的任务。虽然结果是正确的，但实际上在执行的时候会先等待 5 秒，然后再很快打印出这 4 行语句。  
-![](https://s0.lgstatic.com/i/image3/M01/6B/D6/CgpOIF5Y0OGAKVKjAACCEFYDuCw593.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/D6/CgpOIF5Y0OGAKVKjAACCEFYDuCw593.png"/>
 
 这里有一个问题，即第三个的任务量是比较小的，它可以很快返回结果，紧接着第四个任务也会返回结果。但是由于前两个任务速度很慢，所以我们在利用 get 方法执行时，会卡在第一个任务上。也就是说，虽然此时第三个和第四个任务很早就得到结果了，但我们在此时使用这种 for 循环的方式去获取结果，依然无法及时获取到第三个和第四个任务的结果。直到 5 秒后，第一个任务出结果了，我们才能获取到，紧接着也可以获取到第二个任务的结果，然后才轮到第三、第四个任务。
 
@@ -89,7 +89,7 @@ public class FutureDemo {
 Future 的生命周期不能后退，一旦完成了任务，它就永久停在了"已完成"的状态，不能从头再来，也不能让一个已经完成计算的 Future 再次重新执行任务。
 
 这一点和线程、线程池的状态是一样的，线程和线程池的状态也是不能后退的。关于线程的状态和流转路径，第 03 讲已经讲过了，如图所示。  
-![](https://s0.lgstatic.com/i/image3/M01/6B/D6/CgpOIF5Y0PiAcNyAAADVM7mENKE892.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/D6/CgpOIF5Y0PiAcNyAAADVM7mENKE892.png"/>
 
 这个图也是我们当时讲解所用的图，如果有些遗忘，可以回去复习一下当时的内容。这一讲，我推荐你采用看视频的方式，因为视频中会把各个路径都标明清楚，看起来会更加清晰。
 

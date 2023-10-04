@@ -41,7 +41,7 @@ Spring Cloud Config 中提供了多种配置仓库的实现方案，最常见的
 
 在 SpringHealth 案例中，当我们使用本地配置文件方案构建配置仓库时，一种典型的项目工程结构参考下图：
 
-![Lark20201117-170114.png](https://s0.lgstatic.com/i/image/M00/6E/CA/Ciqc1F-zkbCARstdAAPVdmGsq8Y115.png)  
+<Image alt="Lark20201117-170114.png" src="https://s0.lgstatic.com/i/image/M00/6E/CA/Ciqc1F-zkbCARstdAAPVdmGsq8Y115.png"/>  
 本地配置文件方案下的项目工程结构图
 
 可以看到，我们在 src/main/resources 目录下创建一个 springhealthconfig 文件夹，再在这个文件夹下分别创建 userservice、deviceservice 和 interventionservice 这三个子文件夹，请注意这三个子文件夹的名称必须与各个服务自身的名称完全一致。然后我们可以看到这三个子文件夹下面都放着以服务名称命名的针对不同运行环境的 .yml 配置文件。
@@ -175,7 +175,7 @@ public interface EnvironmentRepository {
 
 可以看到这个接口非常简单，Spring Cloud Config中把配置信息抽象为应用（application）、环境（profile）和版本（label）这三个维度进行管理，通过这三个维度，我们就可以确定唯一的一份配置数据。EnvironmentRepository 的实现类非常多，参见下图，从命名中基本都可以看出这些类是用于加载哪些不同类型的配置：
 
-![Lark20201117-170119.png](https://s0.lgstatic.com/i/image/M00/6E/CB/Ciqc1F-zkraAStwyAAmrIq_4e-c473.png)  
+<Image alt="Lark20201117-170119.png" src="https://s0.lgstatic.com/i/image/M00/6E/CB/Ciqc1F-zkraAStwyAAmrIq_4e-c473.png"/>  
 EnvironmentRepository 类层结构图
 
 事实上，上图中各种实现类之间存在一定的关联，那么我们选择哪一个 EnvironmentRepository 来作为切入点呢？这个问题实际上不难回答，因为 Spring Cloud Config 为我们提供了一个默认的 EnvironmentRepositoryConfiguration，即 DefaultRepositoryConfiguration，如下所示：
@@ -207,7 +207,7 @@ class DefaultRepositoryConfiguration {
 
 当服务器启动时，在 JGitEnvironmentRepository 中会决定是否调用 initClonedRepository() 方法来完成从远程 Git 仓库 Clone 代码。如果执行了这一操作，相当于会将配置文件从 Git 上 clone 到本地，然后再进行其他的操作。在 JGitEnvironmentRepository 抽象类中，提供了大量针对第三方 Git 仓库的操作代码，这些都不是理解配置中心的重点内容，这里不做展开。我们只需要明白，无论采用诸如 Git、SVN 等具体某一种配置仓库的实现方式，最终我们处理的对象都是位于本地文件系统中的配置文件。为了理解这点，我们需要围绕 MultipleJGitEnvironmentRepository 类从下向上回顾整个类层结构，如下图所示：
 
-![Lark20201117-170122.png](https://s0.lgstatic.com/i/image/M00/6E/D6/CgqCHl-zkt6AUy91AAGGBtqqXYE828.png)  
+<Image alt="Lark20201117-170122.png" src="https://s0.lgstatic.com/i/image/M00/6E/D6/CgqCHl-zkt6AUy91AAGGBtqqXYE828.png"/>  
 MultipleJGitEnvironmentRepository 类层结构图
 
 上图中，AbstractScmEnvironmentRepository 实现了 EnvironmentRepository 接口，同时也是 JGitEnvironmentRepository 的父类，它的 findOne 方法如下所示：

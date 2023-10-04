@@ -308,7 +308,7 @@ func panic(v interface{})
 
 panic 异常是一种非常严重的情况，会让程序中断运行，使程序崩溃，所以**如果是不影响程序运行的错误，不要使用 panic，使用普通错误 error 即可。**
 
-![pDE7ppQNyfRSIn1Q__thumbnail.png](https://s0.lgstatic.com/i/image/M00/6F/79/CgqCHl-15ZSAAsw5AAUnpsfN34w061.png)
+<Image alt="pDE7ppQNyfRSIn1Q__thumbnail.png" src="https://s0.lgstatic.com/i/image/M00/6F/79/CgqCHl-15ZSAAsw5AAUnpsfN34w061.png"/>
 
 ### Recover 捕获 Panic 异常
 

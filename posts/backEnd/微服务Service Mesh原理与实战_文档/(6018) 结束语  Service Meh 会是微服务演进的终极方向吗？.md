@@ -32,7 +32,7 @@
 
 结合我们上一讲提过的这张图，虽然 Knative 充分利用了 Istio\&Envoy 的能力，但是也受限于开源的 Service Mesh 方案，没有办法更进一步。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image6/M00/19/F1/CioPOWBK13KARAmNAAFOLVdbxMk461.png)  
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/19/F1/CioPOWBK13KARAmNAAFOLVdbxMk461.png"/>  
 Knative 架构图
 
 你可以试想一下，作为 Route（Istio Gateway）是否有存在的必要，而 Activator 是否又有必要呢？

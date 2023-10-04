@@ -92,7 +92,7 @@ Mock 的意思是模拟，它可以用来对系统、组件或类进行隔离。
 
 使用 Mock 对象完成依赖关系测试的示意图如下所示：
 
-![图片1.png](https://s0.lgstatic.com/i/image6/M00/02/45/CioPOWAdHoyAZcf6AACLingamrY696.png)  
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M00/02/45/CioPOWAdHoyAZcf6AACLingamrY696.png"/>  
 Mock 对象与依赖关系测试示意图
 
 从图中可以看出，在形式上，Mock 是在测试代码中直接 Mock 类和定义 Mock 方法的行为，通常测试代码和 Mock 代码放一起。因此，测试代码的逻辑从测试用例的代码上能很容易地体现出来。
@@ -389,7 +389,7 @@ public class CustomerControllerTestsWithAutoConfigureMockMvc {
 
 如下所示表格，我们罗列了一些经常使用的测试注解及其描述。
 
-![图片8.png](https://s0.lgstatic.com/i/image6/M00/02/47/Cgp9HWAdHqiAdUEbAAG7s2vEMgM538.png)
+<Image alt="图片8.png" src="https://s0.lgstatic.com/i/image6/M00/02/47/Cgp9HWAdHqiAdUEbAAG7s2vEMgM538.png"/>
 
 ### 小结与预告
 

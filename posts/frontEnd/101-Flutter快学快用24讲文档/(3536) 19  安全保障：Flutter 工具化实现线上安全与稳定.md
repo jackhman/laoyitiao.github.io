@@ -124,12 +124,12 @@ FlutterError.dumpErrorToConsole(FlutterErrorDetails(exception: error));
 
 3.上报测试，里面会有各种 SDK 的例子，唯独是没有 Flutter 的，你可以不关注，直接进入项目中或者进入个人页面，可以看到如图 1 的界面。
 
-![image.png](https://s0.lgstatic.com/i/image/M00/40/BC/Ciqc1F8zjOiAZrLtAAUYl4LuWZQ819.png)  
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/40/BC/Ciqc1F8zjOiAZrLtAAUYl4LuWZQ819.png"/>  
 图 1 Sentry 平台
 
 4.按照图 2 的方法可以看到我们需要的 dsn，如果是新注册的，可以点击图 2 中的 Setup Sentry 快速找到；
 
-![image (1).png](https://s0.lgstatic.com/i/image/M00/40/BC/Ciqc1F8zjPmADPTqAAZbn--G0NI800.png)  
+<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/40/BC/Ciqc1F8zjPmADPTqAAZbn--G0NI800.png"/>  
 图 2 dsn 查询指引
 
 5.替换项目代码中的 dsn。
@@ -157,7 +157,7 @@ Widget build(BuildContext context) {
 
 成功安装后，打开 App 选择左侧菜单的"图片流"，这时候你会看到界面异常，大概过 1-2 分钟后，我们前往 Sentry 平台，选择我们创建项目，就会看到如下图 3 的上报内容。
 
-![image (2).png](https://s0.lgstatic.com/i/image/M00/40/C8/CgqCHl8zjR6AAojgAAKndALdwFQ016.png)  
+<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/40/C8/CgqCHl8zjR6AAojgAAKndALdwFQ016.png"/>  
 图 3 Sentry 异常例子
 
 点击具体的上报内容，就可以看到详细的报错信息，这里面已经将报错的文件和具体函数都说明了，并打印了调用堆栈。你可以在提示信息中查看到具体的报错文件 img_flow.dart 以及具体的报错内容 RangeError ，通过文件以及报错详情，就可以非常容易的定位到具体问题了。

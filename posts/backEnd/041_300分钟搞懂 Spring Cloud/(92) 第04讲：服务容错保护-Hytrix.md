@@ -4,7 +4,7 @@
 
 微服务架构下，会存在服务之间相互依赖调用的情况，当某个服务不可用时，很容易因为服务之间的依赖关系使故障扩大，甚至造成整个系统不可用的情况，这种现象称为服务雪崩效应。
 
-![](http://s0.lgstatic.com/i/image2/M01/97/EB/CgoB5l2gPgGAPtZNAAD-3MAo7Ls234.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/97/EB/CgoB5l2gPgGAPtZNAAD-3MAo7Ls234.png"/>
 
 如上图所示，为服务雪崩效应发生的过程，首先是服务正常状态，当客户端对服务 A 发起请求，服务 A 依赖了服务 B，服务 B 又依赖了服务 C，当所有服务都处于正常状态时，整个请求链路是通畅的，结果会很快返回给客户端。
 
@@ -49,7 +49,7 @@ Spring Cloud 将原生 Hystrix 整合进来，提供了最简洁的使用方式�
 
 ###### 设计原则
 
-![](http://s0.lgstatic.com/i/image2/M01/98/0A/CgotOV2gPgGAP-qzAABk99lb2oU443.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/0A/CgotOV2gPgGAP-qzAABk99lb2oU443.png"/>
 
 这里总结了 Hystrix 的 5 条设计原则，首先我们看看第一条设计原则避免线程耗尽，由于被调用方出现问题，调用方无法及时获取响应结果，而一直在发送请求，最终会耗尽所有线程的资源。
 
@@ -65,7 +65,7 @@ Spring Cloud 将原生 Hystrix 整合进来，提供了最简洁的使用方式�
 
 前面我们讲了 Hystrix 的一些设计原则，这些原则实际就是为了解决遇到的问题。那么要解决这些问题，就必须去实现这些设计，你现在看到的脑图是我简单整理的一些实现点。
 
-![](http://s0.lgstatic.com/i/image2/M01/97/EB/CgoB5l2gPgGAF353AAFVH3psdO4196.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/97/EB/CgoB5l2gPgGAF353AAFVH3psdO4196.png"/>
 
 封装请求会将用户的操作进行统一封装，统一封装的目的在于进行统一控制。
 
@@ -79,7 +79,7 @@ Spring Cloud 将原生 Hystrix 整合进来，提供了最简洁的使用方式�
 
 ###### 工作原理
 
-![](http://s0.lgstatic.com/i/image2/M01/98/0A/CgotOV2gPgGATT0XAAHyJjjmin8233.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/0A/CgotOV2gPgGATT0XAAHyJjjmin8233.png"/>
 
 这张图是 Hystrix 在 GitHub 主页上提供的，详细的展示了 Hystrix 的工作原理。通过此图可以看出，整个工作流程分为 9 个主要步骤。  
 
@@ -105,13 +105,13 @@ Hystrix 的使用主要有三种方式，分别是 HystrixCommand 注解方式�
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/97/EB/CgoB5l2gPgGAH62HADl1HsI091U613.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/97/EB/CgoB5l2gPgGAH62HADl1HsI091U613.gif"/>
 
 HystrixCommand 都有默认的配置，我们可以手动指定配置信息，比如 commandKey、groupKey、fallbackMethod 等。
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/98/0A/CgotOV2gPgKAZIURACtoJYAvTTw625.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/0A/CgotOV2gPgKAZIURACtoJYAvTTw625.gif"/>
 
 最简便的配置方式还是统一将配置信息放入配置文件中进行管理，我们可以为 HystrixCommand 设置一个 commandKey，然后在配置文件中为这个 commandKey 指定对应的配置信息。比如我们配置 getUser 这个 commandKey 的超时时间和隔离方式，在配置文件中增加
 
@@ -123,14 +123,14 @@ hystrix.command.getUser.execution.isolation.strategy = SEMAPHORE
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/97/EB/CgoB5l2gPgKAfQCjADH_ydrSTn0846.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/97/EB/CgoB5l2gPgKAfQCjADH_ydrSTn0846.gif"/>
 
 我们来调用下 user-service 的接口，将 user-service 接口稍微改造下，休眠 10 秒钟后再返回，这样的话我们在调用的时候需要等待 10 秒钟才能得到返回结果，如果在高并发场景下，很多请求就会阻塞在这里，这种场景下我们需要超时、快速失败等机制来避免资源耗尽的问题，所以我们使用了 Hystrix 来解决这个问题，我们在 get 方法上增加了 HystrixCommand 注解，设置了超时时间为 3 秒钟，如果 3 秒钟还没返回结果，那么该请求就会超时，执行 fallback 方法中的逻辑返回给调用方。
 
 Hystrix 配置
 ----------
 
-![](http://s0.lgstatic.com/i/image2/M01/98/0A/CgotOV2gPgKAYjAMAABpYDXLwZU519.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/0A/CgotOV2gPgKAYjAMAABpYDXLwZU519.png"/>
 
 Hystrix 的配置项比较多，在这里整理了几个比较常用的配置，所有的配置基本上都有默认值，如果我们需要调整这些配置，可以参考 PPT 中给出的链接。
 
@@ -145,7 +145,7 @@ Hystrix 的配置项比较多，在这里整理了几个比较常用的配置，
 Hystrix 监控
 ----------
 
-![](http://s0.lgstatic.com/i/image2/M01/97/EB/CgoB5l2gPgOAFuD2AAKErrJy9zw955.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/97/EB/CgoB5l2gPgOAFuD2AAKErrJy9zw955.png"/>
 
 在 Hystrix 的设计原则中我们提到了近实时监控，Hystrix 会实时记录所有 HystrixCommand 的执行信息，其中有每秒执行了多少次请求，多少次是成功的，多少次是失败的等信息。  
 
@@ -153,19 +153,19 @@ Hystrix 监控
 
 在 Hystrix Dashboard 主页面，我们可以输入需要监控的 Stream 地址，Stream 地址会输出监控的原始数据，Dashboard 就是将这些数据图形化展示。
 
-![](http://s0.lgstatic.com/i/image2/M01/98/0A/CgotOV2gPgOAW-YXAAMjhG4LmRc939.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/0A/CgotOV2gPgOAW-YXAAMjhG4LmRc939.png"/>
 
 这张图是 Hystrix 官方提供的，通过 Dashboard 将请求的情况展示出来，每一块都是一个Command，Command 区域背景色的圆圈越大表示流量越大，绿色的数字表示请求成功的短路的计数，当断路器处于打开状态时，被拦截的请求就是短路的数量。黄色的数字表示超时的请求数，紫色数字表示请求被拒绝的数量。红色的数字表示请求失败的数量。
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/97/EB/CgoB5l2gPgOAUaGgABtwVk03hhA570.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/97/EB/CgoB5l2gPgOAUaGgABtwVk03hhA570.gif"/>
 
 下面我们自己来搭建一个 Hystrix 的 Dashboard，首先需要创建一个单独的 hystrix-dashboard 的项目，加入 spring-cloud-starter-netflix-hystrix-dashboard 的依赖，启动类上增加 @EnableHystrixDashboard 注解，这些都是固定的老套路，相信大家都已经轻车熟路了。
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/98/0A/CgotOV2gPgOAaIiIAFXv_KctB6A050.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/0A/CgotOV2gPgOAaIiIAFXv_KctB6A050.gif"/>
 
 启动项目，在浏览器中访问，就可以看到 Dashboard 的主页了。需要对项目进行监控，首先要有对应的 Stream 地址，Stream 产生数据源，我们在被监控的项目中加入 spring-boot-starter-actuator，只有加入了 actuator 才能暴露出 hystrix.stream 端点，访问下 hystrix.stream 端点，可以看到一直在输出内容 ping:，这个时候证明没有监控数据产生，我们访问下之前添加了 HystrixCommand 的方法，这样就会产生监控数据了，然后再看下 hystrix.stream 你会发现，已经有数据在不断输出了。
 
@@ -181,7 +181,7 @@ HystrixCommand 注解的原理其实很简单，在 Hystrix 中有一个 Hystrix
 Hystrix 隔离方式
 ------------
 
-![](http://s0.lgstatic.com/i/image2/M01/97/EB/CgoB5l2gPgOANzYWAAEMqTCDefI937.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/97/EB/CgoB5l2gPgOANzYWAAEMqTCDefI937.png"/>
 
 Hystrix 支持线程池和信号量两种隔离方式，线程池隔离是当用户请求到 A 服务后，A 服务需要调用其他服务，这个时候可以为不同的服务创建独立的线程池，假如 A 需要调用 B 和 C，那么可以创建 2 个独立的线程池，将调用 B 服务的线程丢入到一个线程池，将调用 C 服务的线程丢入到另一个线程池，这样就起到隔离效果，就算其中某个线程池请求满了，无法处理请求了，对另一个线程池也没有影响。
 

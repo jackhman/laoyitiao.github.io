@@ -10,7 +10,7 @@
 
 本课时我们关注的是Istio 数据平面的高性能智能网络代理，它是基于 Envoy 改进的 Istio-Proxy，控制和协调了被代理服务的所有网络通信，同时也负责收集和上报相关的监控数据。也就是说，代理服务跟外界的所有网络请求都会经过该网络代理，所以网络代理可以代替代理服务实现熔断和限流等功能。
 
-![Istio_service_mesh.png](https://s0.lgstatic.com/i/image/M00/55/EE/CgqCHl9q6yiADTC_AAA05D6oqE0082.png)  
+<Image alt="Istio_service_mesh.png" src="https://s0.lgstatic.com/i/image/M00/55/EE/CgqCHl9q6yiADTC_AAA05D6oqE0082.png"/>  
 Istio 服务间网络请求示意图
 
 如上图所示，当httpbin 服务调用 Java API 提供的网络 RESTful 接口时，其发送的网络请求会经过它们各自的网络代理 proxy，那么 httpbin的代理就可以为其提供服务**熔断**相关的机制，当调用 Java API 持续出错时，就不再将网络请求发送出去，而是直接本地返回默认数值。
@@ -25,7 +25,7 @@ Istio 服务间网络请求示意图
 
 * **Service Mesh 熔断机制能提供的回退行为较为有限，而 Hystrix 等通用组件提供了较为丰富的回退实现。** 正是因为 Service Mesh 是无侵入的，所以它只能在系统触发熔断机制时，通过 Proxy 返回 HTTP 503 错误，期望应用服务在应对503错误时进行各类回退操作。 而 Hystrix等通用组件在其 API 层面提供了多种的回退操作实现，这样可以实现各种不同类型的回退操作，比如单一的默认值、使用缓存结果或者去调用其他服务等。
 
-![istio_and_hystrix.png](https://s0.lgstatic.com/i/image/M00/55/EF/CgqCHl9q61aAEwYWAAB6vty4Sd8250.png)  
+<Image alt="istio_and_hystrix.png" src="https://s0.lgstatic.com/i/image/M00/55/EF/CgqCHl9q61aAEwYWAAB6vty4Sd8250.png"/>  
 Hystrix 和 Istio 的使用区别
 
 总体来说，Istio是使用了 Proxy 作为服务的网络层面的代理来实现熔断机制的，不依赖底层具体的代码和技术栈，而且在部署后也可以进行重新配置和部署。Hystrix等通用组件则需要在代码级别实现熔断机制，因此它需要在开发阶段时就做出具体熔断配置等决策，后期变更配置成本比较高。

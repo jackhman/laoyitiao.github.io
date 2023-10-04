@@ -1,6 +1,6 @@
 在 08 课时"SkyWalking Agent 启动流程剖析"中我详细介绍了 ServiceManager 加载并初始化 BootService 实现的核心逻辑。下图展示了 BootService 接口的所有实现类，本课时将深入分析这些 BootService 实现类的具体逻辑：
 
-![](https://s0.lgstatic.com/i/image3/M01/85/D6/Cgq2xl6OzXqACRPAAAEm5IQEH5Y241.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/85/D6/Cgq2xl6OzXqACRPAAAEm5IQEH5Y241.png"/>
 
 ### 网络连接管理
 
@@ -9,7 +9,7 @@
 * \*\*ManagedChanne l：它是 gRPC 客户端的核心类之一，它逻辑上表示一个 Channel，底层持有一个 TCP 链接，并负责维护此连接的活性。也就是说，在 RPC 调用的任何时机，如果检测到底层连接处于关闭状态（terminated），将会尝试重建连接。通常情况下，我们不需要在 RPC 调用结束后就关闭 Channel ，该 Channel 可以被一直重用，直到整个客户端程序关闭。当然，我们可以在客户端内以连接池的方式使用多个 ManagedChannel ，在每次 RPC 请求时选择使用轮训或是随机等算法选择一个可用的 Channel，这样可以提高客户端整体的并发能力。
 * \*\*ManagedChannelBuilder：\*\*它负责创建客户端 Channel，ManagedChannelBuilder 使用了 provider 机制，具体是创建了哪种 Channel 由 provider 决定，常用的 ManagedChannelBuilder 有三种：NettyChannelBuilder、OkHttpChannelBuilder、InProcessChannelBuilder，如下图所示：
 
-![](https://s0.lgstatic.com/i/image3/M01/0C/C0/Ciqah16OzXqAYIu0AABBDZDMT8c843.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0C/C0/Ciqah16OzXqAYIu0AABBDZDMT8c843.png"/>
 
 在 SkyWalking Agent 中用的是 NettyChannelBuilder，其创建的 Channel 底层是基于 Netty 实现的。OkHttpChannelBuilder 创建的 Channel 底层是基于 OkHttp 库实现的。InProcessChannelBuilder 用于创建进程内通信使用的 Channel。
 
@@ -55,7 +55,7 @@ public void run() {
 
 GRPCChannelListener 是一个监听器接口，有多个需要发送网络请求的 BootService 实现类同时实现了该接口，如下图所示，后面会详细介绍这些 BootService 实现类的具体功能。
 
-![](https://s0.lgstatic.com/i/image3/M01/85/D6/Cgq2xl6OzXqAXhA7AACNDBlVUrQ730.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/85/D6/Cgq2xl6OzXqAXhA7AACNDBlVUrQ730.png"/>
 
 最后，GRPCChannelManager 对外提供了 reportError() 方法，在其他依赖该网络连接的 BootService 实现发送请求失败时，可以通过该方法将 reconnect 字段设置为 true，并由后台线程重新创建 GRPCChannel。
 
@@ -65,7 +65,7 @@ GRPCChannelListener 是一个监听器接口，有多个需要发送网络请求
 
 首先来介绍注册协议涉及的 proto 的定义------ Register.proto 文件，其位置如下：
 
-![](https://s0.lgstatic.com/i/image3/M01/0C/C0/Ciqah16OzXuAO6enAAJXETLoQmo373.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0C/C0/Ciqah16OzXuAO6enAAJXETLoQmo373.png"/>
 
 Register.proto 中定义了 Register 服务，这里先关注 doServiceRegister() 和 doServiceInstanceRegister() 两个 RPC 接口，如下所示：
 
@@ -279,7 +279,7 @@ NetworkAddressDictionary 实现与 EndpointNameDictionary 类似，就留给你�
 
 在前面介绍 SkyWalking Rocketbot 时看到 SkyWalking 可以监控服务实例的 CPU、堆内存使用情况以及 GC 信息，这些信息都是通过 JVMService 收集的。JVMService 也实现了 BootService 接口。JVMService 的结构大致如下图所示：
 
-![](https://s0.lgstatic.com/i/image3/M01/85/D6/Cgq2xl6OzXuAWM3MAAHZFmJeMwM515.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/85/D6/Cgq2xl6OzXuAWM3MAAHZFmJeMwM515.png"/>
 
 在 JVMService 中会启动一个独立 collectMetric 线程请求 MXBean 来收集 JVM 的监控数据，然后将监控数据保存到 queue 队列（LinkedBlockingQueue 类型）中缓存，之后会启动另一个线程读取 queue 队列并将监控数据通过 gRPC 请求发送到后端的 OAP 集群。
 
@@ -359,7 +359,7 @@ for (GarbageCollectorMXBean bean : beans) {
 
 GCMetricAccessor 接口的实现类如下图所示，针对每一种垃圾收集器都有相应的实现：
 
-![](https://s0.lgstatic.com/i/image3/M01/0C/C0/Ciqah16OzXuAH1obAACj_oQjWi4810.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0C/C0/Ciqah16OzXuAH1obAACj_oQjWi4810.png"/>
 
 GCMetricAccessor 接口中提供了一个 getGCList() 方法用于读取 MXBean 获取 GC 的信息，在抽象类 GCModule 中实现了 getGCList() 方法的核心逻辑：
 

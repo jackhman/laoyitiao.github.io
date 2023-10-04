@@ -12,7 +12,7 @@ Leader 服务器的选举操作主要发生在两种情况下。第一种就是 
 
 我们先来介绍在 ZooKeeper 集群服务最初启动的时候，Leader 服务器是如何选举的。在 ZooKeeper 集群启动时，需要在集群中的服务器之间确定一台 Leader 服务器。当 ZooKeeper 集群中的三台服务器启动之后，首先会进行通信检查，如果集群中的服务器之间能够进行通信。集群中的三台机器开始尝试寻找集群中的 Leader 服务器并进行数据同步等操作。如何这时没有搜索到 Leader 服务器，说明集群中不存在 Leader 服务器。这时 ZooKeeper 集群开始发起 Leader 服务器选举。在整个 ZooKeeper 集群中 Leader 选举主要可以分为三大步骤分别是：发起投票、接收投票、统计投票。
 
-![2.png](https://s0.lgstatic.com/i/image/M00/26/E5/Ciqc1F7zKQyAK4wsAADnGMCxArI126.png)
+<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/26/E5/Ciqc1F7zKQyAK4wsAADnGMCxArI126.png"/>
 
 #### 发起投票
 
@@ -32,7 +32,7 @@ Leader 服务器的选举操作主要发生在两种情况下。第一种就是 
 
 而当每轮投票过后，ZooKeeper 服务都会统计集群中服务器的投票结果，判断是否有过半数的机器投出一样的信息。如果存在过半数投票信息指向的服务器，那么该台服务器就被选举为 Leader 服务器。比如上面我们举的例子中，ZooKeeper 集群会选举 Severhost2 服务器作为 Leader 服务器。
 
-![1.png](https://s0.lgstatic.com/i/image/M00/26/F1/CgqCHl7zKRuARwOdAACqX-dZDEQ790.png)
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/26/F1/CgqCHl7zKRuARwOdAACqX-dZDEQ790.png"/>
 
 当 ZooKeeper 集群选举出 Leader 服务器后，ZooKeeper 集群中的服务器就开始更新自己的角色信息，**除被选举成 Leader 的服务器之外，其他集群中的服务器角色变更为 Following。**
 

@@ -4,7 +4,7 @@
 
 任何请求访问 Kubernetes 的 kube-apiserver 时，都要依次经历三个阶段：认证（Authentication，有时简写成 AuthN）、授权（Authorization，有时简写成 AuthZ）和准入控制（Admission Control）。
 
-![image (2).png](https://s0.lgstatic.com/i/image/M00/62/1E/Ciqc1F-RVYyAeaf5AABESlN1pJg327.png)
+<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/62/1E/Ciqc1F-RVYyAeaf5AABESlN1pJg327.png"/>
 
 ([(http://cloudgeekz.com/1045/kubernetes-authentication-and-authorization.html)](http://cloudgeekz.com/1045/kubernetes-authentication-and-authorization.html))
 
@@ -93,7 +93,7 @@ namespace:  7 bytes
 
 Data 里面的 token 我们可以到<https://jwt.io/>中 Decode 出来：
 
-![image (3).png](https://s0.lgstatic.com/i/image/M00/62/1E/Ciqc1F-RVduACXUqABUdlGrHMh4648.png)
+<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/62/1E/Ciqc1F-RVduACXUqABUdlGrHMh4648.png"/>
 
 从解析出来的 Payload 中可以看到， ServiceAccount 所属的 namespace、name 等信息。
 

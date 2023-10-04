@@ -2,7 +2,7 @@
 
 ###### 操作系统简史
 
-![](http://s0.lgstatic.com/i/image2/M01/A9/2F/CgotOV3OcR2AGGnhAAFTLJlqgys080.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A9/2F/CgotOV3OcR2AGGnhAAFTLJlqgys080.png"/>
 
 首先，我们来看一下整个操作系统的简史，整个操作系统可以分为四大时代：
 
@@ -18,11 +18,11 @@
 
 ###### Bash 是什么
 
-![](http://s0.lgstatic.com/i/image2/M01/A9/0F/CgoB5l3OcR2AV-1_AARjoDt0imA774.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A9/0F/CgoB5l3OcR2AV-1_AARjoDt0imA774.png"/>
 
 了解完操作系统简史，我们接下来学习什么是 Bash？我想你一定看过《黑客帝国》这部电影，在电影中有一个镜头是女主角崔妮蒂为了拯救尼奥入侵某个电站时，在交互界面显示了一行行的命令，其实这个交互界面就是 UNIX 系统界面，而这一行行指令便是 Linux Shell 指令，那么 Shell 是指什么呢？它其实是 UNIX 系统下的一个解析器，可以解析这些指令并完成相关操作。而在 Shell 出现之前，人们则需要通过编程的方式输入指令来操作系统，效率非常的底下，往往需要提前设计好大量的程序，才可以正常地操作系统，而有了 Shell 以后，用户操作系统就变得非常便捷。
 
-![](http://s0.lgstatic.com/i/image2/M01/A9/2F/CgotOV3OcR6AXUcsAACOQHI_BVM743.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A9/2F/CgotOV3OcR6AXUcsAACOQHI_BVM743.png"/>
 
 在 1989 年，随着 Bash 的诞生，标志着一个真正属于 Shell 的时代的来临，Bash 提供了更优秀的语法支持，同时还是开源、开放的项目。从 1989 年起，更多的系统默认使用 Bash 作为主机交互界面。
 
@@ -58,7 +58,7 @@
 
 如果你的系统是 Mac，那么恭喜你，Mac 系统自带了 Terminal，你还可以安装 iTerm2，它们都是标准的 Shell 环境。在 Linux 环境下，建议你使用 Bash，Bash 是目前行业内使用最广泛的 Shell 环境，在 Windows 环境下，建议你使用 Git bash，它几乎包含了 Linux 常用的全部指令。
 
-![](http://s0.lgstatic.com/i/image2/M01/A9/0F/CgoB5l3OcR6ASe74AADtcorq_Jc477.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A9/0F/CgoB5l3OcR6ASe74AADtcorq_Jc477.png"/>
 
 如果你想更全面地掌握 Shell，不受限于自己电脑的操作系统，那么可以购买云服务器，目前国内主流的云服务器厂商有阿里云、腾讯云、华为云。国外云服务器厂商有 DigitalOccean 和 Lincode，拥有一台属于自己的云服务器也是一个 IT 工程师的成年礼。
 
@@ -66,7 +66,7 @@
 
 ###### Hello world
 
-![](http://s0.lgstatic.com/i/image2/M01/A9/2F/CgotOV3OcR6AOiCPAAELnbG0Gnc303.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A9/2F/CgotOV3OcR6AOiCPAAELnbG0Gnc303.png"/>
 
 最后，带你演示如何完成我们的第一行命令，我自己的演示电脑是 Mac 系统，并安装了 iTerm2，我们先输入一个简单的 echo 指令，echo指令用于回显，你输入什么系统就输出什么 ，我们输入一个 echo hello world，你可以看到输出显示了 hello world，你也可以使用 Terminal 终端，虽然与 iTerm2 界面不一样，但本质是一样的。输入 echo hello world 也输出了 hello world。除此以外，你还可以登录自己的云服务器，比如我输入账户和密码后，登录自己的云服务器，也可以支持 echo hello world。
 

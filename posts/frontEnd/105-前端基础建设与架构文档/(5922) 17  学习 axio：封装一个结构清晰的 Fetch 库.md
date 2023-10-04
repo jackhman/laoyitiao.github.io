@@ -85,7 +85,7 @@ fetch('https://xxx')
 
 这里我们稍微展开，以一个请求库的分层封装为例，其实任何一种通用能力的封装都可以参考下图：
 
-![202125-101326.png](https://s0.lgstatic.com/i/image6/M01/02/45/Cgp9HWAdGnOAEUmTAADzvClHn5k247.png)  
+<Image alt="202125-101326.png" src="https://s0.lgstatic.com/i/image6/M01/02/45/Cgp9HWAdGnOAEUmTAADzvClHn5k247.png"/>  
 请求库分层封装示例图
 
 如图所示，底层能力部分，对应请求库中宿主提供的 XMLHttpRequest 或 Fetch 能力，以及项目中已经内置的框架/类库能力。这一部分对于一个已有项目来说，往往是较难改变或重构的，也是不同项目中可以复用的；而业务层，比如依赖 axios 请求库的更上层封装，我们一般可以分为：
@@ -102,7 +102,7 @@ fetch('https://xxx')
 
 合理的设计是，底层部分保留对全局封装的影响范围，而项目层保留对页面层的影响能力，页面层保留对组件层的影响能力。
 
-![前端基建 金句.png](https://s0.lgstatic.com/i/image6/M00/02/E5/CioPOWAeNr6AYnHYAAVEoQwNcDk580.png)
+<Image alt="前端基建 金句.png" src="https://s0.lgstatic.com/i/image6/M00/02/E5/CioPOWAeNr6AYnHYAAVEoQwNcDk580.png"/>
 
 比如，我们在项目层提供一个基础请求库封装，在这一层可以提供默认发送 cookie 等（一定需要存在）的行为，同时通过配置 options.fetch 保留覆盖 globalThis.fetch 的能力，这样可以在 Node 等环境中，通过**注入一个 node-fetch npm 库**的方式，支持 SSR 能力。
 
@@ -215,7 +215,7 @@ Axios.prototype.request = function request(config) {
 
 我们通过下图，来加深理解：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/94/9E/CgqCHmAY6WuAA9A_AAEfckV_ZjM495.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/94/9E/CgqCHmAY6WuAA9A_AAEfckV_ZjM495.png"/>
 
 #### 适配器思想
 
@@ -403,6 +403,6 @@ if (utils.isStandardBrowserEnv()) {
 
 主要内容总结如下：
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image2/M01/0C/8A/Cip5yGAY6X6ASgWfAAEY6D_f_OM734.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image2/M01/0C/8A/Cip5yGAY6X6ASgWfAAEY6D_f_OM734.png"/>
 
 最后，给大家布置一个思考题：axios 支持[请求取消能力](https://github.com/axios/axios#cancellation)，这是如何实现的呢？欢迎在留言区和我分享你的观点。下一讲，我们将继续学习代码设计这一话题，通过对比 Koa 和 Redux，聚焦中间件化和插件化理念。我们下一讲再见。

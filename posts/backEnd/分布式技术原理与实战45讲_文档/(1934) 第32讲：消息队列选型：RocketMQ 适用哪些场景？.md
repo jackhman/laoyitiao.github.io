@@ -8,7 +8,7 @@ RocketMQ 在阿里巴巴被大规模应用，其前身是淘宝的 MetaQ，后�
 
 RocketMQ 整体设计和其他的 MQ 类似，除了 Producer、Consumer，还有 NameServer 和 Broker。
 
-![image (5).png](https://s0.lgstatic.com/i/image/M00/37/53/CgqCHl8ZTYKAUg3wAAM3B8uYJ2w877.png)
+<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/37/53/CgqCHl8ZTYKAUg3wAAM3B8uYJ2w877.png"/>
 
 NameServer 存储了 Topic 和 Broker 的信息，主要功能是管理 Broker，以及进行消费的路由信息管理。
 
@@ -42,7 +42,7 @@ RocketMQ 消息中间件的使用场景比较广泛，对于需要通过 MQ 进�
 
 使用 RocketMQ 实现 Binlog 数据同步，有一个成熟的方案，那就是 RocketMQ 结合阿里的 Canal。Canal 是阿里巴巴开源的数据库组件，可以基于 MySQL 数据库进行增量日志解析，实现增量数据订阅和消费，目前已经在很多大公司中应用。
 
-![image (7).png](https://s0.lgstatic.com/i/image/M00/37/48/Ciqc1F8ZTamASw8yAABP8I4Z9dc951.png)
+<Image alt="image (7).png" src="https://s0.lgstatic.com/i/image/M00/37/48/Ciqc1F8ZTamASw8yAABP8I4Z9dc951.png"/>
 
 Canal 的实现原理特别巧妙。不知道你有没有看过谍战题材的影片，比如 007 系列。Canal 在这里就好像一个伪装的特工，它模拟 MySQL Slave 的交互协议，把自己作为 MySQL 主从同步中的一个从节点，拉取 Binlog 日志信息，然后进行分发。
 

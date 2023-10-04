@@ -4,7 +4,7 @@
 
 当我们自己在设计和实现一款开源框架时，如何规划它的应用方式呢？作为一款与数据库访问相关的开源框架，ShardingSphere 提供了多个维度的应用方式，我们可以对这些应用方式进行抽象，从而提炼出一种模版。这个模版由四个维度组成，分别是**底层工具、基础规范、开发框架和领域框架**，如下图所示：
 
-![2.png](https://s0.lgstatic.com/i/image/M00/28/F7/CgqCHl75qv-AFbZvAACz7F_yXRM280.png)
+<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/28/F7/CgqCHl75qv-AFbZvAACz7F_yXRM280.png"/>
 
 #### 底层工具
 
@@ -81,7 +81,7 @@ spring.shardingsphere.datasource.test_datasource.password=root
 
 在介绍开发框架的具体集成方式之前，我们来设计一个简单的应用场景。假设系统中存在一个用户表 User，这张表的数据量比较大，所以我们将它进行分库分表处理，计划分成两个数据库 ds0 和 ds1，然后每个库中再分成两张表 user0 和 user1：
 
-![1.png](https://s0.lgstatic.com/i/image/M00/28/EB/Ciqc1F75qxSADY5yAADgZQ5r488284.png)
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/28/EB/Ciqc1F75qxSADY5yAADgZQ5r488284.png"/>
 
 接下来，让我们来看一下如何基于 Java 原生、Spring 及 Spring Boot 开发框架针对这一场景实现分库分表。
 

@@ -30,7 +30,7 @@ Pod 间的相互网络通信，可以分为同主机通信和跨主机通信。
 
 我们先来看看同主机上 Pod 间的通信。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/70/F6/Ciqc1F-8tLuAWX-tAACIXQBtkeo535.png)  
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/70/F6/Ciqc1F-8tLuAWX-tAACIXQBtkeo535.png"/>  
 图 1：同主机上 Pod 间的通信
 
 在网络命名空间里，每个 Pod 都有各自独立的网络堆栈，通过一对虚拟以太网对（virtual ethernet pair）连接到根网络命名空间里（root netns）。这个 veth pair 一端在 Pod 的 netns 内，另一端在 root netns 里，对应上图中的 eth0 和 vethxxx。
@@ -49,7 +49,7 @@ Pod 间的相互网络通信，可以分为同主机通信和跨主机通信。
 
 我们以下图来说明基于 L2 的跨节点 Pod 互相访问时的网络流量走向。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/71/01/CgqCHl-8tOWAFzVSAAIezV_GXxk921.png)  
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/71/01/CgqCHl-8tOWAFzVSAAIezV_GXxk921.png"/>  
 图 2：基于 L2 的跨节点 Pod 互相访问时的网络流量走向
 
 假设一个数据包要从 Pod1 到达 Pod4，这两个 Pod 分属两个不同的节点：
@@ -76,7 +76,7 @@ Pod 间的相互网络通信，可以分为同主机通信和跨主机通信。
 
 我们这里以 iptables 模式为例，如下图所示：
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/71/01/CgqCHl-8tPSABkDCAAQPXfFW4NM912.png)  
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/71/01/CgqCHl-8tPSABkDCAAQPXfFW4NM912.png"/>  
 图 3：iptables 模式
 
 Kube-Proxy 在每个节点上都运行，并会不断地查询和监听 Kube-APIServer 中 Service 与 Endpoints 的变化，来更新本地的 iptables 规则，实现其主要功能，包括为新创建的 Service 打开一个本地代理对象，接收请求针对发生变化的Service列表，kube-proxy 会逐个处理，处理流程如下：
@@ -95,7 +95,7 @@ Ingress 可以将集群内[服务](https://kubernetes.io/zh/docs/concepts/servic
 
 下图就是一个简单的将所有流量都发送到同一 Service 的 Ingress 示例：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/71/01/CgqCHl-8tQSAAn3KAACHOYfrYmI292.png)  
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/71/01/CgqCHl-8tQSAAn3KAACHOYfrYmI292.png"/>  
 图 4：将所有流量都发送到同一 Service 的 Ingress
 
 关于 Ingress 的更多资料，可以参考[这份官方文档](https://kubernetes.io/zh/docs/concepts/services-networking/ingress/)。

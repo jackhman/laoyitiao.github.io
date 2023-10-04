@@ -6,7 +6,7 @@
 
 事实上，Brave 是 Java 版的 Zipkin 客户端，它将收集的跟踪信息，以 Span 的形式上报给 Zipkin 系统。我们首先来关注 Brave 中的 Span 类，该类的方法列表如下所示：
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image2/M01/04/49/CgpVE1_sSpqAX8fHAAAsCx2fAiU688.png)  
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image2/M01/04/49/CgpVE1_sSpqAX8fHAAAsCx2fAiU688.png"/>  
 Span 类的方法列表
 
 注意到 Span 是一个抽象类，在上面的方法列表中，我们也看到该类的几乎所有方法都是抽象方法，需要子类进行实现。在 Brave 中，该抽象类的子类就是 RealSpan。RealSpan 中的 start 方法如下所示：
@@ -191,7 +191,7 @@ void myMethod(@SpanTag("mykey") String param);
 
 我们来考虑如下场景，假设在服务调用链路中，某一个方法调用时间比较长，但通过默认所创建的基于该方法的 Span，通常无法判断响应时间过长的原因。那么就可能出现一个需求，即通过添加一系列的自定义 Span 的方式进一步对长时间的服务调用进行拆分，把该请求中所涉及的多种操作分别创建 Span，然后找到最影响性能的 Span 并进行优化，这也是服务监控系统实现过程中的一项最佳实践，如下图所示：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/8C/65/Ciqc1F_sSrKAUJKgAAAtpNjayF4547.png)  
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/8C/65/Ciqc1F_sSrKAUJKgAAAtpNjayF4547.png"/>  
 通过自定义 Span 找到性能瓶颈点示意图
 
 ### 使用 Tracer 添加自定义 Span
@@ -230,17 +230,17 @@ public class DeviceService {
 
 我们先来回顾在不添加上述自定义 Span 之前调用 <http://localhost:5555/springhealth/device/devices/device1> 时 Zipkin 上所生成的效果图，如下所示：
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/8C/71/CgqCHl_sSr2AH503AABAn4kpV9A498.png)  
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/8C/71/CgqCHl_sSr2AH503AABAn4kpV9A498.png"/>  
 Zipkin 中系统自动生成 Span 效果界面
 
 显然，这三个 Span 都是系统自定生成的。现在我们重新启动 device-service，然后再次访问该端口，就会得到如下图所示的可视化效果：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/8C/65/Ciqc1F_sSsiATG_0AABPUjTB7og302.png)  
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/8C/65/Ciqc1F_sSsiATG_0AABPUjTB7og302.png"/>  
 Zipkin中添加自定义Span效果界面
 
 请注意在上图中，我们看到在原有默认可视化效果的基础上又多了一个名为"findByDeviceCode"的自定义 Span。点击该 Span，我们也将得到这个 Span 对应的各项事件明细数据，如下图所示：
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image/M00/8C/65/Ciqc1F_sSs-ACuYCAABBZOB6BPU918.png)  
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/8C/65/Ciqc1F_sSs-ACuYCAABBZOB6BPU918.png"/>  
 Zipkin 中自定义 Span 中每个关键事件明细数据界面
 
 这里看到了"deviceObtained"这个自定义事件。同时，基于数据，我们也不难发现在 device-service 处理请求的时间中实际上大部分是消耗在访问数据库以获取设备数据的过程中。同样，我们也可以在其他服务中添加不同的 Span 以实现对服务调用过程更加精细化的管理。

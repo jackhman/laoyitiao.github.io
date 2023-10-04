@@ -18,7 +18,7 @@ ElasticSearch 对搜索的支持非常好，但是和 NoSQL 数据库一样，�
 
 下面是一个实际开发中，常见的数据库-索引-缓存系统架构图：
 
-![25.png](https://s0.lgstatic.com/i/image/M00/2B/B8/Ciqc1F7-68eAeYw2AAF83MZQ2m0681.png)
+<Image alt="25.png" src="https://s0.lgstatic.com/i/image/M00/2B/B8/Ciqc1F7-68eAeYw2AAF83MZQ2m0681.png"/>
 
 可以看到，ElasticSearch 一般是作为持久性数据库的辅助存储，是和 SQL \& NoSQL 数据库一起使用，对外提供索引查询功能。关系型数据库保证数据更新的准确性，在关系型数据库更新以后，通过 binlog 同步结合消息队列分发的方式，来更新文件索引，提供一致性保证。
 
@@ -77,7 +77,7 @@ ElasticSearch 索引的实现基于 Lucene，使用倒排索引的结构，倒�
 
 具体到数据结构的实现，可以通过实现一个字典树，也就是 Trie 树，对字典树进行扩展，额外存储对应的数据块地址，定位到具体的数据位置。
 
-![3.png](https://s0.lgstatic.com/i/image/M00/29/C1/CgqCHl77Do-AXYgbAABfeRIU95w684.png)
+<Image alt="3.png" src="https://s0.lgstatic.com/i/image/M00/29/C1/CgqCHl77Do-AXYgbAABfeRIU95w684.png"/>
 
 #### 对比 B+ 树
 

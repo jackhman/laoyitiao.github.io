@@ -10,8 +10,8 @@
 
 转头再来看国内，不管是阿里、头条这些互联网大厂，还是小米等以硬件为主的厂商，以及快手、Shopee 等后起之秀，都在大量招聘 Kubernetes 相关人才，而且起薪还不低。
 
-![image (5).png](https://s0.lgstatic.com/i/image/M00/45/B0/Ciqc1F9DXw2AbVbEAAUV0CqQDuQ392.png)  
-![image (6).png](https://s0.lgstatic.com/i/image/M00/45/BB/CgqCHl9DXyGAXmmqAAHDUqw7jCo427.png)  
+<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/45/B0/Ciqc1F9DXw2AbVbEAAUV0CqQDuQ392.png"/>  
+<Image alt="image (6).png" src="https://s0.lgstatic.com/i/image/M00/45/BB/CgqCHl9DXyGAXmmqAAHDUqw7jCo427.png"/>  
 （来源：拉勾网 Kubernetes 相关职位）
 
 ### 如何学习 Kubernetes

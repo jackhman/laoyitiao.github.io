@@ -17,7 +17,7 @@
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/10/79/Ciqah16X-TaACWjHAARWKvt67Qs928.png)  
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/10/79/Ciqah16X-TaACWjHAARWKvt67Qs928.png"/>  
 
 <br />
 
@@ -45,7 +45,7 @@
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/89/8F/Cgq2xl6X-TaAeLlvAAB2ENLEb-Q379.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/89/8F/Cgq2xl6X-TaAeLlvAAB2ENLEb-Q379.png"/>
 
 <br />
 
@@ -53,7 +53,7 @@ keepalive_timeout 控制着长连接的时间周期。如果我们想要观察�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/03/4A/CgoCgV6X-TeAAaR6AAB5Rzix4gA237.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/03/4A/CgoCgV6X-TeAAaR6AAB5Rzix4gA237.png"/>
 
 <br />
 
@@ -65,7 +65,7 @@ keepalive_timeout 控制着长连接的时间周期。如果我们想要观察�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/89/8F/Cgq2xl6X-TeAKMNgAAEzmy2gzLQ928.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/89/8F/Cgq2xl6X-TeAKMNgAAEzmy2gzLQ928.png"/>
 
 <br />
 
@@ -77,7 +77,7 @@ HTTP 1.0 是非常早的版本了，它对长连接是不支持的，如果老�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/10/79/Ciqah16X-TeAKr5mAAMZsMci8Zs140.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/10/79/Ciqah16X-TeAKr5mAAMZsMci8Zs140.png"/>
 
 <br />
 
@@ -89,7 +89,7 @@ HTTP 1.0 是非常早的版本了，它对长连接是不支持的，如果老�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/03/4A/CgoCgV6X-TiABS7ZAAMqlyk1mEg118.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/03/4A/CgoCgV6X-TiABS7ZAAMqlyk1mEg118.png"/>
 
 <br />
 
@@ -151,7 +151,7 @@ Timewait 和 TCP 连接的关系
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/89/8F/Cgq2xl6X-TiAfMBxAASAApv99no139.png)  
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/89/8F/Cgq2xl6X-TiAfMBxAASAApv99no139.png"/>  
 
 <br />
 

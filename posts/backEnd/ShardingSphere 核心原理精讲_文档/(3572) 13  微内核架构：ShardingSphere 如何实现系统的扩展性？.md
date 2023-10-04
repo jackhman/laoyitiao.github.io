@@ -12,7 +12,7 @@
 
 比如在下个课时中我们将要介绍的 ShardingSphere 中提供的分布式主键功能，分布式主键的实现可能有很多种，而扩展性在这个点上的体现就是， **我们可以使用任意一种新的分布式主键实现来替换原有的实现，而不需要依赖分布式主键的业务代码做任何的改变** 。
 
-![image.png](https://s0.lgstatic.com/i/image/M00/39/0C/CgqCHl8esVaAVlUFAACJmGjQZDA482.png)
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/39/0C/CgqCHl8esVaAVlUFAACJmGjQZDA482.png"/>
 
 微内核架构模式为这种实现扩展性的思路提供了架构设计上的支持，ShardingSphere 基于微内核架构实现了高度的扩展性。在介绍如何实现微内核架构之前，我们先对微内核架构的具体组成结构和基本原理做简要的阐述。
 
@@ -20,11 +20,11 @@
 
 从组成结构上讲， **微内核架构包含两部分组件：内核系统和插件** 。这里的内核系统通常提供系统运行所需的最小功能集，而插件是独立的组件，包含自定义的各种业务代码，用来向内核系统增强或扩展额外的业务能力。在 ShardingSphere 中，前面提到的分布式主键就是插件，而 ShardingSphere 的运行时环境构成了内核系统。
 
-![image (1).png](https://s0.lgstatic.com/i/image/M00/39/0C/CgqCHl8esWOAJ-5cAACfxz06p_E616.png)
+<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/39/0C/CgqCHl8esWOAJ-5cAACfxz06p_E616.png"/>
 
 那么这里的插件具体指的是什么呢？这就需要我们明确两个概念，一个概念就是经常在说的 **API** ，这是系统对外暴露的接口。而另一个概念就是 **SPI**（Service Provider Interface，服务提供接口），这是插件自身所具备的扩展点。就两者的关系而言，API 面向业务开发人员，而 SPI 面向框架开发人员，两者共同构成了 ShardingSphere 本身。
 
-![image (2).png](https://s0.lgstatic.com/i/image/M00/39/01/Ciqc1F8esXOADonEAACE9HEUTJc298.png)
+<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/39/01/Ciqc1F8esXOADonEAACE9HEUTJc298.png"/>
 
 可插拔式的实现机制说起来简单，做起来却不容易，我们需要考虑两方面内容。一方面，我们需要梳理系统的变化并把它们抽象成多个 SPI 扩展点。另一方面， **当我们实现了这些 SPI 扩展点之后，就需要构建一个能够支持这种可插拔机制的具体实现，从而提供一种 SPI 运行时环境** 。
 
@@ -102,7 +102,7 @@ public class Main {
 
 至此， 完整 的 SPI 提供者和使用者的实现过程演示完毕。我们通过一张图，总结基于 JDK 的 SPI 机制实现微内核架构的开发流程：
 
-![image (3).png](https://s0.lgstatic.com/i/image/M00/39/01/Ciqc1F8esYqAdXABAADVVh6mYnA926.png)
+<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/39/01/Ciqc1F8esYqAdXABAADVVh6mYnA926.png"/>
 
 这个示例非常简单，但却是 ShardingSphere 中实现微内核架构的基础。接下来，就让我们把话题转到 ShardingSphere，看看 ShardingSphere 中应用 SPI 机制的具体方法。
 
@@ -241,17 +241,17 @@ TypeBasedSPIServiceLoader 对外暴露了服务的接口，对通过 loadTypeBas
 
 这里引入的 SQLParserEntry 接口就位于 shardingsphere-sql-parser-spi 工程的 org.apache.shardingsphere.sql.parser.spi 包中。显然，从包的命名上看，该接口是一个 SPI 接口。在 SQLParserEntry 类层结构接口中包含一批实现类，分别对应各个具体的数据库：
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image/M00/38/CB/Ciqc1F8ed26ANXCOAAArBJH3uDs890.png)  
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/38/CB/Ciqc1F8ed26ANXCOAAArBJH3uDs890.png"/>  
 SQLParserEntry 实现类图
 
 我们先来看针对 MySQL 的代码工程 shardingsphere-sql-parser-mysql，在 META-INF/services 目录下，我们找到了一个 org.apache.shardingsphere.sql.parser.spi.SQLParserEntry 文件:
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image/M00/38/D7/CgqCHl8ed3aABqWdAABTnSG89Jg177.png)  
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/38/D7/CgqCHl8ed3aABqWdAABTnSG89Jg177.png"/>  
 MySQL 代码工程中的 SPI 配置
 
 可以看到这里指向了 org.apache.shardingsphere.sql.parser.MySQLParserEntry 类。再来到 Oracle 的代码工程 shardingsphere-sql-parser-oracle，在 META-INF/services 目录下，同样找到了一个 org.apache.shardingsphere.sql.parser.spi.SQLParserEntry 文件：
 
-![Drawing 6.png](https://s0.lgstatic.com/i/image/M00/38/CB/Ciqc1F8ed4GABKlZAABTzlYzJvc755.png)  
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/38/CB/Ciqc1F8ed4GABKlZAABTzlYzJvc755.png"/>  
 Oracle 代码工程中的 SPI 配置
 
 显然，这里应该指向 org.apache.shardingsphere.sql.parser.OracleParserEntry 类，通过这种方式，系统在运行时就会根据类路径动态加载 SPI。
@@ -297,7 +297,7 @@ public final class ConfigCenterServiceLoader extends TypeBasedSPIServiceLoader<C
 
 以 ApolloConfigCenter 为例，我们来看它的使用方法。在 sharding-orchestration-config-apollo 工程的 META-INF/services 目录下，应该存在一个名为 org.apache.shardingsphere.orchestration.config.api.ConfigCenter 的配置文件，指向 ApolloConfigCenter 类：
 
-![Drawing 7.png](https://s0.lgstatic.com/i/image/M00/38/D9/CgqCHl8eekGAa88DAABIbz4-Q20783.png)  
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/38/D9/CgqCHl8eekGAa88DAABIbz4-Q20783.png"/>  
 Apollo 代码工程中的 SPI 配置
 
 其他的 ConfigCenter 实现也是一样，你可以自行查阅 sharding-orchestration-config-zookeeper-curator 等工程中的 SPI 配置文件。

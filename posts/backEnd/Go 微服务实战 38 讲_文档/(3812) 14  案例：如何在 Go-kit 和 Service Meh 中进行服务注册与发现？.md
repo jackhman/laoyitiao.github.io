@@ -82,14 +82,14 @@ Istio 由多个组件组成，核心组件及其作用为如下：
 
 * **Proxy**，作为服务代理，调节所有 Service Mesh 单元的入口和出口流量。
 
-![image.png](https://s0.lgstatic.com/i/image/M00/41/DA/CgqCHl82RMaAO4wvAARr5zliZpw337.png)  
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/41/DA/CgqCHl82RMaAO4wvAARr5zliZpw337.png"/>  
 Istio 架构图
 
 这其中 Proxy 属于数据平面，以 Sidecar 的方式与应用程序一同部署到 Pod 中，而 Pilot、Citadel 和 Galley 属于控制平面。除此之外，Istio 中还提供一些额外的插件，如 grafana、istio-tracing、kiali 和 prometheus，用于进行可视化的数据查看、流量监控和链路追踪等。
 
 Istio 默认提供了以下几种安装 profile 形式，它们开启的组件配置如下表所示（+ 表示开启，空白表示未开启，- 表示未知）：
 
-![图片7.png](https://s0.lgstatic.com/i/image/M00/41/CE/Ciqc1F82RNKADQe4AACin_AYfxg655.png)
+<Image alt="图片7.png" src="https://s0.lgstatic.com/i/image/M00/41/CE/Ciqc1F82RNKADQe4AACin_AYfxg655.png"/>
 
 这其中，istiod 组件封装了 Pilot、Citadel 和 Galley 等控制平面组件，将它们进行统一打包部署，降低多组件维护和管理的困难性。从上表可以看出，demo profile 是功能最全的配置清单，适合于学习和功能演示。preview profile 将可能使用一些开发阶段的测试组件，开启的组件不定。官方推荐使用 default profile 进行安装，因为它在核心组件和插件上做到了最优的选择，比如组件只开启了 Ingressgateway 和 istiod，插件只开启了 prometheus。
 
@@ -163,7 +163,7 @@ spec:
 istioctl dashboard kiali
 ```
 
-![image (1).png](https://s0.lgstatic.com/i/image/M00/41/CF/Ciqc1F82RT2AaFOvAABX9ZrCcO8542.png)  
+<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/41/CF/Ciqc1F82RT2AaFOvAABX9ZrCcO8542.png"/>  
 kiali 控制台
 
 从上图可以看出在 kiali 控制台中存在多个维度查看 Istio 中部署的应用：
@@ -182,12 +182,12 @@ kiali 控制台
 
 register 服务启动后，我们在 Applications、Workloads、Services 维度中均可查看到 register 的身影，如下 Applications 维度图所示：
 
-![QQ20200813-103436.png](https://s0.lgstatic.com/i/image/M00/41/DA/CgqCHl82RTKAGJclAABrWEPqyEA895.png)  
+<Image alt="QQ20200813-103436.png" src="https://s0.lgstatic.com/i/image/M00/41/DA/CgqCHl82RTKAGJclAABrWEPqyEA895.png"/>  
 kiali Applications 维度下的 register
 
 Istio 依托 Kubernetes 的快速发展和推广，对 Kubernetes 有着极强的依赖性，其服务注册与发现的实现也主要依赖于 Kubernetes 的 Service 管理。我们可以通过以下这张图理解 Istio 的服务注册与发现。
 
-![image.png](https://s0.lgstatic.com/i/image/M00/41/DA/CgqCHl82RSqALb27AARr5zliZpw854.png)  
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/41/DA/CgqCHl82RSqALb27AARr5zliZpw854.png"/>  
 Istio 服务注册与发现逻辑图
 
 通过该逻辑图，我们可以看到 Istio 服务注册与发现主要有以下模块参与。

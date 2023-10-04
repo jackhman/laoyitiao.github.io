@@ -123,11 +123,11 @@ public class DomainClassConverter<T extends ConversionService & ConverterRegistr
 
 所以，我们上面的例子其实是需要有 UserInfoRepository 的，否则会失败。通过源码我们也可以看到，如果 matches=true，那么就会执行下面的 convert 方法，最终调用 findById 的方法帮我们执行查询动作，如下图所示：
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/66/CF/Ciqc1F-f3MqAH54fAANYwOjyA38629.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/66/CF/Ciqc1F-f3MqAH54fAANYwOjyA38629.png"/>
 
 而 DomainClassConverter 是 Spring MVC 自定义 Formatter 的一直种机制，加载进去，可以看到如下界面：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/66/CF/Ciqc1F-f3NWAIYBDAAIFxTM8YZQ845.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/66/CF/Ciqc1F-f3NWAIYBDAAIFxTM8YZQ845.png"/>
 
 而 SpringDataWebConfiguration 是因为实现了 WebMvcConfigurer 的 addFormatters 所有加载了自定义参数转化器的功能，所以才有了 DomainClassConverter 组件的支持。关键代码如下：
 
@@ -230,11 +230,11 @@ GET http://127.0.0.1:8089/users/sort?ages=10&sort=id,desc
 
 的解决者，从下面图片中你就可以看出来。
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/66/DA/CgqCHl-f3OWAMLu1AAJEBkl8MfA213.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/66/DA/CgqCHl-f3OWAMLu1AAJEBkl8MfA213.png"/>
 
 我们通过箭头的地方分析一下 SortHandlerMethodArgumentResolver 的类，会看到如下界面：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/66/DA/CgqCHl-f3OyAL_EwAANxdzchFbo230.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/66/DA/CgqCHl-f3OyAL_EwAANxdzchFbo230.png"/>
 
 这个类里面最关键的就是下面两个方法：
 
@@ -244,7 +244,7 @@ GET http://127.0.0.1:8089/users/sort?ages=10&sort=id,desc
 
 这里还要提到的是另外一个类：PageHandlerMethodArgumentResolver 类。
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image/M00/66/CF/Ciqc1F-f3PSAXWofAANpCw8f8NY210.png)
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/66/CF/Ciqc1F-f3PSAXWofAANpCw8f8NY210.png"/>
 
 这个类里面也有两个最关键的方法：
 
@@ -320,11 +320,11 @@ POST /users HTTP/1.1
 
 1.加载 ProjectingJackson2HttpMessageConverter，用来做 Projecting 的接口转化。我们通过源码看一下是在哪里被加载进去的，如下：
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image/M00/66/DA/CgqCHl-f3QGAceZhAAMGX5hYHo8045.png)
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/66/DA/CgqCHl-f3QGAceZhAAMGX5hYHo8045.png"/>
 
 2.而 ProjectingJackson2HttpMessageConverter 主要是继承了 MappingJackson2HttpMessageConverter，并且实现了 HttpMessageConverter 的接口里面的两个重要方法，如下图所示：
 
-![Drawing 6.png](https://s0.lgstatic.com/i/image/M00/66/DA/CgqCHl-f3QeAH_xxAAHoIpHyr-Q310.png)
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/66/DA/CgqCHl-f3QeAH_xxAAHoIpHyr-Q310.png"/>
 
 其中，
 
@@ -438,7 +438,7 @@ public Object resolveArgument(MethodParameter parameter, @Nullable ModelAndViewC
       .....//你有兴趣的话可以在下图关键节点打个断点看看效果，我就不多说了
 ```
 
-![Drawing 7.png](https://s0.lgstatic.com/i/image/M00/66/DA/CgqCHl-f3SCAX2bZAANpM9TDbyc579.png)
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/66/DA/CgqCHl-f3SCAX2bZAANpM9TDbyc579.png"/>
 
 在实际开发中，关于 insert 和 update 的接口我们是"逃不掉"的，但不是每次的字段都会全部传递过来，那这个时候我们应该怎么做呢？这就涉及了上述实例里面的两个注解 @DynamicUpdate 和 @DynamicInsert，下面来详细介绍一下。
 
@@ -720,11 +720,11 @@ update user set last_modified_time=?, version=?, name=? where id=? and version=?
 
 **方法一：/actuator/health 的支持，里面会检查 DB 的状态。**
 
-![Drawing 8.png](https://s0.lgstatic.com/i/image/M00/66/CF/Ciqc1F-f3TCAM1YCAACeuNm2X7E973.png)
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/66/CF/Ciqc1F-f3TCAM1YCAACeuNm2X7E973.png"/>
 
 **方法二：/actuator/prometheus 里面会包含一些 Hibernate 和 Datasource 的 metric。**
 
-![Drawing 9.png](https://s0.lgstatic.com/i/image/M00/66/CF/Ciqc1F-f3TaACqNbAAIajUOGQMQ163.png)
+<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/66/CF/Ciqc1F-f3TaACqNbAAIajUOGQMQ163.png"/>
 
 这个方法在我们做 granfan 图表的时候会很有用，不过需要注意的是：
 

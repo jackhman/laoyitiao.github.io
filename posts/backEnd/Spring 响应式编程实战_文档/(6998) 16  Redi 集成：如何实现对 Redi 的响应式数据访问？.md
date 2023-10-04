@@ -53,7 +53,7 @@ public interface ReactiveRedisOperations<K, V> {
 
 然后我们通过 Maven 可以得到如下图所示的组件依赖图，可以看到 spring-boot-starter-data-redis-reactive 组件同时依赖于 spring-data-redis 和 luttuce-core 组件。
 
-![图片2.png](https://s0.lgstatic.com/i/image6/M01/3A/1D/Cgp9HWB-UKuAHIxRAA0aJtyWMgI410.png)  
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M01/3A/1D/Cgp9HWB-UKuAHIxRAA0aJtyWMgI410.png"/>  
 spring-boot-starter-data-redis-reactive 组件依赖图
 
 在上图中，我们同时看到 luttuce-core 组件中使用了 Project Reactor 框架中的 reactor-core 组件，这点与前面介绍的技术栈是完全一致的。
@@ -217,7 +217,7 @@ public class AccountService {
 
 在 ReactiveSpringCSS 中，Redis 的作用是实现缓存，这里就需要考虑它的具体应用场景。我们知道，在整体架构上，customer-service 一般会与用户服务 account-service 进行交互，但因为用户账户信息的更新属于低频事件，所以我们设计的实现方式是 account-service 通过消息中间件的方式将用户账户变更信息主动推送给 customer--service。而在这个时候，customer--service 就可以把接收到的用户账户信息保存在 Redis 中，两者之间的交互过程如下图所示。
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image6/M00/39/FD/CioPOWB9VM-AZWmYAADG17Qg_-g409.png)  
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M00/39/FD/CioPOWB9VM-AZWmYAADG17Qg_-g409.png"/>  
 customer-service 服务与 account-service 服务交互图
 
 在"10 \| WebFlux（上）：如何使用注解编程模式构建异步非阻塞服务"中，我们已经梳理了 customer-service 中用于生成客户工单的 generateCustomerTicket 方法的整体流程，我带你回顾一下其伪代码。

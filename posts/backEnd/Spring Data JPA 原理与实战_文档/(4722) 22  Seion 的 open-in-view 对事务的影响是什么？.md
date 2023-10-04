@@ -8,7 +8,7 @@
 
 我们通过一个类的关系图来回顾一下，看看 Session 在什么样的位置上。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/71/66/Ciqc1F--J7aAPxYpAAApgD8vr5o823.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/71/66/Ciqc1F--J7aAPxYpAAApgD8vr5o823.png"/>
 
 其中，SessionImpl 是 Hibernate 实现 JPA 协议的 EntityManager 的一种实现方式，即实现类；而 Session 是 Hibernate 中的概念，完全符合 EntityManager 的接口协议，同时又完成了 Hibernate 的特殊实现。
 
@@ -20,7 +20,7 @@
 
 我们通过源码来看一下，请看下面这张图。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/71/66/Ciqc1F--J7-AcywEAAYEtGdc-RE017.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/71/66/Ciqc1F--J7-AcywEAAYEtGdc-RE017.png"/>
 
 通过 SessionImpl 的源码和 Structure 的视图，我们可以"简单粗暴"地得出如下结论。
 
@@ -88,7 +88,7 @@ protected static class JpaWebConfiguration {
 
 打开这一源码后，可以看到下图所示的界面。
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/71/71/CgqCHl--J86AIwh6AATgTHk0WxE893.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/71/71/CgqCHl--J86AIwh6AATgTHk0WxE893.png"/>
 
 我们可以发现，OpenEntityManagerInViewInterceptor 实现了 WebRequestInterceptor 的接口中的两个方法：
 
@@ -98,7 +98,7 @@ protected static class JpaWebConfiguration {
 
 我们如果继续看 createEntityManager 方法的实现，还会找到如下关键代码。
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/71/71/CgqCHl--J9yANzVgAAMLiLh9kQQ355.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/71/71/CgqCHl--J9yANzVgAAMLiLh9kQQ355.png"/>
 
 上图可以看到，我们通过 SessionFactoryImpl 中的 createEntityManager() 方法，创建了一个 EntityManager 的实现 Session；通过拦截器创建了 EntityManager 事务处理逻辑，默认是 Join 类型（即有事务存在会加入）；而 builder.openSession() 逻辑就是 new SessionImpl(sessionFactory, this)。
 
@@ -112,7 +112,7 @@ protected static class JpaWebConfiguration {
 
 我们通过 IDEA 开发者工具，直接点击右键查 public Session createEntityManager() 此方法被使用到的地方即可，如下图所示。
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image/M00/71/71/CgqCHl--J-SAFH9yAAUc9mOMYYk555.png)
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/71/71/CgqCHl--J-SAFH9yAAUc9mOMYYk555.png"/>
 
 其中，EntityManagerFactoryAccessor 是 OpenEntityManagerInViewInterceptor 的父类，从图上我们可以看得出来，Session 的创建（也可以说是 EntityManager 的创建）对我们有用的时机，目前就有三种。
 
@@ -176,7 +176,7 @@ Cache-Control: no-cache
 
 然后我们查看一下日志，关键日志如下图所示。
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image/M00/71/71/CgqCHl--KAKAWO2aAAL2Xu59B5I687.png)
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/71/71/CgqCHl--KAKAWO2aAAL2Xu59B5I687.png"/>
 
 可以看到，我们请求了 user/info 之后就开启了 Session，然后在 Controller 方法执行的过程中开启了两段事务，每个事务结束之后都没有关闭 Session，而是等两个事务都结束之后，并且 Controller 方法执行完毕之后，才 Closing Session 的。中间过程只创建了一次 Session。
 
@@ -188,7 +188,7 @@ spring.jpa.open-in-view=false
 
 我们再执行刚才的请求，会得到如下日志。
 
-![Drawing 6.png](https://s0.lgstatic.com/i/image/M00/71/66/Ciqc1F--KAuAQPOwAATpoE3jbT0924.png)
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/71/66/Ciqc1F--KAuAQPOwAATpoE3jbT0924.png"/>
 
 通过日志可以看到，其中开启了两次事务，每个事务创建之后都会创建一个 Session，即开启了两个 Session，每个 Session 的 ID 是不一样的；在每个事务结束之后关闭了 Session，关闭了 EntityManager。
 
@@ -288,7 +288,7 @@ public enum PhysicalConnectionHandlingMode {
 
 我们打开源码 HibernateJpaVendorAdapter 类里面可以看到如下加载方式。
 
-![Drawing 7.png](https://s0.lgstatic.com/i/image/M00/71/71/CgqCHl--KCuAcIttAANGE2zTL8g522.png)
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/71/71/CgqCHl--KCuAcIttAANGE2zTL8g522.png"/>
 
 Hibernate 5.2 以上使用的是 DELAYED_ACQUISITION_AND_HOLD 模式，即按需获取、Session 关闭释放，如下面这段代码。
 
@@ -356,7 +356,7 @@ Cache-Control: no-cache
 
 这个时候打开日志控制台，可以看到如下日志。
 
-![Drawing 8.png](https://s0.lgstatic.com/i/image/M00/71/66/Ciqc1F--KEGAOpmsAAFjWvgQG2M712.png)
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/71/66/Ciqc1F--KEGAOpmsAAFjWvgQG2M712.png"/>
 
 可以看到，我们在 save 之后，即事务提交之后，HikariPool 里面的数据库连接一直没有归还，而如果我们继续等待的话，在整个 Session 关闭之后，数据库连接才会归还到连接池里面。
 
@@ -372,7 +372,7 @@ spring.jpa.properties.hibernate.connection.handling_mode=DELAYED_ACQUISITION_AND
 
 其他代码都不变，我们再请求刚才的 API 请求，这个时候可以得到如下日志。
 
-![Drawing 9.png](https://s0.lgstatic.com/i/image/M00/71/72/CgqCHl--KFqAEpxiAAGZnguqMBM395.png)
+<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/71/72/CgqCHl--KFqAEpxiAAGZnguqMBM395.png"/>
 
 从日志中可以看到，当我们执行完 save(u2)，事务提交之后，做一些耗时操作的时候，发现此时整个 Session 生命周期是没有持有数据库连接的，也就是事务结束之后就进行了释放，这样大大提高了数据库连接的利用率，即使大量请求也不会造成数据库连接不够用。
 
@@ -380,11 +380,11 @@ spring.jpa.properties.hibernate.connection.handling_mode=DELAYED_ACQUISITION_AND
 
 其中，对连接的池的持有情况如下图所示，这是正常情况，几乎监控不到 DB 连接不够用的情况。
 
-![Drawing 10.png](https://s0.lgstatic.com/i/image/M00/71/72/CgqCHl--KGKAUrM_AAGuA1rvXks679.png)
+<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image/M00/71/72/CgqCHl--KGKAUrM_AAGuA1rvXks679.png"/>
 
 对 DB 连接利用率的监控，如下图所示，连接的 Creation、Acquire 基本上是正常的，但是连接的 Usage\>500ms 就有些不正常了，说明里面有一些耗时操作。
 
-![Drawing 11.png](https://s0.lgstatic.com/i/image/M00/71/66/Ciqc1F--KGiAQnscAAFqjef-KBY275.png)
+<Image alt="Drawing 11.png" src="https://s0.lgstatic.com/i/image/M00/71/66/Ciqc1F--KGiAQnscAAFqjef-KBY275.png"/>
 
 所以，一般在实际工作中，我们会在 DELAYED_ACQUISITION_AND_HOLD 和 DELAYED_ACQUISITION_AND_RELEASE_AFTER_TRANSACTION 之间做选择；通过日志和监控，我们也可以看得出来 DELAYED_ACQUISITION_AND_HOLD 比较适合一个 Session 里面有大量事务的业务场景，这样不用频繁切换数据库连接。
 

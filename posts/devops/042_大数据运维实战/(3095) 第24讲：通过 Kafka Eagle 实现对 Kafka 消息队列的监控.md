@@ -129,75 +129,75 @@ Kafka Eagle 服务启动后，即可打开 Web 界面，默认 Web 登录用户�
 
 Kafka Eagle 的使用比较简单，下面是一个功能预览界面图：
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/34/27/CgqCHl8RWa2AQ597AADfl30QncI077.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/34/27/CgqCHl8RWa2AQ597AADfl30QncI077.png"/>
 
 在上图中，对于左侧导航栏，我已经将每个栏目的功能做了标注，整体分为 5 个部分，分别是全局视图、Kakfa 消息管理、Kafka 集群监控、Kafka 监控告警及系统设置。
 
 点击上图导航栏中的 BScreen 链接，即可进入下图界面：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/34/27/CgqCHl8RWbeAORQBAAlDnMWCVwI984.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/34/27/CgqCHl8RWbeAORQBAAlDnMWCVwI984.png"/>
 
 此界面是个 Kafka 实时状态监控图，主要展示了消息生产的状态和消费状态，数据实时更新，非常炫酷。
 
 接着前面的功能预览界面图，在此图右侧部分，显示了 Kafka 集群 Brokers 的数量、Topic 的数量、ZooKeeper 集群的节点数及消费者数量，点击 Brokers 的数量链接，显示下图界面：
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/34/1C/Ciqc1F8RWcGAJCXtAADdhhAt69Y878.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/34/1C/Ciqc1F8RWcGAJCXtAADdhhAt69Y878.png"/>
 
 此界面显示了 Kafka 集群的状态信息，主要是 Kakfa 占用的系统 CPU、内存等资源信息，要获得这些信息，需要在 Kafka 上开启 JMX 端口，这里设置的 JMX 端口为 9999。
 
 接着，回到功能预览界面图，再点击 Topic 的链接，来到下图所示的界面：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/34/27/CgqCHl8RWcmAWsZQAADQaJT1aIw478.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/34/27/CgqCHl8RWcmAWsZQAADQaJT1aIw478.png"/>
 
 此界面显示了 Kafka 集群中所有的 Topic 信息，包含 partitions 数量、数据偏差等，点击任意一个 Topic 链接，来到下图所示的界面：
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image/M00/34/27/CgqCHl8RWc-AV1dLAADXF7wAPKk061.png)
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/34/27/CgqCHl8RWc-AV1dLAADXF7wAPKk061.png"/>
 
 此界面主要显示了某个 Topic 中目前的消息数、容量以及每个 Partition 中存储的消息数。
 
 最后，再点击功能预览界面图中的消费者链接，来到下图所示的界面：
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image/M00/34/27/CgqCHl8RWeCAd6KVAACdPx7Jf0Q608.png)
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/34/27/CgqCHl8RWeCAd6KVAACdPx7Jf0Q608.png"/>
 
 此界面主要显示了目前有哪些消费组，可以看到这里有一个 Logstash 消费者组，点击这个消费者组，然后点击 Runing 按钮，来到如下的界面：
 
-![Drawing 6.png](https://s0.lgstatic.com/i/image/M00/34/27/CgqCHl8RWeeAXM3OAAEgJuuQ3KU227.png)
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/34/27/CgqCHl8RWeeAXM3OAAEgJuuQ3KU227.png"/>
 
 此界面主要显示了目前消费者消费 Nginxlogs 这个 Topic 的状态信息，重点关注 Lag 列的信息，此信息表示消费延时，如果延时值过大，则表示消费速度过慢，需要引起注意。
 
 下面再来看下 Kafka Eagle 提供的 KSQL 功能，如下图所示：
 
-![Drawing 7.png](https://s0.lgstatic.com/i/image/M00/34/1C/Ciqc1F8RWfaAairZAAEEUcme4_0353.png)
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/34/1C/Ciqc1F8RWfaAairZAAEEUcme4_0353.png"/>
 
 此界面中，右边的 select 语句，nginxlogs 表示 topic 的名称，"`partition` in (0)"表示查询哪个 partition 中的数据，最后的"limit 5"表示显示前 5 条消息。
 
 接着再来看下 Kafka 的监控指标，如下图所示：
 
-![Drawing 8.png](https://s0.lgstatic.com/i/image/M00/34/1C/Ciqc1F8RWfyAFSK-AAFwH8ENnKw658.png)
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/34/1C/Ciqc1F8RWfyAFSK-AAFwH8ENnKw658.png"/>
 
 上图曲线显示了每分钟推送到 Kafka 的消息数，另外还可以看到有很多其他监控指标，比如每秒生产多少数据量、每秒消费多少数据量等。
 
 最后，再来看下如何配置监控告警，首先在告警栏中选择创建一个告警组，如下图所示：
 
-![Drawing 9.png](https://s0.lgstatic.com/i/image/M00/34/27/CgqCHl8RWgSAHxTjAACkzctvXWs371.png)
+<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/34/27/CgqCHl8RWgSAHxTjAACkzctvXWs371.png"/>
 
 此界面设置告警组名称、告警方式和告警接口，支持钉钉、微信和邮件告警，推荐钉钉告警，配置比较简单，直接给出一个告警接口地址即可。
 
 接着，配置一个消费者延时告警，如下图所示：
 
-![Drawing 10.png](https://s0.lgstatic.com/i/image/M00/34/28/CgqCHl8RWguAUvmYAACq3eB4nx8993.png)
+<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image/M00/34/28/CgqCHl8RWguAUvmYAACq3eB4nx8993.png"/>
 
 此界面中主要配置的是消费延时值，上面配置为 1，也就是说延时值超过 1 就进行告警，这个值要根据实际情况进行设置。在海量数据环境下（上亿条数据），有几千条消息延时，其实也是正常的，而在小量数据环境下（几十万条数据），延时消息超过百条，可能就是消费延时了，需要关注延时的原因。
 
 最后，再来看下如何设置集群的告警，如下图所示：
 
-![Drawing 11.png](https://s0.lgstatic.com/i/image/M00/34/28/CgqCHl8RWhOAVNSkAACb9qXjWuY931.png)
+<Image alt="Drawing 11.png" src="https://s0.lgstatic.com/i/image/M00/34/28/CgqCHl8RWhOAVNSkAACb9qXjWuY931.png"/>
 
 此界面中，配置的是对 Kafka 集群的告警，也可以设置 ZooKeeper、Topic、Producer 等的告警，告警可以设置告警级别、告警次数及告警组等信息。
 
 所有配置完成后，就可以实现故障告警了，下图是一个钉钉告警截图：
 
-![Drawing 12.png](https://s0.lgstatic.com/i/image/M00/34/1C/Ciqc1F8RWhuAWMiFAAEaw2H9zcg810.png)
+<Image alt="Drawing 12.png" src="https://s0.lgstatic.com/i/image/M00/34/1C/Ciqc1F8RWhuAWMiFAAEaw2H9zcg810.png"/>
 
 从图中可以看出，此告警是消费延时导致的，我们设置的最大消费延时为 1，而目前延时是 793，这已经是第三次告警了，后面将不再进行告警，因为我配置的最大告警次数为 3。
 

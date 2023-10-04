@@ -6,7 +6,7 @@
 
 大前端概念对于编程开发者来说早已耳熟能详，从我的角度来理解这个概念的话，主要是通过同一套编程代码，经过框架编译转化能够适应于多端平台的前端交互界面。当然这里只介绍目前应用较广的三个方面，即 iOS、Andorid 和 Web H5，之后可以再延伸到小程序、TV、Watch 等其他智能设备，如图 1 所示。
 
-![01-1-1.jpg](https://s0.lgstatic.com/i/image/M00/1A/92/CgqCHl7dpsyAGXTdAABOhwpYTPY773.jpg)
+<Image alt="01-1-1.jpg" src="https://s0.lgstatic.com/i/image/M00/1A/92/CgqCHl7dpsyAGXTdAABOhwpYTPY773.jpg"/>
 
 图 1 多端平台的前端交互界面
 
@@ -16,7 +16,7 @@
 
 移动端跨平台技术经过了一个漫长的发展史，如图 2 所示。下面主要介绍下在这个发展过程中跨平台技术有了哪些进步或者做了哪些优化。
 
-![01-2-1.jpg](https://s0.lgstatic.com/i/image/M00/1A/87/Ciqc1F7dpuiAej-kAAAoqW57xyE079.jpg)
+<Image alt="01-2-1.jpg" src="https://s0.lgstatic.com/i/image/M00/1A/87/Ciqc1F7dpuiAej-kAAAoqW57xyE079.jpg"/>
 
 图 2 跨端技术的发展过程
 
@@ -42,7 +42,7 @@
 
 分析完后，下面对目前的技术团队和未来技术团队进行一个简单分析，也可以认为是一个预测。如果你觉得有帮助，那么可以往这方面进行一些尝试，如图 3 所示。大部分开发者会集中在跨端技术团队中；而另一部分核心技术攻坚则在相应的平台技术端（比如 Android 基础技术团队、iOS 基础技术团队或 Web 基础技术团队），为跨端技术团队提供基础技术服务支撑。当然如果跨端技术团队将组件完善并且可通用化，那么跨端技术团队的人员则可以更快地配置组装的方式构建业务功能。
 
-![image (3).png](https://s0.lgstatic.com/i/image/M00/1A/87/Ciqc1F7dpwCAfhZ3AAChalAD2J4693.png)
+<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/1A/87/Ciqc1F7dpwCAfhZ3AAChalAD2J4693.png"/>
 
 图 3 技术团队选型
 

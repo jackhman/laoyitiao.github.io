@@ -40,13 +40,13 @@
 
 首先，我们通过在 ZooKeeper 服务器上创建数据节点的方式来创建一个共享锁。其实无论是共享锁还是排他锁，在锁的实现方式上都是一样的。唯一的区别在于，**共享锁为一个数据事务创建两个数据节点，来区分是写入操作还是读取操作**。如下图所示，在 ZooKeeper 数据模型上的 Locks_shared 节点下创建临时顺序节点，临时顺序节点的名称中带有请求的操作类型分别是 R 读取操作、W 写入操作。
 
-![image (1).png](https://s0.lgstatic.com/i/image/M00/32/74/CgqCHl8Oc56AEMuZAAAsuQwHWCY999.png)
+<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/32/74/CgqCHl8Oc56AEMuZAAAsuQwHWCY999.png"/>
 
 #### 获取锁
 
 当某一个事务在访问共享数据时，首先需要获取锁。ZooKeeper 中的所有客户端会在 Locks_shared 节点下创建一个临时顺序节点。根据对数据对象的操作类型创建不同的数据节点，如果是读操作，就创建名称中带有 R 标志的顺序节点，如果是写入操作就创建带有 W 标志的顺序节点。
 
-![image (2).png](https://s0.lgstatic.com/i/image/M00/32/69/Ciqc1F8Oc6aAH44DAAA1aVd9UXo732.png)
+<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/32/69/Ciqc1F8Oc6aAH44DAAA1aVd9UXo732.png"/>
 
 #### 释放锁
 
@@ -56,7 +56,7 @@
 
 这种实现方式正好和上面介绍的死锁的两种处理方式相对应。到目前为止，我们就利用 ZooKeeper 实现了一个比较完整的共享锁。如下图所示，在这个实现逻辑中，首先通过创建数据临时数据节点的方式实现获取锁的操作。创建数据节点分为两种，分别是读操作的数据节点和写操作的数据节点。当锁节点删除时，注册了该 Watch 监控的其他客户端也会收到通知，重新发起创建临时节点尝试获取锁。当事务逻辑执行完成，客户端会主动删除该临时节点释放锁。
 
-![X.png](https://s0.lgstatic.com/i/image/M00/32/EB/CgqCHl8O5rOADPbBAACVhsBN-NU550.png)
+<Image alt="X.png" src="https://s0.lgstatic.com/i/image/M00/32/EB/CgqCHl8O5rOADPbBAACVhsBN-NU550.png"/>
 
 ### 总结
 

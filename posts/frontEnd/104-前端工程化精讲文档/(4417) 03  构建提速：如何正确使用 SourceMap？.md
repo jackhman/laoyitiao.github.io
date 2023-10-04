@@ -6,7 +6,7 @@
 
 在前端开发过程中，通常我们编写的源代码会经过多重处理（编译、封装、压缩等），最后形成产物代码。于是在浏览器中调试产物代码时，我们往往会发现代码变得面目全非，例如：
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/42/93/Ciqc1F85_FmAA4UeAABWNiHqsWQ595.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/42/93/Ciqc1F85_FmAA4UeAABWNiHqsWQ595.png"/>
 
 因此，我们需要一种在调试时将产物代码显示回源代码的功能，**source map** 就是实现这一目标的工具。
 
@@ -94,7 +94,7 @@ if (options.devtool.includes("source-map")) {
 
 下面，以课程示例代码 [03_develop_environment](https://github.com/fe-efficiency/lessons_fe_efficiency/tree/master/03_develop_environment) 为例，我们来对比下几种常用预设的差异（为了使时间差异更明显，示例中引入了几个大的类库文件）：
 
-![12.png](https://s0.lgstatic.com/i/image/M00/43/5E/Ciqc1F87kyiAZvHdAAIGvohk2F4144.png)
+<Image alt="12.png" src="https://s0.lgstatic.com/i/image/M00/43/5E/Ciqc1F87kyiAZvHdAAIGvohk2F4144.png"/>
 > \*注1："/"前后分别表示产物 js 大小和对应 .map 大小。  
 >
 > \*注2："/"前后分别表示初次构建时间和开启 watch 模式下 rebuild 时间。对应统计的都是 development 模式下的笔者机器环境下几次构建时间的平均值，只作为相对快慢与量级的比较。
@@ -117,19 +117,19 @@ if (options.devtool.includes("source-map")) {
 
 * 源码且包含列信息
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/42/9E/CgqCHl85_KuANSVfAADSE8VO7Qg572.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/42/9E/CgqCHl85_KuANSVfAADSE8VO7Qg572.png"/>
 
 * 源码不包含列信息
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/42/93/Ciqc1F85_LCAMTlgAADhqpZ4v9o628.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/42/93/Ciqc1F85_LCAMTlgAADhqpZ4v9o628.png"/>
 
 * Loader转换后代码
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/42/9E/CgqCHl85_LqAPrYzAADfmUwS_JE006.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/42/9E/CgqCHl85_LqAPrYzAADfmUwS_JE006.png"/>
 
 * 生成后的产物代码
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image/M00/42/9E/CgqCHl85_MGAHhmMAAKGwvDeXIM418.png)
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/42/9E/CgqCHl85_MGAHhmMAAKGwvDeXIM418.png"/>
 
 #### 开发环境下 Source Map 推荐预设
 
@@ -174,7 +174,7 @@ webpack.config.js
 
 在上面的示例中，我们将 devtool 设为 false，而直接使用 EvalSourceMapDevToolPlugin，通过传入 module: true 和 column:false，达到和预设 eval-cheap-module-source-map 一样的质量，同时传入 exclude 参数，排除第三方依赖包的 source map 生成。保存设定后通过运行可以看到，在文件体积减小（尽管开发环境并不关注文件大小）的同时，再次构建的速度相比上面表格中的速度提升了将近一倍，达到了最快一级。
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image/M00/42/9E/CgqCHl85_N2AUkcpAAEqvMKhgVQ549.png)
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/42/9E/CgqCHl85_N2AUkcpAAEqvMKhgVQ549.png"/>
 
 类似这样的优化可以帮助我们在一些大型项目中，通过自定义设置来获取比预设更好的开发体验。
 

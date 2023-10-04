@@ -77,7 +77,7 @@ Java Agent 最终的体现方式是一个 jar 包，使用 IDEA 创建一个默�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/78/D0/CgpOIF50j_qAf_dJAACCGgHeHyw573.jpg)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/D0/CgpOIF50j_qAf_dJAACCGgHeHyw573.jpg"/>
 
 编写 Transformer
 --------------
@@ -106,7 +106,7 @@ Java Agent 最终的体现方式是一个 jar 包，使用 IDEA 创建一个默�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/78/D1/Cgq2xl50j_qAFT4LAAEbr39G4og828.jpg)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/D1/Cgq2xl50j_qAFT4LAAEbr39G4og828.jpg"/>
 
 <br />
 
@@ -183,7 +183,7 @@ java -javaagent:agent.jar MainRun
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/78/D0/CgpOIF50j_uATNQIAACvhINEUI4723.jpg)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/D0/CgpOIF50j_uATNQIAACvhINEUI4723.jpg"/>
 
 <br />
 
@@ -191,7 +191,7 @@ java -javaagent:agent.jar MainRun
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/78/D1/Cgq2xl50j_uAJ7_SAABNVSit7MU387.jpg)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/D1/Cgq2xl50j_uAJ7_SAABNVSit7MU387.jpg"/>
 
 <br />
 
@@ -199,7 +199,7 @@ java -javaagent:agent.jar MainRun
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/78/D1/CgpOIF50j_uAMC5CAAAyERGVQpg151.jpg)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/D1/CgpOIF50j_uAMC5CAAAyERGVQpg151.jpg"/>
 
 ### agentmain
 

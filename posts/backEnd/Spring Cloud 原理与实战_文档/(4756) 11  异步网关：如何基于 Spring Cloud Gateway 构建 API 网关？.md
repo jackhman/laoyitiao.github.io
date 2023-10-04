@@ -38,7 +38,7 @@ public class GatewayApplication {
 
 Spring Cloud Gateway 中的核心概念有两个，一个是过**滤器（Filter）** ，一个是**谓词（Predicate）**。Spring Cloud Gateway 的整体架构图如下图所示：
 
-![Lark20201027-164157.png](https://s0.lgstatic.com/i/image/M00/64/30/Ciqc1F-X3WqATvJfAAGAafgQhSE126.png)  
+<Image alt="Lark20201027-164157.png" src="https://s0.lgstatic.com/i/image/M00/64/30/Ciqc1F-X3WqATvJfAAGAafgQhSE126.png"/>  
 Spring Cloud Gateway 基本架构图
 
 Spring Cloud Gateway 中的过滤器和 Zuul 中的过滤器是同一个概念。它们都可以用于在处理 HTTP 请求之前或之后修改请求本身，及对应响应结果。区别在于两者的类型和实现方式不同。Spring Cloud Gateway 的种类非常丰富，我们在今天的后续内容中会有专门主题对其进行详细的展开。

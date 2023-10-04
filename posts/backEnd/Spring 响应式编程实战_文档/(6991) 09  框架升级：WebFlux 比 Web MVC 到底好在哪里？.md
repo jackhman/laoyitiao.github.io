@@ -18,7 +18,7 @@ WebFlux 用于构建响应式 Web 服务。在详细介绍 WebFlux 之前，我�
 
 一般而言，Web 请求处理机制都会使用"管道-过滤器（Pipe-Filter）"架构模式，而 Spring WebMVC 作为一种处理 Web 请求的典型实现方案，同样使用了 Servlet 中的过滤器链（FilterChain）来对请求进行拦截，如下图所示。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image6/M01/2C/90/Cgp9HWBlYNSAQ_6xAABLuhAav9c145.png)  
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M01/2C/90/Cgp9HWBlYNSAQ_6xAABLuhAav9c145.png"/>  
 图 1 Spring WebMVC 中的过滤器链
 
 我们知道 WebMVC 运行在 Servlet 容器上，这些容器常用的包括 Tomcat、JBoss 等。当 HTTP 请求通过 Servlet 容器时就会被转换为一个 ServletRequest 对象，而最终返回一个 ServletResponse 对象，FilterChain 的定义如下所示。
@@ -59,7 +59,7 @@ public interface HandlerAdapter {
 
 作为总结，我梳理了 Spring WebMVC 的整体架构，如下图所示。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image6/M00/2C/98/CioPOWBlYOGAF_ssAACxp3BYjUM960.png)  
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/2C/98/CioPOWBlYOGAF_ssAACxp3BYjUM960.png"/>  
 图 2 Spring WebMVC 整体架构图
 
 一直以来，Spring WebMVC 是我们开发 Web 服务的主流框架。但要注意的是，尽管 Servlet 本身在新版本中提供了异步非阻塞的通信机制，但 Spring WebMVC 在实现上并不允许在整个请求生命周期中都采用非阻塞式的操作方式。因此，Spring 在尽量沿用原有的开发模式以及 API 设计上提供了支持异步非阻塞的 Spring WebFlux 框架。
@@ -104,7 +104,7 @@ public interface HandlerAdapter {
 
 在 WebFlux 中，同样实现了响应式版本的 RequestMappingHandlerMapping 和 RequestMappingHandlerAdapter，因此我们仍然可以采用注解的方法来构建 Controller。另一方面，WebFlux 中还提供了 RouterFunctionMapping 和 HandlerFunctionAdapter 组合，专门用来提供基于函数式编程的开发模式。这样 Spring WebFlux 的整体架构图就演变成这样。
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image6/M01/2C/90/Cgp9HWBlYO6AE2c_AABMFtMZQAU060.png)  
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M01/2C/90/Cgp9HWBlYO6AE2c_AABMFtMZQAU060.png"/>  
 图 3 Spring WebFlux 整体架构图
 
 请注意，在处理 HTTP 请求上，我们需要使用支持异步非阻塞的响应式服务器引擎，常见的包括 Netty、Undertow 以及支持 Servlet 3.1 及以上版本的 Servlet 容器。
@@ -117,14 +117,14 @@ public interface HandlerAdapter {
 
 通过前面的讨论你已经知道 Servlet 是阻塞式的，所以 WebMVC 建立在阻塞 I/O 之上，我们来分析这种模型下线程处理请求的过程。假设有一个工作线程会处理来自客户端的请求，所有请求构成一个请求队列，并由一个线程按顺序进行处理。针对一个请求，线程需要执行两部分工作，首先是接受请求，然后再对其进行处理，如下图所示。
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image6/M00/2C/90/Cgp9HWBlYPeAePjYAABQR4znOfo927.png)  
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M00/2C/90/Cgp9HWBlYPeAePjYAABQR4znOfo927.png"/>  
 图 4 同步阻塞式处理过程
 
 在前面的示例中，正如你可能注意到的，工作线程的实际处理时间远小于花费在阻塞操作上的时间。这意味着工作线程会被 I/O 读取或写入数据这一操作所阻塞。从这个简单的图中，**我们可以得出结论，线程效率低下**。同时，因为所有请求是排队的，相当于一个请求队列，所以接受请求和处理请求这两部分操作实际上是可以共享等待时间的。
 
 相比之下，WebFlux 构建在非阻塞 API 之上，这意味着没有操作需要与 I/O 阻塞线程进行交互。接受和处理请求的效率很高，如下图所示。
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image6/M00/2C/98/CioPOWBlYQSAV2szAACULiV9Rbo555.png)  
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image6/M00/2C/98/CioPOWBlYQSAV2szAACULiV9Rbo555.png"/>  
 图 5 异步非阻塞式处理过程
 
 将上图中所展示的异步非阻塞请求处理与前面的阻塞过程进行比较，我们会注意到，现在没有在读取请求数据时发生等待，工作线程高效接受新连接。然后，提供了非阻塞 I/O 机制的底层操作系统会告诉我们请求数据是否已经接收完成，并且处理器可以在不阻塞的情况下进行处理。
@@ -133,7 +133,7 @@ public interface HandlerAdapter {
 
 前面的示例展示了 WebFlux 比 WebMVC 更有效地利用一个工作线程，因此可以在相同的时间内处理更多的请求。那么，如果是在多线程的场景下会发生什么呢？我们来看下面这张图。
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image6/M00/2C/90/Cgp9HWBlYQuAMuj3AABd75iFsms666.png)  
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image6/M00/2C/90/Cgp9HWBlYQuAMuj3AABd75iFsms666.png"/>  
 图 6 多线程处理过程示意图
 
 从上图中可以看出，多线程模型允许更快地处理排队请求，能够同时接受、处理和响应几乎相同数量的请求。当然，我们明白多线程技术有利有弊。当处理用户请求涉及太多的线程实例时，相互之间就需要协调资源，这是由于它们之间的不一致性会导致性能下降。
@@ -146,10 +146,10 @@ public interface HandlerAdapter {
 
 这里我们截取 300 和 3000 并发用户场景下的结果进行对比，如下面两张图所示。
 
-![Drawing 6.png](https://s0.lgstatic.com/i/image6/M00/2C/90/Cgp9HWBlYRSAUYUoAAK7ajk3HpQ553.png)  
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image6/M00/2C/90/Cgp9HWBlYRSAUYUoAAK7ajk3HpQ553.png"/>  
 图 7 300 并发用户下的测试结果
 
-![Drawing 7.png](https://s0.lgstatic.com/i/image6/M00/2C/98/CioPOWBlYRuAQxDNAAK5Dq13-Eg742.png)  
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image6/M00/2C/98/CioPOWBlYRuAQxDNAAK5Dq13-Eg742.png"/>  
 图 8 3000 并发用户下的测试结果
 
 可以看到，在 300 并发用户的测试用例下，WebMVC 和 WebFlux 的表现比较接近，意味着在并发量不高的情况下，非阻塞式的请求处理过程并没有太多优势；而在 3000 并发用户下，情况就完全不一样了。无论是吞吐量还是响应时间，WebFlux 都具有压倒性的性能优势。（完整版的测试结果和数据，你可以参考 Biju Kunjummen 的这篇文章进行获取：[https://dzone.com/articles/raw-performance-numbers-spring-boot-2-webflux-vs-s](https://dzone.com/articles/raw-performance-numbers-spring-boot-2-webflux-vs-s?fileGuid=xxQTRXtVcqtHK6j8)）

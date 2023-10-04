@@ -81,7 +81,7 @@ console.log(p.name) // Jack
 
 因此我们总结一下：new 关键词执行之后总是会返回一个对象，要么是实例对象，要么是 return 语句指定的对象。
 
-![刘烨的js.png](https://s0.lgstatic.com/i/image/M00/8E/0F/CgqCHmABa_qAP_2zAAVBMulvP2U718.png)
+<Image alt="刘烨的js.png" src="https://s0.lgstatic.com/i/image/M00/8E/0F/CgqCHmABa_qAP_2zAAVBMulvP2U718.png"/>
 
 好了，new 这个关键词内容基本就讲到这里了，我们再看一下 apply 和 call 的基本原理。
 
@@ -303,7 +303,7 @@ Function.prototype.bind = function (context, ...args) {
 
 综上，我们可以看到这几个方法是有区别和联系的，通过下面的表格我们再来梳理一下这些方法的异同点，希望你可以更好地理解。
 
-![图片5.png](https://s0.lgstatic.com/i/image/M00/8E/04/Ciqc1GABa-2AO2DlAAD5wuBLNn8120.png)
+<Image alt="图片5.png" src="https://s0.lgstatic.com/i/image/M00/8E/04/Ciqc1GABa-2AO2DlAAD5wuBLNn8120.png"/>
 
 在日常的前端开发工作中，大家往往会忽视对这些方法的系统性学习，其实这些方法在高级 JavaScript 编程中经常出现，尤其是你去看一些比较好的开源项目，经常会通过"借用"的方式去复用已有的方法，来节约内存、优化代码。
 

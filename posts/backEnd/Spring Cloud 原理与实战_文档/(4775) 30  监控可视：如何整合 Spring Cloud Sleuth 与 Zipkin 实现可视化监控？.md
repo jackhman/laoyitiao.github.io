@@ -8,14 +8,14 @@
 
 Zipkin 是一个开源的分布式跟踪系统，每个服务向 Zipkin 报告运行时数据，Zipkin 会根据调用关系通过 Zipkin UI 对整个调用链路中的数据实现可视化。在结构上 Zipkin 包含几个核心的组件，如下图所示：
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image2/M01/04/47/Cip5yF_sSf6AO7sOAAAsmdX5mFU432.png)  
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image2/M01/04/47/Cip5yF_sSf6AO7sOAAAsmdX5mFU432.png"/>  
 Zipkin 基本结构图（来自 Zipkin 官网）
 
 在上图中，首先我们看到的是日志的收集组件 Collector，接收来自外部传输（Transport）的数据，将这些数据转换为 Zikpin 内部处理的 Span 格式，相当于兼顾数据收集和格式化的功能。这些收集的数据通过存储组件 Storage 进行存储，当前支持 Cassandra、Redis、HBase、MySQL、PostgreSQL、SQLite 等工具，默认存储在内存中。然后，所存储数据可以通过 RESTful API 对外暴露查询接口。更为有用的是，Zipkin 还提供了一套简单的 Web 界面，基于 API 组件的上层应用，可以方便而直观的查询和分析跟踪信息。
 
 在运行过程中，可以通过 Zipkin 获取类似如下图所示的服务调用链路分析效果：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image2/M01/04/49/CgpVE1_sSgeAKwhCAACtM9bH7wM931.png)  
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image2/M01/04/49/CgpVE1_sSgeAKwhCAACtM9bH7wM931.png"/>  
 Zipkin 服务调用链路分析示例图（来自 Zipkin 官网）
 
 我们看到 Zipkin 为我们提供了强大的可视化管理功能，关于图中的各个细节将在本课时后续中得到全面展开。
@@ -58,7 +58,7 @@ spring:
 
 在本课时中，Zipkin 可视化服务调用链路的构建包含三大维度，如下图所示：
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image2/M01/04/47/Cip5yF_sShWAETlQAAAyuao3DMc019.png)  
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image2/M01/04/47/Cip5yF_sShWAETlQAAAyuao3DMc019.png"/>  
 构建 Zipkin 可视化服务调用链路的三大维度
 
 接下来，我们将分别这三个维度介绍 Zipkin 的强大功能。
@@ -69,7 +69,7 @@ spring:
 
 在 SpringHealth 案例系统中，当我们通过访问 intervention-service 中的 HTTP 端点<http://localhost:5555/springhealth/intervention/interventions/springhealth_admin/device1>时，下图展示了通过 Zipkin 获取的服务调用依赖关系：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image2/M01/04/49/CgpVE1_sSh2AVJesAAA5oopzibY911.png)  
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image2/M01/04/49/CgpVE1_sSh2AVJesAAA5oopzibY911.png"/>  
 Zipkin 中的 SpringHealth 案务依赖关系示意图
 
 可以看到在这个服务调用链路中，我们首先通过 zuulservice 访问 interventionservice，然后 interventionservice 又通过 zuulservice 分别访问 userservice 和 deviceservice，从而形成一次完整的业务调用。
@@ -100,14 +100,14 @@ public Intervention generateIntervention(String userName, String deviceCode) {
 
 可视化服务调用时序是 Zipkin 最重要的功能，对于服务监控而言，服务调用链数据收集、分析和管理的目的是发现服务调用过程的问题并采取相应的优化措施。下图展示了 Zipkin 可视化服务调用时序的主界面：
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image2/M01/04/48/Cip5yF_sSiuAa_zWAABkqhF8VFQ138.png)  
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image2/M01/04/48/Cip5yF_sSiuAa_zWAABkqhF8VFQ138.png"/>  
 Zipkin 可视化服务调用时序的主界面
 
 上图该主界面主体是一个面向查询的操作界面，其中我们需要关注服务名称和端点，因为服务调用链路中的所有服务都会出现在服务名称列表中，同时，针对每个服务，我们也可以选择自身感兴趣的端点信息。同时，我们也发现了多个用于灵活查询的过滤器，包括 TraceId、SpanName、时间访问、调用时长以及标签功能。
 
 当然，我们最应该关注的是查询结果。针对某个服务，Zipkin 的查询结果展示了包含该服务的所有调用链路。现在，让我们关注于 user-service 中根据用户名获取用户信息的<http://localhost:5555/springhealth/user/users/username/>{userName} 端点，Zipkin 上的执行效果图如下所示：
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image2/M01/04/48/Cip5yF_sSjOAe2oQAABCtCPP68k747.png)  
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image2/M01/04/48/Cip5yF_sSjOAe2oQAABCtCPP68k747.png"/>  
 Zipkin 服务调用链路明细图界面
 
 当发起这个 HTTP 请求时，该请求会先到达 Zuul 网关，然后再通过路由转发到 userservice。通过观察上图服务之间的调用时序，我们在前面介绍的服务依赖关系的基础上给出了更为明确的服务调用关系。
@@ -118,19 +118,19 @@ Zipkin 服务调用链路明细图界面
 
 在上图中，我们点击任何一个感兴趣的 Span 就可以获取该 Span 对应的各项服务调用数据明细。例如，我们点击"get /users/username/{username}"这个 Span，Zipkin 会跳转到一个新的页面并显示如下图所示的数据：
 
-![图片6.png](https://s0.lgstatic.com/i/image/M00/8C/83/CgqCHl_tnS6AQDXdAAGtE02WUpo828.png)  
+<Image alt="图片6.png" src="https://s0.lgstatic.com/i/image/M00/8C/83/CgqCHl_tnS6AQDXdAAGtE02WUpo828.png"/>  
 Zipkin 中 Span 对应的名称、TraceId 和 SpanId
 
 这里看到了本次调用中用于监控的最重要的元数据 TraceId 和 SpanId，以及代表各个关键事件的 Annotation 可视化长条。点击长条下的"SHOW ALL ANNOTATIONS"按钮，可以得到如下所示的事件明细信息：
 
-![Drawing 7.png](https://s0.lgstatic.com/i/image/M00/8C/65/Ciqc1F_sSkWAbGxeAABQkYLlisc594.png)  
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/8C/65/Ciqc1F_sSkWAbGxeAABQkYLlisc594.png"/>  
 Zipkin 中 Span 对应的四个关键事件数据界面
 
 上图展示了针对该 Span 的 cs、sr、ss 和 cr 这四个关键事件数据。对于这个 Span 而言，zuulservice 相当于是 userservice 的客户端，所以 zuulservice 触发了 cs 事件，然后通过 (17.160 -- 2.102)ms 到达了 userservice，以此类推。从这些关键事件数据中可以得出一个结论，即该请求的整个服务响应时间主要取决于 userservice 自身的处理时间。
 
 当然，我们针对这个 Span，也可以获取如所示的标签明细数据：
 
-![Drawing 8.png](https://s0.lgstatic.com/i/image/M00/8C/65/Ciqc1F_sSkyAZfeJAAAwoDw1coE218.png)  
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/8C/65/Ciqc1F_sSkyAZfeJAAAwoDw1coE218.png"/>  
 Zipkin 中 Span 对应的标签数据
 
 可以看到这些数据包括 HTTP 请求相关的方法、路径等各项基础数据，也包括使用 Spring 构建 RESTful 风格调用时的 Controller 类以及端点信息。

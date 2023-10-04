@@ -24,7 +24,7 @@ ZkClient 是在 ZooKeeper 原生 API 接口的基础上进行了包装，虽然 
 
 为便于你更全面了解 Curator 的功能，我整理出了如下表格，展示了 Curator 提供的 jar 包：
 
-![1.png](https://s0.lgstatic.com/i/image/M00/43/54/Ciqc1F87iUKAAAs2AAE2Xaps_KE511.png)
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/43/54/Ciqc1F87iUKAAAs2AAE2Xaps_KE511.png"/>
 
 下面我们从最基础的使用展开，逐一介绍 Apache Curator 在实践中常用的核心功能，开始我们的 Apache Curator 之旅。
 
@@ -266,7 +266,7 @@ public class Main4 {
 
 接下来，我们打开 ZooKeeper 的命令行客户端，在 /user 节点下先后添加两个子节点，如下所示：
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/43/54/Ciqc1F87iXuAQVanAABhI9RRD8M252.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/43/54/Ciqc1F87iXuAQVanAABhI9RRD8M252.png"/>
 
 此时我们只得到一行输出：
 
@@ -383,7 +383,7 @@ TreeCache,type=INITIALIZED
 
 接下来，我们在 ZooKeeper 命令行客户端中**更新 /user 节点中的数据**：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/43/54/Ciqc1F87iY6ACWnvAAA8jA9QVgM875.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/43/54/Ciqc1F87iY6ACWnvAAA8jA9QVgM875.png"/>
 
 得到如下输出：
 
@@ -394,7 +394,7 @@ NodeCache节点路径：/user，节点数据为：userData
 
 **创建 /user/test3 节点**：
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/43/60/CgqCHl87iZqAaG93AABwFnQJA7o497.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/43/60/CgqCHl87iZqAaG93AABwFnQJA7o497.png"/>
 
 得到输出：
 
@@ -407,7 +407,7 @@ PathChildrenCache子节点数据:xxx3
 
 **更新 /user/test3 节点的数据**：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/43/54/Ciqc1F87iaSAFZLpAABDyAm7vuE120.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/43/54/Ciqc1F87iaSAFZLpAABDyAm7vuE120.png"/>
 
 得到输出：
 
@@ -420,7 +420,7 @@ PathChildrenCache修改子节点数据:xxx33
 
 **删除 /user/test3 节点**：
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image/M00/43/60/CgqCHl87ia6AYvijAABBmFLfzx4213.png)
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/43/60/CgqCHl87ia6AYvijAABBmFLfzx4213.png"/>
 
 得到输出：
 
@@ -438,7 +438,7 @@ PathChildrenCache删除子节点:/user/test3
 
 * **ServiceInstance。** 这是 curator-x-discovery 扩展包对服务实例的抽象，由 name、id、address、port 以及一个可选的 payload 属性构成。其存储在 ZooKeeper 中的方式如下图展示的这样。
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image/M00/43/60/CgqCHl87icOABt59AADHccHcE1Q955.png)
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/43/60/CgqCHl87icOABt59AADHccHcE1Q955.png"/>
 
 * **ServiceProvider。** 这是 curator-x-discovery 扩展包的核心组件之一，提供了多种不同策略的服务发现方式，具体策略有轮询调度、随机和黏性（总是选择相同的一个）。得到 ServiceProvider 对象之后，我们可以调用其 getInstance() 方法，按照指定策略获取 ServiceInstance 对象（即发现可用服务实例）；还可以调用 getAllInstances() 方法，获取所有 ServiceInstance 对象（即获取全部可用服务实例）。
 

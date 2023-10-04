@@ -452,7 +452,7 @@ process.exit(go())
 
 本讲内容总结如下：
 
-![npm scripts：打造一体化的构建和部署流程.png](https://s0.lgstatic.com/i/image6/M01/0A/8E/Cgp9HWA3ZvSAGD15AAITBEgOZ_c039.png)
+<Image alt="npm scripts：打造一体化的构建和部署流程.png" src="https://s0.lgstatic.com/i/image6/M01/0A/8E/Cgp9HWA3ZvSAGD15AAITBEgOZ_c039.png"/>
 
 说到底，npm scripts 就是一个 Shell，我们以前端开发者所熟悉的 Node.js 来实现 npm scripts，当然这还不够。事实上，npm scripts 的背后是对一整套工程化体系的理解，比如我们需要通过 npm scripts 来抽象 Babel 方案、抽象 Rollup 方案等。相信通过这一讲的学习，你会有所收获。
 

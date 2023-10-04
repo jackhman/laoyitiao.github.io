@@ -6,7 +6,7 @@ SkyWalking Agent 采用了微内核架构（Microkernel Architecture），那什
 
 如下图所示，微内核架构分为核心系统和插件模块两大部分。
 
-![](https://s0.lgstatic.com/i/image3/M01/08/53/Ciqah16FsIuAY29rAADXS1mP1qk235.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/08/53/Ciqah16FsIuAY29rAADXS1mP1qk235.png"/>
 
 在上图展示的微内核架构中，内核功能是比较稳定的，只负责管理插件的生命周期，不会因为系统功能的扩展而不断进行修改。功能上的扩展全部封装到插件之中，插件模块是独立存在的模块，包含特定的功能，能拓展核心系统的功能。通常，不同的插件模块互相之间独立，当然，你可以设计成一个插件依赖于另外一个插件，但应尽量让插件之间的相互依赖关系降低到最小，避免繁杂的依赖带来扩展性问题。
 
@@ -108,11 +108,11 @@ public static void initialize(String agentOptions) {
 
 将 agent.config 文件中的配置信息加载到 Properties 对象之后，将使用 PropertyPlaceholderHelper 对配置信息进行解析，将当前的"${配置项名称:默认值}"格式的配置值，替换成其中的默认值，demo-provider 解析结果如下图所示：
 
-![](https://s0.lgstatic.com/i/image3/M01/81/69/Cgq2xl6FsIuAD9SEAAXN2BldzCw554.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/81/69/Cgq2xl6FsIuAD9SEAAXN2BldzCw554.png"/>
 
 完成解析之后，会通过 ConfigInitializer 工具类，将配置信息填充到 Config 中的静态字段中，具体填充规则如下：
 
-![](https://s0.lgstatic.com/i/image3/M01/08/53/Ciqah16FsIuAMuWAAAGqpFKOkno592.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/08/53/Ciqah16FsIuAMuWAAAGqpFKOkno592.png"/>
 
 在接下来的 overrideConfigBySystemProp() 方法中会遍历环境变量（即 System.getProperties() 集合），如果环境变 是以 "skywalking." 开头的，则认为是 SkyWalking 的配置，同样会填充到 Config 类中，以覆盖 agent.config 中的默认值。
 
@@ -234,7 +234,7 @@ private static AgentClassLoader DEFAULT_LOADER;
 
 每个 Agent 插件中都会定义一个 skywalking-plugin.def 文件，如下图 tomcat-7.x-8.x-plugin 插件所示：
 
-![](https://s0.lgstatic.com/i/image3/M01/81/69/Cgq2xl6FsIyAD1i3AAAs9sJ1s2Y631.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/81/69/Cgq2xl6FsIyAD1i3AAAs9sJ1s2Y631.png"/>
 
 tomcat-7.x-8.x-plugin 插件中 skywalking-plugin.def 文件的内容如下，其中每一行都是一个插件类的定义：
 
@@ -277,7 +277,7 @@ for (PluginDefine pluginDefine : pluginClassList) {
 
 AbstractClassEnhancePluginDefine 抽象类是所有 Agent 插件类的顶级父类，其中定义了四个核心方法，决定了一个插件类应该增强哪些目标类、应该如何增强、具体插入哪些逻辑，如下所示：
 
-![](https://s0.lgstatic.com/i/image3/M01/81/69/Cgq2xl6FsIyAT0wmAAIua7pnGBg062.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/81/69/Cgq2xl6FsIyAT0wmAAIua7pnGBg062.png"/>
 
 * **enhanceClass() 方法**：返回的 ClassMatch，用于匹配当前插件要增强的目标类。
 * **define() 方法**：插件类增强逻辑的入口，底层会调用下面的 enhance() 方法和 witnessClass() 方法。
@@ -290,7 +290,7 @@ AbstractClassEnhancePluginDefine 抽象类是所有 Agent 插件类的顶级父�
 
 enhanceClass() 方法决定了一个插件类要增强的目标类，返回值为 ClassMatch 类型对象。ClassMatch 类似于一个过滤器，可以通过多种方式匹配到目标类，ClassMatch 接口的实现如下：
 
-![](https://s0.lgstatic.com/i/image3/M01/81/69/Cgq2xl6FsIyAbzszAAFwI9x3bVc197.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/81/69/Cgq2xl6FsIyAbzszAAFwI9x3bVc197.png"/>
 
 * \*\*NameMatch：\*\*根据其 className 字段（String 类型）匹配目标类的名称。
 * \*\*IndirectMatch：\*\*子接口中定义了两个方法。
@@ -499,7 +499,7 @@ org.apache.skywalking.apm.agent.core.context.ContextManagerExtendService
 
 BootService 的覆盖逻辑如下图所示：
 
-![](https://s0.lgstatic.com/i/image3/M01/08/53/Ciqah16FsIyAKF5JAAFCMa4LIHU953.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/08/53/Ciqah16FsIyAKF5JAAFCMa4LIHU953.png"/>
 
 确定完要使用的 BootService 实现之后，ServiceManager 将统一初始化 bootServices 集合中的 BootService 实现，同样是在 ServiceManager.boot() 方法中，会逐个调用 BootService 实现的 prepare()、startup()、onComplete() 方法，具体实现如下：
 

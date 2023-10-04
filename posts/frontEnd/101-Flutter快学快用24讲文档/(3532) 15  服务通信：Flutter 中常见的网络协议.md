@@ -155,7 +155,7 @@ protoc --dart_out=./lib ./protos/* --plugin=protoc-gen-dart=$HOME/.pub-cache/bin
 
 5.运行成功后，**会在 lib 目录下创建 protos 目录**，并生成如图 1 的目录结构；
 
-![image (14).png](https://s0.lgstatic.com/i/image/M00/3A/39/Ciqc1F8hN7qARIvYAACMRuwnLuo133.png)  
+<Image alt="image (14).png" src="https://s0.lgstatic.com/i/image/M00/3A/39/Ciqc1F8hN7qARIvYAACMRuwnLuo133.png"/>  
 图 1 生成的 Protocol Buffer 目录结构
 
 生成完成以后，这时候是会提示报错的，因为在 user_info.pb.dart 中引用了 package:protobuf/protobuf.dart 这个库。接下来我们就需要去修改 pubspec.yaml ，添加 Protocol Buffer（ protobuf: \^1.0.1 ）第三方库的依赖，添加完成后更新本地库。
@@ -231,14 +231,14 @@ flutter: 383
 
 以上就是三种协议在 Flutter 中的应用尝试和对比，基于数据长度和解析性能对比（由于跑的数据总量不够大，因此单次运行会存在样本误差），XML 是最差的，JSON 相对较好，Protocol Buffer 是最优的，不过可读性最差，具体对比看下表格 1。
 
-![image (15).png](https://s0.lgstatic.com/i/image/M00/3A/45/CgqCHl8hN_CAHkTmAABBGfUbGT4406.png)  
+<Image alt="image (15).png" src="https://s0.lgstatic.com/i/image/M00/3A/45/CgqCHl8hN_CAHkTmAABBGfUbGT4406.png"/>  
 表格 1 整体数据对比情况
 
 ### 代码实践
 
 介绍完常见的网络传输协议序列化方式，接下来就使用 JSON 的传输协议来完善我们 api 逻辑。这里会应用到一个第三方的 Mock 平台。主要是 Mock 以下几个接口协议，如图 2 所示的结构列表。
 
-![image (16).png](https://s0.lgstatic.com/i/image/M00/3A/3A/Ciqc1F8hOAmAc5eCAAH87tkUVJM571.png)  
+<Image alt="image (16).png" src="https://s0.lgstatic.com/i/image/M00/3A/3A/Ciqc1F8hOAmAc5eCAAH87tkUVJM571.png"/>  
 图 2 Mock 协议列表
 
 有了具体协议 Mock 协议后，我们再来实现 Flutter 中的代码。首先我们需要创建一个通用的网络请求的类，这个类我们存放在 util/tools 目录下，命名为 call_server.dart 。Flutter 中的网络协议需要使用到 [dio](https://pub.dev/packages/dio) 这个第三方库，同样还是需要在 pubspec.yaml 增加依赖，然后更新本地库文件。接下来我们看下 call_server.dart 的代码实现。
@@ -388,7 +388,7 @@ if(contentList == null){
 
 主要是第 4 行，增加了对数据的判断，如果为空则显示 loading 组件内容，具体效果如下图 3 所示。
 
-![20200717_233752.gif](https://s0.lgstatic.com/i/image/M00/3A/45/CgqCHl8hOHuANKsHACSrYreWeyI011.gif)  
+<Image alt="20200717_233752.gif" src="https://s0.lgstatic.com/i/image/M00/3A/45/CgqCHl8hOHuANKsHACSrYreWeyI011.gif"/>  
 图 3 网络请求 loading 效果
 
 以上就完成了 ApiContentIndex 部分的 getRecommendList 逻辑，其他代码逻辑基本相似，具体大家可以参考 github 上的源码。

@@ -19,7 +19,7 @@ ZooKeeper 是通过 Zab 协议来保证分布式事务的最终一致性。Zab�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/0C/DF/Ciqah16O5QyAB4rJAAEiJ-4T3bE046.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0C/DF/Ciqah16O5QyAB4rJAAEiJ-4T3bE046.png"/>
 
 <br />
 
@@ -60,7 +60,7 @@ Zxid 是 Zab 协议的一个事务编号，Zxid 是一个 64 位的数字，其�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/85/F5/Cgq2xl6O5QyAeZqMAAB5C-BWbeI425.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/85/F5/Cgq2xl6O5QyAeZqMAAB5C-BWbeI425.png"/>
 
 <br />
 
@@ -73,7 +73,7 @@ Zab 的具体流程可以拆分为消息广播、崩溃恢复和数据同步三�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/0C/DF/Ciqah16O5QyADv0LAAA84x9hlQc078.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0C/DF/Ciqah16O5QyADv0LAAA84x9hlQc078.png"/>
 
 ### 消息广播
 
@@ -97,7 +97,7 @@ Leader 节点的写入也是一个两步操作，第一步是广播事务操作�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/85/F5/Cgq2xl6O5Q2ASjMpAAHdAdF67vE736.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/85/F5/Cgq2xl6O5Q2ASjMpAAHdAdF67vE736.png"/>
 
 <br />
 
@@ -141,7 +141,7 @@ Zab 中的节点有三种状态，伴随着的 Zab 不同阶段的转换，节�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/85/F8/Cgq2xl6O5-SASu1cAABBzFJh3s0114.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/85/F8/Cgq2xl6O5-SASu1cAABBzFJh3s0114.png"/>
 
 <br />
 
@@ -184,7 +184,7 @@ ZooKeeper 中除了 Leader 和 Follower，还有 Observer 节点，Observer 不�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/0C/DF/Ciqah16O5Q2AL03bAADZjhkw3ys031.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0C/DF/Ciqah16O5Q2AL03bAADZjhkw3ys031.png"/>
 
 <br />
 

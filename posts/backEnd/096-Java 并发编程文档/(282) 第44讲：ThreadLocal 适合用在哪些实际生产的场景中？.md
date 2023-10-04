@@ -49,7 +49,7 @@ public class ThreadLocalDemo01 {
 
 在以上代码中可以看出，两个线程分别创建了一个自己的 SimpleDateFormat 对象，如图所示：
 
-![](https://s0.lgstatic.com/i/image3/M01/66/80/Cgq2xl5Gb8eAHJXxAAB1tWXZO48680.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/66/80/Cgq2xl5Gb8eAHJXxAAB1tWXZO48680.png"/>
 
 这样一来，有两个线程，那么就有两个 SimpleDateFormat 对象，它们之间互不干扰，这段代码是可以正常运转的，运行结果是：
 
@@ -86,7 +86,7 @@ public class ThreadLocalDemo02 {
 
 上面的代码利用了一个 for 循环来完成这个需求。for 循环一共循环 10 次，每一次都会新建一个线程，并且每一个线程都会在 date 方法中创建一个 SimpleDateFormat 对象，示意图如下：
 
-![](https://s0.lgstatic.com/i/image3/M01/66/7E/CgpOIF5Gal6AeBk6AACsNc5-9ck050.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/66/7E/CgpOIF5Gal6AeBk6AACsNc5-9ck050.png"/>
 
 可以看出一共有 10 个线程，对应 10 个 SimpleDateFormat 对象。
 
@@ -155,7 +155,7 @@ public class ThreadLocalDemo03 {
 
 程序运行结果正确，把从 00:00 到 16:39 这 1000 个时间给打印了出来，并且没有重复的时间。我们把这段代码用图形化给表示出来，如图所示：
 
-![](https://s0.lgstatic.com/i/image3/M01/66/7F/CgpOIF5GbTyAVB13AACRdzpW9yI360.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/66/7F/CgpOIF5GbTyAVB13AACRdzpW9yI360.png"/>
 
 图的左侧是一个线程池，右侧是 1000 个任务。我们刚才所做的就是每个任务都创建了一个 simpleDateFormat 对象，也就是说，1000 个任务对应 1000 个 simpleDateFormat 对象。
 
@@ -196,7 +196,7 @@ public class ThreadLocalDemo04 {
 
 在代码中可以看出，其他的没有变化，变化之处就在于，我们把这个 simpleDateFormat 对象给提取了出来，变成 static 静态变量，需要用的时候直接去获取这个静态对象就可以了。看上去省略掉了创建 1000 个 simpleDateFormat 对象的开销，看上去没有问题，我们用图形的方式把这件事情给表示出来：
 
-![](https://s0.lgstatic.com/i/image3/M01/66/7F/Cgq2xl5GbXSADJb5AAC0PdMmwSI373.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/66/7F/Cgq2xl5GbXSADJb5AAC0PdMmwSI373.png"/>
 
 从图中可以看出，我们有不同的线程，并且线程会执行它们的任务。但是不同的任务所调用的 simpleDateFormat 对象都是同一个，所以它们所指向的那个对象都是同一个，但是这样一来就会有线程不安全的问题。
 
@@ -328,7 +328,7 @@ class ThreadSafeFormatter {
 
 我们用图来看一下当前的这种状态：
 
-![](https://s0.lgstatic.com/i/image3/M01/66/7F/CgpOIF5Gbf2ARIJVAADS5-4CFIM236.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/66/7F/CgpOIF5Gbf2ARIJVAADS5-4CFIM236.png"/>
 
 在图中的左侧可以看到，这个线程池一共有 16 个线程，对应 16 个 simpleDateFormat 对象。而在这个图画的右侧是 1000 个任务，任务是非常多的，和原来一样有 1000 个任务。但是这里最大的变化就是，虽然任务有 1000 个，但是我们不再需要去创建 1000 个 simpleDateFormat 对象了。即便任务再多，最终也只会有和线程数相同的 simpleDateFormat 对象。这样既高效地使用了内存，又同时保证了线程安全。
 
@@ -344,20 +344,20 @@ class ThreadSafeFormatter {
 
 我们用图画的形式举一个实例：
 
-![](https://s0.lgstatic.com/i/image3/M01/66/7F/Cgq2xl5GbiiALuSeAADH1eeI90E061.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/66/7F/Cgq2xl5GbiiALuSeAADH1eeI90E061.png"/>
 
 比如说我们是一个用户系统。假设不使用 ThreadLocal，那么当一个请求进来的时候，一个线程会负责执行这个请求，然后这个请求就会依次调用 service-1()、service-2()、service-3()、service-4()，这 4 个方法可能是分布在不同的类中的。
 
 在 service-1() 的时候它会创建一个 user 的对象，用于保存比如说这个用户的用户名等信息，后面 service-2/3/4() 都需要用到这个对象的信息，比如说 service-2() 代表下订单、service-3() 代表发货、service-4() 代表完结订单，在这种情况下，每一个方法都需要用户信息，所以就需要把这个 user 对象层层传递下去，从 service-1() 传到 service-2()，再从 service-2() 传到 service-3()，以此类推。
 
 这样做会导致代码非常冗余，那有没有什么办法可以解决这个问题呢？我们首先想到的方法就是使用一个 HashMap，如下图所示：  
-![](https://s0.lgstatic.com/i/image3/M01/66/7F/Cgq2xl5GbkGAepKRAAE5e9B5GbE065.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/66/7F/Cgq2xl5GbkGAepKRAAE5e9B5GbE065.png"/>
 
 比如说我们使用了这样的 Map 之后，就不需要把 user 对象层层传递了，而是在执行 service-1() 的时候，把这个用户信息给 put 进去，然后后面需要拿用户信息的时候，直接从静态的 User map 里面 get 就可以了。这样一来，无论你执行哪个方法，都可以直接获取到这个用户信息。当然，我们也要考虑到 web 服务器通常都是多线程的，当多个线程同时工作的时候，我们也需要保证线程安全。
 
 所以在这里，如果我们使用 HashMap 是不够的，因为它是线程不安全的，那我们就可以使用 synchronized，或者直接把 HashMap 替换成 ConcurrentHashMap，用类似的方法来保证线程安全，这样的改进如下图所示：
 
-![](https://s0.lgstatic.com/i/image3/M01/66/7F/CgpOIF5GblqACpu_AAGwufcrq9I360.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/66/7F/CgpOIF5GblqACpu_AAGwufcrq9I360.png"/>
 
 在这个图中，可以看出有两个线程，并且每个线程所做的事情都是访问 service-1/2/3/4()。那么当它们同时运行的时候，都会同时访问这个 User map，于是就需要 User map 是线程安全的。
 
@@ -365,7 +365,7 @@ class ThreadSafeFormatter {
 
 这样一来，我们就可以在不影响性能的情况下，也无需层层传递参数，就可以达到保存当前线程所对应的用户信息的目的。如下图所示：
 
-![](https://s0.lgstatic.com/i/image3/M01/66/7F/Cgq2xl5GbvKAJWHOAAHZjE9Vywo159.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/66/7F/Cgq2xl5GbvKAJWHOAAHZjE9Vywo159.png"/>
 
 在这个图中可以看出，同样是多个线程同时去执行，但是这些线程同时去访问这个 ThreadLocal 并且能利用 ThreadLocal 拿到只属于自己的独享对象。这样的话，就无需任何额外的措施，保证了线程安全，因为每个线程是独享 user 对象的。代码如下所示：
 

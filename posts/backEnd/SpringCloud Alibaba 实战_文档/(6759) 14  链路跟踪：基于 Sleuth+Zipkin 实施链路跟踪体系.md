@@ -12,7 +12,7 @@
 
 我们先看一个图，都知道在微服务架构下，系统的功能是由大量的微服务协调组成的，例如：电商创建订单业务就需要订单服务、库存服务、支付服务、短信通知服务逐级调用才能完成。而每个服务可能是由不同的团队进行开发，部署在成百上千台服务器上。
 
-![图片1.png](https://s0.lgstatic.com/i/image6/M01/2C/A5/Cgp9HWBldo6APrO6AAEGOxZjZu0392.png)  
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M01/2C/A5/Cgp9HWBldo6APrO6AAEGOxZjZu0392.png"/>  
 复杂的调用链路
 
 如此复杂的消息传递过程，当系统发生故障的时候，就需要一种机制对故障点进行快速定位，确认是哪个服务出了问题，链路追踪技术由此而生。所谓的链路追踪，就是运行时通过某种方式记录下服务之间的调用过程，在通过可视化的 UI 界面帮研发运维人员快速定位到出错点。引入链路追踪，是微服务架构运维的底层基础，没有它，运维人员就像盲人摸象一样，根本无法了解服务间通信过程。
@@ -37,7 +37,7 @@
 [微服务 Id,TraceId,SpanId,isExport]
 ```
 
-![图片2.png](https://s0.lgstatic.com/i/image6/M01/2C/AD/CioPOWBldpiAAEEzAAEIV3dI0v0620.png)  
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M01/2C/AD/CioPOWBldpiAAEEzAAEIV3dI0v0620.png"/>  
 链路追踪数据的组成
 
 * **微服务 Id**，说明日志是由哪个微服务产生的。
@@ -65,7 +65,7 @@
 
 Zipkin 是 推特的一个开源项目，它能收集各个服务实例上的链路追踪数据并可视化展现。刚才 ABC 服务控制台产生的日志在 ZipKin 的 UI 界面中会以链路追踪图表的形式展现。
 
-![图片3.png](https://s0.lgstatic.com/i/image6/M01/2C/A5/Cgp9HWBldqaAet1VAAEhVL4p5dM017.png)  
+<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image6/M01/2C/A5/Cgp9HWBldqaAet1VAAEhVL4p5dM017.png"/>  
 链路追踪图表
 
 通过这个图表可以非常直观的了解业务处理过程中服务间的依赖关系与处理时间、处理状态等信息，是开发运维人员进行故障分析时必要的工具。
@@ -80,7 +80,7 @@ Zipkin 是 推特的一个开源项目，它能收集各个服务实例上的链
 
 为了演示需要，这里创建 a-service、b-service、c-service 三个微服务工程，配置过程十分简单，我们把关键代码拿出来说明。
 
-![图片4.png](https://s0.lgstatic.com/i/image6/M01/2C/AD/CioPOWBldrOAGWTLAABgPlbPohY295.png)  
+<Image alt="图片4.png" src="https://s0.lgstatic.com/i/image6/M01/2C/AD/CioPOWBldrOAGWTLAABgPlbPohY295.png"/>  
 调用链路示意图
 
 第一步，创建 a-service、b-service、c-service 三个 Spring Boot 工程，pom.xml 依赖如下：
@@ -244,7 +244,7 @@ public class SampleController {
 
 Zipkin 是由推特开发的分布式链路追踪系统，用于对 Sleuth 产生的日志加以收集并采用可视化的数据对链路追踪进行分析与图表展示，Zipkin 是典型的 C/S（客户端与服务端）架构模式，需要独立部署 Zipkin 服务器，同时也需要在微服务内部持有Zipkin客户端才可以自动实现日志的推送与展示。
 
-![图片5.png](https://s0.lgstatic.com/i/image6/M00/2C/A6/Cgp9HWBldtqACzyVAAEeD5EF8GE518.png)  
+<Image alt="图片5.png" src="https://s0.lgstatic.com/i/image6/M00/2C/A6/Cgp9HWBldtqACzyVAAEeD5EF8GE518.png"/>  
 Zipkin 的架构示意图
 
 在部署 Zipkin 服务端后，一旦微服务产生链路追踪日志，Zipkin 客户端便会自动以异步形式将日志数据推送至 Zipkin 服务端，Zipkin 服务端对数据进行组织整理，开发运维人员便可通过 Zipkin 服务端提供的 UI 界面进行查看。下面咱们来讲解 Zipkin 服务端与客户端的部署过程。
@@ -255,7 +255,7 @@ Zipkin 服务端部署非常简单，可以通过官网快速上手。
 
 [https://zipkin.io/pages/quickstart.html](https://zipkin.io/pages/quickstart.html?fileGuid=xxQTRXtVcqtHK6j8)。
 
-![图片6.png](https://s0.lgstatic.com/i/image6/M00/2C/A6/Cgp9HWBlduaAKJDQAAHelVn9Llw043.png)  
+<Image alt="图片6.png" src="https://s0.lgstatic.com/i/image6/M00/2C/A6/Cgp9HWBlduaAKJDQAAHelVn9Llw043.png"/>  
 快速部署 Zipkin 服务端
 
 ```java
@@ -265,7 +265,7 @@ java -jar zipkin.jar
 
 因为 Zipkin 完全是基于 Java 开发的，在安装好 Java 环境后，只需要使用 Curl 命令下载 Zipkin 最新 Jar 包，并利用 Java 命令启动执行即可。
 
-![图片7.png](https://s0.lgstatic.com/i/image6/M00/2C/AE/CioPOWBldu-AfKZTAAVsfFaI5dg233.png)  
+<Image alt="图片7.png" src="https://s0.lgstatic.com/i/image6/M00/2C/AE/CioPOWBldu-AfKZTAAVsfFaI5dg233.png"/>  
 Zipkin 服务端启动日志
 
 ```java
@@ -278,7 +278,7 @@ Armeria server started at ports: {/0:0:0:0:0:0:0:0:9411=ServerPort(/0:0:0:0:0:0:
 
 [http://localhost:9411/zipkin/](http://localhost:9411/zipkin/?fileGuid=xxQTRXtVcqtHK6j8)
 
-![图片8.png](https://s0.lgstatic.com/i/image6/M00/2C/A6/Cgp9HWBldvuAB7WhAACcYRFoBMA812.png)  
+<Image alt="图片8.png" src="https://s0.lgstatic.com/i/image6/M00/2C/A6/Cgp9HWBldvuAB7WhAACcYRFoBMA812.png"/>  
 Zipkin 服务端 UI
 
 此时映入眼帘的就是 Zipkin 内置的分析 UI 界面，当前因为没有任何服务接入，查询不到任何数据，下面咱们进行 Zipkin 客户端接入。
@@ -321,30 +321,30 @@ spring.zipkin.base-url 设置可用的 Zipkin 服务端IP端口即可。
 
 将 ABC 服务都设置好后，启动应用，重新访问[http://localhost:7000/a](http://localhost:7000/a?fileGuid=xxQTRXtVcqtHK6j8)地址，然后打开 Zipkin 服务端 UI 界面[http://localhost:9411](http://localhost:9411?fileGuid=xxQTRXtVcqtHK6j8)，点击"查找"按钮，便会出现调用链路。
 
-![图片9.png](https://s0.lgstatic.com/i/image6/M00/2C/A6/Cgp9HWBldwyANV6BAAEIr9R5lAA439.png)  
+<Image alt="图片9.png" src="https://s0.lgstatic.com/i/image6/M00/2C/A6/Cgp9HWBldwyANV6BAAEIr9R5lAA439.png"/>  
 查询调用链路
 
-![图片10.png](https://s0.lgstatic.com/i/image6/M00/2C/A6/Cgp9HWBldxOAUW52AACpYTg2JiM395.png)  
+<Image alt="图片10.png" src="https://s0.lgstatic.com/i/image6/M00/2C/A6/Cgp9HWBldxOAUW52AACpYTg2JiM395.png"/>  
 查询结果
 
 点击执行之间的蓝条，便会出现对应的链路调用图。
 
-![图片11.png](https://s0.lgstatic.com/i/image6/M00/2C/A6/Cgp9HWBldxuAOUJJAADMMxuCCC4773.png)  
+<Image alt="图片11.png" src="https://s0.lgstatic.com/i/image6/M00/2C/A6/Cgp9HWBldxuAOUJJAADMMxuCCC4773.png"/>  
 链路条调用图
 
 通过这个图可以直观了解到 ABC 三个服务的执行时间、执行顺序、访问地址、访问方式以及是否执行成功。如果你点击对应的色条，还可以看到更详细的内容。
 
-![图片12.png](https://s0.lgstatic.com/i/image6/M00/2C/A6/Cgp9HWBldyKAKVZTAAFwUrk3trU141.png)  
+<Image alt="图片12.png" src="https://s0.lgstatic.com/i/image6/M00/2C/A6/Cgp9HWBldyKAKVZTAAFwUrk3trU141.png"/>  
 链路调用明细
 
 下面咱们做一个实验，将 C 服务停止，看链路图会产生什么变化。停止后再次访问 A 服务报 500 错误"java.net.SocketTimeoutException: Read timed out"。此时链路追踪图会显示错误。
 
-![图片13.png](https://s0.lgstatic.com/i/image6/M00/2C/AF/CioPOWBldymALd3wAACKH8C4Co8299.png)  
+<Image alt="图片13.png" src="https://s0.lgstatic.com/i/image6/M00/2C/AF/CioPOWBldymALd3wAACKH8C4Co8299.png"/>  
 异常情况下的链路追踪
 
 通过图表发现最后 b-service 只有 6 纳秒执行时间肯定是有问题的，点击后查看明细。
 
-![图片14.png](https://s0.lgstatic.com/i/image6/M00/2C/AF/CioPOWBldzCAFF3MAAG2T6bpl4w635.png)  
+<Image alt="图片14.png" src="https://s0.lgstatic.com/i/image6/M00/2C/AF/CioPOWBldzCAFF3MAAG2T6bpl4w635.png"/>  
 异常明细
 
 异常信息已经非常清晰的说明 C 服务没有可用的实例导致处理失败，开发人员针对这个问题进行及时补救即可。

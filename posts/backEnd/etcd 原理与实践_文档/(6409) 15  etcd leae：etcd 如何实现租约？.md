@@ -28,14 +28,14 @@ lease 694d77aa9e38260f already expired
 
 Lease 模块对外提供了 Lessor 接口，其中定义了包括 Grant、Revoke、Attach 和 Renew 等常用的方法，lessor 结构体实现了 Lessor 接口。Lease 模块涉及的主要对象和接口，如下图所示：
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image6/M01/1D/0B/Cgp9HWBPGqaAOSvBAAApAR0Pn5s728.png)  
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M01/1D/0B/Cgp9HWBPGqaAOSvBAAApAR0Pn5s728.png"/>  
 Lease 模块涉及的主要对象和接口
 
 除此之外，lessor 还启动了两个异步 goroutine：RevokeExpiredLease 和 CheckpointScheduledLease，分别用于撤销过期的租约和更新 Lease 的剩余到期时间。
 
 下图是客户端创建一个指定 TTL 的租约流程，当 etcd 服务端的 gRPC Server 接收到创建 Lease 的请求后，Raft 模块首先进行日志同步；接着 MVCC 调用 Lease 模块的 Grant 接口，保存对应的日志条目到 ItemMap 结构中，接着将租约信息存到 boltdb；最后将 LeaseID 返回给客户端，Lease 创建成功。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image6/M01/1D/08/CioPOWBPGq6AbSSHAAAmYqC-FLA568.png)  
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M01/1D/08/CioPOWBPGq6AbSSHAAAmYqC-FLA568.png"/>  
 客户端创建一个指定 TTL 租约流程图
 
 那么 Lease 与键值对是如何绑定的呢？
@@ -304,6 +304,6 @@ func testLease() {
 
 本讲内容总结如下：
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image6/M00/1D/0B/Cgp9HWBPGsqAJAozAAE8kcN24Nw326.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M00/1D/0B/Cgp9HWBPGsqAJAozAAE8kcN24Nw326.png"/>
 
 学习完这一讲，我想给大家留一个问题，你知道在 etcd 重启之后，Lease 与键值对的绑定关系是如何重建的吗？欢迎你在留言区和我分享自己的想法。下一讲，我们将从整体来梳理 etcd 启动的过程。

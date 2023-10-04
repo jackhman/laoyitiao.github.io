@@ -349,7 +349,7 @@ spec:
 
 在首次使用 Kibana 时，需要配置索引的模式，使用 logstash-\* 作为模式即可。下图是 Kibana 查询日志的界面，可以通过标签来快速对日志消息进行过滤。
 
-![kibana.png](https://s0.lgstatic.com/i/image/M00/26/C2/Ciqc1F7y-cuAFBf_AAJiFWEnj7g432.png)
+<Image alt="kibana.png" src="https://s0.lgstatic.com/i/image/M00/26/C2/Ciqc1F7y-cuAFBf_AAJiFWEnj7g432.png"/>
 
 ### 总结
 

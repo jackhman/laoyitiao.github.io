@@ -76,7 +76,7 @@ Prometheus 在早期开发的时候，参考了Google 内部 Borg 的监控实�
 
 我们来看一个例子，如下图是 Prometheus + Grafana 组成的监控方案。
 
-![image.png](https://s0.lgstatic.com/i/image/M00/5D/C8/Ciqc1F-FUAaABRE2AAFto-2ifvc966.png)  
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/5D/C8/Ciqc1F-FUAaABRE2AAFto-2ifvc966.png"/>  
 
 (<https://www.prometheus.io/assets/architecture.png>)
 

@@ -36,7 +36,7 @@ RSocket 专门设计用来与响应式风格应用程序进行配合使用，在
 
 在交互模式上，与 HTTP 的请求-响应这种单向的交互模式不同，RSocket 倡导的是对等通信，不再使用传统的客户端-服务器端单向通信模式，而是在两端之间可以自由地相互发送和处理请求。RSocket 协议在交互方式上可以参考下图。
 
-![图片1.png](https://s0.lgstatic.com/i/image6/M01/37/06/CioPOWB1XhiAZv3EAACVQCujHBw318.png)  
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M01/37/06/CioPOWB1XhiAZv3EAACVQCujHBw318.png"/>  
 RSocket 协议的交互方式
 
 ### 使用 RSocket 实现远程交互

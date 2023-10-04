@@ -44,31 +44,31 @@
 
 最后是进阶问题，如何进行性能分析，前面的两关，第一关是摸底，第二关是考察你对具体命令的熟悉程度，第三关则重点考察你的综合能力，以及对性能的分析能力。比如，你如何统计某个进程的 CPU 和内存的增长情况？
 
-![](https://s0.lgstatic.com/i/image3/M01/54/AD/Cgq2xl3oo2qAT5Q9AAP9QW1unW4571.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/54/AD/Cgq2xl3oo2qAT5Q9AAP9QW1unW4571.png"/>
 
 如何解答这个问题呢？首先，我们通过 top 命令给大家列举机器的所有进程，你可以看到里面有一个 AliYunDun 的进程，它的 PID 是 705，我们便以它为例来一步步解答这个问题。
 
-![](https://s0.lgstatic.com/i/image3/M01/54/AD/CgpOIF3oo3OAamVXAAGmDLd3sfQ915.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/54/AD/CgpOIF3oo3OAamVXAAGmDLd3sfQ915.png"/>
 
 输入 top -p 705 指令，它会列举这个进程的数据，此时的数据是可交互的。
 
-![](https://s0.lgstatic.com/i/image3/M01/54/AD/Cgq2xl3oo3uAK4O1AAHoIk6W5bA925.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/54/AD/Cgq2xl3oo3uAK4O1AAHoIk6W5bA925.png"/>
 
 我们此时需要不可交互的数据，可以给指令加入一个 -b 命令，-b 表示非交互模式，加入 -b 后系统会每隔 3 秒打印一份内容。
 
-![](https://s0.lgstatic.com/i/image3/M01/54/AD/Cgq2xl3oo4WATWv7AAPT15q6zb0718.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/54/AD/Cgq2xl3oo4WATWv7AAPT15q6zb0718.png"/>
 
 而我们只需要关注核心数据，就可以在指令中加入 -n 1 命令，让系统只输出一次，那我们如何获取最后一行核心数据呢？
 
-![](https://s0.lgstatic.com/i/image3/M01/54/AE/Cgq2xl3oo46AbVlXAAP41ALHjEk157.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/54/AE/Cgq2xl3oo46AbVlXAAP41ALHjEk157.png"/>
 
 通过 \| tail -1 命令实现只打印最后一行核心数据。
 
-![](https://s0.lgstatic.com/i/image3/M01/54/AD/CgpOIF3oo5aAMQfFAAPcJ8rwxrk401.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/54/AD/CgpOIF3oo5aAMQfFAAPcJ8rwxrk401.png"/>
 
 我们继续通过 \| awk 打印 $9 $10 的参数显示 CPU 和内存的使用情况。
 
-![](https://s0.lgstatic.com/i/image3/M01/54/AD/CgpOIF3oo56ALxWwAAHZ_GW0g9E684.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/54/AD/CgpOIF3oo56ALxWwAAHZ_GW0g9E684.png"/>
 
 你也可以使用 while 循环每隔 1 秒统计一次使用情况。当然使用 for 循环也可以实现相同的功能。
 
@@ -78,35 +78,35 @@
 
 比如有一份 Nginx 日志文件，第一列是 IP，如何给出访问量前三的 IP 地址？
 
-![](https://s0.lgstatic.com/i/image3/M01/54/AD/CgpOIF3oo6eADjVvAATco8oWqcQ886.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/54/AD/CgpOIF3oo6eADjVvAATco8oWqcQ886.png"/>
 
 通常在回答这个问题时，你首先需要知道这份日志的格式是什么，可以通过 less nginx.log 指令查看日志格式，你可以看到第一个信息是 IP，后面是以空格隔开的其他字段，这是一份服务器日志访问记录，那么我们如何在繁杂的数据中找出访问量最高的那 3 个 IP 呢？
 
-![](https://s0.lgstatic.com/i/image3/M01/54/AD/CgpOIF3oo7GAP4yxAAGIJe043rs272.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/54/AD/CgpOIF3oo7GAP4yxAAGIJe043rs272.png"/>
 
 我们首先输入 awk '{print $1}' nginx.log \| less 指令，第一列输出了所有的 IP。
 
-![](https://s0.lgstatic.com/i/image3/M01/54/AD/CgpOIF3oo7qAN0rBAAGafa7tPPg079.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/54/AD/CgpOIF3oo7qAN0rBAAGafa7tPPg079.png"/>
 
 但我们只需要统计前三，这时需要对它进行一个排序，通过 awk '{print $1}' nginx.log \| sort \| less 完成排序。
 
-![](https://s0.lgstatic.com/i/image3/M01/54/AD/CgpOIF3oo8aAAz8bAAG1lMxKy2s763.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/54/AD/CgpOIF3oo8aAAz8bAAG1lMxKy2s763.png"/>
 
 然后加入 uniq 命令，它可以把相同的数据整合成一个，-c 命令可以再进行数据整合时记录相同数据有几个重复项。
 
-![](https://s0.lgstatic.com/i/image3/M01/54/AE/CgpOIF3oo9CAT9AfAAHPAHniQQQ244.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/54/AE/CgpOIF3oo9CAT9AfAAHPAHniQQQ244.png"/>
 
 然后我们发现它的排序是有问题的，它是按照 ASCII 码进行排序的。
 
-![](https://s0.lgstatic.com/i/image3/M01/54/AE/CgpOIF3oo9qAICpMAAHs7iA9Wig257.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/54/AE/CgpOIF3oo9qAICpMAAHs7iA9Wig257.png"/>
 
 而我们想按照数字进行排序，我们可以用 sort -n 命令，它就可以按照从小到大的顺序进行了排序。
 
-![](https://s0.lgstatic.com/i/image3/M01/54/AE/Cgq2xl3oo-OAXpmiAAM7_6RNUxc216.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/54/AE/Cgq2xl3oo-OAXpmiAAM7_6RNUxc216.png"/>
 
 这个时候我们加入 tail -3 命令，就列举访问量最高的三个数据。
 
-![](https://s0.lgstatic.com/i/image3/M01/54/AE/CgpOIF3oo-yAXKDeAAMOJudQ9kQ423.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/54/AE/CgpOIF3oo-yAXKDeAAMOJudQ9kQ423.png"/>
 
 当然也可以使用 sort -nr\|head -3 命令，r 代表逆序，这样就可以打印出前三的数据。   
 

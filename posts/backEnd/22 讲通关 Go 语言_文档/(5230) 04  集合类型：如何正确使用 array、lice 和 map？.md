@@ -36,7 +36,7 @@ array:=[5]string{"a","b","c","d","e"}
 
 数组在内存中都是连续存放的，下面通过一幅图片形象地展示数组在内存中如何存放：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/6A/8F/Ciqc1F-pBzmAWUQ0AAAttSjgTjQ158.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/6A/8F/Ciqc1F-pBzmAWUQ0AAAttSjgTjQ158.png"/>
 
 可以看到，数组的每个元素都是连续存放的，每一个元素都有一个下标（Index）。下标从 0 开始，比如第一个元素 a 对应的下标是 0，第二个元素 b 对应的下标是 1。以此类推，通过 array+\[下标\] 的方式，我们可以快速地定位元素。
 
@@ -136,7 +136,7 @@ slice:=array[start:end]
 
 通过下图可以看出，切片是一个具备三个字段的数据结构，分别是指向数组的指针 data，长度 len 和容量 cap：
 
-![图片28.png](https://s0.lgstatic.com/i/image/M00/6A/9B/Ciqc1F-pC5mAbYE_AABTz22B9TY540.png)
+<Image alt="图片28.png" src="https://s0.lgstatic.com/i/image/M00/6A/9B/Ciqc1F-pC5mAbYE_AABTz22B9TY540.png"/>
 
 这里有一些小技巧，切片表达式 array\[start:end\] 中的 start 和 end 索引都是可以省略的，如果省略 start，那么 start 的值默认为 0，如果省略 end，那么 end 的默认值为数组的长度。如下面的示例：
 

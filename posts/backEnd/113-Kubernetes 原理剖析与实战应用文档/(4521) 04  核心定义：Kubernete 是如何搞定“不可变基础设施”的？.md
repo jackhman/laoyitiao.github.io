@@ -37,7 +37,7 @@
 
 Pod 由一个或多个容器组成，如下图所示。Pod 中的容器不可分割，会作为一个整体运行在一个 Node 节点上，也就是说 Pod 是你在 Kubernetes 中可以创建和部署的最原子化的单位。
 
-![image (19).png](https://s0.lgstatic.com/i/image/M00/4A/31/CgqCHl9QuZeAeFxvAAtms5EcUcs313.png)  
+<Image alt="image (19).png" src="https://s0.lgstatic.com/i/image/M00/4A/31/CgqCHl9QuZeAeFxvAAtms5EcUcs313.png"/>  
 
 （<https://github.com/kubernetes/website/blob/master/content/en/docs/tutorials/kubernetes-basics/public/images/module_03_pods.svg>）
 
@@ -53,7 +53,7 @@ Pod 由一个或多个容器组成，如下图所示。Pod 中的容器不可分
 
 我们来看看[官方文档中给的一个例子](https://kubernetes.io/zh/docs/concepts/workloads/pods/#pod-%E6%80%8E%E6%A0%B7%E7%AE%A1%E7%90%86%E5%A4%9A%E4%B8%AA%E5%AE%B9%E5%99%A8)。这个 Pod 里面运行了两个容器 File Puller 和 Web Server。其中 File Puller 负责定期地从外部 Content Manager 同步内容，更新到挂载的共享存储卷（Volume）中，而 Web Server 只负责对外提供访问服务。两个容器之间通过共享的存储卷共享数据。
 
-![image (20).png](https://s0.lgstatic.com/i/image/M00/4A/31/CgqCHl9QuaWAHvj5AACaJbulm4c584.png)  
+<Image alt="image (20).png" src="https://s0.lgstatic.com/i/image/M00/4A/31/CgqCHl9QuaWAHvj5AACaJbulm4c584.png"/>  
 
 （<https://d33wubrfki0l68.cloudfront.net/aecab1f649bc640ebef1f05581bfcc91a48038c4/728d6/images/docs/pod.svg>）
 

@@ -8,7 +8,7 @@
 
 我们把激流勇进的例子用流程图的方式来表示：
 
-![](https://s0.lgstatic.com/i/image3/M01/6F/9D/Cgq2xl5h8oSAKLBQAABld2EcD7Q385.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6F/9D/Cgq2xl5h8oSAKLBQAABld2EcD7Q385.png"/>
 
 可以看到，最开始 CountDownLatch 设置的初始值为 3，然后 T0 线程上来就调用 await 方法，它的作用是让这个线程开始等待，等待后面的 T1、T2、T3，它们每一次调用 countDown 方法，3 这个数值就会减 1，也就是从 3 减到 2，从 2 减到 1，从 1 减到 0，一旦减到 0 之后，这个 T0 就相当于达到了自己触发继续运行的条件，于是它就恢复运行了。
 

@@ -58,13 +58,13 @@
 结合"DOM 节点之间的跨层级操作并不多，**同层级操作是主流** "这一规律，React 的 Diff 过程直接放弃了跨层级的节点比较，它**只针对相同层级的节点作对比**，如下图所示。这样一来，只需要从上到下的一次遍历，就可以完成对整棵树的对比，这是降低复杂度量级方面的一个最重要的设计。
 > 需要注意的是：虽然栈调和将传统的树对比算法优化为了分层对比，但整个算法仍然是以递归的形式运转的，**分层递归也是递归**。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/6C/14/Ciqc1F-qYhGAEPpKAAEByai_5tk134.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/6C/14/Ciqc1F-qYhGAEPpKAAEByai_5tk134.png"/>
 
 那么如果真的发生了跨层级的节点操作（比如将以 B 节点为根节点的子树从 A 节点下面移动到 C 节点下面，如下图所示）会怎样呢？很遗憾，作为"次要矛盾"，在这种情况下 React 并不能够判断出"移动"这个行为，它只能机械地认为移出子树那一层的组件消失了，对应子树需要被销毁；而移入子树的那一层新增了一个组件，需要重新为其创建一棵子树。
 
 **销毁 + 重建的代价是昂贵的，因此 React 官方也建议开发者不要做跨层级的操作，尽量保持 DOM 结构的稳定性**。
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/6C/20/CgqCHl-qYhqAbo1HAAGSgsK973k251.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/6C/20/CgqCHl-qYhqAbo1HAAGSgsK973k251.png"/>
 
 #### 2. 减少递归的"一刀切"策略：类型的一致性决定递归的必要性
 
@@ -74,7 +74,7 @@
 
 这样一来，便能够从很大程度上减少 Diff 过程中冗余的递归操作。
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image/M00/6C/15/Ciqc1F-qYiqAbfiqAAD0Bt0pyEY472.png)
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/6C/15/Ciqc1F-qYiqAbfiqAAD0Bt0pyEY472.png"/>
 
 #### 3. 重用节点的好帮手：key 属性帮 React "记住"节点
 
@@ -83,7 +83,7 @@
 
 它试图解决的是**同一层级下节点的重用问题**。在展开分析之前，我们先结合到现在为止对 Diff 过程的理解，来思考这样一种情况，如下图所示：
 
-![Drawing 7.png](https://s0.lgstatic.com/i/image/M00/6C/20/CgqCHl-qYjGANI2jAAC86KpVHsE612.png)
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/6C/20/CgqCHl-qYjGANI2jAAC86KpVHsE612.png"/>
 
 图中 A 组件在保持类型和其他属性均不变的情况下，在两个子节点（B 和 D）之间插入了一个新的节点（C）。按照已知的 Diff 原则，两棵树之间的 Diff 过程应该是这样的：
 
@@ -111,7 +111,7 @@ const todoItems = todos.map((todo) =>
 
 如果你忘记写 key，React 虽然不至于因此报错，但控制台标红是难免的，它会给你抛出一个"请给列表元素补齐 key 属性"的 warning，这个常见的 warning 也从侧面反映出了 key 的重要性。事实上，当我们没有设定 key 值的时候，Diff 的过程就正如上文所描述的一样惨烈。但只要你按照规范加装一个合适的 key，这个 key 就会像一个记号一样，帮助 React "记住"某一个节点，从而在后续的更新中实现对这个节点的追踪。比如说刚刚那棵虚拟 DOM 树，若我们给位于第 2 层的每一个子节点一个 key 值，如下图所示：
 
-![Drawing 9.png](https://s0.lgstatic.com/i/image/M00/6C/15/Ciqc1F-qYkOANYXaAAC2tCBcU4k280.png)
+<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/6C/15/Ciqc1F-qYkOANYXaAAC2tCBcU4k280.png"/>
 
 这个 key 就充当了每个节点的 ID（唯一标识），有了这个标识之后，当 C 被插入到 B 和 D 之间时，React 并不会再认为 C、D、E 这三个坑位都需要被重建------它会通过识别 ID，意识到 D 和 E 并没有发生变化（D 的 ID 仍然是 1，E 的 ID 仍然是 2），而只是被调整了顺序而已。接着，React 便能够轻松地重用它"追踪"到旧的节点，将 D 和 E 转移到新的位置，并完成对 C 的插入。这样一来，同层级下元素的操作成本便大大降低。
 > 注：作为一个节点的唯一标识，在使用 key 之前，请务必确认 key 的唯一和稳定。

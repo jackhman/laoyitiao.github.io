@@ -18,7 +18,7 @@
 
 整个场景的示意图见下图：
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/8B/F3/CgqCHl_ivJ2AZMUlAABJyFFnmMc174.png)  
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/8B/F3/CgqCHl_ivJ2AZMUlAABJyFFnmMc174.png"/>  
 用户账户更新场景中的消息通信机制
 
 上图中我们发现，消息通信机制使得我们不必花费太大代价即可实现整个交互过程，简单而方便。
@@ -27,7 +27,7 @@
 
 消息通信机制的整体工作流程如下图所示：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/8B/F3/CgqCHl_ivKyAXQR_AABdUOvR5RQ298.png)  
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/8B/F3/CgqCHl_ivKyAXQR_AABdUOvR5RQ298.png"/>  
 消息通信机制示意图
 
 上图中位于流程中间的就是各种消息中间件，**消息中间件**一般提供了消息的发送客户端和接收客户端组件，这些客户端组件会嵌入业务服务中。
@@ -50,7 +50,7 @@
 
 Kafka 基本架构参考下图，从中我们可以看到 Broker、Producer、Consumer、Push、Pull 等消息通信系统常见概念在 Kafka 中都有所体现，生产者使用 Push 模式将消息发布到 Broker，而消费者使用 Pull 模式从 Broker 订阅消息。
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/8B/E8/Ciqc1F_ivLaAVULIAABdyI31l0s036.png)  
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/8B/E8/Ciqc1F_ivLaAVULIAABdyI31l0s036.png"/>  
 Kafka 基本架构图
 
 **在上图中我们注意到，Kafka 架构图中还使用了 Zookeeper。**
@@ -165,7 +165,7 @@ public @interface KafkaListener {
 
 消费者组的基本结构如下图所示：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image2/M01/03/CB/Cip5yF_ivMqAG6llAAA6iqKiy-M353.png)  
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image2/M01/03/CB/Cip5yF_ivMqAG6llAAA6iqKiy-M353.png"/>  
 Kafka 消费者组示意图
 
 使用 @KafkaListener 注解时，我们把它直接添加在处理消息的方法上即可，如下代码所示：

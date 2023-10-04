@@ -30,19 +30,19 @@
 
 根据官网的知识以及我自己的一个理解，可以将整个过程总结为下图 1 。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/41/CC/Ciqc1F82QdiASdHvAAGbIVp4bfI196.png)  
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/41/CC/Ciqc1F82QdiASdHvAAGbIVp4bfI196.png"/>  
 图 1 消息交互流程图
 
 从图 1 中我们可以看到，所有的消息都是通过 binaryMessenger 来传递，Flutter 的底层是 C 和 C++ 实现的，binaryMessenger 就是通过 C++ 底层库来调用平台相关的功能，数据返回也是原路处理返回。上面的调用过程，就是 Flutter 官网三层架构（如图 2 所示）的一个典型例子。
 
-![image (8).png](https://s0.lgstatic.com/i/image/M00/41/E1/CgqCHl82ToiAUS0SAAGny7Ud86w285.png)  
+<Image alt="image (8).png" src="https://s0.lgstatic.com/i/image/M00/41/E1/CgqCHl82ToiAUS0SAAGny7Ud86w285.png"/>  
 图 2 Flutter 三层架构
 
 ### 应用示例
 
 原理分析清晰后，我们再基于我们当前 Two You Friend App 项目实践一下这个功能。主要需求就是能够在 Flutter 中查看当前电量信息，具体效果如如图 3 所示。
 
-![image (7).png](https://s0.lgstatic.com/i/image/M00/41/D6/Ciqc1F82TpCAKE8oAAExi3g6bqk260.png)  
+<Image alt="image (7).png" src="https://s0.lgstatic.com/i/image/M00/41/D6/Ciqc1F82TpCAKE8oAAExi3g6bqk260.png"/>  
 图 3 获取电量界面效果图
 
 从图中我们可以看到在 Android 中是可以正常获取到当前电量信息，但是在 iOS 中是无法获取（主要原因是在虚拟机上 iOS 不支持 device.batteryState 方法）。接下来我们看下具体的代码实现逻辑。
@@ -284,7 +284,7 @@ flutter create --org com.example --template=plugin plugin_name
 
 3.创建完成后，在不修改示例的基础上运行，可以看到如图 4 所示的一个效果。
 
-![image (9).png](https://s0.lgstatic.com/i/image/M00/41/E1/CgqCHl82TqCAWzXCAAAwHz1zoOw595.png)  
+<Image alt="image (9).png" src="https://s0.lgstatic.com/i/image/M00/41/E1/CgqCHl82TqCAWzXCAAAwHz1zoOw595.png"/>  
 图 4 Flutter Plugin 效果
 
 4.开发完成插件后，如果需要使用该插件，方法还是在 pubspec.yaml 增加依赖，例如下面的配置。

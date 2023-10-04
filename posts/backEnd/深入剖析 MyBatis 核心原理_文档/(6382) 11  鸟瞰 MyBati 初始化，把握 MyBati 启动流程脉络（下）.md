@@ -127,7 +127,7 @@ public Cache build() {
 
 介绍完 ResultMapping 对象（即`<resultMap>` 标签下各个子标签的解析结果）之后，我们再来看`<resultMap>` 标签如何被解析。整个 `<resultMap>` 标签最终会被解析成 ResultMap 对象，它与 ResultMapping 之间的映射关系如下图所示：
 
-![图片1.png](https://s0.lgstatic.com/i/image6/M00/0D/AC/CioPOWA7kqSASvnUAAPk5cQ7q3c025.png)  
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M00/0D/AC/CioPOWA7kqSASvnUAAPk5cQ7q3c025.png"/>  
 ResultMap 结构图
 
 通过上图我们可以看出，ResultMap 中有四个集合与 ResultMapping 紧密相连。
@@ -390,7 +390,7 @@ public void parseStatementNode() {
 
 这里解析 SQL 语句**使用的是 LanguageDriver 接口**，其核心实现是 XMLLanguageDriver，继承关系如下图所示：
 
-![图片2.png](https://s0.lgstatic.com/i/image6/M00/0D/B0/Cgp9HWA7ksyAUvrwAADwoAT3J5M370.png)  
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M00/0D/B0/Cgp9HWA7ksyAUvrwAADwoAT3J5M370.png"/>  
 LanguageDriver 继承关系图
 
 在 createSqlSource() 方法中，XMLLanguageDriver 会依赖 XMLScriptBuilder 创建 SqlSource 对象，XMLScriptBuilder 首先会判断 SQL 语句是否为动态SQL，判断的核心逻辑在 parseDynamicTags()方法中，核心实现如下：
@@ -436,7 +436,7 @@ protected MixedSqlNode parseDynamicTags(XNode node) {
 
 另外一个新接口是NodeHandler，它有很多实现类，如下图所示：
 
-![图片3.png](https://s0.lgstatic.com/i/image6/M00/0D/B0/Cgp9HWA7kvSAHP1yAAEyhRwHGEE543.png)  
+<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image6/M00/0D/B0/Cgp9HWA7kvSAHP1yAAEyhRwHGEE543.png"/>  
 NodeHandler 继承关系图
 
 **NodeHandler接口负责解析动态 SQL 内的标签** ，生成相应的 SqlNode 对象，通过 NodeHandler 实现类的名称，我们就可以大概猜测到其解析的标签名称。以 IfHandler 为例，它解析的就是 `<if>` 标签，其核心实现如下：
@@ -483,7 +483,7 @@ public SqlSource parseScriptNode() {
 
 *** ** * ** ***
 
-[![1.png](https://s0.lgstatic.com/i/image/M00/6D/3E/CgqCHl-s60-AC0B_AAhXSgFweBY762.png)](https://shenceyun.lagou.com/t/Mka)
+[<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/6D/3E/CgqCHl-s60-AC0B_AAhXSgFweBY762.png"/>](https://shenceyun.lagou.com/t/Mka)
 
 **《Java 工程师高薪训练营》**
 

@@ -107,11 +107,11 @@ module.exports = {
 
 完成配置之后，我们就可以打开命令行终端，运行 Webpack 打包，那此次打包会有两个入口。打包完成后，我们找到输出目录，这里就能看到两个入口文件各自的打包结果了，如下图所示：
 
-![image (11).png](https://s0.lgstatic.com/i/image/M00/0D/EA/CgqCHl7Ez4KAXb6IAAB9gPjr4iw703.png)
+<Image alt="image (11).png" src="https://s0.lgstatic.com/i/image/M00/0D/EA/CgqCHl7Ez4KAXb6IAAB9gPjr4iw703.png"/>
 
 但是这里还有一个小问题，我们打开任意一个输出的 HTML 文件，具体结果如下图：
 
-![image (12).png](https://s0.lgstatic.com/i/image/M00/0D/DE/Ciqc1F7Ez4yAFCd6AAFu5g0zQLk550.png)
+<Image alt="image (12).png" src="https://s0.lgstatic.com/i/image/M00/0D/DE/Ciqc1F7Ez4yAFCd6AAFu5g0zQLk550.png"/>
 
 你就会发现 index 和 album 两个打包结果都被页面载入了，而我们希望的是每个页面只使用它对应的那个输出结果。
 
@@ -149,7 +149,7 @@ module.exports = {
 
 完成以后我们再次回到命令行终端，然后运行打包，打包结果如下图：
 
-![image (13).png](https://s0.lgstatic.com/i/image/M00/0D/EA/CgqCHl7Ez6OAIz0wAAFGLXodY44387.png)
+<Image alt="image (13).png" src="https://s0.lgstatic.com/i/image/M00/0D/EA/CgqCHl7Ez6OAIz0wAAFGLXodY44387.png"/>
 
 这一次打包的结果就完全正常了。
 
@@ -187,7 +187,7 @@ module.exports = {
 
 完成以后我们打开命令行终端，再次运行 Webpack 打包，打包结果如下图：
 
-![image (14).png](https://s0.lgstatic.com/i/image/M00/0D/EA/CgqCHl7Ez8-ALpdfAABzb5Czbeo871.png)
+<Image alt="image (14).png" src="https://s0.lgstatic.com/i/image/M00/0D/EA/CgqCHl7Ez8-ALpdfAABzb5Czbeo871.png"/>
 
 此时在我们的 dist 下就会额外生成一个 JS 文件，在这个文件中就是 index 和 album 中公共的模块部分了。
 
@@ -205,7 +205,7 @@ Webpack 中支持使用动态导入的方式实现模块的按需加载，而且
 
 接下来，我们具体来看如何使用动态导入特性，这里我已经设计了一个可以发挥按需加载作用的场景，具体效果如下图所示：
 
-![example.gif](https://s0.lgstatic.com/i/image/M00/0D/EA/CgqCHl7Ez--AA39kACvspSgItKU114.gif)
+<Image alt="example.gif" src="https://s0.lgstatic.com/i/image/M00/0D/EA/CgqCHl7Ez--AA39kACvspSgItKU114.gif"/>
 
 在这个应用的主体区域，如果我们访问的是首页，它显示的是一个文章列表，如果我们访问的是相册页，它显示的就是相册列表。
 
@@ -285,7 +285,7 @@ update()
 
 那我们再回到命令行终端，重新运行打包，然后看看此时的打包结果具体是怎样的。打包完成以后我们打开 dist 目录，具体结果如下图所示：
 
-![image (15).png](https://s0.lgstatic.com/i/image/M00/0D/EA/CgqCHl7E0AiAT-imAAHBvVxQKR4701.png)
+<Image alt="image (15).png" src="https://s0.lgstatic.com/i/image/M00/0D/EA/CgqCHl7E0AiAT-imAAHBvVxQKR4701.png"/>
 
 此时 dist 目录下就会额外多出三个 JS 文件，其中有两个文件是动态导入的模块，另外一个文件是动态导入模块中公共的模块，这三个文件就是由动态导入自动分包产生的。
 
@@ -311,11 +311,11 @@ import(/* webpackChunkName: 'posts' */'./posts/posts')
 
 完成过后，我们再次打开命令行终端，运行 Webpack 打包，那此时我们生成 bundle 的 name 就会使用刚刚注释中提供的名称了，具体结果如下：
 
-![image (16).png](https://s0.lgstatic.com/i/image/M00/0D/DF/Ciqc1F7E0DuAVFEdAAHM4Eurysw225.png)
+<Image alt="image (16).png" src="https://s0.lgstatic.com/i/image/M00/0D/DF/Ciqc1F7E0DuAVFEdAAHM4Eurysw225.png"/>
 
 除此之外，魔法注释还有个特殊用途：如果你的 chunkName 相同的话，那相同的 chunkName 最终就会被打包到一起，例如我们这里可以把这两个 chunkName 都设置为 components，然后再次运行打包，那此时这两个模块都会被打包到一个文件中，具体操作如下图所示：
 
-![image (17).png](https://s0.lgstatic.com/i/image/M00/0D/DF/Ciqc1F7E0EOAB4zFAALyynED1R4662.png)
+<Image alt="image (17).png" src="https://s0.lgstatic.com/i/image/M00/0D/DF/Ciqc1F7E0EOAB4zFAALyynED1R4662.png"/>
 
 借助这个特点，你就可以根据自己的实际情况，灵活组织动态加载的模块了。
 

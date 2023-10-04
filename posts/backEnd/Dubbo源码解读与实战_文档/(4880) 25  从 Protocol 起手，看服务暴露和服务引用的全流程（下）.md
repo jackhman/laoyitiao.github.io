@@ -49,12 +49,12 @@ private ExchangeClient[] getClients(URL url) {
 
 当使用独享连接的时候，对每个 Service 建立固定数量的 Client，每个 Client 维护一个底层连接。如下图所示，就是针对每个 Service 都启动了两个独享连接：
 
-![Lark20201020-171207.png](https://s0.lgstatic.com/i/image/M00/61/11/CgqCHl-OqnqAD_WFAAGYtk5Nou4688.png)  
+<Image alt="Lark20201020-171207.png" src="https://s0.lgstatic.com/i/image/M00/61/11/CgqCHl-OqnqAD_WFAAGYtk5Nou4688.png"/>  
 Service 独享连接示意图
 
 当使用共享连接的时候，会区分不同的网络地址（host:port），一个地址只建立固定数量的共享连接。如下图所示，Provider 1 暴露了多个服务，Consumer 引用了 Provider 1 中的多个服务，共享连接是说 Consumer 调用 Provider 1 中的多个服务时，是通过固定数量的共享 TCP 长连接进行数据传输，这样就可以达到减少服务端连接数的目的。
 
-![Lark20201020-171159.png](https://s0.lgstatic.com/i/image/M00/61/06/Ciqc1F-OqoOAHURKAAF2m0HX5qU972.png)  
+<Image alt="Lark20201020-171159.png" src="https://s0.lgstatic.com/i/image/M00/61/06/Ciqc1F-OqoOAHURKAAF2m0HX5qU972.png"/>  
 Service 共享连接示意图
 
 那怎么去创建共享连接呢？**创建共享连接的实现细节是在 getSharedClient() 方法中** ，它首先从 referenceClientMap 缓存（Map\<String, List`<ReferenceCountExchangeClient>`\> 类型）中查询 Key（host 和 port 拼接成的字符串）对应的共享 Client 集合，如果查找到的 Client 集合全部可用，则直接使用这些缓存的 Client，否则要创建新的 Client 来补充替换缓存中不可用的 Client。示例代码如下：
@@ -104,7 +104,7 @@ private List<ReferenceCountExchangeClient> getSharedClient(URL url, int connectN
 
 ReferenceCountExchangeClient 中除了持有被修饰的 ExchangeClient 对象外，还有一个 referenceCount 字段（AtomicInteger 类型），用于记录该 Client 被应用的次数。从下图中我们可以看到，在 ReferenceCountExchangeClient 的构造方法以及 incrementAndGetCount() 方法中会增加引用次数，在 close() 方法中则会减少引用次数。
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/61/06/Ciqc1F-OqqeAHAStAAF3BXy1LnA608.png)  
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/61/06/Ciqc1F-OqqeAHAStAAF3BXy1LnA608.png"/>  
 referenceCount 修改调用栈
 
 这样，对于同一个地址的共享连接，就可以满足两个基本需求：
@@ -148,7 +148,7 @@ private void replaceWithLazyClient() {
 
 LazyConnectExchangeClient 也是 ExchangeClient 的装饰器，它会在原有 ExchangeClient 对象的基础上添加懒加载的功能。LazyConnectExchangeClient 在构造方法中不会创建底层持有连接的 Client，而是在需要发送请求的时候，才会调用 initClient() 方法进行 Client 的创建，如下图调用关系所示：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/61/11/CgqCHl-OqrqAHcvUAAC9KpqKEBQ887.png)  
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/61/11/CgqCHl-OqrqAHcvUAAC9KpqKEBQ887.png"/>  
 initClient() 方法的调用位置
 
 initClient() 方法的具体实现如下：

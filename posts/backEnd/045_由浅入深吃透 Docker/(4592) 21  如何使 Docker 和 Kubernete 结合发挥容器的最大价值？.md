@@ -26,7 +26,7 @@ Kubernetes 采用典型的主从架构，分为 Master 和 Node 两个角色。
 
 整体架构如下图：
 
-![image (1).png](https://s0.lgstatic.com/i/image/M00/68/D6/Ciqc1F-k_FqAdHbtAAFVTi8cyOE246.png)  
+<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/68/D6/Ciqc1F-k_FqAdHbtAAFVTi8cyOE246.png"/>  
 图 1 Kubernetes 架构图（来源：Kubernetes 官网）
 
 #### Master 节点
@@ -150,7 +150,7 @@ $ sudo install kubernetes/client/bin/kubectl /usr/local/bin/kubectl
 
 执行完上述命令后，minikube 会自动帮助我们创建并启动一个 Kubernetes 集群。命令输出如下，当命令行输出 Done 时，代表集群已经部署完成。
 
-![111.png](https://s0.lgstatic.com/i/image/M00/68/FE/CgqCHl-lL_WABqFRAAE7sPUop9w125.png)
+<Image alt="111.png" src="https://s0.lgstatic.com/i/image/M00/68/FE/CgqCHl-lL_WABqFRAAE7sPUop9w125.png"/>
 
 第三步，检查集群状态。集群安装成功后，我们可以使用以下命令检查 Kubernetes 集群是否成功启动。
 
@@ -248,11 +248,11 @@ kubernetes    ClusterIP   10.96.0.1      <none>        443/TCP        40m   <non
 
 输出如下：
 
-![Lark20201106-154358.png](https://s0.lgstatic.com/i/image/M00/68/D8/Ciqc1F-k_seAeN4RAACePALnr0Q662.png)
+<Image alt="Lark20201106-154358.png" src="https://s0.lgstatic.com/i/image/M00/68/D8/Ciqc1F-k_seAeN4RAACePALnr0Q662.png"/>
 
 可以看到 minikube 将我们的服务暴露在了 32391 端口上，我们通过 http://{YOUR-IP}:32391 可以访问到我们启动的服务，如下图所示。
 
-![image (2).png](https://s0.lgstatic.com/i/image/M00/68/D6/Ciqc1F-k_J-AWWQyAABkHB5NA0A837.png)  
+<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/68/D6/Ciqc1F-k_J-AWWQyAABkHB5NA0A837.png"/>  
 图 2 服务请求结果
 
 总结下，我们首先使用 Deployment 创建了三个 nginx-hello 的实例，然后使用 Service 的方式随机负载到后端的三个实例，并将服务通过 NodePort 的方式暴露在主机上，使得我们可以直接使用主机的端口访问到容器中的服务。

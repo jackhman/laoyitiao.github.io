@@ -28,13 +28,13 @@ pod 'SwiftLint', '= 0.41.0', configurations: ['Debug']
 
 为了每次编译完都使用 SwiftLint 来检查代码，我们需要在主 App Target**Moments** 的 Build Phases 里面添加**Run SwiftLint** 步骤。然后配置它执行`"${PODS_ROOT}/SwiftLint/swiftlint"`命令。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image6/M00/0F/0F/CioPOWA9Et6AK5ZLAAKntpgVJ2o333.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/0F/0F/CioPOWA9Et6AK5ZLAAKntpgVJ2o333.png"/>
 
 这里要注意，由于 SwiftLint 的设计是检查有效的 Swift 代码（编译通过的代码就是有效的代码），我们需要把**Run SwiftLint** 步骤放在**Compile Source**步骤之后。否则 SwiftLint 可能会反馈一些错误的结果。
 
 有了上面的配置以后，每次编译程序， SwiftLint 都会自动执行检查，我们可以在 Xcode 上修正这些警告信息来保证编码规范的统一。
 
-￼![图片1.png](https://s0.lgstatic.com/i/image6/M01/11/28/CioPOWA_X36AaLBrAAH6eimbZ_o003.png)
+￼<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M01/11/28/CioPOWA_X36AaLBrAAH6eimbZ_o003.png"/>
 
 例如上面的截图所示，SwiftLint 告诉我们空格的使用不正确。
 
@@ -82,7 +82,7 @@ only_rules:
 
 在我们配置一条规则的时候，为了符合团队自身的情况，可以修改其默认配置。例如`line_length`的默认配置是当一行代码多于 120 个字符的时候会报告编译警告，而多于 200 个字符的时候报告编译错误。
 
-![图片2.png](https://s0.lgstatic.com/i/image6/M01/11/2B/Cgp9HWA_X6yAHMc8AAHVx2uT2fY153.png)  
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M01/11/2B/Cgp9HWA_X6yAHMc8AAHVx2uT2fY153.png"/>  
 来源：SwiftLintFramework Docs
 
 我们可以在 .swiftlint.yml 文件中修改这些配置。
@@ -111,7 +111,7 @@ custom_rules:
 
 该规则`no_hardcoded_strings`会通过正则表达式来检查字符串是否进行了硬编码。如果是SwiftLint 会根据我们的自定义规则显示警告信息，如下图所示。
 
-![图片4.png](https://s0.lgstatic.com/i/image6/M00/11/2C/Cgp9HWA_X_2AWg7XAAJqf2s12IA729.png)
+<Image alt="图片4.png" src="https://s0.lgstatic.com/i/image6/M00/11/2C/Cgp9HWA_X_2AWg7XAAJqf2s12IA729.png"/>
 
 #### 排除扫描文件
 
@@ -128,7 +128,7 @@ excluded:
 
 在这一讲，我介绍了如何使用 SwiftLint 来统一编码规范。特别是其中的`only_rules`，我们要使用它来定义需要生效的规则。
 
-![思维导图+二维码.png](https://s0.lgstatic.com/i/image6/M00/11/29/Cgp9HWA_XxiAF_9EAAJXiOcRtSY049.png)
+<Image alt="思维导图+二维码.png" src="https://s0.lgstatic.com/i/image6/M00/11/29/Cgp9HWA_XxiAF_9EAAJXiOcRtSY049.png"/>
 
 此外，在制定编码规范时，我们还需要注意以下几点。
 
@@ -149,7 +149,7 @@ excluded:
 
 *** ** * ** ***
 
-[![Drawing 1.png](https://s0.lgstatic.com/i/image6/M00/08/77/Cgp9HWA0wqWAI70NAAdqMM6w3z0673.png)](https://shenceyun.lagou.com/t/mka)
+[<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/08/77/Cgp9HWA0wqWAI70NAAdqMM6w3z0673.png"/>](https://shenceyun.lagou.com/t/mka)
 
 **《大前端高薪训练营》**
 

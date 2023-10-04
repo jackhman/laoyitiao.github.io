@@ -8,11 +8,11 @@
 
 #### ViewRootImpl requestLayout 流程
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/16/C8/CgqCHl7WDlCAeAPUAAGFbv2WWtE729.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/16/C8/CgqCHl7WDlCAeAPUAAGFbv2WWtE729.png"/>
 
 requestLayout 第一次被调用是在 setView 方法中，从名字也能看出，这个方法的主要目的就是请求布局操作，其中包括 View 的测量、布局、绘制等。具体代码如下：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/16/BD/Ciqc1F7WDliACqDnAACLhxORyNU400.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/16/BD/Ciqc1F7WDliACqDnAACLhxORyNU400.png"/>
 
 说明：
 
@@ -22,7 +22,7 @@ requestLayout 第一次被调用是在 setView 方法中，从名字也能看出
 
 最后执行 scheduleTraversals 方法，如下：
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/16/BD/Ciqc1F7WDnKAE5bEAADr-hOeT7c204.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/16/BD/Ciqc1F7WDnKAE5bEAADr-hOeT7c204.png"/>
 
 说明：
 
@@ -32,13 +32,13 @@ requestLayout 第一次被调用是在 setView 方法中，从名字也能看出
 
 Choreographer 的 postCallback 的执行流程如下：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/16/BD/Ciqc1F7WDmKANFtlAALhxsMs9iU294.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/16/BD/Ciqc1F7WDmKANFtlAALhxsMs9iU294.png"/>
 
 可以看出最终通过 Handler 发送到 MessageQueue 中的 Message 被设置为异步类型的消息。
 
 mTraversalRunnable 是一个实现 Runnable 接口的 TraversalRunnable 类型对象，其 run 方法如下：
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image/M00/16/BD/Ciqc1F7WDnyAFJzqAAGK-YCFG4Q860.png)
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/16/BD/Ciqc1F7WDnyAFJzqAAGK-YCFG4Q860.png"/>
 
 可以看出，在 run 方法中调用了 doTraversal 方法，并最终调用了 performTraversals() 方法，这个方法就是真正的开始 View 绘制流程：measure --\> layout --\> draw 。
 
@@ -46,7 +46,7 @@ mTraversalRunnable 是一个实现 Runnable 接口的 TraversalRunnable 类型�
 
 这个方法是一个比较重的方法，查看源码发现总共将近 900 行代码。但是抽取一下核心部分代码，这个方法实际上只负责做 3 件事情：
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image/M00/16/C8/CgqCHl7WDoSAWZbvAADYcHBoqeI812.png)
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/16/C8/CgqCHl7WDoSAWZbvAADYcHBoqeI812.png"/>
 
 很明显，实际就是执行了我们在自定义 View 课时中学习的 3 个主要过程。
 
@@ -56,20 +56,20 @@ mTraversalRunnable 是一个实现 Runnable 接口的 TraversalRunnable 类型�
 
 我们知道 View 的测量是一层递归调用，递归执行子 View 的测量工作之后，最后决定父视图的宽和高。但是这个递归的起源是在哪里呢？答案就是 DecorView。因为在 measureHierarchy 方法中最终是调用 performMeasure 方法来进行测量工作的，所以我们直接看 performMeasure 方法的实现，如下所示：
 
-![Drawing 6.png](https://s0.lgstatic.com/i/image/M00/16/C9/CgqCHl7WDoyAFEyEAAH8ZASrUuA900.png)
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/16/C9/CgqCHl7WDoyAFEyEAAH8ZASrUuA900.png"/>
 
 在这个方法中，通过 getRootMeasureSpec 方法获取了根 View的MeasureSpec，实际上 MeasureSpec 中的宽高此处获取的值是 Window 的宽高。关于 MeasureSpec 的介绍可以查看第15课时"自定义 View"。
 
 #### ViewRootImpl 的 performMeasure
 
-![Drawing 7.png](https://s0.lgstatic.com/i/image/M00/16/BD/Ciqc1F7WDpSAGnncAAEEdynruCQ210.png)
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/16/BD/Ciqc1F7WDpSAGnncAAEEdynruCQ210.png"/>
 
 这个方法很简单，只是执行了 mView 的 measure 方法，这个 mView 就是 DecorVIew。其 DecorView 的 measure 方法中，会调用 onMeasure 方法，而 DecorView 是继承自 FrameLayout 的，因此最终会执行 FrameLayout 中的 onMeasure 方法，并递归调用子 View 的 onMeasure 方法。
 > performLayout 也是类似的过程，就不再赘述。
 
 #### ViewRootImpl 的 performDraw
 
-![Drawing 8.png](https://s0.lgstatic.com/i/image/M00/16/BD/Ciqc1F7WDp2AdB5MAAGhEZyszW4993.png)
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/16/BD/Ciqc1F7WDp2AdB5MAAGhEZyszW4993.png"/>
 
 从图中可以看出，在 performDraw 方法中，调用的 ViewRootImpl 的 draw 方法。在 draw 方法中进行 UI 绘制操作，Android 系统提供了 2 种绘制方式：
 
@@ -80,7 +80,7 @@ mTraversalRunnable 是一个实现 Runnable 接口的 TraversalRunnable 类型�
 
 #### 软件绘制 drawSoftware
 
-![Drawing 9.png](https://s0.lgstatic.com/i/image/M00/16/C9/CgqCHl7WDqaAKgJLAAEkjkmYIYM648.png)
+<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/16/C9/CgqCHl7WDqaAKgJLAAEkjkmYIYM648.png"/>
 
 图中 1 处就是调用 DecorView 的 draw 方法将 UI 元素绘制到画布 Canvas 对象中，具体可以绘制的内容在自定义 View 课时已经介绍过了。
 
@@ -90,7 +90,7 @@ mTraversalRunnable 是一个实现 Runnable 接口的 TraversalRunnable 类型�
 
 DecorView 并没有复写 draw 方法，因此实际是调用的顶层 View 的 draw 方法，如下：
 
-![Drawing 10.png](https://s0.lgstatic.com/i/image/M00/16/BD/Ciqc1F7WDq6Af5IAAAYyxWxdF9o888.png)
+<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image/M00/16/BD/Ciqc1F7WDq6Af5IAAAYyxWxdF9o888.png"/>
 
 解释说明：
 
@@ -104,15 +104,15 @@ DecorView 并没有复写 draw 方法，因此实际是调用的顶层 View 的 
 
 可以在 ViewRootImpl 的 draw 方法中，通过如下方法判断是否启用硬件加速：
 
-![Drawing 11.png](https://s0.lgstatic.com/i/image/M00/16/C9/CgqCHl7WDraAJ9ZlAABqmEhIDCw023.png)
+<Image alt="Drawing 11.png" src="https://s0.lgstatic.com/i/image/M00/16/C9/CgqCHl7WDraAJ9ZlAABqmEhIDCw023.png"/>
 
 我们可以在 AndroidManifest 清单文件中，指定 Application 或者某一个 Activity 支持硬件加速，如下：
 
-![Drawing 12.png](https://s0.lgstatic.com/i/image/M00/16/C9/CgqCHl7WDr2AQxK3AAB2-Q9A-7U911.png)
+<Image alt="Drawing 12.png" src="https://s0.lgstatic.com/i/image/M00/16/C9/CgqCHl7WDr2AQxK3AAB2-Q9A-7U911.png"/>
 
 此外我们还可以进行粒度更小的硬件加速设置，比如设置某个 View 支持硬件加速：
 
-![Drawing 13.png](https://s0.lgstatic.com/i/image/M00/16/BD/Ciqc1F7WDsSAAVO5AACzRKtZ2EI576.png)
+<Image alt="Drawing 13.png" src="https://s0.lgstatic.com/i/image/M00/16/BD/Ciqc1F7WDsSAAVO5AACzRKtZ2EI576.png"/>
 
 之所以会有这么多级的支持区分，主要是因为并不是所有的 2D 绘制操作都支持硬件加速，当在自定义 View 中使用了如下 API，则有可能造成程序工作不正常：
 
@@ -135,11 +135,11 @@ Paint
 
 接下来，看下为什么硬件加速能够提高 UI 渲染的性能。再看 ViewRootImpl 的 draw 方法：
 
-![Drawing 14.png](https://s0.lgstatic.com/i/image/M00/16/BD/Ciqc1F7WDsyADbbKAAC-kGeLnrQ221.png)
+<Image alt="Drawing 14.png" src="https://s0.lgstatic.com/i/image/M00/16/BD/Ciqc1F7WDsyADbbKAAC-kGeLnrQ221.png"/>
 
 图中 mThreadRenderer 是 ThreadRenderer 类型，其 draw 方法具体如下：
 
-![Drawing 15.png](https://s0.lgstatic.com/i/image/M00/16/BD/Ciqc1F7WDtOAUoc6AAEpLsoDeF4936.png)
+<Image alt="Drawing 15.png" src="https://s0.lgstatic.com/i/image/M00/16/BD/Ciqc1F7WDtOAUoc6AAEpLsoDeF4936.png"/>
 
 图中注释 1 处就是硬件加速的特殊之处，通过 updateRootDisplayList 方法将 View 视图抽象成一个 RenderNode 对象，并构建 View 的 DrawOp 树。
 
@@ -147,7 +147,7 @@ Paint
 
 updateRootDisplayList 具体如下：
 
-![Drawing 16.png](https://s0.lgstatic.com/i/image/M00/16/C9/CgqCHl7WDtuAcV5jAARjA_A5JGU433.png)
+<Image alt="Drawing 16.png" src="https://s0.lgstatic.com/i/image/M00/16/C9/CgqCHl7WDtuAcV5jAARjA_A5JGU433.png"/>
 
 Android 硬件加速过程中，View 视图被抽象成 RenderNode 节点，View 中的绘制操作都会被抽象成一个个 DrawOp，比如 View中drawLine，构建过程中就会被抽象成一个 DrawLineOp，drawBitmap 操作会被抽象成 DrawBitmapOp。每个子 View 的绘制被抽象成 DrawRenderNodeOp，每个 DrawOp 有对应的 OpenGL 绘制命令。
 
@@ -159,13 +159,13 @@ Android 硬件加速过程中，View 视图被抽象成 RenderNode 节点，View
 
 在 View 的 measure 方法中，有如下几行代码：
 
-![Drawing 17.png](https://s0.lgstatic.com/i/image/M00/16/C9/CgqCHl7WDuSAS5Q3AAD2vQh4q2Q362.png)
+<Image alt="Drawing 17.png" src="https://s0.lgstatic.com/i/image/M00/16/C9/CgqCHl7WDuSAS5Q3AAD2vQh4q2Q362.png"/>
 
 可以看出，如果要触发 onMeasure 方法，需要对 View 设置 PFLAG_FORCE_LAYOUT 标志位，而这个标志位在 requestLayout 方法中被设置，invalidate 并没有设置此标志位。
 
 再看下 onLayout 方法：
 
-![Drawing 18.png](https://s0.lgstatic.com/i/image/M00/16/C9/CgqCHl7WDuuABTjaAADaaiuHx4A929.png)
+<Image alt="Drawing 18.png" src="https://s0.lgstatic.com/i/image/M00/16/C9/CgqCHl7WDuuABTjaAADaaiuHx4A929.png"/>
 
 可以看出，当 View 的位置发送改变，或者添加 PFLAG_FORCE_LAYOUT 标志位后 onLayout 才会被执行。当调用 invalidate 方法时，如果 View 的位置并没有发生改变，则 View 不会触发重新布局的操作。
 
@@ -177,23 +177,23 @@ Android 硬件加速过程中，View 视图被抽象成 RenderNode 节点，View
 
 postInvalidate 的实现如下：
 
-![Drawing 19.png](https://s0.lgstatic.com/i/image/M00/16/BE/Ciqc1F7WDvKAO-ATAAD_ImH55fQ360.png)
+<Image alt="Drawing 19.png" src="https://s0.lgstatic.com/i/image/M00/16/BE/Ciqc1F7WDvKAO-ATAAD_ImH55fQ360.png"/>
 
 最终还是在 ViewRootImpl 中进行操作。
 
 #### ViewRootImpl 的 dispatchInvalidateDelayed
 
-![Drawing 20.png](https://s0.lgstatic.com/i/image/M00/16/BE/Ciqc1F7WDvqAaBciAACf9B7bw-o687.png)
+<Image alt="Drawing 20.png" src="https://s0.lgstatic.com/i/image/M00/16/BE/Ciqc1F7WDvqAaBciAACf9B7bw-o687.png"/>
 
 在非 UI 线程中，通过 Handler 发送了一个延时 Message，因为 Handler 是在主线程中创建的，所以最终 handlerMessage 会在主线程中被执行，方法如下：
 
-![Drawing 21.png](https://s0.lgstatic.com/i/image/M00/16/C9/CgqCHl7WDwGALvleAADn6lvsgqo628.png)
+<Image alt="Drawing 21.png" src="https://s0.lgstatic.com/i/image/M00/16/C9/CgqCHl7WDwGALvleAADn6lvsgqo628.png"/>
 
 上图中的 msg.obj 就是发送 postInvalidate 的 View 对象，可以看出最终还是回到 UI 线程执行了 View 的 invalidate 方法。
 
 **个人理解**：做过 Android 开发的都知道只有 UI 线程才可以刷新 View 控件，但是事实却并非如此。在 ViewRootImpl 中对 View 进行刷新时，会检查当前线程的合法性：
 
-![Drawing 22.png](https://s0.lgstatic.com/i/image/M00/16/C9/CgqCHl7WDweAYfN8AAEWYlH4C2g694.png)
+<Image alt="Drawing 22.png" src="https://s0.lgstatic.com/i/image/M00/16/C9/CgqCHl7WDweAYfN8AAEWYlH4C2g694.png"/>
 
 图中 mThread 是被赋值为当前线程，而 ViewRootImpl 是在 UI 线程中被创建的，因此只有 UI 线程可以进行 View 刷新。但是如果我们能在非 UI 线程中创建 ViewRootImpl，并通过这个 ViewRootImpl 进行 View 的添加和绘制操作，那么后续理论上也是可以在非 UI 线程中刷新 View 控件的，只是维护成本较高，很少有人去做这件事情。
 

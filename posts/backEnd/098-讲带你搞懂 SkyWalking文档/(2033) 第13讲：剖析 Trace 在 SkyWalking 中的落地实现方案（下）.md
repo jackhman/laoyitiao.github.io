@@ -56,7 +56,7 @@ AbstractTraceContext 有两个实现类，如下图所示：
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/89/94/Cgq2xl6X_6-ATLgTAAApyYi2z4g447.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/89/94/Cgq2xl6X_6-ATLgTAAApyYi2z4g447.png"/>
 
 <br />
 
@@ -113,7 +113,7 @@ public AbstractSpan createEntrySpan(final String operationName) {
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/03/50/CgoCgV6X_7CAIrmBAABEHpBozXI630.png)  
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/03/50/CgoCgV6X_7CAIrmBAABEHpBozXI630.png"/>  
 
 <br />
 
@@ -121,7 +121,7 @@ public AbstractSpan createEntrySpan(final String operationName) {
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/10/7E/Ciqah16X_7CADwCpAAQ3K_wSU4k128.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/10/7E/Ciqah16X_7CADwCpAAQ3K_wSU4k128.png"/>
 
 <br />
 
@@ -214,7 +214,7 @@ public boolean stopSpan(AbstractSpan span) {
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/89/95/Cgq2xl6X_7CATU_aAAFxCpVbciQ707.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/89/95/Cgq2xl6X_7CATU_aAAFxCpVbciQ707.png"/>
 
 <br />
 

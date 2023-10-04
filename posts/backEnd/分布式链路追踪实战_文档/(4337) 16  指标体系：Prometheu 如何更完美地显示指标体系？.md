@@ -74,7 +74,7 @@ Prometheus 是一个开源的服务监控系统和时间序列数据库，它是
 
 我们先来看一张 Prometheus 的架构图：
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/55/1D/Ciqc1F9pyTGATVArAAFB6U7Uslw981.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/55/1D/Ciqc1F9pyTGATVArAAFB6U7Uslw981.png"/>
 
 根据我在原理中讲到的数据收集、指标聚合、指标查询和规则告警，我们也可以通过这 4 个步骤来了解 Prometheus。
 
@@ -163,7 +163,7 @@ description: "{ { $labels.instance  }} 实例中的请求错误数超过 20 个(
 
 最后我带你简单认识一下 Grafana，它是**一个通过可视化的形式查看指标数据的展示系统**。通过它，你可以快速构建出 dashboard。其数据源就是依赖 Prometheus，通过 PromQL 的查询实现的。如下图所示：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/55/28/CgqCHl9pyVSAaRiNAAFaF113VPU106.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/55/28/CgqCHl9pyVSAaRiNAAFaF113VPU106.png"/>
 
 这张图是官方 demo 所提供的展示内容，可以点击[这里](http://demo.robustperception.io:3000/d/KyOBFkuik/host-stats-prometheus-node-exporter?orgId=1)访问。
 

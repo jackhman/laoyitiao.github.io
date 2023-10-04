@@ -10,7 +10,7 @@
 
 先看 MySQL 数据库的体系结构，如下图所示。
 
-![](http://s0.lgstatic.com/i/image2/M01/8A/EF/CgoB5l14ySKAdxe1AAo6wxtiDO8081.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/EF/CgoB5l14ySKAdxe1AAo6wxtiDO8081.png"/>
 
 MySQL 体系结构由 Client Connectors 层、MySQL Server 层及存储引擎层组成。
 
@@ -48,7 +48,7 @@ MySQL Server 层主要包括 Connection Pool、Service \& utilities、SQL interf
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/0F/CgotOV14ySKAMxohAAH2VHcAzkE612.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/0F/CgotOV14ySKAMxohAAH2VHcAzkE612.png"/>
 
 ①通过客户端/服务器通信协议与 MySQL 建立连接。  
 
@@ -68,7 +68,7 @@ MySQL Server 层主要包括 Connection Pool、Service \& utilities、SQL interf
 
 存储引擎是 MySQL 中具体与文件打交道的子系统，它是根据 MySQL AB 公司提供的文件访问层抽象接口定制的一种文件访问机制，这种机制就叫作存储引擎，下面是一些常用的存储引擎，有远古时期的 MyISAM、支持事务的 InnoDB、内存类型的 Memory、归档类型的 Archive、列式存储的 Infobright，以及一些新兴的存储引擎，以 RocksDB 为底层基础的 MyRocks 和 RocksDB，和以分形树索引组织存储的 TokuDB，当然现在还有极数云舟出品的分布式存储引擎 ArkDB，如下图所示。
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/0F/CgotOV14ySKAdS_UAAOuxOt5yHc274.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/0F/CgotOV14ySKAdS_UAAOuxOt5yHc274.png"/>
 
 在 MySQL 5.6 版本之前，默认的存储引擎都是 MyISAM，但 5.6 版本以后默认的存储引擎就是 InnoDB 了。
 
@@ -78,7 +78,7 @@ InnoDB 存储引擎的具体架构如下图所示。上半部分是实例层（�
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8A/EF/CgoB5l14ySOAT9VMAASFWIacodo791.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/EF/CgoB5l14ySOAT9VMAASFWIacodo791.png"/>
 
 ###### **实例层**
 
@@ -143,7 +143,7 @@ Redo 日志中包括多个 Redo 文件，这些文件循环使用，当达到一
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/0F/CgotOV14ySOAck4ZAAItjZ-RV6o006.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/0F/CgotOV14ySOAck4ZAAItjZ-RV6o006.png"/>
 
 <br />
 
@@ -187,7 +187,7 @@ MySQL 8.0 版本新特性如下：
 InnoDB 和 MyISAM
 ===============
 
-这里对比几个主流的存储引擎，如下图所示。从图中可以详细看到 InnoDB 和 MyISAM 的对比。![](http://s0.lgstatic.com/i/image2/M01/8B/0F/CgotOV14ySOAEhdFAAN3vQs9Cxc211.png)
+这里对比几个主流的存储引擎，如下图所示。从图中可以详细看到 InnoDB 和 MyISAM 的对比。<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/0F/CgotOV14ySOAEhdFAAN3vQs9Cxc211.png"/>
 
 <br />
 
@@ -197,7 +197,7 @@ InnoDB 和 MyISAM
 
 InnoDB 和 MyISAM 的功能对比如下图所示。
 
-![](http://s0.lgstatic.com/i/image2/M01/8A/EF/CgoB5l14ySOAS58YAAE8GVVK6Y8854.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/EF/CgoB5l14ySOAS58YAAE8GVVK6Y8854.png"/>
 
 * InnoDB 支持 ACID 的事务 4 个特性，而 MyISAM 不支持；
 
@@ -213,14 +213,14 @@ InnoDB 和 MyISAM 的功能对比如下图所示。
 
 InnoDB 表最大还可以支持 64TB，支持聚簇索引、支持压缩数据存储，支持数据加密，支持查询/索引/数据高速缓存，支持自适应hash索引、空间索引，支持热备份和恢复等，如下图所示。
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/0F/CgotOV14ySOAdnlgAAO_KRVPJz0877.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/0F/CgotOV14ySOAdnlgAAO_KRVPJz0877.png"/>
 
 性能对比
 ----
 
 在性能对比上，InnoDB 也完胜 MyISAM，如下图所示。
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/0F/CgotOV14ySSATuS8AALBl7EhXx4697.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/0F/CgotOV14ySSATuS8AALBl7EhXx4697.png"/>
 
 1. 读写混合模式下，随着 CPU 核数的增加，InnoDB 的读写能力呈线性增长，
 
@@ -242,7 +242,7 @@ InnoDB 存储引擎的核心特性包括：MVCC、锁、锁算法和分类、事
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/0F/CgotOV14ySSANcbzAAgkmMU20Z4553.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/0F/CgotOV14ySSANcbzAAgkmMU20Z4553.png"/>
 
 ARIES 三原则
 ---------
@@ -264,7 +264,7 @@ show engine innodb status\\G 的结果里面有详细的 InnoDB 运行态信息�
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/0F/CgotOV14ySSATUGFAANLPCpEobA998.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/0F/CgotOV14ySSATUGFAANLPCpEobA998.png"/>
 
 <br />
 

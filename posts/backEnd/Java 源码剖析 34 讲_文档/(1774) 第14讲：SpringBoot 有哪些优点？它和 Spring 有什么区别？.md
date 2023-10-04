@@ -53,7 +53,7 @@ Spring Boot 提供了更多的 Starters 用于快速构建业务框架，**Start
 
 Spring Boot 提供了起步依赖，也就是在创建 Spring Boot 时可以直接勾选依赖模块，这样在项目初始化时就会把相关依赖直接添加到项目中，大大缩短了查询并添加依赖的时间，如下图所示：
 
-![image.png](https://s0.lgstatic.com/i/image3/M01/07/A6/CgoCgV6iUq2AVmIhAAGjN3d9ZEI221.png)
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image3/M01/07/A6/CgoCgV6iUq2AVmIhAAGjN3d9ZEI221.png"/>
 
 #### Spring Boot 特性三：内嵌容器支持
 
@@ -218,7 +218,7 @@ public ConfigurableApplicationContext run(String... args) {
 
 Spring Boot 启动时会打印 Banner 图片，如下图所示：
 
-![image (1).png](https://s0.lgstatic.com/i/image3/M01/14/D9/Ciqah16iVnqAFdGvAABQamtevj4608.png)
+<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image3/M01/14/D9/Ciqah16iVnqAFdGvAABQamtevj4608.png"/>
 
 此 banner 信息是在 SpringBootBanner 类中定义的，我们可以通过实现 Banner 接口来自定义 banner 信息，然后通过代码 setBanner() 方法设置 Spring Boot 项目使用自己自定义 Banner 信息，或者是在 resources 下添加一个 banner.txt，把 banner 信息添加到此文件中，就可以实现自定义 banner 的功能了。
 

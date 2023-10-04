@@ -16,7 +16,7 @@
 
 今天我们就以一个简单的 Go 服务为例，从 0 部署和搭建基于 Prometheus 和 Grafana 的监控和预警平台，通过钉钉机器人发送报警信息。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/68/E8/CgqCHl-lBcSAT3LdAAMKsps4g0A385.png)  
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/68/E8/CgqCHl-lBcSAT3LdAAMKsps4g0A385.png"/>  
 监控和报警平台架构图
 
 如上图所示，Prometheus 从不同类型的 Exporter 上收集到业务服务或者中间件的数据，然后 Grafana 从 Prometheus 中获取数据并进行可视化展示，还会根据报警规则将报警信息通过邮件、钉钉或者短信发送给开发人员。
@@ -76,7 +76,7 @@ scrape_configs 中配置的就是可以抓取数据的任务，比如对 Prometh
 
 我们可以在 Prometheus 的 Targets 页面查看这些抓取任务的状态，具体如下图所示：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/68/DC/Ciqc1F-lBdOAGf0fAAO2GhMXnPI434.png)  
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/68/DC/Ciqc1F-lBdOAGf0fAAO2GhMXnPI434.png"/>  
 Prometheus 的 Targets 状态页面 1
 
 由上图可以看到，Prometheus 自身的数据抓取已经成功，但是对 Go 程序的抓取一直处于失败状态，所以，接下来我们需要部署 Go 服务程序，并提供相应的数据抓取网络接口。
@@ -99,7 +99,7 @@ func main() {
 
 该程序运行起来后，再去 Prometheus 的 Targets 界面查看，就会发现，Prometheus 已经能够获取到 Go 服务进程相关的数据了。
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image/M00/68/DC/Ciqc1F-lBemAV7huAASa6GYhyx8056.png)  
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/68/DC/Ciqc1F-lBemAV7huAASa6GYhyx8056.png"/>  
 Prometheus 的 Targets 状态页面 2
 
 虽然 Prometheus 自带数据的可视化界面，但是图表格式较为基础，且只能临时查看，总之是不够好用，所以**业界一般使用 Grafana 作为监控数据的展示平台**。
@@ -128,31 +128,31 @@ docker run -d -p 3001:3000 --name=grafana544 grafana/grafana
 
 接着我们配置 Grafana 的数据源，从列表中选择 Prometheus，然后 URL 一栏填写其服务器地址，Access 一栏选择 Server 项，再点击 Save \& Test 按钮来检查并保存，这样我们就将上文配置的 Prometheus 设置为 Grafana 的数据源了。
 
-![Drawing 7.png](https://s0.lgstatic.com/i/image/M00/68/E8/CgqCHl-lBfuAV4UxAAJAa595YgI567.png)  
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/68/E8/CgqCHl-lBfuAV4UxAAJAa595YgI567.png"/>  
 Grafana 数据源配置页面
 
 最后，我们来建立 Go 程序数据的可视化看板，从界面左侧的加号点击，可以从 0 开始新建可视化看板，也可以导入其他人开源的可视化看板。
 
 新建看板时，只要在 Metrics 中输入自己想要监控的数据名称即可，比如我们想要监控 Go 程序中协程的数量，则输入 go_goroutines，然后上方图标就会显示出对应的数据，一个是 Prometheus 平台自身的协程数据，另外一个则是 Go 程序的协程数据。如果只想看 Go 程序的，则可以输入 go_goroutines{job="go"}，即可限定只显示 Go 程序的数据。
 
-![Drawing 9.png](https://s0.lgstatic.com/i/image/M00/68/DD/Ciqc1F-lBgyAPP-DAAMkHLk4ibY306.png)  
+<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/68/DD/Ciqc1F-lBgyAPP-DAAMkHLk4ibY306.png"/>  
 Grafana 看板配置页面
 
 新建看板虽然入门简单，但是想要建立起完备真实可用的看板也是要花费一定时间的，所以我们往往都是直接导入其他人开源的看板配置。那怎么导入呢？
 
 首先，我们在<https://grafana.com/grafana/dashboards>上搜索 Go 相关的看板配置，然后检查这个看板配置是否和我们所收集数据的 Exporter 相互吻合，确定之后，复制该看板详情页面的网络 URL。
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image/M00/67/D6/CgqCHl-iWsCADYe0AAz3hA18tsc589.png)  
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/67/D6/CgqCHl-iWsCADYe0AAz3hA18tsc589.png"/>  
 Grafana 网站页面
 
 将 URL 贴到 Grafana 的导入页面上，点击加载，就会加入一些看板名称、数据来源等配置，点击保存，我们就直接获得了 Go 程序的监控数据可视化看板界面。
 
-![Drawing 12.png](https://s0.lgstatic.com/i/image/M00/68/E8/CgqCHl-lBjGAScg7AANRWsSQuNI689.png)  
+<Image alt="Drawing 12.png" src="https://s0.lgstatic.com/i/image/M00/68/E8/CgqCHl-lBjGAScg7AANRWsSQuNI689.png"/>  
 Grafana 看板导入界面
 
 从可视化看板中，我们可以清晰地看到 Go 程序相关的性能指标曲线图，比如 process memory、 go memstats、Goroutines 和 GC duration 等。
 
-![Drawing 14.png](https://s0.lgstatic.com/i/image/M00/68/DD/Ciqc1F-lBjyAY-kcAARXdD9UNp0756.png)  
+<Image alt="Drawing 14.png" src="https://s0.lgstatic.com/i/image/M00/68/DD/Ciqc1F-lBjyAY-kcAARXdD9UNp0756.png"/>  
 Grafana 看板详情界面
 
 基于这些性能指标曲线图，我们就可以清楚地了解 Go 程序在过去的某一时刻某些指标是否异常，从而给线上 Go 程序异常分析工作提供巨大的帮助。
@@ -165,22 +165,22 @@ Grafana 看板详情界面
 
 首先，我们编辑想要报警指标的看板，切换到 Alert 一栏，在 Conditions 下面我们可以进行均值相关的配置，如下图所示，我们就做了这样的配置：如果 Go 程序线程数量在一分钟内的均值超过 8 则报警，对应的上方图标就有一条红线，表示警戒线。
 
-![Drawing 16.png](https://s0.lgstatic.com/i/image/M00/68/DD/Ciqc1F-lBkuAMUKgAAKPmQSuBFc967.png)  
+<Image alt="Drawing 16.png" src="https://s0.lgstatic.com/i/image/M00/68/DD/Ciqc1F-lBkuAMUKgAAKPmQSuBFc967.png"/>  
 Grafana 报警规则配置界面
 
 接着，我们需要配置报警渠道，可以选择钉钉或者邮件渠道。我们在需要发送报警消息的群中首先添加一个自定义机器人，安全设置就勾选"自定义关键词"选项，关键词就选择"报警"二字。
 
-![Drawing 18.png](https://s0.lgstatic.com/i/image/M00/68/E8/CgqCHl-lBliAe0zFAAFUeXbC5RE342.png)  
+<Image alt="Drawing 18.png" src="https://s0.lgstatic.com/i/image/M00/68/E8/CgqCHl-lBliAe0zFAAFUeXbC5RE342.png"/>  
 钉钉机器人配置界面
 
 添加后，我们可以获得该机器人的 Webhook 地址，然后进入 Grafana 的报警渠道配置页面：新建 DingDing 类型的报警渠道，将 Webhook 地址填入 Url 一栏，点击 Test 没问题后再点击 Save 进行保存。
 
-![Drawing 20.png](https://s0.lgstatic.com/i/image/M00/68/E8/CgqCHl-lBmmAK15XAAKG9lUP1nY683.png)  
+<Image alt="Drawing 20.png" src="https://s0.lgstatic.com/i/image/M00/68/E8/CgqCHl-lBmmAK15XAAKG9lUP1nY683.png"/>  
 Grafana 报警通道配置界面
 
 然后在配置报警规则时，报警渠道选择"钉钉报警渠道"，文本消息中必须包含"报警"二字，否则不能通过钉钉机器人的安全配置校验，从而导致无法发送报警信息，具体配置如下图所示：
 
-![Drawing 22.png](https://s0.lgstatic.com/i/image/M00/68/DD/Ciqc1F-lBnKAXfRbAAI4pLYImMY057.png)  
+<Image alt="Drawing 22.png" src="https://s0.lgstatic.com/i/image/M00/68/DD/Ciqc1F-lBnKAXfRbAAI4pLYImMY057.png"/>  
 Grafana 报警规则配置页面
 
 综上，Grafana 每隔 1 分钟对 Go 服务的协程数量进行判断，如果其数值持续超过 8 到达 5 分钟，则通过钉钉发送报警消息。

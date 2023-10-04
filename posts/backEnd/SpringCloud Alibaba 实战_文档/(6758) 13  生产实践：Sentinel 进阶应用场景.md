@@ -200,7 +200,7 @@ spring:
 
 第三步，在 Nacos 配置中心页面，新增 data-id 为sentinel-sample-flow-rules 的配置项。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image6/M00/27/B7/Cgp9HWBdlU2AH_74AADL3_g2qEo343.png)  
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/27/B7/Cgp9HWBdlU2AH_74AADL3_g2qEo343.png"/>  
 流控规则设置
 
 这里 data-id 与 groups 与微服务应用的配置保持对应，最核心的配置内容采用 JSON 格式进行书写，我们来分析下这段流控规则。
@@ -221,7 +221,7 @@ spring:
 
 仔细观察不难发现，这些配置项与 Dashboard UI 中的选项是对应的，其实使用 DashboardUI 最终目的是为了生成这段 JSON 数据而已，只不过通过 UI 更容易使用罢了。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image6/M00/27/B4/CioPOWBdlVmAUv8YAADoB7vbrZs676.png)  
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/27/B4/CioPOWBdlVmAUv8YAADoB7vbrZs676.png"/>  
 Sentinel Dashboard 流控设置界面
 
 关于这些设置项的各种细节，有兴趣的同学可以访问 Sentinel 的 GitHub 文档进行学习。
@@ -268,7 +268,7 @@ DEBUG 12728 --- [.168.31.10_8848] s.n.www.protocol.http.HttpURLConnection  : sun
 
 访问 [http://localhost/actuator/sentinel](http://localhost/actuator/sentinel?fileGuid=xxQTRXtVcqtHK6j8)，在 flowRules 这个数组中，可以看到 test_flow_rule 的限流规则，每一次流控规则产生改变时 Nacos 都会主动推送到微服务并立即生效。
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image6/M01/27/B7/Cgp9HWBdlZCALcRVAADl835eOig018.png)  
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M01/27/B7/Cgp9HWBdlZCALcRVAADl835eOig018.png"/>  
 新的流控规则
 
 ### 自定义资源点进行熔断保护
@@ -338,7 +338,7 @@ public class SampleService {
 
 然后打开访问 Sentinel Dashboard，在簇点链路中要确认 createOrder资源点已存在。
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image6/M01/27/B7/Cgp9HWBdlaqATmTiAAFaj_pNHQg367.png)  
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M01/27/B7/Cgp9HWBdlaqATmTiAAFaj_pNHQg367.png"/>  
 createOrder 资源点已生效
 
 第三步，获取熔断规则。
@@ -371,7 +371,7 @@ datasource:
 
 设置 data-id 为 sentinel-sample-degrade-rules，Groups 为 SAMPLE_GROUP与微服务的设置保持一致。
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image6/M01/27/B7/Cgp9HWBdlbaAND8LAAChJna7ALA579.png)
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image6/M01/27/B7/Cgp9HWBdlbaAND8LAAChJna7ALA579.png"/>
 
 配置内容如下，我对每一项也做了说明。
 
@@ -388,12 +388,12 @@ datasource:
 ```
 
 上面这段 JSON 完整的含义是：在过去 1 秒内，如果 createOrder资源被访问 1 次后便开启熔断检查，如果其中有 10% 的访问处理时间超过 100 毫秒，则触发熔断 5 秒钟，这期间访问该方法所有请求都将直接抛出 DegradeException，5 秒后该资源点回到"半开"状态等待新的访问，如果下一次访问处理成功，资源点恢复正常状态，如果下一次处理失败，则继续熔断 5 秒钟。  
-![图片1-.png](https://s0.lgstatic.com/i/image6/M01/2A/57/Cgp9HWBihaeAcu_rAADj7f0dzWU991.png)  
+<Image alt="图片1-.png" src="https://s0.lgstatic.com/i/image6/M01/2A/57/Cgp9HWBihaeAcu_rAADj7f0dzWU991.png"/>  
 熔断机制示意图
 
 设置成功，访问 Spring Boot Actuator[http://localhost/actuator/sentinel](http://localhost/actuator/sentinel?fileGuid=xxQTRXtVcqtHK6j8)，可以看到此时 gradeRules 数组下 createOrder 资源点的熔断规则已被 Nacos推送并立即生效。
 
-![Drawing 6.png](https://s0.lgstatic.com/i/image6/M01/27/B4/CioPOWBdldiAfwYZAADXzZezOVY956.png)  
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image6/M01/27/B4/CioPOWBdldiAfwYZAADXzZezOVY956.png"/>  
 自定义资源点熔断规则
 
 下面咱们来验证下，因为规则允许最大时长为 100 毫秒，而在 createOrder 方法中模拟业务处理需要 101 毫秒，显然会触发熔断。
@@ -414,7 +414,7 @@ public void createOrder(){
 
 连续访问 [http://localhost/test_degrade_rule](http://localhost/test_degrade_rule?fileGuid=xxQTRXtVcqtHK6j8)，当第二次访问时便会出现 500 错误。
 
-![Drawing 7.png](https://s0.lgstatic.com/i/image6/M01/27/B4/CioPOWBdlfWASfRYAACZB-pUThM812.png)  
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image6/M01/27/B4/CioPOWBdlfWASfRYAACZB-pUThM812.png"/>  
 已触发熔断的错误提示
 
 在控制台日志也看到了 ERROR 日志，说明熔断已生效。
@@ -440,7 +440,7 @@ com.alibaba.csp.sentinel.slots.block.degrade.DegradeException: null
 
 默认情况下如果访问触发了流控规则，则会直接响应异常信息"BlockedbySentinel (flow limiting)"。
 
-![Drawing 8.png](https://s0.lgstatic.com/i/image6/M00/27/B7/Cgp9HWBdlgWAeKZlAAAq3uzq-uA090.png)  
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image6/M00/27/B7/Cgp9HWBdlgWAeKZlAAAq3uzq-uA090.png"/>  
 触发流控的默认错误信息
 
 我们都知道，RESTful接口默认应返回 JSON 格式数据，如果直接返回纯文本，调用者将无法正确解析，所以咱们要对其进行封装提供更友好的 JSON 格式数据。

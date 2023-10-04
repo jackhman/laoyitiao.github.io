@@ -6,7 +6,7 @@ Java Persistence API 规定，操作数据库实体必须要通过 EntityManager
 
 我们在 SimpleJpaRepository 里面设置一个断点，这样可以很容易看得出来 EntityManger 是 JPA 的接口协议，而其现类是 Hibernate 里面的 SessionImpl，如下图所示：
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/60/71/CgqCHl-NSiyAayfKAAd_nCX2604232.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/60/71/CgqCHl-NSiyAayfKAAd_nCX2604232.png"/>
 
 那么我们看看 EntityManager 给我们提供了哪些方法。
 
@@ -226,15 +226,15 @@ Todo.findBySearchTermNamedFile=SELECT t FROM Table t WHERE LOWER(t.description) 
 
 默认情况下是 spring boot 的自动加载机制，通过 spring.factories 的文件加载 JpaRepositoriesAutoConfiguration，如下图：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/60/71/CgqCHl-NSnqAe4i7AAHNYXt2Rbo960.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/60/71/CgqCHl-NSnqAe4i7AAHNYXt2Rbo960.png"/>
 
 JpaRepositoriesAutoConfiguration 里面再进行 @Import(JpaRepositoriesRegistrar.class) 操作，显示如下：
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/60/66/Ciqc1F-NSoOAZLC9AAFKgEB_ZbM671.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/60/66/Ciqc1F-NSoOAZLC9AAFKgEB_ZbM671.png"/>
 
 而 JpaRepositoriesRegistrar.class 里面配置了 @EnableJpaRepositories，从而使默认值产生了如下效果：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/60/66/Ciqc1F-NSoqAC5SBAAGV8mrWK7o741.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/60/66/Ciqc1F-NSoqAC5SBAAGV8mrWK7o741.png"/>
 
 这样关于 @EnableJpaRepositories 的语法以及默认加载方式就介绍完了，你就可以知道通过 @EnableJpaRepositories 可以完成很多我们自定义的需求。那么到底如何定义自己的 Repository 的实现类呢？我们接着看。
 
@@ -309,23 +309,23 @@ public void testCustomizedUserRepository() {
 
 我们在上面讲过 Class\<?\> repositoryFactoryBeanClass() default JpaRepositoryFactoryBean.class，repository 的动态代理创建工厂是： JpaRepositoryFactoryBean，它会帮我们生产 repository 的实现类，那么我们直接看一下JpaRepositoryFactoryBean 的源码，分析其原理。
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image/M00/60/72/CgqCHl-NSq6AFAjuAAD93443waY861.png)
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/60/72/CgqCHl-NSq6AFAjuAAD93443waY861.png"/>
 
 设置一个断点，就会发现，每个 Repository 都会构建一个 JpaRepositoryFactory，当 JpaRepositoryFactory 加载完之后会执行 afterPropertiesSet() 方法，找到 UserRepository 的 Fragment（即我们自定义的 CustomizedUserRepositoryImpl），如下所示：
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image/M00/60/72/CgqCHl-NSrSAZj08AALzEQG8Sws504.png)
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/60/72/CgqCHl-NSrSAZj08AALzEQG8Sws504.png"/>
 
 我们再看 RepositoryFactory 里面的所有方法，如下图，一看就是动态代理生成 Repository 的实现类，我们进到这个方法里面设置个断点继续观察。
 
-![Drawing 6.png](https://s0.lgstatic.com/i/image/M00/60/72/CgqCHl-NSrmANrzIAALtqlmUVEE696.png)
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/60/72/CgqCHl-NSrmANrzIAALtqlmUVEE696.png"/>
 
 然后我们通过断点可以看到，fragments 放到了 composition 里面，最后又放到了 advice 里面，最后才生成了我们的 repository 的代理类。这时我们再打开 repository 详细地看看里面的值。
 
-![Drawing 7.png](https://s0.lgstatic.com/i/image/M00/60/72/CgqCHl-NSr-AfcXSAAQrh_gENO8150.png)
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/60/72/CgqCHl-NSr-AfcXSAAQrh_gENO8150.png"/>
 
 可以看到 repository 里面的 interfaces，就是我们刚才测试 userRepository 里面的接口定义的。
 
-![Drawing 8.png](https://s0.lgstatic.com/i/image/M00/60/66/Ciqc1F-NSsaAeUC3AALLvvFPRrM408.png)
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/60/66/Ciqc1F-NSsaAeUC3AALLvvFPRrM408.png"/>
 
 我们可以看到 advisors 里面第六个就是我们自定义的接口的实现类，从这里可以得出结论：spring 通过扫描所有 repository 的接口和实现类，并且通过 aop 的切面和动态代理的方式，可以知道我们自定义的接口的实现类是什么。
 
@@ -405,11 +405,11 @@ public void testCustomizedBaseRepository() {
 
 还是打开 RepositoryFactory 里面的父类方法，它会根据 @EnableJpaRepositories 里面我们配置的 repositoryBaseClass，加载我们自定义的实现类，关键方法如下：
 
-![Drawing 9.png](https://s0.lgstatic.com/i/image/M00/60/67/Ciqc1F-NS0KACTP-AAHMT_HqmJA240.png)
+<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/60/67/Ciqc1F-NS0KACTP-AAHMT_HqmJA240.png"/>
 
 我们还看刚才的方法的断点，如下：
 
-![Drawing 10.png](https://s0.lgstatic.com/i/image/M00/60/67/Ciqc1F-NS0iAQ1eDAAFzL2qkapU450.png)
+<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image/M00/60/67/Ciqc1F-NS0iAQ1eDAAFzL2qkapU450.png"/>
 
 可以看到 information 已经变成了我们扩展的基类了，而最终生成的 repository 的实现类也换成了 CustomerBaseRepository。
 

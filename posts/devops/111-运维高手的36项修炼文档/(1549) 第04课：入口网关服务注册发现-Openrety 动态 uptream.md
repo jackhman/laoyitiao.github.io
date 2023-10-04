@@ -20,7 +20,7 @@
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/6B/69/CgpOIF5XlqGAJ1iwAAE2ca-U8Go037.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/69/CgpOIF5XlqGAJ1iwAAE2ca-U8Go037.png"/>
 
 <br />
 
@@ -57,7 +57,7 @@
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/6B/69/Cgq2xl5XlrOAW-n0AAFbOCQssio629.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/69/Cgq2xl5XlrOAW-n0AAFbOCQssio629.png"/>
 
 <br />
 
@@ -78,7 +78,7 @@
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/6B/69/CgpOIF5XlsKAFA4dAACi4m6_YDE387.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/69/CgpOIF5XlsKAFA4dAACi4m6_YDE387.png"/>
 
 <br />
 
@@ -106,7 +106,7 @@
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/6B/69/Cgq2xl5Xls6AJ57nAAEo03hFxpQ626.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/69/Cgq2xl5Xls6AJ57nAAEo03hFxpQ626.png"/>
 
 <br />
 

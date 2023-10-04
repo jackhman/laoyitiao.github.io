@@ -23,7 +23,7 @@
 
 traceroute 常被用来检测一个点到目的端的所有路由器，它的原理是：traceroute 默认基于 UDP 协议发送数据包到目的端（默认：UDP 端口大于 30000 的数据包）。所以它首先会发送一个 TTL 值等于 1 的数据包，TTL 值等于 1 代表发送的是第 1 次的数据包，发送给路由器并接受以后，会将 TTL 的值减 1，然后再发一个 ICMP 超时的数据包给客户端。
 
-![1.png](https://s0.lgstatic.com/i/image3/M01/05/AD/CgoCgV6esyWAGx1tAAGuPOyHnUo585.png)
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image3/M01/05/AD/CgoCgV6esyWAGx1tAAGuPOyHnUo585.png"/>
 
 发起 traceroute 的客户端继续进入第 2 次侦测，客户端会发一个 TTL 为 2 的数据包，这样它就可以经过两个路由，等到等于 0 的时候就是到了第 2 个路由，同样路由 2 再返回一个 ICMP TTL 超时的数据包给到客户端，等最终的目标端收到以后，目的端就不会再发 TTL 超时了，而是会发一个 ICMP 目标端口不可达的响应给到客户端。
 
@@ -45,15 +45,15 @@ traceroute 常被用来检测一个点到目的端的所有路由器，它的原
 
 接下来进入控制台来为你演示一下 traceroute 的命令使用，刚讲到通过加入一个 -n 的参数，可以直接看到 IP 地址，而不去显示主机名和名字字符的名称。所以这里安装完 traceroute 命令后，直接在后面加一个 -n 的选项，后面加目标地址或是域名，我这里加的是 www.jesonc.com，这样从客户端向服务端发起 traceroute 请求后，我们会看到每一级的路由地址，以及每一次发送数据包的过程。还可以看到每到一条路由的一些延迟情况。
 
-![2.png](https://s0.lgstatic.com/i/image3/M01/05/AD/CgoCgV6es2GADVtdAAHGVu-elhg712.png)
+<Image alt="2.png" src="https://s0.lgstatic.com/i/image3/M01/05/AD/CgoCgV6es2GADVtdAAHGVu-elhg712.png"/>
 
 我们会看到在第七跳的时候，会一直是 "*.* .*"、"* .*.*"，没有新的数据在客户端显示。这种情况就可能是服务端因为一些安全策略关闭了对 UDP 数据包返回数据（ICMP 不可达的错误响应），所以我的客户端会不断向服务端去发送 UDP 数据包。
 
-![3.png](https://s0.lgstatic.com/i/image3/M01/12/DC/Ciqah16es26ACqVnAAHPywKy70k381.png)
+<Image alt="3.png" src="https://s0.lgstatic.com/i/image3/M01/12/DC/Ciqah16es26ACqVnAAHPywKy70k381.png"/>
 
 这时我在 -n 的选项之前再加一个 -I，表示客户端向目标服务端发送 ICMP 的数据包，我们再来看一下效果，发现在发送到第 12 条的时候，就到了目标服务器端，然后直接给出了一个反馈，完成了整个 traceroute 过程。
 
-![4.png](https://s0.lgstatic.com/i/image3/M01/05/AD/CgoCgV6es36AaTLIAAI7PnT0K7I888.png)
+<Image alt="4.png" src="https://s0.lgstatic.com/i/image3/M01/05/AD/CgoCgV6es36AaTLIAAI7PnT0K7I888.png"/>
 
 讲到了 traceroute 命令以后，我们再来讲一讲为什么需要使用 MTR 工具？MTR 工具集成了 ping 和 traceroute 两种工具的优点，可以看成是两者的结合体。我们可以通过 MTR 工具来得出每一条路由器的地址，然后通过 ping 命令去循环得出每一跳的延时和丢包率，所以它（MTR）结合了两个命令的优势。
 
@@ -110,15 +110,15 @@ tcpdump 后面加 TCP 的协议，-i 表示监听抓服务器上哪个网卡；-
 
 接下来以 tcpdump 方式进行演示。首先登录到我的服务器上，然后输入了 tcpdump 命令及这一串选项，加入了一个 -w test.pcap ，表示把抓取的数据包存放到文件里面，因为我们一会可以拿 WireShark 工具来做数据包分析。
 
-![5.png](https://s0.lgstatic.com/i/image3/M01/05/AF/CgoCgV6etK2AfgBEAAEfyWiBW5E145.png)
+<Image alt="5.png" src="https://s0.lgstatic.com/i/image3/M01/05/AF/CgoCgV6etK2AfgBEAAEfyWiBW5E145.png"/>
 
 接下来直接在服务端执行这样的命令，抓取的数据包改为 5 个，然后我在客户端执行 curl 命令，请求服务端目标地址是 6060 的端口，发送一个 HTTP 协议。
 
-![6.png](https://s0.lgstatic.com/i/image3/M01/12/DE/Ciqah16etLWAcs2dAAC3nOSs2iU257.png)
+<Image alt="6.png" src="https://s0.lgstatic.com/i/image3/M01/12/DE/Ciqah16etLWAcs2dAAC3nOSs2iU257.png"/>
 
 这个时候我们可以在服务端看到抓包结果，客户端 7 个数据包，采集了 5 个数据包。所以在本地 执行ls命令 会生成一个 test.cap 的文件。打开这个数据包，看到的是一些二进制的格式，这个是无法通过文本来查看的，我们需要通过一些其他分析工具分析（如：WireShark）。
 
-![7.png](https://s0.lgstatic.com/i/image3/M01/12/DE/Ciqah16etMCAKir4AAGFAKrq2qs530.png)
+<Image alt="7.png" src="https://s0.lgstatic.com/i/image3/M01/12/DE/Ciqah16etMCAKir4AAGFAKrq2qs530.png"/>
 
 tcpdump使用样例，这里介绍另外一种方式，就是 tcpdump 后面加了一个 -vv，vv 表示展示结果的详细程度，一个 v 的级别更为简单，两个 v 就更为详细，这种方式 tcpdump 可以通过加入 v 的个数来设置抓取结果详细程度。
 
@@ -126,11 +126,11 @@ tcpdump使用样例，这里介绍另外一种方式，就是 tcpdump 后面加�
 
 这两种演示方式都是在数据包中加入 -w，也就是采集到一个文件里，如果我们不加 -w，在终端里就可以直接看到它整个抓包的。当然这些数据不是非常的方便进行分析，所以我们可以通过采集到 cap 文件的方式（-w 选项），然后通过一些专业的分析工具得到更加详细的或者更加方便的查看。
 
-![8.png](https://s0.lgstatic.com/i/image3/M01/05/AF/CgoCgV6etMyAcMDhAAchCFSUgLE411.png)
+<Image alt="8.png" src="https://s0.lgstatic.com/i/image3/M01/05/AF/CgoCgV6etMyAcMDhAAchCFSUgLE411.png"/>
 
 接下来我们就可以把刚刚采集下来的文件，通过一些专业的工具进行分析。这里推荐你使用 WireShark，我们可以在客户端先安装好 WireShark 工具，然后在里面打开采集好的问天，我们会看到在这样的一个界面，它包含整个客户端和服务端发送数据包连接情况。
 
-![9.png](https://s0.lgstatic.com/i/image3/M01/12/DE/Ciqah16etNSAWvR2AAj7TMGILF4299.png)
+<Image alt="9.png" src="https://s0.lgstatic.com/i/image3/M01/12/DE/Ciqah16etNSAWvR2AAj7TMGILF4299.png"/>
 
 另外， WireShark 也是一个很好的客户端抓包工具，因为它是一个图形化的展示，所以在客户端我们可以用 WireShark 直接抓取数据包。
 

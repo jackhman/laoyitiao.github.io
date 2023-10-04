@@ -12,7 +12,7 @@
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8A/C6/CgoB5l14puyAas0oAABAOzPMKjQ128.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/C6/CgoB5l14puyAas0oAABAOzPMKjQ128.png"/>
 
 如上图所示，左上方是 Spring 系列。很多研发人员把 Spring 看作心目中最好的 Java 项目，没有之一。Spring 系列包含非常多的项目，可以满足 Java 开发中的方方面面。那么来看几个常用的 Spring 框架。
 
@@ -74,7 +74,7 @@ IoC，也就是控制反转，如下图，拿公司招聘岗位来举例。假�
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8A/E6/CgotOV14puyAODLyAAAnwOuTkEk368.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/E6/CgotOV14puyAODLyAAAnwOuTkEk368.png"/>
 
 在 Spring 中，对象的属性是由对象自己创建的，就是正向流程；如果属性不是对象创建，而是由 Spring 来自动进行装配，就是控制反转。这里的 DI 也就是依赖注入，就是实现控制反转的方式。正向流程导致了对象于对象之间的高耦合，IoC 可以解决对象耦合的问题，有利于功能的复用，能够使程序的结构变得非常灵活。
 
@@ -84,7 +84,7 @@ Spring 进行 IoC 实现时使用的两个概念：Context 上下文和 Bean。�
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8A/C6/CgoB5l14puyAWtEwAAA9kZ-6cDw595.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/C6/CgoB5l14puyAWtEwAAA9kZ-6cDw595.png"/>
 
 ###### AOP
 
@@ -92,7 +92,7 @@ AOP，就是面向切面编程。如下图所示，一般我们的程序执行�
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8A/E6/CgotOV14puyAUnRTAAAlyBIiwZM437.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/E6/CgotOV14puyAUnRTAAAlyBIiwZM437.png"/>
 
 但是，我们思考这样一个问题，一个系统中会有多个不同的服务，例如用户服务、商品信息服务等等，每个服务的Controller层都需要验证参数，都需要处理异常，如果按照图中红色的部分，对不同服务的纵向处理流程进行横切，在每个切面上完成通用的功能，例如身份认证、验证参数、处理异常等等、这样就不用在每个服务中都写相同的逻辑了，这就是 AOP 思想解决的问题。AOP 以功能进行划分，对服务顺序执行流程中的不同位置进行横切，完成各服务共同需要实现的功能。
 
@@ -102,7 +102,7 @@ AOP，就是面向切面编程。如下图所示，一般我们的程序执行�
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8A/C6/CgoB5l14puyAXsN8AAB-CNBQpnQ843.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/C6/CgoB5l14puyAXsN8AAB-CNBQpnQ843.png"/>
 
 图中红框框住的是比较重要的组件，Core 组件是 Spring 所有组件的核心；Bean 组件和 Context 组件我刚才提到了，是实现 IoC 和依赖注入的基础；AOP 组件用来实现面向切面编程；Web 组件包括 SpringMVC，是 Web 服务的控制层实现。
 
@@ -112,7 +112,7 @@ AOP，就是面向切面编程。如下图所示，一般我们的程序执行�
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8A/E6/CgotOV14puyAZTSdAAGNifGMENk298.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/E6/CgotOV14puyAZTSdAAGNifGMENk298.png"/>
 
 <br />
 
@@ -158,7 +158,7 @@ Bean 的 Scope 是指 Bean 的作用域，默认情况下是单例模式，这�
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8A/C6/CgoB5l14puyAK0COAAGd_8jLTtQ986.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/C6/CgoB5l14puyAK0COAAGd_8jLTtQ986.png"/>
 
 首先要熟练掌握常用注解的使用。
 
@@ -192,7 +192,7 @@ Bean 的 Scope 是指 Bean 的作用域，默认情况下是单例模式，这�
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8A/E6/CgotOV14puyAX4lxAACLbBAfsE8470.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/E6/CgotOV14puyAX4lxAACLbBAfsE8470.png"/>
 
 <br />
 
@@ -236,7 +236,7 @@ Bean 的 Scope 是指 Bean 的作用域，默认情况下是单例模式，这�
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8A/C6/CgoB5l14puyAAa1gAABPP0lufvQ678.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/C6/CgoB5l14puyAAa1gAABPP0lufvQ678.png"/>
 
 <br />
 
@@ -268,7 +268,7 @@ Bean 的 Scope 是指 Bean 的作用域，默认情况下是单例模式，这�
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8A/E6/CgotOV14puyAOsrSAAB6eiNuRJY924.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/E6/CgotOV14puyAOsrSAAB6eiNuRJY924.png"/>
 
 * BeanFactoryPostProcessor 是 BeanFactory 后置处理器，支持在 BeanFactory 标准初始化完成后，对 BeanFactory 进行一些额外处理。讲 Context 初始化流程时介绍过，这时所有的 Bean 的描述信息已经加载完毕，但是还没有进行 Bean 初始化。例如前面提到的 PropertyPlaceholderConfigurer，就是在这个扩展点上对 Bean 属性中的占位符进行替换。
 
@@ -292,7 +292,7 @@ Bean 的 Scope 是指 Bean 的作用域，默认情况下是单例模式，这�
 
 <br />
 
-![](http://s0.lgstatic.com/i/image2/M01/8A/C6/CgoB5l14puyAX-52AAFrldgEgbY662.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/C6/CgoB5l14puyAX-52AAFrldgEgbY662.png"/>
 
 首先是 Spring Boot 启动流程的主要步骤：
 

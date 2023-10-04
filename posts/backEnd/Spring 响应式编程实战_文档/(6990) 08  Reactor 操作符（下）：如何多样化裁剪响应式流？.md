@@ -124,7 +124,7 @@ Flux.concat(
 
 裁剪操作符中最经典的就是这个 reduce 操作符。reduce 操作符对来自 Flux 序列中的所有元素进行累积操作并得到一个 Mono 序列，该 Mono 序列中包含了最终的计算结果。reduce 操作符示意图如下所示。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image6/M00/2C/98/CioPOWBlYDaAMg1pAAPcwZ2XS_I628.png)  
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/2C/98/CioPOWBlYDaAMg1pAAPcwZ2XS_I628.png"/>  
 reduce 操作符示意图（来自 Reactor 官网）
 
 在上图中，具体的累积计算很简单，我们也可以通过一个 BiFunction 来实现任何自定义的复杂计算逻辑。reduce 操作符的示例代码如下所示，这里的 BiFunction 就是一个求和函数，用来对 1 到 10 的数字进行求和，运行结果为 55。

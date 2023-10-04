@@ -83,14 +83,14 @@ if(process.env.Serverless) {
 
 在代码上传完成以后，我们可以看到类似图 1 所示的结果。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image6/M01/3B/F6/Cgp9HWCHw--AIb5jAAEa4Dzd7Bs282.png)  
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M01/3B/F6/Cgp9HWCHw--AIb5jAAEa4Dzd7Bs282.png"/>  
 图 1 Serverless 服务
 
 接下来我们只需要访问图 1 的 API 网关的 URL 。
 
 打开地址后，我们就可以看到我们熟悉的框架响应数据了，如下图 2 所示。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image6/M01/3B/F6/Cgp9HWCHw_aAEDyzAAAmkVZjuso799.png)  
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M01/3B/F6/Cgp9HWCHw_aAEDyzAAAmkVZjuso799.png"/>  
 图 2 KOA 框架响应
 
 接下来我们访问一个我们正确的路径地址，如下 URL：
@@ -114,7 +114,7 @@ module.exports = Page;
 
 代码逻辑比较简单，获取 name 字段，然后将 name 返回给到 API 调用方。因此当访问 page/index?name=lagou-nodejs 后，会响应如下数据，如图 3 示。
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image6/M00/3B/F6/Cgp9HWCHw_6AX42UAAAzwZkU7Fc325.png)  
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M00/3B/F6/Cgp9HWCHw_6AX42UAAAzwZkU7Fc325.png"/>  
 图 3 KOA 正常响应数据
 
 由于需要独立部署项目，所以我们本讲的[GitHub 源码](https://github.com/love-flutter/serverless?fileGuid=xxQTRXtVcqtHK6j8)做了一定的调整，单独启用了一个新项目，你在实践时，可以直接 fork 该项目，然后去尝试接。

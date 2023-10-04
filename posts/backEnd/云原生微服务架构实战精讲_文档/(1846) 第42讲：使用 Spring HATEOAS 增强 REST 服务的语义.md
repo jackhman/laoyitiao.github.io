@@ -78,7 +78,7 @@ Link link = Link.of(uriTemplate, "order")
 
 下面是 RepresentationModel 类及其子类的结构图。
 
-![1.png](https://s0.lgstatic.com/i/image/M00/3E/BC/CgqCHl8tFzaAcnP-AAA8DI88jKY723.png)
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/3E/BC/CgqCHl8tFzaAcnP-AAA8DI88jKY723.png"/>
 
 这些模型的说明如下表所示。
 

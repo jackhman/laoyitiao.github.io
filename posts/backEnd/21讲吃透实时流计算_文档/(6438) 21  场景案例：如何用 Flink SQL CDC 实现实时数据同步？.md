@@ -10,7 +10,7 @@
 
 面对以上这种情况，你会怎么做呢？一般情况下，我们首先想到的可能就是，改代码！改成类似于下面图 1 这样的方案。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image6/M00/2D/90/Cgp9HWBmt66ACLVqAABVxuvt-SA692.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/2D/90/Cgp9HWBmt66ACLVqAABVxuvt-SA692.png"/>
 
 在上面的图 1 中，我们直接在业务代码中，将数据写入了几种不同的数据库里，包括 MySQL、Redis 和 Elasticsearch。
 
@@ -24,7 +24,7 @@
 
 一种好的改进方法，则是**使用消息中间件**，就像下面的图 2 这样。
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image6/M00/2D/98/CioPOWBmt7aAP2UtAACBbUI0Ab4887.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M00/2D/98/CioPOWBmt7aAP2UtAACBbUI0Ab4887.png"/>
 
 在上面的图 2 中，首先由业务系统将数据写入 Kafka，然后由 Flink 从 Kafka 将消息读取出来，最后再写入不同的数据库。
 
@@ -50,7 +50,7 @@ CDC（Change Data Capture，变化数据捕获）正如其名，是一种捕获�
 
 下面的图 3 就展示了使用 Flink CDC 进行数据同步的方案。
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image6/M00/2D/98/CioPOWBmt8CACcZ1AAB-UuW3dDg051.png)
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image6/M00/2D/98/CioPOWBmt8CACcZ1AAB-UuW3dDg051.png"/>
 
 从上面的图 3 可以看出，相比前面图 2 的方案，这里不需要再引入单独的 Kafka，也不需要我们修改业务系统的代码，只需要引入一个 Flink SQL CDC 工具，就能够同时实现数据的全量同步和增量同步。并且，由于 Flink SQL CDC 封装得很好，我们只需要写一些 SQL 就可以了。
 
@@ -206,7 +206,7 @@ insert into sinkTable select id, name, counts from sourceTable;
 
 下面的图 4 就是 Flink CDC 数据同步的效果图。
 
-![Drawing 6.png](https://s0.lgstatic.com/i/image6/M01/2D/90/Cgp9HWBmt-WAB1cbABNhEi6mLVE369.png)  
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image6/M01/2D/90/Cgp9HWBmt-WAB1cbABNhEi6mLVE369.png"/>  
 图 4 使用 Flink CDC 实时同步数据的效果图
 
 从上面的图 4 可以看出，左边源数据库 MySQL 里的数据和右边目标数据库 Elasticsearch 里的数据是完全对应的。并且，同步到 Elasticsearch 里数据的字段，也是和我们在 insert into select from 语句里指定的字段是完全一致的。你看，Flink SQL CDC 实现实时数据同步的效果是不是很不错！
@@ -221,4 +221,4 @@ insert into sinkTable select id, name, counts from sourceTable;
 
 下面是本课时的知识脑图。
 
-![Drawing 7.png](https://s0.lgstatic.com/i/image6/M01/2D/90/Cgp9HWBmt_uANir5AAfXEAo3ILg905.png)
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image6/M01/2D/90/Cgp9HWBmt_uANir5AAfXEAo3ILg905.png"/>

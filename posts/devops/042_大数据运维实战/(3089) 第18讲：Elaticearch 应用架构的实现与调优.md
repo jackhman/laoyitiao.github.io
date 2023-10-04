@@ -20,7 +20,7 @@ Elasticsearch 集群的一个**主要特点是去中心化**，从字面上理�
 
 下图为 Elasticsearch 集群的运行架构图：
 
-![image1.png](https://s0.lgstatic.com/i/image/M00/26/62/CgqCHl7x1ZOAOu_oAAGRjSv511Y066.png)
+<Image alt="image1.png" src="https://s0.lgstatic.com/i/image/M00/26/62/CgqCHl7x1ZOAOu_oAAGRjSv511Y066.png"/>
 
 在 ElasticSearch 的架构中，有三类角色，分别是 Client node、Data node 和 Master node。其关系如下：搜索查询的请求一般是经过 Client node 来向 Data node 获取数据；而索引查询首先请求 Master node 节点，然后 Master node 将请求分配到多个 Data node 节点完成一次索引查询。
 
@@ -207,7 +207,7 @@ at org.elasticsearch.bootstrap.Bootstrap.init(Bootstrap.java:342)
 
 如果返回类似如下结果，则表示 Elasticsearch 集群运行正常。
 
-![image2.png](https://s0.lgstatic.com/i/image/M00/26/63/CgqCHl7x1paAeDKuAABMVLoLmig568.png)
+<Image alt="image2.png" src="https://s0.lgstatic.com/i/image/M00/26/63/CgqCHl7x1paAeDKuAABMVLoLmig568.png"/>
 
 从安装、基础调优、配置，再到启动、验证，Elasticsearch 集群安装与配置的讲解已经完成了。下面讲解如何安装 Head 插件。
 
@@ -288,7 +288,7 @@ Head 插件服务启动之后，默认的访问端口为 9100，直接访问 htt
 
 下图是配置完成后的一个 Head 插件截图：
 
-![image3.png](https://s0.lgstatic.com/i/image/M00/26/63/CgqCHl7x1tWAVw01AADCWjPJ2oA913.png)  
+<Image alt="image3.png" src="https://s0.lgstatic.com/i/image/M00/26/63/CgqCHl7x1tWAVw01AADCWjPJ2oA913.png"/>  
 
 配置完成后的 Head 插件图
 

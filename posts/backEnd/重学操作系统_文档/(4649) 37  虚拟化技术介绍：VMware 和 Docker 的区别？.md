@@ -32,7 +32,7 @@ VMware 和 Docker 是目前虚拟化技术中最具代表性的两种设计。**
 
 为了实现上述的三种诉求，最直观的方案就是将虚拟机管理程序 Hypervisor 作为操作系统，在虚拟机管理程序（Hypervisor）之上再去构建更多的虚拟机。像这种管理虚拟机的架构，也称为 Type-1 虚拟机，如下图所示：
 
-![Lark20210127-174143.png](https://s0.lgstatic.com/i/image/M00/92/54/CgqCHmARNXqAXohgAACmFoEZ15k793.png)
+<Image alt="Lark20210127-174143.png" src="https://s0.lgstatic.com/i/image/M00/92/54/CgqCHmARNXqAXohgAACmFoEZ15k793.png"/>
 
 我们通常把虚拟机管理程序（Virtual Machine Monitor，VMM）称为 Hypervisor。在 Type-1 虚拟机中，Hypervisor 一方面作为操作系统管理硬件，另一方面作为虚拟机的管理程序。在 Hypervisor 之上创建多个虚拟机，每个虚拟机可以拥有不同的操作系统（Guest OS）。
 
@@ -52,7 +52,7 @@ VMware 和 Docker 是目前虚拟化技术中最具代表性的两种设计。**
 
 Type-1 虚拟机本身是一个操作系统，所以需要用户预装。为了方便用户的使用，VMware 还推出了 Type-2 虚拟机，如下图所示：
 
-![Lark20210127-174145.png](https://s0.lgstatic.com/i/image/M00/92/49/Ciqc1GARNYSAKM46AADCxGGyD4s927.png)
+<Image alt="Lark20210127-174145.png" src="https://s0.lgstatic.com/i/image/M00/92/49/Ciqc1GARNYSAKM46AADCxGGyD4s927.png"/>
 
 在第二种设计当中，虚拟机本身也作为一个进程。它和操作系统中执行的其他进程并没有太大的区别。但是**为了提升性能，有一部分 Hypervisor 程序会作为内核中的驱动执行** 。**当虚拟机操作系统（Guest OS）执行程序的时候，会通过 Hypervisor 实现世界切换**。因此，虽然和 Type-1 虚拟机有一定的区别，但是从本质上来看差距不大，同样是需要二进制翻译技术和虚拟化技术。
 
@@ -60,7 +60,7 @@ Type-1 虚拟机本身是一个操作系统，所以需要用户预装。为了�
 
 随着虚拟机的发展，现在也出现了很多混合型的虚拟机，比如微软的 Hyper-v 技术。从下图中你会看到，虚拟机的管理程序（Parent Partition）及 Windows 的核心程序，都会作为一个虚拟化的节点，拥有一个自己的 VMBus，并且通过 Hypervisor 实现虚拟化。
 
-![Lark20210127-174148.png](https://s0.lgstatic.com/i/image/M00/92/49/Ciqc1GARNYuAUFMRAAF9ae1ZQyE404.png)
+<Image alt="Lark20210127-174148.png" src="https://s0.lgstatic.com/i/image/M00/92/49/Ciqc1GARNYuAUFMRAAF9ae1ZQyE404.png"/>
 
 在 Hyper-V 的架构当中不存在一个主的操作系统。实际上，用户开机之后就在使用虚拟机，Windows 通过虚拟机执行。在这种架构下，其他的虚拟机，比如用 VMware 管理的虚拟机也可以复用这套架构。当然，你也可以直接把 Linux 安装在 Hyper-V 下，只不过安装过程没有 VMWare 傻瓜化，其实也是很不错的选择。
 
@@ -68,7 +68,7 @@ Type-1 虚拟机本身是一个操作系统，所以需要用户预装。为了�
 
 **虚拟机虚拟的是计算机，容器虚拟的是执行环境**。每个容器都是一套独立的执行环境，如下图所示，容器直接被管理在操作系统之内，并不需要一个虚拟机监控程序。
 
-![Lark20210127-174137.png](https://s0.lgstatic.com/i/image/M00/92/49/Ciqc1GARNZOAM0V8AAExEgSEXPg097.png)
+<Image alt="Lark20210127-174137.png" src="https://s0.lgstatic.com/i/image/M00/92/49/Ciqc1GARNZOAM0V8AAExEgSEXPg097.png"/>
 
 **和虚拟机有一个最大的区别就是：容器是直接跑在操作系统之上的，容器内部是应用，应用执行起来就是进程**。这个进程和操作系统上的其他进程也没有本质区别，但这个架构设计没有了虚拟机监控系统。当然，容器有一个更轻量级的管理程序，用户可以从网络上下载镜像，启动起来就是容器。容器中预装了一些程序，比如说一个 Python 开发环境中，还会预装 Web 服务器和数据库。因为没有了虚拟机管理程序在中间的开销，因而性能会更高。而且因为不需要安装操作系统，因此容器安装速度更快，可以达到 ms 级别。
 

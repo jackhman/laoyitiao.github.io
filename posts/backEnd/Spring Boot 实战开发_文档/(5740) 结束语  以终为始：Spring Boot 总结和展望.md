@@ -58,7 +58,7 @@ Spring 5 中内嵌了与数据管理相关的响应式数据访问、与系统�
 
 以支持响应式 Web 的 Spring WebFlux 为例，这里我们给出它的架构图，如下图所示：
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image6/M00/02/32/Cgp9HWAdAZCAB17fAACQeZA8Cyk925.png)  
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/02/32/Cgp9HWAdAZCAB17fAACQeZA8Cyk925.png"/>  
 Spring WebFlux 架构图（来自 Spring 官网）
 
 在图中我们可以看到，上图左侧为基于 Spring Webflux 的技术栈，右侧为基于 Spring MVC 的技术栈。我们知道传统的 Spring MVC 是在 Java EE 的 Servlet 标准之上进行构建的，该标准本身就是阻塞式和同步式。而 Spring WebFlux 基于响应式流进行构建，因此我们可以使用它来构建异步非阻塞的服务。
@@ -71,7 +71,7 @@ Spring WebFlux 架构图（来自 Spring 官网）
 
 下面我们再来看一下 Spring Boot 2 的另一张官网架构图，如下图所示：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image6/M00/02/30/CioPOWAdAZ2AMVhnAACWjgTTFkY662.png)  
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/02/30/CioPOWAdAZ2AMVhnAACWjgTTFkY662.png"/>  
 Spring Boot 2 架构图（来自 Spring 官网）
 
 从图中我们可以看到，上图底部将 Spring Data 明确划分为两大类型：一类是支持 JDBC、JPA 和部分 NoSQL 的传统 Spring Data Repository，另一类则是支持 Mongo、Cassandra、Redis、Couchbase 等的响应式 Spring Data Reactive Repository。

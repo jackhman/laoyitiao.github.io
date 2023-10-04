@@ -2,7 +2,7 @@
 
 现在你一定很想尝试在 Kubernetes 中部署一个稍微复杂的系统，比如下面这个典型的三层架构：前端、后端和数据层。
 
-![image (7).png](https://s0.lgstatic.com/i/image/M00/56/EA/Ciqc1F9sPOKACHGPAADXdRLPJwo750.png)  
+<Image alt="image (7).png" src="https://s0.lgstatic.com/i/image/M00/56/EA/Ciqc1F9sPOKACHGPAADXdRLPJwo750.png"/>  
 
 （<https://docs.bitnami.com/tutorials/_next/static/images/three-tier-kubernetes-architecture-28861dab09dbb6c2dd6ddb986f3a42d4.png.webp>）
 
@@ -100,7 +100,7 @@ version.BuildInfo{Version:"v3.3.1", GitCommit:"249e5215cde0c3fa72e27eb7a30e8d55c
 
 Helm 2 于 2015 年在 KubeCon 上亮相。其架构如下图所示，是个常见的 CS 架构，由 Helm Client 和 Tiller 两部分组成。
 
-![image (8).png](https://s0.lgstatic.com/i/image/M00/56/F6/CgqCHl9sPQ2AWA7kAAKDpOtvIDk020.png)  
+<Image alt="image (8).png" src="https://s0.lgstatic.com/i/image/M00/56/F6/CgqCHl9sPQ2AWA7kAAKDpOtvIDk020.png"/>  
 
 （<https://medium.com/dwarves-foundation/kubernetes-helm-101-78f70eeb0d1>）
 

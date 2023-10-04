@@ -10,7 +10,7 @@
 
 首先进入 Go 语言官网，根据环境下载合适的版本<https://golang.google.cn/dl/>，因为 Go-Micro 的旧版本依赖问题，这里我们选择 Go 1.14 版本。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image6/M00/07/7C/Cgp9HWAzh5aAdgqCAAGppXYgA2M543.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/07/7C/Cgp9HWAzh5aAdgqCAAGppXYgA2M543.png"/>
 
 代码中我们并没有使用最新的 v3 版本，因为 Go-Micro 框架的母公司转向云平台的开发模式，Go-Micro 的 v3 版本转移到了个人项目下，但这个版本还有诸多问题，缺少以前的很多特性，所以这里还是采用了 v1 版本。
 
@@ -229,7 +229,7 @@ RawContent        : HTTP/1.1 200 OK
 
 下面我们再请求 8082 端口，模拟一下完整的 Mesh 过程。整个过程如下图所示：
 
-![图片1.png](https://s0.lgstatic.com/i/image6/M00/08/FF/CioPOWA1hs6AX1jDAAB6NkWYyhA014.png)  
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M00/08/FF/CioPOWA1hs6AX1jDAAB6NkWYyhA014.png"/>  
 完整 Mesh 过程示意图
 
 请求8082端口：
@@ -295,7 +295,7 @@ func main() {
 
 本讲内容总结如下：
 
-![金句.png](https://s0.lgstatic.com/i/image6/M00/09/02/Cgp9HWA1hrWAMQuCAAGBGu1j9ok772.png)
+<Image alt="金句.png" src="https://s0.lgstatic.com/i/image6/M00/09/02/Cgp9HWA1hrWAMQuCAAGBGu1j9ok772.png"/>
 
 结合今天内容的讲解，如果让你研发一个 Mesh 的数据面，你会用什么语言和框架呢。欢迎在留言区和我分享你的观点。
 

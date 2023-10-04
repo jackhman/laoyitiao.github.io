@@ -6,15 +6,15 @@
 
 说到 ShardingSphere 的起源，我们不得不提 Sharding-JDBC 框架，该框架是一款起源于当当网内部的应用框架，并于 2017 年初正式开源。从 Sharding-JDBC 到 Apache 顶级项目，ShardingSphere 的发展经历了不同的演进阶段。纵观整个 ShardingSphere 的发展历史，我们可以得到时间线与阶段性里程碑的演进过程图：
 
-![1.png](https://s0.lgstatic.com/i/image/M00/2B/C0/CgqCHl7-6OWAVF7WAACmgRfIB7Y558.png)
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/2B/C0/CgqCHl7-6OWAVF7WAACmgRfIB7Y558.png"/>
 
 从版本发布角度，我们也可以进一步梳理 ShardingSphere 发展历程中主线版本与核心功能之间的演进关系图：
 
-![2.png](https://s0.lgstatic.com/i/image/M00/22/10/Ciqc1F7rSMqAGrqLAABmt5OcOuc557.png)
+<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/22/10/Ciqc1F7rSMqAGrqLAABmt5OcOuc557.png"/>
 
 基于 GitHub 上星数的增长轨迹，也可以从另一个维度很好地反映出 ShardingSphere 的发展历程：
 
-![3.png](https://s0.lgstatic.com/i/image/M00/22/1C/CgqCHl7rSNaAE3gNAADqRUDMk-w922.png)
+<Image alt="3.png" src="https://s0.lgstatic.com/i/image/M00/22/1C/CgqCHl7rSNaAE3gNAADqRUDMk-w922.png"/>
 
 ### ShardingSphere 的设计理念：不是颠覆，而是兼容
 
@@ -30,13 +30,13 @@ ShardingSphere 的前身是 Sharding-JDBC，所以这是整个框架中最为成
 
 基于这一点，Sharding-JDBC 一开始的设计就完全兼容 JDBC 规范，Sharding-JDBC 对外暴露的一套分片操作接口与 JDBC 规范中所提供的接口完全一致。开发人员只需要了解 JDBC，就可以使用 Sharding-JDBC 来实现分库分表，Sharding-JDBC 内部屏蔽了所有的分片规则和处理逻辑的复杂性。显然，**这种方案天生就是一种具有高度兼容性的方案，能够为开发人员提供最简单、最直接的开发支持**。关于 Sharding-JDBC 与 JDBC 规范的兼容性话题，我们将会在下一课时中详细讨论。
 
-![4.png](https://s0.lgstatic.com/i/image/M00/22/1C/CgqCHl7rSOuAXZt6AAC4cmjERnk488.png)  
+<Image alt="4.png" src="https://s0.lgstatic.com/i/image/M00/22/1C/CgqCHl7rSOuAXZt6AAC4cmjERnk488.png"/>  
 
 Sharding-JDBC 与 JDBC 规范的兼容性示意图
 
 在实际开发过程中，Sharding-JDBC 以 JAR 包的形式提供服务。**开发人员可以使用****这个**** JAR 包直连数据库，无需额外的部署和依赖管理**。在应用 Sharding-JDBC 时，需要注意到 Sharding-JDBC 背后依赖的是一套完整而强大的分片引擎：
 
-![5.png](https://s0.lgstatic.com/i/image/M00/22/1C/CgqCHl7rSPSAUJHuAADsN1Pqjqs981.png)
+<Image alt="5.png" src="https://s0.lgstatic.com/i/image/M00/22/1C/CgqCHl7rSPSAUJHuAADsN1Pqjqs981.png"/>
 
 由于 Sharding-JDBC 提供了一套与 JDBC 规范完全一致的 API，所以它可以很方便地与遵循 JDBC 规范的各种组件和框架进行无缝集成。例如，用于提供数据库连接的 DBCP、C3P0 等数据库连接池组件，以及用于提供对象-关系映射的 Hibernate、MyBatis 等 ORM 框架。当然，作为一款支持多数据库的开源框架，Sharding-JDBC 支持 MySQL、Oracle、SQLServer 等主流关系型数据库。
 
@@ -48,7 +48,7 @@ Sharding-Proxy 所提供的兼容性首先体现在对异构语言的支持上�
 
 接下来，我们看一下 Sharding-Proxy 的整体架构。对于应用程序而言，这种代理机制是完全透明的，可以直接把它当作 MySQL 或 PostgreSQL 进行使用：
 
-![6.png](https://s0.lgstatic.com/i/image/M00/22/1C/CgqCHl7rSQKAC1u6AADoQEq6hys890.png)
+<Image alt="6.png" src="https://s0.lgstatic.com/i/image/M00/22/1C/CgqCHl7rSQKAC1u6AADoQEq6hys890.png"/>
 
 总结一下，我们可以直接把 Sharding-Proxy 视为一个数据库，用来代理后面分库分表的多个数据库，它屏蔽了后端多个数据库的复杂性。同时，也看到 Sharding-Proxy 的运行同样需要依赖于完成分片操作的分片引擎以及用于管理数据库的治理组件。
 
@@ -56,7 +56,7 @@ Sharding-Proxy 所提供的兼容性首先体现在对异构语言的支持上�
 
 前面已经介绍过，我们使用 Sharding-JDBC 的方式是在应用程序中直接嵌入 JAR 包，这种方式适合于业务开发人员。而 Sharding-Proxy 提供静态入口以及异构语言的支持，适用于需要对分片数据库进行管理的中间件开发和运维人员。基于底层共通的分片引擎，以及数据库治理功能，可以混合使用 Sharding-JDBC 和 Sharding-Proxy，以便应对不同的应用场景和不同的开发人员：
 
-![7.png](https://s0.lgstatic.com/i/image/M00/22/11/Ciqc1F7rSRCAS66OAAECtLTiErU161.png)
+<Image alt="7.png" src="https://s0.lgstatic.com/i/image/M00/22/11/Ciqc1F7rSRCAS66OAAECtLTiErU161.png"/>
 
 #### Sharding-Sidecar
 
@@ -74,7 +74,7 @@ Sidecar 设计模式受到了越来越多的关注和采用，这个模式的目
 
 ShardingSphere 在设计上采用了**微内核（MicroKernel）架构模式**，来确保系统具有高度可扩展性。微内核架构包含两部分组件，即内核系统和插件。使用微内核架构对系统进行升级，要做的只是用新插件替换旧插件，而不需要改变整个系统架构：
 
-![8.png](https://s0.lgstatic.com/i/image/M00/22/1C/CgqCHl7rSSCAcY4sAABRDnG4TnQ180.png)
+<Image alt="8.png" src="https://s0.lgstatic.com/i/image/M00/22/1C/CgqCHl7rSSCAcY4sAABRDnG4TnQ180.png"/>
 
 在 ShardingSphere 中，抽象了一大批插件接口，包含用实现 SQL 解析的 SQLParserEntry、用于实现配置中心的 ConfigCenter、用于数据脱敏的 ShardingEncryptor，以及用于数据库治理的注册中心接口 RegistryCenter 等。开发人员完全可以根据自己的需要，基于这些插件定义来提供定制化实现，并动态加载到 ShardingSphere 运行时环境中。
 

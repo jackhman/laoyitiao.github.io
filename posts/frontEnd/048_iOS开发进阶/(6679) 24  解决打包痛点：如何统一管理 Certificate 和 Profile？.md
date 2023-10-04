@@ -10,7 +10,7 @@
 
 这里的打包和签名操作就涉及私钥、证书和 Provisioning Profile 等组件，我们可以结合下面这张图看看这些组件之间的关系：
 
-![图片4.png](https://s0.lgstatic.com/i/image6/M00/3E/F6/Cgp9HWCbpROAFzsfAAbfDL-IX24841.png)
+<Image alt="图片4.png" src="https://s0.lgstatic.com/i/image6/M00/3E/F6/Cgp9HWCbpROAFzsfAAbfDL-IX24841.png"/>
 
 那这些组件到底都有什么作用呢？下面我们来分别说明下。
 
@@ -50,7 +50,7 @@
 
 我们可以点击 GitHub 网站右上角的加号（+）按钮，然后选择 New repository 菜单来新建私有 Repo。因为该 Repo 用于签名，所以我会以"\<项目名称\>-codesign"的方式来命名，例如叫 moments-codesign。具体页面情况如下图所示：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image6/M00/3D/C3/CioPOWCWMc2ASbGgAAEeGAfOCoA064.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/3D/C3/CioPOWCWMc2ASbGgAAEeGAfOCoA064.png"/>
 
 这里需要注意：**我们必须把 Repo 设置为 Private，因为该 Repo 保存了私钥等关键信息**，一旦设置为 Public 的话，所有人都可以访问它了。
 
@@ -60,17 +60,17 @@
 
 我推荐的做法是为每一个 App 新建一个 GitHub 账户，例如新建一个叫作 momentsci 的账户，然后把该账户添加到私有 Repo 的贡献者列表里面。如下图所示：
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image6/M00/3D/C3/CioPOWCWMdSAYvK7AADj0dRNEHo360.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M00/3D/C3/CioPOWCWMdSAYvK7AADj0dRNEHo360.png"/>
 
 这样子，momentsci 用户就能访问和更新该私有 Repo 了。
 
 下一步是为 momentsci 用户生成 GitHub Access Token。当我们通过 momentsci 登录到 GitHub 以后，点击 Settings -\> Developer settings -\> Personal access tokens 来打开来配置页面，接着再点击 Generate new token 按钮，在 Note 输入框填写 Token 的用途，比如写上"用于 Moments App 的 CI"，然后在 Select scopes 选上 repo，如下图所示：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image6/M00/3D/C3/CioPOWCWMdyAGRYeAAGmH0NcYDk620.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M00/3D/C3/CioPOWCWMdyAGRYeAAGmH0NcYDk620.png"/>
 
 因为我们选择了 Full controll of private repositories（能完全控制所有私有 Repo），所以使用该 Token 的应用程序（例如 fastlane）就有权限访问 momentsci 用户所能访问的所有 Repo，并且能 push commit 到这些 Repo 去。当我们点击 Generate token 按钮以后就生成一个如下图所示的 Token：
 
-![图片5.png](https://s0.lgstatic.com/i/image6/M01/3E/F6/Cgp9HWCbpVKAIJRSAAQzSVGBgVk131.png)
+<Image alt="图片5.png" src="https://s0.lgstatic.com/i/image6/M01/3E/F6/Cgp9HWCbpVKAIJRSAAQzSVGBgVk131.png"/>
 
 这里需要注意，我们**一定要好好保存这个 Token**，因为一旦关闭该页面以后就无法再从 GitHub 上找到该 Token 了。为了使得团队所有人都可以使用到这个 Token，我推荐把它存放在团队密码共享服务里面，目前比较流行的密码共享服务有 LastPass、OnePassword 等。
 
@@ -102,7 +102,7 @@ $> export MATCH_PASSWORD=<YOUR MATCH PASSWORD>
 
 我们可以在 App Store Connect 网站上生成该 Key，在网站上选择 Users and Access -\> Keys -\> App Store Connect API，然后点击加号（+）来生成 Key，会弹出下面的输入框：
 
-![图片7.png](https://s0.lgstatic.com/i/image6/M01/3E/F7/Cgp9HWCbpZiAbIChAAC_Yq3o-fE466.png)
+<Image alt="图片7.png" src="https://s0.lgstatic.com/i/image6/M01/3E/F7/Cgp9HWCbpZiAbIChAAC_Yq3o-fE466.png"/>
 
 Key 的名称可以填写其用途，例如使用到 CI 上我们就填 "Moments CI"，然后在 Access 里选择 App Manager。需要注意：**必须选择 App Manager 以上的权限**，因为使用 App Manager 以下的权限，fastlane 在执行过程中会出错。这是 fastlane 的一个已知的问题，假如以后解决了该问题，我们就可以选择 Developer 权限，原则上是该 Key 的 Access 权限越低就越安全。
 
@@ -212,21 +212,21 @@ $> git config --global user.name "Moments CI"
 
 当`create_new_profiles`命令成功执行以后，你可以在私有 Repo 上看到两个新的文件夹，如下图所示：
 
-![图片8.png](https://s0.lgstatic.com/i/image6/M01/3E/F7/Cgp9HWCbpdWASXy9AAJKo3Mqtpg236.png)
+<Image alt="图片8.png" src="https://s0.lgstatic.com/i/image6/M01/3E/F7/Cgp9HWCbpdWASXy9AAJKo3Mqtpg236.png"/>
 
 其中，**certs 文件夹用于保存私钥（.p12）和证书（.cer）文件，而 profiles 文件夹则用来保存 adhoc 和 appstore 两个 Provisioning Profile 文件**。
 
 你也可以在苹果开发者网站查看新的证书文件：
 
-![图片9.png](https://s0.lgstatic.com/i/image6/M01/3E/F7/Cgp9HWCbpfqAKc17AAFyb88k84o360.png)
+<Image alt="图片9.png" src="https://s0.lgstatic.com/i/image6/M01/3E/F7/Cgp9HWCbpfqAKc17AAFyb88k84o360.png"/>
 
 同时还可以看到 Provisioning Profile 文件：
 
-![图片10.png](https://s0.lgstatic.com/i/image6/M00/3E/FF/CioPOWCbpheAOxNSAAFxbPkMv1o580.png)
+<Image alt="图片10.png" src="https://s0.lgstatic.com/i/image6/M00/3E/FF/CioPOWCbpheAOxNSAAFxbPkMv1o580.png"/>
 
 除此之外，你还可以在 Keychain App 里面找到新增的私钥和证书，如下图所示：
 
-![Drawing 9.png](https://s0.lgstatic.com/i/image6/M00/3D/C3/CioPOWCWMyeAQN7wAAOKWo3am2o738.png)
+<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image6/M00/3D/C3/CioPOWCWMyeAQN7wAAOKWo3am2o738.png"/>
 
 #### 下载证书和 Provisioning Profile
 
@@ -273,7 +273,7 @@ end
 
 当我们通过 Ad Hoc 的方式来分发 App 时，必须把需要安装 App 的设备 ID 都添加到设备列表里面，你可以在苹果开发者网站的"Certificates, Identifiers \& Profiles"的 Devices 下查看所有设备信息。如下图所示：
 
-![图片11.png](https://s0.lgstatic.com/i/image6/M00/3E/FF/CioPOWCbpj2AYt-xAAFbLA-2M_0002.png)
+<Image alt="图片11.png" src="https://s0.lgstatic.com/i/image6/M00/3E/FF/CioPOWCbpj2AYt-xAAFbLA-2M_0002.png"/>
 
 但是手工更新设备列表的操作比较麻烦，而且更新完以后还需要再更新 Provisioning Profile。幸运的是 fastlane 能帮我们自动化这些操作，我们把这些操作都封装在`add_device`Lane 里面，具体代码如下：
 

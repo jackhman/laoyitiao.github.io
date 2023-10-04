@@ -2,13 +2,13 @@
 
 先来看几个常见的概念：
 
-![测试1.png](https://s0.lgstatic.com/i/image3/M01/13/7B/Ciqah16f29OAE86BAAEmniG3sQE414.png)
+<Image alt="测试1.png" src="https://s0.lgstatic.com/i/image3/M01/13/7B/Ciqah16f29OAE86BAAEmniG3sQE414.png"/>
 
 上面写了一个 flask demo，这段代码定义了一个 session_handle 方法，我们给它一个 url，即"/session"。首先读取请求，比如我们请求会发一个参数，先通过一个 get 请求发过来，服务器收到之后，然后把几个 session 写进去，之后创建一个服务器的响应，把 session 的内容全都打印出来；接着我们再写一段代码，去给服务器设置一个 cookie，为了表示这是个 cookie，在 cookie 前面加了一个标记 "cookie_"，加上我传的一个参数的名字，这样就可以通过一个 get 请求让服务器既设置 session 又设置 cookie。
 
 我们来看一下对于这样的一个代码，它的响应是什么？完整的代码在这个地方，也就是在服务器里面：
 
-![测试2.png](https://s0.lgstatic.com/i/image3/M01/06/4C/CgoCgV6f2-eADKSNAAI7pBcLbbY475.png)
+<Image alt="测试2.png" src="https://s0.lgstatic.com/i/image3/M01/06/4C/CgoCgV6f2-eADKSNAAI7pBcLbbY475.png"/>
 
 有这样的代码，我们只要请求 session 就可以了，基于这个情况，继续进行对比。
 
@@ -18,7 +18,7 @@
 
 我们看下这两个文件的区别：
 
-![测试3.png](https://s0.lgstatic.com/i/image3/M01/13/7B/Ciqah16f2_6Aa4YEAAbbYYDnx6g884.png)
+<Image alt="测试3.png" src="https://s0.lgstatic.com/i/image3/M01/13/7B/Ciqah16f2_6Aa4YEAAbbYYDnx6g884.png"/>
 
 可以看到，首先都是 get，但 url 不一样，第二个 url 是带有 session 处理功能的；再就是返回的内容不一样，内容长度也不一样，这都是正常的，什么时候出现变化呢？从 set-cookie 开始，可以看到当传入 a=1、b=2 时，服务器设置了 cookie a=1、cookie b =2，设置完后，服务器在响应头里面会增加 set-cookie 的字段；还有一个 Vary Cookie，这是另外一个字段，我们可以先忽略它；再往下还有一个 set-cookie 叫 session，这是一个复杂的字符串标记，从这里可以看到，当设置了 session 存储之后，如果设置了 cookie，那么会通过浏览器原样将 set-cookie 值发给你的浏览器，为什么会出现这样的机制呢？
 
@@ -26,15 +26,15 @@
 
 你可以看到它们的区别，cookie 的核心是它会通过一个独立 cookie 字段传下来，而无论我们设置多少 session，它只会传下来一个 cookie，用一个类似于加密串的东西，来代表存储了它的数据。
 
-![测试4.png](https://s0.lgstatic.com/i/image3/M01/13/7B/Ciqah16f3A6AKYweAAY8z01smgA390.png)
+<Image alt="测试4.png" src="https://s0.lgstatic.com/i/image3/M01/13/7B/Ciqah16f3A6AKYweAAY8z01smgA390.png"/>
 
 那么数据到底存哪了？是加密串里还是服务端？你可以用命令再次执行，比如我们把数据存的非常长，那这个数据会不会发生变化？
 
-![测试5.png](https://s0.lgstatic.com/i/image3/M01/06/4C/CgoCgV6f3BaAATJPAAMf80atzeA754.png)
+<Image alt="测试5.png" src="https://s0.lgstatic.com/i/image3/M01/06/4C/CgoCgV6f3BaAATJPAAMf80atzeA754.png"/>
 
 现在我写了一个 session2，然后把它复制过来，去服务器中看看它与 session 的区别，可以看到，首先由于 cookie 已经设置了，所以这个时候它会发生变化。
 
-![测试6.png](https://s0.lgstatic.com/i/image3/M01/13/7B/Ciqah16f3COAStenAAbwnGtoVp8331.png)
+<Image alt="测试6.png" src="https://s0.lgstatic.com/i/image3/M01/13/7B/Ciqah16f3COAStenAAbwnGtoVp8331.png"/>
 
 再看这个字段，可以看到它设置的 session 大小并没有发生变化，这说明不同的用户访问的时候，session 是不一样的。但是它的数据并没有存到加密串里，是因为它的长度不一样，存的大小东西也不一样，但现在是一模一样，说明数据都存到了服务区，它只不过是把一个加密的关联数据放到这儿了，用来代表关联关系而已。
 
@@ -44,7 +44,7 @@
 
 由于无痕模式的浏览器没有历史记录，所以它是没有 cookie 的。我们换一种方式，把请求换成一次 session，再发一次请求。浏览器跟 curl 命令不太一样，浏览器支持 cookie，可以看到，服务器会返回 cookie_a、cookie_b，以及 session 字段。当拿到消息之后，浏览器里其实就多了两个 cookie、一个 session（一共有 3 个 cookie）。当我们下一次再去访问服务器的时候，哪怕不输入这个网址了，只输入一个首页，甚至首页报错了，在 Headers 信息里面，只要是发送给网站的，浏览器都会自动追加一个 cookie 字段，里面包含了所有的 cookie。我们回到 request，点开这个链接，会发现 cookie 全被带上了，这样其实也很浪费带宽。
 
-![测试7.png](https://s0.lgstatic.com/i/image3/M01/06/4D/CgoCgV6f3FCAJOhrAALJLghJNSc769.png)
+<Image alt="测试7.png" src="https://s0.lgstatic.com/i/image3/M01/06/4D/CgoCgV6f3FCAJOhrAALJLghJNSc769.png"/>
 
 所以根据用户的数据，我们通常都会存到 session 里面，只把一个标记放到客户端，而 session 唯一的 ID 其实是存在 cookie 内的，只要 cookie 带着，那么在服务端根据 cookie 的值，再去取 session 里面存在的数据就可以了。
 
@@ -60,7 +60,7 @@
 
 token 的应用场景比如有开放认证协议、企业微信、GitHub、GitLab 等相关认证。下面以企业微信为例，打开[官网](https://work.weixin.qq.com/api/doc/90000/90135/91039)，找到服务端的 API，它里面有个内容，即获取 token。接下来展示如何获取 token？
 
-![测试8.png](https://s0.lgstatic.com/i/image3/M01/06/4D/CgoCgV6f3HWAFMFwAAQTS6oVITo864.png)
+<Image alt="测试8.png" src="https://s0.lgstatic.com/i/image3/M01/06/4D/CgoCgV6f3HWAFMFwAAQTS6oVITo864.png"/>
 
 获取 token 是调用企业微信 API 接口的第 1 步，调查接口都需要使用 token，这相当于创立了一个登录的凭证。从这个意义上看，token 有点类似于我们古代出城用的令牌，要想获取 token，需要你拿到企业 ID 的加密内容，也就是有个认证，然后可以在后台进行配置。拿着 corpid 和 corpsecret 这两个去申请，发起请求之后，服务器就会生成一个 token，不过它会过期，比如两小时之后，此时我会加一个标记，过期后再次申请就可以了，这样就避免了 cookie 长期被使用。
 
@@ -72,7 +72,7 @@ token 的应用场景比如有开放认证协议、企业微信、GitHub、GitLa
 
 还有一些是不太需要过期的，以 GitHub 为例，当我们访问该网站的时候，在 GitHub 后台有一个 Settings，它里面有一个开发者设置，该设置里面有一个 Personal access token，它也会有一个 token 机制，那么 token 是用来做什么的？当你要以 API 的形式进行访问时，需要有一个认证，也就是需要知道你是谁，在生成认证的时候，会发现它这儿需要你填一个东西，比如我们这次填的是 hogwards2020。
 
-![测试9.png](https://s0.lgstatic.com/i/image3/M01/13/7C/Ciqah16f3IWAJW4RAAL-uCQbX4g904.png)
+<Image alt="测试9.png" src="https://s0.lgstatic.com/i/image3/M01/13/7C/Ciqah16f3IWAJW4RAAL-uCQbX4g904.png"/>
 
 再往下会有一个权限和认证机制，比如 token 是否能访问这几个接口，写完之后保存并点击一下，否则会丢失，这样就可以生成一个新的 token 了。由于 GitHub 足够保密，所以不需要有过期机制，这个 token 可以长期使用。类似这种就不需要再去动态申请了，只需要在客户端的后台有一个地方去生成 token 就可以了。
 

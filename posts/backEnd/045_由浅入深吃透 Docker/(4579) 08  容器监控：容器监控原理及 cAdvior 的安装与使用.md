@@ -69,7 +69,7 @@ $ docker run \
 
 此时，cAdvisor 已经成功启动，我们可以通过访问 <http://localhost:8080> 访问到 cAdvisor 的 Web 界面。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/56/18/Ciqc1F9rCXSAQEwLAADKlh0at8o307.png)  
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/56/18/Ciqc1F9rCXSAQEwLAADKlh0at8o307.png"/>  
 图1 cAdvisor 首页
 
 cAdvisor 不仅可以监控容器的资源使用情况，还可以监控主机的资源使用情况。下面我们就先看下它是如何查看主机资源使用情况的。
@@ -78,19 +78,19 @@ cAdvisor 不仅可以监控容器的资源使用情况，还可以监控主机�
 
 访问 <http://localhost:8080/containers/> 地址，在首页可以看到主机的资源使用情况，包含 CPU、内存、文件系统、网络等资源，如下图所示。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/56/23/CgqCHl9rCX2ANrtaAADIGkeKKPc100.png)  
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/56/23/CgqCHl9rCX2ANrtaAADIGkeKKPc100.png"/>  
 图2 主机 CPU 使用情况
 
 #### 使用 cAdvisor 查看容器监控
 
 如果你想要查看主机上运行的容器资源使用情况，可以访问 <http://localhost:8080/docker/>，这个页面会列出 Docker 的基本信息和运行的容器情况，如下图所示。
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/56/18/Ciqc1F9rCZyAN8hYAAGAOL1FGcg401.png)  
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/56/18/Ciqc1F9rCZyAN8hYAAGAOL1FGcg401.png"/>  
 图3 Docker 容器
 
 在上图中的 Subcontainers 下会列出当前主机上运行的所有容器，点击其中一个容器即可查看该容器的详细运行状态，如下图所示。
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/56/23/CgqCHl9rCaWAVSLVAAGGy2lTMqY130.png)  
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/56/23/CgqCHl9rCaWAVSLVAAGGy2lTMqY130.png"/>  
 图4 容器监控状态
 
 总体来说，使用 cAdvisor 监控容器具有以下特点：

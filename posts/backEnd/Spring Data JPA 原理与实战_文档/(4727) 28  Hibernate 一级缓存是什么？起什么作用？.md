@@ -67,7 +67,7 @@ public class EntityUniqueKey implements Serializable {
 
 我们用一张图来表示，如下所示。
 
-![image (2).png](https://s0.lgstatic.com/i/image/M00/8B/04/Ciqc1F_bHCyAUu5UAACWL1LulDM631.png)  
+<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/8B/04/Ciqc1F_bHCyAUu5UAACWL1LulDM631.png"/>  
 注：图片来源于网络
 
 对于实体 1 来说，新增和更新操作都是先进行一级缓存，只有 flush 的时候才会同步到数据库里面。而当我们执行了 entityManager.clean() 或者是 entityManager.detach(entity1)，那么实体 1 就会变成游离状态，这时再对实体 1 进行修改，如果再执行 flush 的话，就不会同步到 DB 里面了。我们用代码来说明一下，如下所示。
@@ -213,11 +213,11 @@ public interface UserInfoRepository extends JpaRepository<UserInfo, Long> {
 
 当项目启动成功之后你会发现，通过 @Query 定义的 nativeQuery=false 的 JPQL，会在启动成功之后预先放在 QueryPlanCache 里面，我们设置一个断点就可以看到如下内容。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image2/M01/02/2B/CgpVE1_Z3dOAL3LeAAQ5bROVfnw790.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image2/M01/02/2B/CgpVE1_Z3dOAL3LeAAQ5bROVfnw790.png"/>
 
 发现里面 parameterMetadataCache 是空的，也就是没有放置 nativeQuery=true 的 Query SQL，并且可以看到我们在方法里面定义的其他三个 @Query 的 JPQL 解析过程。那么我们打开第一个详细看一下，如下图所示。
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image2/M01/02/2B/CgpVE1_Z3dmAPB5bAAKvPbM8_1U786.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image2/M01/02/2B/CgpVE1_Z3dmAPB5bAAKvPbM8_1U786.png"/>
 
 你会发现一个 QueryPlanCache 还是能存挺多东西的：navtive sql、参数、return 等各种 metadata。也可以看出一个简单的 JPQL 查询会有些占用堆内存，所以如果是复杂点的项目，各种查询的 JPQL 多一点的话，启动所需要的最小堆内存会占用 300M、400M 的空间，这是正常现象。
 
@@ -230,11 +230,11 @@ userInfoRepository.findByName("jack");
 
 然后通过断点就会发现 QueryPlanCache 里面多了两个 Cache，如下图所示。
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image2/M01/02/2A/Cip5yF_Z3eCAeweyAAFrt_Cy4Fw449.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image2/M01/02/2A/Cip5yF_Z3eCAeweyAAFrt_Cy4Fw449.png"/>
 
 同时，parameterMetadataCache 里面就会多一条 key/value的nativeQuery=true 的解析记录，如下图所示。
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image2/M01/02/2B/CgpVE1_Z3eaAOrDUAAJ8yCqnbQI709.png)
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image2/M01/02/2B/CgpVE1_Z3eaAOrDUAAJ8yCqnbQI709.png"/>
 
 通过上面的案例讲解，相信你已经清楚了 QueryPlanCache 的概念，总结起来就是，QueryPlanCache 用来存储的 JQPL 或者 SQL 的 Metadata 信息，从而提升了 Hibernate 执行 JPQL 的性能，因为只有第一次需要把 JPQL 转化成 SQL，后面的每次操作就可以直接从 HashMap 中找到对应的 SQL，直接执行就可以了。
 
@@ -244,11 +244,11 @@ userInfoRepository.findByName("jack");
 
 我们通过查看源码会发现，在 SessionFactoryImpl 的构造方法里面会 new QueryPlanCache(...)，关键源码如下。
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image2/M01/02/2B/CgpVE1_Z3e6APucVAAH8SpvcdMQ168.png)
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image2/M01/02/2B/CgpVE1_Z3e6APucVAAH8SpvcdMQ168.png"/>
 
 说明这个 application 只需要创建一次 QueryPlanCache，整个项目周期是单例的，也就是可以被不同的 Session 共享，那么我们可以查看 Session 的关键源码，如下图所示。
 
-![Drawing 6.png](https://s0.lgstatic.com/i/image2/M01/02/2A/Cip5yF_Z3feAeEqeAAMBOQfm2s8156.png)
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image2/M01/02/2A/Cip5yF_Z3feAeEqeAAMBOQfm2s8156.png"/>
 
 也就是说，每一个 SessionImpl 的实例在获得 query plan 之前，都会去同一个 QueryPlanCache 里面查询一下 JPQL 对应的执行计划。所以我们可以看得出来 QueryPlanCache 和 Session 的关系有如下几点。
 
@@ -264,11 +264,11 @@ userInfoRepository.findByName("jack");
 
 我们在实际的工作中使用 JPA 的时候，会发现其内存越来越大，而不会被垃圾回收机制给回收掉，现象就是堆内存随着时间的推移使用量越来越大，如下图所示，很明显是内存泄漏的问题。
 
-![Drawing 7.png](https://s0.lgstatic.com/i/image2/M01/02/2B/CgpVE1_Z3f6AJ3zkAAA0cwikRBI522.png)
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image2/M01/02/2B/CgpVE1_Z3f6AJ3zkAAA0cwikRBI522.png"/>
 
 而我们把堆栈拿出来分析的话会发现，其实是 Hibernate 的 QueryPlanCache 占用了大量的内存，如下图所示。
 
-![Drawing 8.png](https://s0.lgstatic.com/i/image2/M01/02/2A/Cip5yF_Z3gOAAypLAAH1VLcPqOU952.png)
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image2/M01/02/2A/Cip5yF_Z3gOAAypLAAH1VLcPqOU952.png"/>
 
 我们点开仔细看的话，发现大部分都是某些 In 相关的 SQL 语句。这就是我们常见的 In 查询引起的内存泄漏，那么为什么会发生这种现象呢？
 
@@ -295,7 +295,7 @@ public List<UserInfo> getUserInfos(List<String> urls) {
 
 我们 debug 看一下 QueryPlanCache 里面的情况，会发现随着 In 查询条件的个数增加，会生成不同的 QueryPlanCache，如下图所示，分别是 1 个参数、3 个参数、6个参数的情况。
 
-![Drawing 9.png](https://s0.lgstatic.com/i/image2/M01/02/2B/CgpVE1_Z3guAcgqyAAILGhMwzQg748.png)
+<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image2/M01/02/2B/CgpVE1_Z3guAcgqyAAILGhMwzQg748.png"/>
 
 从图中我们可以想象一下，如果业务代码中有各种 In 的查询操作，不同的查询条件的个数肯定在大部分场景中也是不一样的，甚至有些场景我们能一下查询到几百个 ID 对应的数据，可想而知，那得生成多少个 In 相关的 QueryPlanCache 呀。
 
@@ -327,7 +327,7 @@ spring.jpa.properties.hibernate.query.in_clause_parameter_padding=true
 
 也就是说，当 In 的时候，参数个数会对应归并 QueryPlanCache 变成 1、2、4、8、16、32、64、128 个参数的 QueryPlanCache。那么我们再看一下刚才参数个数分别在 1、3、4、5、6、7、8 个的时候生成 QueryPlanCache 的情况，如下图所示。
 
-![Drawing 10.png](https://s0.lgstatic.com/i/image2/M01/02/2B/CgpVE1_Z3hWAGkLbAAH30LPJHmA137.png)
+<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image2/M01/02/2B/CgpVE1_Z3hWAGkLbAAH30LPJHmA137.png"/>
 
 我们会发现，In 产生个数是 1 个的时候，它会共享参数为 1 个的 QueryPlanCache；而当参数是 3、4 个 In 参数的时候，它就会使用 4 个参数的 QueryPlanCache；以此类推，当参数是 5、6、7、8 个的时候，会使用 8 个参数的 QueryPlanCache......这种算法可以大大地减少 In 的不同查询参数生成的 QueryPlanCache 个数，占用的内存自然会减少很多。
 

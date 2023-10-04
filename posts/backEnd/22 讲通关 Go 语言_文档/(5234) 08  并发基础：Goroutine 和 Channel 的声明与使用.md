@@ -47,7 +47,7 @@ defer 有一个调用栈，越早定义越靠近栈的底部，越晚定义越�
 
 在操作系统中，进程是一个非常重要的概念。当你启动一个软件（比如浏览器）的时候，操作系统会为这个软件创建一个进程，这个进程是该软件的工作空间，它包含了软件运行所需的所有资源，比如内存空间、文件句柄，还有下面要讲的线程等。下面的图片就是我的电脑上运行的进程：
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/70/AE/CgqCHl-7fwyAdSu_AADl16erQwg589.png)  
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/70/AE/CgqCHl-7fwyAdSu_AADl16erQwg589.png"/>  
 （电脑运行的进程）
 
 那么线程是什么呢？
@@ -164,7 +164,7 @@ cacheCh:=make(chan int,5)
 
 我创建了一个容量为 5 的 channel，内部的元素类型是 int，也就是说这个 channel 内部最多可以存放 5 个类型为 int 的元素，如下图所示：
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/70/AE/CgqCHl-7fzmAVLu0AACSjW-neAE188.png)  
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/70/AE/CgqCHl-7fzmAVLu0AACSjW-neAE188.png"/>  
 （有缓冲 channel）
 
 一个有缓冲 channel 具备以下特点：
@@ -288,7 +288,7 @@ func downloadFile(chanName string) string {
 
 在 Go 语言中，提倡通过通信来共享内存，而不是通过共享内存来通信，其实就是提倡通过 channel 发送接收消息的方式进行数据传递，而不是通过修改同一个变量。所以在**数据流动、传递的场景中要优先使用 channel，它是并发安全的，性能也不错。**
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/70/AF/CgqCHl-7f1eAOkA5AAUt2ZtY7Ec582.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/70/AF/CgqCHl-7f1eAOkA5AAUt2ZtY7Ec582.png"/>
 
 到这里就要结束今天的课程了，本节课留个思考题，猜一猜 channel 是怎么做到并发安全的？
 

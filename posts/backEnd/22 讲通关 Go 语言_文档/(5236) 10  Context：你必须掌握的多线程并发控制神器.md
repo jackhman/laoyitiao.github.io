@@ -180,7 +180,7 @@ Context 接口的四个方法中最常用的就是 Done 方法，它返回一个
 
 从下图 Context 的衍生树可以看到，最顶部的是空 Context，它作为整棵 Context 树的根节点，在 Go 语言中，可以通过 context.Background() 获取一个根节点 Context。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/72/D3/CgqCHl_EyHOARbBqAAKzKmhclWo807.png)  
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/72/D3/CgqCHl_EyHOARbBqAAKzKmhclWo807.png"/>  
 （四种 Context 的衍生树）
 
 有了根节点 Context 后，这颗 Context 树要怎么生成呢？需要使用 Go 语言提供的四个函数。
@@ -217,7 +217,7 @@ go func() {
 
 以上示例中的 Context 没有子 Context，如果一个 Context 有子 Context，在该 Context 取消时会发生什么呢？下面通过一幅图说明：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/72/C7/Ciqc1F_EyIyAAO_TAADuPjzGt5U321.png)  
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/72/C7/Ciqc1F_EyIyAAO_TAADuPjzGt5U321.png"/>  
 （Context 取消）
 
 可以看到，当节点 Ctx2 取消时，它的子节点 Ctx4、Ctx5 都会被取消，如果还有子节点的子节点，也会被取消。也就是说根节点为 Ctx2 的所有节点都会被取消，其他节点如 Ctx1、Ctx3 和 Ctx6 则不会。
@@ -279,7 +279,7 @@ Context 是一种非常好的工具，使用它可以很方便地控制取消多
 
 Context 通过 With 系列函数生成 Context 树，把相关的 Context 关联起来，这样就可以统一进行控制。一声令下，关联的 Context 都会发出取消信号，使用这些 Context 的协程就可以收到取消信号，然后清理退出。你在定义函数的时候，如果想让外部给你的函数发取消信号，就可以为这个函数增加一个 Context 参数，让外部的调用者可以通过 Context 进行控制，比如下载一个文件超时退出的需求。
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image/M00/72/C8/Ciqc1F_EyKiAUdQMAAVK80mD2bY940.png)
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/72/C8/Ciqc1F_EyKiAUdQMAAVK80mD2bY940.png"/>
 
 这节课的最后留一个思考题给你：假如一个用户请求访问我们的网站，如何通过 Context 实现日志跟踪？先自己想想，下节课我会揭晓思路。
 

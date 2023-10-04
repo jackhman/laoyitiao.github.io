@@ -38,7 +38,7 @@ Flutter 中的生命周期，包含以下几个阶段：
 
 * **dispose** ，永久移除组件，并释放组件资源。
 
-![image (7).png](https://s0.lgstatic.com/i/image/M00/26/D4/CgqCHl7zAM2AFYCOAAFd30sb1Ck089.png)  
+<Image alt="image (7).png" src="https://s0.lgstatic.com/i/image/M00/26/D4/CgqCHl7zAM2AFYCOAAFd30sb1Ck089.png"/>  
 
 图 1 生命周期流程图
 
@@ -187,7 +187,7 @@ const bool kReleaseMode = bool.fromEnvironment('dart.vm.product', defaultValue: 
 
 setState 比较容易理解，在数据状态进行变化时，触发组件 build ，在上面的代码运行后的界面中，点击中间的页面提示如图 2 位置，就可以看到在调用 setState 后，会调用 build 一个方法。
 
-![image (8).png](https://s0.lgstatic.com/i/image/M00/26/D4/CgqCHl7zAQmAWvyUAAE_mgzi5xE933.png)  
+<Image alt="image (8).png" src="https://s0.lgstatic.com/i/image/M00/26/D4/CgqCHl7zAQmAWvyUAAE_mgzi5xE933.png"/>  
 
 图 2 测试组件运行界面
 
@@ -291,7 +291,7 @@ flutter: sub build
 
 为了验证上面逻辑，我们现在再次点击图 3 中的红色部分，来触发 TestStatefulWidget 组件的 build ，看下是否会触发子组件的 didUpdateWidget 和 build。
 
-![image (9).png](https://s0.lgstatic.com/i/image/M00/26/D4/CgqCHl7zATCAcLoKAAEryO5AHrk427.png)  
+<Image alt="image (9).png" src="https://s0.lgstatic.com/i/image/M00/26/D4/CgqCHl7zATCAcLoKAAEryO5AHrk427.png"/>  
 
 图 3 增加子组件界面点击指示图
 
@@ -604,7 +604,7 @@ sh format_check.sh
 
 检查后，如果有问题则修复，没有问题，再选择手机模拟器运行该项目，既可以看到如下图 2 动态效果了。
 
-![20200610_140500-2.gif](https://s0.lgstatic.com/i/image/M00/26/D4/CgqCHl7zAWyAf3hFAAt1uKBbpwY045.gif)  
+<Image alt="20200610_140500-2.gif" src="https://s0.lgstatic.com/i/image/M00/26/D4/CgqCHl7zAWyAf3hFAAt1uKBbpwY045.gif"/>  
 
 图 2 增加动态时间显示
 

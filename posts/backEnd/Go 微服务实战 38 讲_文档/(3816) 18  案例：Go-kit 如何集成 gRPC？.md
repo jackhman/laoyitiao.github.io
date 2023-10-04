@@ -22,7 +22,7 @@ Go-kit 框架可以和 gRPC 结合使用，将 RPC 作为传输层的组件，�
 
 gRPC 请求的处理过程如下图所示，服务端接收到一个客户端请求后，交由 grpc_transport.Handler 处理，它会调用 DecodeRequestFunc 进行解码，然后交给其 Endpoint 层转换为 Service 层能处理的对象，将返回值通过 EncodeResponseFunc 编码，最后返回给客户端。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/47/A5/CgqCHl9InuGAYQa8AABJDed6WN0517.png)  
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/47/A5/CgqCHl9InuGAYQa8AABJDed6WN0517.png"/>  
 Go-kit 过程调用示意图
 
 接下来，我们就按照上述的流程，实现通过 Go-kit 进行 gRPC 调用。
@@ -109,7 +109,7 @@ func EncodeLoginResponse(_ context.Context, r interface{}) (interface{}, error) 
 
 这样做的好处有两点：一是 LoginRequest 和 LoginResponse 是通过 gRPC 生成的，属于 Transport 层，Endpoint 层不需要感知，后续如果技术选型变化了，需要将 gRPC 替换成 Thrift 时就可以只处理 Transport 层的变化，让变更最小化（如下图）；二是后端业务处理时的属性类型和返回给前端的数据属性类型不一定完全一样，比如上述代码中 LoginResult 中的 Ret 是 bool 类型，而返回给前端的 LoginResponse 中 Ret 是 string 类型，从而实现兼容性。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/47/9A/Ciqc1F9InySAYF-DAAAPcyoNePo946.png)  
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/47/9A/Ciqc1F9InySAYF-DAAAPcyoNePo946.png"/>  
 Go-kit 分层示意图
 
 <br />

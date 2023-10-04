@@ -4,43 +4,43 @@
 
 有时候为了调试方便，我们甚至会将用户的账号、密码、余额等信息也打印到控制台，但是如果这部分 Log 信息也出现在线上版本中，那用户的私密信息，或者程序相关核心实现都会被暴露；除此之外，打印日志的代码并不属于业务需求的必要代码，复杂的 Log 信息还会造成一定的性能损耗，所以这部分代码都不应该出现在线上版本的 App 中。因此我们需要设置一个开关来控制是否打印 Log 日志，只有在 Debug 版本才会打开此开关，如图所示：
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/2B/32/Ciqc1F79yuOAKRc0AACn5J73xWc380.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/2B/32/Ciqc1F79yuOAKRc0AACn5J73xWc380.png"/>
 
 通常情况下我们会使用 BuildConfig.DEBUG 来作为是否要打印日志的开关。但是使用这个变量具有一定的局限性。比如现场突然发现一个异常现象，而我们需要现场抓取异常的日志信息加以分析。因为是 release 版本，所有不会有任何 log 信息被打印。因此这个开关的设置最好具有一定的灵活性，比如可以再加一层 System Property 的设置，如图所示：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/2B/32/Ciqc1F79yuuASf4RAAEC0G7d1i8786.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/2B/32/Ciqc1F79yuuASf4RAAEC0G7d1i8786.png"/>
 
 上述代码打印结果如下所示：
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/2B/32/Ciqc1F79yvGAWzgGAAAydEsKlLQ971.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/2B/32/Ciqc1F79yvGAWzgGAAAydEsKlLQ971.png"/>
 
 使用 System Property 的好处是一旦设置之后，即使重启 App，System Property 中的变量依旧是设置之后的值，与 Android 中的 SharedPreference 非常相似。开发者只要定义好通过何种方式将这种属性打开即可，建议仿照 Android 系统设置中的"开发者选项"来实现，当用户快速连续点击某 item 时，才将此属性打开。
 
 另外，我们还可以通过 ProGuard 在打包阶段清除某些 Log 日志、打印代码，具体规则如下：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/2B/3D/CgqCHl79yviAcvLDAABHPRbfCl0210.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/2B/3D/CgqCHl79yviAcvLDAABHPRbfCl0210.png"/>
 
 ### 设置 log 日志本地保存
 
 有时候我们需要将部分 log 日志以文件的形式保存在手机磁盘中，因此我们还需要设置开关，控制日志是打印在控制台还是保存到文件中。如下所示：
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image/M00/2B/32/Ciqc1F79ywGAUMaFAAHDevPE_DI210.png)
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/2B/32/Ciqc1F79ywGAUMaFAAHDevPE_DI210.png"/>
 
 因为涉及文件的写操作，所以最好是在子线程中完成日志的保存。因此在 LogUtils 中可以使用线程池控制子线程完成日志保存，如下所示：
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image/M00/2B/3D/CgqCHl79ywiAETP_AAI_AuTvNC0527.png)
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/2B/3D/CgqCHl79ywiAETP_AAI_AuTvNC0527.png"/>
 
 ### Config 文件统一配置
 
 如果 LogUtils 中的开关较多，再加上还有其他配置项，比如日志保存为文件的路径等。这种情况可以使用一个全局的 Config 来配置 LogUtils 中所有的配置项，如下所示：
 
-![Drawing 6.png](https://s0.lgstatic.com/i/image/M00/2B/32/Ciqc1F79yxCAZsaGAALTVgPeDRg031.png)
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/2B/32/Ciqc1F79yxCAZsaGAALTVgPeDRg031.png"/>
 
 #### 特殊格式转换
 
 我们经常会处理一些特殊格式的数据，比如 JSON、XML。为了打印这部分数据，还需要在 LogUtils 类中做一些格式转换的操作：
 
-![Drawing 7.png](https://s0.lgstatic.com/i/image/M00/2B/3D/CgqCHl79yxmAaF8EAAKcSdHKQ3Y185.png)
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/2B/3D/CgqCHl79yxmAaF8EAAKcSdHKQ3Y185.png"/>
 
 #### 借助于三方库打印 log
 
@@ -70,19 +70,19 @@ XLog 是比较常用的打印日志开源库，GitHub 地址参考 [XLog github]
 
 XLog 使用比较简单，先调用 init 方法进行初始化，最好是在 Application 中。
 
-![Drawing 8.png](https://s0.lgstatic.com/i/image/M00/2B/32/Ciqc1F79yyOAXOcKAAFJcacSgv8868.png)
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/2B/32/Ciqc1F79yyOAXOcKAAFJcacSgv8868.png"/>
 
 然后就可以直接调用 Xlog 的静态方法打印相应日志即可：
 
-![Drawing 9.png](https://s0.lgstatic.com/i/image/M00/2B/3D/CgqCHl79yyqATI2zAACuVSGDEV8600.png)
+<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/2B/3D/CgqCHl79yyqATI2zAACuVSGDEV8600.png"/>
 
 也可以在打印日志时，添加局部的配置信息：
 
-![Drawing 10.png](https://s0.lgstatic.com/i/image/M00/2B/3D/CgqCHl79yzmAZ3OIAABv32_jBIU173.png)
+<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image/M00/2B/3D/CgqCHl79yzmAZ3OIAABv32_jBIU173.png"/>
 
 打印结果类似下图所示：
 
-![Drawing 11.png](https://s0.lgstatic.com/i/image/M00/2B/32/Ciqc1F79yz-AQZIZAADeZb8f9-Y734.png)
+<Image alt="Drawing 11.png" src="https://s0.lgstatic.com/i/image/M00/2B/32/Ciqc1F79yz-AQZIZAADeZb8f9-Y734.png"/>
 
 可以看出，除了打印日志的类和方法，XLog 还能打印线程信息以及调用栈信息。
 

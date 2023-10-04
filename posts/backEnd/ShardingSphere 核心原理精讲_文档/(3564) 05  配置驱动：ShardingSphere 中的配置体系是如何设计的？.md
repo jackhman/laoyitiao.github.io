@@ -8,7 +8,7 @@
 
 例如上一课时中使用的"ds${0..1}.user${0..1}"就是一个行表达式，用来设置可用的数据源或数据表名称。基于行表达式语法，${begin..end} 表示的是一个从"begin"到"end"的范围区间，而多个 ${expression} 之间可以用"."符号进行连接，代表多个表达式数值之间的一种笛卡尔积关系。这样，如果采用图形化的表现形式，"ds${0..1}.user${0..1}"表达式最终会解析成这样一种结果：
 
-![image (4).png](https://s0.lgstatic.com/i/image/M00/28/F9/CgqCHl75rReAY_fbAACRt1sYKS0524.png)
+<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/28/F9/CgqCHl75rReAY_fbAACRt1sYKS0524.png"/>
 
 当然，类似场景也可以使用枚举的方式来列举所有可能值。行表达式也提供了 ${\[enum1, enum2,..., enumx\]} 语法来表示枚举值，所以"ds${0..1}.user${0..1}"的效果等同于"ds${\[0,1\]}.user${\[0,1\]}"。
 
@@ -26,7 +26,7 @@
 
 ShardingRuleConfiguration 中所需要配置的规则比较多，我们可以通过一张图例来进行简单说明，在这张图中，我们列举了每个配置项的名称、类型以及个数关系：
 
-![image (5).png](https://s0.lgstatic.com/i/image/M00/28/EE/Ciqc1F75rTaADRO6AAD5MCLrohA562.png)
+<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/28/EE/Ciqc1F75rTaADRO6AAD5MCLrohA562.png"/>
 
 这里引入了一些新的概念，包括绑定表、广播表等，这些概念在下一课时介绍到 ShardingSphere 的分库分表操作时都会详细展开，这里不做具体介绍。**事实上，对于 ShardingRuleConfiguration 而言，必须要设置的只有一个配置项，即 TableRuleConfiguration。**
 
@@ -54,7 +54,7 @@ keyGeneratorConfig 代表分布式环境下的自增列生成器配置，Shardin
 
 我们注意到，databaseShardingStrategyConfig 和 tableShardingStrategyConfig 的类型都是一个 ShardingStrategyConfiguration 对象。在 ShardingSphere 中，ShardingStrategyConfiguration 实际上是一个空接口，存在一系列的实现类，其中的每个实现类都代表一种分片策略：
 
-![3.png](https://s0.lgstatic.com/i/image/M00/28/FA/CgqCHl75rUiACYZ1AAA8JV6ve54396.png)  
+<Image alt="3.png" src="https://s0.lgstatic.com/i/image/M00/28/FA/CgqCHl75rUiACYZ1AAA8JV6ve54396.png"/>  
 
 　ShardingStrategyConfiguration 的类层结构图
 
@@ -350,7 +350,7 @@ public final class YamlShardingDataSourceFactory {
 
 可以看到 createDataSource 方法的输入参数是一个 File 对象，我们通过这个 File 对象构建出 YamlRootShardingConfiguration 对象，然后再通过 YamlRootShardingConfiguration 对象获取了 ShardingRuleConfiguration 对象，并交由 ShardingDataSourceFactory 完成目标 DataSource 的构建。这里的调用关系有点复杂，我们来梳理整个过程的类层结构，如下图所示：
 
-![image (6).png](https://s0.lgstatic.com/i/image/M00/28/F0/Ciqc1F75rqaAGL8qAABR8QxogB0683.png)
+<Image alt="image (6).png" src="https://s0.lgstatic.com/i/image/M00/28/F0/Ciqc1F75rqaAGL8qAABR8QxogB0683.png"/>
 
 显然，这里引入了两个新的工具类，YamlEngine 和 YamlSwapper。我们来看一下它们在整个流程中起到的作用。
 

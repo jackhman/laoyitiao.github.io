@@ -305,7 +305,7 @@ void dispose() {
 
 为了验证效果，使用了一个 [github 上创建的测试页面](https://love-flutter.github.io/test-page/index.html)。接下来我们运行下程序，然后在手机模拟器中打开测试页面，可以看到如图 1 所示的效果。
 
-![1.gif](https://s0.lgstatic.com/i/image/M00/2F/E1/Ciqc1F8IDbaAIpJ7AESu3z7EomU793.gif)  
+<Image alt="1.gif" src="https://s0.lgstatic.com/i/image/M00/2F/E1/Ciqc1F8IDbaAIpJ7AESu3z7EomU793.gif"/>  
 图 1 Scheme 实现运行效果
 
 以上就实现了 Scheme 可以直接在内外部使用的跳转逻辑。不过 Scheme 在 App 外部存在一些体验方面的问题，比如：

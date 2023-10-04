@@ -4,7 +4,7 @@
 
 从本课时开始，我们将开始介绍 SkyWalking OAP 服务。OAP 与 Agent 类似，也采用了微内核架构（Microkernel Architecture），如下图所示。
 
-![image.png](https://s0.lgstatic.com/i/image/M00/08/09/CgqCHl66RCiAJ3mTAAHxQQrh8Cg825.png)
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/08/09/CgqCHl66RCiAJ3mTAAHxQQrh8Cg825.png"/>
 
 OAP 使用 ModuleManager（组件管理器）管理多个 Module（组件），一个 Module 可以对应多个 ModuleProvider（组件服务提供者），ModuleProvider 是 Module 底层真正的实现。  
 
@@ -14,7 +14,7 @@ ApplicationConfiguration（应用配置对象） 负责管理整个 OAP 的配�
 
 ModuleConfiguration 负责管理一个 Module 的配置信息，ModuleConfiguration 与 Module 是一一对应关系。ModuleConfiguration 中包含多个 ProviderConfiguration（服务提供者配置对象）。ProviderConfiguration 负责管理一个 ModuleProvider 的配置信息，两者也是一一对应的关系。上面两组对象之间的映射关系，如下图所示：
 
-![image (1).png](https://s0.lgstatic.com/i/image/M00/08/0A/Ciqc1F66RO-ANDsBAADxvp0EW2Q875.png)
+<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/08/0A/Ciqc1F66RO-ANDsBAADxvp0EW2Q875.png"/>
 
 在之前搭建 SkyWalking 源码环境的课时中我们看到，OAPServerStartUp 类的 main() 方法是整个 OAP 服务的入口方法，其核心逻辑如下：
 
@@ -46,7 +46,7 @@ public static void main(String[] args) {
 
 OAP 启动时会使用 ApplicationConfigLoader 加载 application.yml 配置文件，该文件位于 server-starter 子模块的 resources 目录下，如下图所示：
 
-![image (2).png](https://s0.lgstatic.com/i/image/M00/08/0B/Ciqc1F66RQuAKLYRAAB7aXtA8Vc434.png)
+<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/08/0B/Ciqc1F66RQuAKLYRAAB7aXtA8Vc434.png"/>
 
 application.yml 配置文件中包含了整个 OAP 服务中全部 Module 的配置信息，后面在介绍一个 Module 的时候会展示相应的配置信息。
 
@@ -54,7 +54,7 @@ application.yml 配置文件中包含了整个 OAP 服务中全部 Module 的配
 
 在 ModuleConfiguration 中只维护了一个 HashMap\<String, ProviderConfiguration\> 集合（providers 字段）记录了 ModuleProvider 名称与相应配置对象。在 ProviderConfiguration 中只有一个 Properties 集合（properties 字段），存储了 application.yml 中 KV 配置信息。下图所示 core Module 对应的 ModuleConfiguration 以及它下面 default ModuleProvider 对应的 ProviderConfiguration：
 
-![ModuleDefine继承图.png](https://s0.lgstatic.com/i/image/M00/08/0B/CgqCHl66RRSAMwsQAACTJig2rOc013.png)
+<Image alt="ModuleDefine继承图.png" src="https://s0.lgstatic.com/i/image/M00/08/0B/CgqCHl66RRSAMwsQAACTJig2rOc013.png"/>
 
 完成 application.yml 配置文件的读取之后，会紧接着调用 overrideConfigBySystemEnv() 方法读取 System.getProperties() 集合，并覆盖从 application.yml 读取到的相应默认值。
 
@@ -115,7 +115,7 @@ public void init(ApplicationConfiguration applicationConfiguration){
 
 通过对 ModuleManager 的分析我们知道，ModuleDefine 的实现类是通过 SPI 方式被加载到内存的，这些实现类分散在不同的插件模块中，下图展示了 OAP 服务中几个核心插件模块的 ModuleDefine 实现类：
 
-![image (3).png](https://s0.lgstatic.com/i/image/M00/08/0B/CgqCHl66RSyAasXnAAxKC1wvreU269.png)
+<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/08/0B/CgqCHl66RSyAasXnAAxKC1wvreU269.png"/>
 
 上图 ModuleDefine 实现类后面的课程会逐个分析，先来看 ModuleDefine 抽象类本身，其中有两个字段：
 
@@ -128,7 +128,7 @@ private final LinkedList<ModuleProvider> loadedProviders = new LinkedList<>();
 
 每个 Module 都有一个全局唯一的名称，通过前面对配置初始化的介绍我们了解到，ModuleManager 会通过 Module 名称在 application.yml 配置文件中查找相应的配置信息。下图展示了核心 Module 对应的名称：
 
-![image (4).png](https://s0.lgstatic.com/i/image/M00/08/0B/Ciqc1F66RTOAc7l_AAGhZ9L9Cqc865.png)
+<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/08/0B/Ciqc1F66RTOAc7l_AAGhZ9L9Cqc865.png"/>
 
 在 ModuleDefine.prepare() 方法中，会查找与当前 Module 配置的 ModuleProvider 实现，然后记录到 loadedProviders 集合中。随后会继续调用这些 ModuleProvider 对象的 prepare() 方法，继续准备操作：
 
@@ -198,18 +198,18 @@ public interface ModuleServiceHolder {
 
 与 ModuleDefine 实现类相同，ModuleProvider 的实现类也是通过 SPI 方式被加载的，下图展示了 OAP 服务中几个核心插件模块的 ModuleProvider 实现类：
 
-![CoreModuleProvider.png](https://s0.lgstatic.com/i/image/M00/08/0B/Ciqc1F66RUuAOOobAADhJDK8Z_Q834.png)
+<Image alt="CoreModuleProvider.png" src="https://s0.lgstatic.com/i/image/M00/08/0B/Ciqc1F66RUuAOOobAADhJDK8Z_Q834.png"/>
 
 除了 ModuleServiceHolder 接口中的这两个关键方法之外，ModuleProvider 中还定义了一些通用的抽象方法：
 
 * **name() 方法**：返回当前 ModuleProvider 的名称，该名称在同一个 Module 下是唯一的。例如，StorageModule 负责实现 OAP 的持久化存储功能，Module 名称为 "storage"，具体依赖的底层存储可以是 ElasticSearch、H2 等，分别对应StorageModuleElasticsearchProvider、H2StorageProvider 两个 ModuleProvider 实现类，ModuleProvider 名称分别是 "elasticsearch" 和 "h2"。
 * **createConfigBeanIfAbsent() 方法**: 返回当前 ModuleProvider 对应的 ModuleConfig 对象。ModuleConfig 是一个空的抽象类，其实现类都是用于存储配置信息的 Java Bean。下图展示了 OAP 服务中几个核心插件模块对应的 ModuleConfig 实现类：
 
-![ModuleConfig.png](https://s0.lgstatic.com/i/image/M00/08/0B/CgqCHl66RVSAUPzJAACewmU9Ffw912.png)
+<Image alt="ModuleConfig.png" src="https://s0.lgstatic.com/i/image/M00/08/0B/CgqCHl66RVSAUPzJAACewmU9Ffw912.png"/>
 
 结合 ModuleDefine、ModuleProvider 以及 ModuleConfig，整个存储模块的结构如下：
 
-![image (5).png](https://s0.lgstatic.com/i/image/M00/08/0B/Ciqc1F66RV-AHPCmAAuhu0QRPZ4250.png)
+<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/08/0B/Ciqc1F66RV-AHPCmAAuhu0QRPZ4250.png"/>
 
 * **prepare() 方法**：与 ModuleDefine 中的 prepare() 方法的功能相同，也是完成一些准备性的操作，不同的 ModuleProvider 实现类会执行不同的准备操作。例如，StorageModuleElasticsearchProvider 会准备 High Level Rest Client 来访问 ElasticSearch，而 H2StorageProvider 则会准备 JDBC Client 来访问 H2 数据库。
 
@@ -227,7 +227,7 @@ public interface ModuleServiceHolder {
 
 通过前面 ModuleManager 的分析，我们得到了下面的调用链：
 
-![image (6).png](https://s0.lgstatic.com/i/image/M00/08/0B/Ciqc1F66RW2AVITpAABWeBaF_vg920.png)
+<Image alt="image (6).png" src="https://s0.lgstatic.com/i/image/M00/08/0B/Ciqc1F66RW2AVITpAABWeBaF_vg920.png"/>
 
 那 ModuleProvider 的相关检查方法以及 start() 方法是在哪里调用的呢？在 ModuleManager.init() 方法中可以得到答案 ------ BootstrapFlow。在 BootstrapFlow 构造方法中会根据 ModuleProvider 与 Module 之间的依赖关系，确定所有 ModuleProvider 的启动顺序，并记录到一个 LinkedList 集合中（startupSequence 字段）。
 
@@ -255,11 +255,11 @@ start() 方法完成启动之后，会紧接着调用 notifyAfterCompleted() 方
 
 最后，简单看一下 startupSequence 集合的生成原理。下图示例中，ModuleProvider a 依赖 Module B、Module C，ModuleProvider b 依赖 Module C、ModuleProvider c 依赖 Module D。
 
-![image (7).png](https://s0.lgstatic.com/i/image/M00/08/0B/Ciqc1F66RXeADVj3AAD7tFRaUQw017.png)
+<Image alt="image (7).png" src="https://s0.lgstatic.com/i/image/M00/08/0B/Ciqc1F66RXeADVj3AAD7tFRaUQw017.png"/>
 
 在 BootstrapFlow.makeSequence() 方法中，根据 ModuleProvider 对 Module 依赖关系确定 ModuleProvider 的启动顺序，保证每个 ModuleProvider 启动时，其依赖 Module 的 ModuleProvider 已经启动。上图示例的最终启动顺序如下：
 
-![image (8).png](https://s0.lgstatic.com/i/image/M00/08/0B/Ciqc1F66RX6Af8e5AABjm7z7wTQ773.png)
+<Image alt="image (8).png" src="https://s0.lgstatic.com/i/image/M00/08/0B/Ciqc1F66RX6Af8e5AABjm7z7wTQ773.png"/>
 
 makeSequence() 方法的具体实现是靠四层 for 循环实现的，没有什么高深的算法，这里不展开了。
 

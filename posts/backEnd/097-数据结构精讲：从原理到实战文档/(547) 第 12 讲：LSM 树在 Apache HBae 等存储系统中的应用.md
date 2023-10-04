@@ -4,7 +4,7 @@
 
 首先我们一起来回顾一下在上一讲中所遗留的问题。在通过 Log-Structured 结构设计视频网站浏览次数的功能后，底层的数据结构就如下图所示：
 
-![](https://s0.lgstatic.com/i/image3/M01/62/BC/Cgq2xl4o-DqAQElxAAE4TpDNdTY041.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/62/BC/Cgq2xl4o-DqAQElxAAE4TpDNdTY041.png"/>
 
 这种方法存在的一个问题，就是当我们不断地添加新数据进去之后，所占用的空间会越来越大，而且遍历整个数据结构的时间也随之越来越长。这时候，我们就可以通过一种叫 Compaction 的方法，把数据合并，Compaction 方法其实也是很多 NoSQL 架构中的一个重要优化过程。下面我就来详细讲讲整个流程。
 
@@ -14,17 +14,17 @@
 
 以下图为示，我们定义一个 Segment 的大小为 16，当 Segment 1 写满了 16 个数据之后，会将新的数据写入到 Segment 2 里。
 
-![](https://s0.lgstatic.com/i/image3/M01/62/BC/CgpOIF4o-DuAfdPWAAIDOYAAm9U804.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/62/BC/CgpOIF4o-DuAfdPWAAIDOYAAm9U804.png"/>
 
 说到这里，我们的 Log-Structured 结构还是一直在往内存里添加数据，并没有解决最终会消耗完内存的问题。这时候就到 Compaction 大显身手的时候了，在当 Segment 到达一定数量的时候，Compaction 会通过后台的线程，把不同的 Segments 合并在一起，我们以下图为例来说明一下。
 
 假设我们定义当 Segment 的数量到达两个的时候，后台线程就会执行 Compaction 来合并结果。
 
-![](https://s0.lgstatic.com/i/image3/M01/62/BC/Cgq2xl4o-DuAOfSTAAHIkRBDV0E283.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/62/BC/Cgq2xl4o-DuAOfSTAAHIkRBDV0E283.png"/>
 
 执行完 Compaction 之后，内部的数据结构图如下图所示：
 
-![](https://s0.lgstatic.com/i/image3/M01/62/BC/CgpOIF4o-DuAJLesAAJKZsBH2zU484.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/62/BC/CgpOIF4o-DuAJLesAAJKZsBH2zU484.png"/>
 
 刚开始的时候，对于视频浏览次数的统计是通过读取 Segment 1 和 Segment 2 来完成的，在 Compaction 完成了之后，对于结果的读取就可以从 Compacted Segment 里面读取了。因为这时候所有的结果已经存放在 Compacted Segment 里面了，所以就可以删除 Segment 1 和 Segment 2 来腾出内存空间了。
 
@@ -38,11 +38,11 @@
 
 我们假设现在想利用 Log-Structured 结构来保存一本书里的词频，为了方便说明，把 Segment 的大小设为 4。在刚开始的时候，这个 Log-Structured 结构的内存图如下图所示：
 
-![](https://s0.lgstatic.com/i/image3/M01/62/BC/Cgq2xl4o-DyAHTqbAAD5MzXtGgg203.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/62/BC/Cgq2xl4o-DyAHTqbAAD5MzXtGgg203.png"/>
 
 在经过了 Compaction 操作之后，内存图会变成如下图所示：
 
-![](https://s0.lgstatic.com/i/image3/M01/62/BC/CgpOIF4o-DyAGUkIAAII08Em_5k103.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/62/BC/CgpOIF4o-DyAGUkIAAII08Em_5k103.png"/>
 
 可以看到，所有的 Compacted Segment 都是按照字符串排序的。当我们要查找一个单词出现的次数时，可以去遍历所有的 Compacted Segment，来看看这个单词的词频，当然了，因为所有数据都是按照字符串排好序的，如果当遍历到的字符串已经大于我们要找的字符串时，就表示并没有出现过这个单词。
 
@@ -58,7 +58,7 @@
 
 比如，如果内存里保存有以下的 Compacted Segments：
 
-![](https://s0.lgstatic.com/i/image3/M01/62/BC/Cgq2xl4o-DyAAMmjAAFJNdxBZus633.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/62/BC/Cgq2xl4o-DyAAMmjAAFJNdxBZus633.png"/>
 
 如果我们的查询是需要找出所有从 Home 到 No 的数据，那我们就知道，可以从 Compacted Segment 2 到 Compacted Segment 3 里面去寻找这些数据了。
 

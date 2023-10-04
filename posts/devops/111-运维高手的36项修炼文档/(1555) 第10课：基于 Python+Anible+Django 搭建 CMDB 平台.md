@@ -15,11 +15,11 @@ Imoocc 工程可以做到自动化资产收集和自动化任务执行，资产�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/78/05/CgpOIF5zJpGAOh_3AAETRSBrz8A133.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/05/CgpOIF5zJpGAOh_3AAETRSBrz8A133.png"/>
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/78/06/Cgq2xl5zJpGALtEVAAELyQFSaoY556.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/06/Cgq2xl5zJpGALtEVAAELyQFSaoY556.png"/>
 
 ### **自动化资产管理**
 
@@ -35,7 +35,7 @@ Imoocc 工程可以做到自动化资产收集和自动化任务执行，资产�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/78/06/Cgq2xl5zJpGAMNBTAAF2XF3qyck100.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/06/Cgq2xl5zJpGAMNBTAAF2XF3qyck100.png"/>
 
 <br />
 
@@ -47,7 +47,7 @@ Imoocc 工程可以做到自动化资产收集和自动化任务执行，资产�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/78/06/Cgq2xl5zJpKAXQ3uAAVfaDFT2hc238.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/06/Cgq2xl5zJpKAXQ3uAAVfaDFT2hc238.png"/>
 
 <br />
 
@@ -59,7 +59,7 @@ Imoocc 工程可以做到自动化资产收集和自动化任务执行，资产�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/78/05/CgpOIF5zJpKAM5HDAARNAa2lrTA683.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/05/CgpOIF5zJpKAM5HDAARNAa2lrTA683.png"/>
 
 <br />
 
@@ -69,7 +69,7 @@ Imoocc 工程可以做到自动化资产收集和自动化任务执行，资产�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/78/06/Cgq2xl5zJpKALeVmAAJNcMymoDg695.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/06/Cgq2xl5zJpKALeVmAAJNcMymoDg695.png"/>
 
 <br />
 
@@ -77,7 +77,7 @@ Imoocc 工程可以做到自动化资产收集和自动化任务执行，资产�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/78/05/CgpOIF5zJpKALpfAAAKrgiK7cBE082.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/05/CgpOIF5zJpKALpfAAAKrgiK7cBE082.png"/>
 
 <br />
 
@@ -89,7 +89,7 @@ Imoocc 工程可以做到自动化资产收集和自动化任务执行，资产�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/78/06/Cgq2xl5zJpOAfJ37AAKKZIal5Ks938.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/06/Cgq2xl5zJpOAfJ37AAKKZIal5Ks938.png"/>
 
 <br />
 
@@ -97,7 +97,7 @@ Imoocc 工程可以做到自动化资产收集和自动化任务执行，资产�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/78/05/CgpOIF5zJpOALuvRAACLq9bGI6I552.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/05/CgpOIF5zJpOALuvRAACLq9bGI6I552.png"/>
 
 <br />
 
@@ -105,7 +105,7 @@ Imoocc 工程可以做到自动化资产收集和自动化任务执行，资产�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/78/06/Cgq2xl5zJpOAcCmiAAKjQ3sBmI8075.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/06/Cgq2xl5zJpOAcCmiAAKjQ3sBmI8075.png"/>
 
 <br />
 
@@ -113,7 +113,7 @@ Imoocc 工程可以做到自动化资产收集和自动化任务执行，资产�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/78/05/CgpOIF5zJpOAGCFGAALdX5_qU6o957.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/05/CgpOIF5zJpOAGCFGAALdX5_qU6o957.png"/>
 
 <br />
 
@@ -121,7 +121,7 @@ Imoocc 工程可以做到自动化资产收集和自动化任务执行，资产�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/78/06/Cgq2xl5zJpSAMOZhAAJZ02uIxOg018.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/06/Cgq2xl5zJpSAMOZhAAJZ02uIxOg018.png"/>
 
 <br />
 
@@ -175,7 +175,7 @@ Imoocc 工程可以做到自动化资产收集和自动化任务执行，资产�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/78/05/CgpOIF5zJpSACdzWAAA33Ac2y-E712.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/05/CgpOIF5zJpSACdzWAAA33Ac2y-E712.png"/>
 
 <br />
 
@@ -185,7 +185,7 @@ Imoocc 工程可以做到自动化资产收集和自动化任务执行，资产�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/78/06/Cgq2xl5zJpSAVWPTAAAhVhvmLRc779.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/06/Cgq2xl5zJpSAVWPTAAAhVhvmLRc779.png"/>
 
 <br />
 
@@ -203,7 +203,7 @@ Imoocc 工程可以做到自动化资产收集和自动化任务执行，资产�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/78/05/CgpOIF5zJpSAZH84AAFt9Oq8nFg989.png)  
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/05/CgpOIF5zJpSAZH84AAFt9Oq8nFg989.png"/>  
 
 <br />
 
@@ -213,7 +213,7 @@ Imoocc 工程可以做到自动化资产收集和自动化任务执行，资产�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/78/06/Cgq2xl5zJpWAEFtEAAEk9jyLdTM009.png)  
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/06/Cgq2xl5zJpWAEFtEAAEk9jyLdTM009.png"/>  
 
 <br />
 
@@ -256,7 +256,7 @@ Imoocc 工程可以做到自动化资产收集和自动化任务执行，资产�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/78/05/CgpOIF5zJpWADyboAAF-Fvz6tC0285.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/05/CgpOIF5zJpWADyboAAF-Fvz6tC0285.png"/>
 
 <br />
 
@@ -272,7 +272,7 @@ Imoocc 工程可以做到自动化资产收集和自动化任务执行，资产�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/78/05/CgpOIF5zJpWAcd3dAAFKPqRX0rA372.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/05/CgpOIF5zJpWAcd3dAAFKPqRX0rA372.png"/>
 
 <br />
 
@@ -280,7 +280,7 @@ Imoocc 工程可以做到自动化资产收集和自动化任务执行，资产�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/78/05/CgpOIF5zJpaAd0ofAAGTHivpKic910.png)  
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/05/CgpOIF5zJpaAd0ofAAGTHivpKic910.png"/>  
 
 <br />
 
@@ -294,7 +294,7 @@ Imoocc 工程可以做到自动化资产收集和自动化任务执行，资产�
 
 最后给你来展示一下，探测启动所需要做的配置：
 
-![](https://s0.lgstatic.com/i/image3/M01/78/06/Cgq2xl5zJpaAE_NvAADuJPpNISA959.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/06/Cgq2xl5zJpaAE_NvAADuJPpNISA959.png"/>
 
 <br />
 
@@ -314,7 +314,7 @@ Imoocc 工程可以做到自动化资产收集和自动化任务执行，资产�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/78/05/CgpOIF5zJpeAcDksAABCkXF4kb0332.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/05/CgpOIF5zJpeAcDksAABCkXF4kb0332.png"/>
 
 <br />
 

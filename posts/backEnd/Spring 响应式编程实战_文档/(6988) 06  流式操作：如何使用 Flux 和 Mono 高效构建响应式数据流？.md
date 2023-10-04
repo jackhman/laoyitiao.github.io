@@ -58,7 +58,7 @@ Flux.range(2020, 5).subscribe(System.out::println);
 
 在 Reactor 框架中，interval() 方法可以用来生成从 0 开始递增的 Long 对象的数据序列。通过 interval() 所具备的一组重载方法，我们可以分别指定这个数据序列中第一个元素发布之前的延迟时间，以及每个元素之间的时间间隔。interval() 方法相对复杂，我们先附上它的弹珠图，如下所示。
 
-![图片9.png](https://s0.lgstatic.com/i/image6/M00/27/AE/Cgp9HWBdhB-ASNRVAAJo-Y1sCZw573.png)  
+<Image alt="图片9.png" src="https://s0.lgstatic.com/i/image6/M00/27/AE/Cgp9HWBdhB-ASNRVAAJo-Y1sCZw573.png"/>  
 使用 interval() 方法创建 Flux 示意图（来自 Reactor 官网）
 
 可以看到，上图中每个元素发布时相当于添加了一个定时器的效果。使用 interval() 方法的示例代码如下所示。

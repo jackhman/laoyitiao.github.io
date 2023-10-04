@@ -4,7 +4,7 @@
 
 如果你是第一次创建 WebFlux 应用，那么最简单的方法应该是使用 Spring 所提供的 Spring Initializer 初始化模板。直接访问 Spring Initializer 网站（[http://start.spring.io/](http://start.spring.io/?fileGuid=xxQTRXtVcqtHK6j8)），选择创建一个 Maven 项目并指定相应的配置项，然后在添加的依赖中选择 Spring Reactive Web，我们就可以获取一个可运行的 WebFlux 模版项目了，如下所示。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image6/M01/31/1A/CioPOWBsGwCAXcqVAABornEKBhA084.png)  
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M01/31/1A/CioPOWBsGwCAXcqVAABornEKBhA084.png"/>  
 使用 Spring Initializer 初始化响应式 Web 应用示意图
 > 请注意，不做特殊说明的话，本课程将统一使用 Maven 进行代码依赖管理。
 
@@ -194,7 +194,7 @@ public class StubOrderController {
 
 在案例中，我们包含三个独立的 Web 服务，分别是用来管理订单的 order-service、管理用户账户的 account-service 以及核心的客服服务 customer-service，这三个服务之间的交互方式如下图所示。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image6/M00/31/1A/CioPOWBsGyaACJz3AACV3vlgteU433.png)  
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/31/1A/CioPOWBsGyaACJz3AACV3vlgteU433.png"/>  
 ReactiveSpringCSS 案例系统中三个服务的交互方式图
 
 通过这个交互图，实际上我们已经可以梳理工单生成的核心流程的伪代码，如下所示。

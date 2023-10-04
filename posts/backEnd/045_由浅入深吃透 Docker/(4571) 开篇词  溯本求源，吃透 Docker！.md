@@ -57,7 +57,7 @@ $ spec: 1.0.0-rc2-dev
 
 接下来，是我们为你画出的一个学习路径，这也是我们课程设计的核心。
 
-![11.png](https://s0.lgstatic.com/i/image/M00/4C/CA/Ciqc1F9YoBKAP5TpAAHqwwYYWWc486.png)
+<Image alt="11.png" src="https://s0.lgstatic.com/i/image/M00/4C/CA/Ciqc1F9YoBKAP5TpAAHqwwYYWWc486.png"/>
 
 用一句话总结，我希望这个课程从 Docker**基础知识点** 到**底层原理** ，再到**编排实践**，层层递进地展开介绍，最大程度帮你吸收和掌握 Docker 知识。
 

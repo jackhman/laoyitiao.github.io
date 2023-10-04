@@ -45,12 +45,12 @@ import com.mongodb.reactivestreams.client.MongoCollection;
 
 Spring Data 中的响应式 MongoDB 连接基于 MongoDB 响应式流 Java 驱动程序（mongo-java-driver-reactivestreams）构建。该驱动程序提供具有非阻塞背压的异步流处理。另一方面，响应式驱动程序构建在 MongoDB 异步 Java 驱动程序（mongo-java-driver-async）之上。这个异步驱动程序是低级别的，并且具有基于回调的 API，因此它不像更高级别的响应式流驱动程序那样易于使用。下图展示了 Spring Data 中整个响应式 MongoDB 的技术栈。
 
-![图片1.png](https://s0.lgstatic.com/i/image6/M01/38/5F/Cgp9HWB5NlyAUZ8vAAEVEX4GDg4227.png)  
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M01/38/5F/Cgp9HWB5NlyAUZ8vAAEVEX4GDg4227.png"/>  
 Spring Data MongoDB Reactive 技术栈
 
 而下图展示了基于 Maven 依赖所找到的对应的组件库。
 
-![图片2.png](https://s0.lgstatic.com/i/image6/M01/38/68/CioPOWB5NmeAMPT_AAa3JDFhfRw228.png)  
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M01/38/68/CioPOWB5NmeAMPT_AAa3JDFhfRw228.png"/>  
 Spring Data MongoDB Reactive 中的组件库
 
 ### 应用 Reactive MongoDB
@@ -72,7 +72,7 @@ Spring Data MongoDB Reactive 中的组件库
 
 然后我们通过 Maven 来查看组件依赖关系可以得到如下所示的组件依赖图。
 
-![图片3.png](https://s0.lgstatic.com/i/image6/M01/38/68/CioPOWB5NnOAFoIqAAhDv7J-DwA202.png)  
+<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image6/M01/38/68/CioPOWB5NnOAFoIqAAhDv7J-DwA202.png"/>  
 spring-boot-starter-data-mongodb-reactive 组件依赖图
 
 可以看到 spring-boot-starter-data-mongodb-reactive 组件同时依赖于 spring-data-mongodb、mongodb-driver-reactivestreams 以及 reactor-core 等组件，这点与前面介绍的技术栈是完全一致的。

@@ -6,7 +6,7 @@ render 阶段做的事情有很多，这一讲我们将以 beginWork 为线索�
 
 首先，我们复习一下 render 阶段在整个渲染链路中的定位，如下图所示。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/71/0B/CgqCHl-8xCmAcvVyAADtTCzN0RM929.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/71/0B/CgqCHl-8xCmAcvVyAADtTCzN0RM929.png"/>
 
 图中，performSyncWorkOnRoot 标志着 render 阶段的开始，finishSyncRender 标志着 render 阶段的结束。这中间包含了大量的 beginWork、completeWork 调用栈，正是 render 的工作内容。
 > beginWork、completeWork 这两个方法需要注意，它们串联起的是一个"模拟递归"的过程。
@@ -15,7 +15,7 @@ render 阶段做的事情有很多，这一讲我们将以 beginWork 为线索�
 
 那么问题就来了：截止到上一讲，我们的 Fiber 树都还长这个样子：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/71/0A/CgqCHl-8w7qAc91bAABOxKDmLgA173.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/71/0A/CgqCHl-8w7qAc91bAABOxKDmLgA173.png"/>
 
 就这么个样子，你遍历它，能遍历出来什么？到底怎么个遍历法？接下来我们就深入到源码里去一探究竟！
 
@@ -23,7 +23,7 @@ render 阶段做的事情有很多，这一讲我们将以 beginWork 为线索�
 
 上一讲曾经提到，performSyncWorkOnRoot 是 render 阶段的起点，而这个函数最关键的地方在于它调用了 renderRootSync。下面我们放大 Performance 调用栈，来看看 renderRootSync 被调用后，紧接着发生了什么：
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/70/FF/Ciqc1F-8xByAOzCeAAAoruuugdE734.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/70/FF/Ciqc1F-8xByAOzCeAAAoruuugdE734.png"/>
 
 紧随其后的是 prepareFreshStack，这里不卖关子，prepareFreshStack 的作用是重置一个新的堆栈环境，其中最需要我们关注的步骤，就是对**createWorkInProgress** 的调用。以下我对 createWorkInProgress 的主要逻辑进行了提取（解析在注释里）：
 
@@ -54,7 +54,7 @@ function createWorkInProgress(current, pendingProps) {
 
 首先要声明的是，该函数中的 current 入参指的是现有树结构中的 rootFiber 对象，如下图所示：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/70/FF/Ciqc1F-8xDeAR3RMAAClHPw_BEk265.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/70/FF/Ciqc1F-8xDeAR3RMAAClHPw_BEk265.png"/>
 
 源码太长（其实经过处理已经不长了）不看版的重点如下：
 
@@ -83,7 +83,7 @@ var createFiber = function (tag, pendingProps, key, mode) {
 
 再结合 current 指向 rootFiber 对象（同样是 FiberNode 实例），以及 current 和 workInProgress 通过 alternate 互相连接这些信息，我们可以分析出这波操作执行完之后，整棵树的结构应该如下图所示：
 
-![1.png](https://s0.lgstatic.com/i/image/M00/71/49/CgqCHl-91EqAJlftAAB6KmeoTMw529.png)
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/71/49/CgqCHl-91EqAJlftAAB6KmeoTMw529.png"/>
 
 完成了这个任务之后，就会进入 workLoopSync 的逻辑。这个 workLoopSync 函数也是个"人狠话不多"的主，它的逻辑同样是简洁明了的，如下所示（解析在注释里）：
 
@@ -105,7 +105,7 @@ workLoopSync 做的事情就是**通过 while 循环反复判断 workInProgress 
 
 在这个过程中，**每一个被创建出来的新 Fiber 节点，都会一个一个挂载为最初那个 workInProgress 节点（如下图高亮处）的后代节点** 。而上述过程中构建出的这棵 Fiber 树，也正是大名鼎鼎的 **workInProgress 树**。
 
-![2.png](https://s0.lgstatic.com/i/image/M00/71/49/CgqCHl-91HeADxF2AACYnkvx4lM165.png)
+<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/71/49/CgqCHl-91HeADxF2AACYnkvx4lM165.png"/>
 
 相应地，图中 current 指针所指向的根节点所在的那棵树，我们叫它"**current 树**"。
 
@@ -187,7 +187,7 @@ beginWork 源码太长不看版的重点总结：
 
 当前的 current 节点是 rootFiber，而 workInProgress 则是 current 的副本，它们的 tag 都是 3，如下图所示：
 
-![Drawing 6.png](https://s0.lgstatic.com/i/image/M00/71/0B/CgqCHl-8xHmAV2FMAABmLqBlHD0379.png)
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/71/0B/CgqCHl-8xHmAV2FMAABmLqBlHD0379.png"/>
 
 而 3 正是 HostRoot 所对应的值，因此第一个 beginWork 将进入 updateHostRoot 的逻辑。
 
@@ -306,21 +306,21 @@ Placement 这个 effectTag 的意义，是在渲染器执行时，也就是真�
 
 像 Placement 这样的副作用标识，还有很多，它们均以二进制常量的形式存在，下图我为你截取了局部（你可以在[这个文件](https://github.com/facebook/react/blob/1fb18e22ae66fdb1dc127347e169e73948778e5a/packages/react-reconciler/src/ReactSideEffectTags.js)里查看 effectTag 的类型）：
 
-![Drawing 7.png](https://s0.lgstatic.com/i/image/M00/71/0B/CgqCHl-8xIyAZ3VoAADupBJcrgo966.png)
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/71/0B/CgqCHl-8xIyAZ3VoAADupBJcrgo966.png"/>
 
 回到我们的调用链路里来，由于 current 是 rootFiber，它不为 null，因此它将走入的是下图所高亮的这行逻辑。也就是说在 mountChildFibers 和 reconcileChildFibers 之间，它选择的是 **reconcileChildFibers**：
 
-![Drawing 8.png](https://s0.lgstatic.com/i/image/M00/71/07/Ciqc1F-80U-AfncYAAEt69YE2-g951.png)
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/71/07/Ciqc1F-80U-AfncYAAEt69YE2-g951.png"/>
 
 结合前面的分析可知，reconcileChildFibers 是`ChildReconciler(true)`的返回值。入参为 true，意味着其内部逻辑是允许追踪副作用的，因此"打 effectTag"这个动作将会生效。
 
 接下来进入 reconcileChildFibers 的逻辑，在 reconcileChildFibers 这个逻辑分发器中，会把 rootFiber 子节点的创建工作分发给 reconcileXXX 函数家族的一员------reconcileSingleElement 来处理，具体的调用形式如下图高亮处所示：
 
-![Drawing 9.png](https://s0.lgstatic.com/i/image/M00/71/07/Ciqc1F-80VaABnJCAACe4hcSiBM598.png)
+<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/71/07/Ciqc1F-80VaABnJCAACe4hcSiBM598.png"/>
 
 reconcileSingleElement 将基于 rootFiber 子节点的 ReactElement 对象信息，创建其对应的 FiberNode。这个过程中涉及的函数调用如下图高亮处所示：
 
-![Drawing 10.png](https://s0.lgstatic.com/i/image/M00/71/12/CgqCHl-80VyAC2P6AAJfHF2gzfs579.png)
+<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image/M00/71/12/CgqCHl-80VyAC2P6AAJfHF2gzfs579.png"/>
 
 这里需要说明的一点是：**rootFiber 作为 Fiber 树的根节点** ，它并没有一个确切的 ReactElement 与之映射。结合 JSX 结构来看，**我们可以将其理解为是 JSX 中根组件的父节点**。课时所给出的 Demo 中，组件编码如下：
 
@@ -346,15 +346,15 @@ ReactDOM.render(<App />, rootElement);
 
 结合这个分析来看，图中的 _created4 是根据 rootFiber 的第一个子节点对应的 ReactElement 来创建的 Fiber 节点，那么它就是 **App 所对应的 Fiber 节点**。现在我为你打印出运行时的 _created4 值，会发现确实如此：
 
-![Drawing 11.png](https://s0.lgstatic.com/i/image/M00/71/12/CgqCHl-80WaAXLPeAAD-OcP7y4o323.png)
+<Image alt="Drawing 11.png" src="https://s0.lgstatic.com/i/image/M00/71/12/CgqCHl-80WaAXLPeAAD-OcP7y4o323.png"/>
 
 App 所对应的 Fiber 节点，将被 placeSingleChild 打上"Placement"（新增）的副作用标记，而后作为 reconcileChildFibers 函数的返回值，返回给下图中的 workInProgress.child：
 
-![Drawing 12.png](https://s0.lgstatic.com/i/image/M00/71/12/CgqCHl-80WyARnfDAAGNRsiaht8973.png)
+<Image alt="Drawing 12.png" src="https://s0.lgstatic.com/i/image/M00/71/12/CgqCHl-80WyARnfDAAGNRsiaht8973.png"/>
 
 reconcileChildren 函数上下文里的 workInProgress 就是 rootFiber 节点。那么此时，我们就将新创建的 App Fiber 节点和 rootFiber 关联了起来，整个 Fiber 树如下图所示：
 
-![3.png](https://s0.lgstatic.com/i/image/M00/71/3E/Ciqc1F-91MmARvQRAADFJC1K20o629.png)
+<Image alt="3.png" src="https://s0.lgstatic.com/i/image/M00/71/3E/Ciqc1F-91MmARvQRAADFJC1K20o629.png"/>
 
 ### Fiber 节点的创建过程梳理
 
@@ -362,7 +362,7 @@ reconcileChildren 函数上下文里的 workInProgress 就是 rootFiber 节点�
 
 刚刚这一通分析所涉及的调用栈很长，相信不少人如果是初读的话，过程中肯定不可避免地要反复回看，确认自己现在到底在调用栈的哪一环。这里为了方便你把握逻辑脉络，我将本讲讲解的 beginWork 所触发的调用流程总结进一张大图：
 
-![7.png](https://s0.lgstatic.com/i/image/M00/71/47/Ciqc1F-97fSAYLUIAAGBjhvNylg581.png)
+<Image alt="7.png" src="https://s0.lgstatic.com/i/image/M00/71/47/Ciqc1F-97fSAYLUIAAGBjhvNylg581.png"/>
 
 ### Fiber 树的构建过程
 
@@ -404,7 +404,7 @@ if (next === null) {
 
 现在我在 workLoopSync 内部打个断点，尝试输出每一次获取到的 workInProgress 的值，workInProgress 值的变化过程如下图所示：
 
-![Drawing 15.png](https://s0.lgstatic.com/i/image/M00/71/12/CgqCHl-80ZuAA1HAAAEBle-yZFM332.png)
+<Image alt="Drawing 15.png" src="https://s0.lgstatic.com/i/image/M00/71/12/CgqCHl-80ZuAA1HAAAEBle-yZFM332.png"/>
 
 共有 7 个节点，若你点击展开查看每个节点的内容，就会发现这 7 个节点其实分别是：
 
@@ -414,21 +414,21 @@ if (next === null) {
 
 * class 为 App 的 DOM 元素对应的节点，其内容如下图所示
 
-![Drawing 16.png](https://s0.lgstatic.com/i/image/M00/71/12/CgqCHl-80aSAF7MKAAEHjyZ0Xwk039.png)
+<Image alt="Drawing 16.png" src="https://s0.lgstatic.com/i/image/M00/71/12/CgqCHl-80aSAF7MKAAEHjyZ0Xwk039.png"/>
 
 * class 为 container 的 DOM 元素对应的节点，其内容如下图所示
 
-![Drawing 17.png](https://s0.lgstatic.com/i/image/M00/71/07/Ciqc1F-80aqAJId4AACkvKHjlTM377.png)
+<Image alt="Drawing 17.png" src="https://s0.lgstatic.com/i/image/M00/71/07/Ciqc1F-80aqAJId4AACkvKHjlTM377.png"/>
 
 * h1 标签对应的节点
 
 * 第 1 个 p 标签对应的 FiberNode，内容为"我是第一段话"，如下图所示
 
-![Drawing 18.png](https://s0.lgstatic.com/i/image/M00/71/07/Ciqc1F-80bGAGFKTAADArDpX9j4096.png)
+<Image alt="Drawing 18.png" src="https://s0.lgstatic.com/i/image/M00/71/07/Ciqc1F-80bGAGFKTAADArDpX9j4096.png"/>
 
 * 第 2 个 p 标签对应的 FiberNode，内容为"我是第二段话"，如下图所示
 
-![Drawing 19.png](https://s0.lgstatic.com/i/image/M00/71/12/CgqCHl-80biASe4KAAEZMaZTIY8632.png)
+<Image alt="Drawing 19.png" src="https://s0.lgstatic.com/i/image/M00/71/12/CgqCHl-80biASe4KAAEZMaZTIY8632.png"/>
 
 结合这 7 个 FiberNode，再对照对照我们的 Demo：
 
@@ -451,7 +451,7 @@ function App() {
 
 这样一来，我们构建的这棵树里，就多出了不少 FiberNode，如下图所示：
 
-![4.png](https://s0.lgstatic.com/i/image/M00/71/49/CgqCHl-91PKANLSRAACt8c-uYAk378.png)
+<Image alt="4.png" src="https://s0.lgstatic.com/i/image/M00/71/49/CgqCHl-91PKANLSRAACt8c-uYAk378.png"/>
 
 Fiber 节点有是有了，但这些 Fiber 节点之间又是如何相互连接的呢？
 
@@ -463,21 +463,21 @@ Fiber 节点有是有了，但这些 Fiber 节点之间又是如何相互连接�
 
 child 属性为 null，说明 h1 节点没有子 Fiber 节点：
 
-![Drawing 21.png](https://s0.lgstatic.com/i/image/M00/71/13/CgqCHl-80d2AV6r7AABCQ4zzis4597.png)
+<Image alt="Drawing 21.png" src="https://s0.lgstatic.com/i/image/M00/71/13/CgqCHl-80d2AV6r7AABCQ4zzis4597.png"/>
 
 return 属性局部截图：
 
-![Drawing 22.png](https://s0.lgstatic.com/i/image/M00/71/07/Ciqc1F-80eOAMhlKAACxayioeh4810.png)
+<Image alt="Drawing 22.png" src="https://s0.lgstatic.com/i/image/M00/71/07/Ciqc1F-80eOAMhlKAACxayioeh4810.png"/>
 
 sibling 属性局部截图：
 
-![Drawing 23.png](https://s0.lgstatic.com/i/image/M00/71/13/CgqCHl-80eiAJ6doAAClFZDD7jE642.png)
+<Image alt="Drawing 23.png" src="https://s0.lgstatic.com/i/image/M00/71/13/CgqCHl-80eiAJ6doAAClFZDD7jE642.png"/>
 
 可以看到，return 属性指向的是 class 为 container 的 div 节点，而 sibling 属性指向的是第 1 个 p 节点。结合 JSX 中的嵌套关系我们不难得知 ------**FiberNode 实例中，return 指向的是当前 Fiber 节点的父节点，而 sibling 指向的是当前节点的第 1 个兄弟节点**。
 
 结合这 3 个属性所记录的节点间关系信息，我们可以轻松地将上面梳理出来的新 FiberNode 连接起来：
 
-![5.png](https://s0.lgstatic.com/i/image/M00/71/3E/Ciqc1F-91RGAAygAAAEYVWI-PXg439.png)
+<Image alt="5.png" src="https://s0.lgstatic.com/i/image/M00/71/3E/Ciqc1F-91RGAAygAAAEYVWI-PXg439.png"/>
 
 以上便是 workInProgress Fiber 树的最终形态了。从图中可以看出，虽然人们习惯上仍然将眼前的这个产物称为"Fiber 树"，但**它的数据结构本质其实已经从树变成了链表**。
 

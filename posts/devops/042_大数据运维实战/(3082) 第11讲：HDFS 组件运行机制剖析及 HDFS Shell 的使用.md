@@ -10,7 +10,7 @@ Hadoop 中的分布式文件系统 HDFS 为大数据平台提供了统一的存�
 
 下图是 HDFS 分布式文件系统图：
 
-![2.png](https://s0.lgstatic.com/i/image/M00/16/18/CgqCHl7U4HOAXZEFAAJszKiTB6o267.png)
+<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/16/18/CgqCHl7U4HOAXZEFAAJszKiTB6o267.png"/>
 
 由图可知，NameNode、DataNode 和 SecondaryNameNode 构成了分布式文件系统 HDFS。其中 SecondaryNameNode 是可选服务，如果通过 StandbyNameNode 构建 HA 架构的话，那么可以不需要 SecondaryNameNode。
 
@@ -50,7 +50,7 @@ Edit Log 文件记录了对文件的创建、删除、重命名等操作日志�
 
 SecondaryNameNode 实现有两个功能，即对 NameNode 元数据的备份以及将 Edit Log 合并到 Fsimage 中，这种实现机制比较简单，下面通过一张图来了解这种实现机制，如下图所示：
 
-![1.png](https://s0.lgstatic.com/i/image/M00/16/0D/Ciqc1F7U4FSAZPkNAAG0gIoCEHE433.png)
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/16/0D/Ciqc1F7U4FSAZPkNAAG0gIoCEHE433.png"/>
 
 由图可知，SecondaryNameNode 实现对元数据备份，主要分为 5 个步骤：
 
@@ -68,7 +68,7 @@ SecondaryNameNode 总是周期性的去检查是否符合触发 checkpoint 的�
 
 元数据在 NameNode 中有 3 种存储形式，即内存、Edit Log 文件和 Fsimage 文件。最完整且最新的元数据一定是内存中的这一部分，理解这一点非常重要。那么元数据的目录结构是什么样的呢，打开元数据目录（我这里是 /data1/hadoop/dfs/name/current），可以看到文件或目录，如下图所示：
 
-![image3.png](https://s0.lgstatic.com/i/image/M00/15/D2/CgqCHl7UqTmAazCJAACxChYVipc532.png)
+<Image alt="image3.png" src="https://s0.lgstatic.com/i/image/M00/15/D2/CgqCHl7UqTmAazCJAACxChYVipc532.png"/>
 
 由图可知，有大量以 edits_ 开头的文件，这些就是 Edit Log 文件。记录在 Edit Log 之中的每一个操作又称为一个事务，每个事务都有一个整数形式的事务 id 作为编号。这些 edits_ 开头的文件名类似 edits_${start_txid}-${end_txid}，并且多个 Edit Log 之间通过 txid 首尾相连。
 
@@ -103,7 +103,7 @@ JournalNode 只在 HDFS 的 HA 模式下出现，其作为一个守护进程，�
 
 HDFS 文件名也有对应的格式，随便登录一个 DataNode 节点，找到数据块存储路径，如下图所示：
 
-![image4.png](https://s0.lgstatic.com/i/image/M00/15/C7/Ciqc1F7UqUOAMiyxAAB6XluvVzs412.png)
+<Image alt="image4.png" src="https://s0.lgstatic.com/i/image/M00/15/C7/Ciqc1F7UqUOAMiyxAAB6XluvVzs412.png"/>
 
 可以看出，HDFS 数据块文件名组成格式为：
 
@@ -114,7 +114,7 @@ HDFS 文件名也有对应的格式，随便登录一个 DataNode 节点，找�
 
 介绍了 HDFS 的数据块结构后，下面介绍下 HDFS 是如何读取数据的。下图是 HDFS 读取数据的一个流程图：
 
-![4.png](https://s0.lgstatic.com/i/image/M00/16/19/CgqCHl7U4LaAYHtjAAHdezX8IO8904.png)
+<Image alt="4.png" src="https://s0.lgstatic.com/i/image/M00/16/19/CgqCHl7U4LaAYHtjAAHdezX8IO8904.png"/>
 
 从上图可以看出，HDFS 读取文件基本分为 5 个步骤，每个步骤含义如下：
 
@@ -126,7 +126,7 @@ HDFS 文件名也有对应的格式，随便登录一个 DataNode 节点，找�
 
 可以看出，HDFS 读取文件的流程非常简单。接着，再来看看 HDFS 是如何写入数据的，这个过程稍微复杂，如下图所示：
 
-![3.png](https://s0.lgstatic.com/i/image/M00/16/18/CgqCHl7U4IWAbSbsAAIQMoyHI-s874.png)
+<Image alt="3.png" src="https://s0.lgstatic.com/i/image/M00/16/18/CgqCHl7U4IWAbSbsAAIQMoyHI-s874.png"/>
 
 从上图可以看出，HDFS 写入文件基本分为 7 个步骤，每个步骤含义如下所示。
 

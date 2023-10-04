@@ -35,7 +35,7 @@ public class DataTree {
 
 * lastZxidSeen：最后一次更新日志得到的 ZXID。
 
-![image (11).png](https://s0.lgstatic.com/i/image/M00/2F/DF/Ciqc1F8IC-uAcS1bAABJoZ4awKg473.png)
+<Image alt="image (11).png" src="https://s0.lgstatic.com/i/image/M00/2F/DF/Ciqc1F8IC-uAcS1bAABJoZ4awKg473.png"/>
 
 定义了事务日志操作的相关指标参数后，在 FileTxnLog 类中调用 static 静态代码块，来将这些配置参数进行初始化。比如读取 preAllocSize 参数分配给日志文件的空间大小等操作。
 

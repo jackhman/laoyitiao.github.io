@@ -142,7 +142,7 @@
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/71/C0/Cgq2xl5nIHuANsKGAAPpqjib5LM425.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/71/C0/Cgq2xl5nIHuANsKGAAPpqjib5LM425.png"/>
 
 <br />
 
@@ -194,7 +194,7 @@ M 是指模型，V 是视图，T 是我们刚刚讲的目录结构里面的 temp
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/71/C0/Cgq2xl5nIHyAM5EnAAb-zfht2e4708.png)  
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/71/C0/Cgq2xl5nIHyAM5EnAAb-zfht2e4708.png"/>  
 
 <br />
 

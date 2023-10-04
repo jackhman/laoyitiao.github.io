@@ -24,7 +24,7 @@ Swarm 的这些优点得益于它优美的架构设计，下面我们来了解�
 
 Swarm 的架构整体分为**管理节点** （Manager Nodes）和**工作节点**（Worker Nodes），整体架构如下图：
 
-![image.png](https://s0.lgstatic.com/i/image/M00/67/E1/CgqCHl-iZxSAbYhzAABiA3_fQM8971.png)  
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/67/E1/CgqCHl-iZxSAbYhzAABiA3_fQM8971.png"/>  
 图 1 Swarm 架构图
 
 **管理节点：** 管理节点负责接受用户的请求，用户的请求中包含用户定义的容器运行状态描述，然后 Swarm 负责调度和管理容器，并且努力达到用户所期望的状态。
@@ -74,7 +74,7 @@ Swarm 集群的公开端口可以从集群内的任意节点上访问到，当�
 
 下面我通过四台机器来搭建一个 Swarm 集群，演示的节点规划如下：
 
-![Lark20201104-162431.png](https://s0.lgstatic.com/i/image/M00/67/D6/Ciqc1F-iZ0KAdrQoAABINXCXUv0846.png)
+<Image alt="Lark20201104-162431.png" src="https://s0.lgstatic.com/i/image/M00/67/D6/Ciqc1F-iZ0KAdrQoAABINXCXUv0846.png"/>
 > 生产环境中推荐使用至少三个 manager 作为管理节点。
 
 * 第一步：初始化集群

@@ -97,7 +97,7 @@ function UserInfo(props: IUserInfo) {
 
 而能够熟练掌握 TypeScript 的开发人员，**将能轻松拿下大厂 Offer**。下面我截取了拉勾招聘官网的一些大厂招聘要求，你可以参考。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image6/M01/3D/3F/Cgp9HWCToWWAd44HAA6s79WBA5M709.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M01/3D/3F/Cgp9HWCToWWAd44HAA6s79WBA5M709.png"/>
 
 ### 好工具，需要好的学习方式
 

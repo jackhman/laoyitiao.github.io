@@ -75,7 +75,7 @@ require github.com/jinzhu/gorm v1.9.14 // indirect
 
 User 应用的项目结构如下图所示：
 
-![image (8).png](https://s0.lgstatic.com/i/image/M00/37/B7/CgqCHl8aeCmARuM4AADVx9E2eA4809.png)
+<Image alt="image (8).png" src="https://s0.lgstatic.com/i/image/M00/37/B7/CgqCHl8aeCmARuM4AADVx9E2eA4809.png"/>
 
 由图我们可以看到 User 应用的项目结构分别由以下"包"组成：
 

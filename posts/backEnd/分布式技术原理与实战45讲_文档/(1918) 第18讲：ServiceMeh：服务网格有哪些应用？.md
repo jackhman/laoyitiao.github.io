@@ -24,7 +24,7 @@
 
 Service Mesh 基于边车模式演进，通过在系统中添加边车代理，也就是 Sidecar Proxy 实现。
 
-![image.png](https://s0.lgstatic.com/i/image/M00/18/6A/Ciqc1F7YqhyAVsPfAAF3tkypmzU109.png)
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/18/6A/Ciqc1F7YqhyAVsPfAAF3tkypmzU109.png"/>
 
 Service Mesh 可以认为是边车模式的进一步扩展，提供了以下功能：
 

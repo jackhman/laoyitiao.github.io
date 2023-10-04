@@ -32,7 +32,7 @@ management.metrics.export.prometheus.enabled=true
 
 启动之后，我们就可以通过访问[监控接口](http://localhost:8080/actuator/prometheus)来获取监控数据。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/50/07/CgqCHl9htcuAAw51AAK0O_g_pbM862.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/50/07/CgqCHl9htcuAAw51AAK0O_g_pbM862.png"/>
 
 想要监控业务数据也是比较简单的，你只需要注入一个 MeterRegistry 实例即可，下面是一段示例代码：
 
@@ -60,13 +60,13 @@ test_total{from="127.0.0.1",method="test",} 5.0
 
 这里简单介绍一下流行的**Prometheus 监控体系**，Prometheus 使用拉的方式获取监控数据，这个暴露数据的过程可以交给功能更加齐全的 telegraf 组件。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/50/07/CgqCHl9htdiAO89HAAK1NRYCNZE604.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/50/07/CgqCHl9htdiAO89HAAK1NRYCNZE604.png"/>
 
 如上图，我们通常使用 Grafana 进行监控数据的展示，使用 AlertManager 组件进行提前预警。这一部分的搭建工作不是我们的重点，感兴趣的同学可自行研究。
 
 下图便是一张典型的监控图，可以看到 Redis 的缓存命中率等情况。
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/4F/FB/Ciqc1F9htd-AXIKHAANYYdIDl6g753.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/4F/FB/Ciqc1F9htd-AXIKHAANYYdIDl6g753.png"/>
 
 ### Java 生成火焰图
 
@@ -82,7 +82,7 @@ java -agentpath:/root/build/libasyncProfiler.so=start,svg,file=profile.svg -jar 
 
 如下图所示，纵向，表示的是调用栈的深度；横向，表明的是消耗的时间。所以格子的宽度越大，越说明它可能是一个瓶颈。一层层向下浏览，即可找到需要优化的目标。
 
-![2020-08-21 17-07-35.2020-08-21 17_12_29.gif](https://s0.lgstatic.com/i/image/M00/4F/FC/Ciqc1F9htfOAN3G1AEK7W4TM0AU264.gif)
+<Image alt="2020-08-21 17-07-35.2020-08-21 17_12_29.gif" src="https://s0.lgstatic.com/i/image/M00/4F/FC/Ciqc1F9htfOAN3G1AEK7W4TM0AU264.gif"/>
 
 ### 优化思路
 
@@ -90,7 +90,7 @@ java -agentpath:/root/build/libasyncProfiler.so=start,svg,file=profile.svg -jar 
 
 如下图，在浏览器中输入相应的域名，需要通过 DNS 解析到具体的 IP 地址上，为了保证高可用，我们的服务一般都会部署多份，然后使用 Nginx 做反向代理和负载均衡。
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image/M00/4F/FC/Ciqc1F9htgCAcdwGAAIVQmXnOPo885.png)
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/4F/FC/Ciqc1F9htgCAcdwGAAIVQmXnOPo885.png"/>
 
 Nginx 根据资源的特性，会承担一部分动静分离的功能。其中，动态功能部分，会进入我们的SpringBoot 服务。
 
@@ -287,7 +287,7 @@ java -javaagent:/opt/skywalking-agent/skywalking-agent.jar -Dskywalking.agent.se
 
 访问一些服务的链接，打开 Skywalking 的 UI，即可看到下图的界面。这些指标可以类比"01 \| 理论分析：性能优化，有哪些衡量指标？需要注意什么？"提到的衡量指标去理解，我们就可以从图中找到响应比较慢 QPS 又比较高的接口，进行专项优化。
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image/M00/4F/FD/Ciqc1F9htwyARKqMAAgxG3QYe8A553.png)
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/4F/FD/Ciqc1F9htwyARKqMAAgxG3QYe8A553.png"/>
 
 ### 各个层次的优化方向
 
@@ -315,13 +315,13 @@ service 层会频繁使用更底层的资源，通过组合的方式获取我们
 
 这里要着重提到的一点，就是分布式事务。
 
-![Drawing 6.png](https://s0.lgstatic.com/i/image/M00/50/08/CgqCHl9htvaAf1S-AAKlZCq3SXg275.png)
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/50/08/CgqCHl9htvaAf1S-AAKlZCq3SXg275.png"/>
 
 如上图，四个操作分散在三个不同的资源中。要想达到一致性，需要三个不同的资源 MySQL、MQ、ElasticSearch 进行统一协调。它们底层的协议，以及实现方式，都是不一样的，那就无法通过 Spring 提供的 Transaction 注解来解决，需要借助外部的组件来完成。
 
 很多人都体验过，加入了一些保证一致性的代码，一压测，性能掉的惊掉下巴。分布式事务是性能杀手，因为它要使用额外的步骤去保证一致性，常用的方法有：两阶段提交方案、TCC、本地消息表、MQ 事务消息、分布式事务中间件等。
 
-![Drawing 7.png](https://s0.lgstatic.com/i/image/M00/4F/FD/Ciqc1F9htx6ADeh6AAFoqvxy4eM753.png)
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/4F/FD/Ciqc1F9htx6ADeh6AAFoqvxy4eM753.png"/>
 
 如上图，分布式事务要在改造成本、性能、时效等方面进行综合考虑。有一个介于分布式事务和非事务之间的名词，叫作**柔性事务**。柔性事务的理念是将业务逻辑和互斥操作，从资源层上移至业务层面。
 

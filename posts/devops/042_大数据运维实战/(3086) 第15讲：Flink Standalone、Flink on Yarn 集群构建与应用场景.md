@@ -12,7 +12,7 @@ Flink 是一个高性能、高吞吐、低延迟的流处理框架，用于在�
 
 Flink 的集群架构是基于 master/slave 模式，它由一个 Flink Master 和多个 Task Manager 组成，Flink Master 和 Task Manager 是进程级组件，其他的组件都是进程内的组件，内部结构如下图所示。
 
-![image](https://s0.lgstatic.com/i/image/M00/1F/C5/CgqCHl7nNd6AMeXKAAGBwtm077A086.png)
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/1F/C5/CgqCHl7nNd6AMeXKAAGBwtm077A086.png"/>
 
 一个 Flink Master 中由一个 Resource Manager 和多个 Job Manager 组成 ，每一个 Job Manager 单独管理一个具体的 Job，Job Manager 中的 Scheduler 组件负责调度执行该 Job 中所有 Task，也就是整个资源调度的起点。
 
@@ -164,7 +164,7 @@ start-cluster.sh 脚本会首先启动 master 服务，然后自动连接到 Fli
 
 Flink 集群启动后，它自带了一个 Dashboard 监控页面，访问 <http://nnmaster.cloud:8081>，如下图所示：
 
-![image](https://s0.lgstatic.com/i/image/M00/1F/B5/Ciqc1F7nMn-AUBcpAAEP4EaKlKU780.png)
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/1F/B5/Ciqc1F7nMn-AUBcpAAEP4EaKlKU780.png"/>
 
 在此界面中，可以查看集群可用的 Task Slots、运行的 job、已经完成的 job，以及 Task Managers 节点的状态信息、Job Manager 的配置信息等。此界面使用很简单，这里不过多描述了。
 
@@ -176,7 +176,7 @@ Flink 集群启动后，它自带了一个 Dashboard 监控页面，访问 <http
 
 此例子是一个 Flink 自带的 wordcount 统计，如果此命令正常执行，那么则有结果输出，此时登录 Flink 的 Web 界面，可看到如下图已经完成的任务：
 
-![image](https://s0.lgstatic.com/i/image/M00/1F/B5/Ciqc1F7nMouAbehBAACn_Db-PK0368.png)
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/1F/B5/Ciqc1F7nMouAbehBAACn_Db-PK0368.png"/>
 
 除了上面的用法外，还可加上输入源和输出路径，命令执行如下：
 
@@ -196,7 +196,7 @@ Flink on Yarn 模式的原理是依靠 Yarn 来调度 Flink 任务的，这种�
 
 下图展示了 Flink On Yarn 的实现逻辑：
 
-![image](https://s0.lgstatic.com/i/image/M00/1F/C5/CgqCHl7nNf2ATZpjAALuXapYD0o199.png)
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/1F/C5/CgqCHl7nNf2ATZpjAALuXapYD0o199.png"/>
 
 每个步骤的执行过程如下：
 
@@ -218,7 +218,7 @@ Flink on Yarn 模式的原理是依靠 Yarn 来调度 Flink 任务的，这种�
 
 使用此模式，需要提前在 Yarn 中初始化一个 Flink 集群，并申请指定的集群资源池，以后的 Flink 任务都会提交到这个资源池下运行。该 Flink 集群会常驻在 Yarn 集群中，除非手工停止。大致原理如下图所示：
 
-![image](https://s0.lgstatic.com/i/image/M00/1F/B9/Ciqc1F7nNgmARH9kAACweKT2y6U225.png)
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/1F/B9/Ciqc1F7nNgmARH9kAACweKT2y6U225.png"/>
 
 此种模式下创建的 Flink 集群会独占资源，不管有没有 Flink 任务在执行，Yarn 上面的其他任务都无法共享使用这些资源。
 
@@ -226,7 +226,7 @@ Flink on Yarn 模式的原理是依靠 Yarn 来调度 Flink 任务的，这种�
 
 此模式每次提交 Flink 任务，都会创建一个新的 Flink 集群，每个 Flink 任务之间相互独立、互不影响，管理方便。大致原理如下图所示：
 
-![image](https://s0.lgstatic.com/i/image/M00/1F/C5/CgqCHl7nNhCAJXT0AADT0HW3bSs714.png)
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/1F/C5/CgqCHl7nNhCAJXT0AADT0HW3bSs714.png"/>
 
 此模式下，任务执行完成之后创建的 Flink 集群资源也会随之释放，不会额外占用资源，这种按需使用模式，可以使集群资源利用率达到最大，因此，工作中推荐使用此模式。
 
@@ -294,17 +294,17 @@ yarn.scheduler.maximum-allocation-vcores
 
 回到之前的话题，在上面命令执行完毕后，会有输出日志信息，可以从日志中找到如下图所示的信息：
 
-![image](https://s0.lgstatic.com/i/image/M00/1F/B6/Ciqc1F7nMvOAFceWAAB-hvMtNfA437.png)
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/1F/B6/Ciqc1F7nMvOAFceWAAB-hvMtNfA437.png"/>
 
 这里提示在 slave001.cloud 启动了一个 web httpd 36873 端口。还可以看到，由于这个 job 是放到后台运行的，所以，最后还给出了几个提示，告诉我们，怎么关闭这个 job，如果要关闭，推荐使用 yarn shell 命令关闭。
 
 根据上图的提示，通过访问 36873 端口，可以打开 yarn 一个内嵌的 Flink 的 Dashboard，如下图所示：
 
-![image](https://s0.lgstatic.com/i/image/M00/1F/C1/CgqCHl7nMvyAU3XjAADFzBu0bTU689.png)
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/1F/C1/CgqCHl7nMvyAU3XjAADFzBu0bTU689.png"/>
 
 我们可以通过访问此页面来查看 Flink 任务的运行状态。此时，在 Yarn 的 8080 端口界面下，也可以发现有任务运行，如下图所示：
 
-![image](https://s0.lgstatic.com/i/image/M00/1F/C1/CgqCHl7nMwSASX5OAACTLV3fx_Q143.png)
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/1F/C1/CgqCHl7nMwSASX5OAACTLV3fx_Q143.png"/>
 
 可以看出，这个 Session-Cluster 模式在 Yarn 下相当于启动了一个任务，任务的名称为 Flink session cluster，任务类型为 apache flink，一直处于运行状态。此任务会常驻在 Yarn 中，现在，可以在这个 Session-Cluster 模式下运行一个 flink 任务，执行如下命令：
 
@@ -314,7 +314,7 @@ yarn.scheduler.maximum-allocation-vcores
 
 在此任务执行过程中，访问 http://slave001.cloud:36873 页面，即可看到此任务的执行状态，如下图所示：
 
-![image](https://s0.lgstatic.com/i/image/M00/1F/C2/CgqCHl7nMw-AAM2oAADY6YPrTFk158.png)
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/1F/C2/CgqCHl7nMw-AAM2oAADY6YPrTFk158.png"/>
 
 此界面显示了目前正在运行的任务，以及 Flink 剩余的资源、已经使用的资源等信息。
 
@@ -342,7 +342,7 @@ yarn.scheduler.maximum-allocation-vcores
 
 此任务提交后，在 Yarn 的 8080 界面下，可以看到提交的 Flink 任务，如下图所示：
 
-![image](https://s0.lgstatic.com/i/image/M00/1F/B6/Ciqc1F7nMyOAArfaAABNBvmrEKc414.png)
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/1F/B6/Ciqc1F7nMyOAArfaAABNBvmrEKc414.png"/>
 
 在 Pre-Job-Cluster 模式下，Flink 任务名称变成了 Flink pre-Job Cluster，此任务运行结束后，任务自动退出，占用资源自动释放。
 

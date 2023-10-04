@@ -195,7 +195,7 @@ flutter pub get
 
 2.打开后，**点击左侧项目的 Runner**，然后选择右侧的 Singing \& Capabilites，修改 Bundle Id 为对应在苹果开发者中创建的项目 Bundle Id，接下来选择 Team，登录开发者账户，自动查询相应的项目信息，如图 1 截图指引所示；
 
-![image (7).png](https://s0.lgstatic.com/i/image/M00/3D/C7/Ciqc1F8qoliAHwU5AALSnCYSZPg629.png)  
+<Image alt="image (7).png" src="https://s0.lgstatic.com/i/image/M00/3D/C7/Ciqc1F8qoliAHwU5AALSnCYSZPg629.png"/>  
 图 1 Xcode 配置指引
 
 3.回到项目根目录中运行下面命令并**执行 Flutter 的命令创建 relase 版本**；
@@ -210,7 +210,7 @@ flutter build ios
 
 * **选中左侧的 Runner**，并打开右侧的 General ，然后配置 Identity 中的版本号 Version 和 Build，如图 2 所示。
 
-![image (8).png](https://s0.lgstatic.com/i/image/M00/3D/D3/CgqCHl8qopOARENrAAaU0YGW44c040.png)  
+<Image alt="image (8).png" src="https://s0.lgstatic.com/i/image/M00/3D/D3/CgqCHl8qopOARENrAAaU0YGW44c040.png"/>  
 图 2 配置指引
 
 <br />

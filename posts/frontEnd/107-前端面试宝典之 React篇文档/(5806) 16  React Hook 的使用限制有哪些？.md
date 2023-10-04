@@ -18,7 +18,7 @@ React 在 2013 \~ 2018 年走过了它的第一个阶段。毋庸置疑，React 
 
 * 怎么做：讲述如何规避使用限制会引起的问题。
 
-![React Hooks 使用限制.png](https://s0.lgstatic.com/i/image2/M01/06/8E/Cip5yGAFRPOAeuOVAABxuxywIJg368.png)
+<Image alt="React Hooks 使用限制.png" src="https://s0.lgstatic.com/i/image2/M01/06/8E/Cip5yGAFRPOAeuOVAABxuxywIJg368.png"/>
 
 ### 入手
 
@@ -118,7 +118,7 @@ function RenderFunctionComponent() {
 
 当初次渲染时，就会有两对 state 与 setter 被放入数组中，其中第 0 个就是 FirstName 那组，第 1 个就是 LastName 那组。如下图所示：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/8D/FC/CgqCHmABPPiAG3BtAAE77HQGy1U017.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/8D/FC/CgqCHmABPPiAG3BtAAE77HQGy1U017.png"/>
 
 那么在后续渲染中，也会保持这样一个规律获取对应的组。那这里就会产生一个问题：如果在 if 条件中调用 useState 会怎样呢？就会造成数组的取值错位，所以不能在 React 的循环、条件或嵌套函数中调用 Hook。
 
@@ -160,7 +160,7 @@ function RenderFunctionComponent() {
 >
 > 这些限制会在编码上造成一定程度的心智负担，新手可能会写错，为了避免这样的情况，可以引入 ESLint 的 Hooks 检查插件进行预防。
 
-![React Hooks 使用限制总.png](https://s0.lgstatic.com/i/image2/M01/06/8E/Cip5yGAFRQKANoZGAAGHTWta8TA980.png)
+<Image alt="React Hooks 使用限制总.png" src="https://s0.lgstatic.com/i/image2/M01/06/8E/Cip5yGAFRQKANoZGAAGHTWta8TA980.png"/>
 
 ### 总结
 
@@ -172,7 +172,7 @@ function RenderFunctionComponent() {
 
 *** ** * ** ***
 
-[![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/72/94/Ciqc1F_EZ0eANc6tAASyC72ZqWw643.png)](https://shenceyun.lagou.com/t/mka)
+[<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/72/94/Ciqc1F_EZ0eANc6tAASyC72ZqWw643.png"/>](https://shenceyun.lagou.com/t/mka)
 
 《大前端高薪训练营》
 

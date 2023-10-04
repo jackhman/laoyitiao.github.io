@@ -8,7 +8,7 @@
 
 当我们想要分析一个线上文件的时候，首先要思考，能不能这样做？ 这里你可以先用`htop`指令看一下当前的负载。如果你的机器上没有`htop`，可以考虑用`yum`或者`apt`去安装。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/5C/7F/CgqCHl-BkJ6AcP32AAduMy8fcSw412.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/5C/7F/CgqCHl-BkJ6AcP32AAduMy8fcSw412.png"/>
 
 如上图所示，我的机器上 8 个 CPU 都是 0 负载，`2G`的内存用了一半多，还有富余。 我们用`wget`将目标文件下载到本地（如果你没有 wget，可以用`yum`或者`apt`安装）。
 
@@ -18,7 +18,7 @@ wget 某网址（自己替代）
 
 然后我们用`ls`查看文件大小。发现这只是一个 7M 的文件，因此对线上的影响可以忽略不计。如果文件太大，建议你用`scp`指令将文件拷贝到闲置服务器再分析。下图中我使用了`--block-size`让`ls`以`M`为单位显示文件大小。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/5C/74/Ciqc1F-BkKeAQDs9AACqJbZ2jCM025.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/5C/74/Ciqc1F-BkKeAQDs9AACqJbZ2jCM025.png"/>
 
 确定了当前机器的`CPU`和内存允许我进行分析后，我们就可以开始第二步操作了。
 
@@ -26,7 +26,7 @@ wget 某网址（自己替代）
 
 在分析日志前，给你提个醒，记得要`less`一下，看看日志里面的内容。之前我们说过，尽量使用`less`这种不需要读取全部文件的指令，因为在线上执行`cat`是一件非常危险的事情，这可能导致线上服务器资源不足。
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/5C/7F/CgqCHl-BkK6AcDGvAAjaPXe-Nbc605.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/5C/7F/CgqCHl-BkK6AcDGvAAjaPXe-Nbc605.png"/>
 
 如上图所示，我们看到`nginx`的`access_log`每一行都是一次用户的访问，从左到右依次是：
 
@@ -42,7 +42,7 @@ wget 某网址（自己替代）
 
 PV（Page View），用户每访问一个页面就是一次`Page View`。对于`nginx`的`acess_log`来说，分析 PV 非常简单，我们直接使用`wc -l`就可以看到整体的`PV`。
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/5C/74/Ciqc1F-BkL6AGiY-AABQPMnGu40979.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/5C/74/Ciqc1F-BkL6AGiY-AABQPMnGu40979.png"/>
 
 如上图所示：我们看到了一共有 51462 条 PV。
 
@@ -54,17 +54,17 @@ PV（Page View），用户每访问一个页面就是一次`Page View`。对于`
 
 你可以看到我们用`$4`代表文本的第 4 列，也就是时间所在的这一列，如下图所示：
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image/M00/5C/7F/CgqCHl-BkMaAb421AAGUr-N08hM187.png)
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/5C/7F/CgqCHl-BkMaAb421AAGUr-N08hM187.png"/>
 
 我们想要按天统计，可以利用 `awk`提供的字符串截取的能力。
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image/M00/5C/7F/CgqCHl-BkMuAKo9UAAIcPR902XQ858.png)
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/5C/7F/CgqCHl-BkMuAKo9UAAIcPR902XQ858.png"/>
 
 上图中，我们使用`awk`的`substr`函数，数字`2`代表从第 2 个字符开始，数字`11`代表截取 11 个字符。
 
 接下来我们就可以分组统计每天的日志条数了。
 
-![Drawing 6.png](https://s0.lgstatic.com/i/image/M00/5C/7F/CgqCHl-BkNGAB-VgAASNmct9nQA628.png)
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/5C/7F/CgqCHl-BkNGAB-VgAASNmct9nQA628.png"/>
 
 上图中，使用`sort`进行排序，然后使用`uniq -c`进行统计。你可以看到从 2015 年 5 月 17 号一直到 6 月 4 号的日志，还可以看到每天的 PV 量大概是在 2000\~3000 之间。
 
@@ -72,7 +72,7 @@ PV（Page View），用户每访问一个页面就是一次`Page View`。对于`
 
 接下来我们分析 UV。UV（Uniq Visitor），也就是统计访问人数。通常确定用户的身份是一个复杂的事情，但是我们可以用 IP 访问来近似统计 UV。
 
-![Drawing 7.png](https://s0.lgstatic.com/i/image/M00/5C/74/Ciqc1F-BkNeAam2YAACxCjlKsvc488.png)
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/5C/74/Ciqc1F-BkNeAam2YAACxCjlKsvc488.png"/>
 
 上图中，我们使用 awk 去打印`$1`也就是第一列，接着`sort`排序，然后用`uniq`去重，最后用`wc -l`查看条数。 这样我们就知道日志文件中一共有`2660`个 IP，也就是`2660`个 UV。
 
@@ -105,7 +105,7 @@ awk '{print substr($4, 2, 11) " " $1}' access.log |\
 
 编写完上面的脚本之后，我们保存退出编辑器。接着执行`chmod +x ./sum.sh`，给`sum.sh`增加执行权限。然后我们可以像下图这样执行，获得结果：
 
-![Drawing 8.png](https://s0.lgstatic.com/i/image/M00/5C/7F/CgqCHl-BkOKAfpNwAAOFk0EhDjU183.png)
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/5C/7F/CgqCHl-BkOKAfpNwAAOFk0EhDjU183.png"/>
 
 如上图，`IP`地址已经按天进行统计好了。
 

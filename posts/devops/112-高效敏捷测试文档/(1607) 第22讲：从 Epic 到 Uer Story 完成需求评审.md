@@ -66,7 +66,7 @@ Epic 在敏捷中应用还是比较普遍的，但不同的人对 Epic 理解是
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/0B/4C/Ciqah16MkFuAa3XkAAUpaiyTZ7k375.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/4C/Ciqah16MkFuAa3XkAAUpaiyTZ7k375.png"/>
 
 图1 用户故事地图示例
 
@@ -76,7 +76,7 @@ Epic 在敏捷中应用还是比较普遍的，但不同的人对 Epic 理解是
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/0B/4C/Ciqah16MkFyALNRXAAHVTmmD7_U363.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/4C/Ciqah16MkFyALNRXAAHVTmmD7_U363.png"/>
 
 图2 特性、Epic、用户故事和任务之间的关系
 
@@ -120,7 +120,7 @@ Epic 在敏捷中应用还是比较普遍的，但不同的人对 Epic 理解是
 
 经过评审之后，修改评审中所提出的问题，就形成了新的、更合理的用户故事地图，如图 3 所示。
 
-![](https://s0.lgstatic.com/i/image3/M01/0B/4C/Ciqah16MkFyAFXDkAAFoeNHP4bo595.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/4C/Ciqah16MkFyAFXDkAAFoeNHP4bo595.png"/>
 
 图3 评审通过的用户故事地图示例
 
@@ -174,7 +174,7 @@ Epic 在敏捷中应用还是比较普遍的，但不同的人对 Epic 理解是
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/0B/4C/Ciqah16MkF2AQsP7AAG3hCtxZXY244.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/4C/Ciqah16MkF2AQsP7AAG3hCtxZXY244.png"/>
 
 图4 用户故事评审过程示意图
 

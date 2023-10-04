@@ -126,7 +126,7 @@ JSON 图支持 3 种不同的抽象操作，即读取（Get）、设置（Set）
 
 JSON 图是一个抽象的结构，在实际的开发中，需要使用的是具体的数据源、模型和路由器。接下来我会对这三者展开讲解。下图是 Falcor 中不同组成部分的架构图。
 
-![image (8).png](https://s0.lgstatic.com/i/image/M00/2B/C2/CgqCHl7-6leAYwDZAABWO8EqY4w340.png)
+<Image alt="image (8).png" src="https://s0.lgstatic.com/i/image/M00/2B/C2/CgqCHl7-6leAYwDZAABWO8EqY4w340.png"/>
 
 ### 数据源
 

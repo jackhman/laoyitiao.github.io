@@ -19,7 +19,7 @@ Kubernetes 集群
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/04/39/Ciqah1595s2ANX-fAABk4rHlqxA992.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/04/39/Ciqah1595s2ANX-fAABk4rHlqxA992.png"/>
 
 <br />
 
@@ -29,7 +29,7 @@ Kubernetes 集群
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/04/39/Ciqah1595vqAHKWMAAA0p9KyiHI337.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/04/39/Ciqah1595vqAHKWMAAA0p9KyiHI337.png"/>
 
 <br />
 
@@ -43,7 +43,7 @@ Kubernetes 集群
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/04/21/Ciqah159xA6AU1_bAAC_2Bqc9uM667.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/04/21/Ciqah159xA6AU1_bAAC_2Bqc9uM667.png"/>
 
 <br />
 
@@ -267,7 +267,7 @@ spec:
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/04/39/Ciqah1595zWAa7SbAABbO7aQF0w788.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/04/39/Ciqah1595zWAa7SbAABbO7aQF0w788.png"/>
 
 <br />
 

@@ -20,7 +20,7 @@
 
 最常见的设计模式有：单例模式、工厂模式、代理模式、构造者模式、责任链模式、适配器模式、观察者模式等，如下图所示。
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/2D/CgotOV1412GAIvkDAAIBtlkYfqo038.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/2D/CgotOV1412GAIvkDAAIBtlkYfqo038.png"/>
 
 面试中对于设计模式，你应该明白不同的设计用来解决什么场景问题，对于常用的设计模式能够灵活运用。下面重点介绍几种常用的设计模式。
 
@@ -42,7 +42,7 @@
 
 下面结合设计模式的实际应用，来介绍常用的设计模式，如下图所示。在面试时遇到类似问题，记得要将设计模式与实际业务场景进行结合，来体现对设计模式的理解和应用能力。
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/10/CgoB5l142ISAAe_XAAISBI_gX4I754.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/10/CgoB5l142ISAAe_XAAISBI_gX4I754.png"/>
 
 ###### 工厂模式
 
@@ -72,7 +72,7 @@
 
 Java 语言特性的知识点汇总如下图所示。
 
-![](http://s0.lgstatic.com/i/image2/M01/8A/60/CgotOV13doqAUZwdAAJtuA27fL4326.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/60/CgotOV13doqAUZwdAAJtuA27fL4326.png"/>
 
 常用集合类实现与 Java 并发工具包 JUC 是常见考点，JUC 会在后面的多线程课程中进行详细讲解。
 
@@ -92,7 +92,7 @@ Java 的异常处理机制就是 try-catch-finally 机制，需要知道异常�
 
 关于 Java 的基础知识重点讲解最常考察点 HashMap 和 ConcurrentHashMap，以及 Java 的不同版本新技术特性，如下图所示。
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/2E/CgotOV1413iANCl1AAG3aLAzQ6M654.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/2E/CgotOV1413iANCl1AAG3aLAzQ6M654.png"/>
 
 面试中，Map 的实现这个题目能够考察到数据结构、Java 基础实现以及对并发问题处理思路的掌握程度。
 
@@ -108,7 +108,7 @@ Java 的异常处理机制就是 try-catch-finally 机制，需要知道异常�
 
 ###### 详解 Java 版本特性
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/0E/CgoB5l1414OAPPHoAAHK9xyeUdE686.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/0E/CgoB5l1414OAPPHoAAHK9xyeUdE686.png"/>
 
 Java 近些年一改以往的版本发布风格，发布频率提高了很多。目前大部分公司的生产环境使用的还是 1.8 版本，一少部分升级到 1.9 或 1.10 版本，Java 的 1.8 版本是一个长期支持的版本，最新发布的 1.11 版本也是一个长期支持的版本，1.11 版本中已经包含了 1.9、1.10 版本的功能，所以 1.8 和 1.11 版本是我们要重点关注的版本。
 
@@ -164,7 +164,7 @@ Java 近些年一改以往的版本发布风格，发布频率提高了很多。
 
 真题汇总如下图所示。
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/2E/CgotOV1414uAQSHlAAH_rsNrJqI449.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/2E/CgotOV1414uAQSHlAAH_rsNrJqI449.png"/>
 
 解题思路如下。
 
@@ -182,6 +182,6 @@ Java 近些年一改以往的版本发布风格，发布频率提高了很多。
 
 再汇总一些真题，包括基础概念，以及前面介绍过的知识点，如下图所示。
 
-![](http://s0.lgstatic.com/i/image2/M01/8B/0E/CgoB5l1415GALUZ6AAHoxTPQ0mw023.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/0E/CgoB5l1415GALUZ6AAHoxTPQ0mw023.png"/>
 
 下一课时的主题为 JVM 原理。  

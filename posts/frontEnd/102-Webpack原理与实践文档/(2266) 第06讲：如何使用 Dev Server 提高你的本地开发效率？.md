@@ -12,7 +12,7 @@
 
 对于以上的这些需求 Webpack 都已经提供了相对应的功能，其中部分功能需要用到一些周边的工具，具体效果如下：
 
-![理想的环境.gif](https://s0.lgstatic.com/i/image/M00/03/60/CgqCHl6ykgmAQxFBAPPMpiFtDhw170.gif)
+<Image alt="理想的环境.gif" src="https://s0.lgstatic.com/i/image/M00/03/60/CgqCHl6ykgmAQxFBAPPMpiFtDhw170.gif"/>
 
 所以，今天我们的主题就是：学习如何增强使用 Webpack 的开发体验。
 
@@ -32,7 +32,7 @@
 
 我们可以将浏览器移至屏幕的左侧，然后将编辑器移至右侧，此时我们尝试修改源代码，保存过后，以 watch 模式工作的 Webpack 就会自动重新打包，然后我们就可以在浏览器中刷新页面查看最新的结果，具体效果如下图所示：
 
-![image.png](https://s0.lgstatic.com/i/image/M00/03/18/Ciqc1F6yYKmAQNcsAAgeCW_ItQU095.png)
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/03/18/Ciqc1F6yYKmAQNcsAAgeCW_ItQU095.png"/>
 
 那此时我们的开发体验就是：修改代码 → Webpack 自动打包 → 手动刷新浏览器 → 预览运行结果。
 
@@ -77,11 +77,11 @@ webpack-dev-server 同样也是一个独立的 npm 模块，所以我们需要�
 
 运行 webpack-dev-server 这个命令时，它内部会启动一个 HTTP Server，为打包的结果提供静态文件服务，并且自动使用 Webpack 打包我们的应用，然后监听源代码的变化，一旦文件发生变化，它会立即重新打包，大致流程如下：
 
-![4.png](https://s0.lgstatic.com/i/image/M00/03/61/CgqCHl6ykrKAKqeOAABe6Avstu0065.png)
+<Image alt="4.png" src="https://s0.lgstatic.com/i/image/M00/03/61/CgqCHl6ykrKAKqeOAABe6Avstu0065.png"/>
 
 不过这里需要注意的是，webpack-dev-server 为了提高工作速率，它并没有将打包结果写入到磁盘中，而是暂时存放在内存中，内部的 HTTP Server 也是从内存中读取这些文件的。这样一来，就会减少很多不必要的磁盘读写操作，大大提高了整体的构建效率。
 
-![3.png](https://s0.lgstatic.com/i/image/M00/03/61/CgqCHl6ykr2ATByyAAA43IcwZBo618.png)
+<Image alt="3.png" src="https://s0.lgstatic.com/i/image/M00/03/61/CgqCHl6ykr2ATByyAAA43IcwZBo618.png"/>
 
 我们还可以为 webpack-dev-server 命令传入一个 --open 的参数，用于自动唤起浏览器打开我们的应用。打开浏览器过后，此时如果你有两块屏幕，就可以把浏览器放到另外一块屏幕上，然后体验一边编码，一边即时预览的开发环境了。
 
@@ -135,7 +135,7 @@ module.exports = {
 
 启动过后，我们打开浏览器，这里我们访问的页面文件和 bundle.js 文件均来自于打包结果。我们再尝试访问 favicon.ico，因为这个文件已经没有参与打包了，所以这个文件必然来源于 contentBase 中配置的目录了。
 
-![image (3).png](https://s0.lgstatic.com/i/image/M00/03/19/Ciqc1F6yYX2ANKWcAAPBaG2a7VI047.png)
+<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/03/19/Ciqc1F6yYX2ANKWcAAPBaG2a7VI047.png"/>
 
 #### Proxy 代理
 
@@ -153,7 +153,7 @@ webpack-dev-server 就支持直接通过配置的方式，添加代理服务。�
 
 我们可以先在浏览器中尝试访问其中的一个接口，具体结果如下图：
 
-![image (4).png](https://s0.lgstatic.com/i/image/M00/03/19/CgqCHl6yYZaANEg7AAcJihajV7o403.png)
+<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/03/19/CgqCHl6yYZaANEg7AAcJihajV7o403.png"/>
 
 GitHub API 的 Endpoint 都是在根目录下，也就是说不同的 Endpoint 只是 URL 中的路径部分不同，例如 https://api.github.com/users 和 https://api.github.com/events。
 
@@ -177,7 +177,7 @@ module.exports = {
 
 那此时我们请求 http://localhost:8080/api/users ，就相当于请求了 https://api.github.com/api/users。
 
-![2.png](https://s0.lgstatic.com/i/image/M00/03/61/CgqCHl6ykvCAKWlNAAAktiTnWHU229.png)
+<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/03/61/CgqCHl6ykvCAKWlNAAAktiTnWHU229.png"/>
 
 而我们真正希望请求的地址是 https://api.github.com/users，所以对于代理路径开头的 /api 我们要重写掉。我们可以添加一个 pathRewrite 属性来实现代理路径重写，重写规则就是把路径中开头的 /api 替换为空，pathRewrite 最终会以正则的方式来替换请求路径。
 
@@ -200,7 +200,7 @@ module.exports = {
 
 这样我们代理的地址就正常了。
 
-![图片1.png](https://s0.lgstatic.com/i/image/M00/03/61/CgqCHl6ykt-AfcoLAAAkkBntZkc327.png)
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image/M00/03/61/CgqCHl6ykt-AfcoLAAAkkBntZkc327.png"/>
 
 除此之外，我们还需设置一个 changeOrigin 属性为 true。这是因为默认代理服务器会以我们实际在浏览器中请求的主机名，也就是 localhost:8080 作为代理请求中的主机名。而一般服务器需要根据请求的主机名判断是哪个网站的请求，那 localhost:8080 这个主机名，对于 GitHub 的服务器来说，肯定无法正常请求，所以需要修改。
 
@@ -226,7 +226,7 @@ module.exports = {
 
 完成以后，打开命令行终端，运行 webpack-dev-server。然后打开浏览器，这里我们直接尝试请求 http://localhost:8080/api/users，得到的就是 GitHub 的用户数据。 因为这个地址已经被代理到了 GitHub 的用户数据接口。
 
-![image (7).png](https://s0.lgstatic.com/i/image/M00/03/19/Ciqc1F6yYeGAJ8GbAAcUqWinpoA554.png)
+<Image alt="image (7).png" src="https://s0.lgstatic.com/i/image/M00/03/19/Ciqc1F6yYeGAJ8GbAAcUqWinpoA554.png"/>
 
 此时，我们就可以回到代码中使用代理后的本地同源地址去请求后端接口，而不必担心出现跨域问题了。
 

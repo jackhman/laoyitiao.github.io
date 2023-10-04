@@ -8,7 +8,7 @@ Dubbo 是阿里开源的一个分布式服务框架，目的是支持高性能�
 
 下面这张图包含了 Dubbo 核心组件和调用流程：
 
-![image (2).png](https://s0.lgstatic.com/i/image/M00/1B/D3/Ciqc1F7fT3eAFWKFAAWh1hAU8J8466.png)
+<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/1B/D3/Ciqc1F7fT3eAFWKFAAWh1hAU8J8466.png"/>
 
 包括了下面几个角色：
 
@@ -48,7 +48,7 @@ Spring Cloud 基于 Spring Boot，是一系列组件的集成，为微服务开�
 
 Spring Cloud 的微服务组件都有多种选择，典型的架构图如下图所示：
 
-![image (3).png](https://s0.lgstatic.com/i/image/M00/1B/DE/CgqCHl7fT5CATRxXAAJPeC8Jmc8564.png)
+<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/1B/DE/CgqCHl7fT5CATRxXAAJPeC8Jmc8564.png"/>
 
 整体服务调用流程如下：
 

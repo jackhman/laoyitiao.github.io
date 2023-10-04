@@ -2,7 +2,7 @@
 
 下图是本课时即将要介绍的一个线上真实案例的架构图：
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/2D/3D/CgqCHl8C6QSAFcJrAAEUqK2v4nw728.png)  
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/2D/3D/CgqCHl8C6QSAFcJrAAEUqK2v4nw728.png"/>  
 
 某个线上案例图
 
@@ -37,7 +37,7 @@
 
 基本架构图如下：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/2D/3D/CgqCHl8C6TOABlahAADXH7tLpRw715.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/2D/3D/CgqCHl8C6TOABlahAADXH7tLpRw715.png"/>
 
 此架构需要 8 台服务器完成，每台服务器的作用和对应的 IP 信息都已经在图上进行了标注。最前面的一台是 Nginx 服务器，用于产生日志，然后由 Filebeat 来收集 Nginx 产生的日志，Filebeat 将收集到的日志推送（push）到 Kafka 集群中，完成日志的收集工作。接着，Logstash 去 Kafka 集群中拉取（pull）日志并进行日志过滤、分析，之后将日志发送到 Elasticsearch 集群中进行索引和存储，最后由 Kibana 完成日志的可视化查询。
 
@@ -266,29 +266,29 @@ root      7732 32678  0 15:13 pts/0    00:00:00 grep --color=auto node
 
 登录 Kibana，打开浏览器访问 http://172.16.213.152:5601，会自动打开 Kibana 的 Web 界面。在登录 Kibana 后，第一步要做的是配置 index_pattern，点击 Kibana 左侧导航中的 Management 菜单，然后选择右侧的 Index Patterns 按钮，如下图所示：
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/2D/3E/CgqCHl8C6eOAdnuxAAFsrmWOu4w817.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/2D/3E/CgqCHl8C6eOAdnuxAAFsrmWOu4w817.png"/>
 
 接着，点击 Index Patterns 按钮，开始创建一个 index pattern，如下图所示：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/2D/3E/CgqCHl8C6eqAAgLKAADsPr8crdw196.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/2D/3E/CgqCHl8C6eqAAgLKAADsPr8crdw196.png"/>
 
 点击上图右上角的 Create index pattern 按钮，创建 index pattern 的界面如下所示：
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image/M00/2D/3E/CgqCHl8C6fKANkWEAAFP5kYzi14872.png)
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/2D/3E/CgqCHl8C6fKANkWEAAFP5kYzi14872.png"/>
 
 这里需要填写一个 Index pattern 名称，这个 Index pattern，其实我已经在 Logstash 中定义好了，名为 nginxlogs-%{+YYYY.MM.dd}，而这里只需填入 nginxlogs-\* 即可。如果已经有对应的数据写入 Elasticsearch，那么 Kibana 会自动检测到并抓取映射文件，此时就可以创建 Index pattern 了，如上图所示。如果你填入索引名称后，右边的 "Next step" 按钮仍然是不可点击状态的，则说明 Kibana 还没有抓取到输入索引对应的映射文件，此时可以让 Filebeat 再生成一点数据，只要数据正常传到 Elasticsearch 中，那么 Kibana 就能马上检测到。
 
 接着，选择日志按照时间字段 "@timestamp" 进行排序，如下图所示：
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image/M00/2D/33/Ciqc1F8C6fiAPIYqAAFtNHZYRGg459.png)
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/2D/33/Ciqc1F8C6fiAPIYqAAFtNHZYRGg459.png"/>
 
 最后，点击 "Create index pattern" 按钮，完成 Index pattern 的创建，如下图所示：
 
-![Drawing 6.png](https://s0.lgstatic.com/i/image/M00/2D/3E/CgqCHl8C6f-ANFKgAAGQU0G9UVM669.png)
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/2D/3E/CgqCHl8C6f-ANFKgAAGQU0G9UVM669.png"/>
 
 创建完成 Index pattern 后，点击 kibana 左侧导航中的 Discover 导航栏，即可展示已经收集到的日志信息，如下图所示：
 
-![Drawing 7.png](https://s0.lgstatic.com/i/image/M00/2D/3E/CgqCHl8C6gqALoBmAAKJSgpPHmE324.png)
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/2D/3E/CgqCHl8C6gqALoBmAAKJSgpPHmE324.png"/>
 
 Kibana 的 Web 界面操作和使用比较简单，这里仅仅介绍下左侧导航栏中几个常用导航的含义及功能，更细节的功能可自行操作几遍就基本掌握了。
 

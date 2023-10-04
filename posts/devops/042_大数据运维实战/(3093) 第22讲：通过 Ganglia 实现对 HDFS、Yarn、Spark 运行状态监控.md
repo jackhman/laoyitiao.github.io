@@ -18,13 +18,13 @@ Ganglia 监控系统由三部分组成，分别是 Gmond、Gmetad、Webfrontend�
 
 一个简单的 Ganglia 监控系统结构图如下图所示：
 
-![4.png](https://s0.lgstatic.com/i/image/M00/30/13/CgqCHl8IQR2AK0dMAAFl7EwL5Ks931.png)  
+<Image alt="4.png" src="https://s0.lgstatic.com/i/image/M00/30/13/CgqCHl8IQR2AK0dMAAFl7EwL5Ks931.png"/>  
 Ganglia 监控系统图
 从图中可以看出，一个 Ganglia 监控系统由多个 Gmond 进程和一个主 Gmetad 进程组成，所有 Gmond 进程将收集到的监控数据汇总到 Gmetad 管理端，而 Gmetad 将数据存储到 RRD 数据库中，最后通过 PHP 程序在 Web 界面进行展示。
 
 这是最简单的 Ganglia 运行结构图，在复杂的网络环境下，还有更复杂的 Ganglia 监控架构。下图是 Ganglia 的另一种分布式监控架构图。
 
-![5.png](https://s0.lgstatic.com/i/image/M00/30/07/Ciqc1F8IQTSAHWc_AALo2flr8-U281.png)  
+<Image alt="5.png" src="https://s0.lgstatic.com/i/image/M00/30/07/Ciqc1F8IQTSAHWc_AALo2flr8-U281.png"/>  
 Ganglia 的另一种分布式监控架构图
 从这个图中可以看出，Gmond 和 Gmetad 实现了分级架构，二级 Gmond（即图中指向 Gmetad 和一级 Gmond 的 Gmond）可以等待 Gmetad 将监控数据收集走，也可以将监控数据交给一级 Gmond，进而让一级 Gmond 将数据最终交付给 Gmetad。同时，Gmetad 也可以收集其他 Gmetad 的数据，比如，对于上图中的集群 1 和集群 2，集群 2 是一个二级 Gmetad，它将自身收集到的数据又一次地传输给了集群 1 这个一级 Gmetad；而集群 1 将所有集群的数据进行汇总，然后通过 Web 进行统一展现。
 
@@ -227,7 +227,7 @@ $conf['ganglia_port'] = 8652;
 
 Ganglia 服务启动成功后，还需要启动 Apache 服务，然后访问<http://172.16.213.157/ganglia>，稍等片刻，就可以在 Web 上查看获取的监控数据了，如下图所示：
 
-![image3.png](https://s0.lgstatic.com/i/image/M00/2F/F0/CgqCHl8IEhqAE47sAALnNEBdEJ0505.png)  
+<Image alt="image3.png" src="https://s0.lgstatic.com/i/image/M00/2F/F0/CgqCHl8IEhqAE47sAALnNEBdEJ0505.png"/>  
 Web 上获取的监控数据图
 从这里可以看到，集群 bigdata 已经监控到了 5 台主机，点击这个集群，可以看到 5 台主机的详细信息和各种监控指标。
 
@@ -253,7 +253,7 @@ jobhistoryserver.sink.ganglia.servers=172.16.213.120:8649
 
 所有 Hadoop 服务器重启完毕后，在 Ganglia 的 Web 界面，就可以看到相关状态图了，如下图所示：
 
-![image4.png](https://s0.lgstatic.com/i/image/M00/2F/E4/Ciqc1F8IEiuAM0NNAANjAM7xHtY497.png)  
+<Image alt="image4.png" src="https://s0.lgstatic.com/i/image/M00/2F/E4/Ciqc1F8IEiuAM0NNAANjAM7xHtY497.png"/>  
 服务器重启后在 Ganglia 的 Web 界面相关状态图
 Hadoop 在这个图中，dfs.FSNamesystem.CapacityTotal、dfs.FSNamesystem.CapacityRemaining 及 dfs.FSNamesystem.CapacityRemainingGB 等都是 Ganglia 对 Hadoop 的监控指标，我们可以通过程序获取这些指标的具体值，然后实现告警等操作。
 

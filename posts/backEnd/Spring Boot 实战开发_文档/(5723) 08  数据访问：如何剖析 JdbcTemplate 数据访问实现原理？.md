@@ -12,7 +12,7 @@
 
 按照定义，完成一系列步骤时，这些步骤需要遵循统一的工作流程，个别步骤的实现细节除外，这时我们就需要考虑使用模板方法模式处理了。模板方法模式的结构示意图如下所示：
 
-![图片7.png](https://s0.lgstatic.com/i/image/M00/84/15/Ciqc1F_THuiASLZ8AACi3dbo9Ww445.png)  
+<Image alt="图片7.png" src="https://s0.lgstatic.com/i/image/M00/84/15/Ciqc1F_THuiASLZ8AACi3dbo9Ww445.png"/>  
 模板方法设计模式结构示意图
 
 上图中，抽象模板类 AbstractClass 定义了一套工作流程，而具体实现类 ConcreteClassA 和 ConcreteClassB 对工作流程中的某些特定步骤进行了实现。
@@ -21,7 +21,7 @@
 
 在软件开发过程中，回调（Callback）是一种常见的实现技巧，回调的含义如下图所示：
 
-![图片8.png](https://s0.lgstatic.com/i/image/M00/84/15/Ciqc1F_THviAWcz1AABn8HsEEZA924.png)  
+<Image alt="图片8.png" src="https://s0.lgstatic.com/i/image/M00/84/15/Ciqc1F_THviAWcz1AABn8HsEEZA924.png"/>  
 回调示意图
 
 上图中，ClassA 的 operation1() 方法调用 ClassB 的 operation2() 方法，ClassB 的 operation2() 方法执行完毕再主动调用 ClassA 的 callback() 方法，这就是回调机制，体现的是一种双向的调用方式。

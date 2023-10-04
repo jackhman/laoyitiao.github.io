@@ -24,7 +24,7 @@ diff 算法通常被认为 React 的核心点，在面试中很受重视。之�
 
 2. 横向对比 React、React-like 框架及 Vue 的 diff 算法。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/8C/55/CgqCHl_qyoCARaC-AABHz3sJYwo329.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/8C/55/CgqCHl_qyoCARaC-AABHz3sJYwo329.png"/>
 
 ### 入手
 
@@ -34,7 +34,7 @@ diff 算法通常被认为 React 的核心点，在面试中很受重视。之�
 
 而 diff 算法探讨的就是虚拟 DOM 树发生变化后，生成 DOM 树更新补丁的方式。它通过对比新旧两株虚拟 DOM 树的变更差异，将更新补丁作用于真实 DOM，以最小成本完成视图更新。
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/8C/55/CgqCHl_qyouAAkb9AAB_cmWuZhc920.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/8C/55/CgqCHl_qyouAAkb9AAB_cmWuZhc920.png"/>
 
 具体的流程是这样的：
 
@@ -44,7 +44,7 @@ diff 算法通常被认为 React 的核心点，在面试中很受重视。之�
 
 * 最后再根据 patch 去更新真实的 DOM，反馈到用户的界面上。
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image/M00/8C/55/CgqCHl_qypGAZPuGAADYrK9nkJY878.png)
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/8C/55/CgqCHl_qypGAZPuGAADYrK9nkJY878.png"/>
 
 举一个简单易懂的例子：
 
@@ -142,7 +142,7 @@ Fiber 机制下，整个更新过程由 current 与 workInProgress 两株树双�
 
 以下 Preact 的 diff 算法的图示，可以看到它将 diff 分为了三个类型：Fragment、Component 及 DOM Node。
 
-![Drawing 6.png](https://s0.lgstatic.com/i/image/M00/8C/4A/Ciqc1F_qyqeAWvpYAAEVYxYrQis686.png)
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/8C/4A/Ciqc1F_qyqeAWvpYAAEVYxYrQis686.png"/>
 
 * Fragment 对应 React 的树比较；
 
@@ -182,7 +182,7 @@ Vue 2.0 因为使用了 [snabbdom](https://github.com/snabbdom/snabbdom/tree/807
 >
 > Vue 的整体 diff 策略与 React 对齐，虽然缺乏时间切片能力，但这并不意味着 Vue 的性能更差，因为在 Vue 3 初期引入过，后期因为收益不高移除掉了。除了高帧率动画，在 Vue 中其他的场景几乎都可以使用防抖和节流去提高响应性能。
 
-![Diff 算法1.png](https://s0.lgstatic.com/i/image2/M01/04/31/CgpVE1_q2zGAe9UzAACKAZViwbM237.png)  
+<Image alt="Diff 算法1.png" src="https://s0.lgstatic.com/i/image2/M01/04/31/CgpVE1_q2zGAe9UzAACKAZViwbM237.png"/>  
 
 这里需要注意的是：对比过程中切忌踩一捧一，容易引发面试官反感。
 
@@ -203,7 +203,7 @@ diff 算法一直在 React 中处于核心的位置，所以本讲讲到的内�
 
 *** ** * ** ***
 
-[![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/72/94/Ciqc1F_EZ0eANc6tAASyC72ZqWw643.png)](https://shenceyun.lagou.com/t/mka)
+[<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/72/94/Ciqc1F_EZ0eANc6tAASyC72ZqWw643.png"/>](https://shenceyun.lagou.com/t/mka)
 
 《大前端高薪训练营》
 

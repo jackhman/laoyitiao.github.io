@@ -72,7 +72,7 @@ kubectl get pods -l 'environment in (production),tier in (frontend)'
 
 通过 Deployment，我们就不需要再关心和操作 ReplicaSet 了。
 
-![image (3).png](https://s0.lgstatic.com/i/image/M00/4D/56/CgqCHl9Z5ayANEsBAAPzg_vpPBs686.png)  
+<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/4D/56/CgqCHl9Z5ayANEsBAAPzg_vpPBs686.png"/>  
 
 （<https://storage.googleapis.com/cdn.thenewstack.io/media/2017/11/07751442-deployment.png>）
 

@@ -170,7 +170,7 @@ async function middleware1() {
 
 我们将上述过程总结为下图，帮助你理解：
 
-![202127-92025.png](https://s0.lgstatic.com/i/image6/M00/03/C9/Cgp9HWAfsPuAMXAzAAIE4xCY0WY258.png)  
+<Image alt="202127-92025.png" src="https://s0.lgstatic.com/i/image6/M00/03/C9/Cgp9HWAfsPuAMXAzAAIE4xCY0WY258.png"/>  
 Express 工作机制
 
 通过上述内容，我们可以看到，Express 的`next()`方法维护了遍历中间件列表的 Index 游标，中间件每次调用`next()`方法时，会通过**增加 Index 游标的方式**找到下一个中间件并执行。我们采用类似的 hard coding 形式帮助大家理解 Express 插件作用机制：
@@ -290,7 +290,7 @@ function applyMiddleware(...middlewares) {
 
 我们将 Redux 的中间件作用机制总结为下图：
 
-![202127-92020.png](https://s0.lgstatic.com/i/image6/M00/03/C9/Cgp9HWAfsQuABGmXAAGNk0fcn-c946.png)  
+<Image alt="202127-92020.png" src="https://s0.lgstatic.com/i/image6/M00/03/C9/Cgp9HWAfsQuABGmXAAGNk0fcn-c946.png"/>  
 Redux 的中间件作用机制
 
 看上去也像是一个洋葱圈模型，但是对于同步调用和异步调用稍有不同，以三个中间件为例。
@@ -426,6 +426,6 @@ export default function compose(middlewares) {
 
 本讲主要内容如下：
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/94/A4/CgqCHmAY-AqAIZqkAAO1O62z-y4965.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/94/A4/CgqCHmAY-AqAIZqkAAO1O62z-y4965.png"/>
 
 在下一讲中，我们将继续围绕着代码设计中的灵活性和定制性这一话题展开，同时也给大家留一个思考题：你在平时开发中，见过或者使用过哪些插件化的工程或技术呢？欢迎在留言区和我分享你的观点，我们下一讲再见。

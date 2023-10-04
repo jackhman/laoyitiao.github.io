@@ -4,19 +4,19 @@
 
 目前较为常见三种导航栏功能：底部导航栏、顶部导航栏和侧边导航栏。为了更好的界面效果，我在导航栏基础上增加了搜索功能模块的实现，完善了整个界面交互效果。我们先来看看这三种导航栏+搜索功能的运行效果。
 
-![11.gif](https://s0.lgstatic.com/i/image/M00/32/E7/CgqCHl8O3yKAXVpIAAr_4vHP8yw482.gif)  
+<Image alt="11.gif" src="https://s0.lgstatic.com/i/image/M00/32/E7/CgqCHl8O3yKAXVpIAAr_4vHP8yw482.gif"/>  
 
 图 1 底部导航栏+搜索栏
 
-![22.gif](https://s0.lgstatic.com/i/image/M00/32/E7/CgqCHl8O3y6ANmY5ABTLVrhmzuE224.gif)  
+<Image alt="22.gif" src="https://s0.lgstatic.com/i/image/M00/32/E7/CgqCHl8O3y6ANmY5ABTLVrhmzuE224.gif"/>  
 
 图 2 顶部导航栏+搜索栏
 
-![33.gif](https://s0.lgstatic.com/i/image/M00/32/DC/Ciqc1F8O3z-ARRi7ABZtQ8SwZzo652.gif)  
+<Image alt="33.gif" src="https://s0.lgstatic.com/i/image/M00/32/DC/Ciqc1F8O3z-ARRi7ABZtQ8SwZzo652.gif"/>  
 
 图 3 侧边栏+搜索栏+底部导航栏
 
-![44.gif](https://s0.lgstatic.com/i/image/M00/32/E7/CgqCHl8O30yAND7IABhCW3e0Ytk015.gif)  
+<Image alt="44.gif" src="https://s0.lgstatic.com/i/image/M00/32/E7/CgqCHl8O30yAND7IABhCW3e0Ytk015.gif"/>  
 
 图 4 侧边栏+搜索栏+顶部导航栏
 
@@ -26,7 +26,7 @@
 
 导航栏功能会涉及 Flutter 中几个核心点，我们使用如下表格的方式来说明，后续内容遇到相应的知识点后，可以直接对照表格 1 。
 
-![image (5).png](https://s0.lgstatic.com/i/image/M00/32/AC/Ciqc1F8Os9eAcJO5AAB1aFqjuhE322.png)  
+<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/32/AC/Ciqc1F8Os9eAcJO5AAB1aFqjuhE322.png"/>  
 图 1 底部导航栏+搜索栏
 
 可以看到上述导航栏都是 Scaffold 的一个属性，这就类似于一个架子，架子提供了很多模块。如果我们需要某些模块，只需要按照模块的格式插入数据，就可以实现相应功能。这个控件的一些参数应用具体如下。

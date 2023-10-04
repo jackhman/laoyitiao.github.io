@@ -108,13 +108,13 @@ Record 接口的内部实现逻辑非常简单，只是定义了一个 序列化
 
 在 OutputArchive 中定义了可进行序列化的参数类型，根据不同的序列化方式调用不同的实现类进行序列化操作。如下图所示，Jute 可以通过 Binary 、 Csv 、Xml 等方式进行序列化操作。
 
-![image (1).png](https://s0.lgstatic.com/i/image/M00/0A/C3/Ciqc1F6-a8CAUVfhAABcAV_NNXw402.png)
+<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/0A/C3/Ciqc1F6-a8CAUVfhAABcAV_NNXw402.png"/>
 
 而对应于序列化操作，在反序列化时也会相应调用不同的实现类，来进行反序列化操作。  
 
 如下图所示：
 
-![image (2).png](https://s0.lgstatic.com/i/image/M00/0A/C3/CgqCHl6-a8mAOP1YAABW8fO1GAM913.png)
+<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/0A/C3/CgqCHl6-a8mAOP1YAABW8fO1GAM913.png"/>
 
 注意：无论是序列化还是反序列化，都可以对多个对象进行操作，所以当我们在定义序列化和反序列化方法时，需要字符类型参数 tag 表示要序列化或反序列化哪个对象。
 

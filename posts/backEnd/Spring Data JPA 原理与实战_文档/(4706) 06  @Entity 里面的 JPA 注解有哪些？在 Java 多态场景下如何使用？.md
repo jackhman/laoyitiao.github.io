@@ -44,7 +44,7 @@ public String getUserName(){
 
 首先，我们利用 IEDA 工具，打开 @Entity 所在的包，就可以看到 JPA 里面支持的注解有哪些。如下所示：
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/56/4E/Ciqc1F9rLPSAFNw1AAQfaEA3Bgo587.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/56/4E/Ciqc1F9rLPSAFNw1AAQfaEA3Bgo587.png"/>
 
 我们可以看到，在 jakarta.persistence-api 的包路径下面大概有一百多个注解，你在没事的时候可以到这里面一个一个地看，也可以到 JPA 的协议里面对照查看文档。
 
@@ -281,11 +281,11 @@ public class UserTopic {
 
 首先，**打开 Persistence 视图，点击 Generate Persistence Mapping\>** ，接着**点击选中数据源**，如下图所示：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/56/5A/CgqCHl9rLS6AK2kJAAGJp8EnMkE910.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/56/5A/CgqCHl9rLS6AK2kJAAGJp8EnMkE910.png"/>
 
 然后，**选择表和字段，并点击 OK**。
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/56/5A/CgqCHl9rLTOAO3rIAAH3r2qRk40730.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/56/5A/CgqCHl9rLTOAO3rIAAH3r2qRk40730.png"/>
 
 这样就可以生成我们想要的实体了，多简单。如果是新库、新表，我们也可以先定义好实体，通过实体配置JPA的spring.jpa.generate-ddl=true，反向直接生成 DDL 操作数据库生成表结构。
 

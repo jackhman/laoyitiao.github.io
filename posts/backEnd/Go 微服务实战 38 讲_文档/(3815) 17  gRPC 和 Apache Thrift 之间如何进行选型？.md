@@ -22,7 +22,7 @@ gRPC 是由 Google 开源的高性能 RPC 框架。自 2015 年发布以来，gR
 
 * **提供多种语言支持**。gRPC 支持多种语言，如 C、C++、Go 、Python、Ruby、Java 、PHP 、C# 和 Node.js 等，并且能够基于 ProtoBuf 定义自动生成相应的客户端和服务端代码。目前已提供了 Java 语言版本的 gRPC-Java 和 Go 语言版本的 gRPC-Go。
 
-![grpc_language.png](https://s0.lgstatic.com/i/image/M00/46/C9/CgqCHl9GF-WAbunfAADemgWlVgo940.png)  
+<Image alt="grpc_language.png" src="https://s0.lgstatic.com/i/image/M00/46/C9/CgqCHl9GF-WAbunfAADemgWlVgo940.png"/>  
 gRPC 调用示意图
 
 结合上面的 gRPC 调用示意图，我们可以看到，一个 C++ 语言的服务器可以通过 gRPC 分别与 Ruby 语言开发的桌面客户端和 Java 语言开发的 Android 客户端进行交互。
@@ -217,14 +217,14 @@ server.Serve()
 
 整个 Thrift 框架中，可供用户选择和配置的项目如下图所示，由此可见，Thrift 具备丰富的配置项，可以为开发者提供尽可能多的选择。
 
-![thrift_structure.png](https://s0.lgstatic.com/i/image/M00/46/BF/Ciqc1F9GGH6AYzO_AACRpMJ8K94764.png)  
+<Image alt="thrift_structure.png" src="https://s0.lgstatic.com/i/image/M00/46/BF/Ciqc1F9GGH6AYzO_AACRpMJ8K94764.png"/>  
 Thrift 框架示意图
 
 ### gRPC 和 Thrift 的区别和选择
 
 Thrift 是 RPC 领域的老牌开源项目，而 gRPC 后来者居上，逐渐超越了 Thrift，二者目前在社区欢迎度和使用度上的对比可以通过 StackShare 网站查看，截至 2020 年 7 月的数据如下图所示：
 
-![gprc_vs_thrift.jpg](https://s0.lgstatic.com/i/image/M00/46/BF/Ciqc1F9GGIiAJCt0AAHADfLpvVw269.jpg)  
+<Image alt="gprc_vs_thrift.jpg" src="https://s0.lgstatic.com/i/image/M00/46/BF/Ciqc1F9GGIiAJCt0AAHADfLpvVw269.jpg"/>  
 Thrift 和 gRPC在社区的欢迎度和使用度对比
 
 可以看出，gRPC 拥有更加良好的生态环境和社区规模，而且更多的公司开始将自身技术栈迁移到 gRPC，比如 Dropbox。那为什么会出现这种"后来者反而居上"的情况呢？

@@ -43,7 +43,7 @@ Linux 和 Git 之父 Linus 也对于 SHA-1 被攻破发表了一些自己的看�
 
 当然了，不是每个人都是有"资格"去创建一个新区块的。就如上一讲中所讲述的区块链"挖矿"原理一样，只有当一个用户"挖矿"成功了，那这个用户才有资格去打包交易信息并建立一个新的区块。一个典型的比特币区块链就如下图所示：
 
-![](https://s0.lgstatic.com/i/image3/M01/5E/A4/CgpOIF4NlRCAbNzlAAF29h8pAYQ631.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/5E/A4/CgpOIF4NlRCAbNzlAAF29h8pAYQ631.png"/>
 
 备注：图片来自《Mastering Bitcoin》图书的第 7 章。
 

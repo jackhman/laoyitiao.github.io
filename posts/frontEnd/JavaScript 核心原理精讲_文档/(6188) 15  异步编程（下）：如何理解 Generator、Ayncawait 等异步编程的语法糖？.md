@@ -279,7 +279,7 @@ console.log(func());
 
 这样看来，ES7 加入的 async/await 的确解决了之前的问题，使开发者在编程过程中更容易理解，语法更清晰，并且也不用再单独引用 co 函数库了。因此用 async/await 写出的代码也更加优雅，相比于之前的 Promise 和 co+Generator 的方式更容易理解，上手成本也更低，不愧是 JS 异步的终极解决方案。
 
-![金句1.png](https://s0.lgstatic.com/i/image6/M00/08/76/Cgp9HWA0wYmAKbOFAAVCoaU0ifI951.png)
+<Image alt="金句1.png" src="https://s0.lgstatic.com/i/image6/M00/08/76/Cgp9HWA0wYmAKbOFAAVCoaU0ifI951.png"/>
 
 ### 总结
 
@@ -287,7 +287,7 @@ console.log(func());
 
 最后，我整理了这几个异步编程的特点，你可以对比着来回顾，以加深记忆，请看下面的表格。
 
-![图片6.png](https://s0.lgstatic.com/i/image6/M01/08/70/Cgp9HWA0vFyAfpfGAAGGpm0z-f8269.png)
+<Image alt="图片6.png" src="https://s0.lgstatic.com/i/image6/M01/08/70/Cgp9HWA0vFyAfpfGAAGGpm0z-f8269.png"/>
 
 现在你可以回过头思考我在这一讲开头提出的两个问题了，是不是比较容易回答出来了呢？如果你对这部分内容还有不清楚的地方，可以有针对性地去学习。
 

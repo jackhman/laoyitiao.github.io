@@ -32,23 +32,23 @@
 
 首先，我们需要在浏览器上登录到 figma.com 网站并免费注册一个账号，然后就会看到 Figma 的主界面，如下图所示：
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image6/M01/44/22/CioPOWC9z3OAIUMEAAFI4jh8tqo125.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M01/44/22/CioPOWC9z3OAIUMEAAFI4jh8tqo125.png"/>
 
 左边区域是功能菜单，而右边区域是当前选中菜单的详情页面。当我们要开发一个设计稿的时候，第一件事往往是寻找有没有类似模板可以参考。Figma Community 为我们提供了大量的设计模板，可以点击左边的 Community 菜单来打开以下的 Figma 社区页面。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image6/M01/44/1A/Cgp9HWC9z3qATuvCAAI4o7lalO8847.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M01/44/1A/Cgp9HWC9z3qATuvCAAI4o7lalO8847.png"/>
 
 由于我们要做 App 的图标，因此，可以在搜索框输入"App Icon Template"关键字来搜索 App 图标的模板，结果如下：
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image6/M01/44/1A/Cgp9HWC9z4CAEvF4AAOPQ548-S4649.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M01/44/1A/Cgp9HWC9z4CAEvF4AAOPQ548-S4649.png"/>
 
 在实际工作中，我们可以打开多个文件模块进行尝试与比较，并选择自己喜欢的模板。在今天这个例子中，我们选择了图上的"iOS App Icon Template"模板。只需要点击"向下箭头"按钮就能把该模板复制到我们的初稿文件夹里面，复制完毕后会显示下面的提示，翻译成中文就是"文件已经复制到你的初稿里面了"。
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image6/M01/44/23/CioPOWC9z4aAGon8AAAntk0s0Fs586.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M01/44/23/CioPOWC9z4aAGon8AAAntk0s0Fs586.png"/>
 
 点击提示框的"View"按钮就能打开复制的设计稿，如下图所示：
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image6/M01/44/1A/Cgp9HWC9z4yADsi1AAFmnSWqxTg642.png)
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image6/M01/44/1A/Cgp9HWC9z4yADsi1AAFmnSWqxTg642.png"/>
 
 这就是我们的工具页面，最上面的黑色部分是菜单栏，我们可以点击左上角的 Figma 图标来打开 Figma 程序的菜单，而 Figma 图标右边就是我们常用的操作，例如添加形状、文本和绘画工具等。
 
@@ -58,13 +58,13 @@
 
 右边区域可称为属性配置页，它会根据我们当前选中的设计元素而动态改变，方便我们编辑选中元素的属性。例如，在下图中，当我们选中一个圆形的时候，属性配置页会显示该圆形的位置、约束和填充色等信息，我们可以通过修改这些属性来改变该圆形的设计。
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image6/M01/44/1A/Cgp9HWC9z5SAKyW8AAD7-e3IPeo710.png)
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image6/M01/44/1A/Cgp9HWC9z5SAKyW8AAD7-e3IPeo710.png"/>
 
 对 Figma 工具有一个概括性的了解以后，下一步我们再来看看如何使用"iOS App Icon Template"模板。
 
 我们需要先详细阅读模板的描述信息，这个模板的描述信息非常简单，如下图所示：
 
-![Drawing 6.png](https://s0.lgstatic.com/i/image6/M01/44/23/CioPOWC9z5qAeC_TAAFcNS9pBoQ237.png)
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image6/M01/44/23/CioPOWC9z5qAeC_TAAFcNS9pBoQ237.png"/>
 
 简单来说，我们需要在名为"icon-ios"的图层里面根据自己的需要设计和编辑 App 的图标，然后把图标的约束（Constraints）设置为"Scale"，最后再把设计好的图标按照图上的各种尺寸进行导出。
 
@@ -72,11 +72,11 @@
 
 现在我们就可以开始设计和编辑图标了。为了加快设计的速度，我们可以参考微信朋友圈的图标，该图标可以到微信开放平台的官方文档里找到，如下图所示：
 
-![Drawing 7.png](https://s0.lgstatic.com/i/image6/M01/44/1A/Cgp9HWC9z6KAWYC0AACPDYAinvE306.png)
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image6/M01/44/1A/Cgp9HWC9z6KAWYC0AACPDYAinvE306.png"/>
 
 接着我们就可以下载微信朋友圈图标，并把它放到设计稿里面，如下图所示：
 
-![Drawing 8.png](https://s0.lgstatic.com/i/image6/M01/44/23/CioPOWC9z62Abi2xAACcE_JkT6c247.png)
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image6/M01/44/23/CioPOWC9z62Abi2xAACcE_JkT6c247.png"/>
 
 #### 1. 绘制图标
 
@@ -84,45 +84,45 @@
 
 拆分完毕以后，我们就可以**从外部的圆形和中心的八边形开始进行编辑**。在"icon-ios"图层里面，我们先把不需要的内圆删除掉，然后点击下图的"Polygon"菜单来添加一个多边形，为了生成等边的多边形，我们需要在拖放该多边形的时候按着 Shift 键。
 
-![Drawing 9.png](https://s0.lgstatic.com/i/image6/M01/44/1A/Cgp9HWC9z7WAV0ekAABdx1yh4yU812.png)
+<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image6/M01/44/1A/Cgp9HWC9z7WAV0ekAABdx1yh4yU812.png"/>
 
 然后在右边的属性配置页中选择长和高都为 20，角度为 22.5 度，边数为 8，这样就能生成一个如下图所示的八边形来。不过需要注意，我们要把这个八边形布局到圆形的中心上，操作也十分简单，只需要点击和拖动即可。
 
-![Drawing 10.png](https://s0.lgstatic.com/i/image6/M00/44/23/CioPOWC9z72AGsF8AACkcS2zrlU932.png)
+<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image6/M00/44/23/CioPOWC9z72AGsF8AACkcS2zrlU932.png"/>
 
 接着就可以画一个长方形了，我们可以在菜单里面点击 Rectangle，或者使用快捷键 R 来画，如下图所示：
 
-![Drawing 11.png](https://s0.lgstatic.com/i/image6/M01/44/1A/Cgp9HWC9z8SAT31gAADs0RpjNUw198.png)
+<Image alt="Drawing 11.png" src="https://s0.lgstatic.com/i/image6/M01/44/1A/Cgp9HWC9z8SAT31gAADs0RpjNUw198.png"/>
 
 **下一步是复制八条形状一样的长方形，并旋转它们的布局角度**。由于 Figma 没有自带的 Sketch 里面的 Rotate Copies（旋转复制）功能，所以我们需要下载一个插件。那怎么寻找和下载第三方插件呢？我们可以点击 Figma -\> Plugins -\> Browse plugins in Community 菜单来打开社区插件库网页。
 
-![Drawing 12.png](https://s0.lgstatic.com/i/image6/M00/44/23/CioPOWC9z8qAT8pwAADUpZB5nPE746.png)
+<Image alt="Drawing 12.png" src="https://s0.lgstatic.com/i/image6/M00/44/23/CioPOWC9z8qAT8pwAADUpZB5nPE746.png"/>
 
 然后输入"Rotate Copies"关键字进行搜索，并点击"Install"按钮进行安装，如下图所示：
 
-![Drawing 13.png](https://s0.lgstatic.com/i/image6/M00/44/23/CioPOWC9z9GAd084AAA5E-FP-6A356.png)
+<Image alt="Drawing 13.png" src="https://s0.lgstatic.com/i/image6/M00/44/23/CioPOWC9z9GAd084AAA5E-FP-6A356.png"/>
 
 插件安装完毕以后，我们右键图层就能看到如下图所示的插件菜单了。
 
-![Drawing 14.png](https://s0.lgstatic.com/i/image6/M00/44/23/CioPOWC9z9eAdGxnAAEdJTkJemM215.png)
+<Image alt="Drawing 14.png" src="https://s0.lgstatic.com/i/image6/M00/44/23/CioPOWC9z9eAdGxnAAEdJTkJemM215.png"/>
 
 当我们选择"Rotate Copies"菜单时，Figma 就会弹出下图的弹出框。
 
-![Drawing 15.png](https://s0.lgstatic.com/i/image6/M00/44/1A/Cgp9HWC9z-OAfzSJAAD4UbJC3xY413.png)
+<Image alt="Drawing 15.png" src="https://s0.lgstatic.com/i/image6/M00/44/1A/Cgp9HWC9z-OAfzSJAAD4UbJC3xY413.png"/>
 
 该弹出框显示了该插件所需的配置信息，我们可以修改这些配置信息来生成不同的效果。在我们的例子中，我们在"Number of copies"输入框里填入 4，然后点击"Rotate"按钮，这样就能复制 4 条不同角度的长条。由于我们需要 8 条长条，所以还需要再点击一次"Rotate"按钮。
 
 然后把这 8 条长条分别移动到中心八边形的边上，如下图所示：
 
-![Drawing 16.png](https://s0.lgstatic.com/i/image6/M00/44/1A/Cgp9HWC9z-qAMWVHAAE8_JE6A9g840.png)
+<Image alt="Drawing 16.png" src="https://s0.lgstatic.com/i/image6/M00/44/1A/Cgp9HWC9z-qAMWVHAAE8_JE6A9g840.png"/>
 
 现在可以删掉中心八边形以及用于辅助布局的十字形状，生成的效果如下图所示：
 
-![Drawing 17.png](https://s0.lgstatic.com/i/image6/M00/44/23/CioPOWC9z_KAHWU9AADkbhxdR0E065.png)
+<Image alt="Drawing 17.png" src="https://s0.lgstatic.com/i/image6/M00/44/23/CioPOWC9z_KAHWU9AADkbhxdR0E065.png"/>
 
 再下一步就是**把这 8 条长条合并到同一个图层里面**，我们可以在左边区域的图层树上同时选中这 8 条长条，然后右键打开菜单，如下图所示：
 
-![Drawing 18.png](https://s0.lgstatic.com/i/image6/M00/44/1A/Cgp9HWC9z_yAGke2AACm8mNcRnw803.png)
+<Image alt="Drawing 18.png" src="https://s0.lgstatic.com/i/image6/M00/44/1A/Cgp9HWC9z_yAGke2AACm8mNcRnw803.png"/>
 
 选中 Flatten 菜单项就能合成一个名叫"Vector"的图层了。假如你能熟练使用 Figma，也可以直接通过"Command + E 键"来完成这个合并操作。
 
@@ -130,7 +130,7 @@
 
 有了圆形和 8 条长条以后，怎样才能生成八个圆边三角形呢？这里需要使用到 Boolean Operations（布尔操作）。那什么是布尔操作呢？**布尔操作是把任意数量的形状图层通过 Union（并集）、Subtract（减集）、Intersect（交集）或者 Exclude（差集）方式进行合并。** 为了方便你理解，我就通过下面的图来演示它们的效果：
 
-![Drawing 19.png](https://s0.lgstatic.com/i/image6/M01/44/23/CioPOWC90A-AXHTRAAE4RzcdE3Y486.png)
+<Image alt="Drawing 19.png" src="https://s0.lgstatic.com/i/image6/M01/44/23/CioPOWC90A-AXHTRAAE4RzcdE3Y486.png"/>
 
 图最上面展示的是操作前 A 和 B 图层，下面是分别使用四种不同的方式进行布尔操作合并的结果。
 
@@ -146,11 +146,11 @@
 
 下面我们就一起看看如何使用布尔操作来制作八个圆边三角形。首先需要同时选中"Vector"（八条边的合并图）和"Ellipse"（圆形）两个图层，然后点击下图的"Subtract Selection"菜单。
 
-![Drawing 20.png](https://s0.lgstatic.com/i/image6/M00/44/23/CioPOWC90IyAKRPHAAG0Y4_bhXU110.png)
+<Image alt="Drawing 20.png" src="https://s0.lgstatic.com/i/image6/M00/44/23/CioPOWC90IyAKRPHAAG0Y4_bhXU110.png"/>
 
 这样就能生成如下图所示的八个圆边三角形了。
 
-![Drawing 21.png](https://s0.lgstatic.com/i/image6/M00/44/1B/Cgp9HWC90JWAVyhIAAFzRizSj7U520.png)
+<Image alt="Drawing 21.png" src="https://s0.lgstatic.com/i/image6/M00/44/1B/Cgp9HWC90JWAVyhIAAFzRizSj7U520.png"/>
 
 #### 3. 分离图层
 
@@ -158,45 +158,45 @@
 
 前面已经讲过，我们可以通过"Command + E 键"来合并成如下图的"Subtract"的图层。导出 SVG 的操作也非常简单，先选择需要导出的图层，再打开右边的 Export 配置，最后把导出的文件格式修改为 SVG，并点击"Export Subtract"按钮即可。
 
-![Drawing 22.png](https://s0.lgstatic.com/i/image6/M00/44/1B/Cgp9HWC90KGAUsZbAAEudY4FVjo855.png)
+<Image alt="Drawing 22.png" src="https://s0.lgstatic.com/i/image6/M00/44/1B/Cgp9HWC90KGAUsZbAAEudY4FVjo855.png"/>
 
 现在就可以在"icon-ios"里把原有的"Subtract"图层删除掉，并把导出的 SVG 文件拖进里面。如下图所示，你看到一个名叫"Exported Subtract"的新图层。
 
-![Drawing 23.png](https://s0.lgstatic.com/i/image6/M00/44/23/CioPOWC90KiAKgZiAADstdxYsYc335.png)
+<Image alt="Drawing 23.png" src="https://s0.lgstatic.com/i/image6/M00/44/23/CioPOWC90KiAKgZiAADstdxYsYc335.png"/>
 
 当我们设计完一个图标以后，通常会使用到 Home Screen、App Store 和 Push Notification 等不同的地方，各个地方图标的尺寸各不相同，为了能正确地导出各种尺寸的图标，我们必须在属性配置页上把 Constraints 设置为 Scale。这一步非常重要，初次使用 Figma 常常容易忽略这一细节。
 
 接着可以删掉不需要的图层，如下图所示，我们可以展开"Exported Subtract"图层并选中第一、第二个图层。
 
-![Drawing 24.png](https://s0.lgstatic.com/i/image6/M00/44/23/CioPOWC90OaAbSeFAABQV0Sa8cU177.png)
+<Image alt="Drawing 24.png" src="https://s0.lgstatic.com/i/image6/M00/44/23/CioPOWC90OaAbSeFAABQV0Sa8cU177.png"/>
 
 把它们删掉后，就只保留了八个圆边三角形，如下图所示：
 
-![Drawing 25.png](https://s0.lgstatic.com/i/image6/M00/44/23/CioPOWC90NyAQFlhAADVT10WJ-k599.png)
+<Image alt="Drawing 25.png" src="https://s0.lgstatic.com/i/image6/M00/44/23/CioPOWC90NyAQFlhAADVT10WJ-k599.png"/>
 
 #### 4. 填充颜色
 
 最后一步是**为各个圆边三角形分别填充颜色**。填充颜色的操作非常简单，先选择其中一个圆边三角形，然后点击 Control + C 把鼠标变成取色器，接着再把取色器移动到右边的图就能撷取各块的颜色了，如下图所示：
 
-![Drawing 26.png](https://s0.lgstatic.com/i/image6/M00/44/23/CioPOWC90PCAKg64AAENBx1xXDY270.png)
+<Image alt="Drawing 26.png" src="https://s0.lgstatic.com/i/image6/M00/44/23/CioPOWC90PCAKg64AAENBx1xXDY270.png"/>
 
 就这样，八个圆边三角形填充完毕以后效果如下：
 
-![Drawing 27.png](https://s0.lgstatic.com/i/image6/M01/44/1B/Cgp9HWC90PaANXn_AAD-vsRdji4260.png)
+<Image alt="Drawing 27.png" src="https://s0.lgstatic.com/i/image6/M01/44/1B/Cgp9HWC90PaANXn_AAD-vsRdji4260.png"/>
 
 同时，我们还可以看到该图标应用到不同地方的效果，如下图所示：
 
-![Drawing 28.png](https://s0.lgstatic.com/i/image6/M00/44/23/CioPOWC90P2AYjVzAAJ7qHdIOBA753.png)
+<Image alt="Drawing 28.png" src="https://s0.lgstatic.com/i/image6/M00/44/23/CioPOWC90P2AYjVzAAJ7qHdIOBA753.png"/>
 
 #### 5. 导出图标
 
 接着就可以导出图标了，选择"icon-ios"图层并点击"Export icon-ios"按钮，如下图所示：
 
-![Drawing 29.png](https://s0.lgstatic.com/i/image6/M00/44/23/CioPOWC90QWAISIHAADw4hSpf38419.png)
+<Image alt="Drawing 29.png" src="https://s0.lgstatic.com/i/image6/M00/44/23/CioPOWC90QWAISIHAADw4hSpf38419.png"/>
 
 最后一步就是把图标导入 Xcode 里面，只需把所有的 PNG 文件拖到 Xcode 的 AppIcons 下就完成了。
 
-![Drawing 30.png](https://s0.lgstatic.com/i/image6/M01/44/1B/Cgp9HWC90QuAUXIaAAFLc1rV-Fs236.png)
+<Image alt="Drawing 30.png" src="https://s0.lgstatic.com/i/image6/M01/44/1B/Cgp9HWC90QuAUXIaAAFLc1rV-Fs236.png"/>
 
 ### 总结
 

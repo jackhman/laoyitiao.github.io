@@ -114,7 +114,7 @@ React的哲学是：React 是用JavaScript 构建快速响应的大型 Web应用
 
 * 对于文本节点的文本内容改变。
 
-![image.png](https://s0.lgstatic.com/i/image6/M01/41/CE/Cgp9HWCuGOGAJPh4AABjO4iTOhE480.png)
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image6/M01/41/CE/Cgp9HWCuGOGAJPh4AABjO4iTOhE480.png"/>
 
 如图所示，我们对比了两棵基于`<div>`元素的DOM 树，得到的差异有：
 

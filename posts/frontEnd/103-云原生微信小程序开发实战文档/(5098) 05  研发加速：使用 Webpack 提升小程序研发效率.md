@@ -26,7 +26,7 @@
 
 开发者在使用 npm 模块之前必须使用微信 IDE 菜单栏中的"工具"-"构建 npm"，将原始的 npm 模块（即node_modules 目录中的模块）进行一次预构建，预构建的产出目录便是 miniprogram_npm ，最后才可以在小程序源码中引入（流程如下图所示）：
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/6D/91/Ciqc1F-uPmSAHDYTAABv_sOtC6E405.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/6D/91/Ciqc1F-uPmSAHDYTAABv_sOtC6E405.png"/>
 
 而且，小程序预构建 npm 模块的过程并不是简单地将原始模块从拷贝 node_modules 目录到miniprogram_npm 目录，而是会将原始模块的所有散列文件打包成一个单 js 文件，然后再将这个 js 文件作为模块入口暴露出去，整个预编译的流程如下：
 
@@ -38,7 +38,7 @@
 
 4. 将所有文件打包为一个单 js 文件（如下图）。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/6D/91/Ciqc1F-uPmyARZYuAAB84i1b-ro900.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/6D/91/Ciqc1F-uPmyARZYuAAB84i1b-ro900.png"/>
 
 **你要注意，在执行第四步时，微信 IDE 并不会将原始 npm 模块所依赖的其他 npm 模块一并打包。** 比如，现实工作中的网络请求模块 axios ，这个基础模块可能被某个 npm 模块（假设为模块 A）依赖，如下：
 
@@ -58,17 +58,17 @@ import axios from 'axios';
 
 一个未经修改的微信小程序源码目录如下图所示：
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/6D/9C/CgqCHl-uPn-AKQnbAAA5YigCdH0607.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/6D/9C/CgqCHl-uPn-AKQnbAAA5YigCdH0607.png"/>
 
 其中 cloudfunctions 是云函数的根目录（相关的知识会在模块四讲解，在这里我就不多费口舌了）。miniprogram 中的文件是小程序本体的源码，包括小程序的业务代码和 npm 模块。
 
 使用 Webpack 打造的构建体系通常会**另外建立一个与 cloudfunctions 和 miniprogram 平行的目录用于管理源码，然后将 miniprogram 目录作为构建产出目录，如下：**
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/6D/91/Ciqc1F-uPoaAWgOGAAAulRAEVKU221.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/6D/91/Ciqc1F-uPoaAWgOGAAAulRAEVKU221.png"/>
 
 同时禁用微信 IDE 编译相关的功能，把这些工作全部交给 Webpack：
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image/M00/6D/91/Ciqc1F-uPoyADaa-AAA91X7XW4I841.png)
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/6D/91/Ciqc1F-uPoyADaa-AAA91X7XW4I841.png"/>
 
 这样一来，在自建的构建体系下，我们不仅可以使用标准的 npm 模块管理方式，同时可以发挥 Webpack 对于研发效率的加持，比如 Tree-Shaking 减小打包文件体积、结合 Babel 使用最新的 ECMAScript 特性、结合 Lint 工具统一代码规范等。这是接下来我们要讨论使用 Webpack 完成的几项具体工作的基础。
 
@@ -157,7 +157,7 @@ CSS 预编译和后编译工具可以提供类似 ES 6 的静态模块体系，�
 
 统一的编码规范是一个团队必备的因素，如果你是个人开发者可以在写代码的时候天马行空，但是在一个多人团队中则必须严格遵守统一的规范。而且，一个研发团队从小作坊迈向工程化不仅仅需要技术维度的考量，同样也需要形成严格的、一致的规范，编码规范便是其中之一。
 
-![小程序 05--金句.png](https://s0.lgstatic.com/i/image/M00/6E/4E/Ciqc1F-yL7KAJgnbAAE8MX8pSck595.png)
+<Image alt="小程序 05--金句.png" src="https://s0.lgstatic.com/i/image/M00/6E/4E/Ciqc1F-yL7KAJgnbAAE8MX8pSck595.png"/>
 
 在既定的技术栈前提下（比如你的团队选定了使用 TypeScript、Less 开发小程序），下一步就是针对这些技术栈制定代码规范审查流程，首先是选定合适的工具，比如 ESLint、StyleLint 等；然后需要制定规范审查的触发时机，最简单的方法是有人为触发，在提交之前手动执行 lint命令。
 

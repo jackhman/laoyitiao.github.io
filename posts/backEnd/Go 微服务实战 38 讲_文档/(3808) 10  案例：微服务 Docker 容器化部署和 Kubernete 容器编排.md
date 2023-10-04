@@ -141,7 +141,7 @@ docker run -itd --name user --network host user
 
 Kubernetes 主要有由两类节点组成：Master 节点主要负责管理和控制，是 Kubernetes 的调度中心；Node 节点受 Master 节点管理，属于工作节点，负责运行具体的容器应用。整体结构图如下所示：
 
-![10_Kubernetes_集群架构图.png](https://s0.lgstatic.com/i/image/M00/3B/6F/CgqCHl8j-j-AL1E1AADTHvJdwEQ723.png)  
+<Image alt="10_Kubernetes_集群架构图.png" src="https://s0.lgstatic.com/i/image/M00/3B/6F/CgqCHl8j-j-AL1E1AADTHvJdwEQ723.png"/>  
 Kubernetes 集群架构图
 
 Master 节点主要由以下几部分组成：

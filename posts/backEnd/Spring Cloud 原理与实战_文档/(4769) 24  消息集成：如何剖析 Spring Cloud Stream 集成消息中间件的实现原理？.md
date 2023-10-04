@@ -174,7 +174,7 @@ Binder<T, ?, ?> binder = binderProducingContext.getBean(Binder.class);
 
 既然我们已经能够获取 Binder 实例，接下去就来讨论 Binder 实例中对 bindConsumer 和 bindProducer 方法的实现过程。在 Spring Cloud Stream 中，Binder 接口的类层关系如下所示，注意到这里还展示了 spring-cloud-stream-binder-rabbit 代码工程中的 RabbitMessageChannelBinder 类，这个类在本课时讲到 Spring Cloud Stream 与 RabbitMQ 进行集成时会具体展开：
 
-![图片1.png](https://s0.lgstatic.com/i/image/M00/81/B6/Ciqc1F_RmKqAehbuAAUIZHxCJ9g730.png)  
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image/M00/81/B6/Ciqc1F_RmKqAehbuAAUIZHxCJ9g730.png"/>  
 Binder 接口类层结构图
 
 Spring Cloud Stream 首先提供了一个 AbstractBinder，这是一个抽象类，提供的 bindConsumer 和 bindProducer 方法实现如下所示：
@@ -270,7 +270,7 @@ consumerEndpoint.setOutputChannel(inputChannel);
 
 作为总结，我们可以用如下所示的流程图来概括整个消息发送和消费流程：
 
-![图片2.png](https://s0.lgstatic.com/i/image/M00/81/C1/CgqCHl_RmIOAbYcHAAHhiR5WQIE310.png)  
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image/M00/81/C1/CgqCHl_RmIOAbYcHAAHhiR5WQIE310.png"/>  
 消息发送和消费整体流程图
 
 ### Spring Cloud Stream 集成 RabbitMQ

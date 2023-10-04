@@ -11,7 +11,7 @@ Trace 简介
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/77/FE/Cgq2xl5zIEeAIG1BAABPpgHQZkc045.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/77/FE/Cgq2xl5zIEeAIG1BAABPpgHQZkc045.png"/>
 
 <br />
 
@@ -23,7 +23,7 @@ Trace 简介
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/77/FD/CgpOIF5zIEeAHos0AAAZLZRufhU976.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/77/FD/CgpOIF5zIEeAHos0AAAZLZRufhU976.png"/>
 
 <br />
 
@@ -70,7 +70,7 @@ Span 代表系统中具有开始时间和执行时长的逻辑单元，Span 之�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/77/FD/CgpOIF5zIEeANSJ1AAAvjIyS4ac173.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/77/FD/CgpOIF5zIEeANSJ1AAAvjIyS4ac173.png"/>
 
 <br />
 
@@ -78,7 +78,7 @@ Span 代表系统中具有开始时间和执行时长的逻辑单元，Span 之�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/77/FE/Cgq2xl5zIEeAP7J6AAAieIn1LW8813.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/77/FE/Cgq2xl5zIEeAP7J6AAAieIn1LW8813.png"/>
 
 <br />
 
@@ -86,7 +86,7 @@ Span 代表系统中具有开始时间和执行时长的逻辑单元，Span 之�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/77/FD/CgpOIF5zIEiACY7bAAHw5sz9rVs412.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/77/FD/CgpOIF5zIEiACY7bAAHw5sz9rVs412.png"/>
 
 Logs 简介
 =======
@@ -95,7 +95,7 @@ Logs 简介
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/77/FE/Cgq2xl5zIEiAGoMzAAVtWur3mGc633.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/77/FE/Cgq2xl5zIEiAGoMzAAVtWur3mGc633.png"/>
 
 Tags 简介
 =======
@@ -104,7 +104,7 @@ Tags 简介
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/77/FD/CgpOIF5zIEiAOAr-AAH8CUUmFf8447.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/77/FD/CgpOIF5zIEiAOAr-AAH8CUUmFf8447.png"/>
 
 SpanContext 和 Baggage
 =====================

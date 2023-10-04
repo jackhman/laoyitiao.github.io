@@ -8,7 +8,7 @@
 
 我们先来讲解一个最基础的知识点，日常我们所看到的 UI 交互界面，操作系统是如何实现的，参考下图 1 的渲染过程。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/46/CD/CgqCHl9GHCiAcll1AABzhn4c_Mc466.png)  
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/46/CD/CgqCHl9GHCiAcll1AABzhn4c_Mc466.png"/>  
 图1 系统 UI 界面绘制原理
 
 从图 1 我们可以看到，一个界面显示出来，首先是经过了 CPU 的数据计算，然后将数据发送给到 GPU， GPU 再根据相应的数据绘制成像素界面，然后放入帧缓存区中，最终显示器定时从帧缓存区获取帧数据显示在显示器上。
@@ -21,7 +21,7 @@
 
 目前比较常见的两个跨端技术框架，分别是 ReactNative 和 Weex。它们在原理上非常相近，因此这里单独介绍 ReactNative 的原理。我们先来看下图 2 的一个技术架构。
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/46/CD/CgqCHl9GHD6AMhMQAACUmX1O0GA575.png)  
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/46/CD/CgqCHl9GHD6AMhMQAACUmX1O0GA575.png"/>  
 图2 ReactNative 技术架构图
 
 从图 2 ，我们可以非常清晰地看到一点，ReactNative 完全是基于原生平台来进行渲染的，而这之间主要是通过 JSbridge 来通信，将需要渲染的数据通过 JSbridge 传递给原生平台。这样的通信方式在 Flutter 中也有，在我们第 20 课时"原生通信：应用原生平台交互扩充 Flutter 基础能力"中有介绍到，这部分和 ReactNative 比较相近。而两者的最大的区别就在于，**Flutter UI 界面是自渲染的，而 ReactNative 则是通过通信的方式告知原生平台，然后原生平台再绘制出界面。**。
@@ -50,7 +50,7 @@ Flutter 的自渲染模式也遵循这个原则，因此在Flutter的性能要�
 
 整个绘制过程所涉及的核心函数流程，如图 3 所示。
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/46/C2/Ciqc1F9GHHWARkxZAAJL5Wf7xQQ911.png)  
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/46/C2/Ciqc1F9GHHWARkxZAAJL5Wf7xQQ911.png"/>  
 图3 绘制整体流程图
 
 在图 3 的流程中会涉及几个比较重要的函数分别是 scheduleWarmUpFrame 、handleDrawFrame、drawFrame 、flushLayout 、 flushCompositingBits 、 markNeedsPaint 、 flushPaint 、 compositeFrame 和 flushSemantics。接下来我们就先来看下这些函数的作用。
@@ -117,7 +117,7 @@ for (final RenderObject node in dirtyNodes..sort((RenderObject a, RenderObject b
 
 如下是各个过程中所执行的函数，如图 4 所示。
 
-![image (2).png](https://s0.lgstatic.com/i/image/M00/46/E5/CgqCHl9GQHCAKO25AAEzFRZSEzw956.png)  
+<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/46/E5/CgqCHl9GQHCAKO25AAEzFRZSEzw956.png"/>  
 图4 核心绘制流程执行过程
 
 根据图 3 的整体流程，我们知道在绘制过程中涉及 4 个比较重要的函数，图 4 就分别说明了这四个函数在执行过程中所执行的具体逻辑。

@@ -8,7 +8,7 @@
 
 在介绍服务注册的概念前，我们先来了解什么是注册中心，如下图所示。
 
-![](http://s0.lgstatic.com/i/image2/M01/8F/65/CgotOV2DSRmAZljsAACz1-sz9Bc268.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8F/65/CgotOV2DSRmAZljsAACz1-sz9Bc268.png"/>
 
 为了方便理解，可以将注册中心拆解成两个部分，分别是注册和中心。注册很好理解，比如用户注册，就是将自己的信息注册在某个平台上。再来看中心，可以理解成一个统一管理信息的平台。两个部分连起来就是注册中心，也就是统一管理所有注册信息的平台。
 
@@ -24,7 +24,7 @@
 
 了解了服务注册后，我们接下来学习服务发现，如下图所示。
 
-![](http://s0.lgstatic.com/i/image2/M01/8F/45/CgoB5l2DSRmATTQnAACaxgMS0KY966.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8F/45/CgoB5l2DSRmATTQnAACaxgMS0KY966.png"/>
 
 服务发现指的是从注册中心获取对应服务的信息。服务发现是客户端向注册中心获取信息的动作。
 
@@ -40,7 +40,7 @@
 
 如下图所示，图中涉及了服务注册与服务发现，以及它们间的相关动作。
 
-###### ![](http://s0.lgstatic.com/i/image2/M01/8F/65/CgotOV2DSRqAVLzAAACs7Nwq9Xc076.png)
+###### <Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8F/65/CgotOV2DSRqAVLzAAACs7Nwq9Xc076.png"/>
 
 * 注册中心，用来集中存储管理服务信息。
 
@@ -84,7 +84,7 @@ Spring Cloud Eureka 是一个基于 REST 的服务，并提供了基于 Java 的
 
 如下图所示，Eureka 的架构主要分为 Eureka Server 和 Eureka Client 两部分，Eureka Client 又分为 Applicaton Service 和 Application Client，Applicaton Service 就是服务提供者，Application Client 就是服务消费者。
 
-![](http://s0.lgstatic.com/i/image2/M01/8F/45/CgoB5l2DSRqAB8rGAAERVQIV4S0708.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8F/45/CgoB5l2DSRqAB8rGAAERVQIV4S0708.png"/>
 
 我们首先会在应用程序中依赖 Eureka Client，项目启动后 Eureka Client 会向 Eureka Server 发送请求，进行注册，并将自己的一些信息发送给 Eureka Server。
 
@@ -100,21 +100,21 @@ Eureka Server 会有多个节点组成一个集群，保证高可用。Eureka Se
 
 我们来看下单机的 Eureka 如何部署。
 
-![](http://s0.lgstatic.com/i/image2/M01/8F/65/CgotOV2DSTeAf3-EALKO8fACinY443.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8F/65/CgotOV2DSTeAf3-EALKO8fACinY443.gif"/>
 
 1. 打开开发工具，创建一个 Spring Cloud 的项目，然后在 pom 中增加 spring-cloud-starter-netflix-eureka-server 的依赖。
 
-![](http://s0.lgstatic.com/i/image2/M01/8F/65/CgotOV2DST-AKVAbAHMeI0J6fK0381.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8F/65/CgotOV2DST-AKVAbAHMeI0J6fK0381.gif"/>
 
 2. 创建一个 EurekaServerApplication 的启动类，启动类上使用 @EnableEurekaServer 开启 EurekaServer 的自动装配功能。
 
-![](http://s0.lgstatic.com/i/image2/M01/8F/65/CgotOV2DSV2AKL6DAKy7JpEAISo131.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8F/65/CgotOV2DSV2AKL6DAKy7JpEAISo131.gif"/>
 
 <br />
 
 3. 需要配置 Eureka Server 需要的信息，端口配置成 8761，添加一个 eureka.client.register-with-eureka=false 的配置，这个配置表示是否将自己的实例注册到 Eureka Server 中，这里配置成 false，本身是 Eureka Server 节点，不需要将自己进行注册。再添加一个 eureka.client.fetch-registry=false 的配置，这个配置表示是否应从 Eureka Server 中获取 Eureka 的注册表信息，这里也设置成 false，因为不需要消费其他服务信息，所以也不需要拉取注册表信息。
 
-![](//s0.lgstatic.com/plat-home-fed/vue/scripts/libraries/UEditor/themes/default/images/spacer.gif)
+<Image alt="" src="//s0.lgstatic.com/plat-home-fed/vue/scripts/libraries/UEditor/themes/default/images/spacer.gif"/>
 
 4. 启动项目，然后访问 8761 端口，可以看到 Eureka 的管理页面，表示 Eureka 启动成功了。至于线上部署的环境是一样的，将这个项目打包成一个可执行的 jar 文件，部署到服务器上即可，跟普通项目的部署方式一致。
 
@@ -122,17 +122,17 @@ Eureka Server 会有多个节点组成一个集群，保证高可用。Eureka Se
 
 成功部署 Eureka Server 后，我们来学习如何使用 Eureka Client 进行注册。
 
-![](http://s0.lgstatic.com/i/image2/M01/8F/45/CgoB5l2DSZ2AQJPsALFuuL-tIbc368.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8F/45/CgoB5l2DSZ2AQJPsALFuuL-tIbc368.gif"/>
 
 1. 创建一个 eureka-client-provider 的 Spring Cloud 项目，加入 spring-cloud-starter-netflix-eureka-client 的依赖。
 
-![](http://s0.lgstatic.com/i/image2/M01/8F/65/CgotOV2DSaWAFJ1GAG1jcKHY1Vw958.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8F/65/CgotOV2DSaWAFJ1GAG1jcKHY1Vw958.gif"/>
 
 <br />
 
 2. 在启动类上加 @EnableDiscoveryClient 来启用服务注册与服务发现，这步操作不是必需的，因为在 spring-cloud-starter-netflix-eureka-client 的 spring.factories 文件中已经指定了所有的自动装配类。
 
-![](http://s0.lgstatic.com/i/image2/M01/8F/45/CgoB5l2DSayAG4sHAC60ZI94Y-o252.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8F/45/CgoB5l2DSayAG4sHAC60ZI94Y-o252.gif"/>
 
 3. 配置 eureka.client.serviceUrl.defaultZone 的地址，也就是刚刚启动的 Eureka Server 的地址，如下。
 
@@ -140,17 +140,17 @@ http://localhost:8761/eureka/
 
 eureka.instance.instance-id 是自定义实例 ID 的格式，采用服务名 + IP + 端口的格式，比如在 Eureka 的管理页面中看到的实例信息，就是这种格式。
 
-![](http://s0.lgstatic.com/i/image2/M01/8F/65/CgotOV2DScSAVvY_AM_y-nNqfzA573.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8F/65/CgotOV2DScSAVvY_AM_y-nNqfzA573.gif"/>
 
 <br />
 
 4. 启动项目，项目启动成功后，在 Eureka 的管理页面可以看到 eureka-client-provider 已经注册上去了。
 
-![](http://s0.lgstatic.com/i/image2/M01/8F/65/CgotOV2DSc2AZQLyAC_TGC4bwvc724.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8F/65/CgotOV2DSc2AZQLyAC_TGC4bwvc724.gif"/>
 
 继续创建一个 eureka-client-consumer 的 Spring Cloud 项目，Maven 配置和 Eureka Server 的配置跟前面的 eureka-client-provider 一致即可。consumer 需要消费 provider，必要的条件是 consumer 得知道 provider 有哪些节点信息，刚刚已经将 provider 注册到 Eureka中，如何在 consumer 获取 provider 的信息呢？
 
-![](http://s0.lgstatic.com/i/image2/M01/8F/66/CgotOV2DSeOAfdi6AILsPXo79gw058.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8F/66/CgotOV2DSeOAfdi6AILsPXo79gw058.gif"/>
 
 <br />
 
@@ -164,7 +164,7 @@ eureka.instance.instance-id 是自定义实例 ID 的格式，采用服务名 + 
 
 可以为每个节点创建一个配置文件，通过 spring.profiles.active 的方式激活，这样就不用创建多个 Eureka Server 的项目了，代码本质上没有任何区别，只是配置内容不一样而已。
 
-![](http://s0.lgstatic.com/i/image2/M01/8F/46/CgoB5l2DSe-ASrCyAIY6NsQPVGM124.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8F/46/CgoB5l2DSe-ASrCyAIY6NsQPVGM124.gif"/>
 
 创建一个 master 配置文件，defaultZone 指向 8762 端口，随后创建一个 slave 配置文件，defaultZone 指向 8761 的端口，先激活 master 配置，启动项目，然后再激活 slave 配置，启动项目。然后在浏览器中分别查看 8761 和 8762 的管理页面，可以看到两边的信息是一致的。
 
@@ -174,13 +174,13 @@ Eureka 作为注册中心，统一管理服务实例的信息。但我们在部�
 
 还有一点就是前面讲的集群模式，会将注册的信息复制给其他节点，更加验证了不可能采用数据库来存储注册信息，通过复制的模式我们可以推断，注册信息肯定会在每个节点都存储一份，信息的变更通过复制的形式解决，那么信息肯定是存储在 Eureka Server 的节点内部的，通过源码可以验证答案，Eureka 的注册信息是存储在 ConcurrentHashMap 中的。
 
-![](http://s0.lgstatic.com/i/image2/M01/8F/46/CgoB5l2DSfaARAM_AEOS4CtN1mY566.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8F/46/CgoB5l2DSfaARAM_AEOS4CtN1mY566.gif"/>
 
 <br />
 
 注册表定义在 AbstractInstanceRegistry 类中，Map 的 key 是服务名称，也就是 MONKEY-ARTICLE-SERVICE 。value 是一个 Map。value 的 Map 的 key 是服务实例的 ID, 比如这里的monkey-article-service:192.168.31.244:2012 。value 的 Map 里的 value 是 Lease 类，Lease 中存储了实例的注册时间、上线时间等信息，还有具体的实例信息，比如 IP、端口、健康检查的地址等信息，对应的是 InstanceInfo。
 
-![](http://s0.lgstatic.com/i/image2/M01/8F/66/CgotOV2DSgCAXSgcACxAMSY39ZE833.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8F/66/CgotOV2DSgCAXSgcACxAMSY39ZE833.gif"/>
 
 这是 Lease 类中的字段信息，第一个 holder 是实例信息 InstanceInfo。然后是取消注册时间，也就是实例下线的时间。接着是服务注册的时间和服务上线的时间，以及最后更新的时间。需要注意的是最后更新的时间，也就是 lastUpdateTimestamp，从字面上理解就是最后更新的时间，实际上它是最后一次续约的时间加上租约的时长。最后一个字段是租约的时长。
 
@@ -194,7 +194,7 @@ Eureka 核心操作主要有注册、续约、下线、移除，接口是com.net
 
 这里主要带大家分析下注册相关的逻辑和代码，其他的操作可以课后自己尝试分析。
 
-![](http://s0.lgstatic.com/i/image2/M01/8F/46/CgoB5l2DSg-AHS6aAHDhrKrofOw866.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8F/46/CgoB5l2DSg-AHS6aAHDhrKrofOw866.gif"/>
 
 <br />
 
@@ -206,15 +206,15 @@ Eureka 核心操作主要有注册、续约、下线、移除，接口是com.net
 
 ###### Eureka集群各节点的数据同步
 
-![](http://s0.lgstatic.com/i/image2/M01/8F/65/CgotOV2DSRqAJRMwAAB7Balh0cs135.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8F/65/CgotOV2DSRqAJRMwAAB7Balh0cs135.png"/>
 
 如上图所示，Eureka 集群采用相互注册的方式实现高可用集群，任何一台注册中心故障都不会影响服务的注册与发现。前面也介绍了 Eureka 的注册表是存储在内存中的，当服务 A 注册到 Eureka Server 2 的节点上后，会去 Eureka Server 1 的节点拉取信息，正常情况下是拉取不到信息的，为了能够正常的拉取信息，Eureka Server 内部采用了复制的方式向各个节点进行数据同步操作。
 
-![](http://s0.lgstatic.com/i/image2/M01/8F/66/CgotOV2DShmAELiTADB7A1zPQzs891.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8F/66/CgotOV2DShmAELiTADB7A1zPQzs891.gif"/>
 
 我们简单的来看下当服务注册后，信息是如何同步的，代码在com.netflix.eureka.registry.PeerAwareInstanceRegistryImpl.register(InstanceInfo, boolean)中，复制的方法是 replicateToPeers，主要参数是 Action，Action 表示操作的类型，有心跳、注册、取消等操作。还有服务名称和实例 ID。  
 
-![](http://s0.lgstatic.com/i/image2/M01/8F/66/CgotOV2DSiSAQqG4AD7Q8GOGXxk448.gif)  
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8F/66/CgotOV2DSiSAQqG4AD7Q8GOGXxk448.gif"/>  
 
 <br />
 
@@ -224,11 +224,11 @@ Eureka 核心操作主要有注册、续约、下线、移除，接口是com.net
 
 自我保护机制是为了避免因网络分区故障而导致服务不可用的问题。具体现象为当网络故障后，所有的服务与 Eureka Server 之间无法进行正常通信，一定时间后，Eureka Server 没有收到续约的信息，将会移除没有续约的实例，这个时候正常的服务也会被移除掉，所以需要引入自我保护机制来解决这种问题。
 
-![](http://s0.lgstatic.com/i/image2/M01/8F/45/CgoB5l2DSRqAP1FMAACHP1JLl1g494.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8F/45/CgoB5l2DSRqAP1FMAACHP1JLl1g494.png"/>
 
 如上图所示，当服务提供者出现网络故障，无法与 Eureka Server 进行续约，Eureka Server 会将该实例移除，此时服务消费者从 Eureka Server 拉取不到对应的信息，实际上服务提供者处于可用的状态，问题就是这样产生的。
 
-![](http://s0.lgstatic.com/i/image2/M01/8F/65/CgotOV2DSRqACgusAAB-W41DoEM379.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8F/65/CgotOV2DSRqACgusAAB-W41DoEM379.png"/>
 
 如上图所示，再来看已开启自我保护，当服务提供者 A 出现网络故障，无法与 Eureka Server 进行续约时，虽然 Eureka Server 开启了自我保护模式，但没有将该实例移除，服务消费者还是可以正常拉取服务提供者的信息，正常发起调用。
 
@@ -242,13 +242,13 @@ Eureka 核心操作主要有注册、续约、下线、移除，接口是com.net
 
 * expectedNumberOfClientsSendingRenews ：期望的服务实例数量。
 
-![](http://s0.lgstatic.com/i/image2/M01/8F/46/CgoB5l2DSjqAEnLXAKUpD3wLJwU259.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8F/46/CgoB5l2DSjqAEnLXAKUpD3wLJwU259.gif"/>
 
 numberOfRenewsPerMinThreshold = expectedNumberOfClientsSendingRenews \* 每个实例每分钟续约的次数，默认是 60/30=2，也就是一个实例每分钟最多续约 2 次，然后就是续租的比例，默认是 0.85，假如有 10 个实例，每个实例每分钟续约 2 次，那么就是 10\*2\*0.85=17，也就是每分钟至少要有 17 次续约才是正常的，否则就是不正常的。
 
 在 evict 方法的 isLeaseExpirationEnabled 判断中是否能够进行实例的移除，如果返回 true 表示可以进行移除操作，如果返回 false 则直接 return 返回，不进行移除操作。
 
-![](http://s0.lgstatic.com/i/image2/M01/8F/66/CgotOV2DSjmAU8PHAC1XuDwQZMQ630.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8F/66/CgotOV2DSjmAU8PHAC1XuDwQZMQ630.gif"/>
 
 <br />
 
@@ -260,7 +260,7 @@ isLeaseExpirationEnabled 方法里首先会判断是否关闭了自我保护，�
 
 在前面我们讲过 Eureka 的心跳机制，Eureka Client 会定时发送心跳给 Eureka Server 来证明自己处于健康的状态，如下图所示。
 
-![](http://s0.lgstatic.com/i/image2/M01/8F/45/CgoB5l2DSRqALpz-AADDQMq9ysI107.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8F/45/CgoB5l2DSRqALpz-AADDQMq9ysI107.png"/>
 
 但在某些场景下，服务仍处于存活状态，却已经不能对外提供服务了，比如数据库出问题了，这时，Eureka Client 还是会定时发送心跳，由于心跳正常，客户端在请求时还是会请求到这个出了问题的服务实例。
 
@@ -268,17 +268,17 @@ isLeaseExpirationEnabled 方法里首先会判断是否关闭了自我保护，�
 
 我们只要在项目中集成 Actuator，就可以统一管理应用的健康状态，那么我们可以将这个状态反馈给 Eureka Server，这样当应用处于不健康的状态，Eureka Server 就能知道这个应用不健康了，然后将其进行下线操作，这样客户端就不会调用这个不健康的服务实例了，这就是 Eureka 的健康检查。
 
-![](http://s0.lgstatic.com/i/image2/M01/8F/46/CgoB5l2DSkmATe2YAEUUfso8HwQ005.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8F/46/CgoB5l2DSkmATe2YAEUUfso8HwQ005.gif"/>
 
 首先在 pom 中增加 spring-boot-starter-actuator 的依赖，然后扩展一个 health 端点，通过一个 status 来模拟状态是健康还是不健康，然后定义一个 updateStatus 的接口，用于测试，然后启动项目，默认状态是健康的，然后手动调用 updateStatus 接口来模拟服务中途出现故障，这个时候 health 端点已经是 DOWN 状态了，但是在 Eureka Server 中还是正常的，这就是我们最开始描述的问题。
 
-![](http://s0.lgstatic.com/i/image2/M01/8F/66/CgotOV2DSoSAQogtAEgPG3L5yOk199.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8F/66/CgotOV2DSoSAQogtAEgPG3L5yOk199.gif"/>
 
 <br />
 
 解决这个问题只需要在配置文件中增加 eureka.client.healthcheck.enabled=true 的配置，这样就可以将 health 的状态传递给 Eureka Server。再次演示正确的效果，重启项目，默认还是健康状态，手动调用 updateStatus 接口，这个时候 health 端点已经是 DOWN 状态了，然后我们再看 Eureka Server 的状态，也变了 DOWN，健康检查生效了。然后我们将状态改回健康，对应的 Eureka Server 也会处于 Up 状态。
 
-![](http://s0.lgstatic.com/i/image2/M01/8F/66/CgotOV2DSniAAsVsAKWzlP4d_Nk477.gif)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8F/66/CgotOV2DSniAAsVsAKWzlP4d_Nk477.gif"/>
 
 <br />
 
@@ -286,7 +286,7 @@ isLeaseExpirationEnabled 方法里首先会判断是否关闭了自我保护，�
 
 ，在 EurekaClientAutoConfiguration 中会注册 HealthCheck，注册后会有调用任务来进行状态的更新，在 com.netflix.discovery.InstanceInfoReplicator.run() 中会进行状态更新。
 
-![](http://s0.lgstatic.com/i/image2/M01/8F/65/CgotOV2DSRuAI2hZAADmCSYm54U160.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8F/65/CgotOV2DSRuAI2hZAADmCSYm54U160.png"/>
 
 到这里本课时的全部内容就讲完啦，在这一课时我们主要学习了服务治理 Eureka 的相关知识，在学习 Eureka 之前，了解了服务注册、服务发现的概念、以及服务注册与服务发现相关工作和解决的问题，之后主要学习了服务治理 Eureka 的架构剖析、部署、使用、集群部署、注册表、集群节点间数据同步，以及自我保护机制和健康检查。  
 

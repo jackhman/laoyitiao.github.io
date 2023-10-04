@@ -65,7 +65,7 @@ aoho
 
 首先我们结合之前写请求实现流程图的内容分析 MVCC 写请求的过程：
 
-![图片3.png](https://s0.lgstatic.com/i/image6/M01/12/58/Cgp9HWBAvdGAUB34AAJwukqHZTo156.png)  
+<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image6/M01/12/58/Cgp9HWBAvdGAUB34AAJwukqHZTo156.png"/>  
 写请求实现流程图
 
 上图为写请求的过程，写请求在底层统一调用 put 方法。treeIndex 中根据查询的 key 从 B-tree 查找得到的是一个 keyIndex 对象，里面包含了 Revision 等全局版本号信息。
@@ -110,7 +110,7 @@ type revision struct {
 
 Revision 中定义了一个全局递增的主版本号`main`，发生 put、txn、del 操作会递增，一个事务内的 main 版本号是唯一的；事务内的子版本号定义为`sub`，事务发生 put 和 del 操作时，从 0 开始递增。
 
-![图片2.png](https://s0.lgstatic.com/i/image6/M00/12/55/CioPOWBAva-AC-L1AANi-MAgn_0530.png)  
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M00/12/55/CioPOWBAva-AC-L1AANi-MAgn_0530.png"/>  
 keyIndex、generation 和 revision 之间的关系
 
 由于是第一次写，treeIndex 查询为空。etcd 会根据当前的全局版本号加 1（集群初始化从 1 开始），根据执行的结果，我们这里全局版本号在写之前为 2，自增之后变成 3。因此操作对应的版本号 revision {3,0}，对应写入 BoltDB 的 key。写入的 value 对应 mvccpb.KeyValue 结构体，其由 key、value、create_revision、mod_revision、version、lease 等字段组成，定义如下所示：
@@ -134,7 +134,7 @@ type KeyValue struct {
 
 构造好 key 和 value 之后，就可以写入 BoltDB 了。并同步更新 buffer。
 
-![图片1.png](https://s0.lgstatic.com/i/image6/M00/12/59/CioPOWBAv_aAdaSVAABXITH1r1w095.png)
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M00/12/59/CioPOWBAv_aAdaSVAABXITH1r1w095.png"/>
 
 此外还需将本次修改的版本号与用户 key 的映射关系保存到 treeIndex 模块中，key hello 的 keyIndex。对照着上面介绍的 keyIndex、generation 和 Revision 结构体的定义，写入的 keyIndex 记录如下所示：
 
@@ -178,7 +178,7 @@ func (ki *keyIndex) tombstone(lg *zap.Logger, main int64, sub int64) error {
 
 我们继续来看读过程中的 MVCC 实现细节。还是使用讲解键值对查询时的流程图：
 
-![图片1.png](https://s0.lgstatic.com/i/image6/M01/12/58/Cgp9HWBAvXSARvMuAAIh2dCnpU8495.png)  
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M01/12/58/Cgp9HWBAvXSARvMuAAIh2dCnpU8495.png"/>  
 读请求实现流程图
 
 读请求在底层统一调用的是 Range 方法，首先 treeIndex 根据查询的 key 从 BTree 查找对应 keyIndex 对象。从 keyIndex 结构体的定义可知，每一个 keyIndex 结构体中都包含当前键的值以及最后一次修改对应的 Revision 信息，其中还保存了一个 key 的多个 generation，每一个 generation 都会存储当前 key 的所有历史版本。
@@ -251,6 +251,6 @@ $ etcdctl get hello --rev=3
 
 本讲内容总结如下：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image6/M01/10/BE/CioPOWA_CKuAUXIhAAFmNO_GQ6w590.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M01/10/BE/CioPOWA_CKuAUXIhAAFmNO_GQ6w590.png"/>
 
 学习完这一讲，我想给大家留一个问题：既然是批量提交，那么在提交之前出现宕机等事故时，如何保证这部分数据不会丢失的呢？欢迎你在留言区和我交流自己的见解。下一讲，我们将介绍 etcd 事务的实现原理。

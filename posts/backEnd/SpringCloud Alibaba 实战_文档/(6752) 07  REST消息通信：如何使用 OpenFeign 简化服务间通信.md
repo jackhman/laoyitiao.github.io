@@ -16,7 +16,7 @@ Spring Cloud OpenFeign 并不是独立的技术。它底层基于 Netflix Feign�
 
 为了便于理解，我们模拟实际案例进行说明。假设某电商平台日常订单业务中，为保证每一笔订单不会超卖，在创建订单前订单服务（order-service）首先去仓储服务（warehouse-service）检查对应商品 skuId（品类编号）的库存数量是否足够，库存充足创建订单，不存不足 App 前端提示"库存不足"。
 
-![图片1.png](https://s0.lgstatic.com/i/image6/M00/29/69/CioPOWBhSD6AVJ1jAADZb3zB8iU341.png)  
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M00/29/69/CioPOWBhSD6AVJ1jAADZb3zB8iU341.png"/>  
 订单与仓储服务处理流程
 
 在这个业务中，订单服务依赖于仓储服务，那仓储服务就是服务提供者，订单服务是服务消费者。下面我们通过代码还原这个场景。
@@ -109,7 +109,7 @@ public class WarehouseController {
 
 可以看到 WarehouseController 就是普通的 Spring MVC 控制器，对外暴露了 stock 接口，当应用启动后，查看 Nacos 服务列表，已出现 warehouse-service 实例。
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image6/M00/1E/2B/Cgp9HWBQbJSAduJQAAI73U_ruyQ393.png)  
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M00/1E/2B/Cgp9HWBQbJSAduJQAAI73U_ruyQ393.png"/>  
 Nacos 注册成功
 
 访问下面的 URL 可看到 Stock 对象 JSON 序列化数据。
@@ -147,7 +147,7 @@ http://192.168.31.111/stock?skuId=1101
 
 这里关键在于服务消费者依赖了 spring-cloud-starter-openfeign，在 Spring Boot 工程会自动引入 Spring Cloud OpenFeign 与 Netflix Feign 的 Jar 包。这里有个重要细节，当我们引入 OpenFeign 的时候，在 Maven 依赖中会出现 netflix-ribbon 负载均衡器的身影。
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image6/M00/1E/28/CioPOWBQbKGAVNY5AAOIqVeLiUM338.png)  
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image6/M00/1E/28/CioPOWBQbKGAVNY5AAOIqVeLiUM338.png"/>  
 OpenFeign 内置 Ribbon 实现负载均衡
 
 没错，OpenFeign 为了保证通信高可用，底层也是采用 Ribbon 实现负载均衡，其原理与 Ribbon+RestTemplate 完全相同，只不过相较 RestTemplate，OpenFeign 封装度更高罢了。

@@ -21,7 +21,7 @@ RefreshIndicator({
 
 了解完 RefreshIndicator 组件，我们再来看下本课时所要实现的一个效果，如图 1 动画所示。
 
-![20200711_155132.gif](https://s0.lgstatic.com/i/image/M00/36/B5/CgqCHl8X9e6AN6lyAH6AtsDFbHo367.gif)  
+<Image alt="20200711_155132.gif" src="https://s0.lgstatic.com/i/image/M00/36/B5/CgqCHl8X9e6AN6lyAH6AtsDFbHo367.gif"/>  
 
 图 1 下拉刷新上拉加载效果
 

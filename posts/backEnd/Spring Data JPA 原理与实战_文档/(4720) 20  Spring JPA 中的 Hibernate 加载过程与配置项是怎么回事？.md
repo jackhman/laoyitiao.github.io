@@ -8,7 +8,7 @@
 
 首先看一下 Hibernate 5.2 版本中，官方提供的架构图。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/6F/45/CgqCHl-08OiAT8tUAAAtx02IC70594.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/6F/45/CgqCHl-08OiAT8tUAAAtx02IC70594.png"/>
 
 从架构图上，我们可以知道 Hiberante 实现的 ORM 的接口有两种，一种是 Hiberante 自己的 API 接口；一种是 Java Persistence API 的接口实现。
 
@@ -16,7 +16,7 @@
 
 那么有了这个基础，我们研究 Hibernate 在 Spring Data JPA 里面的作用，得出的结论就是：Hibernate 5.2 是 Spring Data JPA 持久化操作的核心。我们再从类上面具体看一下，关键类的图如下所示：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/6F/45/CgqCHl-08PGACMAWAABkBYWN3EQ292.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/6F/45/CgqCHl-08PGACMAWAABkBYWN3EQ292.png"/>
 
 结合类的关系图来看，Session 接口和 SessionFactory 接口都是 Hibernate 的概念，而 EntityManger 和 EntityManagerFactory 都是 Java Persistence API 协议规定的接口。
 
@@ -26,7 +26,7 @@
 
 不同的 Spring Boot 版本，可能加载类的实现逻辑是不一样的，但是分析过程都是相同的。我们先打开 spring.factories 文件，如下图所示，其中可以自动加载 Hibernate 的只有一个类，那就是 HibernateJpaAutoConfiguration。
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/6F/3A/Ciqc1F-08PqAOGq1AAPvvo_ZD7w314.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/6F/3A/Ciqc1F-08PqAOGq1AAPvvo_ZD7w314.png"/>
 
 HibernateJpaAutoConfiguration 就是 Spring Boot 加载 Hibernate 的主要入口，所以我们可以直接打开这个类看一下。
 
@@ -46,7 +46,7 @@ public class HibernateJpaAutoConfiguration {
 
 我们打开 JpaProperties 类看一下，如下图所示。
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/6F/3A/Ciqc1F-08Q6AR-PoAAGybbuAJ7g272.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/6F/3A/Ciqc1F-08Q6AR-PoAAGybbuAJ7g272.png"/>
 
 通过这个类，我们可以在 application.properties 里面得到如下配置项。
 
@@ -107,7 +107,7 @@ class HibernateJpaConfiguration extends JpaBaseConfiguration {
 
 我们通过源码可以看得出来，@EnableConfigurationProperties(HibernateProperties.class) 启用了 HibernatePropertes 的配置类，如下图所示。
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image/M00/6F/45/CgqCHl-08RuALMNSAAKTACKebbE349.png)
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/6F/45/CgqCHl-08RuALMNSAAKTACKebbE349.png"/>
 
 其中可以看到 application.properties 的配置项，如下所示。
 
@@ -175,7 +175,7 @@ protected AbstractJpaVendorAdapter createJpaVendorAdapter() {
 
 我们如果接着在 HibernateJpaConfiguration 类里面 debug 查看关键代码的话，可以找到如下代码。
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image/M00/6F/45/CgqCHl-08SmAc9J8AARC3m5NP2o468.png)
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/6F/45/CgqCHl-08SmAc9J8AARC3m5NP2o468.png"/>
 
 上图中的代码显示，JpaProperties 类里面的 properties 属性，也就是 spring.jpa.properties 的配置加载到了 vendorProperties（即 Hibernate 5.2）里面。而 properties 里面是 HashMap 结构，那么它都可以支持哪些配置呢？
 
@@ -451,7 +451,7 @@ spring.jpa.properties.hibernate.jdbc.batch_size=100
 
 #### 自动加载过程类之间的关系图
 
-![Drawing 6.png](https://s0.lgstatic.com/i/image/M00/6F/45/CgqCHl-08UuABFufAAFail5ZuqU603.png)
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/6F/45/CgqCHl-08UuABFufAAFail5ZuqU603.png"/>
 
 从上图中，我们可以看出以下几点内容。
 
@@ -473,7 +473,7 @@ spring.jpa.properties.hibernate.jdbc.batch_size=100
 
 我们可以通过 JpaRepositoriesAutoConfiguration 的源码发现其主要职责和实现方式，利用异步线程池初始化 repositories，关键源码如下：
 
-![Drawing 7.png](https://s0.lgstatic.com/i/image/M00/6F/45/CgqCHl-08VmASV72AAJavgahY_A852.png)
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/6F/45/CgqCHl-08VmASV72AAJavgahY_A852.png"/>
 
 而其中加载 repositories 有三种方式，即 spring.data.jpa.repositories.bootstrap-mode 的三个值，分别为 deferred、 lazy、 default，下面详细说明。
 
@@ -493,7 +493,7 @@ spring.data.jpa.repositories.bootstrap-mode=lazy
 
 我们通过日志也可以看到，启动的线程和初始化的线程是不一样的，而初始化的线程是 NIO 线程的名字，表示 request 的 http 线程池里面的线程，具体如下图所示。
 
-![Drawing 8.png](https://s0.lgstatic.com/i/image/M00/6F/3A/Ciqc1F-08WGAaqVkAAR8a19UBFQ188.png)
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/6F/3A/Ciqc1F-08WGAaqVkAAR8a19UBFQ188.png"/>
 
 我们在分析 Hibernate 的加载方式的时候，会发现日志的重要性，那么都有哪些日志供我们观察呢？如何开启？
 

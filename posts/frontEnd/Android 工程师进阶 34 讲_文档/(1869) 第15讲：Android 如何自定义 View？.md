@@ -11,11 +11,11 @@
 
 相对而言，这是一种较简单的实现方式。因为大部分核心工作，比如关于控件大小的测量、控件位置的摆放等相关的计算，在系统中都已经实现并封装好，开发人员只要在其基础上进行一些扩展，并按照自己的意图显示相应的 UI 元素。比如以下代码：
 
-![image.png](https://s0.lgstatic.com/i/image/M00/08/47/Ciqc1F66bomAdFbwAALM9ajQIC8076.png)
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/08/47/Ciqc1F66bomAdFbwAALM9ajQIC8076.png"/>
 
 CustomToolBar 继承自 RelativeLayout，在构造函数中通过 addView 方式分别添加了 2 个 ImageView 和 1 个 TextView。显示效果如下：
 
-![image (1).png](https://s0.lgstatic.com/i/image/M00/08/47/CgqCHl66bpKAIlBcAAA0F5H64pY243.png)
+<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/08/47/CgqCHl66bpKAIlBcAAA0F5H64pY243.png"/>
 
 ### 自定义属性
 
@@ -27,7 +27,7 @@ CustomToolBar 继承自 RelativeLayout，在构造函数中通过 addView 方式
 
 在 res 的 values 目录下的 attrs.xml 文件中（没有就自己新建一个），使用 标签自定义属性，如下所示：
 
-![image (2).png](https://s0.lgstatic.com/i/image/M00/08/47/Ciqc1F66bpuAIr0aAAFqNwcLsJ0889.png)
+<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/08/47/Ciqc1F66bpuAIr0aAAFqNwcLsJ0889.png"/>
 
 解释说明：
 
@@ -36,13 +36,13 @@ CustomToolBar 继承自 RelativeLayout，在构造函数中通过 addView 方式
 
 #### 在 XML 布局文件中使用自定义属性
 
-![image (3).png](https://s0.lgstatic.com/i/image/M00/08/47/CgqCHl66bqWAFxZfAAKl9XNB380067.png)
+<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/08/47/CgqCHl66bqWAFxZfAAKl9XNB380067.png"/>
 
 需要先添加命名空间 xmlns:app，然后通过命名空间 app 引用自定义属性，并传入相应的图片资源和字符串内容。
 
 #### 在 CustomToolBar 中，获取自定义属性的引用值
 
-![image (4).png](https://s0.lgstatic.com/i/image/M00/08/47/CgqCHl66bq6AU-oEAAIh3vx_5eM610.png)
+<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/08/47/CgqCHl66bq6AU-oEAAIh3vx_5eM610.png"/>
 
 如上图所示，主要是通过 Context.obtainStyleAttributes 方法获取到自定义属性的集合，然后从这个集合中取出相应的自定义属性。
 
@@ -70,27 +70,27 @@ onDraw 方法接收一个 Canvas 类型的参数。Canvas 可以理解为一个�
 
 系统提供了一系列 Canvas 操作方法，如下：
 
-![image (5).png](https://s0.lgstatic.com/i/image/M00/08/47/Ciqc1F66brqANYwaAAFgenmfG7o790.png)
+<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/08/47/Ciqc1F66brqANYwaAAFgenmfG7o790.png"/>
 
 从上图中可以看出，Canvas 中每一个绘制操作都需要传入一个 Paint 对象。Paint 就相当于一个画笔，我们可以通过设置画笔的各种属性，来实现不同绘制效果：
 
-![image (6).png](https://s0.lgstatic.com/i/image/M00/08/47/CgqCHl66bsKAC3aYAAEfignRLSI590.png)
+<Image alt="image (6).png" src="https://s0.lgstatic.com/i/image/M00/08/47/CgqCHl66bsKAC3aYAAEfignRLSI590.png"/>
 
 比如如下代码，定义 PieImageView 继承自 View，然后在 onDraw 方法中，分别使用 Canvas 的 drawArc 和 drawCircle 方法来绘制弧度和圆形。这两个形状组合在一起就能表示一个简易的圆形进度条控件。
 
-![image (7).png](https://s0.lgstatic.com/i/image/M00/08/47/Ciqc1F66bs2AS0zEAAQY2ssC74o325.png)
+<Image alt="image (7).png" src="https://s0.lgstatic.com/i/image/M00/08/47/Ciqc1F66bs2AS0zEAAQY2ssC74o325.png"/>
 
 在布局文件中直接使用上述的 PieImageView，设置宽高为 300dp，并在 Activity 中设置 PieImageView 的进度为 45，如下所示：
 
-![image (8).png](https://s0.lgstatic.com/i/image/M00/08/47/CgqCHl66btSAYWPrAAH9B9MVFqA640.png)
+<Image alt="image (8).png" src="https://s0.lgstatic.com/i/image/M00/08/47/CgqCHl66btSAYWPrAAH9B9MVFqA640.png"/>
 
 最终运行显示效果如下：
 
-![image (9).png](https://s0.lgstatic.com/i/image/M00/08/47/Ciqc1F66btyAc0PJAAIpVraUjo0218.png)
+<Image alt="image (9).png" src="https://s0.lgstatic.com/i/image/M00/08/47/Ciqc1F66btyAc0PJAAIpVraUjo0218.png"/>
 
 如果在上面代码中的布局文件中，将 PieImageView 的宽高设置为 wrap_content（也就是自适应），重新运行则显示效果如下：
 
-![image (10).png](https://s0.lgstatic.com/i/image/M00/08/47/CgqCHl66buWAP4coAAG7qEuu7jo510.png)
+<Image alt="image (10).png" src="https://s0.lgstatic.com/i/image/M00/08/47/CgqCHl66buWAP4coAAG7qEuu7jo510.png"/>
 
 很显然，PieImageView 并没有正常显示。问题的主要原因就是在 PieImageView 中并没有在 onMeasure 方法中进行重新测量，并重新设置宽高。
 
@@ -100,7 +100,7 @@ onDraw 方法接收一个 Canvas 类型的参数。Canvas 可以理解为一个�
 
 所有工作都是在 onMeasure 方法中完成，方法定义如下：
 
-![image (11).png](https://s0.lgstatic.com/i/image/M00/08/47/CgqCHl66bvCAUiTLAACDybKUm44275.png)
+<Image alt="image (11).png" src="https://s0.lgstatic.com/i/image/M00/08/47/CgqCHl66bvCAUiTLAACDybKUm44275.png"/>
 
 可以看出，方法会传入 2 个参数 widthMeasureSpec 和 heightMeasureSpec。这两个参数是从父视图传递给子 View 的两个参数，看起来很像宽、高，但是它们所表示的不仅仅是宽和高，还有一个非常重要的**测量模式**。
 
@@ -112,7 +112,7 @@ onDraw 方法接收一个 Canvas 类型的参数。Canvas 可以理解为一个�
 
 具体值和测量模式都可以通过 Android SDK 中提供的 MeasureSpec.java 类获取：
 
-![image (12).png](https://s0.lgstatic.com/i/image/M00/08/47/CgqCHl66bvqADG9BAADvBFUSQJk100.png)
+<Image alt="image (12).png" src="https://s0.lgstatic.com/i/image/M00/08/47/CgqCHl66bvqADG9BAADvBFUSQJk100.png"/>
 
 为什么 1 个 int 值可以代表 2 种意义呢？ 实际上 widthMeasureSpec 和 heightMeasureSpec 都是使用二进制高 2 位表示测量模式，低 30 位表示宽高具体大小。
 
@@ -120,30 +120,30 @@ onDraw 方法接收一个 Canvas 类型的参数。Canvas 可以理解为一个�
 
 在 PieImageView 中并没有复写 onMeasure 方法，因此默认使用父类也就是 View 中的实现，View 中的 onMeasure 默认实现如下：
 
-![image (13).png](https://s0.lgstatic.com/i/image/M00/08/47/CgqCHl66bw-ADT0MAADKTPdZQ1c840.png)
+<Image alt="image (13).png" src="https://s0.lgstatic.com/i/image/M00/08/47/CgqCHl66bw-ADT0MAADKTPdZQ1c840.png"/>
 
 蓝色框中的 **setMeasuredDimension** 是一个非常重要的方法，这个方法传入的值直接决定 View 的宽高，也就是说如果调用 setMeasuredDimension(100,200)，最终 View 就显示宽 100 \* 高 200 的矩形范围。红色下划线标识的 getDefaultSize 返回的是默认大小，默认为父视图的剩余可用空间。
 > 这也是为什么 PieImageView 显示异常的原因，虽然我们在 XML 中指定的是 wrap_content，但是实际使用的宽高值却是父视图的剩余可用空间，从代码中可以看出是整个屏幕的宽高。
 
 问题的原因找到，解决方法只要复写 onMeasure，过滤出 wrap_content 的情况，并主动调用 setMeasuredDimension 方法设置正确的宽高即可：
 
-![image (14).png](https://s0.lgstatic.com/i/image/M00/08/48/CgqCHl66bxmAZbnFAAH8BgmvD9Q604.png)
+<Image alt="image (14).png" src="https://s0.lgstatic.com/i/image/M00/08/48/CgqCHl66bxmAZbnFAAH8BgmvD9Q604.png"/>
 
 **ViewGroup 中的 onMeasure**
 
 如果我们自定义的控件是一个容器，onMeasure 方法会更加复杂一些。因为 ViewGroup 在测量自己的宽高之前，需要先确定其内部子 View 的所占大小，然后才能确定自己的大小。比如如下一段代码：
 
-![image (15).png](https://s0.lgstatic.com/i/image/M00/08/48/Ciqc1F66byKARzSmAAc9fHTIEMg900.png)
+<Image alt="image (15).png" src="https://s0.lgstatic.com/i/image/M00/08/48/Ciqc1F66byKARzSmAAc9fHTIEMg900.png"/>
 
 LinearLayout 的宽高为 wrap_content 表示由子控件的大小决定，而 3 个子控件的宽度分别为300、200、100，那最终 LinearLayout 的宽度显示多少呢？ 运行结果如下：
 
-![image (16).png](https://s0.lgstatic.com/i/image/M00/08/48/CgqCHl66byqAFve6AAAqPxvb9sA095.png)
+<Image alt="image (16).png" src="https://s0.lgstatic.com/i/image/M00/08/48/CgqCHl66byqAFve6AAAqPxvb9sA095.png"/>
 
 可以看出 LinearLayout 的最终宽度由其内部最大的子 View 宽度决定。
 
 当我们自己定义一个 ViewGroup 的时候，也需要在 onMeasure 方法中综合考虑子 View 的宽度。比如如果要实现一个流式布局 FlowLayout，效果如下：
 
-![image (17).png](https://s0.lgstatic.com/i/image/M00/08/48/Ciqc1F66b0uANdyTAASLs9Xvo14469.png)
+<Image alt="image (17).png" src="https://s0.lgstatic.com/i/image/M00/08/48/Ciqc1F66b0uANdyTAASLs9Xvo14469.png"/>
 
 在大多数 App 的搜索界面经常会使用 FlowLayout 来展示历史搜索记录或者热门搜索项。  
 
@@ -211,7 +211,7 @@ FlowLayout 的每一行上的 item 个数不一定，当每行的 item 累计宽
 
 ViewGroup 中的 onLayout 方法声明如下：
 
-![image (18).png](https://s0.lgstatic.com/i/image/M00/08/48/Ciqc1F66b1eAeNsoAABs2Q0QRN0512.png)
+<Image alt="image (18).png" src="https://s0.lgstatic.com/i/image/M00/08/48/Ciqc1F66b1eAeNsoAABs2Q0QRN0512.png"/>
 
 它是一个抽象方法，也就是说每一个自定义 ViewGroup 都必须主动实现如何排布子 View，具体就是遍历每一个子 View，调用 child.(l, t, r, b) 方法来为每个子 View 设置具体的布局位置。四个参数分别代表左上右下的坐标位置，一个简易的 FlowLayout 实现如下：
 
@@ -277,11 +277,11 @@ ViewGroup 中的 onLayout 方法声明如下：
 
 最终我们可以在 XML 中使用此自定义控件：
 
-![image (19).png](https://s0.lgstatic.com/i/image/M00/08/48/Ciqc1F66b3CAEEa5AAUEZe6Z528059.png)
+<Image alt="image (19).png" src="https://s0.lgstatic.com/i/image/M00/08/48/Ciqc1F66b3CAEEa5AAUEZe6Z528059.png"/>
 
 一个简易的 FlowLayout 运行效果如下所示，剩下的就是和 UI 同事合作，修改 FlowLayout 内部 TextView 的样式，将界面调整到最佳显示状态。
 
-![image (20).png](https://s0.lgstatic.com/i/image/M00/08/48/CgqCHl66b4SAPQ8iAADyh9KR7Ng588.png)
+<Image alt="image (20).png" src="https://s0.lgstatic.com/i/image/M00/08/48/CgqCHl66b4SAPQ8iAADyh9KR7Ng588.png"/>
 
 ### 总结
 

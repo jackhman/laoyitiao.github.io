@@ -24,7 +24,7 @@ Windows 和 Linux 是当今两款最主流的服务器操作系统产品，都�
 
 从上面 4 种能力来看操作系统和内核之间的关系，通常可以把操作系统分成 3 层，最底层的硬件设备抽象、中间的内核和最上层的应用。
 
-![Lark20201021-153830.png](https://s0.lgstatic.com/i/image/M00/61/89/CgqCHl-P5meAd3VdAAB1f7DWz-I273.png)
+<Image alt="Lark20201021-153830.png" src="https://s0.lgstatic.com/i/image/M00/61/89/CgqCHl-P5meAd3VdAAB1f7DWz-I273.png"/>
 
 #### 内核是如何工作的？
 
@@ -34,7 +34,7 @@ Windows 和 Linux 是当今两款最主流的服务器操作系统产品，都�
 
 内核权限非常高，它可以管理进程、可以直接访问所有的内存，因此确实需要和进程之间有一定的隔离。这个隔离用类似请求/响应的模型，非常符合常理。
 
-![Lark20201021-153825.png](https://s0.lgstatic.com/i/image/M00/61/8A/CgqCHl-P5naAc5fsAABuTlhIQkw555.png)
+<Image alt="Lark20201021-153825.png" src="https://s0.lgstatic.com/i/image/M00/61/8A/CgqCHl-P5naAc5fsAABuTlhIQkw555.png"/>
 
 但不同的是在浏览器、服务端模型中，浏览器和服务端是用不同的机器在执行，因此不需要共享一个 CPU。但是在进程调用内核的过程中，这里是存在资源共享的。
 
@@ -60,7 +60,7 @@ Linux 操作系统第一版是1991 年林纳斯托·瓦兹（一个芬兰的小�
 
 * **ELF（Executable and Linkable Format）**
 
-![Lark20201021-153821.png](https://s0.lgstatic.com/i/image/M00/61/7E/Ciqc1F-P5pOAeET-AAEzXOQTzbA445.png)
+<Image alt="Lark20201021-153821.png" src="https://s0.lgstatic.com/i/image/M00/61/7E/Ciqc1F-P5pOAeET-AAEzXOQTzbA445.png"/>
 
 这个名词翻译过来叫作可执行文件链接格式。这是一种从 Unix 继承而来的可执行文件的存储格式。我们可以看到 ELF 中把文件分成了一个个分段（Segment），每个段都有自己的作用。如果想要深入了解这块知识，会涉及部分编译原理的知识，如果你感兴趣可以去网上多查些资料或者去留言区我们一起讨论。
 
@@ -70,7 +70,7 @@ Linux 操作系统第一版是1991 年林纳斯托·瓦兹（一个芬兰的小�
 
 与宏内核对应，接下来说说**微内核，内核只保留最基本的能力。比如进程调度、虚拟内存、中断。多数应用，甚至包括驱动程序、文件系统，是在用户空间管理的**。
 
-![Lark20201021-183457.png](https://s0.lgstatic.com/i/image/M00/61/AA/CgqCHl-QEKSAYD22AAFXRfj1rsA581.png)
+<Image alt="Lark20201021-183457.png" src="https://s0.lgstatic.com/i/image/M00/61/AA/CgqCHl-QEKSAYD22AAFXRfj1rsA581.png"/>
 
 学到这里，你可能会问：在内核层和在用户层有什么区别吗？
 
@@ -90,7 +90,7 @@ Linux 操作系统第一版是1991 年林纳斯托·瓦兹（一个芬兰的小�
 
 下面我找到一张 Windows 内核架构的图片给你一个直观感受。
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/61/7F/Ciqc1F-P5suAH9CJAAFl4zKFbJc816.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/61/7F/Ciqc1F-P5suAH9CJAAFl4zKFbJc816.png"/>
 
 Windows 同样支持 Multitask 和 SMP（对称多处理）。Windows 的内核设计属于混合类型。你可以看到内核中有一个 Microkernel 模块。而整个内核实现又像宏内核一样，含有的能力非常多，是一个完整的整体。
 
@@ -98,7 +98,7 @@ Windows 下也有自己的可执行文件格式，这个格式叫作 Portable Ex
 
 PE 文件的结构和 ELF 结构有很多相通的地方，我找到了一张图片帮助你更直观地理解。 因为这部分知识涉及编译原理，我这里就不详细介绍了，感兴趣同学可以在留言区和大家一起讨论，或者查阅更多资料。
 
-![Lark20201021-153828.png](https://s0.lgstatic.com/i/image/M00/61/8A/CgqCHl-P5ySAAg5CAACF0kTmx_k209.png)
+<Image alt="Lark20201021-153828.png" src="https://s0.lgstatic.com/i/image/M00/61/8A/CgqCHl-P5ySAAg5CAACF0kTmx_k209.png"/>
 
 Windows 还有很多独特的能力，比如 Hyper-V 虚拟化技术，有关虚拟化技术我们将在"模块八：虚拟化和其他"中详细讲解。
 

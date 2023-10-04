@@ -251,21 +251,21 @@ const fs = require('fs');
 
 社区上我们常见生成海报的技术分享。应用场景很多，比如文稿中划线，进行"金句分享"，如下图所示：
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image6/M00/21/5C/CioPOWBURyGAdWWfAAVd4uI0v5k453.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/21/5C/CioPOWBURyGAdWWfAAVd4uI0v5k453.png"/>
 
 一般来说，生成海报可以使用[html2canvas](https://github.com/niklasvh/html2canvas?fileGuid=xxQTRXtVcqtHK6j8)这样的类库完成，这里面的技术难点主要有跨域处理、分页处理、页面截图时机处理等。整体来说，并不难实现，但是稳定性一般。另一种生成海报的方式就是使用 Puppeteer，构建一个 Node.js 服务来做页面截图。
 
 下面我们来实现一个名叫 posterMan 的海报服务，整体技术链路如下图：
 
-![图片4.png](https://s0.lgstatic.com/i/image6/M01/25/41/Cgp9HWBZg66ADjAJAAJBHVTqmKw043.png)
+<Image alt="图片4.png" src="https://s0.lgstatic.com/i/image6/M01/25/41/Cgp9HWBZg66ADjAJAAJBHVTqmKw043.png"/>
 
 核心技术无外乎使用 Puppeteer，访问页面并截图，这与前面几个场景是一样的，如下图所示：
 
-![图片5.png](https://s0.lgstatic.com/i/image6/M01/25/3D/CioPOWBZg8GAX2qJAALAFyJ2lc8362.png)
+<Image alt="图片5.png" src="https://s0.lgstatic.com/i/image6/M01/25/3D/CioPOWBZg8GAX2qJAALAFyJ2lc8362.png"/>
 
 这里需要特别强调的是，为了实现最好的性能，我们**设计了一个链接池来存储 Puppeteer 实例**，以备所需，如下图所示：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image6/M00/21/5F/Cgp9HWBUR3WAUmueAAEA26Dx-54108.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M00/21/5F/Cgp9HWBUR3WAUmueAAEA26Dx-54108.png"/>
 
 在实现上，我们依赖[generic-pool](https://www.npmjs.com/package/generic-pool?fileGuid=xxQTRXtVcqtHK6j8)库，这个库提供了 Promise 风格的通用池，可以用来对一些高消耗、高成本资源的调用实现**防抖或拒绝服务**能力，一个典型场景是对数据库的连接。这里我们把它用于 Puppeteer 实例的创建，如下代码所示：
 
@@ -467,6 +467,6 @@ class PosterGenerator(object):
 
 本讲内容总结如下：
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image6/M00/21/60/Cgp9HWBUR8mAUFYXAALdEMP1LzI390.png)
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image6/M00/21/60/Cgp9HWBUR8mAUFYXAALdEMP1LzI390.png"/>
 
 通过这几讲的学习，希望你能够从实践出发，对 Node.js 落地应用有一个更全面的认知。这里我也给大家留一个思考题，你平时开发中使用过 Puppeteer 吗？你还能基于 Puppeteer 想到哪些使用场景呢？欢迎在留言区和我分享你的经验。

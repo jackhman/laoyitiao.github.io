@@ -83,19 +83,19 @@ dartdoc
 
 运行结束后，会在当前项目目录生成一个 doc 的文件夹。在生成文件夹中，可以直接打开 doc/api/index.html 文件，你就会看到如图 1 所示的文档界面。
 
-![image (7).png](https://s0.lgstatic.com/i/image/M00/22/66/Ciqc1F7sNjeAE5ykAAFKDSwqzfU381.png)  
+<Image alt="image (7).png" src="https://s0.lgstatic.com/i/image/M00/22/66/Ciqc1F7sNjeAE5ykAAFKDSwqzfU381.png"/>  
 
 图 1 生成文档的整体界面结构
 
 接下来我们打开 HomePageState 类，可以看到如图 2 中的效果。
 
-![image (8).png](https://s0.lgstatic.com/i/image/M00/22/72/CgqCHl7sNkGAMQRQAADbY3c-XN8695.png)  
+<Image alt="image (8).png" src="https://s0.lgstatic.com/i/image/M00/22/72/CgqCHl7sNkGAMQRQAADbY3c-XN8695.png"/>  
 
 图 2 HomePageState 的注释文档
 
 其次再打开函数 getCurrentTime 可以看到图 3 的效果。从效果看，我们的文档已经生成了，而且效果很好。
 
-![image (9).png](https://s0.lgstatic.com/i/image/M00/22/72/CgqCHl7sNkiAYZqRAAGMc2znMSs481.png)  
+<Image alt="image (9).png" src="https://s0.lgstatic.com/i/image/M00/22/72/CgqCHl7sNkiAYZqRAAGMc2znMSs481.png"/>  
 
 图 3 getCurrentTime 的注释文档
 
@@ -264,7 +264,7 @@ dartanalyzer lib
 
 运行完成以后，你可以看到一些提示、警告或者报错信息，具体提示如图 4 的问题：
 
-![image (10).png](https://s0.lgstatic.com/i/image/M00/22/72/CgqCHl7sNqmAMpqEAAESy_g_9Ag796.png)  
+<Image alt="image (10).png" src="https://s0.lgstatic.com/i/image/M00/22/72/CgqCHl7sNqmAMpqEAAESy_g_9Ag796.png"/>  
 
 图 4 dartanalyzer 规则检查运行结果
 
@@ -369,7 +369,7 @@ class HomePageState extends State<HomePage> {
 
 然后我们再运行 dartfmt 来美化代码结构，其次运行 dartanalyzer 工具来校验是否按照规范进行开发。上面代码已经是标准规范，因此你不会发现任何问题，如果你自己开发过程中有问题，则按照提示进行修改即可。如果规范检查完成以后，都没有任何问题后，我们再运行当前程序，结果如图 5 所示的效果。
 
-![image (11).png](https://s0.lgstatic.com/i/image/M00/22/67/Ciqc1F7sNr-AAZloAAFNQgKibbk184.png)  
+<Image alt="image (11).png" src="https://s0.lgstatic.com/i/image/M00/22/67/Ciqc1F7sNr-AAZloAAFNQgKibbk184.png"/>  
 
 图 5 home_page 页面效果
 

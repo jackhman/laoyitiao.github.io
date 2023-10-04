@@ -90,7 +90,7 @@
 
 本讲内容总结如下：
 
-![最佳实践：为什么要从 SDK 演进到 Service Mesh？.png](https://s0.lgstatic.com/i/image6/M00/13/54/CioPOWBCBymAbElLAAHzHabcr4w419.png)
+<Image alt="最佳实践：为什么要从 SDK 演进到 Service Mesh？.png" src="https://s0.lgstatic.com/i/image6/M00/13/54/CioPOWBCBymAbElLAAHzHabcr4w419.png"/>
 
 结合今天的内容，你能谈一谈在现实的工作场景中，还有哪些问题可以用 Service Mesh 的架构解决吗？欢迎在留言区和我分享你的想法。
 

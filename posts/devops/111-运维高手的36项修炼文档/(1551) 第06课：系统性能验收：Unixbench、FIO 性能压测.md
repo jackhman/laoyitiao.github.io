@@ -7,7 +7,7 @@
 测试前关注点
 ------
 
-![](https://s0.lgstatic.com/i/image3/M01/6F/11/CgpOIF5gtPGAQgQyAAbHfhNzTM4078.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6F/11/CgpOIF5gtPGAQgQyAAbHfhNzTM4078.png"/>
 
 <br />
 
@@ -44,7 +44,7 @@
 章节思维导图
 ------
 
-![](https://s0.lgstatic.com/i/image3/M01/6F/11/CgpOIF5gtQiADB-UAASwQDk9GjA321.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6F/11/CgpOIF5gtQiADB-UAASwQDk9GjA321.png"/>
 
 <br />
 
@@ -115,7 +115,7 @@ Unixbench 工具需要手动下载，你可以到 GitHub下载，安装成功后
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/6F/12/Cgq2xl5gtSGACDIrAAWj5rI_m3s047.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6F/12/Cgq2xl5gtSGACDIrAAWj5rI_m3s047.png"/>
 
 <br />
 
@@ -143,7 +143,7 @@ Unixbench 工具需要手动下载，你可以到 GitHub下载，安装成功后
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/6F/12/Cgq2xl5gtXGAB9S3AAH4TWbDc3k323.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6F/12/Cgq2xl5gtXGAB9S3AAH4TWbDc3k323.png"/>
 
 <br />
 
@@ -188,7 +188,7 @@ Unixbench 测试项里面更多关注的是计算性能和内存的 IO 等场景
 FIO 使用
 ------
 
-![](https://s0.lgstatic.com/i/image3/M01/6F/12/Cgq2xl5gtYiAI2f-AAJp6_7gP_I248.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6F/12/Cgq2xl5gtYiAI2f-AAJp6_7gP_I248.png"/>
 
 FIO 是一个开源的主流的 Linux 磁盘 IO 测试工具。通常对于磁盘的测试主要会关注这几个测试项，分别是：Iops，也就是每秒进行读写（I/O）操作的次数，它评估的是，每秒对于磁盘的操作次数和能力，执行次数越多说明执行数据越快。
 
@@ -206,7 +206,7 @@ FIO 是一个开源的主流的 Linux 磁盘 IO 测试工具。通常对于磁�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/6F/12/Cgq2xl5gtaCAGekxAAmbidRaDZI069.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6F/12/Cgq2xl5gtaCAGekxAAmbidRaDZI069.png"/>
 
 <br />
 
@@ -254,7 +254,7 @@ rw 参数里可以指定磁盘读写类型，如果为 randrw 那就是作随机
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/6F/12/Cgq2xl5gtbaADDl1AAJw4GDZ46A089.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6F/12/Cgq2xl5gtbaADDl1AAJw4GDZ46A089.png"/>
 
 <br />
 

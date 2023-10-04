@@ -20,7 +20,7 @@
 
 经常听到一些开发人员，在工作之余感叹自己职业发展的困惑与焦虑，比如每天写业务代码，如何摆脱 CRUD Boy 的标签，去提升技术能力？一直在传统企业工作，怎么才能加入 BAT 等大公司？所有的机遇都是在充分准备后才能获得的，这些问题的关键，就是你在技术上的持续精进。
 
-![](https://s0.lgstatic.com/i/image3/M01/07/63/Ciqah16ERqmAE-qtAAJ5c5hckiA055.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/07/63/Ciqah16ERqmAE-qtAAJ5c5hckiA055.png"/>
 
 **如果想在技术线上深耕和谋求发展，成为高级工程师、资深工程师或者架构师，****掌握分布式系统知识已经成为了必要的一环**。不管是目前流行的 SOA 架构，还是蓬勃发展的微服务和 Serverless 架构，都是在分布式的基础上构建的，业务开发中的框架选型、注册中心，以及服务拆分之后面临的分布式事务问题、分布式锁，也都是分布式系统所关注的。
 
@@ -32,7 +32,7 @@
 
 **在****拉勾网上搜索后端工程师的招聘岗位，可以看到很多岗位都要求掌握缓存、分布式服务、消息队列等分布式组件应用，部分岗位还要求在高并发等分布式设计方向有一定的积累。**
 
-![](https://s0.lgstatic.com/i/image3/M01/08/6A/Ciqah16FzVKAUHomABFJwSsmtFg192.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/08/6A/Ciqah16FzVKAUHomABFJwSsmtFg192.png"/>
 
 结合拉勾对海量招聘启事的大数据分析，我们也总结出了后端开发者在面试中要求**掌握的分布式技能点** ，同时也把它们融入到了课程设计中：
 
@@ -50,7 +50,7 @@
 
 * 合理应用分布式技术，实现系统的高可用。
 
-![](https://s0.lgstatic.com/i/image3/M01/80/79/Cgq2xl6ERqmAEq1kAAENcRtXEvU094.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/80/79/Cgq2xl6ERqmAEq1kAAENcRtXEvU094.png"/>
 
 ### 难点不难，给你学得会的分布式课程
 
@@ -68,7 +68,7 @@
 
 碎片化知识很难有效学习，体系化的学习才是重点。分布式系统知识足够庞杂，本课程从理论开始，一步一步落地到实践中，帮助你快速构建知识框架，让你对分布式技术有个总体的认知。
 
-![](https://s0.lgstatic.com/i/image3/M01/07/63/Ciqah16ERqmAGJjpAACXHV15Oyg347.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/07/63/Ciqah16ERqmAGJjpAACXHV15Oyg347.png"/>
 
 **（2）选取最常用的知识点**
 
@@ -88,7 +88,7 @@
 
 本课程分为 7 个模块，共 45 讲。我将从实际工作和面试出发，从分布式理论开始带你建立知识框架，然后逐个攻破分布式技术的各个核心技术领域。为了让你更清晰地了解本课程中的所有知识点，我还准备了一份思维导图：
 
-![](https://s0.lgstatic.com/i/image3/M01/80/79/Cgq2xl6ERqmAdmMXAAMdZN_Jn7I815.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/80/79/Cgq2xl6ERqmAdmMXAAMdZN_Jn7I815.png"/>
 
 * **分布式基础：** 扎实的理论是进一步学习分布式知识的钥匙，这一模块将详解分布式的概念，包括 CAP 和 Base 理论、各种数据一致性模型，以及两阶段和三阶段提交协议等。
 
@@ -112,7 +112,7 @@
 
 *** ** * ** ***
 
-[![1.png](https://s0.lgstatic.com/i/image/M00/6D/3E/CgqCHl-s60-AC0B_AAhXSgFweBY762.png)](https://shenceyun.lagou.com/t/Mka)
+[<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/6D/3E/CgqCHl-s60-AC0B_AAhXSgFweBY762.png"/>](https://shenceyun.lagou.com/t/Mka)
 
 **《Java 工程师高薪训练营》**
 

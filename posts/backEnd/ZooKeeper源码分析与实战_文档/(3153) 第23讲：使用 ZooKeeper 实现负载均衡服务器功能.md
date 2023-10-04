@@ -50,7 +50,7 @@
 
 最后，通过统计临时节点的数量，来了解网络中服务器的运行情况。**如下图所示，建立的 ZooKeeper 数据模型中 Severs 节点可以作为存储服务器列表的父节点**。用于之后通过负载均衡算法在该列表中选择服务器。在它下面创建 servers_host1、servers_host2、servers_host3等临时节点来存储集群中的服务器运行状态信息。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/36/99/Ciqc1F8X5l-APWIjAAAsDI_4m_Q833.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/36/99/Ciqc1F8X5l-APWIjAAAsDI_4m_Q833.png"/>
 
 在代码层面的实现中，我们首先定义一个 BlanceSever 接口类。该类规定在 ZooKeeper 服务器启动后，向服务器地址列表中，注册或注销信息以及根据接收到的会话请求，动态更新负载均衡情况等功能。如下面的代码所示：
 
@@ -105,7 +105,7 @@ public unregister() throws Exception{
 
 整个实现的过程如下图所示。首先，在接收到客户端的请求后，通过 getData 方法获取服务端 Severs 节点下的服务器列表，其中每个节点信息都存储有当前服务器的连接数。通过判断选择最少的连接数作为当前会话的处理服务器，并通过 setData 方法将该节点连接数加 1。最后，当客户端执行完毕，再调用 setData 方法将该节点信息减 1。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/36/99/Ciqc1F8X5n6AGCBQAABSbLOIuWA010.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/36/99/Ciqc1F8X5n6AGCBQAABSbLOIuWA010.png"/>
 
 首先，我们定义当服务器接收到会话请求后。在 ZooKeeper 服务端增加连接数的 addBlance 方法。如下面的代码所示，首先我们通过 readData 方法获取服务器最新的连接数，之后将该连接数加 1，再通过 writeData 方法将新的连接数信息写入到服务端对应节点信息中。
 

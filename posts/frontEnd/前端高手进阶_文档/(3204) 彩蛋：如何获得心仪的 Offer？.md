@@ -172,7 +172,7 @@
 
 不同公司组织架构不一样，面试风格也不一样，以大公司为例，面试一般有五轮，具体内容我已经整理到下面的表格中了。
 
-![Lark20200918-182506.png](https://s0.lgstatic.com/i/image/M00/51/31/Ciqc1F9kiyKADXyoAAF_7TTgbRs913.png)
+<Image alt="Lark20200918-182506.png" src="https://s0.lgstatic.com/i/image/M00/51/31/Ciqc1F9kiyKADXyoAAF_7TTgbRs913.png"/>
 
 对于 BAT 这些大公司，其实是有分很多部门的，比如阿里就有蚂蚁金服、口碑、飞猪等，当你面试一个不过的时候并不代表失败，应该立即调整好状态查漏补缺，然后试试其他部门。有时候可能并不是能力原因，只是岗位的匹配度问题没有通过。
 

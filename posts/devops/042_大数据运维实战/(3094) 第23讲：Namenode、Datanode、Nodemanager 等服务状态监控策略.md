@@ -12,7 +12,7 @@ Centreon 的安装非常简单，有 ISO 镜像安装、VM 虚拟机安装、源
 
 你可以从 [Centreon 官网](https://download.centreon.com/)下载到需要的版本，如下图所示：
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/31/40/Ciqc1F8MJ2CAGSnuAAC9gzfBQlQ489.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/31/40/Ciqc1F8MJ2CAGSnuAAC9gzfBQlQ489.png"/>
 
 我下载的是 VirtualBox Virtual Machine，其实就是一个打包好的虚拟机。下载后，将文件导入 VirtualBox 虚拟机，然后直接启动系统即可完成安装，非常简单。登录系统，默认的用户名是 root，密码为 centreon。
 
@@ -40,7 +40,7 @@ Centreon 的安装非常简单，有 ISO 镜像安装、VM 虚拟机安装、源
 
 登录 Centreon Web，在左侧导航中，选择 Configuration → Hosts →Templates，然后编辑 generic --- active --- host --- custom 模板，如下图所示：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/31/4C/CgqCHl8MJ26AHCCqAAD_j9g5ftM359.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/31/4C/CgqCHl8MJ26AHCCqAAD_j9g5ftM359.png"/>
 
 **主机模板，是对主机默认属性或通用属性的设置。** 只有主机引用了这个模板，那么此模板的设置值就继承到主机里面了。一些基础的主机监控，比如主机检查属性、报警通知属性、自定义宏属性等都可以在主机模板中进行设置，当然也可以在定义主机监控的时候设置这些属性。
 
@@ -54,7 +54,7 @@ Centreon 的安装非常简单，有 ISO 镜像安装、VM 虚拟机安装、源
 
 点击下图中的"Notification"标签，用来设置告警通知属性模板，如下图所示：
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/31/4C/CgqCHl8MJ3yAD55vAAFjuxr2vSc728.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/31/4C/CgqCHl8MJ3yAD55vAAFjuxr2vSc728.png"/>
 
 告警通知属性主要对是否启用告警、告警联系人、告警周期、告警类型等进行设置，上图已经很清楚地描述了每个选项的含义，这里不再多说。
 
@@ -62,13 +62,13 @@ Centreon 的安装非常简单，有 ISO 镜像安装、VM 虚拟机安装、源
 
 选择 Configuration → Hosts → Hosts，点击 Add 按钮添加一个主机，如下图所示：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/31/41/Ciqc1F8MJ4WAPpG_AACJmxWWjTw282.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/31/41/Ciqc1F8MJ4WAPpG_AACJmxWWjTw282.png"/>
 
 首先添加一个 172.16.213.31 主机，此主机无须设置更多的属性，只需要引用模板即可，模板就选择之前我们创建的"generic-active-host-custom"。这样，此主机的所有属性就配置完成了，因为更多的主机属性都通过指定的主机模板继承进去了。
 
 要添加更多的主机，方法与上面完全相同。下面依次添加多台主机，如下图所示：
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image/M00/31/4C/CgqCHl8MJ4yAAvATAAED2BFrWBs804.png)
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/31/4C/CgqCHl8MJ4yAAvATAAED2BFrWBs804.png"/>
 
 在这个界面上，有很多操作属性，可以用于对主机进行复制、删除、修改、启用和禁用等，由此可见，通过 Centreon 管理主机非常方便、简单。
 
@@ -78,11 +78,11 @@ Centreon 的安装非常简单，有 ISO 镜像安装、VM 虚拟机安装、源
 
 选择 Configuration → Pollers → Pollers，如下图所示：
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image/M00/31/4C/CgqCHl8MJ5aAG2JFAAB3Wpx7NW0860.png)
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/31/4C/CgqCHl8MJ5aAG2JFAAB3Wpx7NW0860.png"/>
 
 在此图中选择"Export configuration"，如下图所示：
 
-![Drawing 6.png](https://s0.lgstatic.com/i/image/M00/31/4C/CgqCHl8MJ52AJ2afAACH_k5NHDY004.png)
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/31/4C/CgqCHl8MJ52AJ2afAACH_k5NHDY004.png"/>
 
 上图主要用于将创建好的配置导出，首先选择 pollers 为 central，然后勾选左边所有动作，最后选择执行方式，可选的有两个，即 Restart 和 Reload。
 
@@ -98,11 +98,11 @@ Centreon 的安装非常简单，有 ISO 镜像安装、VM 虚拟机安装、源
 
 这里的服务模板与之前介绍的主机模板类似，它们具有相同的作用，选择 Configuration→Services→Templates，找到"generic-active-service"这个自带的模板，如下图所示：
 
-![Drawing 7.png](https://s0.lgstatic.com/i/image/M00/31/41/Ciqc1F8MJ6mAfBKWAADpboC-JtU628.png)
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/31/41/Ciqc1F8MJ6mAfBKWAADpboC-JtU628.png"/>
 
 此界面中主要用来设置服务模板的一些属性值，点击上图中的"Notification"选项，可以用来设置通知属性，如下图所示：
 
-![Drawing 8.png](https://s0.lgstatic.com/i/image/M00/31/4C/CgqCHl8MJ7KAY8FnAADrvlGcMT8676.png)
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/31/4C/CgqCHl8MJ7KAY8FnAADrvlGcMT8676.png"/>
 
 在此界面中，对每个选项的含义都做了详细的描述，这里不再多说。generic-active-service 服务模板中设置的属性值都是通用的或公用的，主要用于在创建服务的时候进行引用。
 
@@ -110,7 +110,7 @@ Centreon 的安装非常简单，有 ISO 镜像安装、VM 虚拟机安装、源
 
 选择 Configuration→Commands→Checks，点击 add 创建一个命令，如下图所示：
 
-![Drawing 9.png](https://s0.lgstatic.com/i/image/M00/31/41/Ciqc1F8MJ7qACxTbAAColsW9skw633.png)
+<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/31/41/Ciqc1F8MJ7qACxTbAAColsW9skw633.png"/>
 
 这里创建了一个"ganglia_collect"命令，此命令用来收集 Ganglia 上面的监控指标，可以看到，此命令最终应用的监控命令是 check_ganglia_metric.py，这个脚本我们在上个课时中介绍过。
 
@@ -118,13 +118,13 @@ Centreon 的安装非常简单，有 ISO 镜像安装、VM 虚拟机安装、源
 
 添加监控服务的方法与添加主机基本一样，选择 Configuration→Services→Services by host，点击 Add 按钮添加一个服务。这里添加了一个"check_hadoop_block"的服务，在"Service Template"中引用了服务模板 generic-active-service，如下图所示：
 
-![Drawing 10.png](https://s0.lgstatic.com/i/image/M00/31/4C/CgqCHl8MJ8KASx5iAACVP09wINM609.png)
+<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image/M00/31/4C/CgqCHl8MJ8KASx5iAACVP09wINM609.png"/>
 
 在添加监控服务过程中，只要引用了之前创建好的基础服务模板，那么大部分的属性基本都不用配置了，因为已经在服务模板配置过了。
 
 这里重点关注"check_hadoop_block"服务中引用的命令 ganglia_collect 中三个参数的配置，分别是监控指标、警告阈值和故障阈值。其中，监控项 dfs.FSNamesystem.CorruptBlocks 表示已损坏的 block 数量。这样一个监控服务就添加完成了，如下图所示：
 
-![Drawing 11.png](https://s0.lgstatic.com/i/image/M00/31/41/Ciqc1F8MJ8mARqRMAAC6X0tO3SE756.png)
+<Image alt="Drawing 11.png" src="https://s0.lgstatic.com/i/image/M00/31/41/Ciqc1F8MJ8mARqRMAAC6X0tO3SE756.png"/>
 
 在上图的服务监控列表中，可以对每个服务进行复制、删除、启用、禁用等操作，这些功能对以后的监控系统运维是非常重要的。
 
@@ -138,7 +138,7 @@ Centreon 的安装非常简单，有 ISO 镜像安装、VM 虚拟机安装、源
 
 **第一种方法**是在定义主机时进行开启，选择 Configuration→Hosts→Hosts，编辑已经创建好的主机 172.16.213.31，这里重点看通知（Notification）选项，如下图所示：
 
-![Drawing 12.png](https://s0.lgstatic.com/i/image/M00/31/41/Ciqc1F8MJ9WAW61VAACC6D8QegE514.png)
+<Image alt="Drawing 12.png" src="https://s0.lgstatic.com/i/image/M00/31/41/Ciqc1F8MJ9WAW61VAACC6D8QegE514.png"/>
 
 在默认情况下，通知选项处于"Default"状态，该状态表示一个继承关系，这里选择"monitoring_server"作为通知联系人，monitoring_server 就是 admin 用户的全名，"选择Supervisor"作为联系人组。这里可以根据监控需要任意添加。
 
@@ -154,7 +154,7 @@ Centreon 的安装非常简单，有 ISO 镜像安装、VM 虚拟机安装、源
 
 选择 Configuration→Users→Contacts/Users，然后编辑 admin 用户，如下图所示：
 
-![Drawing 13.png](https://s0.lgstatic.com/i/image/M00/31/41/Ciqc1F8MJ-CAZ2SlAAPd-zgTfWQ531.png)
+<Image alt="Drawing 13.png" src="https://s0.lgstatic.com/i/image/M00/31/41/Ciqc1F8MJ-CAZ2SlAAPd-zgTfWQ531.png"/>
 
 上图总共分成了两个部分，第一部分是用户设置，每个选项的含义在图中都进行了标注；第二部分是通知告警，主要是配置报警通知命令，这里重点关注一下主机通知和服务通知命令。如果是邮件报警，在主机通知命令中，可以选择 host---notify---by---email，而在服务通知命令中可以选择 service---notify---by---email。关于这两个命令，要根据实际情况进行修改，修改方法很简单：选择 Configuration→Commands→Notifications 选项，编辑对应的命令即可。
 
@@ -184,7 +184,7 @@ Centreon 的安装非常简单，有 ISO 镜像安装、VM 虚拟机安装、源
 
 在 Configuration→Commands→Notifications 中，编辑"host-notify-by-email"内容如下图所示：
 
-![Drawing 14.png](https://s0.lgstatic.com/i/image/M00/31/41/Ciqc1F8MJ_WAM4zBAAD42CE0h0w232.png)
+<Image alt="Drawing 14.png" src="https://s0.lgstatic.com/i/image/M00/31/41/Ciqc1F8MJ_WAM4zBAAD42CE0h0w232.png"/>
 
 下面是一个定义好的 service-notify-by-email 命令的内容：
 
@@ -194,7 +194,7 @@ Centreon 的安装非常简单，有 ISO 镜像安装、VM 虚拟机安装、源
 
 在 Configuration→Commands→Notifications 中，编辑"service-notify-by-email"内容如下图所示：
 
-![Drawing 15.png](https://s0.lgstatic.com/i/image/M00/31/4C/CgqCHl8MKAKAehgTAADUjp4Zai8527.png)
+<Image alt="Drawing 15.png" src="https://s0.lgstatic.com/i/image/M00/31/4C/CgqCHl8MKAKAehgTAADUjp4Zai8527.png"/>
 
 告警通知配置完毕后，重启 Centreon 监控引擎，以使告警配置生效，到这里为止，关于 Centreon 邮件报警方式的配置已介绍完毕。
 
@@ -212,31 +212,31 @@ Centreon 对 Hadoop 的监控，主要是通过编写脚本的形式去访问 HD
 
 首先，在监控服务器的 Centreon Web 界面选择 Configuration→Commands→Checks，然后点击 Add 按钮新建一个 Command，如下图所示。
 
-![Drawing 16.png](https://s0.lgstatic.com/i/image/M00/31/41/Ciqc1F8MKA-AbuTSAAB_V8r-Byo174.png)
+<Image alt="Drawing 16.png" src="https://s0.lgstatic.com/i/image/M00/31/41/Ciqc1F8MKA-AbuTSAAB_V8r-Byo174.png"/>
 
 在创建 check_hadoop_namenodestate 命令过程中，需要使用一个 perl 脚本 check_hadoop_namenode_state.pl（[本课时所有脚本都可点击这里下载](https://www.ixdba.net/centreon/hadoop-pl.tar.gz)，将下载下来的文件和目录都放到 Centreon 服务器的 /usr/lib/nagios/plugins 目录下），此脚本其中的"-H"表示主机地址，后面的参数 $ARG1$ 表示 namenode 的状态，有两种状态，即 active 和 standby。此脚本用来检测高可用 Namenode 的主、备是否发生切换，如果主、备发生切换，则意味着 Namenode 可能出现问题，所以要做好主备的状态监控。
 
 接着，开始添加 check_hanamenode_active 服务，如下图所示：
 
-![Drawing 17.png](https://s0.lgstatic.com/i/image/M00/31/41/Ciqc1F8MKB2AfXHWAACXUmkpvI8605.png)
+<Image alt="Drawing 17.png" src="https://s0.lgstatic.com/i/image/M00/31/41/Ciqc1F8MKB2AfXHWAACXUmkpvI8605.png"/>
 
 注意，这里添加的服务对应的主机是 172.16.213.31，此主机是 Namenode 的主节点，因此它的状态应该是 active，注意此服务在检查命令配置项中，添加刚刚配置好的那个命令即可。
 
 然后，继续添加第二个服务 check_hanamenode_standby，此服务用来检查 Namenode 备机运行状态，如下图所示：
 
-![Drawing 18.png](https://s0.lgstatic.com/i/image/M00/31/4C/CgqCHl8MKCaAcMG-AACXEMM6sZk815.png)
+<Image alt="Drawing 18.png" src="https://s0.lgstatic.com/i/image/M00/31/4C/CgqCHl8MKCaAcMG-AACXEMM6sZk815.png"/>
 
 配置完毕后，对 Namenode 主、备运行状态已经配置完成。对 Namenode 监控，还需要及时了解 HDFS 数据块状态（是否丢失块、出现坏块、未复制的块等），这个功能需要通过另一个脚本实现，该脚本为 check_hadoop_replication.pl。
 
 要使用这个脚本，仍然是先创建一个监控命令，在 Centreon Web 界面选择 Configuration→Commands→Checks，然后点击 Add 按钮新建一个 Command，如下图所示。
 
-![Drawing 19.png](https://s0.lgstatic.com/i/image/M00/31/41/Ciqc1F8MKC-AT5piAACYdEMrjg0735.png)
+<Image alt="Drawing 19.png" src="https://s0.lgstatic.com/i/image/M00/31/41/Ciqc1F8MKC-AT5piAACYdEMrjg0735.png"/>
 
 在这个界面，我们调用了刚上传到服务器上的那个脚本，此脚本中 -H 是指定 Namenode 服务器的 IP，-P 是指定 Namenode 的 Web 端口，默认是 50070，-w 是 HDFS 数据块故障状态的警告值，-c 是 HDFS 数据块故障状态的故障值。
 
 接着，开始创建服务，这里创建了一个 check_hadoop_namenode_replicatedblocks 服务，如下图所示：
 
-![Drawing 20.png](https://s0.lgstatic.com/i/image/M00/31/41/Ciqc1F8MKDmAfrqoAACdrufBttk823.png)
+<Image alt="Drawing 20.png" src="https://s0.lgstatic.com/i/image/M00/31/41/Ciqc1F8MKDmAfrqoAACdrufBttk823.png"/>
 
 此服务中，连接了两个主机，也就是对这两个主机的 HDFS 数据块状态进行定期监控和检查。
 
@@ -246,13 +246,13 @@ Centreon 对 Hadoop 的监控，主要是通过编写脚本的形式去访问 HD
 
 接着，在 Centreon Web 界面选择 Configuration→Commands→Checks，然后点击 Add 按钮新建一个 Command，如下图所示。
 
-![Drawing 21.png](https://s0.lgstatic.com/i/image/M00/31/41/Ciqc1F8MKECAYyK9AACLCC4dm1E937.png)
+<Image alt="Drawing 21.png" src="https://s0.lgstatic.com/i/image/M00/31/41/Ciqc1F8MKECAYyK9AACLCC4dm1E937.png"/>
 
 这里创建了一个命令 check_hadoop_deaddatanode，然后将上面脚本引用进来即可，参数含义不再介绍。
 
 命令创建完成，接着，开始创建监控服务，这里我创建的服务名称是 check_hadoop_datanode_dead，将此服务连接到 172.16.213.31 主机上，如下图所示：
 
-![Drawing 22.png](https://s0.lgstatic.com/i/image/M00/31/4D/CgqCHl8MKEmAMGYSAAC_xRN_7N0307.png)
+<Image alt="Drawing 22.png" src="https://s0.lgstatic.com/i/image/M00/31/4D/CgqCHl8MKEmAMGYSAAC_xRN_7N0307.png"/>
 
 注意，在上图中，ARG1 代表警告阈值，ARG2 代表故障阈值，这个可根据实际情况进行修改。配置完毕后，对 Datanode 的监控就添加完成了。
 
@@ -264,7 +264,7 @@ Centreon 对 Hadoop 的监控，主要是通过编写脚本的形式去访问 HD
 
 接着，在 Centreon Web 界面选择 Configuration→Commands→Checks，然后点击 Add 按钮新建一个 Command，如下图所示：
 
-![Drawing 23.png](https://s0.lgstatic.com/i/image/M00/31/4D/CgqCHl8MKFKAIpf-AACVOvlvoHA808.png)
+<Image alt="Drawing 23.png" src="https://s0.lgstatic.com/i/image/M00/31/4D/CgqCHl8MKFKAIpf-AACVOvlvoHA808.png"/>
 
 在上图中，通过创建一个命令将 check_hadoop_yarn_resource_manager_heap.pl 脚本引用进来了，其中 -t 参数表示超时时间。
 
@@ -276,17 +276,17 @@ Centreon 对 Hadoop 的监控，主要是通过编写脚本的形式去访问 HD
 
 * ARG3 参数代表的含义是故障阈值，对应的值也是百分比。
 
-![Drawing 24.png](https://s0.lgstatic.com/i/image/M00/31/42/Ciqc1F8MKFiAWR2AAADF6D_v1EE800.png)
+<Image alt="Drawing 24.png" src="https://s0.lgstatic.com/i/image/M00/31/42/Ciqc1F8MKFiAWR2AAADF6D_v1EE800.png"/>
 
 最后，再来看看如何监控 Nodemanager，在实际运行中，也会出现各种问题，比如 Nodemanager 所在的节点可能出现磁盘只读，此时该节点就会自动进入黑名单，或者出现内存溢出，Nodemanager 服务就会自动退出。针对这些情况，运维需要及时发现、及时处理，所以对 Nodemanager 的监控至关重要，同样，需要借助一个脚本 check_hadoop_yarn_node_managers.pl，此脚本已包含在上面那个下载地址中。
 
 然后，在 Centreon Web 界面选择 Configuration→Commands→Checks，点击 Add 新建一个 Command，如下图所示。
 
-![Drawing 25.png](https://s0.lgstatic.com/i/image/M00/31/42/Ciqc1F8MKGCAcn4YAACTldjW08M979.png)
+<Image alt="Drawing 25.png" src="https://s0.lgstatic.com/i/image/M00/31/42/Ciqc1F8MKGCAcn4YAACTldjW08M979.png"/>
 
 命令创建完毕后，接下来开始创建服务，引入此命令，这里创建一个 check_yarn_lostnodemanager 服务，如下图所示：
 
-![Drawing 26.png](https://s0.lgstatic.com/i/image/M00/31/4D/CgqCHl8MKGaACKiHAADDsCLyqiM045.png)
+<Image alt="Drawing 26.png" src="https://s0.lgstatic.com/i/image/M00/31/4D/CgqCHl8MKGaACKiHAADDsCLyqiM045.png"/>
 
 注意，check_hadoop_yarn_node_managers.pl 脚本的实现是对 Nodemanager 的监控，借助了 Yarn 的 8080 端口，因此，这里监控连接主机是 172.16.213.41，而 ARG1、ARG2 和 ARG3 的含义依次是超时时间、警告阈值和故障阈值。
 

@@ -12,7 +12,7 @@
 
 下面的图 1 描述了 Spark Streaming 的工作原理。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image6/M01/20/52/CioPOWBS_7eAXRqXAAGiz_WNEU8237.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M01/20/52/CioPOWBS_7eAXRqXAAGiz_WNEU8237.png"/>
 
 从上面的图 1 可以看出，当 Spark Streaming 接收到流数据时，先是将其切分成一个个的 RDD（Resilient Distributed Datasets，弹性分布式数据集），每个 RDD 实际是一个小的块数据。然后，这些 RDD 块数据再由 Spark 引擎进行各种处理。最后，处理完的结果同样是以一个个的 RDD 块数据依次输出。
 
@@ -24,7 +24,7 @@
 
 由于 Spark Streaming 是构建在 Spark 之上，而 Spark 的核心是一个针对 RDD 块数据做批处理的执行引擎。所以 Spark Streaming 在描述流时，采用了"模版"的概念。具体如下图 2 所示。
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image6/M00/20/52/CioPOWBS_-6Aa4RJAAJLOFofOxM909.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M00/20/52/CioPOWBS_-6Aa4RJAAJLOFofOxM909.png"/>
 
 上面的图 2 说明了 Spark Streaming 是如何描述流计算过程的，具体如下：
 
@@ -135,4 +135,4 @@ wordCounts.print();
 
 下面是本课时的脑图，以帮助你理解。
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image6/M00/20/52/CioPOWBTABeAf-AEABKJEPt9vJE024.png)
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image6/M00/20/52/CioPOWBTABeAf-AEABKJEPt9vJE024.png"/>

@@ -9,7 +9,7 @@ TypeScript 其实就是类型化的 JavaScript，它不仅支持 JavaScript 的�
 
 因此，从某种意义上来说，**TypeScript 其实就是 JavaScript 的超集**，如下图所示：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image6/M00/3D/B5/CioPOWCV_xuAZSI_AAdZCdHFgM8072.png)  
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/3D/B5/CioPOWCV_xuAZSI_AAdZCdHFgM8072.png"/>  
 TypeScript 是 JavaScript 的超集示意图
 
 在 TypeScript 中，我们不仅可以轻易复用 JavaScript 的代码、最新特性，还能使用可选的静态类型进行检查报错，使得编写的代码更健壮、更易于维护。比如在开发阶段，我们通过 TypeScript 代码转译器就能快速消除很多低级错误（如 typo、类型等）。
@@ -40,7 +40,7 @@ let num: number = 1;
 
 关于 JavaScript 原始数据类型到 TypeScript 类型的映射关系如下表所示：
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image6/M00/3D/B5/CioPOWCV_y2AfRkCAAJ0QW8Nr1k253.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M00/3D/B5/CioPOWCV_y2AfRkCAAJ0QW8Nr1k253.png"/>
 
 接下来，我们详细地了解一下原始类型。
 
@@ -160,7 +160,7 @@ str2 = str; // ok or fail?
 
 此时，我们可以看到 VS Code 的内容和问题面板区域提示了错误（其他 IDE 也会出现类似提示），如下图所示：
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image6/M01/3D/AC/Cgp9HWCV_0GAYFH7AATQLps4G-c499.png)  
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image6/M01/3D/AC/Cgp9HWCV_0GAYFH7AATQLps4G-c499.png"/>  
 错误提示效果图
 
 以上就是类型注解作用的直观体现。

@@ -24,7 +24,7 @@ public synchronized void clear() {
 
 Collections.SynchronizedMap(new HashMap()) 的原理和 Hashtable 类似，也是利用 synchronized 实现的。而我们的 ConcurrentHashMap 实现的原理，却有大大的不同，让我们看一下它在 Java 8 中的结构示意图：
 
-![](https://s0.lgstatic.com/i/image3/M01/62/08/Cgq2xl4hTd6AEtyaAAGajAYmoZ8045.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/62/08/Cgq2xl4hTd6AEtyaAAGajAYmoZ8045.png"/>
 
 对于 ConcurrentHashMap 的原理，我们在第 30 课时的时候有过详细的介绍和源码分析，本质上它实现线程安全的原理是利用了 CAS + synchronized + Node 节点的方式，这和 Hashtable 的完全利用 synchronized 的方式有很大的不同。
 

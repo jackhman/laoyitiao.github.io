@@ -345,8 +345,8 @@ function init(options) {
 
 PostCSS 原理如下图：
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image2/M01/05/E0/Cip5yGABPraACuJCAAGHB98AwXg855.png)  
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/8D/F3/Ciqc1GABPsGAfsSVAAGgxx7GqrU331.png)  
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image2/M01/05/E0/Cip5yGABPraACuJCAAGHB98AwXg855.png"/>  
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/8D/F3/Ciqc1GABPsGAfsSVAAGgxx7GqrU331.png"/>  
 PostCSS 原理图
 
 这里给大家推荐 [purgecss-webpack-plugin](https://github.com/FullHuman/purgecss/tree/master/packages/purgecss-webpack-plugin)，其原理也很简单：
@@ -409,7 +409,7 @@ public walkThroughCSS(
 
 本小节，我们分析了 Tree Shaking 相关知识，我们发现这一理论内容还需要配合构建工具完成落地，而这一系列过程不只是想象中那样简单。
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/8D/F3/Ciqc1GABPt6AAFyMAAGLjLOlwJM945.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/8D/F3/Ciqc1GABPt6AAFyMAAGLjLOlwJM945.png"/>
 
 这里我想给你留一个思考题，Rollup 是如何实现 Tree Shaking 的呢？欢迎在留言区和我分享你的观点。
 

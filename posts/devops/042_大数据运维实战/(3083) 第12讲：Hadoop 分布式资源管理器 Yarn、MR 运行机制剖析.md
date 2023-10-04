@@ -8,7 +8,7 @@ Yarn 的架构设计基于**主从（Master-Slave）模式**，主要由 Resourc
 
 Yarn 的基本架构如下图所示：
 
-![1.png](https://s0.lgstatic.com/i/image/M00/19/3A/CgqCHl7aDLOAbvmyAAEkxIivjh4535.png)
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/19/3A/CgqCHl7aDLOAbvmyAAEkxIivjh4535.png"/>
 
 ### Yarn 中的组件解读
 
@@ -73,7 +73,7 @@ Container 是 Yarn 资源管理器中最底层的计算单元，是执行计算�
 
 当用户向 Yarn 提交一个请求时，Yarn 会执行一系列动作来响应用户的请求，那么 Yarn 具体执行了哪些动作呢？如下图所示：
 
-![2.png](https://s0.lgstatic.com/i/image/M00/19/3A/CgqCHl7aDMKADJ7yAANXiOOOkUE459.png)
+<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/19/3A/CgqCHl7aDMKADJ7yAANXiOOOkUE459.png"/>
 
 上图展示了用户提交一个应用程序到 Yarn 集群时，ResourceManager、Scheduler、Applicationmanager、ApplicationMaster、NodeManager 和容器如何相互交互的过程。
 
@@ -101,7 +101,7 @@ Yarn 中 shell 的使用与 HDFS 中的 shell 类似，Yarn 中也提供了一�
 
 通过 Yarn application 可以对运行的任务进行状态查看、关闭 application 或启动 application 等操作，看下图这个例子：
 
-![image3.png](https://s0.lgstatic.com/i/image/M00/19/04/Ciqc1F7Z5AeARCrmAAF9NAhxDlw904.png)
+<Image alt="image3.png" src="https://s0.lgstatic.com/i/image/M00/19/04/Ciqc1F7Z5AeARCrmAAF9NAhxDlw904.png"/>
 
 由上图可知，目前 Yarn 集群有三个 application 正在运行，application 的类型、名称、ID、用户、队列、状态、进度等都显示的很清楚，要查看某个 application 的状态信息，可执行如下命令：
 
@@ -149,7 +149,7 @@ appattempt_1578297910271_66111_000001           RUNNING       container_e55_1578
 
 从上图可以找到 application 下面的 container，接着看这个 container 的状态，执行如下图所示命令：
 
-![image3.png](https://s0.lgstatic.com/i/image/M00/19/10/CgqCHl7Z5DWAXBPTAAF9NAhxDlw433.png)
+<Image alt="image3.png" src="https://s0.lgstatic.com/i/image/M00/19/10/CgqCHl7Z5DWAXBPTAAF9NAhxDlw433.png"/>
 
 从这个输出可以看到 container 的启动时间、运行状态、所在主机及端口等。
 

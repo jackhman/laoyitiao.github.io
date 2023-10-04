@@ -140,7 +140,7 @@ Linux bridge 是一个虚拟设备，是用来连接网络的设备，相当于�
 
 * veth 与 bridge 的关系
 
-![Lark20200929-162853.png](https://s0.lgstatic.com/i/image/M00/59/ED/Ciqc1F9y8IKAa-1NAABjDM-2kBk665.png)
+<Image alt="Lark20200929-162853.png" src="https://s0.lgstatic.com/i/image/M00/59/ED/Ciqc1F9y8IKAa-1NAABjDM-2kBk665.png"/>
 
 通过图 1 ，我们可以看到，bridge 就像一台交换机，而 veth 就像一根网线，通过交换机和网线可以把两个不同 Net Namespace 的容器连通，使得它们可以互相通信。
 
@@ -259,7 +259,7 @@ RX bytes:0 (0.0 B) TX bytes:0 (0.0 B)
 
 以上就是 Libnetwork 常见的四种网络模式，它们的作用及业务场景帮你总结如下：
 
-![Lark20200929-162901.png](https://s0.lgstatic.com/i/image/M00/59/ED/Ciqc1F9y8HGAaH1iAAClKDUq5FY736.png)
+<Image alt="Lark20200929-162901.png" src="https://s0.lgstatic.com/i/image/M00/59/ED/Ciqc1F9y8HGAaH1iAAClKDUq5FY736.png"/>
 
 ### 结语
 

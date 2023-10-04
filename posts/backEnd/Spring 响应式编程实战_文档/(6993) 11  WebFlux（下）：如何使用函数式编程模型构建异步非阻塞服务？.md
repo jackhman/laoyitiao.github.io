@@ -4,7 +4,7 @@
 
 在引入函数式编程模型之前，让我先带你回顾一下 Spring WebFlux 的系统架构图，如下所示。
 
-![图片2.png](https://s0.lgstatic.com/i/image6/M01/32/E0/Cgp9HWBuf--Aek0BAAT9zBvy7qI451.png)  
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M01/32/E0/Cgp9HWBuf--Aek0BAAT9zBvy7qI451.png"/>  
 Spring WebFlux 架构图（来自 Spring 官网）
 
 在上图的后半部分，你可以看到在 Spring WebFlux 中，函数式编程模型的核心概念是 Router Functions，对标 Spring MVC 中的 @Controller、@RequestMapping 等标准注解。而 Router Functions 则提供一套函数式风格的 API，其中最重要的就是 Router 和 Handler 接口。我们可以简单把 Router 对应成 RequestMapping，把 Controller 对应为 Handler。

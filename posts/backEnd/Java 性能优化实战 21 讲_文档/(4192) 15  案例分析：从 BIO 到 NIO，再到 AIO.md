@@ -4,7 +4,7 @@ Reactor 是 NIO 的基础。为什么 NIO 的性能就能够比传统的阻塞 I
 
 ### 阻塞 I/O 模型
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/48/9C/CgqCHl9MynKADFW4AAB9PAD7ZA0902.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/48/9C/CgqCHl9MynKADFW4AAB9PAD7ZA0902.png"/>
 
 如上图，是典型的**BIO 模型**，每当有一个连接到来，经过协调器的处理，就开启一个对应的线程进行接管。如果连接有 1000 条，那就需要 1000 个线程。
 
@@ -59,7 +59,7 @@ PONG:nice
 
 使用 "04 \| 工具实践：如何获取代码性能数据？"提到的 JMC 工具，在录制期间发起多个连接，能够发现有多个线程在运行，和连接数是一一对应的。
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/48/9C/CgqCHl9MyoiAGgY5AAGbD3wkqUs988.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/48/9C/CgqCHl9MyoiAGgY5AAGbD3wkqUs988.png"/>
 
 可以看到，BIO 的读写操作是阻塞的，线程的整个生命周期和连接的生命周期是一样的，而且不能够被复用。
 
@@ -176,7 +176,7 @@ ssc.register(selector, ssc.validOps());
 
 任何网络和文件操作，都可以抽象成这四个事件。
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/48/91/Ciqc1F9MyqmAdmlrAAMSNPAj_F4698.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/48/91/Ciqc1F9MyqmAdmlrAAMSNPAj_F4698.png"/>
 
 接下来，在 while 循环里，使用 select 函数，阻塞在主线程里。所谓**阻塞**，就是操作系统不再分配 CPU 时间片到当前线程中，所以 select 函数是几乎不占用任何系统资源的。
 
@@ -235,7 +235,7 @@ int size = sc.read(buf);
 
 NIO 是基于事件机制的，有一个叫作 Selector 的选择器，阻塞获取关注的事件列表。获取到事件列表后，可以通过分发器，进行真正的数据操作。
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image/M00/48/91/Ciqc1F9MysaAZw9aAADxUNI1q_I139.png)
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/48/91/Ciqc1F9MysaAZw9aAADxUNI1q_I139.png"/>
 > 该图来自 Doug Lea 的[《](http://gee.cs.oswego.edu/dl/cpjslides/nio.pdf)[Scalable IO in Java》](http://gee.cs.oswego.edu/dl/cpjslides/nio.pdf)，该图指明了最简单的 Reactor 模型的基本元素。
 
 你可以回看下我在上文举例的 "Java 中的 NIO 代码"，对比分析一下，你会发现 Reactor
@@ -252,7 +252,7 @@ NIO 是基于事件机制的，有一个叫作 Selector 的选择器，阻塞获
 
 我们可以对上面的模型进行进一步细化，如下图所示，将 Reactor 分为 mainReactor 和 subReactor 两部分。
 
-![Drawing 7.png](https://s0.lgstatic.com/i/image/M00/48/91/Ciqc1F9MytSAebMfAAFlMTAoyJQ496.png)
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/48/91/Ciqc1F9MytSAebMfAAFlMTAoyJQ496.png"/>
 > 该图来自 Doug Lea 的 [《Scalable IO in Java》](http://gee.cs.oswego.edu/dl/cpjslides/nio.pdf)
 
 * **mainReactor**负责监听处理新的连接，然后将后续的事件处理交给 subReactor；
@@ -333,7 +333,7 @@ AIO 是 Java 1.7 加入的，理论上性能会有提升，但实际测试并不
 
 你可能听说过 Spring 5.0 的 WebFlux，WebFlux 是可以替代 Spring MVC 的一套解决方案，可以编写响应式的应用，两者之间的关系如下图所示：
 
-![image.png](https://s0.lgstatic.com/i/image/M00/48/92/Ciqc1F9My2WAeCGbAACrOS4gYGA066.png)
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/48/92/Ciqc1F9My2WAeCGbAACrOS4gYGA066.png"/>
 
 Spring WebFlux 的底层使用的是 Netty，所以操作是异步非阻塞的，类似的组件还有 vert.x、akka、rxjava 等。
 

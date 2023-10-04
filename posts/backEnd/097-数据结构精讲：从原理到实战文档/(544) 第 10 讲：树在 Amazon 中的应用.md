@@ -18,7 +18,7 @@ SELECT name FROM table;
 
 这样一行 SQL 可以选取下表中所有的 name 这一列：
 
-![](https://s0.lgstatic.com/i/image3/M01/61/DA/CgpOIF4f_qCAFrrXAABVuB8FTZk278.png)执行这行 SQL 指令的输出一般就是 Alex、David、Patrick。
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/61/DA/CgpOIF4f_qCAFrrXAABVuB8FTZk278.png"/>执行这行 SQL 指令的输出一般就是 Alex、David、Patrick。
 
 SQL 在 20 世纪 80 年代成为了 ANSI/ISO 国际标准。但即使是国际标准，不同的关系型数据库的实现都有很多不同，比如 MySQL、PostgreSQL 对于 SQL 标准的实现就不同。更不用说在专门优化的大型分布式数据库就更不一样了，比如本文要介绍的 Amazon 云服务 AWS 里所使用的 SQL 执行引擎，就拥有很多独门秘籍的实现。
 
@@ -64,7 +64,7 @@ WHERE c.id = o.cust_id AND c.creation_timestamp < 1579069516;
 
 * 最后面的 SQL 执行器（Executor）才会去真正的执行优化重写的 SQL 语法树。
 
-![](https://s0.lgstatic.com/i/image3/M01/61/DA/CgpOIF4f_r2AfVt5AAAtd-U383M254.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/61/DA/CgpOIF4f_r2AfVt5AAAtd-U383M254.png"/>
 
 ### **SQL 语法树是个什么树**
 
@@ -80,11 +80,11 @@ SELECT name FROM table;
 
 还是在我们刚才表中选取 name 这一列。
 
-![](https://s0.lgstatic.com/i/image3/M01/61/DB/Cgq2xl4f_uSAGzwqAABVuB8FTZk049.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/61/DB/Cgq2xl4f_uSAGzwqAABVuB8FTZk049.png"/>
 
 如果用语法树表达的话会是下面图中的样子，这个树的根是 SELECT 节点，在下面左子树是 name，右子树是 FROM 节点为根的子树。FROM 节点下面是 table 叶子节点。  
 
-![](https://s0.lgstatic.com/i/image3/M01/61/DB/Cgq2xl4f_vCAelA_AADz55RQ5Gk214.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/61/DB/Cgq2xl4f_vCAelA_AADz55RQ5Gk214.png"/>
 
 在用 AST 表达 SQL 语句时，SQL 操作符永远是子树的根，而树的叶子则是比如这里的 name 或者 table。
 
@@ -96,7 +96,7 @@ SELECT name FROM table;
 
 我们可以根据解析后的语法树对这棵树做进一步的修改，比如在 FROM 下面的子节点我们知道是一个表的名字，可以把表的完整路径解析出来；再比如我们知道 SELECT 下面的左子树是一个表的列名称，可以把完整的表名称解析出来。在做完这些名字的解析之后，这个 SQL 语法树就变成了如下图所示的样子。
 
-![](https://s0.lgstatic.com/i/image3/M01/61/DA/CgpOIF4f_vuAS2ZLAAFUDkBSqfc827.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/61/DA/CgpOIF4f_vuAS2ZLAAFUDkBSqfc827.png"/>
 
 我们可以看到，原来的 name 节点变成了 schema.table.name，而原来的 table 节点变成了 schema.table，这些名称的解析只需要通过操作树的节点就可以了，是不是很方便啊！
 

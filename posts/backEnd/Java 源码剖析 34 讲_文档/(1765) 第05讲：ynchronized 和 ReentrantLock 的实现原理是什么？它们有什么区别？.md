@@ -185,7 +185,7 @@ private static boolean shouldParkAfterFailedAcquire(Node pred, Node node) {
 
 到这里整个加锁的流程就已经走完了，最后的情况是，没有拿到锁的线程会在队列中被挂起，直到拥有锁的线程释放锁之后，才会去唤醒其他的线程去获取锁资源，整个运行流程如下图所示：
 
-![](https://s0.lgstatic.com/i/image3/M01/02/7D/Ciqah157DAiAK_DJAAC0JawhGp4730.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/02/7D/Ciqah157DAiAK_DJAAC0JawhGp4730.png"/>
 
 unlock 相比于 lock 来说就简单很多了，源码如下：
 

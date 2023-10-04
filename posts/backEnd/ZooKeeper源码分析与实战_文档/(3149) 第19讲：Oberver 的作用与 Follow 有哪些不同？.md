@@ -10,7 +10,7 @@
 
 要想解释这个问题，就要从 ZooKeeper 技术的发展过程说起，最早的 ZooKeeper 框架如下图所示，可以看到，其中是不存在 Observer 服务器的。
 
-![image (3).png](https://s0.lgstatic.com/i/image/M00/2E/C9/Ciqc1F8FnKWAQEJJAADU9xFvIIU685.png)
+<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/2E/C9/Ciqc1F8FnKWAQEJJAADU9xFvIIU685.png"/>
 
 在早期的 ZooKeeper 集群服务运行过程中，只有 Leader 服务器和 Follow 服务器。不过随着 ZooKeeper 在分布式环境下的广泛应用，早期模式的设计缺点也随之产生，主要带来的问题有如下几点：
 
@@ -26,7 +26,7 @@
 
 在引入 Observer 角色服务器后，一个 ZooKeeper 集群服务在部署的拓扑结构，如下图所示：
 
-![image (4).png](https://s0.lgstatic.com/i/image/M00/2E/C9/Ciqc1F8FnLGAKhD0AAE5oGBLTTQ439.png)
+<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/2E/C9/Ciqc1F8FnLGAKhD0AAE5oGBLTTQ439.png"/>
 
 在实际部署的时候，因为 Observer 不参与 Leader 节点等操作，并不会像 Follow 服务器那样频繁的与 Leader 服务器进行通信。因此，可以将 Observer 服务器部署在不同的网络区间中，这样也不会影响整个 ZooKeeper 集群的性能，也就是所谓的跨域部署。
 

@@ -51,7 +51,7 @@ public class AtomicLongDemo {
 
 不过如果我们深入一步去看内部情景的话，你可能会感到意外。我们把模型简化成只有两个线程在同时工作的并发场景，因为两个线程和更多个线程本质上是一样的。如图所示：
 
-![1.png](https://s0.lgstatic.com/i/image6/M00/44/55/Cgp9HWC-6OWAOb6NAAC1SVqjdK8226.png)
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image6/M00/44/55/Cgp9HWC-6OWAOb6NAAC1SVqjdK8226.png"/>
 
 我们可以看到在这个图中，每一个线程是运行在自己的 core 中的，并且它们都有一个本地内存是自己独用的。在本地内存下方，有两个 CPU 核心共用的共享内存。
 

@@ -33,11 +33,11 @@ eventEmitter.emit('say','Jonh');
 
 除了上面的那段代码中已经使用的 on 和emit 这两个 API，EventEmitter还提供了其他的 API 方法，我通过一个表格简单整理了一下对应的方法和功能总结。
 
-![图片1.png](https://s0.lgstatic.com/i/image6/M01/0E/14/Cgp9HWA8LMiAEVlGAAJEpecSYyo071.png)
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M01/0E/14/Cgp9HWA8LMiAEVlGAAJEpecSYyo071.png"/>
 
 除此之外，还有两个特殊的事件，不需要额外手动添加，下表所示的就是 Node.js 的 EventEmitter 模块自带的特殊事件。
 
-![图片2.png](https://s0.lgstatic.com/i/image6/M01/0E/14/Cgp9HWA8LLaAdnhdAADOmTg9zw8428.png)
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M01/0E/14/Cgp9HWA8LLaAdnhdAADOmTg9zw8428.png"/>
 
 从上面的表格可以看出，Node.js的EventEmitter 模块看起来方法很多且复杂，但通过仔细学习，其实其使用和实现并不困难。下面我就来挑几个比较重要 API 方法为你进行讲解。
 

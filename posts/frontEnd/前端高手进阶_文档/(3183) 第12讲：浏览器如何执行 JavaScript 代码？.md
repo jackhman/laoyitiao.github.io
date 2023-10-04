@@ -36,7 +36,7 @@ Punctuator())
 
 语法分析阶段会用令牌生成类似下面结构的抽象语法树，生成树的过程并不是简单地把所有令牌都添加到树上，而是去除了不必要的符号令牌之后，按照语法规则来生成。
 
-![1.png](https://s0.lgstatic.com/i/image/M00/27/1E/Ciqc1F70ZQSAGf1cAAEehLtbbTk491.png)  
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/27/1E/Ciqc1F70ZQSAGf1cAAEehLtbbTk491.png"/>  
 
 抽象语法树
 
@@ -72,7 +72,7 @@ Source Position Table (size = 24)
 
 整个过程如下面流程图所示：
 
-![3.png](https://s0.lgstatic.com/i/image/M00/27/29/CgqCHl70ZTqAR9m6AAEz8M57qjs116.png)  
+<Image alt="3.png" src="https://s0.lgstatic.com/i/image/M00/27/29/CgqCHl70ZTqAR9m6AAEz8M57qjs116.png"/>  
 
 JavaScript 编译过程
 
@@ -107,11 +107,11 @@ function fib(n) {
 fib(4)
 ```
 
-![image (31).png](https://s0.lgstatic.com/i/image/M00/27/16/Ciqc1F70SjGAI_8JAAANLDVx3V0087.png)  
+<Image alt="image (31).png" src="https://s0.lgstatic.com/i/image/M00/27/16/Ciqc1F70SjGAI_8JAAANLDVx3V0087.png"/>  
 
 示例效果图
 
-![image (32).png](https://s0.lgstatic.com/i/image/M00/27/16/Ciqc1F70SjmAfUtiAAAkCGWd2MI629.png)  
+<Image alt="image (32).png" src="https://s0.lgstatic.com/i/image/M00/27/16/Ciqc1F70SjmAfUtiAAAkCGWd2MI629.png"/>  
 
 示例效果图
 
@@ -125,7 +125,7 @@ fib(4)
 })()
 ```
 
-![image (33).png](https://s0.lgstatic.com/i/image/M00/27/16/Ciqc1F70Sk6ANM__AAAQ-wQno2Q416.png)  
+<Image alt="image (33).png" src="https://s0.lgstatic.com/i/image/M00/27/16/Ciqc1F70Sk6ANM__AAAQ-wQno2Q416.png"/>  
 
 栈溢出错误
 
@@ -187,7 +187,7 @@ function fibTail(n, a = 0, b = 1) {
 
 新生代的内存回收频率很高、速度也很快，但空间利用率较低，因为让一半的内存空间处于"闲置"状态。
 
-![1.png](https://s0.lgstatic.com/i/image6/M00/25/15/Cgp9HWBZVYuADfmqAACqB-v2Dq0515.png)  
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image6/M00/25/15/Cgp9HWBZVYuADfmqAACqB-v2Dq0515.png"/>  
 
 Scanvage 回收过程
 
@@ -199,7 +199,7 @@ Scanvage 回收过程
 
 这种方式主要分为**标记** 和**清除**两个阶段。标记阶段会遍历堆中所有对象，并对存活的对象进行标记；清除阶段则是对未标记对象的空间进行回收。
 
-![5.png](https://s0.lgstatic.com/i/image/M00/27/1E/Ciqc1F70ZZWAeo71AABOQKZ828k489.png)  
+<Image alt="5.png" src="https://s0.lgstatic.com/i/image/M00/27/1E/Ciqc1F70ZZWAeo71AABOQKZ828k489.png"/>  
 
 标记清除回收过程
 
@@ -207,7 +207,7 @@ Scanvage 回收过程
 
 为了解决内存碎片的问题，提高对内存的利用，还需要使用到**标记整理（Mark-Compact）** 算法。标记整理算法相对于标记清除算法在回收阶段进行了改进，标记整理对待未标记的对象并不是立即进行回收，而是将存活的对象移动到一边，然后再清理。当然这种移动对象的操作相对而言是比较耗时的，所以执行速度上，比标记清除要慢。
 
-![6.png](https://s0.lgstatic.com/i/image/M00/27/21/Ciqc1F70cS2AU5w_AABOiU6R39g235.png)  
+<Image alt="6.png" src="https://s0.lgstatic.com/i/image/M00/27/21/Ciqc1F70cS2AU5w_AABOiU6R39g235.png"/>  
 
 标记整理回收过程
 

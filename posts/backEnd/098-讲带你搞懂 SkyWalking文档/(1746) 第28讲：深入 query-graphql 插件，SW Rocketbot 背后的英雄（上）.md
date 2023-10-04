@@ -39,7 +39,7 @@ public class GraphQLQueryProvider extends ModuleProvider {
 
 在前面介绍中提到，server-core 模块会启动两个 Server，一个是 GRPCServer，主要用于接收 Agent 发送来的 gRPC 请求，前文介绍的 RegisterServiceHandler、JVMMetricReportServiceHandler、TraceSegmentReportServiceHandler 等都是注册在 GRPCServer 上的 Handler；另一个是 JettyServer，用于接收 Http 请求，本小节介绍的 GraphQLQueryHandler 就是注册在 JettyServer 的 Handler，它继承 JettyJsonHandler 如下图所示：
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/26/44/CgqCHl7xt6yAHDDLAAIeqgBo9HE860.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/26/44/CgqCHl7xt6yAHDDLAAIeqgBo9HE860.png"/>
 
 JettyJsonHandler 使用模板方法模式将真正的请求处理逻辑延迟到子类实现，而在其 doGet() 方法和 doPost() 方法中只完成了下面几项通用的逻辑：
 
@@ -73,13 +73,13 @@ protected JsonElement doPost(HttpServletRequest req) throws IOException {
 
 到此处为止，query-graphql-plugin 插件处理查询请求的核心流程就介绍完了，通过下面一张图，可以很好地总结该流程：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/26/38/Ciqc1F7xt76AflHaAANfIPXqD0Q765.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/26/38/Ciqc1F7xt76AflHaAANfIPXqD0Q765.png"/>
 
 ### GraphQL Schema 鸟瞰
 
 在 resouces/query-protocol 目录中包含了 query-graphql-plugin 插件的全部 GraphQL Schema 文件，其结构如下图所示，该结构图是通过 GraphQL Voyager 工具生成的，如果你感兴趣可以查找相关资料进行了解。
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/26/39/Ciqc1F7xt8uAa-I6AAjKWi_tgPI783.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/26/39/Ciqc1F7xt8uAa-I6AAjKWi_tgPI783.png"/>
 
 在学习了前面介绍的 GraphQL Schema 基本语法和示例之后，相信你已经完全能够读懂上图涉及的全部 GraphQL Schema 定义，这里就不再一一展开分析，我们将重点放在关联的 Resolver 以及具体的查询实现上。
 
@@ -87,11 +87,11 @@ protected JsonElement doPost(HttpServletRequest req) throws IOException {
 
 query-graphql-plugin 插件中提供了三个查询 Service 的方法，如下图所示：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/26/39/Ciqc1F7xt9WABcbdAAI-KmsR4xQ745.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/26/39/Ciqc1F7xt9WABcbdAAI-KmsR4xQ745.png"/>
 
 GraphQL Java Tools 会将上述三个查询 Service 的方法映射到 MetadataQuery 中的同名方法，如下图所示，MetadataQuery 会将请求委托给 MetadataQueryService 的同名方法处理，而 MetadataQueryService 中也没有其他逻辑，直接将请求委托给 MetadataQueryEsDAO 的同名方法：
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image/M00/26/44/CgqCHl7xt92AR6MbAAT0t4jgEsA600.png)
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/26/44/CgqCHl7xt92AR6MbAAT0t4jgEsA600.png"/>
 
 在 MetadataQuery 的这三个方法中都有一个 Duration 入参，在 metadata.graphqls 文件中定义了 Duration 这个 input 类型，该参数指定了查询的起止时间以及时间单位。
 
@@ -122,7 +122,7 @@ public List<Service> searchServices(long startTimestamp, long endTimestamp,
 
 下图展示了 timeRangeQueryBuild() 方法构造的查询时间范围：
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image/M00/26/39/Ciqc1F7xt-uAYJIjAANCIMBQIGg737.png)
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/26/39/Ciqc1F7xt-uAYJIjAANCIMBQIGg737.png"/>
 
 另外两个查询 Service 元数据的方法：getAllServices() 方法只根据时间范围进行查询，searchService() 方法只根据 serviceName 的关键字进行匹配，实现方式类似，这里不再展开详细分析。
 
@@ -152,7 +152,7 @@ getGlobalBrief() 方法会按照时间范围查询整个 OAP 集群所能感知�
 
 在前面介绍 jvm-receiver-plugin 以及 trace-receiver-plugin 的章节中，我们详细介绍了 SkyWalking 中多种监控指标的计算方式以及存储实现，在 query-graphql-plugin 插件中自然是关注这些指标是如何查询的，在 metric.graphqls 文件中定义了下图三个查询监控指标的相关方法。
 
-![Drawing 6.png](https://s0.lgstatic.com/i/image/M00/26/44/CgqCHl7xuAKAGJpGAAEsPKwo6_0843.png)
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/26/44/CgqCHl7xuAKAGJpGAAEsPKwo6_0843.png"/>
 
 * getValues() 方法：返回一个聚合后的单值，例如，一个 Service 在一段时间内 SLA 的平均值。
 
@@ -164,7 +164,7 @@ getGlobalBrief() 方法会按照时间范围查询整个 OAP 集群所能感知�
 
 首先来看 MetricQuery.getValues() 方法，请求该方法的位置是在 SkyWalking Rocketbot 的拓扑图中，如下图所示：
 
-![Drawing 7.png](https://s0.lgstatic.com/i/image/M00/26/39/Ciqc1F7xuA2AZu34AAD4-d0xhHI072.png)
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/26/39/Ciqc1F7xuA2AZu34AAD4-d0xhHI072.png"/>
 
 图中的"每分钟请求量""SLA"以及"延迟"三个值都是分别请求 getValues() 方法获得的，这三个值都是计算查询时间段内响应指标的平均值。
 
@@ -235,7 +235,7 @@ return intValues;
 
 下图是 demo-provider （serviceId = 3）响应时间的监控图，如前文所述，图中的时序数据是通过 getLinearIntValues() 方法查询得到的：
 
-![Drawing 8.png](https://s0.lgstatic.com/i/image/M00/26/3A/Ciqc1F7xuIyAZc4MAABhTIGGqHg410.png)
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/26/3A/Ciqc1F7xuIyAZc4MAABhTIGGqHg410.png"/>
 
 下面将以该图为例，详细分析 getLinearIntValues() 方法的查询流程：
 
@@ -251,7 +251,7 @@ durationPoints.forEach(durationPoint -> ids.add(durationPoint.getPoint() + Const
 
 示例中的 DownSampling 值为 Minute，查询的时间范围为 20:44\~ 20:59，生成的 DurationPoint 以及 Document Id 如下图所示：
 
-![Drawing 9.png](https://s0.lgstatic.com/i/image/M00/26/45/CgqCHl7xuJmAapVFAAC9IVj0ets069.png)
+<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/26/45/CgqCHl7xuJmAapVFAAC9IVj0ets069.png"/>
 
 2、创建 SearchRequst 请求进行查询。
 
@@ -272,11 +272,11 @@ return result;
 
 示例中会根据步骤 1 生成的 Document Id 精确查找 demo-webapp 的 service_resp_time 指标每分钟（20:44\~ 20:59 范围）对应的 Document，如下图所示：
 
-![Drawing 10.png](https://s0.lgstatic.com/i/image/M00/26/3A/Ciqc1F7xuKiAfaUbAAr-NQ2X_L4640.png)
+<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image/M00/26/3A/Ciqc1F7xuKiAfaUbAAr-NQ2X_L4640.png"/>
 
 3、将步骤 2 的查询结果整理成 IntValues（底层是 KVInt 列表），相关代码实现比较简单，不再展示。示例中的整理结果如下图所示，其中每个 KVInt 的 Key 为 Document Id，Value 为相应的 summation 值：
 
-![Drawing 11.png](https://s0.lgstatic.com/i/image/M00/26/45/CgqCHl7xuLKAFb6VAAwzofyYQew138.png)
+<Image alt="Drawing 11.png" src="https://s0.lgstatic.com/i/image/M00/26/45/CgqCHl7xuLKAFb6VAAwzofyYQew138.png"/>
 
 前端拿到上述 KVInt 列表之后，即可绘制出示例中的 Service Response Time 监控图。
 

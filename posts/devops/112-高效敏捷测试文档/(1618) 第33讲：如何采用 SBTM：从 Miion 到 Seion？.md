@@ -18,11 +18,11 @@ SBTM 需要结合探索式测试的特点来理解。探索式测试可以看做
 
 另外，你还需要把 SBTM 和测试计划结合起来理解它的整体框架，如图 1 所示。从图中可以看出，SBTM 是在一次迭代中测试计划之后进行的，并且"监控和测试完成"这些环节没有变化。该怎么做测试计划就怎么做，测试过程依旧需要监控，衡量测试能否结束的定性/定量标准也是一样的，最终要实现测试计划所定义的测试目标。
 
-![1.png](https://s0.lgstatic.com/i/image/M00/00/F1/CgqCHl6qtTuAA56xAAMajLPtzDM856.png)
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/00/F1/CgqCHl6qtTuAA56xAAMajLPtzDM856.png"/>
 
 首先，把测试计划中的测试目标分解为一系列清晰的、具体的测试子目标（Mission），每个子目标代表一个负有使命的测试任务。为了完成一个特定的测试子目标，需要通过一个或几个具体会话来完成。每个会话中要执行的具体任务需要一个指导书来描述，那就是测试章程。测试计划、子目标、会话和测试章程的关系可以描述成如图 2 所示。
 
-![2.png](https://s0.lgstatic.com/i/image/M00/00/F1/CgqCHl6qtUmANCfSAAGo6eSiPpE214.png)
+<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/00/F1/CgqCHl6qtUmANCfSAAGo6eSiPpE214.png"/>
 
 #### Plan 分解成多个子目标------Mission
 
@@ -40,7 +40,7 @@ SBTM 需要结合探索式测试的特点来理解。探索式测试可以看做
 * 功能交互性的测试子目标：验证新的功能特性之间，以及和其他功能特性的交互是否正常。
 * 各类专项测试子目标，包括非功能性的，验证被测系统的易用性、安全性、兼容性等；还包括功能性的，验证被测系统在临界状态、复杂网络环境等条件下的系统功能是否正常。
 
-![3.png](https://s0.lgstatic.com/i/image/M00/00/F1/CgqCHl6qtWaAdRhkAAFdUMgmP_g435.png)
+<Image alt="3.png" src="https://s0.lgstatic.com/i/image/M00/00/F1/CgqCHl6qtWaAdRhkAAFdUMgmP_g435.png"/>
 
 #### Mission 进一步分解为 Session
 
@@ -48,13 +48,13 @@ SBTM 需要结合探索式测试的特点来理解。探索式测试可以看做
 
 对于新功能特性的测试子目标，一个 Session 可以针对一个用户故事的几个应用场景开展测试。有的用户故事比较小，几个小时就可以完成；有的用户故事比较大，可能需要 几天，对应的场景也会比较多，需要根据用户故事的场景复杂度分解成 若干个 Session 共同完成对用户故事的场景覆盖，如图 4所示。
 
-![4.png](https://s0.lgstatic.com/i/image/M00/00/F1/CgqCHl6qtW-AVk4EAAGi2_9hd0E998.png)
+<Image alt="4.png" src="https://s0.lgstatic.com/i/image/M00/00/F1/CgqCHl6qtW-AVk4EAAGi2_9hd0E998.png"/>
 
 从时间安排上来说，一个测试会话是 90 分钟左右，那么可以为测试人员一天计划 3\~4 个测试会话，在每个测试会话结束后，测试人员填写 Session Sheet，并及时向测试负责人进行口头汇报，也可以上午集中进行一次，下午集中进行一次，但最好当天完成测试任务的口头汇报。这里体现SBTM增加了面对面沟通，又一次显示探索式测试和敏捷的价值观是一致的。
 
 对于每个 Session，需要事先定义清楚具体的测试任务、目标以及需要准备的数据、环境等，在章程里进行描述，侧重描述测什么（哪些测试点）、如何测试和测试目标，但和测试用例比，层次是不一样的，章程站在更高层次上指导一次 90 分钟左右的测试，而一个测试用例执行时间往往是 5\~10 分钟。因此章程的粒度更大，不需要具体描述测试步骤，只要列出需要执行的测试场景或要点等。如图 5 所示是一个测试章程的格式，可以用清单（checklist）格式，也可以用思维导图方式。
 
-![5.png](https://s0.lgstatic.com/i/image/M00/00/F1/CgqCHl6qtXeACDb5AAFzeH4p0RU138.png)
+<Image alt="5.png" src="https://s0.lgstatic.com/i/image/M00/00/F1/CgqCHl6qtXeACDb5AAFzeH4p0RU138.png"/>
 
 在探索式测试中，每个会话相对独立，这时采用角色扮演来模拟客户的业务处理或操作思路，这样会比较好。例如，对于拉勾教育 App 的测试，你可以扮演：新用户、已经购买过课程的用户、课程编辑、专栏讲师、或者参加课程分享的用户等。每个会话一般由单人独立完成，或者根据需要两个人一起结对测试。比如，有经验的测试人员带着新手一起完成一个会话；再比如，两个人需要配合进行测试，比如视频会议 App 的会议场景，需要至少两人入会。关于角色扮演、场景挖掘，将会在下一部分详细介绍。
 

@@ -100,7 +100,7 @@ Kubernetes 提供了如下 3 种类型：
 
 这 3 种亲和性和反亲和性策略支持更广泛的操作符，差异如下表所示：
 
-![image (1).png](https://s0.lgstatic.com/i/image/M00/6F/1C/Ciqc1F-0wO2AaNBNAAB8jlKE3Qo120.png)
+<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/6F/1C/Ciqc1F-0wO2AaNBNAAB8jlKE3Qo120.png"/>
 
 对于上述的亲和性和反亲和性功能，每种都有 3 种规则可以设置。
 

@@ -123,7 +123,7 @@ Beeline 的使用很简单，一般只需要两个参数即可。
 
 上面命令运行成功后，就会进入 beeline 命令行下，如下图所示：
 
-![image5.png](https://s0.lgstatic.com/i/image/M00/11/0C/CgqCHl7LeAKAGTb5AAB9C6xYdZo772.png)
+<Image alt="image5.png" src="https://s0.lgstatic.com/i/image/M00/11/0C/CgqCHl7LeAKAGTb5AAB9C6xYdZo772.png"/>
 
 在这个命令中，我使用了 gaojf 这个用户，这是一个操作系统下的用户，如果不指定 -n 参数，那么 beeline 会默认使用 anonymous 这个用户。由于这里没有开启 beeline 的安全认证机制，所以不需要指定用户的密码。在这个步骤中，可能会出现如下问题：
 
@@ -146,7 +146,7 @@ Error: Could not open client transport with JDBC Uri: jdbc:hive2://yarnserver:10
 
 接着， 我们在 beeline 命令行执行一个简单的 SQL 查询，看看是否正常，操作如下图所示：
 
-![image6.png](https://s0.lgstatic.com/i/image/M00/11/0C/CgqCHl7LeAyAZTRKAAC0F_JZuec980.png)
+<Image alt="image6.png" src="https://s0.lgstatic.com/i/image/M00/11/0C/CgqCHl7LeAyAZTRKAAC0F_JZuec980.png"/>
 
 这是执行一个 select count 操作，统计 test_table 这张表有多少行数据，执行 select count(1) 查询的话，就会走 mapreduce；而如果执行 select \* from test_table 的话，是不会走 mapreduce 的，这点需要注意。
 
@@ -214,11 +214,11 @@ uid=1002(gaojf) gid=1002(gaojf) 组=1002(gaojf),1001(hadoop)
 
 现在，我们再来执行刚才的那个 select 查询 SQL，如下图所示：
 
-![image7.png](https://s0.lgstatic.com/i/image/M00/11/0C/CgqCHl7LeBqAOYSAAACgSQOElrw186.png)
+<Image alt="image7.png" src="https://s0.lgstatic.com/i/image/M00/11/0C/CgqCHl7LeBqAOYSAAACgSQOElrw186.png"/>
 
 可以看到，很快就得到了查询结果，因为这个查询是走了 MapReduce，还可以在 Yarn 的 8088 端口查看执行状态，如下图所示：
 
-![image8.png](https://s0.lgstatic.com/i/image/M00/11/00/Ciqc1F7LeCGASLemAADLdE61WUY603.png)
+<Image alt="image8.png" src="https://s0.lgstatic.com/i/image/M00/11/00/Ciqc1F7LeCGASLemAADLdE61WUY603.png"/>
 
 从上图中，可以看出这个任务执行的用户是 gaojf，任务类型是 MapReduce，提交在 default 队列中。
 
@@ -336,17 +336,17 @@ export HADOOP_CLASSPATH=${TEZ_JARS}/*:${TEZ_JARS}/lib/*
 
 这个步骤中通过 Beeline 链接 Hiveserver2，被代理的用户是 gaojf，也可以是任意一个用户；然后创建了一个表 ad1，通过 load 方法将本地文件导入到 ad1 表中；最后执行 select 查询 SQL 获取此表记录数，select 查询过程如下图所示：
 
-![image9.png](https://s0.lgstatic.com/i/image/M00/11/0C/CgqCHl7LeDCAUtXVAAB8Htt1_zk875.png)
+<Image alt="image9.png" src="https://s0.lgstatic.com/i/image/M00/11/0C/CgqCHl7LeDCAUtXVAAB8Htt1_zk875.png"/>
 
 上图就是 Tez 的执行过程，可以看到执行这个查询花费了 16.533 秒，而目前的计算引擎是 Tez。可以通过"set hive.execution.engine=mr;"切换计算引擎为 MR，然后再次执行 select 查询，结果如下图所示：
 
-![image10.png](https://s0.lgstatic.com/i/image/M00/11/0C/CgqCHl7LeDeAWFY9AACNsnwuL-k209.png)
+<Image alt="image10.png" src="https://s0.lgstatic.com/i/image/M00/11/0C/CgqCHl7LeDeAWFY9AACNsnwuL-k209.png"/>
 
 可以看到，通过 MR 引擎执行这个查询花费了 31.201 秒，比 Tez 慢了近一倍，这就是 Tez 的优势。
 
 要查看任务的详细运行状态信息，可查看 yarnserver 的 8088 端口，如下图所示：
 
-![image11.png](https://s0.lgstatic.com/i/image/M00/11/00/Ciqc1F7LeD-AGsWMAACnwuw3FuQ838.png)
+<Image alt="image11.png" src="https://s0.lgstatic.com/i/image/M00/11/00/Ciqc1F7LeD-AGsWMAACnwuw3FuQ838.png"/>
 
 从上图可以看出，任务 application_1588733821232_0066 使用的是 Tez 引擎，还有此任务使用的队列、CPU、内存等资源信息。
 

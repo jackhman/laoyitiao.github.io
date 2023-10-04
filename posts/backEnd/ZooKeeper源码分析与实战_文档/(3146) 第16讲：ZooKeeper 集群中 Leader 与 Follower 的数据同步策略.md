@@ -20,7 +20,7 @@
 
 在数据同步的过程中，ZooKeeper 集群的主要工作就是将那些没有在 Learnning 服务器上执行过的事务性请求同步到 Learning 服务器上。**这里请你注意，事务性的会话请求会被同步，而像数据节点的查询等非事务性请求则不在数据同步的操作范围内。** 而在具体实现数据同步的时候，ZooKeeper 集群又提供四种同步方式，如下图所示：
 
-![image (28).png](https://s0.lgstatic.com/i/image/M00/26/F3/CgqCHl7zLYaASBk3AAA-I033owc988.png)
+<Image alt="image (28).png" src="https://s0.lgstatic.com/i/image/M00/26/F3/CgqCHl7zLYaASBk3AAA-I033owc988.png"/>
 
 #### DIFF 同步
 

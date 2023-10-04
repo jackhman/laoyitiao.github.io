@@ -93,7 +93,7 @@ pod 'DesignKit', :path => './Frameworks/DesignKit', :inhibit_warnings => false
 ```
 
 当执行`bundle exec pod install`命令以后，CocoaPods 会在 Pods 项目下建立一个**Development Pods** 文件夹来存放所有内部库的相关文件。  
-![Drawing 0.png](https://s0.lgstatic.com/i/image6/M00/1F/4C/Cgp9HWBRveSAYt47AASIGxbwB9s124.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/1F/4C/Cgp9HWBRveSAYt47AASIGxbwB9s124.png"/>
 
 有了 CocoaPods，我们新建、管理和使用公共组件库就会变得非常简单。下面我们介绍下如何开发设计组件 DesignKit。
 
@@ -101,7 +101,7 @@ pod 'DesignKit', :path => './Frameworks/DesignKit', :inhibit_warnings => false
 
 DesignKit 是一个设计组件，用于封装与 UI 相关的公共组件。为了方便维护，每次新增一个组件，我们最好都建立一个独立的文件夹，例如把 Spacing.swift 放在新建的 Spacing 文件夹中。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image6/M00/1F/4C/Cgp9HWBRve-AVJZSAACVtoXExgU145.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/1F/4C/Cgp9HWBRve-AVJZSAACVtoXExgU145.png"/>
 
 下面以几乎每个 App 都会使用到的三个组件：间距（Spacing）、头像（Avatar）和点赞按钮（Favorite Button）为例子，介绍下如何封装基础设计组件。
 
@@ -175,7 +175,7 @@ public extension UIImageView {
 ```
 
 这是人像组件的显示效果，可以在内部菜单查看。  
-![Drawing 2.png](https://s0.lgstatic.com/i/image6/M00/1F/49/CioPOWBRvgqAL1THABqNofQMQ_4461.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M00/1F/49/CioPOWBRvgqAL1THABqNofQMQ_4461.png"/>
 
 #### 点赞按钮
 
@@ -230,7 +230,7 @@ private extension UIButton {
 ### 总结
 
 前面我介绍了如何封装公共功能组件库，以及以怎样封装基础设计组件，希望对你有所帮助。合理使用功能组件可以让你的开发事半功倍。  
-![思维导图+二维码.png](https://s0.lgstatic.com/i/image6/M00/1F/73/Cgp9HWBR3wyAAnwjAAcCv2pASBs854.png)  
+<Image alt="思维导图+二维码.png" src="https://s0.lgstatic.com/i/image6/M00/1F/73/Cgp9HWBR3wyAAnwjAAcCv2pASBs854.png"/>  
 
 不过，在封装组件的时候，我还需要提醒你注意这么几点。
 

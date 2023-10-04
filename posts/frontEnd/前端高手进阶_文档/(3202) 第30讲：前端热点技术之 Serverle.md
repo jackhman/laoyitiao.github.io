@@ -34,7 +34,7 @@ Serverless 不仅提供了运行代码的环境，还能自动实现负载均衡
 
 流量费用则稍贵，达到 0.8 元/GB，而且没有免费额度，所以对于通信数据量比较大的场景还是要慎重使用。
 
-![Lark20200911-184216.png](https://s0.lgstatic.com/i/image/M00/4D/DA/Ciqc1F9bVNSABY8aAADMDBAJigk871.png)
+<Image alt="Lark20200911-184216.png" src="https://s0.lgstatic.com/i/image/M00/4D/DA/Ciqc1F9bVNSABY8aAADMDBAJigk871.png"/>
 
 #### 深度绑定
 
@@ -60,7 +60,7 @@ Serverless 不仅提供了运行代码的环境，还能自动实现负载均衡
 
 下面来分析讲解一个使用阿里云函数计算来实现代码自动部署的例子。函数要实现的功能就是，当 GitHub 仓库中的某个分支有新的提交时，拉取最新代码并编译，然后将编译生成的代码部署到 OSS 存储的静态服务器上。
 
-![Lark20200911-184226.png](https://s0.lgstatic.com/i/image/M00/4D/E5/CgqCHl9bVLaATst6AADK7ETww2g973.png)  
+<Image alt="Lark20200911-184226.png" src="https://s0.lgstatic.com/i/image/M00/4D/E5/CgqCHl9bVLaATst6AADK7ETww2g973.png"/>  
 自动部署流程图
 
 在这个例子中，两种函数都会用到。

@@ -42,7 +42,7 @@ JavaScript 最初被设计为浏览器脚本语言，主要用途包括对页面
 
 由于栈的容量是有限制的，所以当我们没有合理调用函数的时候，可能会导致爆栈异常，此时控制台便会抛出错误：
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image6/M00/37/A1/Cgp9HWB4EDeACyjFAAAW-kfzUR0259.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/37/A1/Cgp9HWB4EDeACyjFAAAW-kfzUR0259.png"/>
 
 这样的一个函数调用栈结构，可以理解为 JavaScript 中同步任务的执行环境，同步任务也可以理解为 JavaScript 代码片段的执行。
 
@@ -92,7 +92,7 @@ JavaScript 有一个基于事件循环的并发模型，称为事件循环（Eve
 
 JavaScript 的运行过程，可以借用 Philip Roberts 演讲《Help, I'm stuck in an event-loop》中经典的一张图来描述：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image6/M00/37/A1/Cgp9HWB4EESAQnXYAAClWLdHiXU406.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/37/A1/Cgp9HWB4EESAQnXYAAClWLdHiXU406.png"/>
 
 如图，主线程运行的时候，会产生堆（heap）和栈（stack），其中堆为内存、栈为函数调用栈。我们能看到，Event Loop 负责执行代码、收集和处理事件以及执行队列中的子任务，具体包括以下过程。
 
@@ -151,7 +151,7 @@ Node.js 中的事件循环执行过程为：
    └───────────────────────────┘
 ```
 
-![图片1.png](https://s0.lgstatic.com/i/image6/M01/38/42/CioPOWB5CK-Ae-ZRAAG6BriFZRI860.png)  
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M01/38/42/CioPOWB5CK-Ae-ZRAAG6BriFZRI860.png"/>  
 
 由于事件循环阶段划分不一致，Node.js 和浏览器在对宏任务和微任务的处理上也不一样。
 

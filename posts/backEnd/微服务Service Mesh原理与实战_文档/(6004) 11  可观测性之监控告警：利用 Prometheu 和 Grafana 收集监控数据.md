@@ -70,7 +70,7 @@ Prometheus 架构由以下模块构成。
 
 * **Alertmanager**：告警管理器，接收 Prometheus Server 发来的告警信息，去除重复信息，分组后发送给相应的人员。通知方式支持 Email 和 WebHook 自定义等，一般会通过 WebHook 接入钉钉或者企业微信以达到实时报警的目的。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/90/4C/CgqCHmAKh7WAS3kyAAFtuGRBoi0895.png)  
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/90/4C/CgqCHmAKh7WAS3kyAAFtuGRBoi0895.png"/>  
 Prometheus 架构图
 
 #### Prometheus 数据模型
@@ -123,11 +123,11 @@ Grafana 是一套可视化监控指标工具，主要用于时序数据的展示
 
 通过 Grafana的 Web 图形界面，可以配置不同的面板，以多种方式展示数据源。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/90/4C/CgqCHmAKh9uAQAMSAAHVS5sXmD0847.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/90/4C/CgqCHmAKh9uAQAMSAAHVS5sXmD0847.png"/>
 
 通过 Grafana 展示服务一段时间内的运行状态，包括常见的 QPS、延时等信息。
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/90/41/Ciqc1GAKh-KAR5LLAAMgpQx_lWg972.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/90/41/Ciqc1GAKh-KAR5LLAAMgpQx_lWg972.png"/>
 
 ### 常见问题
 
@@ -153,7 +153,7 @@ Prometheus 虽然性能强大，但如果无规范的使用，随着采集数据
 
 这一讲我主要介绍了微服务中 Metrics 监控告警，通过今天的内容，相信你已经对服务的可观测性有了进一步的认识。在程序 Metrics 的输出打点中，我们要特别注意 Metrics 的数量，注意 Metrics 标签中的变量，如变量变化过多，会造成服务和 Prometheus 不稳定。
 
-![金句11.png](https://s0.lgstatic.com/i/image/M00/91/3A/Ciqc1GAN5YmAb5kSAAL1ncn8r90570.png)
+<Image alt="金句11.png" src="https://s0.lgstatic.com/i/image/M00/91/3A/Ciqc1GAN5YmAb5kSAAL1ncn8r90570.png"/>
 
 本讲内容到这里就结束了，下一讲我会讲解 Service Mesh 的技术选型，我们一起来看看如何在众多 Service Mesh 开源产品中选择适合你的产品。
 

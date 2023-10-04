@@ -6,7 +6,7 @@
 
 与介绍 SQL 解析引擎时一样，我们通过翻阅 ShardingSphere 源码，首先梳理了如下所示的包结构：
 
-![Lark20201109-190944.png](https://s0.lgstatic.com/i/image/M00/6A/D2/CgqCHl-pI5mAXrqWAACIykUr4yg379.png)
+<Image alt="Lark20201109-190944.png" src="https://s0.lgstatic.com/i/image/M00/6A/D2/CgqCHl-pI5mAXrqWAACIykUr4yg379.png"/>
 
 上述包图总结了与路由机制相关的各个核心类，我们可以看到整体呈一种对称结构，即根据是 **PreparedStatement** 还是**普通 Statement** 分成两个分支流程。
 
@@ -69,7 +69,7 @@ ShardingRule 的内容非常丰富，但其定位更多是提供规则信息，�
 
 我们回到 ShardingRouter 类，发现其核心方法只有一个，即 route 方法。这个方法的逻辑比较复杂，我们梳理它的执行步骤，如下图所示：
 
-![image (2).png](https://s0.lgstatic.com/i/image/M00/3F/D0/CgqCHl8xJyqAHmcfAACVSxCxm4s053.png)
+<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/3F/D0/CgqCHl8xJyqAHmcfAACVSxCxm4s053.png"/>
 
 ShardingRouter 是路由引擎的核心类，**在接下来的内容中，我们将对上图中的 6 个步骤分别一 一 详细展开，帮忙你理解一个路由引擎的设计思想和实现机制。**
 
@@ -301,7 +301,7 @@ public static RoutingEngine newInstance(final ShardingRule shardingRule,
 
 这些 RoutingEngine 的具体介绍我们放在下一课时《18 \| 路由引擎：如何实现数据访问的分片路由和广播路由？》中进行详细介绍，这里只需要了解 ShardingSphere 在包结构的设计上把具体的 RoutingEngine 分成了六大类：即广播（broadcast）路由、混合（complex）路由、默认数据库（defaultdb）路由、无效（ignore）路由、标准（standard）路由以及单播（unicast）路由，如下所示：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/3F/C4/Ciqc1F8xJvuALcqiAAA5dODyQeU720.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/3F/C4/Ciqc1F8xJvuALcqiAAA5dODyQeU720.png"/>
 
 不同类型的 RoutingEngine 实现类
 
@@ -374,13 +374,13 @@ public final class RouteUnit {
 
 这里的 SQLUnit 中就是最终的一条 SQL 语句以及相应参数的组合。因为路由结果对象 SQLRouteResult 会继续传递到分片引擎的后续流程，且内部结构比较复杂，所以这里通过如下所示的类图对其包含的各种变量进行总结，方便你进行理解。
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image/M00/3F/D0/CgqCHl8xJ0eAMp1GAABywd2SYFQ497.png)
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/3F/D0/CgqCHl8xJ0eAMp1GAABywd2SYFQ497.png"/>
 
 至此，我们把 ShardingRouter 类的核心流程做了介绍。在 ShardingSphere 的路由引擎中，ShardingRouter 可以说是一个承上启下的核心类，向下我们可以挖掘各种 RoutingEngine 的具体实现；向上我们可以延展到读写分离等面向应用的具体场景。
 
 下图展示了 ShardingRouter 的这种定位关系。关于各种 RoutingEngine 的介绍是我们下一课时的内容，今天我们先将基于 ShardingRouter 讨论它的上层结构，从而引出了 ShardingEngine。
 
-![Drawing 6.png](https://s0.lgstatic.com/i/image/M00/3F/D0/CgqCHl8xJ1WAbAmHAAB_-h8F66g956.png)
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/3F/D0/CgqCHl8xJ1WAbAmHAAB_-h8F66g956.png"/>
 
 ### 从底层 ShardingRouter 到上层 ShardingEngine
 
@@ -478,7 +478,7 @@ public final class SimpleQueryShardingEngine extends BaseShardingEngine {
 
 至此，关于 ShardingSphere 路由引擎部分的内容基本都介绍完毕。对于上层结构而言，我们以 SimpleQueryShardingEngine 为例进行了展开，对于 PreparedQueryShardingEngine 的处理方式也是类似。作为总结，我们通过如下所示的时序图来梳理这些路由的主流程。
 
-![Drawing 8.png](https://s0.lgstatic.com/i/image/M00/3F/D0/CgqCHl8xJ2aAQabtAACUcSURKVc544.png)
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/3F/D0/CgqCHl8xJ2aAQabtAACUcSURKVc544.png"/>
 
 ### 从源码解析到日常开发
 

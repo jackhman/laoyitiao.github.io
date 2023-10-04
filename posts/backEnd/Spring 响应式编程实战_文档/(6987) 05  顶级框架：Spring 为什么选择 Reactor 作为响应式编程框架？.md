@@ -39,7 +39,7 @@ Reactor 框架可以单独使用。和集成其他第三方库一样，如果想
 
 响应式流规范的基本组件是一个异步的数据序列，在 Reactor 框架中，我们可以把这个异步数据序列表示成如下形式。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image6/M00/26/8D/CioPOWBbFBCAQDDNAACGnB65zn8934.png)  
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/26/8D/CioPOWBbFBCAQDDNAACGnB65zn8934.png"/>  
 图 1 Reactor 框架异步序列模型
 
 上图中的异步序列模型从语义上可以用如下公式表示。
@@ -64,7 +64,7 @@ Reactor 框架可以单独使用。和集成其他第三方库一样，如果想
 
 Flux 代表的是一个包含 0 到 n 个元素的异步序列，Reactor 官网给出了它的示意图，如下所示。
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image6/M00/26/91/Cgp9HWBbFCaAPHNNAAIMnXsm0_I218.png)  
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M00/26/91/Cgp9HWBbFCaAPHNNAAIMnXsm0_I218.png"/>  
 图 2 Flux 组件（来自 Reactor 官网）
 
 上图中的"operator"代表的是操作符，红色的叉号代表异常，而最后的一个符号则代表序列正常结束。显然，序列的三种消息通知都适用于 Flux。在详细介绍 Flux的构建和使用方法之前，我们先通过一段简短的代码来演示使用 Flux 的方法，如下所示。
@@ -100,7 +100,7 @@ public Flux<Account> getAccountList() {
 
 介绍完 Flux 之后，我们再来看 Reactor 所提供的 Mono 组件。Mono 数据序列中只包含 0 个或 1 个元素，如下图所示。
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image6/M00/26/8D/CioPOWBbFDmAOLiVAAFp-asMTcw575.png)  
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image6/M00/26/8D/CioPOWBbFDmAOLiVAAFp-asMTcw575.png"/>  
 图 3 Mono 组件（来自 Reactor 官网）
 
 与 Flux 组件一样，我们同样通过一个服务层的方法来演示 Mono 组件的用法，示例代码如下。
@@ -136,7 +136,7 @@ public Mono<Account> getAccountById(@PathVariable Long id) {
 
 操作符并不是响应式流规范的一部分，但为了改进响应式代码的可读性并降低开发成本，Reactor 库中的 API 提供了一组丰富的操作符，这些操作符为响应式流规范提供了最大的附加值。操作符的执行效果如下所示。
 
-![Drawing 7.png](https://s0.lgstatic.com/i/image6/M00/26/8E/CioPOWBbFEmABfrGAADTAAE8mv4005.png)  
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image6/M00/26/8E/CioPOWBbFEmABfrGAADTAAE8mv4005.png"/>  
 图 4 Reactor 中操作符示意图
 
 在 Reactor 中，可以把操作符分成转换、过滤、组合、条件、数学、日志、调试等几大类，每一类中都提供了一批有用的操作符。尤其是针对转换场景，操作符非常健全。在这个模块的接下来几讲中，我会详细介绍。
@@ -167,7 +167,7 @@ Reactor 使用了一个枚举类型 OverflowStrategy 来定义这些背压处理
 
 为了更好地展示操作符的语义和效果，从这一讲开始，我将引入弹珠图（Marble Diagram）。弹珠图能将数据流的转换以可视化方式呈现出来，它们对于描述操作符的行为非常有效，因此在 RxJava 或 Reactor 等响应式编程框架中，几乎所有的操作符都包含带有对应的弹珠图的说明。在我们课程的后续内容中也将大量使用弹珠图。实际上你在本讲前面的 Flux 和 Mono 组件中已经看到了弹珠图，而 Reactor 官网给出的 onBackpressureBuffer 操作符的弹珠图如下所示。
 
-![Drawing 9.png](https://s0.lgstatic.com/i/image6/M00/26/91/Cgp9HWBbFFWAC8VCAANwlTGCS1U790.png)  
+<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image6/M00/26/91/Cgp9HWBbFFWAC8VCAANwlTGCS1U790.png"/>  
 图 5 onBackpressureBuffer 操作符示意图（来自 Reactor 官网）
 
 onBackpressureBuffer 操作符有很多种可以选择的配置项，我们可以用来灵活控制它的行为。

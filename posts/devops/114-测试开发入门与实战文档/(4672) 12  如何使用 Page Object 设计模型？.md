@@ -3,7 +3,7 @@
 今天我将带你一起，使用 PageObject 模型，优化我们的框架代码，使我们的框架结构更加清晰，代码更加模块化，以便在迁移项目重用框架时成本更低。
 
 下方是课程内容结构图，可供你学习参考：  
-![Lark20201019-184959.png](https://s0.lgstatic.com/i/image/M00/60/81/Ciqc1F-NcGWAZc7WAAUL4728Z-8331.png)
+<Image alt="Lark20201019-184959.png" src="https://s0.lgstatic.com/i/image/M00/60/81/Ciqc1F-NcGWAZc7WAAUL4728Z-8331.png"/>
 
 ### 什么是 PageObject 设计模型？
 
@@ -29,7 +29,7 @@ PageObject 模式减少了代码冗余，可以使业务流程变得清晰易读
 
 根据上述特点，我们来看下一个 PageObject 的经典设计：
 
-![Lark20201019-185002.png](https://s0.lgstatic.com/i/image/M00/60/8D/CgqCHl-NcHKALdY4AAFp3jzWIEU818.png)
+<Image alt="Lark20201019-185002.png" src="https://s0.lgstatic.com/i/image/M00/60/8D/CgqCHl-NcHKALdY4AAFp3jzWIEU818.png"/>
 
 可以看到，在**测试类** 里，我们会定义许多**测试方法** ，这些测试方法里，会含有对**页面对象实例** 的调用；而**页面对象实例** ，是通过**页面对象类** 进行初始化操作生成的；对于许多**页面对象类** 都存在的通用操作，我们会提取到**页面对象基类**里。
 
@@ -279,7 +279,7 @@ D:\_Automation\lagouAPITest>pytest tests/test_ones.py
 
 测试运行结束后，查看运行结果如下：
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/60/82/Ciqc1F-NcJuAfRgwAAC13CMIBCs725.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/60/82/Ciqc1F-NcJuAfRgwAAC13CMIBCs725.png"/>
 
 至此，Page 类和 TestPage 类的解耦已经完成。
 
@@ -532,7 +532,7 @@ D:\_Automation\lagouAPITest>allure serve allure_reports
 
 接着你的默认浏览器会自动打开测试报告，看下运行结果：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/60/82/Ciqc1F-NcfmAFQfWAABpixBpo-E991.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/60/82/Ciqc1F-NcfmAFQfWAABpixBpo-E991.png"/>
 
 好的，大功告成。
 

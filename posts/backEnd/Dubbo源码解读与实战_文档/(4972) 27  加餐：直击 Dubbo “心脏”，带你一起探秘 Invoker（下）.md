@@ -21,7 +21,7 @@ InvokeMode 有三个可选值，分别是 SYNC、ASYNC 和 FUTURE。这里对于
 
 **SYNC 表示同步模式**，是 Dubbo 的默认调用模式，具体含义如下图所示，客户端发送请求之后，客户端线程会阻塞等待服务端返回响应。
 
-![Lark20201027-180625.png](https://s0.lgstatic.com/i/image/M00/64/4B/CgqCHl-X8UOAOTRbAACy-uBf52M689.png)  
+<Image alt="Lark20201027-180625.png" src="https://s0.lgstatic.com/i/image/M00/64/4B/CgqCHl-X8UOAOTRbAACy-uBf52M689.png"/>  
 SYNC 调用模式图
 
 在拿到线程池之后，DubboInvoker 就会调用 ExchangeClient.request() 方法，将 Invocation 包装成 Request 请求发送出去，同时会创建相应的 DefaultFuture 返回。注意，这里还加了一个回调，取出其中的 AppResponse 对象。AppResponse 表示的是服务端返回的具体响应，其中有三个字段。
@@ -175,7 +175,7 @@ ThreadlessExecutor 针对同步请求的优化，我们在前面的第 20 课时
 
 最后要说明的是，**AsyncRpcResult 实现了 Result 接口**，如下图所示：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/63/A9/Ciqc1F-WqdmAbppOAABOGWzVljY775.png)  
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/63/A9/Ciqc1F-WqdmAbppOAABOGWzVljY775.png"/>  
 AsyncRpcResult 继承关系图
 
 AsyncRpcResult 对 Result 接口的实现，例如，getValue() 方法、recreate() 方法、getAttachments() 方法等，都会先调用 getAppResponse() 方法从 responseFuture 中拿到 AppResponse 对象，然后再调用其对应的方法。这里我们以 recreate() 方法为例，简单分析一下：
@@ -237,7 +237,7 @@ Dubbo 2.6.x 及之前版本中使用的 Future 是在 Java 5 中引入的，所�
 
 好了，DubboInvoker 涉及的同步调用、异步调用的原理和底层实现就介绍到这里了，我们可以通过一张流程图进行简单总结，如下所示：
 
-![Lark20201027-180621.png](https://s0.lgstatic.com/i/image/M00/64/40/Ciqc1F-X8WuACaAKAAEb-X6qf4Y710.png)  
+<Image alt="Lark20201027-180621.png" src="https://s0.lgstatic.com/i/image/M00/64/40/Ciqc1F-X8WuACaAKAAEb-X6qf4Y710.png"/>  
 DubboInvoker 核心流程图
 
 在 Client 端发送请求时，首先会创建对应的 DefaultFuture（其中记录了请求 ID 等信息），然后依赖 Netty 的异步发送特性将请求发送到 Server 端。需要说明的是，这整个发送过程是不会阻塞任何线程的。之后，将 DefaultFuture 返回给上层，在这个返回过程中，DefaultFuture 会被封装成 AsyncRpcResult，同时也可以添加回调函数。
@@ -254,7 +254,7 @@ DubboInvoker 核心流程图
 
 ProtocolListenerWrapper 是 Protocol 接口的实现之一，如下图所示：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/63/B4/CgqCHl-WqfyAZ0TzAAAbeTUMLT0465.png)  
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/63/B4/CgqCHl-WqfyAZ0TzAAAbeTUMLT0465.png"/>  
 ProtocolListenerWrapper 继承关系图
 
 ProtocolListenerWrapper 本身是 Protocol 接口的装饰器，在其 export() 方法和 refer() 方法中，会分别在原有 Invoker 基础上封装一层 ListenerExporterWrapper 和 ListenerInvokerWrapper。

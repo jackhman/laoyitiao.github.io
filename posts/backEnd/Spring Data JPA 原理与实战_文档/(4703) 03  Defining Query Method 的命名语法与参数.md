@@ -117,7 +117,7 @@ interface PersonRepository extends Repository<User, Long> {
 
 下面表格是一个我们在上面 DQM 方法语法里常用的关键字列表，方便你快速查阅，并满足在实际代码中更加复杂的场景：
 
-![Lark20200918-182821.png](https://s0.lgstatic.com/i/image/M00/51/31/Ciqc1F9ki9CAPfoLAAMOpmuNPDY563.png)
+<Image alt="Lark20200918-182821.png" src="https://s0.lgstatic.com/i/image/M00/51/31/Ciqc1F9ki9CAPfoLAAMOpmuNPDY563.png"/>
 
 综上，总结 3 点经验：
 
@@ -139,11 +139,11 @@ interface UserRepository extends CrudRepository<User, Long> {
 
 有的时候随着版本的更新，也会有更多的语法支持，或者不同的版本语法可能也不一样，我们通过源码来看一下上面说的几种语法。感兴趣的同学可以到类 org.springframework.data.repository.query.parser.PartTree 查看相关源码的逻辑和处理方法，关键源码如下：
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/51/31/Ciqc1F9kjAWAfjJiAAc5lsBJToo426.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/51/31/Ciqc1F9kjAWAfjJiAAc5lsBJToo426.png"/>
 
 根据源码我们也可以分析出来，query method 包含其他的表达式，比如 find、count、delete、exist 等关键字在 by 之前通过正则表达式匹配。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/51/31/Ciqc1F9kjA6AFsC1AASo47BSWUo068.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/51/31/Ciqc1F9kjA6AFsC1AASo47BSWUo068.png"/>
 
 由此可知，我们方法中的关键字不是乱填的，是枚举帮我们定义好的。接下来打开枚举类 Type 源码看下，比什么都清楚。
 
@@ -197,7 +197,7 @@ Sort 里面决定了我们哪些字段的排序方向（ASC 正序、DESC 倒序
 
 Pageable 在查询的时候可以实现分页效果和动态排序双重效果，我们看下 Pageable 的 Structure，如下图所示：
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/51/31/Ciqc1F9kjB-AVHUCAADjYUn04XE249.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/51/31/Ciqc1F9kjB-AVHUCAADjYUn04XE249.png"/>
 
 我们发现 Pageable 是一个接口，里面有常见的分页方法排序、当前页、下一行、当前指针、一共多少页、页码、pageSize 等。
 
@@ -220,7 +220,7 @@ List<User> findByLastname(String lastname, Pageable pageable);//根据分页参�
 
 那么如何使用呢？我们再来看一下源码，也就是 Pageable 的实现类，如下图所示：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/51/3C/CgqCHl9kjDSAFKPVAASB48M-k1w197.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/51/3C/CgqCHl9kjDSAFKPVAASB48M-k1w197.png"/>
 
 由此可知，我们可以通过 PageRequest 里面提供的几个 of 静态方法（多态），分别构建页码、页面大小、排序等。我们来看下，在使用中的写法，如下所示：
 

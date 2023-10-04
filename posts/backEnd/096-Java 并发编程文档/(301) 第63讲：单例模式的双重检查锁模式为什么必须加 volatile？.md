@@ -28,7 +28,7 @@ public class ExpensiveResource {
 
 一般单例模式的类结构如下图所示：有一个私有的 Singleton 类型的 singleton 对象；同时构造方法也是私有的，为了防止他人调用构造函数来生成实例；另外还会有一个 public 的 getInstance 方法，可通过这个方法获取到单例。
 
-![](https://s0.lgstatic.com/i/image3/M01/05/B6/Ciqah16BpV-AG9iPAAAf42nvy5s798.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/05/B6/Ciqah16BpV-AG9iPAAAf42nvy5s798.png"/>
 
 #### 双重检查锁模式的写法
 
@@ -73,7 +73,7 @@ public class Singleton {
 
 相信细心的你可能看到了，我们在双重检查锁模式中，给 singleton 这个对象加了 volatile 关键字，那\*\*为什么要用 volatile 呢？\*\*主要就在于 singleton = new Singleton() ，它并非是一个原子操作，事实上，在 JVM 中上述语句至少做了以下这 3 件事：
 
-![](https://s0.lgstatic.com/i/image3/M01/7E/CC/Cgq2xl6BpWCAMBaVAACFIdffjfM852.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7E/CC/Cgq2xl6BpWCAMBaVAACFIdffjfM852.png"/>
 
 * 第一步是给 singleton 分配内存空间；
 
@@ -85,7 +85,7 @@ public class Singleton {
 
 如果是 1-3-2，那么在第 3 步执行完以后，singleton 就不是 null 了，可是这时第 2 步并没有执行，singleton 对象未完成初始化，它的属性的值可能不是我们所预期的值。假设此时线程 2 进入 getInstance 方法，由于 singleton 已经不是 null 了，所以会通过第一重检查并直接返回，但其实这时的 singleton 并没有完成初始化，所以使用这个实例的时候会报错，详细流程如下图所示：
 
-![](https://s0.lgstatic.com/i/image3/M01/7E/CC/Cgq2xl6BpWCAB6QQAAEKacFd0CE542.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7E/CC/Cgq2xl6BpWCAB6QQAAEKacFd0CE542.png"/>
 
 线程 1 首先执行新建实例的第一步，也就是分配单例对象的内存空间，由于线程 1 被重排序，所以执行了新建实例的第三步，也就是把 singleton 指向之前分配出来的内存地址，在这第三步执行之后，singleton 对象便不再是 null。
 

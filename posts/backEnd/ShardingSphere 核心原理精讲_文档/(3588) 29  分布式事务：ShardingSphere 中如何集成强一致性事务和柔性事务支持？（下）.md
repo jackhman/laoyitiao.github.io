@@ -177,7 +177,7 @@ public final class BitronixXATransactionManager implements XATransactionManager 
 
 作为总结，我们在上一课时的基础上，进一步梳理了 XA 两阶段提交相关的核心类之间的关系，如下图所示：
 
-![image.png](https://s0.lgstatic.com/i/image/M00/53/AB/CgqCHl9oXe6AK8JkAAByEfwPBs0489.png)
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/53/AB/CgqCHl9oXe6AK8JkAAByEfwPBs0489.png"/>
 
 #### 2.ShardingConnection
 
@@ -284,7 +284,7 @@ private void initSeataRPCClient() {
 
 而在命名上，Seata 更为直接明了，使用 DataSourceProxy 和 ConnectionProxy 这种代理对象。以 DataSourceProxy 为例，我们可以梳理它的类层结构如下：
 
-![image (1).png](https://s0.lgstatic.com/i/image/M00/53/AB/CgqCHl9oXgKACi15AAA7sb7XKlo735.png)
+<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/53/AB/CgqCHl9oXgKACi15AAA7sb7XKlo735.png"/>
 
 可以看到 DataSourceProxy 实现了自己定义的 Resource 接口，然后继承了抽象类 AbstractDataSourceProxy，而后者则实现了 JDBC 中的 DataSource 接口。
 

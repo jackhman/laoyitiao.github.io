@@ -171,7 +171,7 @@ public class PassengerController {
 
 在开发中的一个常见需求是发送 HTTP 请求来测试 REST API ，如果使用 Postman 或其他工具，可以直接导入 OpenAPI 文档来生成 HTTP 请求的模板，如下图所示，Postman 自动生成了 POST 请求的内容。
 
-![微服务11.png](https://s0.lgstatic.com/i/image3/M01/13/79/Ciqah16f2byAMICiAADnG6dPSdw777.png)
+<Image alt="微服务11.png" src="https://s0.lgstatic.com/i/image3/M01/13/79/Ciqah16f2byAMICiAADnG6dPSdw777.png"/>
 
 #### 总结
 

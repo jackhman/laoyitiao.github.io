@@ -4,7 +4,7 @@
 
 1964 年，世界上的第一台计算机诞生，那时的计算机主要用于军事领域。计算机的运行离不开程序，那时负责编程的人员被称之为"程序员"。由于那时的程序比较简单，很多工作可以一个人完成，所以早期的计算软件交付流程是这样的：设计---开发---自测---发布---部署---维护。如图 1 所示：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/6D/A8/CgqCHl-uVieAfOxkAAAwBofBN_Y124.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/6D/A8/CgqCHl-uVieAfOxkAAAwBofBN_Y124.png"/>
 
 然而，随着计算机的发展和普及，越来越多的人接触到了计算机，这时的计算机也开始逐渐应用于商业领域，市场上出现了越来越多的办公、游戏等"软件"，也有越来越多的人开始从事软件开发这个行业，而这些软件开发者也有了更加专业的称呼"软件开发工程师"。
 
@@ -12,17 +12,17 @@
 
 分工之后软件开发流程如下：研发工程师做代码设计和开发，测试工程师做专业的测试工作，运维工程师负责将软件部署并负责维护软件。如图 2 所示：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/6D/9D/Ciqc1F-uVjqANUjJAABEgJx4ezg502.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/6D/9D/Ciqc1F-uVjqANUjJAABEgJx4ezg502.png"/>
 
 这种软件开发模式被称为瀑布模型，这种模式将软件生命周期划分为制定计划、需求分析、软件设计、程序编写、软件测试和运行维护等六个基本活动，并且规定了它们自上而下、相互衔接的固定次序，如瀑布流水一样，逐级的下降。
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image/M00/6D/9D/Ciqc1F-uVkSAK6G-AABQOfQy504986.png)
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/6D/9D/Ciqc1F-uVkSAK6G-AABQOfQy504986.png"/>
 
 瀑布模型的模式十分理想化，它假定用户需求十分明确，开发时间十分充足，且项目是单向迭代的。但随着互联网的出现，软件迭代速度越来越快，软件开发越来越"敏捷"，这时候大名鼎鼎的"敏捷开发"出现了，敏捷开发把大的时间点变成细小的时间点，快速迭代开发，软件更新速度也越来越快。
 
 敏捷开发对传统的开发、测试、运维模式提出了新的挑战，要求更快的开发速度和更高的软件部署频率。而运维工程师信奉的则是稳定性压倒一切，不希望软件频繁变更而引发新的问题。于是乎，敏捷开发和运维工程师之间的矛盾便诞生了。
 
-![Drawing 7.png](https://s0.lgstatic.com/i/image/M00/6D/9D/Ciqc1F-uVkuAfwNzAACSxCvT8p8579.png)
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/6D/9D/Ciqc1F-uVkuAfwNzAACSxCvT8p8579.png"/>
 
 敏捷开发使得开发和运维工程师之间的矛盾变得越来越深，为了解决这个问题，DevOps 诞生了。DevOps 是研发工程师（Development）和运维工程师（Operations）的组合。下面是维基百科对 DevOps 的定义：
 > DevOps（Development 和 Operations 的组合词）是一种重视"软件开发人员（Dev）"和"IT 运维技术人员（Ops）"之间沟通合作的文化、运动或惯例。透过自动化"软件交付"和"架构变更"的流程，来使得构建、测试、发布软件能够更加地快捷、频繁和可靠。
@@ -45,7 +45,7 @@ DevOps 的整体目标是**促进开发和运维人员之间的配合，并且�
 
 这时的研发和运维都开始关注软件统一交付的格式和软件生命周期的管理，**而不像之前一样研发只关注"打包前"，而运维只关注"打包后"的模式**，DevOps 无论是研发环境还是生产环境都开始围绕 Docker 进行构建。
 
-![Drawing 9.png](https://s0.lgstatic.com/i/image/M00/6D/9D/Ciqc1F-uVmOASObQAAA7V7ib-l8145.png)
+<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/6D/9D/Ciqc1F-uVmOASObQAAA7V7ib-l8145.png"/>
 
 综上所述，微服务、Docker 与 DevOps 三者之间的关系，如上图所示。
 
@@ -83,7 +83,7 @@ Docker 可以在 DevOps 各个阶段发挥重要作用，例如 Docker 可以帮
 
 #### Git
 
-![Drawing 10.png](https://s0.lgstatic.com/i/image/M00/6D/9D/Ciqc1F-uVomAACq6AAGSnXiZ7Xg745.png)
+<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image/M00/6D/9D/Ciqc1F-uVomAACq6AAGSnXiZ7Xg745.png"/>
 
 [Git](https://git-scm.com/) 是一种分布式的版本控制工具， 是目前使用最广泛的 DevOps 工具之一。Git 相比于其他版本控制工具，它可以**实现离线代码提交**，它允许我们提交代码时未连接到 Git 服务器，等到网络恢复再将我们的代码提交到远程服务器。
 
@@ -93,19 +93,19 @@ Git 非常容易上手，并且占用空间很小，相比于传统的版本控�
 
 #### Jenkins
 
-![Drawing 11.png](https://s0.lgstatic.com/i/image/M00/6D/A9/CgqCHl-uVpaAF5u_AACv-5xaZ1E856.png)
+<Image alt="Drawing 11.png" src="https://s0.lgstatic.com/i/image/M00/6D/A9/CgqCHl-uVpaAF5u_AACv-5xaZ1E856.png"/>
 
 [Jenkins](https://www.jenkins.io/) 是开源的 CI/CD 构建工具，Jenkins 采用插件化的方式来扩展它的功能，它拥有非常丰富的插件，这些插件可以帮助我们实现构建、部署、自动化等流程。它还拥有强大的生态系统，这些生态系统可以很方便地与 Docker 和 Kubernetes 集成。Jenkins 几乎可以和所有的 DevOps 工具进行集成。
 
 #### Ansible
 
-![Drawing 12.png](https://s0.lgstatic.com/i/image/M00/6D/9D/Ciqc1F-uVqKAHHhCAANJIGhWQ_A950.png)
+<Image alt="Drawing 12.png" src="https://s0.lgstatic.com/i/image/M00/6D/9D/Ciqc1F-uVqKAHHhCAANJIGhWQ_A950.png"/>
 
 [Ansible](https://www.ansible.com/) 是一个配置管理工具。Ansible 可以帮助我们自动完成一些重复的 IT 配置管理，应用程序部署等任务，还可以帮助我们放弃编写繁杂的 shell 脚本，仅仅做一些 YAML 的配置，即可实现任务下发和管理工作。并且 Ansible 的每一行命令都是幂等的，它允许我们多次重复执行相同的脚本并且得到的结果都是一致的。
 
 #### Kubernetes
 
-![Drawing 13.png](https://s0.lgstatic.com/i/image/M00/6D/A9/CgqCHl-uVqmABoq8AAEeX_9ee0Y690.png)
+<Image alt="Drawing 13.png" src="https://s0.lgstatic.com/i/image/M00/6D/A9/CgqCHl-uVqmABoq8AAEeX_9ee0Y690.png"/>
 
 [Kubernetes](https://kubernetes.io/) 是当前最流行的容器编排工具之一，Docker 帮助我们解决了容器打包和镜像分发的问题，而 Kubernetes 则帮助我们解决了大批量容器管理和调度的问题，它可以打通从研发到上线的整个流程，使得 DevOps 落地更加简单方便。
 

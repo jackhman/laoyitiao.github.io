@@ -4,7 +4,7 @@
 
 首先，我们来看 AbstractPeer 这个抽象类，它同时实现了 Endpoint 接口和 ChannelHandler 接口，如下图所示，它也是 AbstractChannel、AbstractEndpoint 抽象类的父类。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/58/F3/Ciqc1F9wb8eAHyD_AAFkwn8xp18694.png)  
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/58/F3/Ciqc1F9wb8eAHyD_AAFkwn8xp18694.png"/>  
 AbstractPeer 继承关系
 > Netty 中也有 ChannelHandler、Channel 等接口，但无特殊说明的情况下，这里的接口指的都是 Dubbo 中定义的接口。如果涉及 Netty 中的接口，会进行特殊说明。
 
@@ -61,7 +61,7 @@ public void reset(URL url) {
 
 AbstractServer 和 AbstractClient 都实现了 AbstractEndpoint 抽象类，我们先来看 AbstractServer 的实现。AbstractServer 在继承了 AbstractEndpoint 的同时，还实现了 RemotingServer 接口，如下图所示：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/58/F3/Ciqc1F9wb-iAMAgtAACJWi59iSc812.png)  
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/58/F3/Ciqc1F9wb-iAMAgtAACJWi59iSc812.png"/>  
 AbstractServer 继承关系图
 
 **AbstractServer 是对服务端的抽象，实现了服务端的公共逻辑**。AbstractServer 的核心字段有下面几个。
@@ -127,7 +127,7 @@ public synchronized ExecutorService createExecutorIfAbsent(URL url) {
 
 在 createExecutor() 方法中，会通过 Dubbo SPI 查找 ThreadPool 接口的扩展实现，并调用其 getExecutor() 方法创建线程池。ThreadPool 接口被 @SPI 注解修饰，默认使用 FixedThreadPool 实现，但是 ThreadPool 接口中的 getExecutor() 方法被 @Adaptive 注解修饰，动态生成的适配器类会优先根据 URL 中的 threadpool 参数选择 ThreadPool 的扩展实现。ThreadPool 接口的实现类如下图所示：
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/58/FE/CgqCHl9wcBeAYMZ1AABRTGzl5uY627.png)  
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/58/FE/CgqCHl9wcBeAYMZ1AABRTGzl5uY627.png"/>  
 ThreadPool 继承关系图
 
 不同实现会根据 URL 参数创建不同特性的线程池，这里以**CacheThreadPool**为例进行分析：
@@ -271,7 +271,7 @@ protected void doOpen() throws Throwable {
 
 其实在 Transporter 这一层看，功能的不同其实就是注册在 Channel 上的 ChannelHandler 不同，通过 doOpen() 方法得到的 Server 端结构如下：
 
-![5.png](https://s0.lgstatic.com/i/image/M00/59/E4/Ciqc1F9y4LaAIHSsAADBytWDQ3U695.png)  
+<Image alt="5.png" src="https://s0.lgstatic.com/i/image/M00/59/E4/Ciqc1F9y4LaAIHSsAADBytWDQ3U695.png"/>  
 NettyServer 模型
 
 #### 核心 ChannelHandler
@@ -280,7 +280,7 @@ NettyServer 模型
 
 首先是**decoder 和 encoder**，它们都是 NettyCodecAdapter 的内部类，如下图所示，分别继承了 Netty 中的 ByteToMessageDecoder 和 MessageToByteEncoder：
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image/M00/58/FE/CgqCHl9wcESANfPCAABDUdzhtNU066.png)
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/58/FE/CgqCHl9wcESANfPCAABDUdzhtNU066.png"/>
 
 还记得 AbstractEndpoint 抽象类中的 codec 字段（Codec2 类型）吗？InternalDecoder 和 InternalEncoder 会将真正的编解码功能委托给 NettyServer 关联的这个 Codec2 对象去处理，这里以 InternalDecoder 为例进行分析：
 
@@ -319,18 +319,18 @@ InternalEncoder 的具体实现就不再展开讲解了，你若感兴趣可以�
 
 最后来看**NettyServerHandler**，它继承了 ChannelDuplexHandler，这是 Netty 提供的一个同时处理 Inbound 数据和 Outbound 数据的 ChannelHandler，从下面的继承图就能看出来。
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image/M00/58/F3/Ciqc1F9wcFKAQQZ3AAB282frbWw282.png)  
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/58/F3/Ciqc1F9wcFKAQQZ3AAB282frbWw282.png"/>  
 NettyServerHandler 继承关系图
 
 在 NettyServerHandler 中有 channels 和 handler 两个核心字段。
 
 * channels（Map\<String,Channel\>集合）：记录了当前 Server 创建的所有 Channel，从下图中可以看到，连接创建（触发 channelActive() 方法）、连接断开（触发 channelInactive()方法）会操作 channels 集合进行相应的增删。
 
-![Drawing 6.png](https://s0.lgstatic.com/i/image/M00/58/F3/Ciqc1F9wcFuABJWsAAaIoTwCIA0958.png)
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/58/F3/Ciqc1F9wcFuABJWsAAaIoTwCIA0958.png"/>
 
 * handler（ChannelHandler 类型）：NettyServerHandler 内几乎所有方法都会触发该 Dubbo ChannelHandler 对象（如下图）。
 
-![Drawing 7.png](https://s0.lgstatic.com/i/image/M00/58/FE/CgqCHl9wcGOAE_ykAAFvy5a4X58367.png)
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/58/FE/CgqCHl9wcGOAE_ykAAFvy5a4X58367.png"/>
 
 这里以 write() 方法为例进行简单分析：
 
@@ -353,13 +353,13 @@ final NettyServerHandler nettyServerHandler = new NettyServerHandler(getUrl(), t
 
 其中第二个参数传入的是 NettyServer 这个对象，你可以追溯一下 NettyServer 的继承结构，会发现它的最顶层父类 AbstractPeer 实现了 ChannelHandler，并且将所有的方法委托给其中封装的 ChannelHandler 对象，如下图所示：
 
-![Drawing 8.png](https://s0.lgstatic.com/i/image/M00/58/F3/Ciqc1F9wcGuADQi3AAD6EEURlNU871.png)
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/58/F3/Ciqc1F9wcGuADQi3AAD6EEURlNU871.png"/>
 
 也就是说，NettyServerHandler 会将数据委托给这个 ChannelHandler。
 
 到此为止，Server 这条继承线就介绍完了。你可以回顾一下，从 AbstractPeer 开始往下，一路继承下来，NettyServer 拥有了 Endpoint、ChannelHandler 以及RemotingServer多个接口的能力，关联了一个 ChannelHandler 对象以及 Codec2 对象，并最终将数据委托给这两个对象进行处理。所以，上层调用方只需要实现 ChannelHandler 和 Codec2 这两个接口就可以了。
 
-![6.png](https://s0.lgstatic.com/i/image/M00/59/E4/Ciqc1F9y4MyAR8XLAABTLdOZqrc228.png)
+<Image alt="6.png" src="https://s0.lgstatic.com/i/image/M00/59/E4/Ciqc1F9y4MyAR8XLAABTLdOZqrc228.png"/>
 
 ### 总结
 

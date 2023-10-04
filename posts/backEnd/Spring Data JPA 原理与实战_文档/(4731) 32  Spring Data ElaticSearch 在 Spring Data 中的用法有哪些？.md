@@ -30,7 +30,7 @@ Spring Data 和 Elasticsearch 结合的时候，唯一需要注意的是版本�
 
 安装完之后，我们就可以看到如下信息。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image2/M01/04/56/CgpVE1_tdLyAY0UfAAH31rOGV0o472.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image2/M01/04/56/CgpVE1_tdLyAY0UfAAH31rOGV0o472.png"/>
 
 这代表我们安装成功。
 
@@ -82,7 +82,7 @@ test {
 
 **第三步：新建一个目录，结构如下图所示，方便我们测试**。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image2/M01/04/55/Cip5yF_tdMaAbP03AAD7ix9soGU430.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image2/M01/04/55/Cip5yF_tdMaAbP03AAD7ix9soGU430.png"/>
 
 **第四步：在 application.properties 里面新增 es 的连接地址，连接本地的 Elasticsearch**。
 
@@ -303,11 +303,11 @@ public class ElasticSearchRepositoryTest {
 
 接着我们看一下测试用例的调用日志，从日志可以看出，调用的时候发生的 Http 的 PUT 请求，是用来创建和修改一个索引的文档的。请看下面的图片。
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image2/M01/04/56/CgpVE1_tdNiAXq0WAAPx9WYUcvE585.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image2/M01/04/56/CgpVE1_tdNiAXq0WAAPx9WYUcvE585.png"/>
 
 从中也可以看得出来，转化成 es 的 api 查询语法之后，发送的 post 请求又变成下图显示的样子。
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image2/M01/04/55/Cip5yF_tdN6AQ3l9AAPPn8brHa8263.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image2/M01/04/55/Cip5yF_tdN6AQ3l9AAPPn8brHa8263.png"/>
 
 日志比较长，你有兴趣的话，可以按照我的 DEMO 和开启日志的方法，自己去分析体会一下。
 
@@ -319,13 +319,13 @@ public class ElasticSearchRepositoryTest {
 
 那么我们简单看一下这一框架还给我们提供了哪些 ElasticSearch 的操作方法。和分析 Spring Data JPA 一样，看一下 Repository 的所有子类，如下图所示。
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image2/M01/04/55/Cip5yF_tdOWAN1p8AAKW4zuYBgc483.png)
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image2/M01/04/55/Cip5yF_tdOWAN1p8AAKW4zuYBgc483.png"/>
 
 从图中可以看得出来，ElasticsearchRepository 是默认的 Repository 的实现类，我们如果继续往下面看源码的话，就可以看到里面进行了很多 ES 的 Http Client 操作。
 
 同时再看一下 Structure 视图，如下所示。
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image2/M01/04/57/CgpVE1_tdOyAa_qxAARM3eWQpnQ793.png)
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image2/M01/04/57/CgpVE1_tdOyAa_qxAARM3eWQpnQ793.png"/>
 
 从这张图可以知道，ElasticsearchRepository 默认给我们提供了 search 和 index 相关的一些操作方法，并且 Spring Data Common 里面的一些公共方法同样适用，这和我们刚才演示的 Defining Method Query 的 JPA 语法同样适用，可以大大减轻操作 ES 的难度，提高了开发的效率，甚至像我们没有演示到的分页、排序、limit 等同样适用。
 
@@ -341,7 +341,7 @@ public class ElasticSearchRepositoryTest {
 
 **第一步：我们将对 Elasticsearch 的实体、Repository 和对 JPA 操作的实体、Repository 放到不同的文件里面**，如下图所示。
 
-![Drawing 6.png](https://s0.lgstatic.com/i/image2/M01/04/55/Cip5yF_tdPOAVRMHAACTufgK21A436.png)
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image2/M01/04/55/Cip5yF_tdPOAVRMHAACTufgK21A436.png"/>
 
 **第二步：新增 JpaConfiguration，用来指定 Jpa 相关的 Repository 目录**，完整代码如下。
 
@@ -414,7 +414,7 @@ public class UserRepositoryTest {
 
 这个时候，我们的测试用例就变成了如下图所示的结构。
 
-![Drawing 7.png](https://s0.lgstatic.com/i/image2/M01/04/57/CgpVE1_tdQKAAa7zAABNF77hZ_A879.png)
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image2/M01/04/57/CgpVE1_tdQKAAa7zAABNF77hZ_A879.png"/>
 
 那么现在我们知道了，JPA 和 Elasticsearch 同时存在，和启动项目是一样的效果，这里就不写 Controller 了。
 
@@ -422,11 +422,11 @@ public class UserRepositoryTest {
 
 1.ElasticSearchRepositoryTest 执行的时候，通过日志可以看到这是对 ES 进行的操作，如下图所示。
 
-![Drawing 8.png](https://s0.lgstatic.com/i/image/M00/8C/74/Ciqc1F_tdRWABN3HAASErifQeiw553.png)
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/8C/74/Ciqc1F_tdRWABN3HAASErifQeiw553.png"/>
 
 2.UserRepositoryTest 执行的时候，通过日志我们可以看出来这是对 DB 进行的操作，所以谁也不影响谁，如下图所示。
 
-![Drawing 9.png](https://s0.lgstatic.com/i/image/M00/8C/74/Ciqc1F_tdRyAe_oeAAMw4yV6H4o471.png)
+<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/8C/74/Ciqc1F_tdRyAe_oeAAMw4yV6H4o471.png"/>
 
 通过上面的例子我们可以知道，Spring Data 对 JPA 等 SQL 型的传统数据库的支持是非常好的，同时对 NoSQL 型的非关系类数据库的支持也比较友好，大大降低了操作不同数据源的难度，可以有效提升我们的开发效率。
 

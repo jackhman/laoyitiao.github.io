@@ -26,11 +26,11 @@ ReactDOM.render(<App />, rootElement);
 
 首先，我们先在调用栈中定位一下 completeWork。Demo 所对应的调用栈中，第一个 completeWork 出现在下图红框选中的位置：
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/72/1B/CgqCHl_AsdSAQuGuAAC09U5X0K0556.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/72/1B/CgqCHl_AsdSAQuGuAAC09U5X0K0556.png"/>
 
 从图上我们需要把握住的一个信息是，从 performUnitOfWork 到 completeWork，中间会经过一个这样的调用链路：
 
-![图片10.png](https://s0.lgstatic.com/i/image/M00/72/29/CgqCHl_A2PuADu50AABVUspw4O0014.png)
+<Image alt="图片10.png" src="https://s0.lgstatic.com/i/image/M00/72/29/CgqCHl_A2PuADu50AABVUspw4O0014.png"/>
 
 其中 completeUnitOfWork 的工作也非常关键，但眼下我们先拿 completeWork 开刀，你可以暂时将 completeUnitOfWork 简单理解为一个用于发起 completeWork 调用的"工具人"。completeUnitOfWork 是在 performUnitOfWork 中被调用的，那么 performUnitOfWork 是如何把握其调用时机的呢？我们直接来看相关源码（解析在注释里）：
 
@@ -66,11 +66,11 @@ function performUnitOfWork(unitOfWork) {
 
 接下来我们在 Demo 代码的 completeWork 处打上断点，看看第一个走到 completeWork 的节点是哪个，结果如下图所示：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/72/10/Ciqc1F_AseOADKNDAALdERWik0M525.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/72/10/Ciqc1F_AseOADKNDAALdERWik0M525.png"/>
 
 显然，第一个进入 completeWork 的节点是 h1，这也符合我们上一讲所构建出来的 Fiber 树中的节点关系，如下图所示：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/72/1B/CgqCHl_AsgSAJoM0AAEYVWI-PXg056.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/72/1B/CgqCHl_AsgSAJoM0AAEYVWI-PXg056.png"/>
 
 由图可知，按照深度优先遍历的原则，h1 确实将是第一个被遍历到的叶子节点。接下来我们就以 h1 为例，一起看看 completeWork 都围绕它做了哪些事情。
 
@@ -179,7 +179,7 @@ function completeWork(current, workInProgress, renderLanes) {
 
 3. completeWork 中的 current、 workInProgress 分别对应的是下图中左右两棵 Fiber 树上的节点：
 
-![图片12.png](https://s0.lgstatic.com/i/image/M00/72/29/CgqCHl_A2R-AWalhAAD-42SivEU001.png)
+<Image alt="图片12.png" src="https://s0.lgstatic.com/i/image/M00/72/29/CgqCHl_A2R-AWalhAAD-42SivEU001.png"/>
 
 其中 workInProgress 树代表的是"当前正在 render 中的树"，而 current 树则代表"已经存在的树"。
 
@@ -201,7 +201,7 @@ workInProgress 节点和 current 节点之间用 alternate 属性相互连接。
 
 （3）**创建好的 DOM 节点会被赋值给 workInProgress 节点的 stateNode 属性**。也就是说当我们想要定位一个 Fiber 对应的 DOM 节点时，访问它的 stateNode 属性就可以了。这里我们可以尝试访问运行时的 h1 节点的 stateNode 属性，结果如下图所示：
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image/M00/72/10/Ciqc1F_Ash-AW32XAABIXg8drFo176.png)
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/72/10/Ciqc1F_Ash-AW32XAABIXg8drFo176.png"/>
 
 （4）将 DOM 节点插入到 DOM 树的操作是通过 appendAllChildren 函数来完成的。
 
@@ -256,7 +256,7 @@ do {
 
 那么为什么在源码中，遇到兄弟节点会 return，遇到父节点才会进入下次循环呢？这里我以 h1 节点的节点关系为例进行说明。请看下图：
 
-![图片8.png](https://s0.lgstatic.com/i/image/M00/72/29/CgqCHl_A2UCAeC8WAAByZUWVwpM770.png)
+<Image alt="图片8.png" src="https://s0.lgstatic.com/i/image/M00/72/29/CgqCHl_A2UCAeC8WAAByZUWVwpM770.png"/>
 
 结合前面的分析和图示可知，**h1 节点是递归过程中所触及的第一个叶子节点，也是其兄弟节点中被遍历到的第一个节点**；而剩下的两个 p 节点，此时都还没有被遍历到，也就是说连 beginWork 都没有执行过。
 
@@ -270,7 +270,7 @@ do {
 
 无论是 beginWork 还是 completeWork，它们的应用对象都是 workInProgress 树上的节点。我们说 render 阶段是一个递归的过程，"递归"的对象，正是这棵 workInProgress 树（见下图右侧高亮部分）：
 
-![图片13.png](https://s0.lgstatic.com/i/image/M00/72/29/CgqCHl_A2VCAHbHdAAEBwCIJFE4253.png)
+<Image alt="图片13.png" src="https://s0.lgstatic.com/i/image/M00/72/29/CgqCHl_A2VCAHbHdAAEBwCIJFE4253.png"/>
 
 那么我们递归的目的是什么呢？或者说，render 阶段的工作目标是什么呢？
 
@@ -280,7 +280,7 @@ do {
 
 更新阶段与挂载阶段的主要区别在于更新阶段的 current 树不为空，比如说情况可以是下图这样子的：
 
-![图片14.png](https://s0.lgstatic.com/i/image/M00/72/29/CgqCHl_A2VyAUxeJAAIrypFDLh4388.png)
+<Image alt="图片14.png" src="https://s0.lgstatic.com/i/image/M00/72/29/CgqCHl_A2VyAUxeJAAIrypFDLh4388.png"/>
 
 假如说我的某一次操作，仅仅对 p 节点产生了影响，那么对于渲染器来说，它理应只关注 p 节点这一处的更新。这时候问题就来了：**怎样做才能让渲染器又快又好地定位到那些真正需要更新的节点呢**？
 
@@ -303,7 +303,7 @@ do {
 
 首先我们要知道的是，这个 effectList 链表在 Fiber 节点中是通过 firstEffect 和 lastEffect 来维护的，如下图所示：
 
-![Drawing 10.png](https://s0.lgstatic.com/i/image/M00/72/1C/CgqCHl_AspmALRFDAADaKY8wTqc180.png)
+<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image/M00/72/1C/CgqCHl_AspmALRFDAADaKY8wTqc180.png"/>
 
 其中 firstEffect 表示 effectList 的第一个节点，而 lastEffect 则记录最后一个节点。
 
@@ -338,7 +338,7 @@ if (flags > PerformedWork) {
 
 3. rootFiber 的 firstEffect 和 lastEffect 指针都会指向 App 节点，App 节点由此成为 effectList 中的唯一一个 FiberNode，如下图所示。
 
-![图片15.png](https://s0.lgstatic.com/i/image/M00/72/1E/Ciqc1F_A2W-AVmmRAABDdji0MoI238.png)
+<Image alt="图片15.png" src="https://s0.lgstatic.com/i/image/M00/72/1E/Ciqc1F_A2W-AVmmRAABDdji0MoI238.png"/>
 
 OK，读到这里，相信你已经对 effectList 的创建过程知根知底了。
 
@@ -350,7 +350,7 @@ OK，读到这里，相信你已经对 effectList 的创建过程知根知底了
 
 commit 会在 performSyncWorkOnRoot 中被调用，如下图所示：
 
-![Drawing 12.png](https://s0.lgstatic.com/i/image/M00/72/10/Ciqc1F_AsqiAENXWAAF6r2_37Lc521.png)
+<Image alt="Drawing 12.png" src="https://s0.lgstatic.com/i/image/M00/72/10/Ciqc1F_AsqiAENXWAAF6r2_37Lc521.png"/>
 
 这里的入参 root 并不是 rootFiber，而是 fiberRoot（FiberRootNode）实例。fiberRoot 的 current 节点指向 rootFiber，因此拿到 effectList 对后续的 commit 流程来说不是什么难事。
 

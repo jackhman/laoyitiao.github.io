@@ -12,7 +12,7 @@ HeaderExchangeClient 是 Client 装饰器，主要为其装饰的 Client 添加�
 
 HeaderExchangeClient 实现的是 ExchangeClient 接口，如下图所示，间接实现了 ExchangeChannel 和 Client 接口，ExchangeClient 接口是个空接口，没有定义任何方法。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/5B/D7/Ciqc1F-AF6OAT7YOAAAw9BR-aXg961.png)  
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/5B/D7/Ciqc1F-AF6OAT7YOAAAw9BR-aXg961.png"/>  
 HeaderExchangeClient 继承关系图
 
 HeaderExchangeClient 中有以下两个核心字段。
@@ -51,7 +51,7 @@ private static final HashedWheelTimer IDLE_CHECK_TIMER = new HashedWheelTimer(
 
 对于无法自己发送心跳请求的 Client 实现，HeaderExchangeClient 会为其启动 HeartbeatTimerTask 心跳定时任务，其继承关系如下图所示：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/5B/E3/CgqCHl-AF7eAHJWXAABGVZRbaEE743.png)  
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/5B/E3/CgqCHl-AF7eAHJWXAABGVZRbaEE743.png"/>  
 TimerTask 继承关系图
 
 我们先来看 AbstractTimerTask 这个抽象类，它有三个字段。
@@ -119,7 +119,7 @@ public void close(int timeout) {
 
 下面再来看 HeaderExchangeServer，其继承关系如下图所示，其中 Endpoint、RemotingServer、Resetable 这三个接口我们在前面已经详细介绍过了，这里不再重复。
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/5B/E3/CgqCHl-AF8eAUB8nAACKkTpW9nc845.png)  
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/5B/E3/CgqCHl-AF8eAUB8nAACKkTpW9nc845.png"/>  
 HeaderExchangeServer 的继承关系图
 
 与前面介绍的 HeaderExchangeClient 一样，HeaderExchangeServer 是 RemotingServer 的装饰器，实现自 RemotingServer 接口的大部分方法都委托给了所修饰的 RemotingServer 对象。
@@ -184,7 +184,7 @@ public interface Exchanger {
 
 Dubbo 只为 Exchanger 接口提供了 HeaderExchanger 这一个实现，其中 connect() 方法创建的是 HeaderExchangeClient 对象，bind() 方法创建的是 HeaderExchangeServer 对象，如下图所示：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/5B/E3/CgqCHl-AF9aANkhOAAB5TgtrSDg780.png)  
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/5B/E3/CgqCHl-AF9aANkhOAAB5TgtrSDg780.png"/>  
 HeaderExchanger 门面类
 
 从 HeaderExchanger 的实现可以看到，它会在 Transport 层的 Client 和 Server 实现基础之上，添加前文介绍的 HeaderExchangeClient 和 HeaderExchangeServer 装饰器。同时，为上层实现的 ExchangeHandler 实例添加了 HeaderExchangeHandler 以及 DecodeHandler 两个修饰器：
@@ -209,7 +209,7 @@ public class HeaderExchanger implements Exchanger {
 
 这里重点介绍 Transport 层和 Exchange 层对 Codec2 接口的实现，涉及的类如下图所示：
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image/M00/5B/E3/CgqCHl-AF9-AQVPBAAByBFYPxkE786.png)
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/5B/E3/CgqCHl-AF9-AQVPBAAByBFYPxkE786.png"/>
 
 **AbstractCodec**抽象类并没有实现 Codec2 中定义的接口方法，而是提供了几个给子类用的基础方法，下面简单说明这些方法的功能。
 
@@ -225,7 +225,7 @@ public class HeaderExchanger implements Exchanger {
 
 最后来看**ExchangeCodec**，它在 TelnetCodec 的基础之上，添加了处理协议头的能力。下面是 Dubbo 协议的格式，能够清晰地看出协议中各个数据所占的位数：
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image/M00/5B/E3/CgqCHl-AF-eAdTmiAADznCJnMrw389.png)  
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/5B/E3/CgqCHl-AF-eAdTmiAADznCJnMrw389.png"/>  
 Dubbo 协议格式
 
 结合上图，我们来深入了解一下 Dubbo 协议中各个部分的含义：

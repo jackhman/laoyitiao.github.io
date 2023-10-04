@@ -14,7 +14,7 @@
 
 著名的 Scrum 联盟创始人 Mike Cohn 在 2012 年提出了测试金字塔理论：
 
-![Lark20210113-175325.png](https://s0.lgstatic.com/i/image2/M01/05/4E/CgpVE1_-wzCALcR9AAR8TB-B350408.png)  
+<Image alt="Lark20210113-175325.png" src="https://s0.lgstatic.com/i/image2/M01/05/4E/CgpVE1_-wzCALcR9AAR8TB-B350408.png"/>  
 测试金字塔
 
 如果你写过单元测试，测试金字塔对你来说肯定不陌生，测试可分为单元测试、服务测试和 UI 测试，金字塔越上层测试速度越慢，成本越高，所以你应该写更多的单元测试。
@@ -385,7 +385,7 @@ Ran all test suites.
 
 总的来说，对 Serverless 应用编写单元测试的前提是将业务代码和云服务依赖分离，在设计和编写业务代码时就需要考虑代码是否利于测试，在此基础上，业务代码的单元测试和传统应用单元测试的方法是互通的。但单元测试只是保证系统质量的一部分，你依旧需要编写集成测试，来保证整个系统的质量和稳定性。
 
-![Lark20210113-175329.png](https://s0.lgstatic.com/i/image2/M01/05/4E/CgpVE1_-w06AWX__AAEYrgALpK0776.png)
+<Image alt="Lark20210113-175329.png" src="https://s0.lgstatic.com/i/image2/M01/05/4E/CgpVE1_-w06AWX__AAEYrgALpK0776.png"/>
 
 最后我给你留的作业：亲自实践一下 Serverless 应用的单元测试和集成测试。
 

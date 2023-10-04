@@ -4,7 +4,7 @@
 
 在[《01 \| 事件循环：高性能到底是如何做到的？》](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=694#/detail/pc?id=6783)中我们分析了 Node.js 主线程是单线程的，如果我们使用 node app.js 方式运行，就启动了一个进程，只能在**一个 CPU 中进行运算** ，无法应用服务器的多核 CPU，因此我们需要寻求一些解决方案。你能想到的解决方案肯定是**多进程分发策略** ，即主进程接收所有请求，然后通过一定的**负载均衡策略**分发到不同的 Node.js 子进程中。如图 1 的方案所示：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image6/M01/1D/E0/CioPOWBQKV2ABtnsAAAuF7ZUkEQ818.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M01/1D/E0/CioPOWBQKV2ABtnsAAAuF7ZUkEQ818.png"/>
 
 这一方案有 2 个不同的实现：
 
@@ -258,7 +258,7 @@ $ pm2 list
 
 可以看到如图 2 所示的结果，代表运行成功了。
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image6/M01/1D/E3/Cgp9HWBQKZeAM-MIAAB0_RHaw1E022.png)  
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M01/1D/E3/Cgp9HWBQKZeAM-MIAAB0_RHaw1E022.png"/>  
 图 2 pm2 list 运行结果
 
 PM2 启动时可以带一些配置化参数，具体参数列表你可以参考[官方文档](https://pm2.keymetrics.io/docs/usage/pm2-doc-single-page/)。在开发中我总结出了一套最佳的实践，如以下配置所示：
@@ -304,7 +304,7 @@ $ pm2 start pm2.config.js --env production
 
 首先我们来看下进程创建的方式，整体的流程如图 3 所示。
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image6/M01/1D/E0/CioPOWBQKaWAHrR1AAKhg2CW1Z0319.png)  
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M01/1D/E0/CioPOWBQKaWAHrR1AAKhg2CW1Z0319.png"/>  
 图 3 PM2 源码多进程创建方式
 
 这一方式涉及五个模块文件。
@@ -344,7 +344,7 @@ pm2 start pm2.config.js --env development
 
 *** ** * ** ***
 
-[![Drawing 2.png](https://s0.lgstatic.com/i/image6/M00/12/FA/CioPOWBBrAKAAod-AASyC72ZqWw233.png)](https://shenceyun.lagou.com/t/mka)
+[<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M00/12/FA/CioPOWBBrAKAAod-AASyC72ZqWw233.png"/>](https://shenceyun.lagou.com/t/mka)
 
 **《大前端高薪训练营》**
 

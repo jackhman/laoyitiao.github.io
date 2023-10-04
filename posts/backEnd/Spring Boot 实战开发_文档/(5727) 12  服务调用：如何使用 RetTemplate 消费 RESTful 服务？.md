@@ -74,7 +74,7 @@ public RestTemplate customRestTemplate(){
 
 在远程服务访问上，RestTemplate 内置了一批常用的工具方法，我们可以根据 HTTP 的语义以及 RESTful 的设计原则对这些工具方法进行分类，如下表所示。
 
-![Lark20201225-135202.png](https://s0.lgstatic.com/i/image/M00/8C/1D/CgqCHl_lfhWAWs-DAACna_DO-CA750.png)  
+<Image alt="Lark20201225-135202.png" src="https://s0.lgstatic.com/i/image/M00/8C/1D/CgqCHl_lfhWAWs-DAACna_DO-CA750.png"/>  
 RestTemplate 中的方法分类表
 
 接下来，我们将基于该表对 RestTemplate 中的工具方法进行详细介绍并给出相关示例。不过在此之前，我们想先来讨论一下请求的 URL。

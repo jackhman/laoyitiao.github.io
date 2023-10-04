@@ -18,7 +18,7 @@
 
 为了解决上述问题，**Dubbo 独立出了一个实现集群功能的模块------ dubbo-cluster**。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/6B/E0/Ciqc1F-qN92ADHx8AACiY_cvusQ921.png)  
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/6B/E0/Ciqc1F-qN92ADHx8AACiY_cvusQ921.png"/>  
 dubbo-cluster 结构图
 
 作为 dubbo-cluster 模块分析的第一课时，我们就首先来了解一下 dubbo-cluster 模块的架构以及最核心的 Cluster 接口。
@@ -27,7 +27,7 @@ dubbo-cluster 结构图
 
 dubbo-cluster 模块的主要功能是将多个 Provider 伪装成一个 Provider 供 Consumer 调用，其中涉及集群的容错处理、路由规则的处理以及负载均衡。下图展示了 dubbo-cluster 的核心组件：
 
-![Lark20201110-175555.png](https://s0.lgstatic.com/i/image/M00/6C/18/Ciqc1F-qY-CAQ08VAAFAZaC5kyU044.png)  
+<Image alt="Lark20201110-175555.png" src="https://s0.lgstatic.com/i/image/M00/6C/18/Ciqc1F-qY-CAQ08VAAFAZaC5kyU044.png"/>  
 Cluster 核心接口图
 
 由图我们可以看出，dubbo-cluster 主要包括以下四个核心接口：
@@ -69,7 +69,7 @@ AbstractDirectory 对 list() 方法的实现也比较简单，就是直接委托
 
 **Directory 接口有 RegistryDirectory 和 StaticDirectory 两个具体实现**，如下图所示：
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/6B/E0/Ciqc1F-qN_-AMVHmAAA3C6TAxsA315.png)  
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/6B/E0/Ciqc1F-qN_-AMVHmAAA3C6TAxsA315.png"/>  
 Directory 接口继承关系图
 
 其中，**RegistryDirectory 实现** 中维护的 Invoker 集合会随着注册中心中维护的注册信息**动态** 发生变化，这就依赖了 ZooKeeper 等注册中心的推送能力；**StaticDirectory 实现** 中维护的 Invoker 集合则是**静态**的，在 StaticDirectory 对象创建完成之后，不会再发生变化。
@@ -167,7 +167,7 @@ public void subscribe(URL url) {
 
 我们看到除了作为 NotifyListener 监听器之外，RegistryDirectory 内部还有两个 ConfigurationListener 的内部类（继承关系如下图所示），为了保持连贯，这两个监听器的具体原理我们在后面的课时中会详细介绍，这里先不展开讲述。
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/6B/EC/CgqCHl-qOBmAbzKkAABZPyC5mIA963.png)  
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/6B/EC/CgqCHl-qOBmAbzKkAABZPyC5mIA963.png"/>  
 RegistryDirectory 内部的 ConfigurationListener 实现
 
 通过前面对 Registry 的介绍我们知道，在注册 NotifyListener 的时候，监听的是 providers、configurators 和 routers 三个目录，所以在这三个目录下发生变化的时候，就会触发 RegistryDirectory 的 notify() 方法。

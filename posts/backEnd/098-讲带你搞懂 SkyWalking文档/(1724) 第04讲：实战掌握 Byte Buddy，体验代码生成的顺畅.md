@@ -33,7 +33,7 @@ Byte Buddy 提供了一种非常灵活且强大的领域特定语言，通过编
 
 下表是 Byte Buddy 官网给出的数据，显示了上述代码生成库的基本性能，以纳秒为单位，标准偏差在括号内附加：
 
-![](https://s0.lgstatic.com/i/image3/M01/76/36/Cgq2xl5wS6eAEhhvAABWkAaOdsc174.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/36/Cgq2xl5wS6eAEhhvAABWkAaOdsc174.png"/>
 
 代码生成库需要在"生成快速的代码"与"快速生成代码"之间进行折中。Byte Buddy 折中的考虑是：类型动态创建不是程序中的常见步骤，并不会对长期运行的应用程序产生重大性能影响，但方法调用等操作却在程序中随处可见。所以，Byte Buddy 的主要侧重点在于生成更快速的代码。
 
@@ -152,7 +152,7 @@ System.out.println(dynamicFoo.foo(null));
 ```
 
 这里 method() 方法出现了三次，且每次出现后面都跟着的 intercept() 方法使用的 Implementation 参数都不同。Byte Buddy 会按照栈的方式将后定义 method() 方法在栈顶，先定义的方法在栈底。在匹配方法的时候，按照下图执行出栈流程逐一匹配：  
-![](https://s0.lgstatic.com/i/image3/M01/76/34/CgpOIF5wSpuAZ3eOAAEl5LR7yUY040.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/34/CgpOIF5wSpuAZ3eOAAEl5LR7yUY040.png"/>
 
 所以上例的输出结果是：
 

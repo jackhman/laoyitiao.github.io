@@ -12,7 +12,7 @@ MyBatis 在加载配置文件、创建配置对象的时候，会使用到经典
 
 构造者模式的类图如下所示：
 
-![2021223-18655.png](https://s0.lgstatic.com/i/image6/M01/08/8C/Cgp9HWA01CyAP_FuAAGR6B2VRBg565.png)  
+<Image alt="2021223-18655.png" src="https://s0.lgstatic.com/i/image6/M01/08/8C/Cgp9HWA01CyAP_FuAAGR6B2VRBg565.png"/>  
 构造者模式类图
 
 从图中，我们可以看到构造者模式的四个核心组件。
@@ -37,7 +37,7 @@ MyBatis 在加载配置文件、创建配置对象的时候，会使用到经典
 
 这里**创建的 XMLConfigBuilder 对象的核心功能就是解析 mybatis-config.xml 配置文件**。XMLConfigBuilder 有一部分能力继承自 BaseBuilder 抽象类，具体继承关系如下图所示：
 
-![2021223-1877.png](https://s0.lgstatic.com/i/image6/M01/08/8C/Cgp9HWA01DeAFFn1AAEKQNyimxk937.png)  
+<Image alt="2021223-1877.png" src="https://s0.lgstatic.com/i/image6/M01/08/8C/Cgp9HWA01DeAFFn1AAEKQNyimxk937.png"/>  
 BaseBuilder 继承关系图
 
 BaseBuilder 抽象类扮演了构造者模式中 Builder 接口的角色，下面我们先来看 BaseBuilder 中各个字段的定义。
@@ -281,7 +281,7 @@ private void databaseIdProviderElement(XNode context) throws Exception {
 
 可以看到，解析`<databaseIdProvider>` 标签之后会得到一个 DatabaseIdProvider 对象，其核心方法是 getDatabaseId() 方法，主要是根据前面解析得到的 DataSource 对象来生成 DatabaseId。DatabaseIdProvider 的继承关系如下图所示：
 
-![2021223-1874.png](https://s0.lgstatic.com/i/image6/M01/08/89/CioPOWA01E6AM0S_AAFq9Ci2CSc510.png)  
+<Image alt="2021223-1874.png" src="https://s0.lgstatic.com/i/image6/M01/08/89/CioPOWA01E6AM0S_AAFq9Ci2CSc510.png"/>  
 DatabaseIdProvider 继承关系图
 
 从继承关系图中可以看出，DefaultDatabaseIdProvider 是个空实现，而且已被标记为过时了，所以这里我们就重点来看 VendorDatabaseIdProvider 实现。
@@ -365,7 +365,7 @@ private void mapperElement(XNode parent) throws Exception {
 
 *** ** * ** ***
 
-[![1.png](https://s0.lgstatic.com/i/image/M00/6D/3E/CgqCHl-s60-AC0B_AAhXSgFweBY762.png)](https://shenceyun.lagou.com/t/Mka)
+[<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/6D/3E/CgqCHl-s60-AC0B_AAhXSgFweBY762.png"/>](https://shenceyun.lagou.com/t/Mka)
 
 **《Java 工程师高薪训练营》**
 

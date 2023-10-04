@@ -16,7 +16,7 @@
 
 首先我们来讲一下 ConfigMap 这个对象，它主要用来保存一些非敏感数据，可以用作环境变量、命令行参数或者挂载到存储卷中。
 
-![image (2).png](https://s0.lgstatic.com/i/image/M00/4F/8C/Ciqc1F9gkFGAAFxaAAB80T5b-WU361.png)  
+<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/4F/8C/Ciqc1F9gkFGAAFxaAAB80T5b-WU361.png"/>  
 
 （<https://matthewpalmer.net/kubernetes-app-developer/articles/configmap-diagram.gif>）
 

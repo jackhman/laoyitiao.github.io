@@ -12,7 +12,7 @@ Kubernetes 由 Google 开源，目的是管理公司内部运行的成千上万�
 
 Kubernetes 主要由两类节点组成：**Master 节点** 主要负责管理和控制，是 Kubernetes 的调度中心；**Node 节点**受 Master 节点管理，属于工作节点，负责运行具体的容器应用。整体结构图如下所示：
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image6/M00/2D/C7/Cgp9HWBm9BCAXpFdAADbjd3yt1A943.png)  
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/2D/C7/Cgp9HWBm9BCAXpFdAADbjd3yt1A943.png"/>  
 Kubernetes 结构图
 
 Master 节点主要由以下几部分组成。
@@ -39,13 +39,13 @@ Node 节点的主要组成部分为：
 
 前面我们介绍了 Kubernetes 的基本架构，在 Kubernetes 集群中，etcd 有两种部署方式，一种是 etcd 实例可以**作为 Pod 部署在 Master 节点上**，如下图所示：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image6/M00/2D/C7/Cgp9HWBm9BiALFB3AAKN-4rjhns935.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/2D/C7/Cgp9HWBm9BiALFB3AAKN-4rjhns935.png"/>
 
 etcd 作为 Pod 部署的方式（图片[来源](https://betterprogramming.pub/a-closer-look-at-etcd-the-brain-of-a-kubernetes-cluster-788c8ea759a5?fileGuid=xxQTRXtVcqtHK6j8)）
 
 另一种是将 etcd**部署在集群外部**，用以增加可靠性和安全性，如下图所示：
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image6/M00/2D/D0/CioPOWBm9DqABTi2AAE9o4GAgqY183.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M00/2D/D0/CioPOWBm9DqABTi2AAE9o4GAgqY183.png"/>
 
 etcd 集群单独部署（图片[来源](https://betterprogramming.pub/a-closer-look-at-etcd-the-brain-of-a-kubernetes-cluster-788c8ea759a5?fileGuid=xxQTRXtVcqtHK6j8)）
 
@@ -189,7 +189,7 @@ kubectl delete Deployment user-service
 
 为了更好地理解创建 Pod 的过程，我绘制了下面这张时序图：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image6/M00/2D/C7/Cgp9HWBm9EiACq-OAABI1H01pJ0565.png)  
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M00/2D/C7/Cgp9HWBm9EiACq-OAABI1H01pJ0565.png"/>  
 创建 Pod 的流程图
 
 该时序图展示了创建 Pod 的流程，基本流程描述如下。
@@ -292,6 +292,6 @@ Kubernetes 使用 watch 机制获取数据变化的事件，etcd watch 机制提
 
 本讲内容总结如下：
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image6/M00/2D/C7/Cgp9HWBm9FaARqT2AAFQlIIQ-Gk573.png)
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image6/M00/2D/C7/Cgp9HWBm9FaARqT2AAFQlIIQ-Gk573.png"/>
 
 最后，你觉得还有哪些 etcd 在 Kubernetes 中的独特优势，欢迎在评论区与我分享。这一讲是我们专栏正文的最后一篇了，很高兴你能坚持学习到这里。在结束语中，除了对 etcd 在服务端架构中的展望，我也有一些在专栏写作期间的心得和你分享，希望你能坚持阅读，我们结束语再见。

@@ -12,14 +12,14 @@
 
 那什么是 RPC 呢？RPC 是远程过程调用（Remote Procedure Call）的缩写形式，RPC 与 RESTful 最大的不同是，RPC 采用**客户端（Client) - 服务端（Server）** 的架构方式实现跨进程通信，实现的通信协议也没有统一的标准，具体实现依托于研发厂商的设计。
 
-![图片1.png](https://s0.lgstatic.com/i/image6/M01/1F/21/Cgp9HWBRmtGAJrWGAAS5A1X6ztc358.png)  
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M01/1F/21/Cgp9HWBRmtGAJrWGAAS5A1X6ztc358.png"/>  
 RPC 基于 C/S 架构实现跨进程通信
 
 目前开源市场上 RPC 框架有很多，例如 GoogleRPC、Alibaba Dubbo、Facebook Thrift，每一种产品都有自己的设计与实现方案。
 
 那 RESTful 与 RPC 孰优孰劣呢？我们通过一个表格进行说明：
 
-![图片2.png](https://s0.lgstatic.com/i/image6/M01/1F/22/Cgp9HWBRmt2APWu8AAH9-fU6l5c006.png)
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M01/1F/22/Cgp9HWBRmt2APWu8AAH9-fU6l5c006.png"/>
 
 可以发现，RESTful 通信更适合调用延时不敏感、短连接的场景。而 RPC 则拥有更好的性能，适用于长连接、低延时系统。两者本质是互补的，并不存在孰优孰劣。在微服务架构场景下，因为大多数服务都是轻量级的，同时 90%的任务通过短连接就能实现，因此马丁福勒更推荐使用 RESTful 通信。这只是因为应用场景所决定的，并不代表 RPC 比 RESTful 落后。
 
@@ -33,7 +33,7 @@ Dubbo 是阿里巴巴开源的高性能、轻量级的开源 Java 框架，目�
 http://dubbo.apache.org/
 ```
 
-![图片22.png](https://s0.lgstatic.com/i/image6/M01/1F/22/Cgp9HWBRmuqAa3CBAAIAHzTPLj0715.png)  
+<Image alt="图片22.png" src="https://s0.lgstatic.com/i/image6/M01/1F/22/Cgp9HWBRmuqAa3CBAAIAHzTPLj0715.png"/>  
 Dubbo的官方介绍
 
 Dubbo 是典型的 RPC 框架的代表，通过客户端/服务端结构实现跨进程应用的高效二进制通信。
@@ -52,12 +52,12 @@ Apache Dubbo 提供了六大核心能力：
 
 * 可视化的服务治理与运维。
 
-![图片3.png](https://s0.lgstatic.com/i/image6/M01/1F/1E/CioPOWBRmvaAKTm2AAPyFp0dSf8331.png)  
+<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image6/M01/1F/1E/CioPOWBRmvaAKTm2AAPyFp0dSf8331.png"/>  
 Dubbo主要特性
 
 下图我们引用 Dubbo 的官方架构图，讲解 ApacheDubbo 的组成。
 
-![图片4.png](https://s0.lgstatic.com/i/image6/M00/1F/1F/CioPOWBRmxWANqxoAAIXlEgpEbQ890.png)  
+<Image alt="图片4.png" src="https://s0.lgstatic.com/i/image6/M00/1F/1F/CioPOWBRmxWANqxoAAIXlEgpEbQ890.png"/>  
 Dubbo架构图
 
 Dubbo 架构中，包含 5 种角色。
@@ -78,7 +78,7 @@ Dubbo 架构中，包含 5 种角色。
 
 为了方便理解，我们仍然采用 07 讲"订单与库存服务"案例，改由 RPC 方式实现通信。
 
-![图片5.png](https://s0.lgstatic.com/i/image6/M01/1F/22/Cgp9HWBRmyOAQauOAAGVp6w3uG4991.png)  
+<Image alt="图片5.png" src="https://s0.lgstatic.com/i/image6/M01/1F/22/Cgp9HWBRmyOAQauOAAGVp6w3uG4991.png"/>  
 订单与仓储服务的业务流程
 
 #### 开发 Provider仓储服务
@@ -139,7 +139,7 @@ dubbo: #dubbo与nacos的通信配置
 
 很多人不明白，为什么上面配置了 spring.cloud.nacos.discovery.server-addr 还要在下面配置 dubbo.registry.address 呢？前面介绍架构时介绍了，Dubbo 需要依托 Container（容器）对外暴露服务，而这个容器配置与微服务配置是分开的，需要额外占用一个网络端口20880提供服务。
 
-![图片6.png](https://s0.lgstatic.com/i/image6/M00/1F/22/Cgp9HWBRmziAAd_LAAE40sLBEjo538.png)  
+<Image alt="图片6.png" src="https://s0.lgstatic.com/i/image6/M00/1F/22/Cgp9HWBRmziAAd_LAAE40sLBEjo538.png"/>  
 Dubbo Provider 端启动时向 Nacos 注册两次
 
 这里还有一个配置点需要特别注意：dubbo.scan.base-packages 代表在 Dubbo 容器启动时自动扫描 com.lagou.warehouseservice.dubbo 包下的接口与实现类，并将这些接口信息在Nacos 进行登记，因此 Dubbo 对外暴露的接口必须放在该包下。
@@ -224,14 +224,14 @@ public class WarehouseServiceImpl implements WarehouseService {
 http://192.168.31.101:8848/nacos/#/serviceManagement?dataId=&group=&appName=&namespace=
 ```
 
-![图片7.png](https://s0.lgstatic.com/i/image6/M01/1F/1F/CioPOWBRm0mAKUgNAALNIHodMII419.png)  
+<Image alt="图片7.png" src="https://s0.lgstatic.com/i/image6/M01/1F/1F/CioPOWBRm0mAKUgNAALNIHodMII419.png"/>  
 验证Nacos注册信息
 
 此时在服务列表中出现了 2 条数据，warehouse-service 是仓储微服务的注册信息，providers 开头的是 Dubbo 在 Nacos 的注册 Provider 信息，这也验证了前面介绍 Dubbo 的注册过程。
 
 而查看 Provider详情后，你会得到更多信息，其中包含 Provider 的 IP、端口、接口、方法、pid、版本的明细，方便开发、运维人员对应用进行管理。
 
-![图片8.png](https://s0.lgstatic.com/i/image6/M01/1F/1F/CioPOWBRm1SAKLjbAAGK7S9aIpY685.png)  
+<Image alt="图片8.png" src="https://s0.lgstatic.com/i/image6/M01/1F/1F/CioPOWBRm1SAKLjbAAGK7S9aIpY685.png"/>  
 Provider详情
 
 到这里，仓储服务与 Dubbo Provider 的开发已完成。下面咱们开发Consumer消费者。
@@ -287,7 +287,7 @@ dubbo:
 
 第三步，将 Provider 端接口 WarehouseService 以及依赖的 Stock类复制到 order-service 工程，注意要求包名、类名及代码保持完全一致。当然我这种做法比较原始，在项目环境通常是将接口与依赖的类发布到 Maven 仓库，由 Consumer 直接依赖即可。
 
-![图片9.png](https://s0.lgstatic.com/i/image6/M01/1F/20/CioPOWBRm2KAIpCRAAJoR7cA3Hw642.png)  
+<Image alt="图片9.png" src="https://s0.lgstatic.com/i/image6/M01/1F/20/CioPOWBRm2KAIpCRAAJoR7cA3Hw642.png"/>  
 必须保证 Provider 与 Consumer 接口一致
 
 第四步，Consumer 调用接口实现业务逻辑。
@@ -330,7 +330,7 @@ public class OrderController {
 
 业务逻辑非常简单，前文讲过不再赘述，关键点是第三行 @DubboReference 注解。该注解用在 Consumer 端，说明 WarehouseService 是 Dubbo Consumer 接口，Spring 会自动生成 WarehouseService 接口的代理实现类，并隐藏远程通信细节，处理流程如下图所示：
 
-![图片10 (2).png](https://s0.lgstatic.com/i/image6/M00/1F/21/CioPOWBRm8WAUi4pAAFRuMBBSJc896.png)  
+<Image alt="图片10 (2).png" src="https://s0.lgstatic.com/i/image6/M00/1F/21/CioPOWBRm8WAUi4pAAFRuMBBSJc896.png"/>  
 Dubbo Consumer 处理流程
 
 第五步，启动微服务，验证 Nacos 注册信息。
@@ -341,7 +341,7 @@ Dubbo Consumer 处理流程
 http://192.168.31.101:8848/nacos/#/serviceManagement?dataId=&group=&appName=&namespace=
 ```
 
-![图片11.png](https://s0.lgstatic.com/i/image6/M01/1F/20/CioPOWBRm3uAW-qFAAJ0jHj71gk377.png)  
+<Image alt="图片11.png" src="https://s0.lgstatic.com/i/image6/M01/1F/20/CioPOWBRm3uAW-qFAAJ0jHj71gk377.png"/>  
 DubboConsumer 注册成功
 
 此时 Consumer 已在服务列表中出现，说明消费者已注册成功。

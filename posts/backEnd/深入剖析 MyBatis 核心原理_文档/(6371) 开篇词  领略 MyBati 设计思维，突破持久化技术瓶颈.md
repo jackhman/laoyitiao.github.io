@@ -32,8 +32,8 @@ MyBatis 是 Java 生态中非常著名的一款 ORM 框架，也是我们此次�
 
 那 MyBatis 在很多人都很关心的招聘层面又有怎样的表现呢？下面是国内几家大厂对 Java 开发工作的岗位描述：
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image2/M01/07/C3/CgpVE2AJKUqAKtZTAAQvV9Mx8qY091.png)  
-![Drawing 1.png](https://s0.lgstatic.com/i/image2/M01/07/C2/Cip5yGAJKVKAGbUxAASCteXV8q8281.png)  
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image2/M01/07/C3/CgpVE2AJKUqAKtZTAAQvV9Mx8qY091.png"/>  
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image2/M01/07/C2/Cip5yGAJKVKAGbUxAASCteXV8q8281.png"/>  
 （职位信息来源：拉勾网）
 
 作为一名 Java 工程师，**深入掌握一款持久化框架已经是一项必备技能**，并且成为个人职场竞争力的关键项。拉勾网显示，研发工程师、架构师等高薪岗位，都要求你熟悉并曾经深入使用过某种持久化框架，其中以 MyBatis 居多，"熟悉 MyBatis" 或是"精通 MyBatis" 等字眼更是频繁出现在岗位职责中。
@@ -70,15 +70,15 @@ MyBatis 是 Java 生态中非常著名的一款 ORM 框架，也是我们此次�
 
 除此之外，还有更让人崩溃的是，有的博主或是讲师写了一篇或几篇源码分析之后，就断更了，毕竟坚持做知识输出还是非常困难的，最后你只能这儿看一篇帖子，那儿看一段视频，然后还得靠自己的经验将碎片化的知识点串联起来，如果经验不足的话，可能串联过程中丢失了某些知识点都意识不到。下面这张对比示意图，就很清晰地说明了通过碎片知识点搭建的知识框架会缺失不少东西：
 
-![图片3.png](https://s0.lgstatic.com/i/image/M00/91/60/Ciqc1GAOXe2AJF1DAAKghEVKtaQ718.png)
+<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image/M00/91/60/Ciqc1GAOXe2AJF1DAAKghEVKtaQ718.png"/>
 
 也可能有些同学会结合这些残缺的"武功秘籍"和 MyBatis 源码这个总纲，自己直接去阅读源码，这不仅是一个痛苦的过程，而且很可能会由于对整个架构的"视野"受限，迷失在代码迷宫中。这就需要你本身具备一定的技术功底，而且要对整个开源项目有比较高的熟练度，还要耐得住性子，花费上一些时间，走上一些弯路，才能完全掌握其核心原理。当然也有可能是更糟糕的结果，花了很大力气去阅读源码，关上 IDEA 之后依然"似懂非懂"，然后就放弃了。
 
 除此之外，按照"总纲+残卷"的模式完成了 MyBatis 的源码分析后，你可能还是会缺少下图展示的"架构、方案、模式"这一部分知识，它是在底层原理基础之上的。对于优秀的开发人员来说，不仅要能看到代码细节处的优秀设计，而且还要能站在更高的角度看整体框架的架构之美，这才是分析一个开源框架最重要的两部分收获。
 
-![图片2.png](https://s0.lgstatic.com/i/image2/M01/0A/21/Cip5yGAQ5d2AQ1WlAAHlKhm69Ys260.png)
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image2/M01/0A/21/Cip5yGAQ5d2AQ1WlAAHlKhm69Ys260.png"/>
 
-![2021127-65510.png](https://s0.lgstatic.com/i/image2/M01/0A/31/CgpVE2ARDmOAKOoSAAVhUzE5yeE415.png)
+<Image alt="2021127-65510.png" src="https://s0.lgstatic.com/i/image2/M01/0A/31/CgpVE2ARDmOAKOoSAAVhUzE5yeE415.png"/>
 
 ### 这门课的核心内容是什么
 
@@ -106,7 +106,7 @@ MyBatis 是 Java 生态中非常著名的一款 ORM 框架，也是我们此次�
 
 *** ** * ** ***
 
-[![1.png](https://s0.lgstatic.com/i/image/M00/6D/3E/CgqCHl-s60-AC0B_AAhXSgFweBY762.png)](https://shenceyun.lagou.com/t/Mka)
+[<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/6D/3E/CgqCHl-s60-AC0B_AAhXSgFweBY762.png"/>](https://shenceyun.lagou.com/t/Mka)
 
 **《Java 工程师高薪训练营》**
 

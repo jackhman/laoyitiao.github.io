@@ -16,12 +16,12 @@
 
 * 在服务访问前很难做到统一的前置处理，如服务访问前需要对用户进行鉴权，这就必须将鉴权代码分散到每个服务模块中，随着服务数量增加代码将难以维护。
 
-![图片1.png](https://s0.lgstatic.com/i/image6/M00/23/99/Cgp9HWBXaFSANx-tAAE1dQdYjME754.png)  
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M00/23/99/Cgp9HWBXaFSANx-tAAE1dQdYjME754.png"/>  
 用户端直接访问微服务
 
 为了解决以上问题，API 网关应运而生，加入网关后应用架构变为下图所示。
 
-![微信图片_20210322095840.png](https://s0.lgstatic.com/i/image6/M01/23/ED/CioPOWBX-fWAHNqWAAB1dyZpFjI441.png)  
+<Image alt="微信图片_20210322095840.png" src="https://s0.lgstatic.com/i/image6/M01/23/ED/CioPOWBX-fWAHNqWAAB1dyZpFjI441.png"/>  
 引入 API 网关后的微服务架构
 
 当引入 API 网关后，在用户端与微服务之间建立了一道屏障，通过 API 网关为微服务访问提供了统一的访问入口，所有用户端的请求被 API 网关拦截并在此基础上可以实现额外功能，例如：
@@ -50,7 +50,7 @@ OpenResty 因为性能强大在微服务架构早期深得架构师的喜爱。�
 
 Zuul 是 Netflix 开源的微服务网关，它的主要职责是对用户请求进行路由转发与过滤。早期Spring Cloud 与 Netfilx 合作，使用 Zuul 作为微服务架构的首选网关产品。Zuul 是基于 J2EE Servlet 实现路由转发，网络通信采用同步方式，使用简单部署方便。经过 Spring Cloud 对 Zuul 的封装，Spring Cloud Zuul 应运而生。Spring Cloud Zuul 在原有 Zuul 的基础上，增加对注册中心的支持，同时在基于 Spring Boot Starter 机制基础上，可以在极短的时间内完成 API 网关的开发部署任务。
 
-![图片3.png](https://s0.lgstatic.com/i/image6/M00/23/96/CioPOWBXaHKAXbZsAAOHtjWJwBo401.png)  
+<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image6/M00/23/96/CioPOWBXaHKAXbZsAAOHtjWJwBo401.png"/>  
 Zuul 基于 Servlet 的请求响应处理过程
 
 但好景不长，后来 Netflix 内部产生分歧，Netflix 官方宣布 Zuul 停止维护，这让 Spring 机构也必须转型。于是 Spring Cloud 团队决定开发自己的第二代 API 网关产品：Spring Cloud Gateway。
@@ -83,11 +83,11 @@ Zuul 基于 Servlet 的请求响应处理过程
 
 假设"service-a"微服务提供了三个 RESTful 接口。
 
-![图片4.png](https://s0.lgstatic.com/i/image6/M00/23/99/Cgp9HWBXaICAUVGbAACopAyWXv0370.png)
+<Image alt="图片4.png" src="https://s0.lgstatic.com/i/image6/M00/23/99/Cgp9HWBXaICAUVGbAACopAyWXv0370.png"/>
 
 假设 "service-b" 微服务提供了三个 RESTful 接口。
 
-![图片5.png](https://s0.lgstatic.com/i/image6/M00/23/96/CioPOWBXaI2APUbjAACpocL8xRE677.png)
+<Image alt="图片5.png" src="https://s0.lgstatic.com/i/image6/M00/23/96/CioPOWBXaI2APUbjAACpocL8xRE677.png"/>
 
 如何通过部署 Spring Cloud Gateway 实现 API 路由功能来屏蔽后端细节呢？
 
@@ -156,7 +156,7 @@ http://192.168.31.103:80/service-a/list
 
 访问后 Gateway 按下图流程进行请求路由转发。
 
-![图片6.png](https://s0.lgstatic.com/i/image6/M00/23/99/Cgp9HWBXaViAFTHsAAHX8DX4Vz8328.png)  
+<Image alt="图片6.png" src="https://s0.lgstatic.com/i/image6/M00/23/99/Cgp9HWBXaViAFTHsAAHX8DX4Vz8328.png"/>  
 基于网关自动路由处理流程
 
 咱们来梳理下路由转发流程：
@@ -340,7 +340,7 @@ filters:
 
 下图是 Spring Cloud Gateway 的执行流程。
 
-![图片7.png](https://s0.lgstatic.com/i/image6/M00/23/96/CioPOWBXaLWAYmNDAADePiHh5QM390.png)
+<Image alt="图片7.png" src="https://s0.lgstatic.com/i/image6/M00/23/96/CioPOWBXaLWAYmNDAADePiHh5QM390.png"/>
 
 按执行顺序可以拆解以下几步：
 

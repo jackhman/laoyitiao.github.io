@@ -2,7 +2,7 @@
 
 Dubbo 目前支持 Consul、etcd、Nacos、ZooKeeper、Redis 等多种开源组件作为注册中心，并且在 Dubbo 源码也有相应的接入模块，如下图所示：
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/41/6B/Ciqc1F81FQ2ANt6EAADZ01G_QYM489.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/41/6B/Ciqc1F81FQ2ANt6EAADZ01G_QYM489.png"/>
 
 **Dubbo 官方推荐使用 ZooKeeper 作为注册中心**，它是在实际生产中最常用的注册中心实现，这也是我们本课时要介绍 ZooKeeper 核心原理的原因。
 
@@ -14,7 +14,7 @@ Dubbo 目前支持 Consul、etcd、Nacos、ZooKeeper、Redis 等多种开源组�
 
 ZooKeeper 本身也是一个分布式应用程序，下图展示了 ZooKeeper 集群的核心架构。
 
-![2.png](https://s0.lgstatic.com/i/image/M00/41/D1/CgqCHl82OOeARx1GAAEjvCaXdEE505.png)  
+<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/41/D1/CgqCHl82OOeARx1GAAEjvCaXdEE505.png"/>  
 ZooKeeper 集群的核心架构图
 
 * **Client 节点**：从业务角度来看，这是分布式应用中的一个节点，通过 ZkClient 或是其他 ZooKeeper 客户端与 ZooKeeper 集群中的一个 Server 实例维持长连接，并定时发送心跳。从 ZooKeeper 集群的角度来看，它是 ZooKeeper 集群的一个客户端，可以主动查询或操作 ZooKeeper 集群中的数据，也可以在某些 ZooKeeper 节点（ZNode）上添加监听。当被监听的 ZNode 节点发生变化时，例如，该 ZNode 节点被删除、新增子节点或是其中数据被修改等，ZooKeeper 集群都会立即通过长连接通知 Client。
@@ -27,7 +27,7 @@ ZooKeeper 集群的核心架构图
 
 了解了 ZooKeeper 整体的架构之后，我们再来了解一下 ZooKeeper 集群存储数据的逻辑结构。ZooKeeper 逻辑上是按照**树型结构** 进行数据存储的（如下图），其中的节点称为 **ZNode**。每个 ZNode 有一个名称标识，即树根到该节点的路径（用 "/" 分隔），ZooKeeper 树中的每个节点都可以拥有子节点，这与文件系统的目录树类似。
 
-![1.png](https://s0.lgstatic.com/i/image/M00/41/D1/CgqCHl82OR6AJaDUAAEpNFJyW_0507.png)  
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/41/D1/CgqCHl82OR6AJaDUAAEpNFJyW_0507.png"/>  
 ZooKeeper 树型存储结构
 
 ZNode 节点类型有如下四种：
@@ -42,7 +42,7 @@ ZNode 节点类型有如下四种：
 
 在每个 ZNode 中都维护着一个 stat 结构，记录了该 ZNode 的元数据，其中包括版本号、操作控制列表（ACL）、时间戳和数据长度等信息，如下表所示：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/41/77/CgqCHl81FVuAFUp7AARJWw4cOq4421.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/41/77/CgqCHl81FVuAFUp7AARJWw4cOq4421.png"/>
 
 我们除了可以通过 ZooKeeper Client 对 ZNode 进行增删改查等基本操作，还可以注册 Watcher 监听 ZNode 节点、其中的数据以及子节点的变化。一旦监听到变化，则相应的 Watcher 即被触发，相应的 ZooKeeper Client 会立即得到通知。Watcher 有如下特点：
 
@@ -74,7 +74,7 @@ ZooKeeper 集群中三种角色的节点（Leader、Follower 和 Observer）都�
 
 下图展示了写操作的核心流程：
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image/M00/41/6C/Ciqc1F81FXOAKEC8AAKkiqE6rHY039.png)  
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/41/6C/Ciqc1F81FXOAKEC8AAKkiqE6rHY039.png"/>  
 写操作核心流程图
 
 ### 崩溃恢复

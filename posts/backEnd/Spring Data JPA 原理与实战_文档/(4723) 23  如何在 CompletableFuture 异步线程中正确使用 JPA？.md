@@ -182,7 +182,7 @@ logging.level.org.hibernate.engine.transaction.internal.TransactionImpl=DEBUG
 
 再请求一下刚才的测试接口：POST<http://127.0.0.1:8087/test/async/user?name=jack>就会产生下图所示的日志。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/72/11/Ciqc1F_As0GAa7gmAAQU-sy_Y6s946.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/72/11/Ciqc1F_As0GAa7gmAAQU-sy_Y6s946.png"/>
 
 先看一下上半部分，通过日志我们可以看到，首先执行这个方法的时候开启了两个事务，分别做如下解释。
 
@@ -194,7 +194,7 @@ logging.level.org.hibernate.engine.transaction.internal.TransactionImpl=DEBUG
 
 我们再看一下后半部分的日志，如图所示。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/72/1C/CgqCHl_As2KAPPhLAAVgCANdWbo463.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/72/1C/CgqCHl_As2KAPPhLAAVgCANdWbo463.png"/>
 
 通过后半部分日志，我们可以看到两次 save(user) 方法，也分别开启了各自的事务，这是因为 SimpleJpaRepository.save 方法上面有 @Transaction 注解起了作用，而第二次事务因为 JPA 的实现方法判断了数据库这条数据的 Version 和我们 UserInfo 的对象中的 Version 不一致，从而第二次进行了回滚操作。
 
@@ -259,7 +259,7 @@ public String testSaveUser(String name) {
 
 我们再次发起一下请求，看一下日志。
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/72/1C/CgqCHl_As2uAXKFdAAOga2Jcfio735.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/72/1C/CgqCHl_As2uAXKFdAAOga2Jcfio735.png"/>
 
 通过上图的日志，我们可以知道两个重要信息：
 
@@ -341,7 +341,7 @@ public String testSaveUser(String name) {
 
 什么意思呢？我们可以通过设置 Debug 断点，查看一下对象的内存对象地址是否一样，就可以看得出来。如下图所示，findById 之后和两次 save 之后都是同一个对象。
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/72/11/Ciqc1F_As3uAcvehAAG5ahJbL1Y740.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/72/11/Ciqc1F_As3uAcvehAAG5ahJbL1Y740.png"/>
 
 而如果我们跨 Session 传递实体对象，那么在一个 Session 里面持久态的对象，对于另外一个 Session 来说就是一个Detached（游离态）的对象。
 
@@ -364,7 +364,7 @@ public String testSaveUser(String name) {
 
 我们设置一个断点看一下 user、u2、u3 在不同的 Session 作用域之后，就变成不同的实例了，如下所示。
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image/M00/72/11/Ciqc1F_As4SATk88AAEnxfK1BOo296.png)
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/72/11/Ciqc1F_As4SATk88AAEnxfK1BOo296.png"/>
 
 问题分析完了，那么这些内容带给我们哪些思考呢？
 

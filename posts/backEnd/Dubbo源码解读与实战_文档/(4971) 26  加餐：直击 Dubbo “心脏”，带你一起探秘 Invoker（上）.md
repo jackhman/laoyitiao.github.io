@@ -8,7 +8,7 @@ DubboProtocol.protocolBindingRefer() 方法则会将底层的 ExchangeClient 集
 
 首先，我们来看 AbstractInvoker 这个抽象类，它继承了 Invoker 接口，继承关系如下图所示：
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/61/07/Ciqc1F-Oq-uAdi4nAABRchTw_kQ666.png)  
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/61/07/Ciqc1F-Oq-uAdi4nAABRchTw_kQ666.png"/>  
 AbstractInvoker 继承关系示意图
 
 从图中可以看到，最核心的 DubboInvoker 继承自AbstractInvoker 抽象类，AbstractInvoker 的核心字段有如下几个。
@@ -232,7 +232,7 @@ public static boolean isOneway(URL url, Invocation inv) {
 
 oneway 指的是客户端发送消息后，不需要得到响应。所以，对于那些不关心服务端响应的请求，就比较适合使用 oneway 通信，如下图所示：
 
-![Lark20201023-161312.png](https://s0.lgstatic.com/i/image/M00/62/8F/CgqCHl-SkLWAaPzTAACgt5rmWHg530.png)  
+<Image alt="Lark20201023-161312.png" src="https://s0.lgstatic.com/i/image/M00/62/8F/CgqCHl-SkLWAaPzTAACgt5rmWHg530.png"/>  
 oneway 和 twoway 通信方式对比图
 
 可以看到发送 oneway 请求的方式是send() 方法，而后面发送 twoway 请求的方式是 request() 方法。通过之前的分析我们知道，request() 方法会相应地创建 DefaultFuture 对象以及检测超时的定时任务，而 send() 方法则不会创建这些东西，它是直接将 Invocation 包装成 oneway 类型的 Request 发送出去。

@@ -4,7 +4,7 @@
 
 我们之前已经介绍过了 Repository 的接口，那么现在来看一下这些接口支持的返回结果有哪些，如下图所示：
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/56/1A/Ciqc1F9rCruAArlKAANX2obUD_A764.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/56/1A/Ciqc1F9rCruAArlKAANX2obUD_A764.png"/>
 
 打开 SimpleJpaRepository 直接看它的 Structure 就可以知道，它实现的方法，以及父类接口的方法和返回类型包括：Optional、Iterable、List、Page、Long、Boolean、Entity 对象等，而实际上支持的返回类型还要多一些。
 
@@ -67,7 +67,7 @@ interface ProductRepository implements Repository<Product, Long> {
 
 通过以上例子你就可以做到自定义 Streamable，其原理很简单，就是实现Streamable接口，自己定义自己的实现类即可。我们也可以看下源码 QueryExecutionResultHandler 里面是否有 Streamable 子类的判断，来支持自定义 Streamable，关键源码如下：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/56/1A/Ciqc1F9rCteAD_ysAADP7mUlfak673.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/56/1A/Ciqc1F9rCteAD_ysAADP7mUlfak673.png"/>
 
 通过源码你会发现 Streamable 为什么生效，下面来看看常见的集合类的返回实现。
 
@@ -368,7 +368,7 @@ ListenableFuture<User> findOneByLastname(String lastname);(3)
 
 下面我们在 gradle 里面引用一个Spring Data Common的子模块implementation 'org.springframework.boot:spring-boot-starter-data-mongodb' 来加载依赖，这时候我们打开 Repository 看 Hierarchy 就可以看到，这里多了一个 Mongo 的 Repsitory 的实现，天然地支持着 Reactive 这条线。
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/56/1C/Ciqc1F9rC-uAWLY5AASQJuG5If0280.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/56/1C/Ciqc1F9rC-uAWLY5AASQJuG5If0280.png"/>
 
 相信到这里你能感受到 Spring Data Common 的强大支持，对 Repository 接口的不同实现也有了一定的认识。对于以上讲述的返回结果，你可以自己测试一下加以理解并运用，那么接下来我们进行一个总结。
 
@@ -376,17 +376,17 @@ ListenableFuture<User> findOneByLastname(String lastname);(3)
 
 下面打开 ResultProcessor 类的源码看一下支持的类型有哪些。
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/56/27/CgqCHl9rC7uAOiNSAAGT0qXVLyY891.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/56/27/CgqCHl9rC7uAOiNSAAGT0qXVLyY891.png"/>
 
 从上图可以看出 processResult 的时候分别对 PageQuery、Stream、Reactiv 有了各自的判断，我们 debug 到这里的时候来看一下 convert，进入到类里面。
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image/M00/56/1C/Ciqc1F9rC_-AOhtnAALvuoaT4mw230.png)
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/56/1C/Ciqc1F9rC_-AOhtnAALvuoaT4mw230.png"/>
 
 可以看到 QueryExecutorConverters 里面对 JDK8、Guava、vavr 也做了各种支持，如果你有兴趣可以课后去仔细看看源码。
 
 这里我们先用表格总结一下返回值，下表列出了 Spring Data JPA Query Method 机制支持的方法的返回值类型：
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image/M00/56/1D/Ciqc1F9rDAiARh9tAAQVFWlht1s532.png)
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/56/1D/Ciqc1F9rDAiARh9tAAQVFWlht1s532.png"/>
 
 以上是对返回的类型做的总结，接下来进入本课时的第二部分，来看看工作中最常见的、同一个 Entity 的不同字段的返回形式有哪些。
 
@@ -517,7 +517,7 @@ UserOnlyNameEmailDto(name=jack12, email=123456@126.com)
 
 这里需要注意的是，如果我们去看源码的话，看关键的 PreferredConstructorDiscoverer 类时会发现，UserDTO 里面只能有一个全参数构造方法，如下所示：
 
-![Drawing 6.png](https://s0.lgstatic.com/i/image/M00/56/28/CgqCHl9rDDKAPKAIAASfIaP3unE060.png)
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/56/28/CgqCHl9rDDKAPKAIAASfIaP3unE060.png"/>
 
 如上图所示，Constructor 选择的时候会帮我们做构造参数的选择，如果 DTO 里面有多个构造方法，就会报转化错误的异常，这一点需要注意，异常是这样的：
 
@@ -578,11 +578,11 @@ org.springframework.data.jpa.repository.query.AbstractJpaQuery$TupleConverter$Tu
 
 其中源码是如何实现的，我来说一个类，你可以通过 debug，看一下最终 DTO 和接口转化执行的 query 有什么不同，看下图中老师 debug 显示的 Query 语句的位置：
 
-![Drawing 7.png](https://s0.lgstatic.com/i/image/M00/56/28/CgqCHl9rDD6AWKs9AAE8kGFOxmo130.png)
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/56/28/CgqCHl9rDD6AWKs9AAE8kGFOxmo130.png"/>
 
 图一：是返回 DTO 接口形式的 query 生成的 JPQL。
 
-![Drawing 8.png](https://s0.lgstatic.com/i/image/M00/56/28/CgqCHl9rDEWAdoxmAARwd1XSUzo704.png)
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/56/28/CgqCHl9rDEWAdoxmAARwd1XSUzo704.png"/>
 
 图二：是返回 DTO 类的时候 QueryStructure 生成的 JPQL 语句。
 
@@ -592,7 +592,7 @@ org.springframework.data.jpa.repository.query.AbstractJpaQuery$TupleConverter$Tu
 
 当我们去写userRepositor 的定义方法的时候，IDA 会为我们提供满足 JPA 语法的提示，这也是用 Spring Data JPA 的好处之一，因为这些一旦约定死了（这里是指遵守 JPA 协议），周边的工具会越来越成熟，其中 MyBatis 太灵活了，就会导致周边的工具没办法跟上。创建 defining query method 的时候就会提示，如下图所示：
 
-![Drawing 9.png](https://s0.lgstatic.com/i/image/M00/56/28/CgqCHl9rDE-AYIBqAADX_Pwf0QE948.png)
+<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/56/28/CgqCHl9rDE-AYIBqAADX_Pwf0QE948.png"/>
 
 以上就是返回 DTO 的几种常见的方法了，你在实际应用时，要不断 debug 和仔细体会。当然除了这些外，还有 @Query 注解也是可以做到，下一节会有介绍。
 

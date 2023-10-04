@@ -6,17 +6,17 @@
 
 configuration-api 模块定义了 Configuration 模块的核心功能和扩展框架，位于 server-configuration 模块之中，具体位置如下图所示：
 
-![image.png](https://s0.lgstatic.com/i/image/M00/09/D7/CgqCHl688siAJ017AABzT6xvdZs551.png)
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/09/D7/CgqCHl688siAJ017AABzT6xvdZs551.png"/>
 
 上图可以看到，除了 configuration-api 模块之外，server-configuration 中还有支持各种配置中心的子模块，例如，configuration-zookeeper 依赖 ZooKeeper 管理配置信息，configuration-etcd 依赖 etcd 管理配置信息等。
 
 在默认 application.yml 配置文件中可以看到 Configuration 插件模块的相关配置信息，如下图所示：
 
-![image (1).png](https://s0.lgstatic.com/i/image/M00/09/D7/CgqCHl688tKAUWu8AApG54vhCNQ135.png)
+<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/09/D7/CgqCHl688tKAUWu8AApG54vhCNQ135.png"/>
 
 首先来看 configuration-api 模块，在其 resource 目录下有两个 SPI 配置文件，分别指定 ModuleDefine 实现类和 ModuleProvider 实现类，如下图所示：
 
-![image (2).png](https://s0.lgstatic.com/i/image/M00/09/D7/CgqCHl688tuAWXXyAAIN0mNeddY662.png)
+<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/09/D7/CgqCHl688tuAWXXyAAIN0mNeddY662.png"/>
 
 其中指定的 ModeDefine 实现类为 ConfigurationModule（对应名称为 configuration），通过其 services() 方法可以知道，需要其关联的所有 ModuleProvider 需要提供DynamicConfigurationService 这个 Service 接口的实现：
 
@@ -36,7 +36,7 @@ public interface DynamicConfigurationService extends Service {
 
 根据底层依赖的配置中心不同，DynamicConfigurationService 接口有不同的实现类，如下图所示，其中一个实现是在 NoneConfigurationProvider 中定义的匿名类（该实现为空实现）。
 
-![image (3).png](https://s0.lgstatic.com/i/image/M00/09/D7/CgqCHl688viAJ8OZAABFqb4k60Q765.png)
+<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/09/D7/CgqCHl688viAJ8OZAABFqb4k60Q765.png"/>
 
 NoneConfigurationProvider 是 configuration-api 模块中提供的 ModuleProvider 实现类，也是 configuration-api 模块在 SPI 文件中指定的 ModuleProvider 实现类，其 name() 方法返回的 ModuleProvider 名称为 "none"，其余方法都是空实现。
 
@@ -50,7 +50,7 @@ NoneConfigurationProvider 是 configuration-api 模块中提供的 ModuleProvide
 
 ZooKeeper 本身也是一个分布式应用程序，下图展示了 ZooKeeper 集群的核心架构。
 
-![image (4).png](https://s0.lgstatic.com/i/image/M00/09/D7/CgqCHl688u-AVrZ3AAHsBQjob44191.png)
+<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/09/D7/CgqCHl688u-AVrZ3AAHsBQjob44191.png"/>
 
 * **Client**：分布式应用中的一个节点，通过 ZkClient 或是其他 ZooKeeper 客户端与 ZooKeeper 集群中的一个 Server 实例维持长连接，并定时发送心跳。Client 可以主动查询或操作 ZooKeeper 集群中的数据，也可以在某些 ZooKeeper 节点上添加监听，当被监听的节点发生变化时，会通过长连接通知 Client。
 * **Leader 节点**：负责整个 ZooKeeper 集群的写操作，保证集群内事务处理的顺序性。同时，还要负责整个集群中所有 Follower 节点与 Observer 节点的数据同步。
@@ -59,7 +59,7 @@ ZooKeeper 本身也是一个分布式应用程序，下图展示了 ZooKeeper �
 
 下图展示了 ZooKeeper 树型的存储结构。ZooKeeper 节点称为 ZNode 。每个 ZNode 有一个名称标识，并用 "/" 分隔，这与文件系统的目录树一样。ZooKeeper 树中的每个节点可以拥有子节点。
 
-![image (5).png](https://s0.lgstatic.com/i/image/M00/09/D7/Ciqc1F688wqAJsJtAAHIFtKaGSg850.png)
+<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/09/D7/Ciqc1F688wqAJsJtAAHIFtKaGSg850.png"/>
 
 ZNode 节点类型有如下四种：
 
@@ -70,7 +70,7 @@ ZNode 节点类型有如下四种：
 
 每个 ZNode 都维护着一个 stat 结构，其中记录了该 ZNode 的元数据，其中包括版本号、操作控制列表（ACL）、时间戳和数据长度等信息，如下表所示：
 
-![image (6).png](https://s0.lgstatic.com/i/image/M00/09/D8/Ciqc1F688xKAHcQCAAU-W9Rr--g899.png)
+<Image alt="image (6).png" src="https://s0.lgstatic.com/i/image/M00/09/D8/Ciqc1F688xKAHcQCAAU-W9Rr--g899.png"/>
 
 我们除了可以通过 Client 对 ZNode 进行增删改查等基本操作，还可以注册 Watcher 监听 ZNode 节点中数据的变化，以及其子节点的变化。一旦监听的数据有变化，则相应的 Watcher 即被触发。Watcher 有如下特点。
 
@@ -93,7 +93,7 @@ ZooKeeper 集群中三种角色的节点（Leader、Follower、Observer）都可
 
 下图展示了写操作的核心流程：
 
-![image (7).png](https://s0.lgstatic.com/i/image/M00/09/D8/CgqCHl688x6Ab-hWAAPUPfOGKLE909.png)
+<Image alt="image (7).png" src="https://s0.lgstatic.com/i/image/M00/09/D8/CgqCHl688x6Ab-hWAAPUPfOGKLE909.png"/>
 
 上面写请求处理中，如果发生 Leader 节点宕机，整个 ZooKeeper 集群可能处于如下两种状态：
 
@@ -141,7 +141,7 @@ Apache Curator 是 Apache 基金会提供的一款 ZooKeeper Client，提供了�
 
 下面表展示了 Curator 提供的 jar 包：
 
-![sw.png](https://s0.lgstatic.com/i/image/M00/09/D8/CgqCHl6888eAY4NZAADf6Jd0NXg990.png)
+<Image alt="sw.png" src="https://s0.lgstatic.com/i/image/M00/09/D8/CgqCHl6888eAY4NZAADf6Jd0NXg990.png"/>
 
 在下一课时介绍 configuration-zookeeper 模块实现时，就会使用到 Apache Curator 的相关内容。
 
@@ -151,7 +151,7 @@ Apache Curator 是 Apache 基金会提供的一款 ZooKeeper Client，提供了�
 
 ConfigWatcherRegister 继承了DynamicConfigurationService 接口，如下图所示，依赖 ZooKeeper、Nacos 等配置中心的实现都继承了该抽象类。
 
-![ConfigWatcherRegister.png](https://s0.lgstatic.com/i/image/M00/09/D8/Ciqc1F688y-AT0Y0AAGEZhYxBWc264.png)
+<Image alt="ConfigWatcherRegister.png" src="https://s0.lgstatic.com/i/image/M00/09/D8/Ciqc1F688y-AT0Y0AAGEZhYxBWc264.png"/>
 
 在 ConfigWatcherRegister 实现的 registerConfigChangeWatcher() 方法中，会将 ConfigChangeWatcher 记录到 Register 中。其中，ConfigChangeWatcher 是对配置变更的监听器，在 Register 底层维护了一个 Map， Key 为 ConfigChangeWatcher 的名称，Value 是 ConfigChangeWatcher 监听器本身。例如，在 SkyWalking 统计慢查询的时候，根据存储类型从 DBLatencyThresholdsAndWatcher 处获取相应的慢查询阈值，这里的 DBLatencyThresholdsAndWatcher 就继承了 ConfigChangeWatcher，在配置发生变更时，会通知 DBLatencyThresholdsAndWatcher 更新其自身的缓存。
 
@@ -173,7 +173,7 @@ public void prepare(){
 
 AbstractConfigurationProvider 的子类如下图所示：
 
-![AbstractConfigurationProvider继承关系.png](https://s0.lgstatic.com/i/image/M00/09/D8/Ciqc1F688zqAE5J_AAGK-TTe0o8616.png)
+<Image alt="AbstractConfigurationProvider继承关系.png" src="https://s0.lgstatic.com/i/image/M00/09/D8/Ciqc1F688zqAE5J_AAGK-TTe0o8616.png"/>
 
 这里我们关注一下 ZookeeperConfigurationProvider，该实现类位于configuration-zookeeper 模块，该模块的 SPI 文件中定义的 ModuleProvider 实现类也是 ZookeeperConfigurationProvider，在其实现的 initConfigReader() 方法中使用的是 ZookeeperConfigWatcherRegister。
 

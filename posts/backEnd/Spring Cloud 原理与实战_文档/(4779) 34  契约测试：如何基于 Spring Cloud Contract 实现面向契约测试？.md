@@ -5,7 +5,7 @@
 在引入 Spring Cloud Contract 之前，我们需要先明确在测试领域中另一个非常重要的概念，即 Stub，也就是打桩。Stub 与 Mock 经常被混淆，因为他们都可以用来替代真实的依赖对象，从而实现对测试对象的隔离效果。然而，Stub 和 Mock 的区别也非常明显，从类的实现方式上看，Stub 必须有一个显式的类实现，这个实现类需要提供被替代对象的所有逻辑，即使是不需要关注的方法也至少要给出空实现。而 Mock 则不同，它只需要实现自己感兴趣的方法即可，这点在上一课时中已经得到了体现。
 
 回到 SpringHealth 案例系统，我们来看基于 Stub 的测试场景，如下图所示：  
-![图片1.png](https://s0.lgstatic.com/i/image2/M01/05/5A/Cip5yF__uIuAbLcFAAHK4CP0YMY943.png)  
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image2/M01/05/5A/Cip5yF__uIuAbLcFAAHK4CP0YMY943.png"/>  
 基于 Stub 的 SpringHealth 案例系统测试场景
 
 <br />
@@ -40,7 +40,7 @@
 
 基于 Spring Cloud Contract 实现面向契约测试的开发流程比较特殊，也有一定的复杂性，在具体编写案例代码之前，我们有必要先对这个流程做一个梳理，如下所示：
 
-![图片2.png](https://s0.lgstatic.com/i/image2/M01/05/5C/CgpVE1__uKyACLiNAAJkLYEm61s912.png)  
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image2/M01/05/5C/CgpVE1__uKyACLiNAAJkLYEm61s912.png"/>  
 基于 Spring Cloud Contract 实现面向契约测试的开发流程
 
 针对上图，我们先站在服务提供者的角度来看这个流程。显然，服务提供者需要编写契约文件。请注意，Spring Cloud Contract 中的契约文件并不是一个普通的 Java 文件，而是一个支持动态语言的 groovy 文件。有了契约文件之后，基于 Spring Cloud Contract 内置的 Stub 处理机制，我们自动生成一个 Stub 文件，而这个 Stub 文件实际上就是一个 jar 包。然后，我们需要把这个 Stub 文件上传到 Maven 仓库，供服务的消费者进行使用。显然，这里的 Maven 仓库一般指的是我们自己搭建的 nexus 私服。

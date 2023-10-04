@@ -158,7 +158,7 @@ function webpackBundle({ modules, entry }) {
 
 我们通过下图来总结一下 Webpack 风格的打包器原理和流程：
 
-![Lark20210125-174549.png](https://s0.lgstatic.com/i/image/M00/91/75/Ciqc1GAOlIOAYZLfAAFmQUf14uQ501.png)  
+<Image alt="Lark20210125-174549.png" src="https://s0.lgstatic.com/i/image/M00/91/75/Ciqc1GAOlIOAYZLfAAFmQUf14uQ501.png"/>  
 Webpack 打包器原理和流程图
 
 讲到这里，我们再扩充一下另一个打包器------Rollup 的打包原理，针对上述代码，Rollup 打包过后的产出为：
@@ -409,6 +409,6 @@ return `${module.id}: {
 
 主要内容总结为下图：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image2/M01/09/65/Cip5yGAOlKiAA3uyAAG87LhMy8s651.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image2/M01/09/65/Cip5yGAOlKiAA3uyAAG87LhMy8s651.png"/>
 
 在实际生产环节，打包器当然功能更多，比如需要考虑：code spliting 甚至 watch mode 以及 reloading 能力等。但是不管什么样的特性和能力，只要我们理清最初心，掌握最基本的思想，任何疑问都会迎刃而解。

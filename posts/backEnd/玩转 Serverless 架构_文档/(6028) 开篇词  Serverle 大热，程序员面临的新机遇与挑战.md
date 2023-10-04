@@ -30,7 +30,7 @@ Serverless 说白了，就是一种不用关心服务器的架构思想，开发
 
 我作为面试官也认为：如果一个开发者会 Serverless，那说明他很关注前沿技术，未来可以以更高效率、更低成本的方式为公司完成业务创造价值，从而给公司带来产品和技术上的领先。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/8B/F0/Ciqc1F_i-PWAfISFAAPrRZz2hM0607.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/8B/F0/Ciqc1F_i-PWAfISFAAPrRZz2hM0607.png"/>
 
 ### 学习 Serverless 所面临的挑战
 
@@ -58,7 +58,7 @@ Serverless 说白了，就是一种不用关心服务器的架构思想，开发
 
 为了让你更全面地了解 Serverless，我还特地为你画了一张学习路径图：
 
-![Lark20201230-111838.png](https://s0.lgstatic.com/i/image/M00/8C/5B/Ciqc1F_r8Z6APJcVAA2iRurEGFE180.png)
+<Image alt="Lark20201230-111838.png" src="https://s0.lgstatic.com/i/image/M00/8C/5B/Ciqc1F_r8Z6APJcVAA2iRurEGFE180.png"/>
 
 ### 讲师寄语
 

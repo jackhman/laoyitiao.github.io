@@ -4,7 +4,7 @@
 
 <br />
 
-![](https://s0.lgstatic.com/i/image/M00/2E/83/Ciqc1F8FW9WAFA1JAAoB4R90bZs335.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image/M00/2E/83/Ciqc1F8FW9WAFA1JAAoB4R90bZs335.png"/>
 
 ### 为什么你必须精通一款 APM
 
@@ -24,9 +24,9 @@
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/6E/32/Cgq2xl5fIh6AUZZiAADydqJDBfY359.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6E/32/Cgq2xl5fIh6AUZZiAADydqJDBfY359.png"/>
 
-### ![](https://s0.lgstatic.com/i/image3/M01/6E/32/CgpOIF5fIh6ALuHjAADVPXfGBfI652.png)
+### <Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6E/32/CgpOIF5fIh6ALuHjAADVPXfGBfI652.png"/>
 APM 那么多，学哪个呢？
 
 答案当然是：企业用哪个就学哪个！那么，企业用哪个呢？

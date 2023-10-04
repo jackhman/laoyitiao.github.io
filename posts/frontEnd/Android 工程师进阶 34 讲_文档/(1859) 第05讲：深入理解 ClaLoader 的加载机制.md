@@ -36,7 +36,7 @@ JVM 中自带 3 个类加载器：
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/0B/07/Ciqah16MQCaAf-h3AAFnyY9SYn4768.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/07/Ciqah16MQCaAf-h3AAFnyY9SYn4768.png"/>
 
 <br />
 
@@ -48,7 +48,7 @@ JVM 中自带 3 个类加载器：
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/0B/07/Ciqah16MQCaAGUjRAAIMUAR7Y3c186.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/07/Ciqah16MQCaAGUjRAAIMUAR7Y3c186.png"/>
 
 <br />
 
@@ -56,7 +56,7 @@ JVM 中自带 3 个类加载器：
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/84/1D/Cgq2xl6MQCaAY_dYAAAprdcpTC0589.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/84/1D/Cgq2xl6MQCaAY_dYAAAprdcpTC0589.png"/>
 
 <br />
 
@@ -64,7 +64,7 @@ JVM 中自带 3 个类加载器：
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/0B/07/Ciqah16MQCaAPNV4AAAvayS6X4o835.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/07/Ciqah16MQCaAPNV4AAAvayS6X4o835.png"/>
 
 ### BootstrapClassLoader 启动类加载器
 
@@ -80,7 +80,7 @@ BootstrapClassLoader 加载系统属性"sun.boot.class.path"配置下类文件�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/84/1D/Cgq2xl6MQCaAONHUAAAsZT0sIBc274.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/84/1D/Cgq2xl6MQCaAONHUAAAsZT0sIBc274.png"/>
 
 <br />
 
@@ -88,7 +88,7 @@ BootstrapClassLoader 加载系统属性"sun.boot.class.path"配置下类文件�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/0B/07/Ciqah16MQCeAMOlRAAGJMpJkA5I246.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/07/Ciqah16MQCeAMOlRAAGJMpJkA5I246.png"/>
 
 <br />
 
@@ -109,7 +109,7 @@ BootstrapClassLoader 加载系统属性"sun.boot.class.path"配置下类文件�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/84/1D/Cgq2xl6MQCeAQezSAAQYyFDklrg999.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/84/1D/Cgq2xl6MQCeAQezSAAQYyFDklrg999.png"/>
 
 <br />
 
@@ -129,7 +129,7 @@ BootstrapClassLoader 加载系统属性"sun.boot.class.path"配置下类文件�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/84/1D/Cgq2xl6MQCeAWh1-AAA_Lzb-zhw301.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/84/1D/Cgq2xl6MQCeAWh1-AAA_Lzb-zhw301.png"/>
 
 <br />
 
@@ -163,7 +163,7 @@ Test test = new Test();
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/84/1D/Cgq2xl6MQCeAW8daAADQVXAv0pE448.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/84/1D/Cgq2xl6MQCeAW8daAADQVXAv0pE448.png"/>
 
 <br />
 
@@ -171,7 +171,7 @@ Test test = new Test();
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/0B/07/Ciqah16MQCeAE1DdAABZjeS7yN0189.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/07/Ciqah16MQCeAE1DdAABZjeS7yN0189.png"/>
 
 <br />
 
@@ -195,7 +195,7 @@ JVM 中预置的 3 种 ClassLoader 只能加载特定目录下的 .class 文件�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/84/1D/Cgq2xl6MQCeABoqPAACWzrHjS54889.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/84/1D/Cgq2xl6MQCeABoqPAACWzrHjS54889.png"/>
 
 ### 自定义 ClassLoader 实践
 
@@ -203,7 +203,7 @@ JVM 中预置的 3 种 ClassLoader 只能加载特定目录下的 .class 文件�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/0B/07/Ciqah16MQCeAY0-WAABCcqmFmiI938.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/07/Ciqah16MQCeAY0-WAABCcqmFmiI938.png"/>
 
 <br />
 
@@ -211,7 +211,7 @@ JVM 中预置的 3 种 ClassLoader 只能加载特定目录下的 .class 文件�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/84/1D/Cgq2xl6MQCeAbiOCAAAqAZH35mE333.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/84/1D/Cgq2xl6MQCeAbiOCAAAqAZH35mE333.png"/>
 
 <br />
 
@@ -219,7 +219,7 @@ JVM 中预置的 3 种 ClassLoader 只能加载特定目录下的 .class 文件�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/0B/07/Ciqah16MQCiAEqSMAAILClnPGbQ559.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/07/Ciqah16MQCiAEqSMAAILClnPGbQ559.png"/>
 
 <br />
 
@@ -227,7 +227,7 @@ JVM 中预置的 3 种 ClassLoader 只能加载特定目录下的 .class 文件�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/84/1D/Cgq2xl6MQCiAcRZvAALz_thptwU623.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/84/1D/Cgq2xl6MQCiAcRZvAALz_thptwU623.png"/>
 
 <br />
 
@@ -243,7 +243,7 @@ JVM 中预置的 3 种 ClassLoader 只能加载特定目录下的 .class 文件�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/0B/07/Ciqah16MQCiAIP_eAAAdfd_DpwM913.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/07/Ciqah16MQCiAIP_eAAAdfd_DpwM913.png"/>
 > **注意** ：上述动态加载 .class 文件的思路，经常被用作热修复和插件化开发的框架中，包括 QQ 空间热修复方案、微信 Tink 等原理都是由此而来。客户端只要从服务端下载一个加密的 .class 文件，然后在本地通过事先定义好的加密方式进行解密，最后再使用自定义 ClassLoader 动态加载解密后的 .class 文件，并动态调用相应的方法。
 
 Android 中的 ClassLoader
@@ -261,7 +261,7 @@ PathClassLoader 用来加载系统 apk 和被安装到手机中的 apk 内的 de
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/84/1D/Cgq2xl6MQCiAV6lJAACs0LXqQVg644.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/84/1D/Cgq2xl6MQCiAV6lJAACs0LXqQVg644.png"/>
 
 <br />
 
@@ -279,7 +279,7 @@ PathClassLoader 里面除了这 2 个构造方法以外就没有其他的代码�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/0B/07/Ciqah16MQCiASPYPAADN5OpH1GE240.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/07/Ciqah16MQCiASPYPAADN5OpH1GE240.png"/>
 
 <br />
 
@@ -287,7 +287,7 @@ PathClassLoader 里面除了这 2 个构造方法以外就没有其他的代码�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/84/1D/Cgq2xl6MQCiAI6J_AABwUllm8lQ019.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/84/1D/Cgq2xl6MQCiAI6J_AABwUllm8lQ019.png"/>
 
 ### DexClassLoader
 
@@ -303,7 +303,7 @@ DexClassLoader 的源码里面只有一个构造方法，代码如下：
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/0B/07/Ciqah16MQCiAP86KAABzADT7Fyw585.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/07/Ciqah16MQCiAP86KAABzADT7Fyw585.png"/>
 
 <br />
 
@@ -324,7 +324,7 @@ DexClassLoader 的源码里面只有一个构造方法，代码如下：
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/84/1D/Cgq2xl6MQCmAAYQwAABXjFvkmNA900.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/84/1D/Cgq2xl6MQCmAAYQwAABXjFvkmNA900.png"/>
 
 <br />
 
@@ -332,7 +332,7 @@ ISay.java 是一个接口，内部只定义了一个方法 saySomething。
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/0B/07/Ciqah16MQCmARry8AAAnNYtVKYY963.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/07/Ciqah16MQCmARry8AAAnNYtVKYY963.png"/>
 
 <br />
 
@@ -340,7 +340,7 @@ SayException.java 实现了 ISay 接口，但是在 saySomething 方法中，打
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/84/1D/Cgq2xl6MQCmAaT9iAABbAZmk7t4425.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/84/1D/Cgq2xl6MQCmAaT9iAABbAZmk7t4425.png"/>
 
 <br />
 
@@ -348,7 +348,7 @@ SayException.java 实现了 ISay 接口，但是在 saySomething 方法中，打
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/0B/07/Ciqah16MQCmAAJAfAAGne-5xMvU261.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/07/Ciqah16MQCmAAJAfAAGne-5xMvU261.png"/>
 
 <br />
 
@@ -356,7 +356,7 @@ SayException.java 实现了 ISay 接口，但是在 saySomething 方法中，打
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/84/1D/Cgq2xl6MQCmASNkxAABX65sn8h4261.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/84/1D/Cgq2xl6MQCmASNkxAABX65sn8h4261.png"/>
 
 ### 创建 HotFix patch 包
 
@@ -364,11 +364,11 @@ SayException.java 实现了 ISay 接口，但是在 saySomething 方法中，打
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/0B/07/Ciqah16MQCmAV6ogAABQ-CUJLqk288.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/07/Ciqah16MQCmAV6ogAABQ-CUJLqk288.png"/>
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/84/1D/Cgq2xl6MQCmAbfLLAACCTcF2Vrg097.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/84/1D/Cgq2xl6MQCmAbfLLAACCTcF2Vrg097.png"/>
 
 <br />
 
@@ -400,7 +400,7 @@ ISay 接口的包名和类名必须和 Android 项目中保持一致。SayHotFix
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/0B/07/Ciqah16MQCqAIwZuAAXDP0LfIXU972.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/07/Ciqah16MQCqAIwZuAAXDP0LfIXU972.png"/>
 
 <br />
 
@@ -412,7 +412,7 @@ ISay 接口的包名和类名必须和 Android 项目中保持一致。SayHotFix
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/84/1D/Cgq2xl6MQCqAShVqAABP_H12Tes976.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/84/1D/Cgq2xl6MQCqAShVqAABP_H12Tes976.png"/>
 
 总结
 ===

@@ -6,7 +6,7 @@
 
 而云计算之所以可以这么快地发展起来，主要原因还是可以为企业带来便利，同时又能降低成本，国内的各大传统型企业的基础设施纷纷向云计算转型，从阿里云、腾讯云每年的发展规模我们就可以看出来云计算市场对人才的需求有多大。
 
-![Lark20200824-143701.png](https://s0.lgstatic.com/i/image/M00/45/BC/CgqCHl9DYEuADAreAADTZgwHR7E773.png)
+<Image alt="Lark20200824-143701.png" src="https://s0.lgstatic.com/i/image/M00/45/BC/CgqCHl9DYEuADAreAADTZgwHR7E773.png"/>
 
 这里，我们可以将经典的云计算架构分为三大服务层：也就是 IaaS（Infrastructure as a Service，基础设施即服务）、PaaS（Platform as a Service，平台即服务）和 SaaS（Software as a Service，软件即服务）。
 
@@ -16,21 +16,21 @@
 
 * SaaS 层直接为开发者提供软件服务，将软件的开发、管理、部署等全部都交给第三方，用户不需要再关心技术问题，可以拿来即用。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/45/BD/CgqCHl9DYFeAW4ZYAAF1UiD0s0A670.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/45/BD/CgqCHl9DYFeAW4ZYAAF1UiD0s0A670.png"/>
 
 （图片引自<https://www.aalpha.net/blog/the-difference-between-paas-iaas-and-saas/>）
 
 这样解释起来可能会有点抽象，我们可以想象自己要去一个地方旅行，那么首先就需要解决住的问题，而 IaaS 服务就相当于直接在当地购买了一套商品房，像搭建系统、维护运行环境这种"装修"的事情就必须由我们自己来，但优点是"装修风格"可以自己定。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/45/B1/Ciqc1F9DYGiAV-pgAAcUl1vxuA4620.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/45/B1/Ciqc1F9DYGiAV-pgAAcUl1vxuA4620.png"/>
 
 PaaS 则要简单一点，我们到了一个陌生的城市，可以选择住民宿或青旅，这样就不需要考虑装修和买家具的事情了，系统和环境都是现成的，我们只需要安装自己的运行程序就可以了。
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image/M00/45/B1/Ciqc1F9DYHOAdfWeAAcj5M-SolM624.png)
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/45/B1/Ciqc1F9DYHOAdfWeAAcj5M-SolM624.png"/>
 
 而 SaaS 就更简单了，相当于直接住酒店，一切需求都由供应商搞定了，我们只需要选择自己喜欢的房间风格和户型就可以了，这时从操作系统到运行的具体软件都不再需要我们自己操心了。
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image/M00/45/B1/Ciqc1F9DYH-AHwidAAxW6hYIBhw502.png)
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/45/B1/Ciqc1F9DYH-AHwidAAxW6hYIBhw502.png"/>
 
 上面，我们了解了云计算的概念，既然上云可以给我们带来这么多的便利，那么我们该如何让系统上云呢？
 
@@ -64,7 +64,7 @@ Docker 镜像解决了环境打包的问题，它直接打包了应用运行所�
 
 有了 Docker，开发人员可以轻松地将其生产环境复制为可立即运行的容器应用程序，让工作更有效率。越来越多的机构在容器中运行着生产业务，而且这一使用比例也越来越高。我们来看看CNCF （Cloud Native Computing Foundation，云计算基金会）在2019年做的[调研报告](https://www.cncf.io/wp-content/uploads/2020/03/CNCF_Survey_Report.pdf)。
 
-![Drawing 6.png](https://s0.lgstatic.com/i/image/M00/45/BD/CgqCHl9DYJiAYUrzAAHq834oYlA699.png)
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/45/BD/CgqCHl9DYJiAYUrzAAHq834oYlA699.png"/>
 
 容器使用数量低于249 个的比例自2018年开始下降了 26%，而使用容器数目高于 250 个的比例增加了 28%。可以预见的是，未来企业应用容器化会越来越常见，使用容器进行交付、生产、部署是大势所趋，也是企业进行技术改造，业务快速升级的利器。
 
@@ -74,14 +74,14 @@ Docker 镜像解决了环境打包的问题，它直接打包了应用运行所�
 
 接下来，我们来看看一个容器编排引擎到底需要哪些能力才能解决上述这些棘手的问题。
 
-![Drawing 7.png](https://s0.lgstatic.com/i/image/M00/45/B1/Ciqc1F9DYKWAW3w_AACD_6ySCwY186.png)  
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/45/B1/Ciqc1F9DYKWAW3w_AACD_6ySCwY186.png"/>  
 一个容器调度系统到底需要什么
 
 如表所示，首先容器调度平台可以自动生成容器实例，然后是生成的容器可以相邻或者相隔，帮助提高可用性和性能，还有健康检查、容错、可扩展、网络等功能，它几乎完美地解决了需求与资源的匹配编排问题。
 
 既然容器调度平台功能这样强大，市场竞争必定是风云逐鹿的，其实主流的容器管理调度平台有三个，分别是Docker Swarm、Mesos Marathon和Kubernetes，它们有各自的特点。但是同时满足上面所述的八大能力的容器调度平台，其实非 Kubernetes 莫属了。
 
-![Drawing 8.png](https://s0.lgstatic.com/i/image/M00/45/BD/CgqCHl9DYMeAJMZBAALljjjSsQ8305.png)
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/45/BD/CgqCHl9DYMeAJMZBAALljjjSsQ8305.png"/>
 
 Swarm 是 Docker 公司自己的产品，会直接调度 Docker 容器，并且使用标准的 Docker API 语义，为用户提供无缝衔接的使用体验。 Swarm 更多的是面向于开发者，而且对容错性支持不够好。
 
@@ -93,13 +93,13 @@ Kubernetes 的目标就是消除编排物理或者虚拟计算、网络和存储
 
 根据 StackRox 的统计数据表明，Kubernetes 在容器调度领域占据了 86% 的市场份额，虽说Kubernetes 的部署方式千差万别。以前绝大多数人都是采用自建的方式来管理 Kubernetes 集群的，现在已经逐渐采用公有云的 Kubernetes 服务。可见，Kubernetes 越来越成熟，也越来越受到市场的青睐。
 
-![Drawing 9.png](https://s0.lgstatic.com/i/image/M00/45/B2/Ciqc1F9DYNiARjZ5AAMhoyp7brI603.png)  
+<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/45/B2/Ciqc1F9DYNiARjZ5AAMhoyp7brI603.png"/>  
 
 （<https://www.stackrox.com/kubernetes-adoption-and-security-trends-and-market-share-for-containers/>）
 
 依据 Google Trends 收集的数据，自 Kubernetes出现以后，便呈黑马态势一路开挂，迅速并牢牢占据头把交椅位置，最终成为容器调度的事实标准。
 
-![Drawing 10.png](https://s0.lgstatic.com/i/image/M00/45/B2/Ciqc1F9DYOGAH5IcAAF8ZEwwV5s160.png)
+<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image/M00/45/B2/Ciqc1F9DYOGAH5IcAAF8ZEwwV5s160.png"/>
 
 ### Kubernetes 成为事实标准
 
@@ -109,7 +109,7 @@ Kubernetes 的目标就是消除编排物理或者虚拟计算、网络和存储
 
 经过 6 年的时间，Kubernetes 成为云厂商的"宠儿"，而且国内的诸多大厂已经在生产环境中大规模使用 Kubernetes，用于运行自己的核心业务系统，无数中小企业也都在进行业务容器化探索以及云原生化改造，比如阿里的蚂蚁金服已经有线上业务在使用了。
 
-![Drawing 11.png](https://s0.lgstatic.com/i/image/M00/45/B2/Ciqc1F9DYQOAIffnAAnOzS-nfj0022.png)  
+<Image alt="Drawing 11.png" src="https://s0.lgstatic.com/i/image/M00/45/B2/Ciqc1F9DYQOAIffnAAnOzS-nfj0022.png"/>  
 各大云厂商对Kubernetes的支持力度
 
 <br />

@@ -14,7 +14,7 @@
 
 Tomcat 的核心架构如下图所示，最顶层的 Server 代表整个 Tomcat 服务器，它可以包含多个 Service：
 
-![1.png](https://s0.lgstatic.com/i/image3/M01/0A/5A/CgoCgV6nzhOAav2wAAJz0wrnIb8899.png)
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image3/M01/0A/5A/CgoCgV6nzhOAav2wAAJz0wrnIb8899.png"/>
 
 每个 Service 都会包含两个部分：Connector 和 Container，其中 Connector 用于处理连接相关的事情，并提供 Socket 与 Request 和 Response 相关的转化。Container 用于封装和管理Servlet，以及具体处理 Request 请求的业务。
 
@@ -31,17 +31,17 @@ Container 是容器的父接口，所有子容器都必须实现这个接口。T
 
 下面这张图大致展示了从 Connector 开始接收请求，经过 Engine、Host、Context、Wrapper，最终到 Servlet 的流程，这里需要关注的是拿到 Request 请求对象之后的处理：
 
-![2.png](https://s0.lgstatic.com/i/image3/M01/0A/5B/CgoCgV6nzlmAEVwIAAL7sBPspMA637.png)
+<Image alt="2.png" src="https://s0.lgstatic.com/i/image3/M01/0A/5B/CgoCgV6nzlmAEVwIAAL7sBPspMA637.png"/>
 
 Container 中真正处理请求的是 Valve，一组 Valve 组成一个 Pipeline，这是典型的责任链模式。责任链模式是指在一个请求处理的过程中会有很多处理器依次对请求进行处理，每个处理器只负责处理自己相应的部分，当对应的部分被处理完成之后，会将请求交给下一个处理器继续处理，直至请求完全处理完成。
 
 以现实生活中汽车组装为例，整个责任链就像是汽车的生产线，责任链上的每个处理器则对应每个组装车间，每个组装车间只组装汽车的一部分，如下图所示：
 
-![3.png](https://s0.lgstatic.com/i/image3/M01/0A/5B/CgoCgV6nzmmAcpAbAACdLrM19_c471.png)
+<Image alt="3.png" src="https://s0.lgstatic.com/i/image3/M01/0A/5B/CgoCgV6nzmmAcpAbAACdLrM19_c471.png"/>
 
 在每个 Container 的 Pipeline 中，我们可以增加任意多个 Valve，处理请求的 Tomcat 线程会依次执行这些 Valve，并最终完成请求的处理。在上图中我们可以看到，每个 Pipeline 都有一个特定的 Valve（即图中的 StandEngineValve、StandHostValve、StandContextValve、StandWrapperValve），而且这些 Valve 是在 Pipeline 中最后一个执行，这种 Valve 叫作BaseValve。我们可以在 Tomcat 的 server.xml 文件中自定义 Pipeline 中的 Valve，但上述四个 BaseValve 是不可删除的。这些 BaseValve 会负责调用子容器的 Pipeline，将请求传给子容器，以保证处理逻辑能继续向下执行。Valve 接口与四个标准 Valve 实现的继承关系如下图所示：
 
-![4.png](https://s0.lgstatic.com/i/image3/M01/17/89/Ciqah16nznSAYGnWAAETh59IW7M573.png)
+<Image alt="4.png" src="https://s0.lgstatic.com/i/image3/M01/17/89/Ciqah16nznSAYGnWAAETh59IW7M573.png"/>
 
 ### tomcat-7.x-8.x-plugin 插件
 
@@ -74,7 +74,7 @@ public final void invoke(Request request, Response response){
 
 tomcat-7.x-8.x-plugin 插件在 SkyWalking 项目中的位置如下图所示：
 
-![5.png](https://s0.lgstatic.com/i/image3/M01/17/8A/Ciqah16nzs-AaQEyAANfduRtXP8265.png)
+<Image alt="5.png" src="https://s0.lgstatic.com/i/image3/M01/17/8A/Ciqah16nzs-AaQEyAANfduRtXP8265.png"/>
 
 在前文介绍 SkyWalking Agent 启动流程时提到，SkyWalking Agent 启动时会扫描 agent 目录下的全部插件 jar 包，并根据每个插件 jar 包中的 skywalking-plugin.def 配置文件加载指定的 AbstractClassEnhancePluginDefine 实现。tomcat-7.x-8.x-plugin 插件的 skywalking-plugin.def 配置文件如下：
 
@@ -88,7 +88,7 @@ tomcat-7.x/8.x=org.apache.skywalking.apm.plugin.tomcat78x.define
 
 这两个类都继承了 ClassInstanceMethodsEnhancePluginDefine 抽象类，同时间接继承了 ClassEnhancePluginDefine 类，如下图所示：
 
-![6.png](https://s0.lgstatic.com/i/image3/M01/17/8A/Ciqah16nzu2AXC4aAACqCsqjVe0795.png)
+<Image alt="6.png" src="https://s0.lgstatic.com/i/image3/M01/17/8A/Ciqah16nzu2AXC4aAACqCsqjVe0795.png"/>
 
 这里先简单回顾一下 ClassEnhancePluginDefine 这个类，ClassEnhancePluginDefine 抽象类使用了模板方法模式：只定义了增强 static 静态方法、构造方法、实例方法（以及增加字段）的流程，具体增强哪些方法则由子类实现，也就是说，ClassEnhancePluginDefine 的子类需要实现下面三个方法：
 

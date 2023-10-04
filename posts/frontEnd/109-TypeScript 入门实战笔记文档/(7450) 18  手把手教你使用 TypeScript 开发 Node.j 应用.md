@@ -280,7 +280,7 @@ program.parse(process.argv);
 
 接下来我们可以通过 npm start 直接运行 src/cli.ts 或通过 npm run build 将 TypeScript 代码转译为 JavaScript 代码，并运行 node lib/cli.js 启动静态服务，浏览器访问服务效果图如下：
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image6/M00/49/B6/CioPOWDcIQOAK0rcAAIAVQXojdE355.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/49/B6/CioPOWDcIQOAK0rcAAIAVQXojdE355.png"/>
 
 在实际的开发过程中，我们肯定会碰到各种错误，不可能那么顺利。**因此，在定位错误时，我们除了可以结合之前介绍的 TypeScript 常见错误等实用技能之外，还可以通过 VS Code 免转译直接调试源码。**
 
@@ -290,7 +290,7 @@ program.parse(process.argv);
 
 首先，我们需要给当前项目创建一个配置文件，具体操作方法为通过 VS Code 左侧或者顶部菜单 Run 选项添加或在 .vscode 目录中手动添加 launch.json，如图例所示：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image6/M00/49/AD/Cgp9HWDcIQqAemuKAAwOfFNd21o140.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/49/AD/Cgp9HWDcIQqAemuKAAwOfFNd21o140.png"/>
 
 然后，我们将以下配置添加到 launch.json 文件中。
 
@@ -313,7 +313,7 @@ program.parse(process.argv);
 
 此时，我们可以在源文件中添加断点，并点击 Run 运行调试，如图例所示：
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image6/M00/49/AD/Cgp9HWDcIRKAFCLmAAdLT9Jo0xw822.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M00/49/AD/Cgp9HWDcIRKAFCLmAAdLT9Jo0xw822.png"/>
 
 TypeScript 并不是万能的，虽然它可以帮助我们减少低级错误，但是并不能取代单元测试。因此，我们有必要介绍一个单元测试的内容。
 

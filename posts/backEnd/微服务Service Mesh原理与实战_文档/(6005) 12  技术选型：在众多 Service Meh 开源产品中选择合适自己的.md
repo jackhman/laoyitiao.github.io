@@ -106,7 +106,7 @@ Nginx 包含一个**处理东西流量的 NGINX Plus 数据面** 和一个**用�
 
 需要注意的是，NGINX Plus 是 Nginx 收费版本，并不是开源软件，无法进行二次开发。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/91/C1/Ciqc1GAPkTuAI9qkAAFRd_frjBQ269.png)  
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/91/C1/Ciqc1GAPkTuAI9qkAAFRd_frjBQ269.png"/>  
 NGINX Service Mesh 架构图
 
 #### Traefik Mesh
@@ -115,14 +115,14 @@ Traefik Mesh 由 Go 语言编写的开源网关系统 Traefik 演进而来，与
 
 但这种做法也有缺点，资源隔离性不好，容易相互影响，比如同一个 Node 节点上某个服务出现了问题，从而占用了更多的资源，其他的 Pod 可能就没有资源可用了。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image2/M01/09/B4/CgpVE2APkUeAJgTwAACV4xlXkAY740.png)  
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image2/M01/09/B4/CgpVE2APkUeAJgTwAACV4xlXkAY740.png"/>  
 Traefik Mesh 架构图
 
 #### Consul Connect
 
 Consul Connect 是 HashiCorp 公司开源的 Service Mesh 解决方案，需要和 Consul 绑定使用，同样采用 Envoy 作为数据面，Consul Connect 充当控制面的角色。
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image2/M01/09/B2/Cip5yGAPkVOAbJG1AAF-LOUj7H0281.png)  
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image2/M01/09/B2/Cip5yGAPkVOAbJG1AAF-LOUj7H0281.png"/>  
 Consul Connect 架构图
 
 #### GCP Traffic Director
@@ -131,7 +131,7 @@ Traffic Director 是Google Cloud Platform（谷歌云平台）提供的 Service 
 
 Traffic Director 通过**集中化的健康检查**代替了 Envoy 内置网格的健康检查方式，这样做的好处是减少了网格健康检查带来的服务压力，但需要注意的是集中式的健康检查无法处理网络分区故障的问题。
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image2/M01/09/B4/CgpVE2APkV2ABiA_AACPWphx1FM106.png)  
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image2/M01/09/B4/CgpVE2APkV2ABiA_AACPWphx1FM106.png"/>  
 Traffic Director 架构图
 
 ### 总结
@@ -140,7 +140,7 @@ Traffic Director 架构图
 
 下面我们通过一张对比表格进一步总结上述解决方案的特点：
 
-![1-1.png](https://s0.lgstatic.com/i/image/M00/91/E3/CgqCHmAP1DiAEeobAAHFe0eUSUk269.png)
+<Image alt="1-1.png" src="https://s0.lgstatic.com/i/image/M00/91/E3/CgqCHmAP1DiAEeobAAHFe0eUSUk269.png"/>
 
 本讲内容到这里就结束了，下一讲我会讲解最常用的数据面 Envoy，Envoy 特性丰富，支持多种协议代理、多种负载均衡策略，它拥有着丰富的服务治理功能，下一讲我们都会一一介绍。
 

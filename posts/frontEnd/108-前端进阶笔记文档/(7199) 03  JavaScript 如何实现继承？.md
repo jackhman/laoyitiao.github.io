@@ -51,7 +51,7 @@ console.log(Person.prototype);
 
 打印结果显示为：
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image6/M01/34/06/CioPOWBwCzyAM-CAAAAKDg-SVug894.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M01/34/06/CioPOWBwCzyAM-CAAAAKDg-SVug894.png"/>
 
 可以看到，该原型对象有两个属性：`constructor`和`__proto__`。
 
@@ -63,7 +63,7 @@ console.log(Person.prototype);
 
 我们可以用这样一张图来描述`prototype`、`__proto__`和`constructor`三个属性的关系：
 
-![图片1.png](https://s0.lgstatic.com/i/image6/M00/39/C6/Cgp9HWB87hmAPbFxAACJvyE_nJI526.png)
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M00/39/C6/Cgp9HWB87hmAPbFxAACJvyE_nJI526.png"/>
 
 从这个图中，我们可以找到这样的关系：
 
@@ -98,13 +98,13 @@ Person.call(lily, "Lily");
 
 我们来打印一下`lily`实例：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image6/M00/33/FE/Cgp9HWBwC56AVE8iAAAQagv5qXA279.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M00/33/FE/Cgp9HWBwC56AVE8iAAAQagv5qXA279.png"/>
 
 可以看到，`lily`作为`Person`的实例对象，它的`__proto__`指向了`Person`的原型对象，即`Person.prototype`。
 
 这时，我们再补充下上图中的关系：
 
-![图片2.png](https://s0.lgstatic.com/i/image6/M00/39/CF/CioPOWB87iuAaqLIAADOJoaQI4k669.png)
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M00/39/CF/CioPOWB87iuAaqLIAADOJoaQI4k669.png"/>
 
 从这幅图中，我们可以清晰地看到构造函数和`constructor`属性、原型对象（`prototype`）和`__proto__`、实例对象之间的关系，这是很多初学者容易搞混的。根据这张图，我们可以得到以下的关系：
 
@@ -124,7 +124,7 @@ Person.call(lily, "Lily");
 
 现在我们知道，一个对象可通过`__proto__`访问原型对象上的属性和方法，而该原型同样也可通过`__proto__`访问它的原型对象，这样我们就在实例和原型之间构造了一条原型链。这里我用红色的线将`lily`实例的原型链标了出来。
 
-![图片3.png](https://s0.lgstatic.com/i/image6/M01/39/CF/CioPOWB87jeAG0OeAADy6IPqiP8527.png)
+<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image6/M01/39/CF/CioPOWB87jeAG0OeAADy6IPqiP8527.png"/>
 
 下面一起来进行疑惑 4 "JavaScript 是怎么访问对象的方法和属性的？"的解答：在 JavaScript 中，是通过遍历原型链的方式，来访问对象的方法和属性。
 

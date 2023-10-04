@@ -189,7 +189,7 @@ Hook 的类型按照同步或异步、是否接收上一插件的返回值等情
 
 优化阶段在 seal 函数中共有 12 个主要的处理过程，如下图所示：
 
-![image (4).png](https://s0.lgstatic.com/i/image/M00/4D/B4/Ciqc1F9bGtqAJo4uAABnYGwsyYs218.png)
+<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/4D/B4/Ciqc1F9bGtqAJo4uAABnYGwsyYs218.png"/>
 
 每个过程都暴露了相应的 Hooks，分别如下:
 
@@ -256,7 +256,7 @@ module.exports = SamplePlugin;
 
 执行构建后，可以看到在控制台输出了相应的统计时间结果（这里的时间是从构建起始到各阶段 Hook 触发为止的耗时），如下图所示：
 
-![image (5).png](https://s0.lgstatic.com/i/image/M00/4D/B4/Ciqc1F9bGvGAFRmpAAGFrvBhTHE475.png)
+<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/4D/B4/Ciqc1F9bGvGAFRmpAAGFrvBhTHE475.png"/>
 
 根据这样的输出结果，我们就可以分析项目里各阶段的耗时情况，再进行针对性地优化。这个统计插件将在后面几课的优化实践中运用。
 

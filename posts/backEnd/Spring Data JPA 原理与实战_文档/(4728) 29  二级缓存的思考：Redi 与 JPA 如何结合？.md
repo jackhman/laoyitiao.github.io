@@ -109,7 +109,7 @@ public UserInfo getUserInfo(@PathVariable("id") Long id) {
 
 第五步：启动项目，请求一下这个 API 会发现，第一次请求过后，redis 里面就有一条记录了，如下图所示。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image2/M01/03/A1/CgpVE1_gGfGAAYRDAAGxaGz4d8A668.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image2/M01/03/A1/CgpVE1_gGfGAAYRDAAGxaGz4d8A668.png"/>
 
 可以看到，第二次请求之后，取数据就不会再请求数据库了。那么 redis 我们已经熟悉了，那么来看一下 Spring Cache 都做了哪些事情。
 
@@ -119,7 +119,7 @@ Spring 3.1 之后引入了基于注释（annotation）的缓存（cache）技术
 
 Spring 的缓存技术还具备相当的灵活性，不仅能够使用 SpEL（Spring Expression Language）来定义缓存的 key 和各种 condition，还提供开箱即用的缓存临时存储方案，也支持主流的专业缓存，例如 Redis，EHCache 集成。而 Spring Cache 属于 Spring framework 的一部分，在下面图片所示的这个包里面。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image2/M01/03/9F/Cip5yF_gGfmAfvKbAAGFdPiyN9k521.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image2/M01/03/9F/Cip5yF_gGfmAfvKbAAGFdPiyN9k521.png"/>
 
 **Spring cache 里面的主要的注解**
 
@@ -222,7 +222,7 @@ public class CacheAutoConfiguration {
 
 通过源码可以看到，此类的关键作用是加载 Cache 的依赖配置，以及加载所有 CacheType 的配置文件，而 CacheConfigurations 里面定义了不同的 Cache 实现方式的配置，里面包含了 Ehcache、Redis、Jcache 的各种实现方式，如下图所示。
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image2/M01/03/9F/Cip5yF_gGgWAPkIYAAD6KrApZRs929.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image2/M01/03/9F/Cip5yF_gGgWAPkIYAAD6KrApZRs929.png"/>
 
 **org.springframework.cache.annotation.CachingConfigurerSupport**
 
@@ -259,19 +259,19 @@ public class CachingConfigurerSupport implements CachingConfigurer {
 
 其中，所有 CacheManager 是 Spring 提供的各种缓存技术抽象接口，通过它来管理，Spring framework 里面默认实现的 CacheManager 有不同的实现类，redis 默认加载的是 RedisCacheManager，如下图所示。
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image2/M01/03/9F/Cip5yF_gGgyAJ21FAADMLk_C6ag487.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image2/M01/03/9F/Cip5yF_gGgyAJ21FAADMLk_C6ag487.png"/>
 
 **org.springframework.boot.autoconfigure.cache.RedisCacheConfiguration**
 
 它是加载 Cache 的实现者，也是 redis 的实现类，关键源码如下图所示。
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image/M00/8B/BE/Ciqc1F_gGhKAQGL2AAIaDnIIDQQ607.png)
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/8B/BE/Ciqc1F_gGhKAQGL2AAIaDnIIDQQ607.png"/>
 
 我们可以看得出来，它依赖本身的 Redis 的连接，并且加载了 RedisCacheManager；同时可以看到关于 Cache 和 Redis 的配置有哪些。
 
 通过 CacheProperties 里面 redis 的配置，我们可以设置"key 的统一前缀、默认过期时间、是否缓存 null 值、是否使用前缀"这四个配置。
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image/M00/8B/C9/CgqCHl_gGhqAf6niAACSWTdYSNc168.png)
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/8B/C9/CgqCHl_gGhqAf6niAACSWTdYSNc168.png"/>
 
 通过这几个主要的类，相信你已经对 Spring Cache 有了简单的了解，下面我们看一下在实际工作中有哪些最佳实践可以提供参考。
 

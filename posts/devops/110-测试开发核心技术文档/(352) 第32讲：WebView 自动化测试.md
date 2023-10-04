@@ -3,7 +3,7 @@
 App 分类
 ------
 
-![](https://s0.lgstatic.com/i/image3/M01/07/46/Ciqah16ELsmANoDvAAIyWTuGX3s586.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/07/46/Ciqah16ELsmANoDvAAIyWTuGX3s586.png"/>
 
 <br />
 
@@ -16,7 +16,7 @@ Hybrid App 在 Natvie App 的基础上内嵌了一层 WebView，WebView 负责�
 WebView 控件在 Appium 中的抽象
 -----------------------
 
-![](https://s0.lgstatic.com/i/image3/M01/80/5C/Cgq2xl6ELsqAbmoNAAFhXVE8ARk521.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/80/5C/Cgq2xl6ELsqAbmoNAAFhXVE8ARk521.png"/>
 
 <br />
 
@@ -37,7 +37,7 @@ WebView 控件在 Appium 中的抽象
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/07/46/Ciqah16ELsqADv7pAAC9jaPPPYo388.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/07/46/Ciqah16ELsqADv7pAAC9jaPPPYo388.png"/>
 
 <br />
 
@@ -45,7 +45,7 @@ WebView 控件在 Appium 中的抽象
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/07/46/Ciqah16ELsqALrLGAAGEVhWNDaM815.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/07/46/Ciqah16ELsqALrLGAAGEVhWNDaM815.png"/>
 
 <br />
 
@@ -53,7 +53,7 @@ WebView 控件在 Appium 中的抽象
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/80/5C/Cgq2xl6ELsuAA40iAAIKjk7to3U675.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/80/5C/Cgq2xl6ELsuAA40iAAIKjk7to3U675.png"/>
 
 <br />
 
@@ -61,7 +61,7 @@ Chrome 里面会有一个实盘交易，点击它，一旦开启了 WebView 调�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/07/46/Ciqah16ELsuAPr0VAAJMm_vPWMg299.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/07/46/Ciqah16ELsuAPr0VAAJMm_vPWMg299.png"/>
 
 <br />
 
@@ -69,7 +69,7 @@ Chrome 里面会有一个实盘交易，点击它，一旦开启了 WebView 调�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/80/5C/Cgq2xl6ELsyAS2AwAAL7zRPHqmc256.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/80/5C/Cgq2xl6ELsyAS2AwAAL7zRPHqmc256.png"/>
 
 <br />
 
@@ -77,7 +77,7 @@ Chrome 里面会有一个实盘交易，点击它，一旦开启了 WebView 调�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/07/46/Ciqah16ELsyADlADAAR5xYL-DeQ437.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/07/46/Ciqah16ELsyADlADAAR5xYL-DeQ437.png"/>
 
 <br />
 
@@ -94,7 +94,7 @@ Chrome 里面会有一个实盘交易，点击它，一旦开启了 WebView 调�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/07/46/Ciqah16ELsyASc6uAAI5BLkNOOs595.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/07/46/Ciqah16ELsyASc6uAAI5BLkNOOs595.png"/>
 
 <br />
 
@@ -102,7 +102,7 @@ Chrome 里面会有一个实盘交易，点击它，一旦开启了 WebView 调�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/80/5C/Cgq2xl6ELs2AO70DAAHrbVi5hNI845.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/80/5C/Cgq2xl6ELs2AO70DAAHrbVi5hNI845.png"/>
 
 <br />
 
@@ -110,7 +110,7 @@ Chrome 里面会有一个实盘交易，点击它，一旦开启了 WebView 调�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/07/46/Ciqah16ELs2AXdkbAANSd_2rQyo597.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/07/46/Ciqah16ELs2AXdkbAANSd_2rQyo597.png"/>
 
 <br />
 
@@ -118,7 +118,7 @@ Chrome 里面会有一个实盘交易，点击它，一旦开启了 WebView 调�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/80/5C/Cgq2xl6ELs2AATbOAAEkk1zFl8Q476.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/80/5C/Cgq2xl6ELs2AATbOAAEkk1zFl8Q476.png"/>
 
 <br />
 
@@ -130,7 +130,7 @@ Chrome 里面会有一个实盘交易，点击它，一旦开启了 WebView 调�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/07/46/Ciqah16ELs6ARpnhAABaTXvQdx8626.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/07/46/Ciqah16ELs6ARpnhAABaTXvQdx8626.png"/>
 
 <br />
 
@@ -138,7 +138,7 @@ Chrome 里面会有一个实盘交易，点击它，一旦开启了 WebView 调�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/80/5C/Cgq2xl6ELs6AN0heAACHkib8h7Y738.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/80/5C/Cgq2xl6ELs6AN0heAACHkib8h7Y738.png"/>
 
 <br />
 
@@ -150,7 +150,7 @@ Chrome 里面会有一个实盘交易，点击它，一旦开启了 WebView 调�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/07/46/Ciqah16ELs6Ab9HNAANI7Xhw8O0038.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/07/46/Ciqah16ELs6Ab9HNAANI7Xhw8O0038.png"/>
 
 <br />
 
@@ -158,7 +158,7 @@ Chrome 里面会有一个实盘交易，点击它，一旦开启了 WebView 调�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/80/5C/Cgq2xl6ELs6AY5MSAAFh_Lu4I-A959.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/80/5C/Cgq2xl6ELs6AY5MSAAFh_Lu4I-A959.png"/>
 
 <br />
 
@@ -170,7 +170,7 @@ Chrome 里面会有一个实盘交易，点击它，一旦开启了 WebView 调�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/07/46/Ciqah16ELs6AWMhrAAIy0Si0xuo374.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/07/46/Ciqah16ELs6AWMhrAAIy0Si0xuo374.png"/>
 
 <br />
 
@@ -182,7 +182,7 @@ Chrome 里面会有一个实盘交易，点击它，一旦开启了 WebView 调�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/80/5C/Cgq2xl6ELs-ASAk4AAR7u9laZ4g790.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/80/5C/Cgq2xl6ELs-ASAk4AAR7u9laZ4g790.png"/>
 
 <br />
 

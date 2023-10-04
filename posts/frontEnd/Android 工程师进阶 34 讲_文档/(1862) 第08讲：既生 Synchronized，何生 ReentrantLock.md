@@ -13,7 +13,7 @@ synchronized 可以用来修饰以下 3 个层面：
 
 ### synchronized 修饰实例方法
 
-![](https://s0.lgstatic.com/i/image3/M01/89/8E/Cgq2xl6X-CGAVC61AABX0U421kk161.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/89/8E/Cgq2xl6X-CGAVC61AABX0U421kk161.png"/>
 
 <br />
 
@@ -21,7 +21,7 @@ synchronized 可以用来修饰以下 3 个层面：
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/03/49/CgoCgV6X-CGAX3UPAALcuyvYTr0464.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/03/49/CgoCgV6X-CGAX3UPAALcuyvYTr0464.png"/>
 
 <br />
 
@@ -29,7 +29,7 @@ synchronized 可以用来修饰以下 3 个层面：
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/10/78/Ciqah16X-CGAcrKiAAHaIMHzqvs482.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/10/78/Ciqah16X-CGAcrKiAAHaIMHzqvs482.png"/>
 
 <br />
 
@@ -41,7 +41,7 @@ synchronized 可以用来修饰以下 3 个层面：
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/89/8E/Cgq2xl6X-CGAXyrZAAK14-hA_p0053.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/89/8E/Cgq2xl6X-CGAXyrZAAK14-hA_p0053.png"/>
 
 <br />
 
@@ -49,7 +49,7 @@ synchronized 可以用来修饰以下 3 个层面：
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/03/49/CgoCgV6X-CKADxv6AAK2n8Hb_oI699.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/03/49/CgoCgV6X-CKADxv6AAK2n8Hb_oI699.png"/>
 
 <br />
 
@@ -65,7 +65,7 @@ synchronized 可以用来修饰以下 3 个层面：
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/10/78/Ciqah16X-CKAdo5PAAGlZwFDsJM251.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/10/78/Ciqah16X-CKAdo5PAAGlZwFDsJM251.png"/>
 
 <br />
 
@@ -73,7 +73,7 @@ synchronized 可以用来修饰以下 3 个层面：
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/89/8E/Cgq2xl6X-CKAa6FcAAJ44oCVs3Q021.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/89/8E/Cgq2xl6X-CKAa6FcAAJ44oCVs3Q021.png"/>
 
 <br />
 
@@ -85,7 +85,7 @@ synchronized 可以用来修饰以下 3 个层面：
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/03/49/CgoCgV6X-CKAV1oUAAGejxzGQ6g680.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/03/49/CgoCgV6X-CKAV1oUAAGejxzGQ6g680.png"/>
 
 <br />
 
@@ -97,7 +97,7 @@ synchronized 既可以作用于方法，也可以作用于某一代码块。但�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/10/78/Ciqah16X-CKAZaaeAABaozQldl0900.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/10/78/Ciqah16X-CKAZaaeAABaozQldl0900.png"/>
 
 <br />
 
@@ -105,7 +105,7 @@ synchronized 既可以作用于方法，也可以作用于某一代码块。但�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/89/8E/Cgq2xl6X-COAC4hMAAEjW40t64s500.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/89/8E/Cgq2xl6X-COAC4hMAAEjW40t64s500.png"/>
 
 <br />
 
@@ -117,7 +117,7 @@ synchronized 既可以作用于方法，也可以作用于某一代码块。但�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/10/78/Ciqah16X-COACexhAAD00Tr1LPM127.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/10/78/Ciqah16X-COACexhAAD00Tr1LPM127.png"/>
 
 <br />
 
@@ -135,7 +135,7 @@ synchronized 既可以作用于方法，也可以作用于某一代码块。但�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/89/8E/Cgq2xl6X-COAEskYAABd1Qkprak432.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/89/8E/Cgq2xl6X-COAEskYAABd1Qkprak432.png"/>
 
 <br />
 
@@ -150,7 +150,7 @@ ReentrantLock 的使用同 synchronized 有点不同，它的加锁和解锁操�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/03/49/CgoCgV6X-COAM0TsAAHIQYMakhA463.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/03/49/CgoCgV6X-COAM0TsAAHIQYMakhA463.png"/>
 
 <br />
 
@@ -158,7 +158,7 @@ ReentrantLock 的使用同 synchronized 有点不同，它的加锁和解锁操�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/10/78/Ciqah16X-COAO3ZBAAClbs36w3w694.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/10/78/Ciqah16X-COAO3ZBAAClbs36w3w694.png"/>
 
 <br />
 
@@ -174,7 +174,7 @@ ReentrantLock 有一个带参数的构造器，如下：
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/89/8E/Cgq2xl6X-CSAAdUqAACzsvj2pFg758.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/89/8E/Cgq2xl6X-CSAAdUqAACzsvj2pFg758.png"/>
 
 <br />
 
@@ -186,7 +186,7 @@ ReentrantLock 有一个带参数的构造器，如下：
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/03/49/CgoCgV6X-CSAR23jAAG2SZgQKY0744.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/03/49/CgoCgV6X-CSAR23jAAG2SZgQKY0744.png"/>
 
 <br />
 
@@ -194,7 +194,7 @@ ReentrantLock 有一个带参数的构造器，如下：
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/10/78/Ciqah16X-CSAR8MxAAI0mD5blog517.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/10/78/Ciqah16X-CSAR8MxAAI0mD5blog517.png"/>
 
 <br />
 
@@ -224,7 +224,7 @@ ReentrantLock 有一个带参数的构造器，如下：
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/89/8E/Cgq2xl6X-CSAfAiHAAAlGuwPEXA557.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/89/8E/Cgq2xl6X-CSAfAiHAAAlGuwPEXA557.png"/>
 
 <br />
 
@@ -232,7 +232,7 @@ ReentrantLock 有一个带参数的构造器，如下：
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/03/49/CgoCgV6X-CWAEmShAAApkBH8nBM233.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/03/49/CgoCgV6X-CWAEmShAAApkBH8nBM233.png"/>
 
 <br />
 
@@ -240,7 +240,7 @@ ReentrantLock 有一个带参数的构造器，如下：
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/10/78/Ciqah16X-CWAHTM4AACOosEvECg851.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/10/78/Ciqah16X-CWAHTM4AACOosEvECg851.png"/>
 
 <br />
 
@@ -248,7 +248,7 @@ ReentrantLock 有一个带参数的构造器，如下：
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/89/8E/Cgq2xl6X-CWAYv9FAATloxYxrXs824.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/89/8E/Cgq2xl6X-CWAYv9FAATloxYxrXs824.png"/>
 
 <br />
 
@@ -266,7 +266,7 @@ ReentrantLock 有一个带参数的构造器，如下：
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/03/49/CgoCgV6X-CaAdEWVAAI1D9-ghzQ492.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/03/49/CgoCgV6X-CaAdEWVAAI1D9-ghzQ492.png"/>
 
 <br />
 

@@ -236,7 +236,7 @@ public class Person {
 可以看出 Lombok 让代码简单和优雅了很多。
 > 小贴士：如果在项目中使用了 Lombok 的 Getter 和 Setter 注解，那么想要在编码阶段成功调用对象的 set 或 get 方法，我们需要在 IDE 中安装 Lombok 插件才行，比如 Idea 的插件如下图所示：
 
-![](https://s0.lgstatic.com/i/image3/M01/09/05/Ciqah16HCB6AcjsPAAIhVz8yo1o620.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/09/05/Ciqah16HCB6AcjsPAAIhVz8yo1o620.png"/>
 
 接下来讲讲 Lombok 的原理。
 
@@ -244,13 +244,13 @@ Lombok 的实现和反射没有任何关系，前面我们说了反射是程序�
 
 回到我们刚才 Setter/Getter 的方法，当我们打开 Person 的编译类就会发现，使用了 Lombok 的 @Data 注解后的源码竟然是这样的：
 
-![](https://s0.lgstatic.com/i/image3/M01/82/1B/Cgq2xl6HCB6AXaC5AAHG477g0yQ093.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/82/1B/Cgq2xl6HCB6AXaC5AAHG477g0yQ093.png"/>
 
 可以看出 Lombok 是在编译期就为我们生成了对应的字节码。
 
 其实 Lombok 是基于 Java 1.6 实现的 JSR 269: Pluggable Annotation Processing API 来实现的，也就是通过编译期自定义注解处理器来实现的，它的执行步骤如下：
 
-![](https://s0.lgstatic.com/i/image3/M01/82/1B/Cgq2xl6HCB-AAsAKAACfTHorgDA111.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/82/1B/Cgq2xl6HCB-AAsAKAACfTHorgDA111.png"/>
 
 从流程图中可以看出，在编译期阶段，当 Java 源码被抽象成语法树（AST）之后，Lombok 会根据自己的注解处理器动态修改 AST，增加新的代码（节点），在这一切执行之后就生成了最终的字节码（.class）文件，这就是 Lombok 的执行原理。
 

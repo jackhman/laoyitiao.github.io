@@ -14,7 +14,7 @@ Eureka 服务快速发现的背景
 Eureka 服务发现慢的原因
 ===============
 
-![](https://s0.lgstatic.com/i/image3/M01/87/D3/Cgq2xl6UKu-AWCOVAAGDqNRLidI263.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/87/D3/Cgq2xl6UKu-AWCOVAAGDqNRLidI263.png"/>
 
 Eureka 服务发现慢的原因主要有两个，一部分是因为服务缓存导致的，另一部分是因为客户端缓存导致的。
 

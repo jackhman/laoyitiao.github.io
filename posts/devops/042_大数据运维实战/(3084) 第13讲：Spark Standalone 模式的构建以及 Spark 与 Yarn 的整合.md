@@ -6,7 +6,7 @@ Spark 现在已经广泛使用在各个企业中，常见的应用模式有两�
 
 从集群部署的角度看，Spark 集群由集群管理器（Cluster Manager）、工作节点（Worker）、执行器（Executor）、驱动器（Driver）、应用程序（Application）等部分组成，其整体关系如下图所示：
 
-![1.png](https://s0.lgstatic.com/i/image/M00/1B/14/Ciqc1F7eFeyAVscGAAHpX-ShiyY637.png)
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/1B/14/Ciqc1F7eFeyAVscGAAHpX-ShiyY637.png"/>
 
 下面我将对每个部分的功能进行介绍。
 
@@ -198,7 +198,7 @@ slave002.cloud
 
 如果不出问题的话，此时你的 Spark 集群已经成功启动，查看集群情况，可访问 \[http:// nnmaster.cloud:8080/\](http:// nnmaster.cloud:8080/) ，这里的主机名换成自己环境的 Master 地址即可。如下图所示：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/1B/13/CgqCHl7eCEWAIQYkAAF6TniV8_Y016.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/1B/13/CgqCHl7eCEWAIQYkAAF6TniV8_Y016.png"/>
 
 从图中可以看出，整个 Spark 集群的运行状态、活跃节点数，以及可用的 CPU 和内存资源。在下面的 Workers 列表中，显示了 Spark 集群目前活跃的节点数以及每个节点可用的系统资源。
 
@@ -255,7 +255,7 @@ res1: String = # Apache Spark
 
 从上面的 spark-shell 输出，可以看出此任务的 APP id = app-20200601175518-0009，打开 Spark 的 8080 状态界面，可以发现一个 app-20200601175518-0009 正在运行。
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/1B/08/Ciqc1F7eCKCAJB2VAAGkrRokxa8933.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/1B/08/Ciqc1F7eCKCAJB2VAAGkrRokxa8933.png"/>
 
 还有下面的用法，这是对指定的一个目录进行统计分析：
 
@@ -313,7 +313,7 @@ Pi is roughly 3.133655668278341
 
 在客户端集群模式下，程序运行期间，会在执行此程序的客户端机器上生成一个 SparkSubmit 进程，并运行 4040 端口，此进程作为 Client 端并运行 driver 程序，通过访问此客户端的 4040 端口，可以看到 driver 运行在哪个节点，如下图所示：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/1B/08/Ciqc1F7eCPaAYt3xAAGOaN-9t_k453.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/1B/08/Ciqc1F7eCPaAYt3xAAGOaN-9t_k453.png"/>
 
 上面的操作我是在 slave002 节点进行的，因此 driver 程序就运行在此节点上，还可以看到每个 Executor 的资源使用情况。当任务运行完毕后，4040 端口会自动关闭。
 
@@ -334,15 +334,15 @@ Pi is roughly 3.133655668278341
 
 此命令执行完毕后，直接退出命令行，执行结果不会输出到屏幕。要查看执行结果，可以到运行 driver 程序的节点对应的 stdout 输出中查看。下图是完全集群模式下 Spark 任务的运行状态：
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image/M00/1B/08/Ciqc1F7eCRWAExIQAAH3sX9VMy8453.png)
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/1B/08/Ciqc1F7eCRWAExIQAAH3sX9VMy8453.png"/>
 
 从上图可以看到，master 选择了"worker-20200601142643-172.16.213.138-33869"这个节点来运行 driver 程序，点开这个节点连接，页面拉到最后，如下图所示：
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image/M00/1B/08/Ciqc1F7eCS2ACYQ7AADtGJZDP44063.png)
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/1B/08/Ciqc1F7eCS2ACYQ7AADtGJZDP44063.png"/>
 
 上图显示的是已经完成的 driver 程序，查看第一个 driver，点开 Logs 列下面的 stdout 链接，如下图所示，这就是上面命令的执行结果。
 
-![Drawing 6.png](https://s0.lgstatic.com/i/image/M00/1B/14/CgqCHl7eCSaAeDFsAACjualC02g847.png)
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/1B/14/CgqCHl7eCSaAeDFsAACjualC02g847.png"/>
 
 下面分析下完全集群模式下，Spark 任务的执行过程，叙述如下：
 

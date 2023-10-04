@@ -8,7 +8,7 @@
 
 在微服务架构中，应用系统往往被拆分成很多个微服务（可以多达成百上千），数量庞大的微服务实例使得服务治理具有一定的挑战，比如说常见的服务注册、服务发现、服务实例的负载均衡，以及为了保护服务器实现熔断、重试等基础功能。除此之外，应用程序中还加上了大量的非功能性代码。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/32/9C/CgqCHl8OniqAaOpTAABLWy0eR68344.png)  
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/32/9C/CgqCHl8OniqAaOpTAABLWy0eR68344.png"/>  
 
 微服务架构的基础功能
 
@@ -47,7 +47,7 @@ Service Mesh 的第一代产品，如 Linkerd 1 和 Envoy，天然支持虚拟�
 
 在云原生架构下，应用系统可能由数百个微服务组成，微服务一般又是多实例部署，并且每一个实例都可能处于不断变化的状态，因为它们是由 Kubernetes 之类的资源调度系统动态调度。 Kubernetes 中的 Service Mesh 实现模式被命名为 **Sidecar**（边车模式，因为类似连接到摩托车的边车）。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/32/92/Ciqc1F8OnrqAWCmyAAWNZlJGJJQ859.png)  
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/32/92/Ciqc1F8OnrqAWCmyAAWNZlJGJJQ859.png"/>  
 
 边车
 
@@ -55,7 +55,7 @@ Service Mesh 的第一代产品，如 Linkerd 1 和 Envoy，天然支持虚拟�
 
 在 Sidecar 模式中，"边车"与父应用程序（即业务服务）是两个独立的进程，二者生命周期相同，同时被创建和退出。"边车"附加到业务服务，并为应用提供支持功能，如微服务架构中的基本通信。Service Mesh 一般的架构如下图所示：
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/32/92/Ciqc1F8OnsOAa3MVAABY1memBaA509.png)  
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/32/92/Ciqc1F8OnsOAa3MVAABY1memBaA509.png"/>  
 
 Service Mesh 架构图
 
@@ -81,7 +81,7 @@ Istio 功能十分丰富，包括：
 
 Istio 专为可扩展性而设计，可满足多种部署需求。它通过拦截和配置 Mesh 网络流量来做到这一点，架构图如下所示：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/32/92/Ciqc1F8OntCAXtNNAARr5zliZpw986.png)  
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/32/92/Ciqc1F8OntCAXtNNAARr5zliZpw986.png"/>  
 
 Istio 架构图
 

@@ -28,7 +28,7 @@ Devicemapper 的工作机制主要围绕三个核心概念。
 
 * 映射表（map table）：映射表记录了映射设备到目标设备的映射关系，它记录了映射设备在目标设备的起始地址、范围和目标设备的类型等变量。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/5E/87/CgqCHl-GyFOAG6TPAACE_8cMjoQ585.png)  
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/5E/87/CgqCHl-GyFOAG6TPAACE_8cMjoQ585.png"/>  
 图 1 Devicemapper 核心概念关系图
 
 Devicemapper 三个核心概念之间的关系如图 1，**映射设备通过映射表关联到具体的物理目标设备。事实上，映射设备不仅可以通过映射表关联到物理目标设备，也可以关联到虚拟目标设备，然后虚拟目标设备再通过映射表关联到物理目标设备。**
@@ -78,7 +78,7 @@ Devicemapper 的每一镜像层都是其下一层的快照，最底层的镜像�
 
 以下是一个运行中的 Ubuntu 容器示意图。
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/5E/87/CgqCHl-GyHeAX_zKAABoNW4U26c205.png)  
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/5E/87/CgqCHl-GyHeAX_zKAABoNW4U26c205.png"/>  
 图 2 Devicemapper 存储模型
 
 这个 Ubuntu 镜像一共有四层，每一层镜像都是下一层的快照，镜像的最底层是基础设备的快照。当容器运行时，容器是基于镜像的快照。综上，Devicemapper 实现镜像分层的根本原理就是快照。

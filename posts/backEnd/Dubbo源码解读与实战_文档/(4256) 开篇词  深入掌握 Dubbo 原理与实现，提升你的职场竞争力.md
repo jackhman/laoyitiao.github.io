@@ -8,14 +8,14 @@
 
 一家公司由小做大，业务会不断发展，随之而来的是 DAU、订单量、数据量的不断增长，用来支撑业务的系统复杂度也会不断提高，模块之间的依赖关系也会日益复杂。这时候我们一般会从单体架构进入集群架构（如下图所示），在集群架构中通过负载均衡技术，将流量尽可能均摊到集群中的每台机器上，以此克服单台机器硬件资源的限制，做到横向扩展。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/38/A0/Ciqc1F8eQ_eAbHovAAC1BISTRQE943.png)  
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/38/A0/Ciqc1F8eQ_eAbHovAAC1BISTRQE943.png"/>  
 单体架构 VS 集群架构
 
 之后，又由于业务系统本身的实现较为复杂、扩展性较差、性能也有上限，代码和功能的复用能力较弱，我们会将一个巨型业务系统拆分成多个微服务，根据不同服务对资源的不同要求，选择更合理的硬件资源。例如，有些流量较小的服务只需要几台机器构成的集群即可，而核心业务则需要成百上千的机器来支持，这样就可以最大化系统资源的利用率。
 
 另外一个好处是，可以在服务维度进行重用，在需要某个服务的时候，直接接入即可，从而提高开发效率。拆分成独立的服务之后（如下图所示），整个服务可以最大化地实现重用，也可以更加灵活地扩展。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/38/A0/Ciqc1F8eRAqAKU1gAAGcFDQgvSc126.png)  
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/38/A0/Ciqc1F8eRAqAKU1gAAGcFDQgvSc126.png"/>  
 微服务架构图
 
 但是在微服务架构落地的过程中，我们需要解决的问题有很多，如：
@@ -44,11 +44,11 @@ Dubbo 是由阿里开源，后来加入了 Apache 基金会，目前已经从孵
 
 作为一名 Java 工程师，深入掌握 Dubbo 的原理和实现已经是大势所趋，并且成为你职场竞争力的关键项。拉勾网显示，研发工程师、架构师等高薪岗位，都要求你熟悉并曾经深入使用某种 RPC 框架，一线大厂更是要求你至少深入了解一款 RPC 框架的原理和核心实现。
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/38/AB/CgqCHl8eRBiAdm-9AACm_9hf8ac565.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/38/AB/CgqCHl8eRBiAdm-9AACm_9hf8ac565.png"/>
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/38/A0/Ciqc1F8eRCaAdTaTAACqwi3sVSo733.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/38/A0/Ciqc1F8eRCaAdTaTAACqwi3sVSo733.png"/>
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image/M00/38/AB/CgqCHl8eRC2Acm_pAACV8eY8-C8598.png)  
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/38/AB/CgqCHl8eRC2Acm_pAACV8eY8-C8598.png"/>  
 （职位信息来源：拉勾网）
 
 而 Dubbo 就是首选。Dubbo 和 Spring Cloud 是目前主流的微服务框架，阿里、京东、小米、携程、去哪儿网等互联网公司的基础设施早已落成，并且后续的很多项目还是以 Dubbo 为主。Dubbo 重启之后，已经开始规划 3.0 版本，相信后面还会有更加惊艳的表现。
@@ -59,7 +59,7 @@ Dubbo 是由阿里开源，后来加入了 Apache 基金会，目前已经从孵
 
 学习和掌握一项技能的时候，一般都是按照"是什么""怎么用""为什么"（原理）逐层深入的：
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image/M00/38/AB/CgqCHl8eRDyAaP3fAABjUNh74KM999.png)
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/38/AB/CgqCHl8eRDyAaP3fAABjUNh74KM999.png"/>
 
 同样，你可以通过阅读官方文档或是几篇介绍性的文章，迅速了解 Dubbo 是什么；接下来，再去上手，用 Dubbo 写几个项目，从而更加全面地熟悉 Dubbo 的使用方式和特性，成为一名"熟练工"，但这也是很多开发者所处的阶段。而"有技术追求"的开发者，一般不会满足于每天只是写写业务代码，而是会开始研究 Dubbo 的源码实现以及底层原理，这就对应了上图中的核心层："原理"。
 
@@ -87,7 +87,7 @@ Dubbo 是由阿里开源，后来加入了 Apache 基金会，目前已经从孵
 
 本课程的每一个知识点都是你深入理解 Dubbo 的进步阶梯，整个分析 Dubbo 实现的过程，就是一步步到达山顶，成为高手的过程。你也可以通过目录，快速了解这个课程的知识体系结构。
 
-![Dubbo 最终大纲.png](https://s0.lgstatic.com/i/image2/M01/04/B9/CgpVE1_1V7mAUEnNAAXNnLyYFjk151.png)
+<Image alt="Dubbo 最终大纲.png" src="https://s0.lgstatic.com/i/image2/M01/04/B9/CgpVE1_1V7mAUEnNAAXNnLyYFjk151.png"/>
 
 ### 讲师寄语
 

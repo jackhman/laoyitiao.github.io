@@ -33,7 +33,7 @@ PO 模式前面也已经讲过了，当时主要针对 Selenium，但是其实�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/78/CE/CgpOIF50jbCAEGjfAAF90rzlUnc958.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/CE/CgpOIF50jbCAEGjfAAF90rzlUnc958.png"/>
 
 <br />
 
@@ -46,7 +46,7 @@ App自动化测试
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/78/CF/Cgq2xl50jbCAOt2uAAH45KgAlVo279.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/CF/Cgq2xl50jbCAOt2uAAH45KgAlVo279.png"/>
 
 <br />
 
@@ -59,7 +59,7 @@ Appium 也是支持 PO 模式的。Selenium 最早的时候有一个功能叫 Pa
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/78/CF/Cgq2xl50jbGARIbIAAQZ6Cc9J6I194.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/CF/Cgq2xl50jbGARIbIAAQZ6Cc9J6I194.png"/>
 
 <br />
 
@@ -80,7 +80,7 @@ PO 实战演练
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/78/CE/CgpOIF50jbGAJyT1AAFDWZBsFcY566.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/CE/CgpOIF50jbGAJyT1AAFDWZBsFcY566.png"/>
 
 <br />
 
@@ -88,7 +88,7 @@ PO 实战演练
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/78/CF/Cgq2xl50jbGAc2RzAABUXXjJjOg264.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/CF/Cgq2xl50jbGAc2RzAABUXXjJjOg264.png"/>
 
 <br />
 
@@ -96,7 +96,7 @@ PO 实战演练
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/78/CE/CgpOIF50jbGABACkAAE4SkSeTZ0771.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/CE/CgpOIF50jbGABACkAAE4SkSeTZ0771.png"/>
 
 <br />
 
@@ -104,7 +104,7 @@ search 完后会进入另外一个页面，所以接下来我们需要 return �
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/78/CF/Cgq2xl50jbGAKPf0AAC7Q0ExKgg629.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/CF/Cgq2xl50jbGAKPf0AAC7Q0ExKgg629.png"/>
 
 <br />
 
@@ -116,7 +116,7 @@ search 完后会进入另外一个页面，所以接下来我们需要 return �
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/78/CE/CgpOIF50jbGASsT0AABiUUqEVac775.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/CE/CgpOIF50jbGASsT0AABiUUqEVac775.png"/>
 
 <br />
 
@@ -124,7 +124,7 @@ search 完后会进入另外一个页面，所以接下来我们需要 return �
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/78/CF/Cgq2xl50jbGAPTFWAADArSAy52s207.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/CF/Cgq2xl50jbGAPTFWAADArSAy52s207.png"/>
 
 <br />
 
@@ -132,7 +132,7 @@ search 完后会进入另外一个页面，所以接下来我们需要 return �
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/78/CE/CgpOIF50jbGAHQFKAADfVvWIwaE949.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/CE/CgpOIF50jbGAHQFKAADfVvWIwaE949.png"/>
 
 <br />
 
@@ -140,7 +140,7 @@ search 完后会进入另外一个页面，所以接下来我们需要 return �
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/78/CF/Cgq2xl50jbGAc-IHAAEpughqYRs137.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/CF/Cgq2xl50jbGAc-IHAAEpughqYRs137.png"/>
 
 <br />
 
@@ -152,7 +152,7 @@ search 完后会进入另外一个页面，所以接下来我们需要 return �
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/78/CE/CgpOIF50jbGAdC0yAABhd5sKPVM490.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/CE/CgpOIF50jbGAdC0yAABhd5sKPVM490.png"/>
 
 <br />
 

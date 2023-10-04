@@ -22,7 +22,7 @@
 
 如下图所示，该 FollowerZooKeeperServer 类继承了 LearnerZooKeeperServer 。在一个 FollowerZooKeeperServer 类内部，定义了一个核心的 ConcurrentLinkedQueue 类型的队列字段，用于存放接收到的会话请求。
 
-![image (10).png](https://s0.lgstatic.com/i/image/M00/2B/CB/Ciqc1F7_AqmAchKvAABHDmj-uIc721.png)
+<Image alt="image (10).png" src="https://s0.lgstatic.com/i/image/M00/2B/CB/Ciqc1F7_AqmAchKvAABHDmj-uIc721.png"/>
 
 在定义了 FollowerZooKeeperServer 类之后，在该类的 setupRequestProcessors 函数中，定义了我们之前一直反复提到的处理责任链，指定了该处理链上的各个处理器。如下面的代码所示，分别按顺序定义了起始处理器 FollowerRequestProcessor 、提交处理器 CommitProcessor、同步处理器 SendAckRequestProcessor 以及最终处理器 FinalProcessor。
 
@@ -45,7 +45,7 @@ protected void setupRequestProcessors() {
 
 **ZooKeeper 集群重新选举 Leader 的过程本质上只有 Follow 服务器参与工作**。而在 ZooKeeper 集群重新选举 Leader 节点的过程中，如下图所示。主要可以分为 Leader 失效发现、重新选举 Leader 、Follow 服务器角色变更、集群同步这几个步骤。
 
-![image (11).png](https://s0.lgstatic.com/i/image/M00/2B/D7/CgqCHl7_ArmAD4KYAABMANi9AkA539.png)
+<Image alt="image (11).png" src="https://s0.lgstatic.com/i/image/M00/2B/D7/CgqCHl7_ArmAD4KYAABMANi9AkA539.png"/>
 
 #### Leader 失效发现
 
@@ -91,7 +91,7 @@ default:
 
 之后，在 ZooKeeper 集群选举 Leader 服务器时，是通过 FastLeaderElection 类实现的。该类实现了 TCP 方式的通信连接，用于在 ZooKeeper 集群中与其他 Follow 服务器进行协调沟通。
 
-![image (12).png](https://s0.lgstatic.com/i/image/M00/2B/CB/Ciqc1F7_AtCAVRpLAABYUblVD80124.png)
+<Image alt="image (12).png" src="https://s0.lgstatic.com/i/image/M00/2B/CB/Ciqc1F7_AtCAVRpLAABYUblVD80124.png"/>
 
 如上图所示，FastLeaderElection 类继承了 Election 接口，定义其是用来进行选举的实现类。而在其内部，又定义了选举通信相关的一些配置参数，比如 finalizeWait 最终等待时间、最大通知间隔时间 maxNotificationInterval 等。
 

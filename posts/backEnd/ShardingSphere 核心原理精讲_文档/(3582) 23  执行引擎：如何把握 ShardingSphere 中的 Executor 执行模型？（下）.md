@@ -29,7 +29,7 @@ public ShardingStatement(final ShardingConnection connection, final int resultSe
 
 根据这一点，我们可以想象 ShardingStatement 应该具备与 ShardingConnection 类似的类层结构：
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/48/9D/CgqCHl9MzLGAdeNfAACM0dnojxQ073.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/48/9D/CgqCHl9MzLGAdeNfAACM0dnojxQ073.png"/>
 
 然后我们来到上图中 AbstractStatementAdapter 类，这里的很多方法的风格都与 ShardingConnection 的父类 AbstractConnectionAdapter 一致，例如如下所示的 setPoolable 方法：
 
@@ -223,7 +223,7 @@ protected final void replaySetParameter(final PreparedStatement preparedStatemen
 
 关于 AbstractShardingPreparedStatementAdapter 还需要注意的是它的**类层结构**，如下图所示，可以看到 AbstractShardingPreparedStatementAdapter 继承了 AbstractUnsupportedOperationPreparedStatement 类；而 AbstractUnsupportedOperationPreparedStatement 却又继承了 AbstractStatementAdapter 类并实现了 PreparedStatement：
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/48/92/Ciqc1F9MzNeACiagAACzQd-8eig186.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/48/92/Ciqc1F9MzNeACiagAACzQd-8eig186.png"/>
 
 形成这种类层结构的原因在于，PreparedStatement 本来就是在 Statement 的基础上添加了各种参数设置功能，换句话说，Statement 的功能 PreparedStatement 都应该有。
 

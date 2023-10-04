@@ -28,7 +28,7 @@ etcd 网关是一个简单的**TCP 代理** ，可将网络数据转发到 etcd 
 
 下面我们基于 etcd 网关模式进行实战演练，有如下的环境：
 
-![202124-24610.png](https://s0.lgstatic.com/i/image6/M00/01/33/Cgp9HWAbYByAfA1MAANa5H93HxQ555.png)
+<Image alt="202124-24610.png" src="https://s0.lgstatic.com/i/image6/M00/01/33/Cgp9HWAbYByAfA1MAANa5H93HxQ555.png"/>
 
 启动 etcd 网关，以通过 etcd gateway 命令代理这些静态端点：
 
@@ -141,7 +141,7 @@ $ curl -L http://localhost:2379/v3/kv/put \
 
 我们在 watch 请求的执行页面，可以看到如下结果：
 
-![202124-24615.png](https://s0.lgstatic.com/i/image6/M00/01/31/CioPOWAbYCuAXNCwAAUjH7emDuI276.png)
+<Image alt="202124-24615.png" src="https://s0.lgstatic.com/i/image6/M00/01/31/CioPOWAbYCuAXNCwAAUjH7emDuI276.png"/>
 
 当写入键值后，触发了监测事件的发生，控制台输出了时间的细节。HTTP 请求客户端与 etcd 服务端建立长连接，当监听的键值对发生变更时，便会将事件通知给客户端。
 
@@ -185,7 +185,7 @@ $ curl -L http://localhost:2379/v3/kv/txn \
 
 HTTP 的方式访问 etcd 服务端，需要考虑安全的问题，gRPC-Gateway 中提供的 API 接口支持开启安全认证。通过 /v3/auth 接口设置认证，实现认证的流程如下图所示：
 
-![图片3.png](https://s0.lgstatic.com/i/image6/M00/02/F8/CioPOWAeU_iAW1x5AABp9hsIxJk379.png)
+<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image6/M00/02/F8/CioPOWAeU_iAW1x5AABp9hsIxJk379.png"/>
 
 ```java
 # 创建 root 用户
@@ -208,7 +208,7 @@ $ curl -L http://localhost:2379/v3/auth/enable -X POST -d '{}'
 
 如上的请求中，我们首先创建了 root 用户和角色，将 root 角色赋予到 root 用户，这样就可以开启用户的权限。接下来就是进行身份验证，并进行 HTTP 访问。流程如下图所示：
 
-![图片4.png](https://s0.lgstatic.com/i/image6/M00/02/FA/Cgp9HWAeVBOAboy4AAB4viPlbQo993.png)
+<Image alt="图片4.png" src="https://s0.lgstatic.com/i/image6/M00/02/FA/Cgp9HWAeVBOAboy4AAB4viPlbQo993.png"/>
 
 使用 /v3/auth/authenticate API 接口对 etcd 进行身份验证以获取身份验证令牌：
 
@@ -233,7 +233,7 @@ $ curl -L http://localhost:2379/v3/kv/put \
 
 可以看到，上述请求设置成功 Zm9v 对应的 YmFy。如果 token 不合法，会出现 401 的错误，如下所示：
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image2/M01/0C/37/CgpVE2AXy1mAIoJYAAHuUqnYrC4761.png)
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image2/M01/0C/37/CgpVE2AXy1mAIoJYAAHuUqnYrC4761.png"/>
 
 etcd gRPC-Gateway 中提供的 API 接口还有诸如 /v3/auth/role/delete、/v3/auth/role/get 等其他接口，限于篇幅，我只介绍了其中常用的几个，其他的接口可以参见：[rpc.swagger.json](https://github.com/etcd-io/etcd/blob/master/Documentation/dev-guide/apispec/swagger/rpc.swagger.json)。
 
@@ -249,6 +249,6 @@ etcd gRPC-Gateway 中提供的 API 接口还有诸如 /v3/auth/role/delete、/v3
 
 本讲主要内容如下：
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image2/M01/0C/35/Cip5yGAXy2aAZl7CAAGOud5RyFE332.png)
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image2/M01/0C/35/Cip5yGAXy2aAZl7CAAGOud5RyFE332.png"/>
 
 学完这一讲，你对 etcd 网关与 gRPC-Gateway 有什么使用方面的见解或者实践经历？欢迎在留言区和我分享。下一讲我们将会学习如何实现可伸缩的 etcd API，即 etcd gRPC 代理的模式。

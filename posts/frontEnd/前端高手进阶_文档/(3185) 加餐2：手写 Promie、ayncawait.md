@@ -303,7 +303,7 @@ resolve(x);
 
 测试结果如下图所示：
 
-![image (16).png](https://s0.lgstatic.com/i/image/M00/2B/DD/CgqCHl7_DEeALZgpAAALJ4MkJtQ487.png)
+<Image alt="image (16).png" src="https://s0.lgstatic.com/i/image/M00/2B/DD/CgqCHl7_DEeALZgpAAALJ4MkJtQ487.png"/>
 
 ### async/await
 

@@ -8,7 +8,7 @@
 
 在前面的课程中介绍过，向服务端发送创建数据节点或者添加 Watch 监控等操作时，都会先将请求信息封装成 Packet 对象。那么 Packet 是什么呢？其实\*\* Packet 可以看作是一个 ZooKeeper 定义的，用来进行网络通信的数据结构\*\*，其主要作用是封装了网络通信协议层的数据。而 Packet 内部的数据结构如下图所示：
 
-![image.png](https://s0.lgstatic.com/i/image/M00/19/3A/CgqCHl7aDQyAEkoJAAB9K_a8-pA768.png)
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/19/3A/CgqCHl7aDQyAEkoJAAB9K_a8-pA768.png"/>
 
 在 Packet 类中具有一些请求协议的相关属性字段，这些请求字段中分别包括：
 

@@ -10,7 +10,7 @@
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/6E/3E/CgpOIF5fMbaAYJFNAACF5FQCSZg598.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6E/3E/CgpOIF5fMbaAYJFNAACF5FQCSZg598.png"/>
 
 <br />
 
@@ -22,7 +22,7 @@
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/6E/3E/Cgq2xl5fMbaARPc6AAF9cLLO7pM785.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6E/3E/Cgq2xl5fMbaARPc6AAF9cLLO7pM785.png"/>
 
 <br />
 
@@ -39,7 +39,7 @@ Logging\&Metrics\&Tracing
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/6E/3E/CgpOIF5fMbeAVBbiAAKBOtXrJgg411.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6E/3E/CgpOIF5fMbeAVBbiAAKBOtXrJgg411.png"/>
 
 <br />
 
@@ -59,7 +59,7 @@ Logging\&Metrics\&Tracing
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/6E/3E/Cgq2xl5fMbeAIKO2AABvAar2e5E122.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6E/3E/Cgq2xl5fMbeAIKO2AABvAar2e5E122.png"/>
 
 <br />
 
@@ -67,7 +67,7 @@ Logging\&Metrics\&Tracing
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/6E/3E/CgpOIF5fMbeACGYWAABqbqP7vns698.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6E/3E/CgpOIF5fMbeACGYWAABqbqP7vns698.png"/>
 
 常见 APM 系统
 =========
@@ -119,7 +119,7 @@ SkyWalking 的架构图如下所示：
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/6E/3E/Cgq2xl5fMbiAd3tdAAa1Trt-kIg886.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6E/3E/Cgq2xl5fMbiAd3tdAAa1Trt-kIg886.png"/>
 
 <br />
 
@@ -139,7 +139,7 @@ SkyWalking 分为三个核心部分：
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/6E/3E/CgpOIF5fMbiAIwXlAADOeLbrwsU997.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6E/3E/CgpOIF5fMbiAIwXlAADOeLbrwsU997.png"/>
 
 <br />
 

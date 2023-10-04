@@ -182,7 +182,7 @@ input CreateUserAddressRequest {
 
 下面介绍如何使用 GraphQL 来实现乘客管理界面的 API。后台实现使用的是 Java 语言，基于 GraphQL 的 Java 实现库 [graphql-java](https://www.graphql-java.com/)，以及相应的 Spring Boot 集成库 [graphql-spring-boot](https://github.com/graphql-java-kickstart/graphql-spring-boot)。在实际的数据获取时，使用的是不同微服务 API 的 Java 客户端。完整的实现请参考 GitHub 上源代码中示例应用的 happyride-passenger-web-api-graphql 模块。下图是 GraphQL 服务的架构示意图。
 
-![image (5).png](https://s0.lgstatic.com/i/image/M00/2E/CF/Ciqc1F8Fpv-AZk1NAABk0f47qTs188.png)
+<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/2E/CF/Ciqc1F8Fpv-AZk1NAABk0f47qTs188.png"/>
 
 #### 模式
 
@@ -384,7 +384,7 @@ public class SchemaConfig {
 
 下图是使用 Insomnia 查询 GraphQL 时的截图。
 
-![insomnia.png](https://s0.lgstatic.com/i/image/M00/2E/CF/Ciqc1F8Fp3yAHFszAAMallAEM2s704.png)
+<Image alt="insomnia.png" src="https://s0.lgstatic.com/i/image/M00/2E/CF/Ciqc1F8Fp3yAHFszAAMallAEM2s704.png"/>
 
 ### 总结
 

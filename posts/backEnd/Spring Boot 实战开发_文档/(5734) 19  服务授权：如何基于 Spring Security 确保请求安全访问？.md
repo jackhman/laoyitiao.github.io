@@ -44,7 +44,7 @@ protected void configure(HttpSecurity http) throws Exception {
 
 当然，Spring Security 中还提供了很多其他有用的配置方法供开发人员灵活使用，下表中我们进行了列举，一起来看下。
 
-![Lark20210119-172757.png](https://s0.lgstatic.com/i/image2/M01/06/F3/CgpVE2AGpjqARlFfAAE9RHgwruA457.png)
+<Image alt="Lark20210119-172757.png" src="https://s0.lgstatic.com/i/image2/M01/06/F3/CgpVE2AGpjqARlFfAAE9RHgwruA457.png"/>
 
 **基于上表中的配置方法，我们就可以通过 HttpSecurity 实现自定义的授权策略。**
 

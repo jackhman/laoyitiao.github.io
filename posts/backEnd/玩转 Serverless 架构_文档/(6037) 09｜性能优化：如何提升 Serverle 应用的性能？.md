@@ -16,14 +16,14 @@
 
 在 04 讲中，我们已经学习了函数的启动过程：函数可以分为冷启动和热启动，其中冷启动要经过下载代码、初始化容器、执行初始化代码、执行函数这四个过程。
 
-![图片1.png](https://s0.lgstatic.com/i/image2/M01/06/96/CgpVE2AFehKABm9NAAPbR0FktI8010.png)  
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image2/M01/06/96/CgpVE2AFehKABm9NAAPbR0FktI8010.png"/>  
 函数的启动过程示意图
 
 从图中你可以发现，冷启动需要经过多个步骤，耗时比较长。**那实际上冷启动时间到底有多长呢？** 你可以借助链路追踪工具，比如 AWS 的 [X-Ray](https://aws.amazon.com/cn/xray/)、阿里云的[链路追踪](https://www.aliyun.com/product/xtrace)。Lambda、函数计算等 FaaS 平台也都集成了链路追踪功能，通过链路追踪你可以查询函数冷启动耗时、执行时间，进行诊断和分析 Serverless 应用的性能。
 
 下面是我创建的一个函数的调用链路图：
 
-![image.png](https://s0.lgstatic.com/i/image2/M01/06/94/Cip5yGAFejSARHsrAAJ37M2V_VY768.png)  
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image2/M01/06/94/Cip5yGAFejSARHsrAAJ37M2V_VY768.png"/>  
 函数计算链路追踪截图
 
 图中的主要信息有五点。
@@ -46,22 +46,22 @@
 
 如果所有用户的请求都是串行的，则在这个过程中，确实就只有第一次请求是冷启动。为了说明情况，我提供了一段测试程序（[地址](https://github.com/nodejh/serverless-class/tree/master/09/performance-http)），你可以将其部署在函数计算中，然后通过 charles 等工具来模拟用户连续请求该接口的情况。如图所示，在 charles 中将并发设置为 1，然后发起 100 个请求，这样函数就会被顺序调用 100 次，这 100 个请求也就是串行的。
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/8E/AC/CgqCHmAFQDGAFPLlAACdpnqR27w892.png)  
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/8E/AC/CgqCHmAFQDGAFPLlAACdpnqR27w892.png"/>  
 100 个请求，并发 1 （charles 设置）
 
 发起请求后得到的结果如下：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image2/M01/06/8F/CgpVE2AFQDmAVrrxAALO5iFN2RY126.png)  
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image2/M01/06/8F/CgpVE2AFQDmAVrrxAALO5iFN2RY126.png"/>  
 100 个请求，并发 1 （测试结果）
 
 在这个测试结果中，第一个请求耗时 770ms（我在这份代码的响应体中返回了 requestId，根据 requestId 在链路追踪中查询到第一个请求确实是冷启动）。而后面的请求都只耗时 40 ms左右，通过链路追踪分析确定都是热启动。可能对于某些性能要求不高的场景来说，在这 100 个请求中，只有一个请求是冷启动，影响的用户是 1%，是可以忍受的。
 
 **那如果用户并发访问会怎么样呢？** 毕竟用户行为是不可预测的，不可能总是串行访问。因此，让我们再来模拟发起 100 个请求，并发为 10 的情况，看一下会发生什么：
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image2/M01/06/8F/CgpVE2AFQE6AJEBXAADLKr84zKo250.png)  
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image2/M01/06/8F/CgpVE2AFQE6AJEBXAADLKr84zKo250.png"/>  
 100 个请求，并发 10 （charles 设置）
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image2/M01/06/8D/Cip5yGAFQFaAPfJDAALhBhSRm5k514.png)  
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image2/M01/06/8D/Cip5yGAFQFaAPfJDAALhBhSRm5k514.png"/>  
 100 个请求，并发 10 （测试结果）
 
 情况不乐观了，前 10 个请求都是冷启动。如果你的网站在一天内流量有波峰波谷，比如以下场景：
@@ -110,17 +110,17 @@
 
 很多初学 Serverless 的同学可能会进入一个误区：认为一个函数实例只能处理一个请求。很多早期的 FaaS 平台确实是这样设计的，但现在大多 FaaS 都支持了单实例多并发，本质上为了提升函数吞吐量，这样一个实例就可以同时处理多个请求，能够减少函数实例的生成，进而减少冷启动。
 
-![Drawing 6.png](https://s0.lgstatic.com/i/image/M00/8E/AC/CgqCHmAFQGOAalPEAAKfjpk2TGQ796.png)
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/8E/AC/CgqCHmAFQGOAalPEAAKfjpk2TGQ796.png"/>
 
 假设有 3 个并发请求同时需要处理，当函数并发为 1 时，FaaS 平台就会生成 3 个函数实例来处理这 3 个请求，每个函数实例处理一个请求，需要经过 3 次冷启动。当函数并发为 10，则只会生成一个函数实例来处理 3 个并发请求。
 
 单实例单并发的情况下，函数实例只能同时处理一个请求，处理完毕才能处理下一个请求。
 
-![Drawing 7.png](https://s0.lgstatic.com/i/image/M00/8E/AC/CgqCHmAFQG6AZtARAAFLIxd18bA584.png)
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/8E/AC/CgqCHmAFQG6AZtARAAFLIxd18bA584.png"/>
 
 而单实例多并发，函数实例则可以同时处理多个请求。
 
-![Drawing 8.png](https://s0.lgstatic.com/i/image2/M01/06/8F/CgpVE2AFQHeADlNcAAEArS4tH6M355.png)
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image2/M01/06/8F/CgpVE2AFQHeADlNcAAEArS4tH6M355.png"/>
 
 从实例的生命周期也可以看出来，单实例多并发的实例执行时间更短，这样成本自然也更低。你可能比较疑惑，单实例处理多个请求时，代码具体是怎么执行的呢？让我们看下面这段代码：
 
@@ -162,7 +162,7 @@ exports.handler = function(event, context, callback) {
 
 当然，空口无凭，不同编程语言的冷启动过耗时到底如何，最终还要靠数据说话。所以为了让结果更可行，我在函数计算中，针对 Node.js、Python、Java、PHP 这几种常见的编程语言进行了冷启动性能测试。**测试的方法是：** 我分别使用这几种编程语言实现了一个 "Hello World" 函数，然后给函数设置定时触发器，每半小时执行一次，这样函数执行时基本就是冷启动了。然后我使用链路追踪来采集冷启动耗时，最后统计每个语言的耗时。我还统计了这些函数分别在 128MB、1024MB、2008MB 这几种不同内存下的冷启动时间，最终得到了下面这张图。
 
-![Drawing 9.png](https://s0.lgstatic.com/i/image2/M01/06/8D/Cip5yGAFQIqAX7ykAACYovlO0ak428.png)
+<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image2/M01/06/8D/Cip5yGAFQIqAX7ykAACYovlO0ak428.png"/>
 
 我的统计代码在 [ClodStart Performance Test](https://github.com/nodejh/serverless-class/tree/master/09/performance-language)，你有兴趣的话也可以亲自试一下。从这张图中可以看出这些信息：
 

@@ -14,7 +14,7 @@
 
 在之前的课程中，我们知道 Deployment、StatefulSet 这类工作负载都是通过 labelSelector 来管理一组 Pod 的。那么 Kubernetes 中的 Service 也采用了同样的做法，如下图。
 
-![image (4).png](https://s0.lgstatic.com/i/image/M00/56/EA/Ciqc1F9sPFSAMnmPAAO5U6ZAsB0716.png)  
+<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/56/EA/Ciqc1F9sPFSAMnmPAAO5U6ZAsB0716.png"/>  
 
 （<https://platform9.com/wp-content/uploads/2019/05/kubernetes-service-discovery.jpg>）
 
@@ -167,7 +167,7 @@ spec:
 
 顾名思义，这种类型的 Service 通过任一 Node 节点的 IP 地址，再加上端口号就可以访问 Service 后端负载了。我们看下面这个流量图，方便理解。
 
-![image (5).png](https://s0.lgstatic.com/i/image/M00/56/F5/CgqCHl9sPGuAbYFBAAR9dQ-LWLw022.png)  
+<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/56/F5/CgqCHl9sPGuAbYFBAAR9dQ-LWLw022.png"/>  
 
 （<https://miro.medium.com/max/1680/1>\*CdyUtG-8CfGu2oFC5s0KwA.png）
 
@@ -217,7 +217,7 @@ NGINX_PROD_SVC_DEMO_PORT_80_TCP=tcp://10.111.193.186:80
 
 目前 kube-proxy 默认的工作方式是 iptables 模式，我们来通过如下一个 iptables 模式的例子来看一下实际访问链路是什么样的。
 
-![image (6).png](https://s0.lgstatic.com/i/image/M00/56/F5/CgqCHl9sPH6AMn4jAA32mDhWECM868.png)  
+<Image alt="image (6).png" src="https://s0.lgstatic.com/i/image/M00/56/F5/CgqCHl9sPH6AMn4jAA32mDhWECM868.png"/>  
 
 （<https://d33wubrfki0l68.cloudfront.net/27b2978647a8d7bdc2a96b213f0c0d3242ef9ce0/e8c9b/images/docs/services-iptables-overview.svg>）
 

@@ -139,7 +139,7 @@ cpu-demo   1000m        0Mi
 
 这里 QoS 的一个作用就是跟[oom_score](https://www.baidu.com/s?ie=utf-8&tn=baidu&wd=oom%20score)进行挂钩。Kubernetes 会根据 QoS 设置 OOM 的评分调整参数oom_score_adj，有兴趣可以阅读[详细的计算代码](https://github.com/kubernetes/kubernetes/blob/master/pkg/kubelet/qos/policy.go#L34)。当发生 OOM 时，oom_score_adj数值越高就越优先被 Kill。这里我给你展示了三个 QoS 对应的oom_score_adj计算公式。
 
-![image.png](https://s0.lgstatic.com/i/image/M00/64/34/Ciqc1F-X4kSAWDiXAABGicJIZQU816.png)
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/64/34/Ciqc1F-X4kSAWDiXAABGicJIZQU816.png"/>
 
 除此之外，QoS 还与 Pod 驱逐有关系。当节点的内存、CPU 资源不足时，Kubelet 会开始驱逐节点上的 Pod，它会依据 QoS 的优先级确定驱逐的顺序，跟上面 OOM kill 的次序一样。我们会在后续的课程中单独讲这部分。
 

@@ -43,7 +43,7 @@ NoSQL 数据库因具有庞大的数据存储需求，常被用于大数据和 C
 那么 NoSQL 数据库与 SQL 数据库的区别表现在哪呢？如下表所示。  
 表 NoSQL 数据库与 SQL 数据库的区别
 
-![image (4).png](https://s0.lgstatic.com/i/image/M00/8E/05/CgqCHmABUO2ARErIAAC-JxCHpDg212.png)
+<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/8E/05/CgqCHmABUO2ARErIAAC-JxCHpDg212.png"/>
 
 NoSQL 除了不是 SQL 外，另外一个广泛的解释是 Not Only SQL。其背后暗含：我们没有 SQL，但是有一项比 SQL 要吸引人的东西，那就是------分布式。
 

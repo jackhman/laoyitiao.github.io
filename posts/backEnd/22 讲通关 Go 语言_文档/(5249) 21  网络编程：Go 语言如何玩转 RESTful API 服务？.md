@@ -357,7 +357,7 @@ func createUser(c *gin.Context) {
 Go 语言已经给我们提供了比较强大的 SDK，让我们可以很容易地开发网络服务的应用，而借助第三方的 Web 框架，可以让这件事情更容易、更高效。比如这篇文章介绍的 Gin 框架，就可以很容易让我们开发出 RESTful API，更多关于 Gin 框架的使用可以参考 [Golang Gin 实战](https://mp.weixin.qq.com/mp/appmsgalbum?action=getalbum&album_id=1362784031968149504&__biz=MzI3MjU4Njk3Ng==#wechat_redirect)系列文章。
 
 在我们做项目开发的时候，要善于借助已经有的轮子，让自己的开发更有效率，也更容易实现。  
-![go语言金句.png](https://s0.lgstatic.com/i/image/M00/8C/DA/Ciqc1F_1dACARBqrAAVSvK3wokw352.png)  
+<Image alt="go语言金句.png" src="https://s0.lgstatic.com/i/image/M00/8C/DA/Ciqc1F_1dACARBqrAAVSvK3wokw352.png"/>  
 
 在我们做项目开发的时候，会有增、删、改和查，现在增和查你已经学会了，那么就给你留 2 个作业，任选其中 1 个即可，它们是：
 

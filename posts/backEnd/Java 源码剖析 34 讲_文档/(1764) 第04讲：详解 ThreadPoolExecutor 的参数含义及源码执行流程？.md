@@ -141,7 +141,7 @@ public void execute(Runnable command) {
 
 本课时的这道面试题考察的是你对于线程池和 ThreadPoolExecutor 的掌握程度，也属于 Java 的基础知识，几乎所有的面试都会被问到，其中线程池任务执行的主要流程，可以参考以下流程图：
 
-![](https://s0.lgstatic.com/i/image3/M01/78/50/Cgq2xl5zjxGAXOA-AABF0Dv8GMI518.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/50/Cgq2xl5zjxGAXOA-AABF0Dv8GMI518.png"/>
 
 与 ThreadPoolExecutor 相关的面试题还有以下几个：
 
@@ -194,7 +194,7 @@ Success
 
 从以上结果可以看出 submit() 方法可以配合 Futrue 来接收线程执行的返回值。它们的另一个区别是 execute() 方法属于 Executor 接口的方法，而 submit() 方法则是属于 ExecutorService 接口的方法，它们的继承关系如下图所示：
 
-![](https://s0.lgstatic.com/i/image3/M01/78/50/CgpOIF5zjxGAGu4zAAAsFgFaNvI005.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/78/50/CgpOIF5zjxGAGu4zAAAsFgFaNvI005.png"/>
 
 #### 线程池的拒绝策略
 

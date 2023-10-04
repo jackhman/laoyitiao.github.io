@@ -36,7 +36,7 @@ public static void premain(String agentArgs, Instrumentation inst){
 
 首先，我们创建一个最基本的 Maven 项目，然后创建 TestAgent.java 这一个类，项目的整体结构如图所示。
 
-![](https://s0.lgstatic.com/i/image3/M01/73/51/Cgq2xl5p4auAbrrvAACRfWvGnT4223.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/73/51/Cgq2xl5p4auAbrrvAACRfWvGnT4223.png"/>
 
 TestAgent 中提供了 premain() 方法的实现，如下所示：
 
@@ -167,7 +167,7 @@ Specification-Version: 1.0.0-SNAPSHOT
 
 下面再创建一个普通的 Maven 项目：TestMain，项目结构与 TestAgent 类似，如图所示：
 
-![](https://s0.lgstatic.com/i/image3/M01/73/51/CgpOIF5p4auARfNmAACdrDhFMHg352.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/73/51/CgpOIF5p4auARfNmAACdrDhFMHg352.png"/>
 
 在 Main 这个类中定义了该项目的入口 main() 方法，如下所示：
 
@@ -182,7 +182,7 @@ public class Main {
 
 在启动 TestMain 项目之前，需要在 VM options 中使用 -javaagent 命令指定前面创建的 test-agent.jar，如图所示：
 
-![](https://s0.lgstatic.com/i/image3/M01/73/51/Cgq2xl5p4ayACZVOAABtprd-NZA652.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/73/51/Cgq2xl5p4ayACZVOAABtprd-NZA652.png"/>
 
 启动 TestMain 之后得到了如下输出：
 
@@ -214,7 +214,7 @@ public class TestClass {
 
 编译生成 TestClass.class 文件之后，我们将 getNumber() 方法返回值修改为 2，然后再次编译，并将此次得到的 class 文件重命名为 TestClass.class.2 文件，如图所示，我们得到两个 TestClass.class 文件：
 
-![](https://s0.lgstatic.com/i/image3/M01/73/51/CgpOIF5p4ayAQ7QjAAAJJFmWXV4100.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/73/51/CgpOIF5p4ayAQ7QjAAAJJFmWXV4100.png"/>
 
 之后将 TestClass.getNumber() 方法返回值改回 1 ，重新编译。
 

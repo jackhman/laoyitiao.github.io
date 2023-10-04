@@ -119,7 +119,7 @@ bar[[scope]] = [fooContext, globalContext];
 
 运行上述代码，我们可以在控制台看到符合预期的输出：
 
-![图片2.png](https://s0.lgstatic.com/i/image6/M01/37/18/Cgp9HWB1uyGAAaZIAAK9qHI3wvE362.png)
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M01/37/18/Cgp9HWB1uyGAAaZIAAK9qHI3wvE362.png"/>
 
 可以看到：
 
@@ -255,7 +255,7 @@ console.log(b()); // 1
 
 根据 JavaScript 中函数的调用方式不同，`this`的指向分为以下情况。
 
-![this 指向.png](https://s0.lgstatic.com/i/image6/M01/37/18/Cgp9HWB1uzSAQvuHAAJh7k1PAh8263.png)
+<Image alt="this 指向.png" src="https://s0.lgstatic.com/i/image6/M01/37/18/Cgp9HWB1uzSAQvuHAAJh7k1PAh8263.png"/>
 
 * 在全局环境中，`this`指向全局对象（在浏览器中为`window`）
 

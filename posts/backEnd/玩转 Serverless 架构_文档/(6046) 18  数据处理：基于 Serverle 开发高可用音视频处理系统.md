@@ -12,7 +12,7 @@
 
 得益于云计算的发展，有些云厂商推出了对应的视频解决方案，因此你现在要搭建一个视频处理程序是很容易的（下图就是一个典型的视频处理方案）：
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image6/M01/07/36/Cgp9HWAzRsKAW-EAAATCejrS5YI741.png)  
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M01/07/36/Cgp9HWAzRsKAW-EAAATCejrS5YI741.png"/>  
 传统视频处理解决方案
 
 在该方案中，我们用 OSS 来存储海量的视频内容，视频上传后用视频转码服务将不同来源的视频进行转码，以适配各种终端，然后利用 CDN 提升客户端访问视频的速度。
@@ -31,7 +31,7 @@
 
 下图就是基于 Serverless 的视频处理系统解决方案：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image6/M01/07/36/Cgp9HWAzRsuAb0gaAAGQSnOzXmk655.png)  
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M01/07/36/Cgp9HWAzRsuAb0gaAAGQSnOzXmk655.png"/>  
 基于 Serverless 的视频处理系统
 
 用户将视频上传后 OSS 后，触发函数计算中的视频转码函数执行，该函数对视频进行转码后，将元数据存入数据库，然后将转码后的视频再保存到 OSS 中。

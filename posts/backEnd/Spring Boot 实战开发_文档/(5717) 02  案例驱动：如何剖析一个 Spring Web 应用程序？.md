@@ -4,19 +4,19 @@
 
 在典型的 Web 应用程序中，前后端通常采用基于 HTTP 协议完成请求和响应，开发过程中需要完成 URL 地址的映射、HTTP 请求的构建、数据的序列化和反序列化以及实现各个服务自身内部的业务逻辑，如下图所示：
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/70/96/CgqCHl-7WIiAQimVAABHwO_CPqU821.png)  
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/70/96/CgqCHl-7WIiAQimVAABHwO_CPqU821.png"/>  
 HTTP 请求响应过程
 
 我们先来看基于 Spring MVC 完成上述开发流程所需要的开发步骤，如下图所示：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/70/96/CgqCHl-7WI2AaDcrAABBSHVyAdE329.png)  
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/70/96/CgqCHl-7WI2AaDcrAABBSHVyAdE329.png"/>  
 基于 Spring MVC 的 Web 应用程序开发流程
 
 上图中包括使用 web.xml 定义 Spring 的 DispatcherServlet、完成启动 Spring MVC 的配置文件、编写响应 HTTP 请求的 Controller 以及将服务部署到 Tomcat Web 服务器等步骤。事实上，基于传统的 Spring MVC 框架开发 Web 应用逐渐暴露出一些问题，比较典型的就是配置工作过于复杂和繁重，以及缺少必要的应用程序管理和监控机制。
 
 如果想优化这一套开发过程，有几个点值得我们去挖掘，比方说减少不必要的配置工作、启动依赖项的自动管理、简化部署并提供应用监控等。而这些优化点恰巧推动了以 Spring Boot 为代表的新一代开发框架的诞生，基于 Spring Boot 的开发流程见下图：
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/70/8A/Ciqc1F-7WJeAHD-nAABRAXax5k4419.png)  
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/70/8A/Ciqc1F-7WJeAHD-nAABRAXax5k4419.png"/>  
 基于 Spring Boot 的 Web 应用程序开发流程
 
 从上图中可以看到，它与基于 Spring MVC 的开发流程在配置信息的管理、服务部署和监控等方面有明显不同。作为 Spring 家族新的一员，Spring Boot 提供了令人兴奋的特性，这些特性的核心价值在于确保了开发过程的简单性，具体体现在编码、配置、部署、监控等多个方面。
@@ -27,7 +27,7 @@ HTTP 请求响应过程
 
 最后，在部署方案上，Spring Boot 也创造了一键启动的新模式。Spring Boot 部署包结构参考下图：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/70/8A/Ciqc1F-7WKCALlK_AAAvL2X5nlU081.png)  
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/70/8A/Ciqc1F-7WKCALlK_AAAvL2X5nlU081.png"/>  
 Spring Boot部署包结构
 
 从图中我们可以看到，相较于传统模式下的 war 包，Spring Boot 部署包既包含了业务代码和各种第三方类库，同时也内嵌了 HTTP 容器。这种包结构支持 java --jar application.jar 方式的一键启动，不需要部署独立的应用服务器，通过默认内嵌 Tomcat 就可以运行整个应用程序。
@@ -38,7 +38,7 @@ Spring Boot部署包结构
 
 针对一个基于 Spring Boot 开发的 Web 应用程序，其代码组织方式需要遵循一定的项目结构。在 02 讲中，如果不做特殊说明，我们都将使用 Maven 来管理项目工程中的结构和包依赖。一个典型的 Web 应用程序的项目结构如下图所示：
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image/M00/70/96/CgqCHl-7WKuAE6hIAABP4_ORBpU588.png)  
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/70/96/CgqCHl-7WKuAE6hIAABP4_ORBpU588.png"/>  
 Spring Boot Web 项目结构图
 
 在上图中，有几个地方需要特别注意，我也在图中做了专门的标注，分别是包依赖、启动类、控制器类以及配置，让我们讲此部分内容分别做一些展开。
@@ -63,7 +63,7 @@ Spring Boot 提供了一系列 starter 工程来简化各种组件之间的依�
 
 如果我们使用 Spring Boot 2.2.4 版本，你会发现它所依赖的 Spring 组件都升级到了 5.X 版本，如下图所示：
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image/M00/70/8A/Ciqc1F-7WLOAHBZ_AABP1erBa_k988.png)  
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/70/8A/Ciqc1F-7WLOAHBZ_AABP1erBa_k988.png"/>  
 Spring Boot 2.2.4 版本的包依赖示意图
 
 在应用程序中引入 spring-boot-starter-web 组件就像引入一个普通的 Maven 依赖一样，如下所示。
@@ -150,7 +150,7 @@ spring:
 
 在客服系统中，我们知道其核心业务是生成客户工单。为此，customer-service 一般会与用户服务 account-service 进行交互，但因为用户账户信息的更新属于低频事件，所以我们设计的实现方式是 account-service 通过消息中间件的方式将用户账户变更信息主动推送给 customer--service，从而完成用户信息的获取操作。而针对 order-service，其定位是订单系统，customer-service 也需要从该服务中查询订单信息。SpringCSS 的整个系统交互过程如下图所示：
 
-![Drawing 6.png](https://s0.lgstatic.com/i/image/M00/70/96/CgqCHl-7WMKAR1x_AACL4oIyVgU534.png)  
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/70/96/CgqCHl-7WMKAR1x_AACL4oIyVgU534.png"/>  
 SpringCSS 系统的整体架构图
 
 在上图中，引出了构建 SpringCSS 的多项技术组件，在后续课程中我们会对这些技术组件做专题介绍。
@@ -171,7 +171,7 @@ SpringCSS 系统的整体架构图
 
 从 03 讲开始，我们就将基于 SpringCSS 案例来解析 Spring Boot 框架，首当其冲的是它的配置体系。
 
-[![1.png](https://s0.lgstatic.com/i/image/M00/6D/3E/CgqCHl-s60-AC0B_AAhXSgFweBY762.png)](https://shenceyun.lagou.com/t/Mka)
+[<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/6D/3E/CgqCHl-s60-AC0B_AAhXSgFweBY762.png"/>](https://shenceyun.lagou.com/t/Mka)
 
 **《Java 工程师高薪训练营》**
 

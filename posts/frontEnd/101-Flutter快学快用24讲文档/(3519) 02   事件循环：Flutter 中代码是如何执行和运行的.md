@@ -24,7 +24,7 @@
 
 4. 在微任务和事件任务执行过程中，同样会产生微任务和事件任务，因此需要再次判断是否需要插入微任务队列和事件任务队列。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/1D/7D/Ciqc1F7h_D2ARi2aAAJ2G36y8Ng725.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/1D/7D/Ciqc1F7h_D2ARi2aAAJ2G36y8Ng725.png"/>
 
 图 1 Dart 事件循环机制
 
@@ -75,7 +75,7 @@ event
 
 为了更清晰描述，可以我们使用图 2 动画来演示。
 
-![flutter-flow-new.gif](https://s0.lgstatic.com/i/image/M00/1D/8A/CgqCHl7h_RmAFXa9AAnXFc-CvdQ552.gif)
+<Image alt="flutter-flow-new.gif" src="https://s0.lgstatic.com/i/image/M00/1D/8A/CgqCHl7h_RmAFXa9AAnXFc-CvdQ552.gif"/>
 
 图 2 Dart 主线程运行逻辑
 
@@ -148,7 +148,7 @@ event in microtask
 
 为了更形象来描述，我使用图 3 动画来演示。
 
-![image](https://s0.lgstatic.com/i/image/M00/21/33/Ciqc1F7p3BCAAutpABeCx2dZvOo916.gif)
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/21/33/Ciqc1F7p3BCAAutpABeCx2dZvOo916.gif"/>
 
 图 3 多微任务和事件任务执行流程
 

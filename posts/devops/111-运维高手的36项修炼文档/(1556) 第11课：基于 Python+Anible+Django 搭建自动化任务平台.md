@@ -31,7 +31,7 @@ Ansible 的应用通常有两种方式，第 1 种是 adhoc（命令模式），
 
 ### playbook
 
-![](https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHCARXKPAAEGxYJzasw197.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHCARXKPAAEGxYJzasw197.png"/>
 
 <br />
 
@@ -51,7 +51,7 @@ tasks 是 playbook 具体执行的任务，这里任务是执行 shell:touch /tm
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHCAXLU8AAFRHO4gLxc907.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHCAXLU8AAFRHO4gLxc907.png"/>
 
 <br />
 
@@ -112,7 +112,7 @@ templates 里面主要放一些模板和相关的配置，我们可以把一些 
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHCARtpTAAHVwx-gTak127.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHCARtpTAAHVwx-gTak127.png"/>
 
 <br />
 
@@ -140,7 +140,7 @@ templates 里面主要放一些模板和相关的配置，我们可以把一些 
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHGAdMFQAADEpb7Dwsw655.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHGAdMFQAADEpb7Dwsw655.png"/>
 
 <br />
 
@@ -152,7 +152,7 @@ views.py 视图里面定义了一个 adhoc_task() 函数，它会来负责接收
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHGAJLotAAFmNJ-edRA051.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHGAJLotAAFmNJ-edRA051.png"/>
 
 <br />
 
@@ -181,7 +181,7 @@ PlayBookResultsCollector(CallbackBase) 跟前面类是一样的，只不过它�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHGAVPdAAADGi3JVaHk602.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHGAVPdAAADGi3JVaHk602.png"/>
 
 <br />
 
@@ -189,7 +189,7 @@ PlayBookResultsCollector(CallbackBase) 跟前面类是一样的，只不过它�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHKAPwtfAACH5Q2NW3o196.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHKAPwtfAACH5Q2NW3o196.png"/>
 
 <br />
 
@@ -197,7 +197,7 @@ PlayBookResultsCollector(CallbackBase) 跟前面类是一样的，只不过它�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHKAO35aAAGx4BbLhL0386.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHKAO35aAAGx4BbLhL0386.png"/>
 
 <br />
 
@@ -205,7 +205,7 @@ PlayBookResultsCollector(CallbackBase) 跟前面类是一样的，只不过它�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHOATKf0AATlRJB7cOI285.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHOATKf0AATlRJB7cOI285.png"/>
 
 <br />
 
@@ -213,7 +213,7 @@ PlayBookResultsCollector(CallbackBase) 跟前面类是一样的，只不过它�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/7A/CA/Cgq2xl55wHOAH6vtAAMlclXaedE645.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7A/CA/Cgq2xl55wHOAH6vtAAMlclXaedE645.png"/>
 
 <br />
 
@@ -225,7 +225,7 @@ mod_type 是直接执行 adhoc 的模块方式，这里我执行的是 Shell 的
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/7A/CA/Cgq2xl55wHOACyO2AAXukl_6PSE019.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7A/CA/Cgq2xl55wHOACyO2AAXukl_6PSE019.png"/>
 
 <br />
 
@@ -233,7 +233,7 @@ mod_type 是直接执行 adhoc 的模块方式，这里我执行的是 Shell 的
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHSAPhPbAANojZQK3YM533.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHSAPhPbAANojZQK3YM533.png"/>
 
 <br />
 
@@ -241,7 +241,7 @@ mod_type 是直接执行 adhoc 的模块方式，这里我执行的是 Shell 的
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHSAYKeEAAJCjs_ILvU244.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHSAYKeEAAJCjs_ILvU244.png"/>
 
 <br />
 

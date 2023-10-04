@@ -4,11 +4,11 @@
 
 其实 Webpack 官网首屏的英雄区就已经很清楚地描述了它的工作原理，如下图所示：
 
-![1.png](https://s0.lgstatic.com/i/image/M00/00/4E/CgqCHl6pSFmAC5UzAAEwx63IBwE024.png)
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/00/4E/CgqCHl6pSFmAC5UzAAEwx63IBwE024.png"/>
 
 那这里我们先来快速理解一下 Webpack 打包的核心工作过程。我们以一个普通的前端项目为例，项目中一般都会散落着各种各样的代码及资源文件，如下图所示：
 
-![2.png](https://s0.lgstatic.com/i/image/M00/00/4E/Ciqc1F6pSGGAc9qLAAAkYGOB6fY837.png)
+<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/00/4E/Ciqc1F6pSGGAc9qLAAAkYGOB6fY837.png"/>
 
 比如 JS、CSS、图片、字体等，这些文件在 Webpack 的思想中都属于当前项目中的一个模块。Webpack 可以通过打包，将它们最终聚集到一起。Webpack 在整个打包的过程中：
 
@@ -17,11 +17,11 @@
 
 具体来看打包的过程，Webpack 启动后，会根据我们的配置，找到项目中的某个指定文件（一般这个文件都会是一个 JS 文件）作为入口。然后顺着入口文件中的代码，根据代码中出现的 import（ES Modules）或者是 require（CommonJS）之类的语句，解析推断出来这个文件所依赖的资源模块，然后再分别去解析每个资源模块的依赖，周而复始，最后形成整个项目中所有用到的文件之间的依赖关系树，下面这个动画生动的演示了这个过程：
 
-![3.gif](https://s0.lgstatic.com/i/image/M00/00/4E/Ciqc1F6pSHiAbuTBACPS6wVVqZw547.gif)
+<Image alt="3.gif" src="https://s0.lgstatic.com/i/image/M00/00/4E/Ciqc1F6pSHiAbuTBACPS6wVVqZw547.gif"/>
 
 有了这个依赖关系树过后， Webpack 会遍历（递归）这个依赖树，找到每个节点对应的资源文件，然后根据配置选项中的 Loader 配置，交给对应的 Loader 去加载这个模块，最后将加载的结果放入 bundle.js（打包结果）中，从而实现整个项目的打包，具体操作可以参考下面的动画：
 
-![4小.gif](https://s0.lgstatic.com/i/image/M00/00/54/Ciqc1F6pUBeAfHWtAG70TcGBhSM152.gif)
+<Image alt="4小.gif" src="https://s0.lgstatic.com/i/image/M00/00/54/Ciqc1F6pUBeAfHWtAG70TcGBhSM152.gif"/>
 
 对于依赖模块中无法通过 JavaScript 代码表示的资源模块，例如图片或字体文件，一般的 Loader 会将它们单独作为资源文件拷贝到输出目录中，然后将这个资源文件所对应的访问路径作为这个模块的导出成员暴露给外部。
 
@@ -65,21 +65,21 @@ Webpack CLI 的作用就是将 CLI 参数和 Webpack 配置文件中的配置整
 
 首先，Webpack CLI 会通过 yargs 模块解析 CLI 参数，所谓 CLI 参数指的就是我们在运行 webpack 命令时通过命令行传入的参数，例如 --mode=production，具体位置如下：
 
-![5.png](https://s0.lgstatic.com/i/image/M00/00/51/Ciqc1F6pS9iAE-dtAAOjZcVPPzw330.png)
+<Image alt="5.png" src="https://s0.lgstatic.com/i/image/M00/00/51/Ciqc1F6pS9iAE-dtAAOjZcVPPzw330.png"/>
 
 紧接着后面，调用了 bin/utils/convert-argv.js 模块，将得到的命令行参数转换为 Webpack 的配置选项对象，具体操作如下：
 
-![image.png](https://s0.lgstatic.com/i/image/M00/00/53/CgqCHl6pTd-ASt6BAADU-S6qhDo690.png)
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/00/53/CgqCHl6pTd-ASt6BAADU-S6qhDo690.png"/>
 
 在 convert-argv.js 工作过程中，首先为传递过来的命令行参数设置了默认值，然后判断了命令行参数中是否指定了一个具体的配置文件路径，如果指定了就加载指定配置文件，反之则需要根据默认配置文件加载规则找到配置文件，具体代码如下：
 
-![image (1).png](https://s0.lgstatic.com/i/image/M00/00/53/Ciqc1F6pTeaAedzEAAS80vohmio167.png)
+<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/00/53/Ciqc1F6pTeaAedzEAAS80vohmio167.png"/>
 
 找到配置文件过后，将配置文件中的配置和 CLI 参数中的配置合并，如果出现重复的情况，会优先使用 CLI 参数，最终得到一个完整的配置选项。
 
 有了配置选项过后，开始载入 Webpack 核心模块，传入配置选项，创建 Compiler 对象，这个 Compiler 对象就是整个 Webpack 工作过程中最核心的对象了，负责完成整个项目的构建工作。
 
-![image (2).png](https://s0.lgstatic.com/i/image/M00/00/53/CgqCHl6pTe6AKEyAAAFWM1c2jo4379.png)
+<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/00/53/CgqCHl6pTe6AKEyAAAFWM1c2jo4379.png"/>
 
 #### 二、创建 Compiler 对象
 
@@ -87,38 +87,38 @@ Webpack CLI 的作用就是将 CLI 参数和 Webpack 配置文件中的配置整
 
 同样，这里我们需要找到这个模块的入口文件，也就是 lib/webpack.js 文件。这个文件导出的是一个用于创建 Compiler 的函数，具体如下：
 
-![image (3).png](https://s0.lgstatic.com/i/image/M00/00/53/CgqCHl6pThGAYBSpAAOrHJC19zY284.png)
+<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/00/53/CgqCHl6pThGAYBSpAAOrHJC19zY284.png"/>
 
 在这个函数中，首先校验了外部传递过来的 options 参数是否符合要求，紧接着判断了 options 的类型。
 
 根据这个函数中的代码，我们发现 options 不仅仅可以是一个对象，还可以是一个数组。如果我们传入的是一个数组，那么 Webpack 内部创建的就是一个 MultiCompiler，也就是说 Webpack 应该支持同时开启多路打包，配置数组中的每一个成员就是一个独立的配置选项。而如果我们传入的是普通的对象，就会按照我们最熟悉的方式创建一个 Compiler 对象，进行单线打包。
 
-![image (4).png](https://s0.lgstatic.com/i/image/M00/00/53/Ciqc1F6pThqAB_XKAAPEsCITm7Q145.png)
+<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/00/53/Ciqc1F6pThqAB_XKAAPEsCITm7Q145.png"/>
 
 我们顺着主线接着往下看，如下图所示：在创建了 Compiler 对象过后，Webpack 就开始注册我们配置中的每一个插件了，因为再往后 Webpack 工作过程的生命周期就要开始了，所以必须先注册，这样才能确保插件中的每一个钩子都能被命中。
 
-![image (5).png](https://s0.lgstatic.com/i/image/M00/00/53/Ciqc1F6pTiKAHHyCAAJMG1UWDSA408.png)
+<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/00/53/Ciqc1F6pTiKAHHyCAAJMG1UWDSA408.png"/>
 
 #### 三、开始构建
 
 完成 Compiler 对象的创建过后，紧接着这里的代码开始判断配置选项中是否启用了监视模式，具体操作如下：
 
-![image (6).png](https://s0.lgstatic.com/i/image/M00/00/53/Ciqc1F6pTl6AIg5uAAJLEZQnnTE844.png)
+<Image alt="image (6).png" src="https://s0.lgstatic.com/i/image/M00/00/53/Ciqc1F6pTl6AIg5uAAJLEZQnnTE844.png"/>
 
 * 如果是监视模式就调用 Compiler 对象的 watch 方法，以监视模式启动构建，但这不是我们主要关心的主线。
 * 如果不是监视模式就调用 Compiler 对象的 run 方法，开始构建整个应用。
 
 这个 run 方法定义在 Compiler 类型中，具体文件在 webpack 模块下的 lib/Compiler.js 中，代码位置如下：
 
-![image (7).png](https://s0.lgstatic.com/i/image/M00/00/53/Ciqc1F6pTmmAT8OjAALe_UlnYVs734.png)
+<Image alt="image (7).png" src="https://s0.lgstatic.com/i/image/M00/00/53/Ciqc1F6pTmmAT8OjAALe_UlnYVs734.png"/>
 
 这个方法内部就是先触发了beforeRun 和 run 两个钩子，然后最关键的是调用了当前对象的 compile 方法，真正开始编译整个项目，具体代码位置如下：
 
-![image (8).png](https://s0.lgstatic.com/i/image/M00/00/53/Ciqc1F6pTnCAIOwcAAO9SzOiSUg967.png)
+<Image alt="image (8).png" src="https://s0.lgstatic.com/i/image/M00/00/53/Ciqc1F6pTnCAIOwcAAO9SzOiSUg967.png"/>
 
 compile 方法内部主要就是创建了一个 Compilation 对象，这个对象我们在 04 课时中有提到，Compilation 字面意思是"合集"，实际上，你就可以理解为一次构建过程中的上下文对象，里面包含了这次构建中全部的资源和信息。
 
-![image (9).png](https://s0.lgstatic.com/i/image/M00/00/53/Ciqc1F6pTniAHnnDAAHoLTnzs9A306.png)
+<Image alt="image (9).png" src="https://s0.lgstatic.com/i/image/M00/00/53/Ciqc1F6pTniAHnnDAAHoLTnzs9A306.png"/>
 
 创建完 Compilation 对象过后，紧接着触发了一个叫作 make 的钩子，进入整个构建过程最核心的 make 阶段。
 
@@ -126,7 +126,7 @@ compile 方法内部主要就是创建了一个 Compilation 对象，这个对�
 
 make 阶段主体的目标就是：根据 entry 配置找到入口模块，开始依次递归出所有依赖，形成依赖关系树，然后将递归到的每个模块交给不同的 Loader 处理。
 
-![image (10).png](https://s0.lgstatic.com/i/image/M00/00/54/Ciqc1F6pTzWABOtoAAEXDnF67ow274.png)
+<Image alt="image (10).png" src="https://s0.lgstatic.com/i/image/M00/00/54/Ciqc1F6pTzWABOtoAAEXDnF67ow274.png"/>
 
 由于这个阶段的调用过程并不像之前一样，直接调用某个对象的某个方法，而是采用事件触发机制，让外部监听这个 make 事件的地方开始执行，所以从这里往后的代码可能找起来会费点劲儿。
 
@@ -134,19 +134,19 @@ make 阶段主体的目标就是：根据 entry 配置找到入口模块，开�
 
 Webpack 的插件系统是基于官方自己的 Tapable 库实现的，我们想要知道在哪里注册了某个事件，必须要知道如何注册的事件。Tapable 的注册方式具体如下：
 
-![image (11).png](https://s0.lgstatic.com/i/image/M00/00/54/CgqCHl6pT0SAQu2BAAD1mVx6IOM261.png)
+<Image alt="image (11).png" src="https://s0.lgstatic.com/i/image/M00/00/54/CgqCHl6pT0SAQu2BAAD1mVx6IOM261.png"/>
 
 所以，我们只需要通过开发工具搜索源代码中的 make.tap，就应该能够找到事件注册的位置，具体操作如下：
 
-![image (12).png](https://s0.lgstatic.com/i/image/M00/00/54/Ciqc1F6pT06AdneyAARyPGKqWLw664.png)
+<Image alt="image (12).png" src="https://s0.lgstatic.com/i/image/M00/00/54/Ciqc1F6pT06AdneyAARyPGKqWLw664.png"/>
 
 这里搜索到了六个插件中都注册了 make 事件，这些插件实际上是前面创建 Compiler 对象的时候创建的，刚刚因为没有影响，所以我们就忽略了：
 
-![image (13).png](https://s0.lgstatic.com/i/image/M00/00/54/Ciqc1F6pT1aAfcDBAANqf-qyrV8871.png)
+<Image alt="image (13).png" src="https://s0.lgstatic.com/i/image/M00/00/54/Ciqc1F6pT1aAfcDBAANqf-qyrV8871.png"/>
 
 因为我们默认使用的就是单一入口打包的方式，所以这里最终会执行其中的 SingleEntryPlugin。
 
-![image (14).png](https://s0.lgstatic.com/i/image/M00/00/54/Ciqc1F6pT12AfmmEAAF7uDrm_DY692.png)
+<Image alt="image (14).png" src="https://s0.lgstatic.com/i/image/M00/00/54/Ciqc1F6pT12AfmmEAAF7uDrm_DY692.png"/>
 
 这个插件中调用了 Compilation 对象的 addEntry 方法，开始解析我们源代码中的入口文件，以此开始"顺藤摸瓜"式的寻找。
 

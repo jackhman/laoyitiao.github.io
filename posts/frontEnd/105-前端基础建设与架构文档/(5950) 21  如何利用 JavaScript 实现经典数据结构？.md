@@ -129,7 +129,7 @@ class Queue {
 
 * 
 
-![图片12.png](https://s0.lgstatic.com/i/image6/M01/04/F5/CioPOWAvYtuAEfl-AAIhGegvMJU666.png)
+<Image alt="图片12.png" src="https://s0.lgstatic.com/i/image6/M01/04/F5/CioPOWAvYtuAEfl-AAIhGegvMJU666.png"/>
 
 首先，根据双向链表的特点，我们实现一个节点构造函数（节点类），如下代码：
 
@@ -780,6 +780,6 @@ BFS 的实现重点在于队列，而 DFS 的重点在于递归，这是它们�
 
 本讲内容总结如下：
 
-![如何利用 JavaScript 实现经典数据结构？.png](https://s0.lgstatic.com/i/image6/M00/04/F5/CioPOWAvYweAUX2mAAHhvq_M9XU847.png)
+<Image alt="如何利用 JavaScript 实现经典数据结构？.png" src="https://s0.lgstatic.com/i/image6/M00/04/F5/CioPOWAvYweAUX2mAAHhvq_M9XU847.png"/>
 
 随着需求的复杂度上升，前端工程师越来越离不开数据结构。是否能够掌握这个难点内容，将是进阶的重要考量。下一讲，我们将解析数据结构在前端中的具体应用场景，来帮助你加深理解，做到灵活应用。

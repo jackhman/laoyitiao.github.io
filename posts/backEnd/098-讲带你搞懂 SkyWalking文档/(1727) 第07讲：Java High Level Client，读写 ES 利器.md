@@ -6,7 +6,7 @@
 
 ElasticSearch 中有几个比较核心的概念，为了方便你理解，我将其与数据库中的概念进行映射，如下图所示：
 
-![](https://s0.lgstatic.com/i/image3/M01/03/81/Ciqah158kASATlQvAAApiOhG1PE953.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/03/81/Ciqah158kASATlQvAAApiOhG1PE953.png"/>
 
 注意：在老版本的 ElasticSearch 中，Index 和 Document 之间还有个 Type 的概念，每个 Index 下可以建立多个 Type，Document 存储时需要指定 Index 和 Type。从 ES 6.0 版本开始单个 Index 中只能有一个 Type，ES 7.0 版本以后将不建议使用 Type，ES 8.0 以后完全不支持 Type。
 
@@ -114,7 +114,7 @@ ElasticSearch 集群中的节点有多个可选的角色，这些角色都是通
 
 ElasticSearch 提供的副本功能就可以很好的解决这一问题，在副本模式下，每个分片分为主分片和副本分片，下图中一个 Index 有两个分片，p0 和 p1 是两个主分片，r0 和 r1 则是相应的副本分片：
 
-![](https://s0.lgstatic.com/i/image3/M01/7C/97/Cgq2xl58kASAIlnSAAA2g6WmR_U791.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7C/97/Cgq2xl58kASAIlnSAAA2g6WmR_U791.png"/>
 
 副本带来了两个好处：一个是在主分片出现故障的时候，可以通过副本继续提供服务（所以，分片副本一般不与主分片分配到同一个节点上）；另一个就是查询操作可以在分片副本上执行，因此可以提升整个 ElasticSearch 查询性能。
 
@@ -122,7 +122,7 @@ ElasticSearch 提供的副本功能就可以很好的解决这一问题，在副
 
 分片是 ElasticSearch 中最小的数据分配单位，即一个分片总是作为一个整体被分配到集群中的某个节点。继续深入分片的结构会发现，一个分片是由多个 Segment 构成的，如下图所示：
 
-![](https://s0.lgstatic.com/i/image3/M01/03/81/Ciqah158kASAPMPyAABiTVfbZ1w517.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/03/81/Ciqah158kASAPMPyAABiTVfbZ1w517.png"/>
 
 Segment 是最小的数据存储单元，ElasticSearch 每隔一段时间会产生一个新的 Segment，用于写入最新的数据。旧的 Segment 是不可改变的，只能用于数据查询，是无法继续向其中写入数据的。
 
@@ -154,7 +154,7 @@ ElasticSearch 的删除操作只是逻辑删除， 在每个 Segment 中都会�
 
 读操作分为两个阶段：查询阶段和聚合提取阶段。在查询阶段中，协调节点接受到读请求，并将请求分配到相应的分片上（如果没有特殊指定，请求可能落到主分片，也有可能落到副本分片，由协调节点的负载均衡算法来确定）。默认情况下，每个分片会创建一个固定大小的优先级队列（其中只包含 Document Id 以及 Score，并不包含 Document 的具体内容），并以 Score 进行排序，返回给协调节点。如下图所示：
 
-![](https://s0.lgstatic.com/i/image3/M01/7C/97/Cgq2xl58kASAVIIqAADyYyiGJl0221.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7C/97/Cgq2xl58kASAVIIqAADyYyiGJl0221.png"/>
 
 在聚合阶段中，协调节点会将拿到的全部优先级队列进行合并排序，然后再通过 Document ID 查询对应的 Document ，并将这些 Document 组装到队列里返回给客户端。
 

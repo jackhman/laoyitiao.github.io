@@ -12,7 +12,7 @@
 
 基于命名空间机制实现与 Spring 的整合，开发上通常采用的是固定的一个流程，包括如下所示的五大步骤：
 
-![image (10).png](https://s0.lgstatic.com/i/image/M00/5A/27/Ciqc1F90KhSANChgAACMwNPdi-8838.png)
+<Image alt="image (10).png" src="https://s0.lgstatic.com/i/image/M00/5A/27/Ciqc1F90KhSANChgAACMwNPdi-8838.png"/>
 
 这些步骤包括：编写业务对象、编写 XSD 文件、编写 BeanDefinitionParser 实现类、编写 NamespaceHandler 实现类，以及编写 spring.handlers 和 spring.schemas 配置文件，我们来看看 ShardingSphere 中实现这些步骤的具体做法。
 

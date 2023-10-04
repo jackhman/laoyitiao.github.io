@@ -10,7 +10,7 @@
 
 TraceModuleProvider 的 start() 方法核心是将 TraceSegmentReportServiceHandler 注册到 GRPCHandlerRegister 中。TraceSegmentReportServiceHandler 负责接收 Agent 发送来的 TraceSegment 数据，并调用 SegmentParseV2.parse() 方法进行解析，如下图所示：
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/1B/D7/CgqCHl7fSYGAKb4lAAEg6Xckx78215.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/1B/D7/CgqCHl7fSYGAKb4lAAEg6Xckx78215.png"/>
 
 ### SegmentParseV2
 
@@ -44,7 +44,7 @@ private boolean isV2; // 是否为 V2 版本的 TraceSegment 数据
 
 这里的 SpanListener 接口分为 GlobalTraceIdsListener、FirstSpanListener、LocalSpanListener、EntrySpanListener、ExitSpanListener 五个子接口，不同类型的子接口监听 SegmentParseV2 解析过程中产生的不同数据，如下图所示：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/1B/D7/CgqCHl7fSYqALG1gAAGuE9qIaPk072.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/1B/D7/CgqCHl7fSYqALG1gAAGuE9qIaPk072.png"/>
 
 而这五个子接口的真正实现类只有 SegmentSpanListener 三个，默认情况下都会添加到 spanListeners 集合中。
 
@@ -75,7 +75,7 @@ SegmentObject 中封装了 TraceSegment 的全部信息，其中包括 TraceSegm
 
 SegmentParseV2 解析得到的 SegmentObject 会立即封装到 SegmentDecorator 中，它是 StandardBuilder 接口的实现类，如下图所示：
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/1B/D7/CgqCHl7fSZuAcM1EAAG3Hx3xP4Y420.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/1B/D7/CgqCHl7fSZuAcM1EAAG3Hx3xP4Y420.png"/>
 
 为了更清晰的说明 StandardBuilder 对象的作用，这里以 SpanDecorator 为例进行说明。在 SpanDecorator 底层封装了 SpanObjectV2 对象以及其关联的 Builder 对象，如下所示：
 
@@ -135,7 +135,7 @@ segment.setTraceId(traceIdBuilder.toString()); // 记录traceId
 
 这里的 exchange 过程是通过 IdExchanger 接口实现的，IdExchange 接口有两个实现类，如下图所示：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/1B/CC/Ciqc1F7fSaaAbOcSAAApWn6Htjw623.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/1B/CC/Ciqc1F7fSaaAbOcSAAApWn6Htjw623.png"/>
 
 IdExchanger 接口只定义了一个 exchange() 方法，也是整个 exchange 过程的核心。下面先来分析 SpanIdExchanger 的实现，其核心字段如下：
 
@@ -288,11 +288,11 @@ RecordStreamProcessor 的核心功能是为每个 Record 类型创建相应的 w
 
 与前面介绍的 MetricsPersistentWorker 类型，RecordPersistentWorker 负责 SegmentRecord 数据的持久化：
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image/M00/1B/D7/CgqCHl7fSbWALRYDAAEn3HDWLfM382.png)
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/1B/D7/CgqCHl7fSbWALRYDAAEn3HDWLfM382.png"/>
 
 如上图所示，RecordPersistentWorker 也继承了 PersistentWorker，写入流程大致如下图所示：
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image/M00/1B/CC/Ciqc1F7fSbuAPPvbAAG3YJeCl48222.png)
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/1B/CC/Ciqc1F7fSbuAPPvbAAG3YJeCl48222.png"/>
 
 RecordPersistentWorker 有两个地方与 MetricsPersistentWorker 有些区别：
 

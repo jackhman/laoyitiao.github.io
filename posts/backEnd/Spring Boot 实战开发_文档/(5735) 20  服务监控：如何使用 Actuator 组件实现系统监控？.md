@@ -141,7 +141,7 @@ management:
 
 根据 Spring Boot Actuator 默认提供的端点列表，我们将部分常见端点的类型、路径和描述梳理在如下表格中，仅供参考。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image2/M01/08/30/Cip5yGAKfl6Af_yWAAIDoRxLU2E765.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image2/M01/08/30/Cip5yGAKfl6Af_yWAAIDoRxLU2E765.png"/>
 
 通过访问上表中的各个端点，我们就可以获取自己感兴趣的监控信息了。例如访问了<http://localhost:8082/actuator/health>端点，我们就可以得到如下所示的 account-service 基本状态。
 
@@ -195,7 +195,7 @@ Info 端点用于暴露 Spring Boot 应用的自身信息。在 Spring Boot 内�
 
 在Spring Boot 中包含了很多自动配置的 InfoContributor 对象，常见的 InfoContributor 及其描述如下表所示：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/90/47/CgqCHmAKfoOARrjaAADoOGMdQb4610.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/90/47/CgqCHmAKfoOARrjaAADoOGMdQb4610.png"/>
 
 以上表中的 EnvironmentInfoContributor 为例，通过在配置文件中添加格式以"info"作为前缀的配置段，我们就可以定义 Info 端点暴露的数据。添加完成后，我们将看到所有在"info"配置段下的属性都将被自动暴露。
 

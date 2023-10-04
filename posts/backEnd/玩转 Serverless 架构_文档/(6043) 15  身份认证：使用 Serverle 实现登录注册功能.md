@@ -28,7 +28,7 @@
 
 * 服务端接收到请求后，从 cookie 获取到 Session ID，然后根据 Session ID 解析出用户信息。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/94/3B/Ciqc1GAXxNGAVJ2eAAHjY3afYhk253.png)  
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/94/3B/Ciqc1GAXxNGAVJ2eAAHjY3afYhk253.png"/>  
 Cookie-Session 身份认证流程
 
 这种方案存在两个主要问题：
@@ -41,7 +41,7 @@ Cookie-Session 身份认证流程
 
 于是 Cookie-Session 的身份认证方案就发生了变化：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/94/3B/Ciqc1GAXxOKAJBiFAALzfxQb7r8244.png)  
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/94/3B/Ciqc1GAXxOKAJBiFAALzfxQb7r8244.png"/>  
 基于共享存储的 Cookie-Session 身份认证流程
 
 与早期方案不同，用户登录时，该方案会把用户信息保存在 Redis 中，而不是内存中，然后服务端依然会将 Session ID 返回给浏览器，浏览器将其保存在 cookie 中。而之后非登录的请求，浏览器依然会将包含 Session ID 的 cookie 放在请求头中发送给服务端，服务端拿到 Session ID 后，从 Redis 中查询出用户信息。这样就可以解决分布式、无状态的系统中用户登录状态共享问题。
@@ -60,7 +60,7 @@ JWT 是（JSON Web Token）的简称，其原理是：
 
 * 服务端接收到 token 后，验证 token 的合法性，并从 token 中解析出用户信息。
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/94/46/CgqCHmAXxOyAImLQAAHmAyEZuFk591.png)  
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/94/46/CgqCHmAXxOyAImLQAAHmAyEZuFk591.png"/>  
 JWT 身份认证流程
 
 token 是个比较长字符串，格式为`Header.Payload.Signature`，由`.`分隔为三部分。下面是一个实际的 token 示例：
@@ -411,7 +411,7 @@ Serverless 应用的身份认证，本质上是要将有状态的认证方案改
 
 * 使用无状态的身份认证方案，比如 JWT。
 
-![玩转 Serverless 架构15金句.png](https://s0.lgstatic.com/i/image6/M01/04/32/CioPOWAj2_2AUoDKAAEU4YVNqFA780.png)
+<Image alt="玩转 Serverless 架构15金句.png" src="https://s0.lgstatic.com/i/image6/M01/04/32/CioPOWAj2_2AUoDKAAEU4YVNqFA780.png"/>
 
 当然了，除了自己实现应用的身份认证，你也可以使用第三方的身份认证服务，比如 AWS Cognito、Google Firebase 等，基于它们，你就不用自己开发用户管理及身份认证功能了。
 

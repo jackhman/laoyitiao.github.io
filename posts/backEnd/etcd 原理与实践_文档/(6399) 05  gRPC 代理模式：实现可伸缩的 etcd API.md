@@ -6,7 +6,7 @@ gRPC proxy 是在 gRPC 层（L7）运行的无状态 etcd 反向代理，旨在*
 
 首先我们来配置 etcd 集群，集群中拥有如下的静态成员信息：
 
-![202125-92345.png](https://s0.lgstatic.com/i/image6/M00/02/39/CioPOWAdDsCAOeHvAACGoxT-wS8912.png)
+<Image alt="202125-92345.png" src="https://s0.lgstatic.com/i/image6/M00/02/39/CioPOWAdDsCAOeHvAACGoxT-wS8912.png"/>
 
 使用`etcd grpc-proxy start`的命令开启 etcd 的 gRPC proxy 模式，包含上表中的静态成员：
 
@@ -57,7 +57,7 @@ ETCDCTL_API=3 etcdctl --endpoints=http://localhost:23790 member list --write-out
 
 通过下图，可以看到，通过相同的前缀端点名完成了自动发现所有成员列表的操作。
 
-![202125-92351.png](https://s0.lgstatic.com/i/image6/M00/02/39/CioPOWAdDuaAL9IoAAMgcPZE1jc101.png)
+<Image alt="202125-92351.png" src="https://s0.lgstatic.com/i/image6/M00/02/39/CioPOWAdDuaAL9IoAAMgcPZE1jc101.png"/>
 
 同样地，客户端也可以通过 Sync 方法自动发现代理的端点，代码实现如下：
 
@@ -94,7 +94,7 @@ ETCDCTL_API=3 etcdctl --endpoints=http://localhost:23792 member list --write-out
 
 通过下图，可以看到，结果如我们预期：当我们**没有配置代理的前缀端点名时，获取其成员列表只会显示当前节点的信息，也不会包含其他的端点**。
 
-![202125-92353.png](https://s0.lgstatic.com/i/image6/M00/02/3B/Cgp9HWAdDu2Afub8AAI6unk0A5A099.png)
+<Image alt="202125-92353.png" src="https://s0.lgstatic.com/i/image6/M00/02/3B/Cgp9HWAdDu2Afub8AAI6unk0A5A099.png"/>
 
 ### 可伸缩的 watch API
 
@@ -104,7 +104,7 @@ ETCDCTL_API=3 etcdctl --endpoints=http://localhost:23792 member list --write-out
 
 如下图所示，三个客户端监视键 A。gRPC 代理将三个监视程序合并，从而创建一个附加到 etcd 服务器的监视程序。
 
-![202125-92355.png](https://s0.lgstatic.com/i/image6/M00/02/39/CioPOWAdDvWAAhlsAADrPgju77A709.png)
+<Image alt="202125-92355.png" src="https://s0.lgstatic.com/i/image6/M00/02/39/CioPOWAdDvWAAhlsAADrPgju77A709.png"/>
 
 为了有效地将多个客户端监视程序合并为一个监视程序，gRPC 代理在可能的情况下将新的 c-watcher 合并为现有的 s-watcher。由于网络延迟或缓冲的未传递事件，合并的 s-watcher 可能与 etcd 服务器不同步。
 
@@ -122,7 +122,7 @@ ETCDCTL_API=3 etcdctl --endpoints=http://localhost:23792 member list --write-out
 
 在下图示例中，三个客户端更新了三个独立的租约（L1、L2 和 L3）。gRPC 代理将三个客户端租约流（c-stream）合并为连接到 etcd 服务器的单个租约（s-stream），以保持活动流。代理将客户端租约的心跳从 c-stream 转发到 s-stream，然后将响应返回到相应的 c-stream。
 
-![202125-92357.png](https://s0.lgstatic.com/i/image6/M00/02/3C/Cgp9HWAdDwCAZYOCAAC-ZGY7vng236.png)
+<Image alt="202125-92357.png" src="https://s0.lgstatic.com/i/image6/M00/02/3C/Cgp9HWAdDwCAZYOCAAC-ZGY7vng236.png"/>
 
 除此之外，gRPC 代理在满足一致性时会缓存请求的响应。该功能可以保护 etcd 服务器免遭恶意 for 循环中滥用客户端的攻击。
 
@@ -165,10 +165,10 @@ gRPC 代理的功能非常强大，除了上述提到的客户端端点同步、
 
 gRPC 代理为`--endpoints`定义的 etcd 成员公开了`/health`和 Prometheus 的`/metrics`接口。我们通过浏览器访问这两个接口：
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image/M00/94/3D/Ciqc1GAXy8qAAw3iAAaZ1XYdHxw861.png)  
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/94/3D/Ciqc1GAXy8qAAw3iAAaZ1XYdHxw861.png"/>  
 访问 metrics 接口的结果
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image/M00/94/48/CgqCHmAXy8-AZ0q5AACKTo_Vhhg176.png)  
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/94/48/CgqCHmAXy8-AZ0q5AACKTo_Vhhg176.png"/>  
 访问 health 接口的结果
 
 通过代理访问`/metrics`端点的结果如上图所示 ，其实和普通的 etcd 集群实例没有什么区别，同样也会结合一些中间件进行统计和页面展示，如 Prometheus 和 Grafana 的组合。
@@ -228,7 +228,7 @@ $ ETCDCTL_API=3 etcdctl --endpoints=http://localhost:12379 put abc def
 
 这一讲我们主要介绍了 etcd 中的 gRPC proxy。本讲主要内容如下：
 
-![202125-92359.png](https://s0.lgstatic.com/i/image6/M00/02/39/CioPOWAdDxKAFk1BAAIimkNUiSk285.png)
+<Image alt="202125-92359.png" src="https://s0.lgstatic.com/i/image6/M00/02/39/CioPOWAdDxKAFk1BAAIimkNUiSk285.png"/>
 
 gRPC 代理用于支持多个 etcd 服务器端点，当代理启动时，它会随机选择一个 etcd 服务器端点来使用，该端点处理所有请求，直到代理检测到端点故障为止。如果 gRPC 代理检测到端点故障，它将切换到其他可用的端点，对客户端继续提供服务，并且隐藏了存在问题的 etcd 服务端点。
 

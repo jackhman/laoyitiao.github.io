@@ -87,7 +87,7 @@ self.driver.find_element(By.CSS_SELECTOR,'#search-term')
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/6D/3D/Cgq2xl5c9UOARr4jAAG5zhiZE-8151.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6D/3D/Cgq2xl5c9UOARr4jAAG5zhiZE-8151.png"/>
 
 <br />
 

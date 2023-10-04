@@ -20,7 +20,7 @@ implementation 'io.springfox:springfox-data-rest:3.0.0'
 
 添加完依赖之后，我们可以通过 gradle 的依赖视图看一下都用了哪些 jar 包。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image2/M01/03/D1/CgpVE1_i5W-ASHQlAAGMwEhDK_w968.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image2/M01/03/D1/CgpVE1_i5W-ASHQlAAGMwEhDK_w968.png"/>
 
 通过上图可以很清晰地看到 spring-data-rest 的 jar 包引入情况，以及我们依赖的 spring-data-jpa 和 Swagger。
 
@@ -43,15 +43,15 @@ spring.data.rest.base-path=api/rest/v2
 
 启动成功之后，我们就会发现，里面多了很多 api/rest/v2 等 Rest 风格的 API，并且可以直接使用。如下图所示，不只有我们自己的 Controller，还有 Spring DataRest 自己生成的 API。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image2/M01/03/CF/Cip5yF_i5XaAfkQUAAOu3Oghurk191.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image2/M01/03/CF/Cip5yF_i5XaAfkQUAAOu3Oghurk191.png"/>
 
 这时我们打开 Swagger 看一下：<http://127.0.0.1:8087/swagger-ui/>
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image2/M01/03/D1/CgpVE1_i5X2AaQhNAAIRIf6mhUk512.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image2/M01/03/D1/CgpVE1_i5X2AaQhNAAIRIf6mhUk512.png"/>
 
 由于我们的 Demo 的项目结构是下图所示这样的。
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image2/M01/03/CF/Cip5yF_i5YKAdyZXAACzqZkR3vs585.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image2/M01/03/CF/Cip5yF_i5YKAdyZXAACzqZkR3vs585.png"/>
 
 你会发现有几个 Repository 会帮我们生成几个对应的 Rest 协议的 API，除了基本的 CRUD，例如 UserInfoRespository 自定义的方法它们也会帮我们展示出来。而 Room 实体我们没有对应的 Repository，所以不会有对应的 Rest 风格 API 生成。
 
@@ -70,7 +70,7 @@ public interface AddressRepository extends JpaRepository<Address, Long>{
 
 它帮我们生成的 API 有下图所示的这些。
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image2/M01/03/D1/CgpVE1_i5YqAX6zIAAD0ZWEXWfU636.png)
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image2/M01/03/D1/CgpVE1_i5YqAX6zIAAD0ZWEXWfU636.png"/>
 
 从 swagger 我们可以看到 Spring Data Rest 的几点用法。
 
@@ -106,7 +106,7 @@ public interface AddressRepository extends JpaRepository<Address, Long>{
 
 通过 Swagger，我们可以看到其完全对分页和排序进行支持，完全兼容我们之前讲过的 Spring Data JPA 的分页和排序的参数，如下图所示。
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image2/M01/03/CF/Cip5yF_i5ZKAMXN9AADg4CrauLY452.png)
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image2/M01/03/CF/Cip5yF_i5ZKAMXN9AADg4CrauLY452.png"/>
 
 #### 通过 @RepositoryRestResource 改变资源的 metaData
 
@@ -139,7 +139,7 @@ public interface UserInfoRepository extends JpaRepository<UserInfo, Long> {}
 
 这时通过 Swagger 可以看到，url 的 path 上面变成了 users，而 body 里面的资源名字变成了 userInfo，取 itemResource 的 URL 描述变成了 userDetail，如下图所示。
 
-![Drawing 6.png](https://s0.lgstatic.com/i/image2/M01/03/D1/CgpVE1_i5ZyADJsUAAGZTJ31fiw252.png)
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image2/M01/03/D1/CgpVE1_i5ZyADJsUAAGZTJ31fiw252.png"/>
 
 @RepositoryRestResource 是使用在 Repository 类上面的全局设置，我们也可以针对具体的 Repsitory 里面的每个方法进行单独设置，这就是另外一个注解：@RestResource。
 
@@ -170,7 +170,7 @@ public interface AddressRepository extends JpaRepository<Address, Long>{
 
 我们打开 Swagger 看一下结果，会发现 search 后面的 path 路径被自定义了，如下图所示。
 
-![Drawing 7.png](https://s0.lgstatic.com/i/image2/M01/03/D1/CgpVE1_i5aSAGiOEAABI57HiU0g381.png)
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image2/M01/03/D1/CgpVE1_i5aSAGiOEAABI57HiU0g381.png"/>
 
 同时这个注解也可以配置在关联关系上，如 @OneToMany 等。如果我们不想某些方法暴露成 RestAPI，就直接添加 @RestResource(exported = false) 这一注解即可，例如一些删除方法等。
 
@@ -178,11 +178,11 @@ public interface AddressRepository extends JpaRepository<Address, Long>{
 
 这个可以直接在 application.properties 里面配置，我们在 IDEA 里面输入前缀的时候，就会有如下提示。
 
-![Drawing 8.png](https://s0.lgstatic.com/i/image2/M01/03/CF/Cip5yF_i5auAW0BTAAEFk4n5M4c741.png)
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image2/M01/03/CF/Cip5yF_i5auAW0BTAAEFk4n5M4c741.png"/>
 
 对应的描述如下表所示。
 
-![Lark20201224-161329.png](https://s0.lgstatic.com/i/image/M00/8C/0E/CgqCHl_kTcWAS5aJAAC14Y9YPQ4842.png)
+<Image alt="Lark20201224-161329.png" src="https://s0.lgstatic.com/i/image/M00/8C/0E/CgqCHl_kTcWAS5aJAAC14Y9YPQ4842.png"/>
 
 Spring Data Rest 的常见用法我们介绍完了，之前还讲过 Spring Data JPA 对 Jackson 的支持，它在 Spring Data Rest 里面完全适用，下面来看一下。
 
@@ -208,7 +208,7 @@ public class Address extends BaseEntity {
 
 我们通过 Swagger 里面的 Description 可以看到，当前的资源的描述发生了变化，字段名变成了 myCity，address 属性没有了，具体如下图所示。
 
-![Drawing 9.png](https://s0.lgstatic.com/i/image2/M01/03/D1/CgpVE1_i5bSAA7YZAAE7YXeoJQY773.png)
+<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image2/M01/03/D1/CgpVE1_i5bSAA7YZAAE7YXeoJQY773.png"/>
 
 Spring Data Rest 返回 ResponseBody 的原理和接收 RequestBody 的原理都是基于 JSON 格式的，我们之前讲的 Jackson 的所有注解语法同样适用。
 

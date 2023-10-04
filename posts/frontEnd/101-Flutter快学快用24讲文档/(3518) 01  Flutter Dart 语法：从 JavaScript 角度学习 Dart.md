@@ -6,7 +6,7 @@
 
 与 JavaScript 相比较，我们整体上看一下图 1 两种语言的对比情况，相似的部分这里就不介绍了，比如 Number 和 String，其使用方式基本一致。下面主要基于两者的差异点逐一讲解，避免混淆或错误使用。
 
-![image (4).png](https://s0.lgstatic.com/i/image/M00/1C/5F/CgqCHl7gWVGAdOndAACK0gUBRW0309.png)
+<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/1C/5F/CgqCHl7gWVGAdOndAACK0gUBRW0309.png"/>
 
 图 1 Dart 与 JavaScript 基础数据类型对比
 

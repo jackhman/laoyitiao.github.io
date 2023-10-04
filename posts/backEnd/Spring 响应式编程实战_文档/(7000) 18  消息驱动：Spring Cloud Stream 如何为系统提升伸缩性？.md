@@ -10,7 +10,7 @@ Spring Cloud Streams 为异步跨服务消息通信提供了简化的编程模�
 
 Spring Cloud Stream 中有三个角色，即消息的发布者、消费者以及消息通信系统本身，以消息通信系统为中心，整个工作流程表现为一种对称结构，如下图所示。
 
-![图片7.png](https://s0.lgstatic.com/i/image6/M00/3A/E1/CioPOWCBSkeATpnCAAD7HNvxzLk301.png)  
+<Image alt="图片7.png" src="https://s0.lgstatic.com/i/image6/M00/3A/E1/CioPOWCBSkeATpnCAAD7HNvxzLk301.png"/>  
 Spring Cloud Stream 工作流程图
 
 在上图中，充当消息发布者的服务 A 根据业务需要产生消息发送的需求，Spring Cloud Stream 中的 Source 组件是真正生成消息的组件，然后消息通过 Channel 传送到 Binder，这里的 Binder 是一个抽象组件，通过 Binder，Channel 可以与特定的消息中间件进行通信。在 Spring Cloud Stream 中，目前已经内置集成的消息中间件实现工具包括 RabbitMQ 和 Kafka。

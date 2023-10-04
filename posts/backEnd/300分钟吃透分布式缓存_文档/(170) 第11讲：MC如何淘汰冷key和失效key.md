@@ -4,7 +4,7 @@
 
 Mc 作为缓存组件，意味着 Mc 中只能存储访问最频繁的热数据，一旦存入数据超过内存限制，就需要对 Mc 中的冷 key 进行淘汰工作。Mc 中的 key 基本都会有过期时间，在 key 过期后，出于性能考虑，Mc 并不会立即删除过期的 key，而是由维护线程逐步清理，同时，只有这个失效的 key 被访问时，才会进行删除，从而回收存储空间。所以 Mc 对 key 生命周期的管理，即 Mc 对 key 的淘汰，包括失效和删除回收两个纬度，知识结构如下图所示。
 
-![](http://s0.lgstatic.com/i/image2/M01/99/C1/CgoB5l2lMr6ASGzEAACB7rAcaqU851.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/C1/CgoB5l2lMr6ASGzEAACB7rAcaqU851.png"/>
 
 key 的失效，包括 key 在 expire 时间之后的过期，以及用户在 flush_all 之后对所有 key 的过期 2 种方式。
 
@@ -44,19 +44,19 @@ Mc 在插入或变更 key 时，首先会在适合的 slabclass 为新的 key/va
 
 Mc 在新写入 key 时，如果 key 的过期时间小于 61s，就会直接插入到 TEMP LRU 中，如下图所示。TEMP LRU 没有长度限制，可以一直插入，同时因为过期时间短，TEMP LRU 不进行队列内部的搬运和队列间的迁移，确保处理性能最佳。LRU 维护线程在 sleep 完毕后，首先会对 TEMP LRU 队尾进行 500 次轮询，然后在每次轮询时，会进行 5 次小循环。小循环时，首先检查 key是否过期失效，如果失效则进行回收淘汰，然后继续小循环；如果遇到一个没失效的 key，则回收该 key 并退出 TEMP LRU 的清理工作。如果 TEMP LRU 队尾 key 全部失效，维护线程一次可以回收 500\*5 共 2500 个失效的 key。
 
-![](http://s0.lgstatic.com/i/image2/M01/99/E1/CgotOV2lMr-AaQVZAAC-AitDERU510.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/E1/CgotOV2lMr-AaQVZAAC-AitDERU510.png"/>
 
 如下图，MC 在新写入 key 时，如果 key 的过期时间超过 61s，就会直接插入到 HOT LRU。HOT LRU 会有内存限制，每个 HOT LRU 所占内存不得超过所在 slabclass 总实际使用内存的 20%。LRU 维护线程在执行日常维护工作时，首先对 TEMP LRU 进行清理，接下来就会对 HOT LRU 进行维护。HOT LRU 的维护，也是首先轮询 500 次，每次轮询进行 5 次小循环，小循环时，首先检查 key 是否过期失效，如果失效则进行回收淘汰，然后继续小循环。直到遇到没失效的 key。如果这个 key 的状态是 ACTIVE，则迁移到 WARM LRU。对于非 ACTIVE 状态的 key，如果 HOT LRU 内存占用超过限制，则迁移到 COLD LRU，否则进行纾困性清理掉该 key，注意这种纾困性清理操作一般不会发生，一旦发生时，虽然会清理掉该 key，但操作函数此时也认定本次操作回收和清理 keys 数仍然为 0。
 
-![](http://s0.lgstatic.com/i/image2/M01/99/C1/CgoB5l2lMr-Adai5AADecNLamqw346.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/C1/CgoB5l2lMr-Adai5AADecNLamqw346.png"/>
 
 如下图，如果 HOT LRU 中回收和迁移的 keys 数为 0，LRU 维护线程会对 WARM LRU 进行轮询。WARM LRU 也有内存限制，每个 WARM LRU 所占内存不得超过所在 slabclass 总实际使用内存的 40%。WARM LRU 的维护，也是首先轮询 500 次，每次轮询进行 5 次小循环，小循环时，首先检查 key 是否过期失效，如果失效则进行回收淘汰，然后继续小循环。直到遇到没失效的 key。如果这个 key 的状态是 ACTIVE，则内部搬运到 LRU 队列头部。对于非 ACTIVE 状态的 key，如果 WARM LRU 内存占用超过限制，则迁移到 COLD LRU，否则进行纾困性清理掉该 key。注意这种纾困性清理操作一般不会发生，一旦发生时，虽然会清理掉该 key，但操作函数此时也认定本次操作回收和清理 keys 数仍然为 0。
 
-![](http://s0.lgstatic.com/i/image2/M01/99/E1/CgotOV2lMr-AYNh7AAEBqGNruvU217.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/E1/CgotOV2lMr-AYNh7AAEBqGNruvU217.png"/>
 
 LRU 维护线程最后会对 COLD LRU 进行维护，如下图。与 TEMP LRU 相同，COLD LRU 也没有长度限制，可以持续存放数据。COLD LRU 的维护，也是首先轮询 500 次，每次轮询进行 5 次小循环，小循环时，首先检查 key 是否过期失效，如果失效则进行回收淘汰，然后继续小循环。直到遇到没失效的 key。如果这个 key 的状态是 ACTIVE，则会迁移到 WARM LRU 队列头部，否则不处理直接返回。
 
-![](http://s0.lgstatic.com/i/image2/M01/99/C1/CgoB5l2lMr-AVx39AADL6FNQktQ690.png)
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/C1/CgoB5l2lMr-AVx39AADL6FNQktQ690.png"/>
 
 LRU 维护线程处理时，TEMP LRU 是在独立循环中进行，其他三个 LRU 在另外一个循环中进行，如果 HOT、WARM、COLD LRU 清理或移动的 keys 数为 0，则那个 500 次的大循环就立即停止。
 

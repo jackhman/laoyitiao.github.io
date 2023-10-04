@@ -8,7 +8,7 @@
 
 我们来看一个案例。如下图所示场景：点击左图播放按钮后，页面出现视频列表浮层（如右侧图所示，类似单页应用，视频列表仍为同一页面）。视频列表浮层包含了滚动处理、视频播放等多项复杂逻辑，因此这个浮层对应的脚本在页面初始化时，不需要被加载。那么在工程上，我们需要对视频浮层脚本单独进行拆分，和初始化脚本进行分离。当用户点击浮层触发按钮后，执行某一单独部分脚本的请求。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/8D/42/Ciqc1F_9Bu2AB133AAluXVg4Mlw240.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/8D/42/Ciqc1F_9Bu2AB133AAluXVg4Mlw240.png"/>
 
 这其实是一个我接手并重构过的真实线上案例，通过后期对页面交互的统计数据分析发现，用户点击触发视频浮层出现按钮的概率只有 10% 左右。也就是说，大部分用户（90%）并不会看到这一浮层，也就不需要对相关脚本进行加载执行，因此延迟按需加载设计是有统计数据支持的。现在你已经了解了这个场景，下面我们从技术环节详细展开。
 
@@ -511,7 +511,7 @@ eval("__webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(nul
 
 完整的源码内容我们不再一一粘贴，你可以参考下图的整个处理流程：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image2/M01/05/28/Cip5yF_9BziALsMpAAFUvdp7KoQ251.png)  
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image2/M01/05/28/Cip5yF_9BziALsMpAAFUvdp7KoQ251.png"/>  
 webpack_require.e 处理流程图
 
 #### Webpack 中 splitChunk 插件和代码分割
@@ -550,7 +550,7 @@ import(/* webpackChunkName: "module.js" */"./module.js").then(module => {
 
 依赖关系图如下图所示：
 
-![Lark20210112-163942.png](https://s0.lgstatic.com/i/image/M00/8D/58/CgqCHl_9YFqAKybyAAGp092kEyI435.png)  
+<Image alt="Lark20210112-163942.png" src="https://s0.lgstatic.com/i/image/M00/8D/58/CgqCHl_9YFqAKybyAAGp092kEyI435.png"/>  
 三重依赖关系图
 
 最终打包结果会按需动态引入 async.js，同时 module.js 也被成功单独拆分出来。
@@ -565,7 +565,7 @@ import(/* webpackChunkName: "module.js" */"./module.js").then(module => {
 
 * 最后，我们通过对 Webpack 能力的探究，剖析了如何在工程中实现代码拆分和按需加载。
 
-![Lark20210112-163852.png](https://s0.lgstatic.com/i/image2/M01/05/34/CgpVE1_9YDyAVOWwAAel8VpUNt4885.png)
+<Image alt="Lark20210112-163852.png" src="https://s0.lgstatic.com/i/image2/M01/05/34/CgpVE1_9YDyAVOWwAAel8VpUNt4885.png"/>
 
 在实际工作中，我希望你能利用本节内容，并结合项目实际情况，排查代码拆分和按需加载是否合理；如果有不合理之处，可以动手实践、实验，进行论证。
 

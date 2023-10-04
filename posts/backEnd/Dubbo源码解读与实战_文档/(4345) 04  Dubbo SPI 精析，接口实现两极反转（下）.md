@@ -36,11 +36,11 @@ dubbo=org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol
 
 Dubbo 中某个接口被 @SPI注解修饰时，就表示该接口是**扩展接口**，前文示例中的 org.apache.dubbo.rpc.Protocol 接口就是一个扩展接口：
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/3E/A4/CgqCHl8s936AYuePAABLd6cRz6w646.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/3E/A4/CgqCHl8s936AYuePAABLd6cRz6w646.png"/>
 
 @SPI 注解的 value 值指定了默认的扩展名称，例如，在通过 Dubbo SPI 加载 Protocol 接口实现时，如果没有明确指定扩展名，则默认会将 @SPI 注解的 value 值作为扩展名，即加载 dubbo 这个扩展名对应的 org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol 这个扩展实现类，相关的 SPI 配置文件在 dubbo-rpc-dubbo 模块中，如下图所示：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/3E/A4/CgqCHl8s94mAaj2mAABcaXHNXqc467.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/3E/A4/CgqCHl8s94mAaj2mAABcaXHNXqc467.png"/>
 
 **那 ExtensionLoader 是如何处理 @SPI 注解的呢？**
 
@@ -59,7 +59,7 @@ Protocol protocol = ExtensionLoader
  DubboInternalLoadingStrategy > DubboLoadingStrategy > ServicesLoadingStrateg
 ```
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/3E/99/Ciqc1F8s95mANXYKAADUVwBlgxs297.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/3E/99/Ciqc1F8s95mANXYKAADUVwBlgxs297.png"/>
 
 * **EXTENSION_LOADERS（ConcurrentMap\<Class, ExtensionLoader\>类型）**   
 
@@ -159,7 +159,7 @@ private T createExtension(String name) {
 
 @Adaptive 注解用来实现 Dubbo 的适配器功能，那什么是适配器呢？这里我们通过一个示例进行说明。Dubbo 中的 ExtensionFactory 接口有三个实现类，如下图所示，ExtensionFactory 接口上有 @SPI 注解，AdaptiveExtensionFactory 实现类上有 @Adaptive 注解。
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/3E/99/Ciqc1F8s-D6AZFtdAAC318rtQ-I710.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/3E/99/Ciqc1F8s-D6AZFtdAAC318rtQ-I710.png"/>
 
 AdaptiveExtensionFactory 不实现任何具体的功能，而是用来适配 ExtensionFactory 的 SpiExtensionFactory 和 SpringExtensionFactory 这两种实现。AdaptiveExtensionFactory 会根据运行时的一些状态来选择具体调用 ExtensionFactory 的哪个实现。
 
@@ -203,7 +203,7 @@ public class Transporter$Adaptive implements Transporter {
 
 明确了 @Adaptive 注解的作用之后，我们回到 ExtensionLoader.createExtension() 方法，其中在扫描 SPI 配置文件的时候，会调用 loadClass() 方法加载 SPI 配置文件中指定的类，如下图所示：
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image/M00/3E/A5/CgqCHl8s-H2AJE1LAACILXqbtHY819.png)
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/3E/A5/CgqCHl8s-H2AJE1LAACILXqbtHY819.png"/>
 
 loadClass() 方法中会识别加载扩展实现类上的 @Adaptive 注解，将该扩展实现的类型缓存到 cachedAdaptiveClass 这个实例字段上（volatile修饰）：
 
@@ -442,7 +442,7 @@ public List<T> getActivateExtension(URL url, String[] values,
 
 最后举个简单的例子说明上述处理流程，假设 cachedActivates 集合缓存的扩展实现如下表所示：
 
-![11.png](https://s0.lgstatic.com/i/image/M00/3E/CB/CgqCHl8tNGCAIw8fAACXC_dle_g809.png)
+<Image alt="11.png" src="https://s0.lgstatic.com/i/image/M00/3E/CB/CgqCHl8tNGCAIw8fAACXC_dle_g809.png"/>
 
 在 Provider 端调用 getActivateExtension() 方法时传入的 values 配置为 "demoFilter3、-demoFilter2、default、demoFilter1"，那么根据上面的逻辑：
 

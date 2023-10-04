@@ -8,7 +8,7 @@ JMS（Java Messaging Service）是一种 Java 消息服务，它基于消息传�
 
 JMS 规范提供了一批核心接口供开发人员使用，而这些接口构成了客户端的 API 体系，如下图所示：
 
-![图片2.png](https://s0.lgstatic.com/i/image2/M01/04/A0/CgpVE1_0G4iAFaHdAADIv5Y696k445.png)  
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image2/M01/04/A0/CgpVE1_0G4iAFaHdAADIv5Y696k445.png"/>  
 JMS 规范中的核心 API
 
 上图中可以看到，我们可以通过 ConnectionFactory 创建 Connection，作为客户端的 MessageProducer 和 MessageConsumer 通过 Connection 提供的会话（Session）与服务器进行交互，而交互的媒介就是各种经过封装、包含目标地址（Destination）的消息。
@@ -233,7 +233,7 @@ ActiveMQ 是本专栏中使用到的第二款消息中间件，因为每款消�
 
 在 account-service 中，我们可以根据 Profile 构建如下所示的配置文件体系。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image2/M01/03/CB/Cip5yF_ivRuAdYV0AAANYpYvrk4834.png)  
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image2/M01/03/CB/Cip5yF_ivRuAdYV0AAANYpYvrk4834.png"/>  
 account-service 中的配置文件
 
 从以上图中可以看到：根据三种不同的中间件，我们分别提供了三个配置文件。以其中的 application-activemq.yml 为例，其包含的配置项如下代码所示：

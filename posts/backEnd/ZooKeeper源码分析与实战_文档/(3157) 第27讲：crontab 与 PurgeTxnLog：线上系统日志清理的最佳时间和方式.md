@@ -40,7 +40,7 @@ crontab [ -u user ] { -l | -r | -e }
 
 接下来我们打开系统的控制台，并输入 crontab -e 命令，开启定时任务的编辑功能。如下图所示，系统会显示出当前已有的定时任务列表。整个 crontab 界面的操作逻辑和 Vim 相同，为了新建一个定时任务，我们首先将光标移动到文件的最后一行，并敲击 i 键来开启编辑模式。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/3D/CD/CgqCHl8qlt2ALC7CAABlifm7LHs902.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/3D/CD/CgqCHl8qlt2ALC7CAABlifm7LHs902.png"/>
 
 这个 crontab 定时脚本由两部分组成，第一部分是定时时间，第二部分是要执行的脚本。如下代码所示，脚本的执行时间是按照 f1 分、 f2 小时、f3 日、f4 月、f5 一个星期中的第几天这种固定顺序格式编写的。
 
@@ -58,7 +58,7 @@ f1 f2 f3 f4 f5 program
 
 当我们设定完定时任务后，就可以打开控制台，并输入 crontab -l 命令查询系统当前的定时任务。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/3D/CE/CgqCHl8qlu-AW-xZAAA50ErYH4s391.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/3D/CE/CgqCHl8qlu-AW-xZAAA50ErYH4s391.png"/>
 
 到目前为止我们就完成了用 crontab 创建定时任务来自动清理和维护 ZooKeeper 服务产生的相关日志和数据的过程。
 

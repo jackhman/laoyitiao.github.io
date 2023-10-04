@@ -20,14 +20,14 @@ AMQP（Advanced Message Queuing Protocol）是一个提供统一消息服务的�
 
 通过下面 Exchange 与 Queue 之间的路由关系图，我们可以看到一条来自生产者的消息通过 Exchange 中的路由算法可以发送给一个或多个 Queue，从而实现点对点和发布订阅功能。
 
-![图片7.png](https://s0.lgstatic.com/i/image/M00/8D/16/CgqCHl_4DTKAbAiPAADqglSjwTc554.png)  
+<Image alt="图片7.png" src="https://s0.lgstatic.com/i/image/M00/8D/16/CgqCHl_4DTKAbAiPAADqglSjwTc554.png"/>  
 AMQP 路由关系图
 
 上图中，不同的路由算法存在不同的 Exchange 类型，而 AMQP 规范中指定了直接式交换器（Direct Exchange）、广播式交换器（Fanout Exchange）、主题式交换器（Topic Exchange）和消息头式交换器（Header Exchange）这几种 Exchange 类型，不过这一讲我们将重点介绍直接式交换器。
 
 通过精确匹配消息的 Routing Key，直接式交换器可以将消息路由发送到零个或多个队列中，如下图所示：
 
-![图片8.png](https://s0.lgstatic.com/i/image/M00/8D/0B/Ciqc1F_4DTqAJ5kHAADKl5uWm0U797.png)  
+<Image alt="图片8.png" src="https://s0.lgstatic.com/i/image/M00/8D/0B/Ciqc1F_4DTqAJ5kHAADKl5uWm0U797.png"/>  
 Direct Exchange 示意图
 
 #### RabbitMQ 基本架构
@@ -159,7 +159,7 @@ spring:
 
 Virtual Host 类似于权限控制组，内部可以包含若干个 Exchange 和 Queue。多个不同用户使用同一个 RabbitMQ 服务器提供的服务时，我们可以将其划分为多个 Virtual Host，并在自己的 Virtual Host 中创建相应组件，如下图所示：
 
-![图片9.png](https://s0.lgstatic.com/i/image/M00/8D/16/CgqCHl_4DUiAGJuEAAC1QELaeNI351.png)  
+<Image alt="图片9.png" src="https://s0.lgstatic.com/i/image/M00/8D/16/CgqCHl_4DUiAGJuEAAC1QELaeNI351.png"/>  
 添加了 Virtual Host 的 AMQP 模型
 
 #### 使用 RabbitTemplate 消费消息

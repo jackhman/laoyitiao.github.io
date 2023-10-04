@@ -38,7 +38,7 @@ public class Visibility {
 **（1）单线程规则** ：  
 
 在一个单独的线程中，按照程序代码的顺序，先执行的操作 happen-before 后执行的操作。也就是说，如果操作 x 和操作 y 是同一个线程内的两个操作，并且在代码里 x 先于 y 出现，那么有 hb(x, y)，正如下图所示：  
-![](https://s0.lgstatic.com/i/image3/M01/02/81/Ciqah157Dw6AfJVGAABiifLhJkU236.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/02/81/Ciqah157Dw6AfJVGAABiifLhJkU236.png"/>
 
 这一个 happens-before 的规则非常重要，因为如果对于同一个线程内部而言，后面语句都不能保证可以看见前面的语句的执行结果的话，那会造成非常严重的后果，程序的逻辑性就无法保证了。
 
@@ -49,7 +49,7 @@ public class Visibility {
 **（2）锁操作规则（synchronized 和 Lock 接口等）** ：  
 
 如果操作 A 是解锁，而操作 B 是对同一个锁的加锁，那么 hb(A, B) 。正如下图所示：  
-![](https://s0.lgstatic.com/i/image3/M01/02/81/Ciqah157Dw6Aeo7EAAA0bxPJeKw538.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/02/81/Ciqah157Dw6Aeo7EAAA0bxPJeKw538.png"/>
 
 从上图中可以看到，有线程 A 和线程 B 这两个线程。线程 A 在解锁之前的所有操作，对于线程 B 的对同一个锁的加锁之后的所有操作而言，都是可见的。这就是锁操作的 happens-before 关系的规则。
 
@@ -63,14 +63,14 @@ public class Visibility {
 
 Thread 对象的 start 方法 happen-before 此线程 run 方法中的每一个操作。如下图所示：
 
-![](https://s0.lgstatic.com/i/image3/M01/7B/97/Cgq2xl57Dw6AdKyOAADBt-00qXo349.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7B/97/Cgq2xl57Dw6AdKyOAADBt-00qXo349.png"/>
 
 在图中的例子中，左侧区域是线程 A 启动了一个子线程 B，而右侧区域是子线程 B，那么子线程 B 在执行 run 方法里面的语句的时候，它一定能看到父线程在执行 threadB.start() 前的所有操作的结果。
 
 **（5）线程 join 规则**：
 
 我们知道 join 可以让线程之间等待，假设线程 A 通过调用 threadB.start() 启动了一个新线程 B，然后调用 threadB.join() ，那么线程 A 将一直等待到线程 B 的 run 方法结束（不考虑中断等特殊情况），然后 join 方法才返回。在 join 方法返回后，线程 A 中的所有后续操作都可以看到线程 B 的 run 方法中执行的所有操作的结果，也就是线程 B 的 run 方法里面的操作 happens-before 线程 A 的 join 之后的语句。如下图所示：  
-![](https://s0.lgstatic.com/i/image3/M01/7B/97/Cgq2xl57Dw6ADE7rAADRJKFrbWE816.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7B/97/Cgq2xl57Dw6ADE7rAADRJKFrbWE816.png"/>
 
 **（6）中断规则** ：  
 

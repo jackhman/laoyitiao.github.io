@@ -255,7 +255,7 @@ JavaScript 这种弱类型的语言，相对于其他高级语言有一个特点
 
 通常强制转换的目标数据类型为 String、Number、Boolean 这三种。下面的表格中显示了 6 种基础数据类型转换关系。
 
-![前端07.png](https://s0.lgstatic.com/i/image/M00/17/C1/CgqCHl7XaNOAOR-5AAC7iyHcEyQ034.png)
+<Image alt="前端07.png" src="https://s0.lgstatic.com/i/image/M00/17/C1/CgqCHl7XaNOAOR-5AAC7iyHcEyQ034.png"/>
 
 除了不同类型的转换之外，操作同种数据类型也会发生转换。把基本类型的数据换成对应的对象过程称之为"**装箱转换** "，反过来，把数据对象转换为基本类型的过程称之为"**拆箱转换**"。
 

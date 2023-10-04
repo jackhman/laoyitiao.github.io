@@ -1,6 +1,6 @@
 在前面的课时中，我们深入介绍了 SkyWalking 对 Trace 基本概念的实现。本课时我们将继续深入学习 Trace 相关的 BootService 接口实现类以及 Trace 收集和发送的核心逻辑。Trace 相关的 BootService 接口实现类如下图所示：
 
-![sw0.png](https://s0.lgstatic.com/i/image3/M01/14/4A/Ciqah16hMVaAatgbAABGB3yEwak805.png)
+<Image alt="sw0.png" src="https://s0.lgstatic.com/i/image3/M01/14/4A/Ciqah16hMVaAatgbAABGB3yEwak805.png"/>
 
 #### ContextManager
 
@@ -52,7 +52,7 @@ SamplingService 的采样逻辑依赖 samplingFactorHolder 字段（AtomicIntege
 
 另外，SamplingService 中会启动一个定时任务，每秒都会将 samplingFactorHolder 字段清零，这样就实现了每秒采样指定条数的 Trace 数据，如下图所示：
 
-![sw1.png](https://s0.lgstatic.com/i/image3/M01/14/49/Ciqah16hMHmAT7-VAALHNKUBOhU815.png)
+<Image alt="sw1.png" src="https://s0.lgstatic.com/i/image3/M01/14/49/Ciqah16hMHmAT7-VAALHNKUBOhU815.png"/>
 
 #### Trace 的收集
 
@@ -70,7 +70,7 @@ TraceSegmentServiceClient 是 TracingContextListener 接口的唯一实现，其
 
 下图展示了 TraceSegmentServiceClient 的核心结构：
 
-![sw2.png](https://s0.lgstatic.com/i/image3/M01/14/4A/Ciqah16hMNGAO2HOAAEZleWtX24011.png)
+<Image alt="sw2.png" src="https://s0.lgstatic.com/i/image3/M01/14/4A/Ciqah16hMNGAO2HOAAEZleWtX24011.png"/>
 
 TraceSegmentServiceClient 底层维护了一个 DataCarrier 对象，其底层 Channels 默认有 5 个 Buffer，每个 Buffer 长度为 300，使用的是 IF_POSSIBLE 阻塞写入策略，底层会启动一个 ConsumerThread 线程。
 
@@ -94,7 +94,7 @@ message UpstreamSegment {
 
 这个过程中，TraceSegment 对象会转换成相应的 proto 结构体实例，下图展示了 UpstreamSegment 中包含的具体信息：
 
-![sw3.png](https://s0.lgstatic.com/i/image3/M01/14/4A/Ciqah16hMPmAaAOWAAPeM8ggypA230.png)
+<Image alt="sw3.png" src="https://s0.lgstatic.com/i/image3/M01/14/4A/Ciqah16hMPmAaAOWAAPeM8ggypA230.png"/>
 
 既然要发送 gRPC 请求，就必然要依赖网络连接，TraceSegmentServiceClient 实现了 GRPCChannelListener 接口，可以监听底层网络连接的变化情况。在 prepare() 方法中可将其作为 Listener 注册到前文介绍的 GRPCChannelManager 中。
 
@@ -140,7 +140,7 @@ public void consume(List<TraceSegment> data) {
 注意，TraceSegmentServiceClient 在批量发送完 UpstreamSegment 数据之后，会通过 GRPCStreamServiceStatus 进行自旋等待，直至该批 UpstreamSegment 全部发送完毕。
 
 最后总结一下，TraceSegmentServiceClient 同时实现了 BootService、IConsumer、GRPCChannelListener、TracingContextListener 四个接口，如下图所示，这四个接口的实现相互依赖，共同完成 Trace 数据的收集和发送：  
-![sw4.png](https://s0.lgstatic.com/i/image3/M01/07/1B/CgoCgV6hMS2AQpyZAAFcVM04dCk973.png)
+<Image alt="sw4.png" src="https://s0.lgstatic.com/i/image3/M01/07/1B/CgoCgV6hMS2AQpyZAAFcVM04dCk973.png"/>
 
 #### 总结
 

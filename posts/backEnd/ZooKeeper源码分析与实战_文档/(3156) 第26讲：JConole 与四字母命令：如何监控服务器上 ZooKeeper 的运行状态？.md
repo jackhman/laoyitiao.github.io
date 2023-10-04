@@ -4,7 +4,7 @@
 
 通常使用 Java 语言进行开发的技术人员对 JConsole 并不陌生。JConsole 是 JDK 自带的工具，用来监控程序运行的状态信息。如下图所示，我们打开系统的控制终端，输入 JConsole 就会弹出一个这样的监控界面。
 
-![image.png](https://s0.lgstatic.com/i/image/M00/3B/72/CgqCHl8kAy2ANt38AADolBOTa2s256.png)
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/3B/72/CgqCHl8kAy2ANt38AADolBOTa2s256.png"/>
 
 ### JConsole 使用
 
@@ -28,7 +28,7 @@ JMX 可以跨越一系列异构操作系统平台、系统体系结构和网络�
 
 配置完 JMX 的开启功能后，接下来我们通过系统终端启动 JConsole ，再在弹出的对话框中选择远程连接，然后在远程连接的地址中输入要监控的 ZooKeeper 服务器地址，之后就可以通过 JConsole 监控 ZooKeeper 服务器了。
 
-![image (1).png](https://s0.lgstatic.com/i/image/M00/3B/67/Ciqc1F8kA0CAF9c9AACQw_N29Fg373.png)
+<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/3B/67/Ciqc1F8kA0CAF9c9AACQw_N29Fg373.png"/>
 
 ### 四字母命令
 

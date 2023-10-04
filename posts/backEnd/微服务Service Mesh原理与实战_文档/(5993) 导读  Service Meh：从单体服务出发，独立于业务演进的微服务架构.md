@@ -72,7 +72,7 @@ Service Mesh，中文名叫作服务网格，简单来说就是将可以配置�
 
 如下图所示：
 
-![Lark20201221-143013.png](https://s0.lgstatic.com/i/image2/M01/03/A3/Cip5yF_gQQmABXu_AA2cEKASe2E309.png)  
+<Image alt="Lark20201221-143013.png" src="https://s0.lgstatic.com/i/image2/M01/03/A3/Cip5yF_gQQmABXu_AA2cEKASe2E309.png"/>  
 Service Mesh sidecar 模式图
 
 所谓 sidecar， 其实就是一个**部署在本地的代理服务器**，它既接管了入口流量，也接管了出口流量。其实这种模式要追溯到 Web Server 的时代，比如 Nginx + Php-fpm 这种模式，实际上 Nginx 也是充当了 sidecar 的角色，只是通信协议由比较常见的 HTTP ，变成了 FastCGI ，另外 Nginx 只是代理了入口流量，并未代理出口流量。
@@ -169,7 +169,7 @@ Service Mesh 一个最重要的变革，就是引入了数据面和控制面的�
 
 这一讲我主要讲解了为什么从单体服务演进到微服务以及 Service Mesh 的基础知识（包括演进历程和优点、基础组件等内容 ）。整体来看，如果你的业务还处在一个起步阶段，我个人还是不建议过早地进行微服务拆分，因为架构演进的**一个重要的原则，就是组织架构要和技术架构相匹配**。
 
-![Lark20201221-143007.png](https://s0.lgstatic.com/i/image2/M01/03/A5/CgpVE1_gQR-Ac3f6AAF5oHL2Guo835.png)
+<Image alt="Lark20201221-143007.png" src="https://s0.lgstatic.com/i/image2/M01/03/A5/CgpVE1_gQR-Ac3f6AAF5oHL2Guo835.png"/>
 
 在起步阶段，单体服务是和组织架构匹配度最高的技术架构，当然一些小的、稳定的服务，可以尝试拆出来，这些服务变化不大、不会造成过多的和人力不匹配的维护成本，当然这也是为应对将来业务发展采用微服务架构的一种准备。而且我们作为技术研发人员，一定要对未来有更充分的准备，比如提前做好微服务相关的技术储备；否则当业务迎来了高速发展，你却不能跟上公司的节奏，结果就可想而知了。
 
@@ -179,6 +179,6 @@ Service Mesh 一个最重要的变革，就是引入了数据面和控制面的�
 
 *** ** * ** ***
 
-[![java_高薪训练营.png](https://s0.lgstatic.com/i/image/M00/8B/BD/Ciqc1F_gEFiAcnCNAAhXSgFweBY589.png)](https://shenceyun.lagou.com/t/Mka)
+[<Image alt="java_高薪训练营.png" src="https://s0.lgstatic.com/i/image/M00/8B/BD/Ciqc1F_gEFiAcnCNAAhXSgFweBY589.png"/>](https://shenceyun.lagou.com/t/Mka)
 
 [拉勾背书内推 + 硬核实战技术干货，帮助每位 Java 工程师达到阿里 P7 技术能力。点此链接，快来领取！](https://shenceyun.lagou.com/t/Mka)

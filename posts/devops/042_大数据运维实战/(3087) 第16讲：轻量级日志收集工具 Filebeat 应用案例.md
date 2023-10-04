@@ -6,7 +6,7 @@ Filebeat 是一个开源的文本日志收集器，Elastic 公司 Beats 数据�
 
 Filebeat 是一个轻量级的日志监测、传输工具，它最大的特点是性能稳定、配置简单、占用系统资源很少，这也是强烈推荐 Filebeat 的原因。下图是官方给出的 Filebeat 架构图：
 
-![image1.png](https://s0.lgstatic.com/i/image/M00/22/B4/Ciqc1F7saKKAQ8YZAAEBev585Hk521.png)
+<Image alt="image1.png" src="https://s0.lgstatic.com/i/image/M00/22/B4/Ciqc1F7saKKAQ8YZAAEBev585Hk521.png"/>
 
 从图中可以看出，Filebeat 主要由两个组件构成：**Prospector（探测器）和 Harvester（收集器）**，这两类组件一起协作完成 Filebeat 的工作。
 
@@ -66,9 +66,9 @@ logging.level: debug
 
 每个配置项的含义介绍如下：
 
-![01.png](https://s0.lgstatic.com/i/image/M00/22/B5/Ciqc1F7sakCAZRRhAAVtPJ5WfBg187.png)  
-![02.png](https://s0.lgstatic.com/i/image/M00/22/B5/Ciqc1F7sakqAYIedAAU0BudFkBA057.png)  
-![03.png](https://s0.lgstatic.com/i/image/M00/22/C1/CgqCHl7salKAH_SMAAb9p7oShcE030.png)
+<Image alt="01.png" src="https://s0.lgstatic.com/i/image/M00/22/B5/Ciqc1F7sakCAZRRhAAVtPJ5WfBg187.png"/>  
+<Image alt="02.png" src="https://s0.lgstatic.com/i/image/M00/22/B5/Ciqc1F7sakqAYIedAAU0BudFkBA057.png"/>  
+<Image alt="03.png" src="https://s0.lgstatic.com/i/image/M00/22/C1/CgqCHl7salKAH_SMAAb9p7oShcE030.png"/>
 
 注意，这个配置是将 filbeat 输出到 Kafka 中，因此你需要先配置好 Kafka 集群，并且将 Kafka 中的 topic 设置为可自动创建。
 
@@ -205,7 +205,7 @@ logging.level: debug
 
 配置完成，启动 filebeat 服务，然后尝试 ssh 登录 172.16.213.156 主机，让 /var/log/secure 文件产生日志，接着登录 Redis 服务器，查看是否有数据写入，如下图所示：
 
-![image2.png](https://s0.lgstatic.com/i/image/M00/22/B6/Ciqc1F7saviAIgKIAACKia52tP0739.png)
+<Image alt="image2.png" src="https://s0.lgstatic.com/i/image/M00/22/B6/Ciqc1F7saviAIgKIAACKia52tP0739.png"/>
 
 可以看到，Filebeat 已经将收集到的数据传到了 Redis 服务器上。
 

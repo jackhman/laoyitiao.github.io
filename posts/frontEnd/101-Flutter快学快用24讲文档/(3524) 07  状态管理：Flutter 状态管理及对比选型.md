@@ -4,7 +4,7 @@
 
 上一课时的例子中，只涉及一个有状态的组件 article_like_bar ，接下来我们需要实现另外一个详情页面，并且在详情页面中也需要一个点赞功能，具体的界面效果可以参考动图 1 （为了界面更好，我在上一课时的基础上增加了一些样式）。
 
-![20200620_110314.gif](https://s0.lgstatic.com/i/image/M00/2A/89/CgqCHl78dduAVpypABtxqF5qwAA906.gif)  
+<Image alt="20200620_110314.gif" src="https://s0.lgstatic.com/i/image/M00/2A/89/CgqCHl78dduAVpypABtxqF5qwAA906.gif"/>  
 
 图 1 增加二级点赞详情页面效果
 
@@ -12,7 +12,7 @@
 
 如果不引入新的技术方案，能想到的办法就是将该状态进行提升，放到其共同的父节点上，然后将父节点设计为有状态组件，并提供修改状态的方法给到子组件。可以用图 2 来表示。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/2A/7D/Ciqc1F78dfGARKuUAACYOe66MlY026.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/2A/7D/Ciqc1F78dfGARKuUAACYOe66MlY026.png"/>
 
 图 2 状态提升共享方式
 
@@ -28,13 +28,13 @@ InheritedWidget 核心原理和状态提升原理一致，将 likeNum 提升到�
 
 现在我们有一个页面，页面下有两个组件，两个组件都需要用同一个名字，并且第二个组件的名字可以点击切换随机名字，而切换以后需要及时更新第一个组件中的名字。页面效果如图 3 所示。
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/2A/89/CgqCHl78diqALC0dAACKe0B0HjU731.png)  
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/2A/89/CgqCHl78diqALC0dAACKe0B0HjU731.png"/>  
 
 图 3 多组件状态共享效果
 
 按照上面介绍的例子以及上一课时的知识点，画一个简单的组件树，并且附带上需要的状态属性，如图 4 所示。
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image/M00/2A/7D/Ciqc1F78djSAUVqwAACHGNkmeCM922.png)  
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/2A/7D/Ciqc1F78djSAUVqwAACHGNkmeCM922.png"/>  
 
 图 4 InheritedWidget 组件设计
 
@@ -579,7 +579,7 @@ class ArticleDetailLike extends StatelessWidget {
 
 接下来我们运行下项目，可以看到效果如图 5 所示。
 
-![20200620_213558.gif](https://s0.lgstatic.com/i/image/M00/2A/7E/Ciqc1F78dpSARI7HACF3LNRp7LA326.gif)  
+<Image alt="20200620_213558.gif" src="https://s0.lgstatic.com/i/image/M00/2A/7E/Ciqc1F78dpSARI7HACF3LNRp7LA326.gif"/>  
 
 图 5 多页面状态点赞同步效果
 

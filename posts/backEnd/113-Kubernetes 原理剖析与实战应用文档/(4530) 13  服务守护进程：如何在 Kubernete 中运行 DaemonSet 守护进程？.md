@@ -12,7 +12,7 @@
 
 Kubernetes 提供的 DaemonSet 就可以完美地解决上述问题，其主要目的就是可以在集群内的每个节点上（或者指定的一堆节点上）都只运行一个副本，即 Pod 和 Node 是一一对应的关系。DaemonSet 会结合节点的情况来帮助你管理这些 Pod，见下面的拓扑结构：
 
-![Lark20201009-105149.png](https://s0.lgstatic.com/i/image/M00/5B/9B/Ciqc1F9_0FqACmcBAABg43Rbbow934.png)
+<Image alt="Lark20201009-105149.png" src="https://s0.lgstatic.com/i/image/M00/5B/9B/Ciqc1F9_0FqACmcBAABg43Rbbow934.png"/>
 
 今天我们就来学习一下 DaemonSet，先来看看其主要的使用场景。
 
@@ -123,7 +123,7 @@ DESIRED 代表该 DaemonSet 期望要创建的 Pod 个数，即我们需要几�
 
 现在我们来看看如何限定一个 DaemonSet，让其只在某些节点上运行，比如只在带有 `app=logging-node ` 的节点上运行，可以看这张图：
 
-![1.png](https://s0.lgstatic.com/i/image/M00/59/81/Ciqc1F9xnpWAKFwRAAB-Lq1l0YU648.png)
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/59/81/Ciqc1F9xnpWAKFwRAAB-Lq1l0YU648.png"/>
 
 此时，我们就可以通过 DaemonSet 的 selector 来实现：
 

@@ -8,7 +8,7 @@
 
 为了保持一致性，我们在 test 单元测试目录，创建与项目结构目录一致的结构，如图 1 所示。
 
-![image (9).png](https://s0.lgstatic.com/i/image/M00/2B/C9/Ciqc1F7_AHGAJ8__AABUPoaGi10666.png)  
+<Image alt="image (9).png" src="https://s0.lgstatic.com/i/image/M00/2B/C9/Ciqc1F7_AHGAJ8__AABUPoaGi10666.png"/>  
 
 图 1 单元测试目录结构
 

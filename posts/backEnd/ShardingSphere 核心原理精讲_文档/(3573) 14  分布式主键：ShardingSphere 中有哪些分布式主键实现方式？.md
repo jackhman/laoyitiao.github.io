@@ -103,7 +103,7 @@ public final class ShardingKeyGeneratorServiceLoader extends TypeBasedSPIService
 
 我们在 sharding-core-common 工程的 META-INF/services 目录中看到了具体的 SPI 定义：
 
-![1.png](https://s0.lgstatic.com/i/image/M00/3A/E1/Ciqc1F8iliiAVywgAAByh__z6Bw582.png)  
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/3A/E1/Ciqc1F8iliiAVywgAAByh__z6Bw582.png"/>  
 分布式主键 SPI 配置
 
 可以看到，这里有两个 ShardingKeyGenerator，分别是 SnowflakeShardingKeyGenerator 和 UUIDShardingKeyGenerator，它们都位于org.apache.shardingsphere.core.strategy.keygen 包下。
@@ -137,7 +137,7 @@ public final class UUIDShardingKeyGenerator implements ShardingKeyGenerator {
 
 再来看 SnowFlake（雪花）算法，SnowFlake 是 ShardingSphere 默认的分布式主键生成策略。它是 Twitter 开源的分布式 ID 生成算法，其核心思想是使用一个 64bit 的 long 型数字作为全局唯一 ID，且 ID 引入了时间戳，基本上能够保持自增。SnowFlake 算法在分布式系统中的应用十分广泛，SnowFlake 算法中 64bit 的详细结构存在一定的规范：
 
-![2.png](https://s0.lgstatic.com/i/image/M00/3A/ED/CgqCHl8ilkuAHxUeAAHYgqa5Z0Q435.png)  
+<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/3A/ED/CgqCHl8ilkuAHxUeAAHYgqa5Z0Q435.png"/>  
 64bit 的 ID 结构图
 
 <br />

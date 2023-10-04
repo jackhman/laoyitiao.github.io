@@ -4,7 +4,7 @@
 
 我们先来看下本课时要完成的一个界面效果，如图 1 动画所示。
 
-![20200712_160246.gif](https://s0.lgstatic.com/i/image/M00/37/AD/Ciqc1F8aewCAIDGrAAocYK2ZqIo350.gif)  
+<Image alt="20200712_160246.gif" src="https://s0.lgstatic.com/i/image/M00/37/AD/Ciqc1F8aewCAIDGrAAocYK2ZqIo350.gif"/>  
 
 图 1 本课时目标效果
 
@@ -20,11 +20,11 @@
 
 根据图 2 的界面效果，我们将页面拆分图 3 组件树。
 
-![image (9).png](https://s0.lgstatic.com/i/image/M00/37/B9/CgqCHl8aeySAO1UTAAIF-lgAvBA674.png)  
+<Image alt="image (9).png" src="https://s0.lgstatic.com/i/image/M00/37/B9/CgqCHl8aeySAO1UTAAIF-lgAvBA674.png"/>  
 
 图 2 个人页面效果
 
-![image (10).png](https://s0.lgstatic.com/i/image/M00/37/AD/Ciqc1F8aezCAA5btAACFxGz_UhM158.png)  
+<Image alt="image (10).png" src="https://s0.lgstatic.com/i/image/M00/37/AD/Ciqc1F8aezCAA5btAACFxGz_UhM158.png"/>  
 
 图 3 个人页面组件树设计
 
@@ -316,7 +316,7 @@ class UserPageButtonList extends StatelessWidget {
 
 上面代码中的第 28 行就是点击触发消息消除，接下来我们运行看下效果，如图 4 的动效所示。
 
-![20200712_160246 (1).gif](https://s0.lgstatic.com/i/image/M00/37/AE/Ciqc1F8ae4WASR5LAAocYK2ZqIo031.gif)  
+<Image alt="20200712_160246 (1).gif" src="https://s0.lgstatic.com/i/image/M00/37/AE/Ciqc1F8ae4WASR5LAAocYK2ZqIo031.gif"/>  
 
 图 4 红点效果图
 

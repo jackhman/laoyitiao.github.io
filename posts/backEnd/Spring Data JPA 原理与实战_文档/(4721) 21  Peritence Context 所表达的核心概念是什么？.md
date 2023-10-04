@@ -118,7 +118,7 @@ private EntityManager entityManager;
 
 既然 PersistenceContext 是存储 Entity 的，那么 Entity 在 PersistenceContext 里面肯定有不同的状态。对此，JPA 协议定义了四种状态：new、manager、detached、removed。我们通过一个图来整体认识一下。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/70/03/CgqCHl-3m3OAPiQmAAB8FdvAFnE298.png)  
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/70/03/CgqCHl-3m3OAPiQmAAB8FdvAFnE298.png"/>  
 注：图片来自网络
 
 #### 第一种：New 状态的对象
@@ -473,11 +473,11 @@ public void testDirty() {
 
 如果我们通过 debug 一步一步分析的话可以找到，DefaultFlushEntityEventListener 的源码里面 isUpdateNecessary 的关键方法如下所示：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/70/03/CgqCHl-3m6uAEoT1AAEkZaYyxn8305.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/70/03/CgqCHl-3m6uAEoT1AAEkZaYyxn8305.png"/>
 
 我们进一步 debug 看 dirtyCheck 的实现，可以看发现如下关键点，从而找出发生变化的 proerties。
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/6F/F8/Ciqc1F-3m7GAUkFiAAEtQI1J900876.png)
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/6F/F8/Ciqc1F-3m7GAUkFiAAEtQI1J900876.png"/>
 
 我们再仔细看 persister.findDirty（values, loadedState, entity, session），可以看出来源码里面是通过一个字段一个字段比较的，所以可以知道 PsersistenceContext 中的前后两个 Entity 的哪些字段发生了变化。因此当我们执行完 save 之后，没有产生任何 sql（因为没有变化）。你知道了这个原理之后，就不用再为此"大惊小怪"了。
 

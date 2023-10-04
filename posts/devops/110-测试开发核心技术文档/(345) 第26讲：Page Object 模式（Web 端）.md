@@ -5,7 +5,7 @@
 传统测试用例问题
 --------
 
-![](https://s0.lgstatic.com/i/image3/M01/6F/11/Cgq2xl5gs92AIuvBAAP8QZgz0qs996.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6F/11/Cgq2xl5gs92AIuvBAAP8QZgz0qs996.png"/>
 
 <br />
 
@@ -36,7 +36,7 @@ PO 封装
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/6F/10/CgpOIF5gs92AGCGXAAGM0fHgeW4741.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6F/10/CgpOIF5gs92AGCGXAAGM0fHgeW4741.png"/>
 
 <br />
 
@@ -49,7 +49,7 @@ PO 封装
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/6F/11/Cgq2xl5gs92ABdGpAAGvfSpvxmM165.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6F/11/Cgq2xl5gs92ABdGpAAGvfSpvxmM165.png"/>
 
 <br />
 

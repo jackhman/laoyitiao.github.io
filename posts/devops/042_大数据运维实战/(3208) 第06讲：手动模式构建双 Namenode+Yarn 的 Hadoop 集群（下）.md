@@ -39,7 +39,7 @@ core-site.xml 是 NameNode 的核心配置文件，主要对 NameNode 的属性�
 
 其中，每个参数含义如下：
 
-![图片1.png](https://s0.lgstatic.com/i/image/M00/0A/B4/CgqCHl6-Wt2AV5l0AAFCOLCd2K4775.png)
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image/M00/0A/B4/CgqCHl6-Wt2AV5l0AAFCOLCd2K4775.png"/>
 
 **（2）hdfs-site.xml 文件**
 
@@ -164,9 +164,9 @@ core-site.xml 是 NameNode 的核心配置文件，主要对 NameNode 的属性�
 
 其中，每个参数含义如下：
 
-![图片2-1.png](https://s0.lgstatic.com/i/image/M00/0A/B4/Ciqc1F6-WxCABpPmAAE9vEHRMgc089.png)  
-![图片2-2.png](https://s0.lgstatic.com/i/image/M00/0A/B4/Ciqc1F6-WxaAUnnLAAGL3rsyvBU330.png)  
-![图片2-3.png](https://s0.lgstatic.com/i/image/M00/0A/B4/Ciqc1F6-Wx2AEUU0AAG1MKpUL-A807.png)
+<Image alt="图片2-1.png" src="https://s0.lgstatic.com/i/image/M00/0A/B4/Ciqc1F6-WxCABpPmAAE9vEHRMgc089.png"/>  
+<Image alt="图片2-2.png" src="https://s0.lgstatic.com/i/image/M00/0A/B4/Ciqc1F6-WxaAUnnLAAGL3rsyvBU330.png"/>  
+<Image alt="图片2-3.png" src="https://s0.lgstatic.com/i/image/M00/0A/B4/Ciqc1F6-Wx2AEUU0AAG1MKpUL-A807.png"/>
 
 **（3）mapred-site.xml 文件**   
 
@@ -195,7 +195,7 @@ core-site.xml 是 NameNode 的核心配置文件，主要对 NameNode 的属性�
 
 其中，每个参数含义如下：
 
-![图片3.png](https://s0.lgstatic.com/i/image/M00/0A/B5/CgqCHl6-W0OAETx9AAC4Ao4YdUw462.png)
+<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image/M00/0A/B5/CgqCHl6-W0OAETx9AAC4Ao4YdUw462.png"/>
 
 **（4）yarn-site.xml 文件**
 
@@ -292,9 +292,9 @@ core-site.xml 是 NameNode 的核心配置文件，主要对 NameNode 的属性�
 
 其中，每个参数含义如下：
 
-![图片4-1.png](https://s0.lgstatic.com/i/image/M00/0A/B5/Ciqc1F6-W2qADyrVAAFeCAR3VRo004.png)  
-![图片4-2.png](https://s0.lgstatic.com/i/image/M00/0A/B5/Ciqc1F6-W2-AYKY5AAFxWlwVqZ0347.png)  
-![图片4-3.png](https://s0.lgstatic.com/i/image/M00/0A/B5/CgqCHl6-W3WAMosXAADyhIAnDJM901.png)
+<Image alt="图片4-1.png" src="https://s0.lgstatic.com/i/image/M00/0A/B5/Ciqc1F6-W2qADyrVAAFeCAR3VRo004.png"/>  
+<Image alt="图片4-2.png" src="https://s0.lgstatic.com/i/image/M00/0A/B5/Ciqc1F6-W2-AYKY5AAFxWlwVqZ0347.png"/>  
+<Image alt="图片4-3.png" src="https://s0.lgstatic.com/i/image/M00/0A/B5/CgqCHl6-W3WAMosXAADyhIAnDJM901.png"/>
 
 **（5）hosts 文件**
 
@@ -446,17 +446,17 @@ DataNode 节点用于 HDFS 分布式文件系统存储，根据之前规划，�
 
 正常情况下，高可用 NameNode 中，namenodemaster 主机处于 Active 状态， 访问 http:// namenodemaster:50070，得到如下截图：
 
-![image4.png](https://s0.lgstatic.com/i/image/M00/0A/B6/Ciqc1F6-XMKAJagjAACPxB44lJU201.png)
+<Image alt="image4.png" src="https://s0.lgstatic.com/i/image/M00/0A/B6/Ciqc1F6-XMKAJagjAACPxB44lJU201.png"/>
 
 由图可知，namenodemaster 目前是 Active 状态，还看到 Namespace、Namenode ID、Version、Cluster ID 等信息，这些信息在前面介绍配置文件时定义好的。此外，还能看到 HDFS 的 Summary 信息，前面课时中已经做过介绍了；另外，还有 NameNode Journal Status、NameNode Storage 及 DFS Storage Types 等信息，如下图所示：
 
-![image5.png](https://s0.lgstatic.com/i/image/M00/0A/B6/Ciqc1F6-XMqAM4oAAADRhtEnqsY823.png)
+<Image alt="image5.png" src="https://s0.lgstatic.com/i/image/M00/0A/B6/Ciqc1F6-XMqAM4oAAADRhtEnqsY823.png"/>
 
 其中，NameNode Journal Status 部分显示了 JournalNode 集群的节点信息以及目前处于 inprogress 的 edits 文件写的位置。NameNode Storage 部分显示了 NameNode 元数据的存放路径，可以看到元数据有两份互为镜像，且状态均为 active，这表明两个元数据均正常，如果元数据状态不是 Active，说明元数据有问题，需要检查对应路径下的元数据信息。最后 DFS Storage Types 部分，主要展示了 HDFS 的总存储容量以及活跃的节点数。
 
 接着来看看 yarnserver 主机，此时 yarnserver 应该处于 standby 状态，访问 http:// yarnserver:50070，得到如下截图：
 
-![image6.png](https://s0.lgstatic.com/i/image/M00/0A/B6/CgqCHl6-XNOAFkL5AACO-vATZLk481.png)
+<Image alt="image6.png" src="https://s0.lgstatic.com/i/image/M00/0A/B6/CgqCHl6-XNOAFkL5AACO-vATZLk481.png"/>
 
 Yarnserver 上展示的 HDFS 集群状态跟 namenodemaster 主机上基本相同，不同的是 NameNode Journal Status 部分，因为是 standby 状态，所以对 JournalNode 集群是只读的。
 
@@ -468,7 +468,7 @@ Yarnserver 上展示的 HDFS 集群状态跟 namenodemaster 主机上基本相�
 
 在 ResourceManager 和 NodeManager 服务启动后，可通过访问 <http://yarnserver:8088/cluster/nodes> 来检查 Yarn 资源管理器是否正常运行，如下图所示：
 
-![image7.png](https://s0.lgstatic.com/i/image/M00/0A/B6/CgqCHl6-XNuAMmICAAGXC0we9l4454.png)
+<Image alt="image7.png" src="https://s0.lgstatic.com/i/image/M00/0A/B6/CgqCHl6-XNuAMmICAAGXC0we9l4454.png"/>
 
 上图中，显示了 yarn 资源管理器中可用的计算资源，主要是可用 CPU VCores、内存以及活跃的计算节点数，最下面显示的是每个节点的运行状态、节点地址以及节点可用的 CPU、内存等资源信息。目前集群总共三个计算节点，每个节点提供了 8 个 CPU 核、20GB 内存，所以 Yarn 总共可用的 CPU 资源为 24 核，内存资源为 60GB。
 

@@ -6,7 +6,7 @@
 
 Tracing 是在 20 世纪 90 年代就已出现的技术，虽然提出的时间很早，但真正让该领域流行起来的还是源于 Google 关于 Dapper 组件的一篇论文。分布式链路追踪组件经过了多年的发展，特别是微服务架构出现之后，各大公司也加大了对这块儿的投入和研发，但是对于链路追踪组件来说，其核心步骤有：**代码埋点、数据存储** 和**查询展示**。链路追踪组件的组成，如下图所示：
 
-![图片1.png](https://s0.lgstatic.com/i/image/M00/62/8C/CgqCHl-SjWKARLMtAACUh0mRaIk002.png)  
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image/M00/62/8C/CgqCHl-SjWKARLMtAACUh0mRaIk002.png"/>  
 链路追踪组件的组成
 
 目前流行的链路追踪组件有**Jaeger、Zipkin、SkyWalking** 和**Pinpoint**。但是，在数据采集过程中，对用户代码的入侵和不同系统 API 的兼容性，导致切换链路追踪系统需要巨大的成本。
@@ -17,7 +17,7 @@ OpenTracing 的诞生主要是为了解决不同的分布式链路追踪平台�
 
 OpenTracing 的架构如下图所示，从图中我们可以看到 OpenTracing 支持 Zipkin、LightStep 和 Appdash 等追踪组件，并且可以轻松集成到开源的框架中，例如 gRPC、Flask、Django 和 Go-kit 等。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/5E/80/CgqCHl-Gvg-ACKv9AAHli59gxME260.png)  
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/5E/80/CgqCHl-Gvg-ACKv9AAHli59gxME260.png"/>  
 OpenTracing 架构
 
 OpenTracing 是一个 Library 库，定义了一套通用的数据上报接口，要求各个分布式追踪系统都来实现这套接口。这样一来，应用程序只需要对接 OpenTracing，而无须关心后端采用的到底是什么样的分布式追踪系统，因此**开发者可以无缝切换分布式追踪系统，也使得在通用代码库增加对分布式追踪的支持成为可能。**
@@ -32,7 +32,7 @@ OpenTracing 于 2016 年 10 月加入 CNCF 基金会，是继 Kubernetes 和 Pro
 
 Zipkin 是一款由 Twitter 开源的分布式链路追踪组件，同样也兼容 OpenTracing API：基于 Google Dapper 论文而设计，很多公司都在用，文档资料也很丰富。其架构如下图所示：
 
-![Drawing 2.png](https://s0.lgstatic.com/i/image/M00/5E/80/CgqCHl-Gvh6AVPPFAABoGNmX9as934.png)  
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/5E/80/CgqCHl-Gvh6AVPPFAABoGNmX9as934.png"/>  
 Zipkin 架构图
 
 从 Zipkin 架构图可知，Zipkin 包含 Collector、Storage、API 和 Web UI 这 4 个部分。
@@ -69,7 +69,7 @@ Jaeger 的服务端使用 Go 语言实现，其存储支持 Cassandra、Elastics
 
 Jaeger 的架构如下图所示：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/5E/80/CgqCHl-GvjaAElw5AAEfQ3MA-FU057.png)  
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/5E/80/CgqCHl-GvjaAElw5AAEfQ3MA-FU057.png"/>  
 Jaeger 架构图
 
 我们来分析一下 Jaeger 的架构图，Jaeger 主要由 client、agent、collector、DB 和 query 这几部分组成。
@@ -86,7 +86,7 @@ Jaeger 架构图
 
 下图为 Jaeger UI 中的统计视图，我们可以点击进去查看请求的链路调用详情。
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image/M00/5E/75/Ciqc1F-Gvj6AI-5SAAHxKyQQHhk929.png)  
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/5E/75/Ciqc1F-Gvj6AI-5SAAHxKyQQHhk929.png"/>  
 Jaeger 链路监控页面
 
 该列表展示了请求的追踪记录，包括每次请求的时间、涉及的服务名和 Span 数量。通过统计的散列图，我们可以很清楚地看到请求的响应时间分布。**相比于 Zipkin，Jaeger 在界面上较为丰富，但是也无告警功能。**
@@ -111,7 +111,7 @@ SkyWalking 的客户端通过 HTTP 或 gRPC 方式向 SkyWalking 收集器发送
 
 SkyWalking 整体架构的模块较多，但是结构比较清晰，主要就是通过收集各种格式的数据进行存储，然后展示。如下图为 SkyWalking 6.x 的架构图：
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image/M00/5E/75/Ciqc1F-GvlOARTWZAANEwHNPMrQ811.png)  
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/5E/75/Ciqc1F-GvlOARTWZAANEwHNPMrQ811.png"/>  
 SkyWalking 6.x 架构图
 
 SkyWalking 支持的存储组件有：ES、H2、MySQL、TiDB 和 Sharding Sphere。SkyWalking 的 UI 界面提供的链路追踪查询较为简单，但 SkyWalking 拥有非常活跃的中文社区，支持多种语言的探针，且对国产开源软件全面支持。**SkyWalking 在探针性能方面表现优异，并且探针的性能损耗较低**。
@@ -120,7 +120,7 @@ SkyWalking 支持的存储组件有：ES、H2、MySQL、TiDB 和 Sharding Sphere
 
 Pinpoint 是一个 APM 工具，适用于 Java 、PHP 编写的大型分布式系统进行链路追踪。也就是说，**Go 语言项目不能直接应用 Pinpoint，需要使用代理进行改造**。这里进行简单介绍，因为其链路追踪的分析较为完善。Pinpoint 也是受 Dapper 的启发，通过追踪分布式应用程序之间的调用链，帮助分析分布式系统的整体结构，以及服务和组件相互之间的依赖关系，如下图所示：
 
-![Drawing 6.png](https://s0.lgstatic.com/i/image/M00/5E/75/Ciqc1F-GvmSAYLmbAAI33y2CSDk491.png)  
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/5E/75/Ciqc1F-GvmSAYLmbAAI33y2CSDk491.png"/>  
 Pinpoint 链路监控页面
 
 **Pinpoint 的追踪数据粒度非常细，用户界面功能强大，并且服务调用展示做得非常丰富** ，在这方面它优于市面上大多数组件。Pinpoint 使用 HBase 作为存储带来了海量存储的能力，但丰富的数据背后，必然需要大量的数据采集，因此在这几款常用链路追踪组件中，**Pinpoint 的探针性能最低**，在生产环境需要注意应用服务的采样率，过高的话就会影响系统的吞吐量。
@@ -131,7 +131,7 @@ Pinpoint 链路监控页面
 
 上面我们对 4 种当前流行的链路追踪组件进行了简单介绍，相信你已经对每个组件的组成和特性已经有了大概的了解。为便于你更好地理解，下面我们再根据如下的几个指标对它们进行直观的对比。
 
-![图片2.png](https://s0.lgstatic.com/i/image/M00/62/81/Ciqc1F-SjXKAKnGuAAGS0Nd0F1o697.png)
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image/M00/62/81/Ciqc1F-SjXKAKnGuAAGS0Nd0F1o697.png"/>
 
 从这张对比表可以看出：
 

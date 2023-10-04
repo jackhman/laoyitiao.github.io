@@ -10,17 +10,17 @@ B 树和 B+ 树是两种数据结构（关于它们的名字为什么以 B 开�
 
 目前数据库存储一张表格主要是行存储（Row Storage）和列存储（Column Storage）两种存储方式。行存储将表格看作一个个记录，每个记录是一行。以包含订单号、金额、下单时间 3 项的表为例，行存储如下图所示：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image2/M01/04/4C/CgpVE1_sZ-GAVZtxAABQMz4nr2o681.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image2/M01/04/4C/CgpVE1_sZ-GAVZtxAABQMz4nr2o681.png"/>
 
 如上图所示，在计算机中没有真正的行的概念。行存储本质就是数据一个接着一个排列，一行数据后面马上跟着另一行数据。如果订单表很大，一个磁盘块（Block）存不下，那么实际上就是每个块存储一定的行数。 类似下图这样的结构：
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image/M00/8C/68/Ciqc1F_sZ-qAWYp7AABVE_FTHT8211.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/8C/68/Ciqc1F_sZ-qAWYp7AABVE_FTHT8211.png"/>
 
 行存储更新一行的操作，往往可以在一个块（Block）中进行。而查询数据，聚合数据（比如求 4 月份的订单数），往往需要跨块（Block）。因此，**行存储优点很明显，更新快、单条记录的数据集中，适合事务。但缺点也很明显，查询慢**。
 
 还有一种表格的存储方式是列存储（Column Storage），列存储中数据是一列一列存的。还以订单表为例，如下图所示：
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image/M00/8C/73/CgqCHl_sZ_GAV5BXAABYyBf77uc003.png)
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/8C/73/CgqCHl_sZ_GAV5BXAABYyBf77uc003.png"/>
 
 你可以看到订单号在一起、姓名在一起、时间在一起、金额也在一起------每个列的数据都聚集在一起。乍一看这样的结构很低效，比如说你想取出第一条订单，需要取第 1 列的第 1 个数据`1001`，然后取第 2 列的第 1 个数据`小明`，以此类推，需要 4 次磁盘读取。特别是更新某一条记录的时候，需要更新多处，速度很慢。那么列存储优势在哪里呢？**优势其实是在查询和聚合运算**。
 
@@ -78,11 +78,11 @@ B 树和 B+ 树是两种数据结构（关于它们的名字为什么以 B 开�
 
 如下图所示，二叉搜索树的特点是一个节点的左子树的所有节点都小于这个节点，右子树的所有节点都大于这个节点。而且，因为索引条目较少，确实可以考虑在查询的时候，先将足够大的树导入内存，然后再进行搜索。搜索的算法是递归的，与二分查找非常类似，每次计算可以将问题规模减半。当然，具体有多少数据可以导入内存，受实际可以使用的内存数量的限制。
 
-![Drawing 7.png](https://s0.lgstatic.com/i/image/M00/8C/68/Ciqc1F_saAWAQLD2AAEHA2b-QK4732.png)
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/8C/68/Ciqc1F_saAWAQLD2AAEHA2b-QK4732.png"/>
 
 在上面的二叉搜索树中，每个节点的数据分成 Key 和 Value。Key 就是索引值，比如订单 ID 创建索引，那么 Key 就是订单 ID。值中至少需要序号（对行存储也就是行号）。这样，如果们想找 18 对应的行，就可以先通过二叉搜索树找到对应的行号，然后再去对应的行读取数据。
 
-![Drawing 9.png](https://s0.lgstatic.com/i/image/M00/8C/73/CgqCHl_saAyAIC_4AAFHdR111Pg040.png)
+<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/8C/73/CgqCHl_saAyAIC_4AAFHdR111Pg040.png"/>
 
 二叉搜索树是一个天生的二分查找结构，每次查找都可以减少一半的问题规模。而且二叉搜索树解决了插入新节点的问题，因为二叉搜索树是一个跳跃结构，不必在内存中连续排列。这样在插入的时候，新节点可以放在任何位置，不会像线性结构那样插入一个元素，所有元素都需要向后排列。
 
@@ -100,7 +100,7 @@ B 树和 B+ 树是两种数据结构（关于它们的名字为什么以 B 开�
 
 **一个更好的方案，就是继续沿用树状结构，利用好磁盘的分块让每个节点多一些数据，并且允许子节点也多一些，树就会更矮。因为树的高度决定了搜索的次数**。
 
-![Drawing 11.png](https://s0.lgstatic.com/i/image/M00/8C/68/Ciqc1F_saBaAXK5-AAFO9nLONPo957.png)
+<Image alt="Drawing 11.png" src="https://s0.lgstatic.com/i/image/M00/8C/68/Ciqc1F_saBaAXK5-AAFO9nLONPo957.png"/>
 
 **上图中我们构造的树被称为 B 树** （**B-Tree**），开头说过，B 这个字母具体是哪个单词或者人名的缩写，至今有争议，具体你可以查查资料。
 
@@ -114,48 +114,48 @@ B 树的每个节点是一个索引条目（例如：一个 \<订单 ID，序号
 
 为了达到最高的效率，实战中我们往往使用的是一种继承于 B 树设计的结构，称为 B+ 树。B+ 树只有叶子节点才映射数据，下图中是对 B 树设计的一种改进，节点 1 为冗余节点，它不存储数据，只划定子树数据的范围。你可以看到节点 1 的索引 Key：12 和 30，在节点 3 和 4 中也有一份。
 
-![Drawing 13.png](https://s0.lgstatic.com/i/image/M00/8C/68/Ciqc1F_saCKADMzAAAEHeJ2-HvI282.png)
+<Image alt="Drawing 13.png" src="https://s0.lgstatic.com/i/image/M00/8C/68/Ciqc1F_saCKADMzAAAEHeJ2-HvI282.png"/>
 
 #### 树的形成：插入
 
 下面我以一棵 2-3 B+ 树来演示 B+ 树的插入过程。2 指的是 B+ 树每个非叶子节点允许 2 个数据，叶子节点最多允许 3 个索引，每个节点允许最多 3 个子节点。我们要在 2-3 B+ 树中依次插入 3,6,9,12,19,15,26,8,30。下图是演示：  
-![10.gif](https://s0.lgstatic.com/i/image/M00/8C/9F/Ciqc1F_yuGaAe34hAIFHQoSI9GI738.gif)
+<Image alt="10.gif" src="https://s0.lgstatic.com/i/image/M00/8C/9F/Ciqc1F_yuGaAe34hAIFHQoSI9GI738.gif"/>
 
 插入 3,6,9 过程很简单，都写入一个节点即可，因为叶子节点最多允许每个 3 个索引。接下来我们插入 12，会发生一次过载，然后节点就需要拆分，这个时候按照 B+ 树的设计会产生冗余节点。
 
-![6.png](https://s0.lgstatic.com/i/image/M00/8C/9F/Ciqc1F_yt1uAUp9PAABNVsx4HM8009.png)
+<Image alt="6.png" src="https://s0.lgstatic.com/i/image/M00/8C/9F/Ciqc1F_yt1uAUp9PAABNVsx4HM8009.png"/>
 
 然后插入 15 非常简单，直接加入即可：
 
-![7.png](https://s0.lgstatic.com/i/image/M00/8C/AA/CgqCHl_yt36ANCL0AABO--TyyME355.png)
+<Image alt="7.png" src="https://s0.lgstatic.com/i/image/M00/8C/AA/CgqCHl_yt36ANCL0AABO--TyyME355.png"/>
 
 接下来插入 19， 这个时候下图中红色部分发生过载：
 
-![8.png](https://s0.lgstatic.com/i/image/M00/8C/9F/Ciqc1F_yt6GAarKkAABRlrOx8wQ337.png)
+<Image alt="8.png" src="https://s0.lgstatic.com/i/image/M00/8C/9F/Ciqc1F_yt6GAarKkAABRlrOx8wQ337.png"/>
 
 因此需要拆分节点数据，我们从中间把红色的节点拆开，15 作为冗余的索引写入父节点，就形成下图的情况：
 
-![9.png](https://s0.lgstatic.com/i/image/M00/8C/9F/Ciqc1F_yt9aAWPFwAABWeUsN-3w700.png)
+<Image alt="9.png" src="https://s0.lgstatic.com/i/image/M00/8C/9F/Ciqc1F_yt9aAWPFwAABWeUsN-3w700.png"/>
 
 接着插入 26， 写入到对应位置即可。
 
-![1.png](https://s0.lgstatic.com/i/image2/M01/04/81/Cip5yF_ytRmAXVtMAABY0urP73M758.png)
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image2/M01/04/81/Cip5yF_ytRmAXVtMAABY0urP73M758.png"/>
 
 接下来，插入 8 到对应位置即可。
 
-![2.png](https://s0.lgstatic.com/i/image/M00/8C/9F/Ciqc1F_ytbOABwB3AABY1XWgGI4978.png)
+<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/8C/9F/Ciqc1F_ytbOABwB3AABY1XWgGI4978.png"/>
 
 然后我们插入 30，此时右边节点发生过载：
 
-![3.png](https://s0.lgstatic.com/i/image2/M01/04/83/CgpVE1_yteaATRGyAABdLxm53J0846.png)
+<Image alt="3.png" src="https://s0.lgstatic.com/i/image2/M01/04/83/CgpVE1_yteaATRGyAABdLxm53J0846.png"/>
 
 解决完一次过载问题之后，因为 26 会浮上去，根节点又发生了过载：
 
-![4.png](https://s0.lgstatic.com/i/image2/M01/04/83/CgpVE1_ytjSAduc9AABnqqExax0913.png)
+<Image alt="4.png" src="https://s0.lgstatic.com/i/image2/M01/04/83/CgpVE1_ytjSAduc9AABnqqExax0913.png"/>
 
 再次解决过载，拆分红色部分，得到最后结果：
 
-![5.png](https://s0.lgstatic.com/i/image2/M01/04/81/Cip5yF_ytoaACk0NAAB41Q4jOn8459.png)
+<Image alt="5.png" src="https://s0.lgstatic.com/i/image2/M01/04/81/Cip5yF_ytoaACk0NAAB41Q4jOn8459.png"/>
 
 在上述过程中，B+ 树始终可以保持平衡状态，而且所有叶子节点都在同一层级。更复杂的数学证明，我就不在这里讲解了。不过建议对算法感兴趣对同学，可以学习《算法导论》中关于树的部分。
 

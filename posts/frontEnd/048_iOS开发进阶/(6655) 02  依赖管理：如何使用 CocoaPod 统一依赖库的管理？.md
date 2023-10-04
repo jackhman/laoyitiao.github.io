@@ -233,7 +233,7 @@ The following pod updates are available:
 
 这一讲我介绍了如何使用 CocoaPods 来统一管理依赖库的版本。特别是根据我自己的经验总结了一套更新 Pod 版本的流程，希望你灵活使用这些步骤，从而少走弯路。
 
-![依赖管理.png](https://s0.lgstatic.com/i/image6/M00/0A/3A/CioPOWA3GR6AIe4nAApbaq5B2h0899.png)
+<Image alt="依赖管理.png" src="https://s0.lgstatic.com/i/image6/M00/0A/3A/CioPOWA3GR6AIe4nAApbaq5B2h0899.png"/>
 
 这里我再特别强调一下，为了保证依赖库版本都能保持一致，尽量不要执行`pod update`，而是使用通过修改 Podfile 文件里的版本号并执行`pod install`来更新 Pod 的版本，然后把 Podfile 和 Podfile.lock 文件一同并入 Git 主分支中进行统一管理。
 
@@ -248,7 +248,7 @@ The following pod updates are available:
 
 *** ** * ** ***
 
-[![Drawing 1.png](https://s0.lgstatic.com/i/image6/M00/08/77/Cgp9HWA0wqWAI70NAAdqMM6w3z0673.png)](https://shenceyun.lagou.com/t/mka)
+[<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/08/77/Cgp9HWA0wqWAI70NAAdqMM6w3z0673.png"/>](https://shenceyun.lagou.com/t/mka)
 
 **《大前端高薪训练营》**
 

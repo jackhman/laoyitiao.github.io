@@ -20,7 +20,7 @@ SLF4J 是一个**采用门面设计模式（Facade）** 的日志框架。如下
 
 在下图中，我们用门面模式创建了一个绘制几何图形的小功能。首先，定义了一个 Shape 接口类，并分别创建了三个类 Circle、Square、Rectangle ，以继承 Shape 接口。其次，我们再来创建一个画笔类 ShapeMaker ，在该类中我定义了 shape 形状字段以及绘画函数 drawCircle等。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/44/DD/Ciqc1F8_iESARR3eAAB5fX25Qrk279.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/44/DD/Ciqc1F8_iESARR3eAAB5fX25Qrk279.png"/>
 
 之后，当我们在本地项目中需要调用实现的会话功能时，直接调用 ShapeMaker 类，并传入我们要绘制的图形信息，就可以实现图形的绘制功能了。它使用起来非常简单，不必关心其底层是如何实现绘制操作的，只要将我们需要绘制的图形信息传入到接口函数中即可。
 
@@ -37,7 +37,7 @@ LOG.warn("Couldn't find the leader with id = "
 
 接下来我们看一下搜集完的日志是什么样子的。在开头我们已经说过，系统日志的存放位置，在 zoo.cfg 文件中。假设我们的日志路径为dataDir=/var/lib/zookeeper，打开系统命令行，进入到该文件夹，就会看到如下图所示的样子，所有系统日志文件都放在了该文件夹下。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/44/E9/CgqCHl8_iFWAQwfvAAAfvGjcfow495.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/44/E9/CgqCHl8_iFWAQwfvAAAfvGjcfow495.png"/>
 
 ### 快照文件
 
@@ -65,7 +65,7 @@ public interface SnapShot {
 
 创建完 ZooKeeper 服务的数据快照文件后，接下来就要对数据文件进行持久化的存储操作了。其实在整个 ZooKeeper 中，随着服务的不同阶段变化，数据快照存放文件的位置也随之变化。存储位置的变化，主要是内存和本地磁盘之间的转变。当 ZooKeeper 集群处理来自客户端的事务性的会话请求的时候，会首先在服务器内存中针对本次会话生成数据快照。当整个集群可以执行该条事务会话请求后，提交该请求操作，就会将数据快照持久化到本地磁盘中，如下图所示。
 
-![zk.png](https://s0.lgstatic.com/i/image/M00/44/DD/Ciqc1F8_iGKAU3N-AABQvy8biHk445.png)
+<Image alt="zk.png" src="https://s0.lgstatic.com/i/image/M00/44/DD/Ciqc1F8_iGKAU3N-AABQvy8biHk445.png"/>
 
 存储到本地磁盘中的数据快照文件，是经过 ZooKeeper 序列化后的二进制格式文件，通常我们无法直接查看，但如果想要查看，也可以通过 ZooKeeper 自带的 SnapshotFormatter 类来实现。如下图所示，在 SnapshotFormatter 类的内部用来查看快照文件的几种函数分别是： printDetails 函数，用来打印日志中的数据节点和 Session 会话信息；printZnodeDetails 函数，用来查看日志文件中节点的详细信息，包括节点 id 编码、state 状态信息、version 节点版本信息等。
 

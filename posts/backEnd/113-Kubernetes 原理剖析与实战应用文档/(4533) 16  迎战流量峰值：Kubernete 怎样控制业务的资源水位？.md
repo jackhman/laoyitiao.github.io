@@ -14,7 +14,7 @@ HPA 大多数是用来自动扩缩（Scale）一些无状态的应用负载，�
 
 我们来看下面这张图，它描述了 HPA 通过动态地调整`Deployment`的副本数，从而控制 Pod 的数量。
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/5E/E4/CgqCHl-H4QiAJarCAAQ5OqhzE0c569.png)
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/5E/E4/CgqCHl-H4QiAJarCAAQ5OqhzE0c569.png"/>
 
 （<https://github.com/kubernetes/website/blob/master/static/images/docs/horizontal-pod-autoscaler.png>）
 
@@ -262,7 +262,7 @@ HPA 能够自适应地伸缩 Pod 的数目，但是如果集群中资源不够�
 
 这里描述了 CA 和 HPA 一起使用的情形。两者一般可以配合起来一起使用。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/5E/DA/Ciqc1F-H5LCAEEBiAAB2SWxVmmg879.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/5E/DA/Ciqc1F-H5LCAEEBiAAB2SWxVmmg879.png"/>
 
 （<https://blogs.tensult.com/2019/08/20/cluster-autoscalerca-and-horizontal-pod-autoscalerhpa-on-kubernetes/>）
 

@@ -1,10 +1,10 @@
 前面的课时提到，SkyWalking OAP 底层支持 ElasticSearch、H2、MySQL 等多种持久化存储，同时也支持读取其他分布式链路追踪系统的数据，例如，jaeger（Uber 开源的分布式跟踪系统）、zipkin（Twitter 开源的分布式跟踪系统）。下图展示了 OAP 提供的针对不同持久化存储的插件模块：
 
-![image001.png](https://s0.lgstatic.com/i/image/M00/11/F6/Ciqc1F7M1mOAdkinAAUHgWAh2x8972.png)
+<Image alt="image001.png" src="https://s0.lgstatic.com/i/image/M00/11/F6/Ciqc1F7M1mOAdkinAAUHgWAh2x8972.png"/>
 
 在 server-core 模块中对整个 OAP 的持久化有一个整体的抽象，具体位置如下图所示，而上述这些插件都是在此基础上扩展实现的：
 
-![image003.png](https://s0.lgstatic.com/i/image/M00/11/F6/Ciqc1F7M1nCAO5cwAAKxM_2j59I530.png)
+<Image alt="image003.png" src="https://s0.lgstatic.com/i/image/M00/11/F6/Ciqc1F7M1nCAO5cwAAKxM_2j59I530.png"/>
 
 首先，OAP 存储了两种类型的数据：时间相关的数据和非时间相关的数据（与"时序"这个专有名词区分一下）。注册到 OAP 集群的 Service、ServiceInstance 以及同步的 EndpointName、NetworkAddress 都是非时间相关的数据，一个稳定的服务产生的这些数据是有限的，我们可以用几个固定的 ES 索引（或数据库表）来存储这些数据。
 
@@ -14,7 +14,7 @@
 
 假设我们查询该 JVM 实例跨度为一周的 Old GC 监控，将获得 10080 个点，监控图中点与点之间的距离会变得非常密。此时，就可以通过 DownSampling 的方式，将一个时间范围内的多个监控数据点聚合成单个点，从而减少需要绘制的点的个数。这里我们可以按照小时为时间窗口，计算一小时内 60 点的平均值，作为该小时的 DownSampling 聚合结果。下图为 13:00 \~ 14:00 以及 14:00 \~ 15:00 两小时的 DownSampling 示意图，经过 DownSampling 之后，一周的监控数据只有 168 个点了。
 
-![image005.png](https://s0.lgstatic.com/i/image/M00/11/F6/Ciqc1F7M1nyAFfhMAAP8mBituI8522.png)
+<Image alt="image005.png" src="https://s0.lgstatic.com/i/image/M00/11/F6/Ciqc1F7M1nyAFfhMAAP8mBituI8522.png"/>
 
 另外，Trace 也是时间相关的数据，其数据量会随时间不断增加，但不具备可聚合的特性。
 
@@ -22,13 +22,13 @@
 
 明确了 OAP 要存储的数据特性，我们回到 server-core 模块继续分析。常见的 ORM 框架会将数据中的表结构映射成 Java 类，表中的一个行数据会映射成一个 Java Bean 对象，在 OAP 的存储抽象中也有类似的操作。SkyWalking 会将 \[Metric + DownSampling\] 对应的一系列 ES 索引与一个 Model 对象进行映射，下图展示了 instance_jvm_old_gc_time 这个 Metric（指标）涉及的全部 ES 索引以及对应的 Model 对象：
 
-![image007.png](https://s0.lgstatic.com/i/image/M00/12/02/CgqCHl7M1qqAWJwzAAJI_qj62kA075.png)
+<Image alt="image007.png" src="https://s0.lgstatic.com/i/image/M00/12/02/CgqCHl7M1qqAWJwzAAJI_qj62kA075.png"/>
 
-![image009.png](https://s0.lgstatic.com/i/image/M00/12/02/CgqCHl7M1rCAF_BRAAIjEdyxGKM865.png)
+<Image alt="image009.png" src="https://s0.lgstatic.com/i/image/M00/12/02/CgqCHl7M1rCAF_BRAAIjEdyxGKM865.png"/>
 
-![image011.png](https://s0.lgstatic.com/i/image/M00/11/F6/Ciqc1F7M1riAbapoAAIgfkX2Ecw638.png)
+<Image alt="image011.png" src="https://s0.lgstatic.com/i/image/M00/11/F6/Ciqc1F7M1riAbapoAAIgfkX2Ecw638.png"/>
 
-![image013.png](https://s0.lgstatic.com/i/image/M00/12/02/CgqCHl7M1saAc6guAAIMU20bW9s987.png)
+<Image alt="image013.png" src="https://s0.lgstatic.com/i/image/M00/12/02/CgqCHl7M1saAc6guAAIMU20bW9s987.png"/>
 
 Model 对象记录了对应 ES 索引的核心信息：
 
@@ -43,11 +43,11 @@ Model 对象记录了对应 ES 索引的核心信息：
 
 下图展示了 Model.columns 集合与 ES 索引中 Field 之间的映射关系，除了名称之间的映射关系之外，ModelColumn 中记录了每个 Field 的类型。
 
-![image015.png](https://s0.lgstatic.com/i/image/M00/11/F7/Ciqc1F7M1tWAGod6AAXHbG78X9I245.png)
+<Image alt="image015.png" src="https://s0.lgstatic.com/i/image/M00/11/F7/Ciqc1F7M1tWAGod6AAXHbG78X9I245.png"/>
 
 在 CoreModuleProvider 启动过程中，会扫描 @Stream 注解，创建相应的 Model 对象，并由 StorageModels 统一管理（底层维护了 List 集合）。 @Stream 扫描过程后面介绍，这里只需知道 @Stream 中会包含 Model 需要的信息即可。StorageModels 同时实现了 IModelSetter、IModelGetter、IModelOverride 三个 Service 接口，如下图所示。
 
-![image017.png](https://s0.lgstatic.com/i/image/M00/12/02/CgqCHl7M1uGAFsn_AAHpuk8RDn4882.png)
+<Image alt="image017.png" src="https://s0.lgstatic.com/i/image/M00/12/02/CgqCHl7M1uGAFsn_AAHpuk8RDn4882.png"/>
 
 IModelGetter、IModelSetter 定义了读取和新增 Model 实例的方法，IModelOverride 接口提供的 overrideColumnName() 方法一般用在以 DB 为存储的插件模块中，当列名与数据库关键字冲突时，会通过该方法修改列名。
 
@@ -80,7 +80,7 @@ public final void install(Client client) throws StorageException {
 
 ModelInstaller 是一个抽象类，其中的 createTable() 是个抽象方法，针对具体存储的具体创建流程由对应的子类完成，继承关系如下图所示：
 
-![image019.png](https://s0.lgstatic.com/i/image/M00/11/F7/Ciqc1F7M1vSAKUcCAACnS4z1sy0205.png)
+<Image alt="image019.png" src="https://s0.lgstatic.com/i/image/M00/11/F7/Ciqc1F7M1vSAKUcCAACnS4z1sy0205.png"/>
 
 StorageEsInstaller 是针对 ElasticSearch 的实现，位于 storage-elasticsearch-plugin 模块中，该模块的 ModuleProvider 实现是 StorageModuleElasticsearchProvider（依赖于 CoreModule），在其 start() 方法中会调用 StorageEsInstaller.intall() 方法完成 ES 索引的初始化。
 
@@ -129,13 +129,13 @@ protected void createTable(Client client, Model model) {
 
 这里有几个点需要关注一下，首先是模板的相关内容，以 instance_jvm_old_gc_time 这个指标为例，每个 DownSampling 维度对应一个模板，每个模板中的 index_patterns 、aliases 配置以及匹配的索引名称，如下表所示：
 
-![image021.png](https://s0.lgstatic.com/i/image/M00/11/F7/Ciqc1F7M1wGAI3qgAACMKwr5nRI057.png)
+<Image alt="image021.png" src="https://s0.lgstatic.com/i/image/M00/11/F7/Ciqc1F7M1wGAI3qgAACMKwr5nRI057.png"/>
 
 可以看到模板中指定的别名与 Model.name 是相同的，在后续查询操作中，我们可以直接通过别名查询该模板匹配的全部索引，但是写入时还是要明确指定具体索引名称的。
 
 另一个点是索引名称的时间后缀。在 TimeBucket 工具类中会根据指定的 DownSampling 将毫秒级时间进行整理，得到相应的时间窗口，如下图所示：
 
-![image023.png](https://s0.lgstatic.com/i/image/M00/12/02/CgqCHl7M1yCAbH7cAAmLbCfxgJc857.png)
+<Image alt="image023.png" src="https://s0.lgstatic.com/i/image/M00/12/02/CgqCHl7M1yCAbH7cAAmLbCfxgJc857.png"/>
 
 拿到时间戳所在的窗口之后，TimeSeriesUtils 工具类会将其转换成对应索引的时间戳后缀：
 
@@ -165,7 +165,7 @@ public static String timeSeries(String modelName,
 
 SkyWalking 与 ORM 类似，会将索引中的一个 Document （或是数据库表中的一条数据）映射为一个 StorageData 对象。StorageData 接口中定义了一个 id() 方法，负责返回该条数据的唯一标识。实现 StorageData 接口的有三类数据，分别对应三个抽象类，如下图所示：
 
-![image025.png](https://s0.lgstatic.com/i/image/M00/11/F7/Ciqc1F7M1y2AAEnMAACsBUVPIcg418.png)
+<Image alt="image025.png" src="https://s0.lgstatic.com/i/image/M00/11/F7/Ciqc1F7M1y2AAEnMAACsBUVPIcg418.png"/>
 
 * **Metrics**：所有监控指标的顶级抽象，其中定义了一个 timeBucket 字段（long类型），它是所有监控指标的公共字段，用于表示该监控点所处的时间窗口。另外，timeBucket 字段被 @Column 注解标记，在 OAP 启动时会被扫描到转换成 Model 中的 ModelColumn，在初始化 ES 索引时就会创建相应的 Field。Metrics 抽象类中还定义了计算监控数据的一些公共方法：
 
@@ -175,7 +175,7 @@ SkyWalking 与 ORM 类似，会将索引中的一个 Document （或是数据库
 
 * **Record**：抽象了所有记录类型的数据，其子类如下图所示。其中 SegmentRecord 对应的是 TraceSegment 数据、AlarmRecord 对应一条告警、TopNDatabaseStatement 对应一条慢查询记录，这些数据都是一条条的记录。
 
-![image027.png](https://s0.lgstatic.com/i/image/M00/12/03/CgqCHl7M1ziAUV3lAADO8_KdBjs730.png)
+<Image alt="image027.png" src="https://s0.lgstatic.com/i/image/M00/12/03/CgqCHl7M1ziAUV3lAADO8_KdBjs730.png"/>
 
 上述记录类型的数据也有一个公共字段 ------ timeBucket（long 类型），表示该条记录数据所在的时间窗口，也同样被 @Column 注解标记。Record 抽象类中没有定义其他的公共方法。
 
@@ -192,7 +192,7 @@ SkyWalking 与 ORM 类似，会将索引中的一个 Document （或是数据库
 
 在创建 ES 索引时使用到的 ElasticSearchClient， 是对 RestHighLevelClient 进行了一层封装，位于 library-client 模块，其中还提供了 JDBC 以及 gRPC 的 Client，如下图所示：
 
-![image029.png](https://s0.lgstatic.com/i/image/M00/11/F7/Ciqc1F7M10iAQOQeAACK78d1tQw384.png)
+<Image alt="image029.png" src="https://s0.lgstatic.com/i/image/M00/11/F7/Ciqc1F7M10iAQOQeAACK78d1tQw384.png"/>
 
 GRPCClient 底层会与指定地址创建 gRPC ManagedChannel 连接，在后面的课程中会看到， OAP 节点之间的通信就是依赖 GRPCClient 实现的。
 
@@ -202,15 +202,15 @@ library-client 模块相对独立，如果同学们在实际开发中需要封�
 
 虽然 ElasticSearchClient 对 RestHighLevelClient 的通用操作进行了封装，但如果上层逻辑直接使用，还是必须了解 RestHighLevelClient 的相关概念，所以在实践中会针对业务封装出一套 DAO 层。在 DAO 层会完成业务概念与存储概念的转换，如下图所示：
 
-![image031.png](https://s0.lgstatic.com/i/image/M00/11/F7/Ciqc1F7M11iAEBxFAAGikNTBius816.png)
+<Image alt="image031.png" src="https://s0.lgstatic.com/i/image/M00/11/F7/Ciqc1F7M11iAEBxFAAGikNTBius816.png"/>
 
 SkyWalking OAP 也提供了DAO 层抽象，如下图所示，大致可以分为三类：Receiver DAO、Cache DAO、Query DAO。
 
-![image033.png](https://s0.lgstatic.com/i/image/M00/11/F7/Ciqc1F7M12iAYJt9AAIIw288AD4900.png)
+<Image alt="image033.png" src="https://s0.lgstatic.com/i/image/M00/11/F7/Ciqc1F7M12iAYJt9AAIIw288AD4900.png"/>
 
 * **Receiver DAO 接口**：在各个 receiver 模块接收到 Agent 上报的 Metrics 数据、Trace 数据以及注册请求的时候，会通过 Receiver DAO 将数据持久化到底层存储，具体的接口如下图所示：
 
-![image035.png](https://s0.lgstatic.com/i/image/M00/11/F7/Ciqc1F7M13SAGmxvAADxT4960Jo386.png)
+<Image alt="image035.png" src="https://s0.lgstatic.com/i/image/M00/11/F7/Ciqc1F7M13SAGmxvAADxT4960Jo386.png"/>
 
 * **IRegisterDAO 接口**：负责增删改查 RegisterSource 数据。
 * **IMetricsDAO 接口**：负责增删改查 Metrics 数据。
@@ -221,13 +221,13 @@ SkyWalking OAP 也提供了DAO 层抽象，如下图所示，大致可以分为�
 
 如下图所示，每一种 RegisterSource 数据都对应一个 Cache，通过 Cache 的方式提高查询性能，每个 Cache 底层都关联了一个 Cache DAO 接口实现。
 
-![image037.png](https://s0.lgstatic.com/i/image/M00/11/F7/Ciqc1F7M132AMFlHAACbaBYDnW8720.png)
+<Image alt="image037.png" src="https://s0.lgstatic.com/i/image/M00/11/F7/Ciqc1F7M132AMFlHAACbaBYDnW8720.png"/>
 
 另外，在 CoreModule 中还会启动 CacheUpdateTimer，其中会启动一个后台线程，定期更新 ServiceInventoryCache 缓存。
 
 * **Query DAO 接口**：Query DAO 接口负责支撑 query 模块处理 SkyWalking Rocketbot 发来的查询请求，接口参数更加贴近用户请求参数。下图展示了所有 Query DAO 接口，从接口名称即可看出查询的是哪些数据。
 
-![image039.png](https://s0.lgstatic.com/i/image/M00/11/F7/Ciqc1F7M14eAfVPdAABls_BG5tE854.png)
+<Image alt="image039.png" src="https://s0.lgstatic.com/i/image/M00/11/F7/Ciqc1F7M14eAfVPdAABls_BG5tE854.png"/>
 
 SkyWalking OAP 中 DAO 层的整体架构以及核心接口就介绍完了。
 
@@ -240,7 +240,7 @@ SkyWalking OAP 中 DAO 层的整体架构以及核心接口就介绍完了。
 1. 通过 ClusterNodesQuery 查询到当前 OAP 集群中全部节点列表，如果当前节点为列表中第一个节点，才能继续执行后续的清理操作。这就保证不会出现多个 OAP 节点并发执行清理任务。
 2. 从 IModelGetter 中拿到全部 Model 对象，根据 Model 数据的 DownSampling 计算每个 Model 保留 ES 索引的范围。这里使用到了 StorageTTL 接口，其中会根据每个 Model 不同的 DownSampling 返回相应的 TTLCalculator，如下图所示：
 
-![image041.png](https://s0.lgstatic.com/i/image/M00/11/F7/Ciqc1F7M15KASkiEAABTiYqEwqw229.png)
+<Image alt="image041.png" src="https://s0.lgstatic.com/i/image/M00/11/F7/Ciqc1F7M15KASkiEAABTiYqEwqw229.png"/>
 
 对于一个 Model，通过 TTLCalculator 计算之后会得到一个时间，在该时间之前的 ES 索引将被删除。
 

@@ -37,7 +37,7 @@
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/6D/CB/Cgq2xl5eH-eAdcX0AAVtUaK_J8w145.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6D/CB/Cgq2xl5eH-eAdcX0AAVtUaK_J8w145.png"/>
 
 图1 研发组织从传统向敏捷演化（以 Scrum 为例）
 
@@ -98,7 +98,7 @@ Test Owner（TO）是以敏捷中最流行的 Scrum 方式来定义这个角色�
 
 <br />
 
-![](https://s0.lgstatic.com/i/image3/M01/6D/CB/CgpOIF5eH_uASvi2AANL2NAEMxQ709.png)
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6D/CB/CgpOIF5eH_uASvi2AANL2NAEMxQ709.png"/>
 
 图2 大规模软件敏捷研发团队的构成
 

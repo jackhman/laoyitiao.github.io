@@ -10,7 +10,7 @@ Kubernetes 隐藏了所有容器编排的复杂细节，让我们可以专注在
 
 我们从整个 Kubernetes 的架构为出发点，来看看整个集群的组件。我在《[02 \| 高屋建瓴：Kubernetes 的架构为什么是这样的？](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=447#/detail/pc?id=4519)》中讲到 Kubernetes 的官方架构图，如下：
 
-![Drawing 0.png](https://s0.lgstatic.com/i/image/M00/6B/F9/Ciqc1F-qTFCAfuayAAHPVgKdC98338.png)  
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/6B/F9/Ciqc1F-qTFCAfuayAAHPVgKdC98338.png"/>  
 图 1：Kubernetes 官方架构图
 
 从上图可以看出，整个 Kubernetes 集群可分为Master 节点（左侧）和 Node 节点（右侧）。
@@ -129,7 +129,7 @@ spec:
 
 这是 Velero 的架构图：
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image/M00/6C/04/CgqCHl-qTK6ADCLwAAFaThL2Fxk754.png)  
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/6C/04/CgqCHl-qTK6ADCLwAAFaThL2Fxk754.png"/>  
 图 2：Velero 架构图
 
 Velero 由两部分组成：

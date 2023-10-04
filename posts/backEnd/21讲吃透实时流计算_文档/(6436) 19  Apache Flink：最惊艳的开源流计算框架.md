@@ -14,7 +14,7 @@ Flink 是一个主从（Master/Worker）架构的分布式系统。主节点负�
 
 图 1 展示了 Flink 的系统架构。
 
-![Drawing 1.png](https://s0.lgstatic.com/i/image6/M01/27/A9/CioPOWBdgJuAFv9cAAMbscARMZA482.png)
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M01/27/A9/CioPOWBdgJuAFv9cAAMbscARMZA482.png"/>
 
 可以看出，Flink 可以部署在诸如 Yarn、Mesos 和 K8S 等分布式资源管理器上。其整体架构与 Storm 和 Spark Streaming 等分布式流计算框架类似，但与这些流计算框架不同的是，**Flink 明确地把状态管理（尤其是流信息状态管理）纳入到了其系统架构中**。
 
@@ -24,7 +24,7 @@ Flink 是一个主从（Master/Worker）架构的分布式系统。主节点负�
 
 接下来，我们再来看看在 Flink 中如何描述一个流计算过程。下面的图 2 展示了 Flink 用于描述流计算过程的 DAG 组成。
 
-![Drawing 3.png](https://s0.lgstatic.com/i/image6/M01/27/A9/CioPOWBdgKiAVR1QAANcMDm_ZVg804.png)
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M01/27/A9/CioPOWBdgKiAVR1QAANcMDm_ZVg804.png"/>
 
 从图 2 可以看出，Flink 使用了 DataStream 来描述数据流。Flink 的数据输入、数据处理和数据输出均与 DataStream 有关，具体来说是这样的。
 
@@ -163,7 +163,7 @@ Flink 基于 snapshot 和 checkpoint 的故障恢复机制，在 Flink 内部提
 
 下面的表 1 是对模块四所讨论四种流计算框架的比较。
 
-![Drawing 4.png](https://s0.lgstatic.com/i/image6/M01/27/A9/CioPOWBdgRKAGRhrAAEdy_HlR50807.png)
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image6/M01/27/A9/CioPOWBdgRKAGRhrAAEdy_HlR50807.png"/>
 
 从上面的表中可以看出，在流计算领域，Flink 在各个方面都更有优势，所以它不愧是当前最好的流计算框架。如果你是刚刚入门流计算领域的话，我最推荐的就是 Flink 了，其次是 Spark Streaming。至于 Storm 和 Samza，你可以了解一下，以帮助理解流计算概念和技术即可。
 
@@ -181,4 +181,4 @@ Flink 基于 snapshot 和 checkpoint 的故障恢复机制，在 Flink 内部提
 
 下面是本课时的脑图，以帮助你理解。
 
-![Drawing 5.png](https://s0.lgstatic.com/i/image6/M01/27/AC/Cgp9HWBdgSCAbnm5ABGgDbOk8_w551.png)
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image6/M01/27/AC/Cgp9HWBdgSCAbnm5ABGgDbOk8_w551.png"/>

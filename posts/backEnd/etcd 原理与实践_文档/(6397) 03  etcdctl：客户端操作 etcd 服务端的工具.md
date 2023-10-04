@@ -29,11 +29,11 @@ API VERSION:
 
 COMMANDS:
 
-![Lark20210201-172927.png](https://s0.lgstatic.com/i/image/M00/94/3B/Ciqc1GAXykaAefV0AAoX29H6c7o817.png)
+<Image alt="Lark20210201-172927.png" src="https://s0.lgstatic.com/i/image/M00/94/3B/Ciqc1GAXykaAefV0AAoX29H6c7o817.png"/>
 
 OPTIONS:
 
-![Lark20210201-172932.png](https://s0.lgstatic.com/i/image/M00/94/3C/Ciqc1GAXylSANvfVAAYmlJl-aDo653.png)
+<Image alt="Lark20210201-172932.png" src="https://s0.lgstatic.com/i/image/M00/94/3C/Ciqc1GAXylSANvfVAAYmlJl-aDo653.png"/>
 
 etcdctl 支持的命令大体上分为**数据库操作和非数据库操作**两类。其中数据库的操作命令是最常用的命令，我们将在下面具体介绍。其他的命令如用户、角色、授权、认证相关，你可以根据语法自己尝试一下。
 
@@ -396,6 +396,6 @@ lease 694d71ddacfda22c granted with TTL(300s), remaining(220s), attached keys([f
 
 本讲内容如下：
 
-![Lark20210201-172935.png](https://s0.lgstatic.com/i/image2/M01/0C/36/CgpVE2AXynmAbZxPAAEoYddgUBM139.png)
+<Image alt="Lark20210201-172935.png" src="https://s0.lgstatic.com/i/image2/M01/0C/36/CgpVE2AXynmAbZxPAAEoYddgUBM139.png"/>
 
 学完这一讲内容，想必你对 etcd 的常用功能已经有了一个整体的了解，但是如果在 etcd 集群信息变更的情况下，etcdctl 如何稳定地访问 etcd 服务实例，非 gRPC 客户端又该如何访问 etcd 服务端呢？这也是我们下一讲的主要内容，希望你能提前思考，也欢迎你在留言区和我交流，我们下一讲再见。
