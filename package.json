@@ -15,10 +15,13 @@
     "limit": "cross-env LIMIT=36000 increase-memory-limit && node fix-memory-limit.config.cjs"
   },
   "dependencies": {
+    "algoliasearch": "^4.20.0",
     "confetti-js": "^0.0.18",
     "element-plus": "^2.3.14",
+    "instantsearch.css": "^8.1.0",
     "markdown-it-title": "^4.0.0",
     "nprogress": "^0.2.0",
-    "vue": "^3.3.4"
+    "vue": "^3.3.4",
+    "vue-instantsearch": "^4.10.12"
   }
 }

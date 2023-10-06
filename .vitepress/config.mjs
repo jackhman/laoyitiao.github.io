@@ -6,19 +6,24 @@ import markdownItTitle from 'markdown-it-title'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+
+import { fileURLToPath, URL } from 'node:url'
+
 markdownItTitle.defaults = {
   level: 0,
   excerpt: 0
 }
-// https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "Docs",
   description: "A VitePress Site",
   ignoreDeadLinks: true,
   lang: 'zh-CN',
+  head: [
+    ['link', { rel: 'preconnect', href: 'https://YOUR_APP_ID-dsn.algolia.net',crossorigin: true }],
+  ],
   markdown: {
     attrs: {
-      disable: true
+      disable: false
     },
     defaultHighlightLang: 'html',
     config: (md) => {
@@ -59,23 +64,12 @@ export default defineConfig({
       ...dataLoader.load().sirderBar
     },
     search: {
-      // provider: 'local',
-      // options: {
-      //   miniSearch: {
-      //     options: {
-      //       fields: ['title'],
-      //     },
-      //     searchOptions: {
-      //       boost: { title: 2 },
-      //       fuzzy: 0.2
-      //     }
-      //   }
-      // }
       provider: 'algolia',
       options: {
         appId: 'FXWJW2H1XK',
         apiKey: '7ed21ca5ac0fcda5a3dad33d19c7bec3',
         indexName: 'docs_index',
+        maxResultsPerGroup: 20,
         locales: {
           root: {
             placeholder: '搜索文档',

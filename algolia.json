@@ -8,12 +8,11 @@
       "selector": "",
       "defaultValue": "Documentation"
     },
-    "lvl1": ".content h1",
+    "lvl1": ".content h1,.title h1 strong,.VPSidebarItem a p.text",
     "lvl2": ".content h2",
     "lvl3": ".content h3",
     "lvl4": ".content h4",
     "lvl5": ".content h5",
-    "content": ".content p, .content li",
     "lang": {
       "selector": "/html/@lang",
       "type": "xpath",
@@ -21,6 +20,7 @@
       "default_value": "zh-CN"
     }
   },
+  "indexHeadings": true,
   "custom_settings": {
     "attributesForFaceting": ["lang"]
   }

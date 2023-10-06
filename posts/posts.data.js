@@ -83,22 +83,25 @@ export const traverseFolder = function (folderPath) {
 
 export const generatePostsSidebar =  function generatePostsSidebar(data){
     const res = {}
+    const pattern = /^\([0-9]*\)\s*/;
+
     Object.keys(data).forEach((sDir)=>{
         Object.keys(data[sDir]).forEach((pDir)=>{
             const pageUrls = data[sDir][pDir];
             const items = []
+            const baseAndPrefix = '/posts/'+sDir+'/'+pDir+'/'
             pageUrls.forEach((pageUrl)=>{
+                const r = pattern.exec(pageUrl);
+                const p = pageUrl.replace(r,"")
                 items.push({
-                    text: pageUrl,
-                    link: pageUrl
+                    text: p,
+                    link: baseAndPrefix+pageUrl
                 })
             })
-            const baseAndPrefix = '/posts/'+sDir+'/'+pDir+'/'
+
             res[baseAndPrefix]={
                 text: pDir,
-                items: items,
-                collapsed: true,
-                base: baseAndPrefix
+                items: items
             }
         })
     })
