@@ -1,3 +1,5 @@
+# 09同步网关：如何基于Zuul构建API网关？
+
 今天我们开始讨论 Spring Cloud 中的另一个核心技术组件，**API 网关**。
 
 我们先来简单介绍 API 网关的基本结构，然后给出 Spring Cloud 中关于 API 网关的解决方案。今天的内容重点是介绍如何使用 Zuul 这一特定工具来构建 API 网关的实现过程。
@@ -6,12 +8,16 @@
 
 在微服务架构中，API 网关（也叫服务网关）的出现有其必然性。通常，单个微服务提供的 API 粒度与客户端请求的粒度不一定完全匹配。多个服务之间通过对细粒度 API 的聚合才能满足客户端的要求。更为重要的是，网关能够起到客户端与微服务之间的隔离作用。随着业务需求的变化和时间的演进，网关背后的各个微服务的划分和实现可能需要做相应的调整和升级。这种调整和升级应该实现对客户端透明，如下所示：
 
-<Image alt="Lark20201020-175149.png" src="https://s0.lgstatic.com/i/image/M00/61/17/CgqCHl-Os0qAGZryAABHtvSGSm8333.png"/>  
+
+<Image alt="Lark20201020-175149.png" src="https://s0.lgstatic.com/i/image/M00/61/17/CgqCHl-Os0qAGZryAABHtvSGSm8333.png"/> 
+  
 API 网关的聚合和隔离作用示意图
 
 当然，如果我们在服务调用过程中添加了一个网关层，那么所有的客户端都通过这个统一的网关接入微服务。这样一些非业务功能性需求就可以在网关层进行集中处理。这些需求中，比较常见的包括**请求监控** 、**安全管理** 、**路由规则** 、**日志记录** 、**访问控制** 、**服务适配**等功能：
 
-<Image alt="Lark20201020-175156.png" src="https://s0.lgstatic.com/i/image/M00/61/0C/Ciqc1F-Os1SAHbuIAABCdN3hS7M839.png"/>  
+
+<Image alt="Lark20201020-175156.png" src="https://s0.lgstatic.com/i/image/M00/61/0C/Ciqc1F-Os1SAHbuIAABCdN3hS7M839.png"/> 
+  
 服务网关的处理机制
 
 在 Spring Cloud 中，针对 API 网关的实现提供了两种解决方案。一种是集成 Netflix 中的 Zuul 网关，一种是自研 Spring Cloud Gateway。接下来，我们先来讨论如何使用 Zuul 构建 API 网关。
@@ -204,3 +210,4 @@ thirdpartyservice:
 这里给你留一道思考题：我们通过 Zuul 来实现服务路由，可以采用哪些具体的配置方式？
 
 Zuul 是一款经典的开源API网关，使用上非常简单，而它的内部实现机制也比较容易理解。下一课时，我们将通过源码来深入剖析 Zuul 的实现原理。
+

@@ -1,8 +1,12 @@
+# 开篇词SpringCloudAlibaba未来的微服务生态标准
+
 你好，我是老齐，一名从业近 20 年的 IT 老兵，曾在京东、财政部、宜信、工商银行等机构从事架构设计与核心研发工作，有多个亿级流量的软件架构设计经验。也曾多次基于 Spring Cloud Alibaba 对微服务架构项目进行落地与升级改造，有着丰富的实践经验。
 
 出来工作我不觉得谈钱庸俗，我们学习本身就是为了未来有更好的发展、更多的收入。现在已经走进 21 世纪第三个十年，在未来十年内以互联网、IoT 物联网为代表的分布式应用必将成为主流，大量软件企业对掌握微服务与高可用、高性能、高并发的架构人才也必定趋之若鹜，在这样的时代拐角下，我们又该如何选择呢？
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M01/10/1E/Cgp9HWA-NMWAapSTAACz5Css5rk246.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M01/10/1E/Cgp9HWA-NMWAapSTAACz5Css5rk246.png"/> 
+  
 某知名互联网企业招聘需求
 
 ### 为什么要掌握微服务架构？
@@ -31,14 +35,18 @@
 
 其实微服务看似是将整体应用打散为小服务这种很简单的处理，实则操作起来非常复杂，针对新的微服务架构额外产生的数据一致性问题、网络通信故障、限流与熔断机制、调用链路跟踪、集群监控、甚至用户登录与权限管理都是全新的挑战。如果这些问题全部都要软件公司自己解决显然是行不通的，好在这几年以 Spring Cloud 为基础的微服务技术生态日渐成熟，前面提到的大多数问题确实都已得到了有效解决。
 
-<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M01/10/F7/Cgp9HWA_NfCALaxSAAF-ldAP6Vw773.png"/>  
+
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M01/10/F7/Cgp9HWA_NfCALaxSAAF-ldAP6Vw773.png"/> 
+  
 Spring Cloud官方架构
 
 但好景不长，在这几年以 Netfilix Eureka 为代表的 Spring Cloud 核心中间件纷纷停止更新，再加上许多组件设计老旧，在性能上已无法满足互联网大厂的要求，我们迫切需要一套符合中国特色的微服务架构解决方案。
 
 Spring Cloud Alibaba 就是在这种背景下诞生的，Spring Cloud Alibaba 是国产的微服务开发一站式解决方案，与原有 Spring Cloud 兼容的同时对微服务生态进行扩展，通过添加少量的配置注解，便可实现更符合国情的微服务架构。
 
-<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M01/10/F7/Cgp9HWA_NfuAbL5nAANAH9ISxfA364.png"/>  
+
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M01/10/F7/Cgp9HWA_NfuAbL5nAANAH9ISxfA364.png"/> 
+  
 Spring Cloud Alibaba 架构
 
 相比 Spring Cloud 官方标准，Spring Cloud Alibaba 提供了更完整的功能、更好用的 API，同时在中文的加持下让复杂的微服务架构变得不再高不可攀，目前 Spring Cloud Alibaba 已经是事实上的国内微服务技术标准，这也是我为什么极力推荐学习 Spring Cloud Alibaba 的重要原因。
@@ -84,3 +92,4 @@ Spring Cloud Alibaba 架构
 希望在座的你，能坚持学习不断进步，日积月累后肯定会在收入上体现出你付出的努力与汗水。
 
 最后，欢迎你在留言区分享自己的经历和经验，也希望你能在这里找到自己的良师益友。
+

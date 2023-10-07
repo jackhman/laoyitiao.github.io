@@ -1,8 +1,12 @@
+# 05如何基于JMeterAPI开发性能测试平台？
+
 上一讲我带你学习了 JMeter 二次开发，通过对 JMeter 提供的接口或者抽象类方法重写可以自定义所需要的 JMeter 插件。这一讲我将带你了解如何开发一个性能测试平台。
 
 目前测试界比较热门的一个方向就是**开发测试平台**，平台级别的性能测试能减少重复劳动、提升效率，也方便统一管理，自然受到了市场的欢迎，测试平台开发能力也成了资深测试人员的必备技能之一。
 
-<Image alt="05.png" src="https://s0.lgstatic.com/i/image2/M01/07/6C/CgpVE2AIEHeAGseIAAEYqQmZkM8141.png"/>
+
+<Image alt="05.png" src="https://s0.lgstatic.com/i/image2/M01/07/6C/CgpVE2AIEHeAGseIAAEYqQmZkM8141.png"/> 
+
 
 本专栏，我们应用的主要性能测试工具是 JMeter，那开发性能测试平台需要什么样的能力呢？我认为需要以下能力：
 
@@ -24,12 +28,16 @@
 
 这些场景使我们的性能测试平台具有了更多现实意义，我们希望有一个**可以协作共享** ，并能够**追溯历史数据的性能测试平台**。基于这点我梳理了性能测试平台的基础功能，如下图所示：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/8E/A0/Ciqc1GAFPJ-ASd02AAB5h9Xz8Ok173.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/8E/A0/Ciqc1GAFPJ-ASd02AAB5h9Xz8Ok173.png"/> 
+  
 图 1：性能测试平台基础功能
 
 目前市面上的性能测试平台大多是基于 JMeter 提供的 API 开发的，核心流程如下图所示：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/8E/AB/CgqCHmAFPKaACL8lAACO4B5j9fY519.png"/>  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/8E/AB/CgqCHmAFPKaACL8lAACO4B5j9fY519.png"/> 
+  
 图 2：性能测试平台开发核心流程
 
 接下来我们根据这 4 个阶段来学习如何使用 JMeter 的 API 实现性能测试。
@@ -69,7 +77,9 @@ HashTree jmxTree = SaveService.loadTree(file);
 
 那**创建脚本文件**是怎么做的呢？它是通过 API 构建测试计划，然后再保存为 JMeter 的 jmx 文件格式。核心步骤如下图所示：
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image2/M01/06/8C/Cip5yGAFPLWAE3XRAAHi31Yd_oY766.png"/>  
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image2/M01/06/8C/Cip5yGAFPLWAE3XRAAHi31Yd_oY766.png"/> 
+  
 图 3：脚本文件创建步骤
 
 该方式需要自己构建 HashTree，我们可以参考 JMeter 客户端生成的 jmx 文件。
@@ -196,7 +206,9 @@ engine.run();
 
 性能测试平台结果收集的流程图如下：
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image2/M01/06/8E/CgpVE2AFPMiAUfRUAAHZ0vk2YZg058.png"/>  
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image2/M01/06/8E/CgpVE2AFPMiAUfRUAAHZ0vk2YZg058.png"/> 
+  
 图 4：结果收集流程图
 
 上面流程图中与 JMeter 关联最密切的是第 1 步，获取 JMeter 结果数据。那我们如何获取这些数据呢？
@@ -284,7 +296,9 @@ while (true) {
 
 实现后的效果图如下：
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image2/M01/06/8C/Cip5yGAFPNWAIzKMAACkBrnfdmY418.png"/>  
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image2/M01/06/8C/Cip5yGAFPNWAIzKMAACkBrnfdmY418.png"/> 
+  
 图 5 ：效果图
 > 其中横坐标是时间，纵坐标是实时处理能力的展示，可以看到每秒请求次数在 400 \~ 600 之间波动。
 
@@ -297,3 +311,4 @@ while (true) {
 到此，我们对于工具的学习也告一段落了，通过**模块一**的学习，你不仅知道了工具的原理，还知道了它们的基础使用方法以及拓展方法。希望你也能在日常工作中，把这些工具用起来，有任何问题，都欢迎在留言区交流。
 
 接下来，我们就进入**模块二**，系统地学习性能测试的需求分析、方案编写等。下一讲将为你讲解"Nginx 在系统架构中的作用"。
+

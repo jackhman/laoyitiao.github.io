@@ -1,3 +1,5 @@
+# 16tconfig.jon配置：如何定制TypeScript的行为？
+
 tsconfig.json 是 TypeScript 项目的配置文件。如果一个目录下存在一个 tsconfig.json 文件，那么往往意味着这个目录就是 TypeScript 项目的根目录。
 
 tsconfig.json 包含 TypeScript 编译的相关配置，通过更改编译配置项，我们可以让 TypeScript 编译出 ES6、ES5、node 的代码。
@@ -275,3 +277,4 @@ tsconfig.json 是 TypeScript 项目非常重要的配置文件，这一讲我们
 17 讲我们将介绍解析在 TypeScript 项目开发中常见的类型错误以及如何为 TypeScript 类型编写单元测试，敬请期待！
 
 另外，如果你觉得本专栏有价值，欢迎分享给更多好友。
+

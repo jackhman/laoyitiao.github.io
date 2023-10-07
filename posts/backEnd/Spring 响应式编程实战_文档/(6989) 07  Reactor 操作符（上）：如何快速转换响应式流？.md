@@ -1,3 +1,5 @@
+# 07Reactor操作符（上）：如何快速转换响应式流？
+
 上一讲，我系统地为你介绍了 Reactor 框架中创建 Flux 和 Mono 这两种数据流的各种方法。一旦我们得到了一个数据流，就可以使用它来完成某个特定的需求。
 
 和其他主流的响应式编程框架一样，Reactor 框架的设计目标也是为了简化响应式流的使用方法。为此，Reactor 框架为我们提供了大量操作符，用于操作 Flux 和 Mono 对象。本讲和下一讲，我们将对常用的操作符展开讨论。
@@ -48,7 +50,9 @@ buffer 操作符的另一种用法是指定收集的时间间隔，由此演变�
 
 window 操作符的作用类似于 buffer，不同的是 window 操作符是把当前流中的元素收集到另外的 Flux 序列中，而不是一个集合。因此该操作符的返回值类型就变成了 Flux\<Flux \>。window 操作符相对比较复杂，我们附上官方给出的弹珠图，如下所示。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/29/9C/Cgp9HWBhfxqAbRiUAAQFjAhjF5U321.png"/>  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/29/9C/Cgp9HWBhfxqAbRiUAAQFjAhjF5U321.png"/> 
+  
 window 操作符示意图（来自 Reactor 官网）
 
 上图比较复杂，代表的是一种对序列进行开窗的操作。我们还是通过一个简单的示例来进一步阐述 window 操作符的作用，示例代码如下。
@@ -91,7 +95,9 @@ number-2
 
 flatMap 操作符执行的也是一种映射操作，但与 map 不同，该操作符会把流中的每个元素映射成一个流而不是一个元素，然后再把得到的所有流中的元素进行合并，整个过程你可以通过 flapMap 操作符的弹珠图进行理解，如下所示。
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M00/29/A5/CioPOWBhfyaAdHDOAALuJxPlC4w200.png"/>  
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M00/29/A5/CioPOWBhfyaAdHDOAALuJxPlC4w200.png"/> 
+  
 flapMap 操作符示意图（来自 Reactor 官网）
 
 上图比较复杂，而如下代码展示了 flatMap 操作符的一种常见的应用方法。
@@ -209,7 +215,9 @@ public Mono<Void> updateOrders(Flux<Order> orders) {
 
 作为一种典型的组合类操作符，merge 操作符用来把多个 Flux 流合并成一个 Flux 序列，而合并的规则就是按照流中元素的实际生成的顺序进行，它的弹珠图如下所示。
 
-<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image6/M00/29/9C/Cgp9HWBhfz6ABVQNAANJ8ZXLXC8786.png"/>  
+
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image6/M00/29/9C/Cgp9HWBhfz6ABVQNAANJ8ZXLXC8786.png"/> 
+  
 merge 操作符示意图（来自 Reactor 官网）
 
 merge 操作符的代码示例如下所示，我们通过 Flux.intervalMillis() 方法分别创建了两个 Flux 序列，然后将它们 merge 之后打印出来。
@@ -250,7 +258,9 @@ Flux.mergeSequential (Flux.intervalMillis(0, 100).take(2), Flux.intervalMillis(5
 
 zip 操作符的合并规则比较特别，是将当前流中的元素与另外一个流中的元素按照一对一的方式进行合并，如下所示。
 
-<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image6/M00/29/A5/CioPOWBhf0-AMFkrAAMs-TKDoUM878.png"/>  
+
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image6/M00/29/A5/CioPOWBhf0-AMFkrAAMs-TKDoUM878.png"/> 
+  
 zip 操作符示意图（来自 Reactor 官网）
 
 使用 zip 操作符在合并时可以不做任何处理，由此得到的是一个元素类型为 Tuple2 的流，示例代码如下所示。
@@ -301,3 +311,4 @@ Flux.just(1, 2).zipWith(Flux.just(3, 4), (s1, s2) ->
 下一讲将承接本讲内容继续讨论 Reactor 框架中的操作符，我们将讨论条件、裁剪和工具类的操作符使用方法，到时见。
 > 点击链接，获取课程相关代码↓↓↓  
 > [https://github.com/lagoueduCol/ReactiveProgramming-jianxiang.git](https://github.com/lagoueduCol/ReactiveProgramming-jianxiang.git?fileGuid=5qq2xRIWjHwZ6Uvr)
+

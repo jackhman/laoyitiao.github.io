@@ -1,3 +1,5 @@
+# 第26讲：HDFS存储权限ACL控制策略以及与系统权限整合应用
+
 ### POSIX 系统权限模型
 
 **POSIX 系统权限模型** 是 Linux/Unix 下的一个 权限定义标准，此标准规定了每个文件和目录有一个所有者（Owner）和一个组（Group）。
@@ -12,7 +14,9 @@
 
 **八进制权限表示法** 如下图所示：
 
-<Image alt="6.png" src="https://s0.lgstatic.com/i/image/M00/37/C1/Ciqc1F8alp6AaL2_AACr36-IPwE693.png"/>
+
+<Image alt="6.png" src="https://s0.lgstatic.com/i/image/M00/37/C1/Ciqc1F8alp6AaL2_AACr36-IPwE693.png"/> 
+
 
 从图中可以清晰地看出，"755"组合的代表含义：
 
@@ -96,11 +100,15 @@ drwxrwxr-x  - user1  supergroup          0 2020-05-09 14:01 /logs/demo
 
 如果 ACL 规则与文件、目录权限位完全对应，则称为最小 ACL（Minimal ACL），它们有 3 个 ACL 规则（即 Owner、Group 和 Others 三种类型，由于与传统的 POSIX 权限模型完全对应，因此不需要指定用户名，称为无名规则），如下图所示：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/37/B8/Ciqc1F8aimWAdwAqAAAla7uwNlY190.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/37/B8/Ciqc1F8aimWAdwAqAAAla7uwNlY190.png"/> 
+
 
 拥有超过 3 个规则的 ACL 称为扩展 ACL（Extended ACL），扩展 ACL 会包含一个 Mask 规则以及给 Owner、Group 和 Others 授权的规则，如下图所示：
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/37/B8/Ciqc1F8aimyAWM4iAAAlSdeJdrk817.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/37/B8/Ciqc1F8aimyAWM4iAAAlSdeJdrk817.png"/> 
+
 
 上图中 /logs/aa.log 这个文件就使用了一个扩展 ACL 规则。
 
@@ -159,7 +167,9 @@ hdfs dfs -setfacl -R|[--set <acl_spec> <path>]
 
 下面看一个操作实例，如下图所示：
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/37/C5/CgqCHl8ajJeAL7qXAABUONHs15s396.png"/>
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/37/C5/CgqCHl8ajJeAL7qXAABUONHs15s396.png"/> 
+
 
 这里对 HDFS 上的文件 /logs/demo100.txt 设置了 ACL 规则，默认情况下此文件的 owner 是 Hadoop，Group 是 supergroup，对应的权限是 644，即只有 Hadoop 用户对此文件有写权限。此时我通过 ACL 规则添加了另一个用户 Hive，对此文件拥有读、写权限，规则设置完成后，通过 Hive 用户就可以向此文件中追加内容。
 
@@ -206,22 +216,31 @@ hdfs dfs -getfacl -R /hivedata/data/mv.db
 
 用户对应的 HDFS 目录创建完成后，就可以做相关的 ACL 授权操作了。这里假定 Hive 库mvlog.db 的路径为 /user/hive/warehouse/mvlog.db，对此目录做下图授权即可：
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/37/BA/Ciqc1F8ajM2AMU3MAABKbQke-r0769.png"/>
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/37/BA/Ciqc1F8ajM2AMU3MAABKbQke-r0769.png"/> 
+
 
 从上图中可以看出，若直接通过 userb 去追加内容到 mvcount 表中的 2020-07-15 文件时，提示没有写权限，这是正常的。因为 userb 对此表本来就没有写权限，接着进行 acl 授权，执行如下图操作：
 
-<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/37/C5/CgqCHl8ajNWARt8iAABTxrsGiqw705.png"/>
+
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/37/C5/CgqCHl8ajNWARt8iAABTxrsGiqw705.png"/> 
+
 
 在上图操作中，对 mvcount 目录下的文件和子目录递归的授权给 userb 用户有读、写操作权限，接着再通过 userb 去追加内容到 mvcount 表，操作过程如下图所示：
 
-<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/37/C5/CgqCHl8ajNyAeCBOAABKWYv410Y363.png"/>
+
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/37/C5/CgqCHl8ajNyAeCBOAABKWYv410Y363.png"/> 
+
 
 从上图可知，这次操作还是未成功，但提示错误有了变化，这次提示 userb 用户对 mvcount 目录没有执行权限。很显然，要在 mvcount 目录下写文件，必须对 mvcount 目录要有可执行权限，再次修改 mvcount 目录的权限，其操作如下图所示：
 
-<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/37/BA/Ciqc1F8ajOOAZdQaAABiSES-rS0672.png"/>
+
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/37/BA/Ciqc1F8ajOOAZdQaAABiSES-rS0672.png"/> 
+
 
 在此操作中，主要是对 mvcount 目录添加了可执行权限，最后查看 ACL 规则，发现 mvcount 目录对 userb 用户有读、写、执行权限；而 mvcount 目录下面的文件对 userb 用户有读、写权限，这样就满足了权限需求，再通过 userb 用户来读、写 mvcount 这张表，发现已经可以对此表进行读、写操作了。
 
 ### 小结
 
 本课时主要介绍了在 HDFS 中 POSIX 权限以及 POSIX ACL 的使用。在多用户使用场景中，权限控制至关重要，而通过 ACL 规则控制 HDFS 文件的读、写、执行权限，可以做到更加精细化的权限控制，并且简单、高效。
+

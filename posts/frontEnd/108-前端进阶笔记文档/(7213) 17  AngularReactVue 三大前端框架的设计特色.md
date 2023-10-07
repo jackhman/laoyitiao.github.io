@@ -1,3 +1,5 @@
+# 17AngularReactVue三大前端框架的设计特色
+
 在前面第 10 讲中，我介绍了前端框架中的核心能力------模板引擎。其实，除了模板引擎以外，前端框架还提供了很多其他的能力，比如性能优化相关、状态管理相关等。现如今，虽然各式各样的框架层出不穷，但目前稳定排行在前的基本上是这三大热门框架 Angular/React/Vue（排名不分先后）。
 
 对于不同的前端框架来说，各自的设计原理和解决方案都有所不同，开发者可根据自身需要选择合适的前端框架。
@@ -114,7 +116,9 @@ React的哲学是：React 是用JavaScript 构建快速响应的大型 Web应用
 
 * 对于文本节点的文本内容改变。
 
-<Image alt="image.png" src="https://s0.lgstatic.com/i/image6/M01/41/CE/Cgp9HWCuGOGAJPh4AABjO4iTOhE480.png"/>
+
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image6/M01/41/CE/Cgp9HWCuGOGAJPh4AABjO4iTOhE480.png"/> 
+
 
 如图所示，我们对比了两棵基于`<div>`元素的DOM 树，得到的差异有：
 
@@ -203,3 +207,4 @@ Vue 最大的特点是上手简单，框架的设计和文档对新手极其友�
 对于框架的升级，React 选择了渐进兼容的技术方案，而 Angular/Vue 都曾经历过"断崖式"的版本升级。
 
 最后，希望你可以思考下：Angular/Vue 在版本升级过程中，为了更彻底地抛弃历史债务而选择了不兼容，这样的做法你们是怎么看待的呢？在我们的业务开发过程中，是否也会存在这样的情况呢？
+

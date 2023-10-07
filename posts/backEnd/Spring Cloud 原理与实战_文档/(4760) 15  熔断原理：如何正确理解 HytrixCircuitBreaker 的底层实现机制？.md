@@ -1,3 +1,5 @@
+# 15熔断原理：如何正确理解HytrixCircuitBreaker的底层实现机制？
+
 介绍完 Spring Cloud 中针对服务容错机制的 Spring Cloud Circuit Breaker 组件之后，今天我们还是探讨其中的 Hystrix 组件。Hystrix 作为最为经典的服务容错实现框架，我们有必须要对它的底层实现机制有一定的了解。
 
 ### HystrixCircuitBreaker
@@ -90,7 +92,9 @@ return result;
 
 从这个处理流程中引出了 HystrixInvokable 接口，我们发现它实际上只是一个空接口。在 Hystrix中，存在一批以"-able"结尾的接口定义。例如，HystrixExecutable 和 HystrixObservable 接口就继承了 HystrixInvokable 接口，而这些接口最终都由各种以"-Command"结尾的类来负责实现。HystrixInvokable 接口以及相关的 Command 类的类层关系比较复杂，整体类层结构关系如下所示。
 
-<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image/M00/6C/2B/CgqCHl-qaVeAPjoDAAGi61XW-lA326.png"/>  
+
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image/M00/6C/2B/CgqCHl-qaVeAPjoDAAGi61XW-lA326.png"/> 
+  
 HystrixInvokable 接口的类层关系图
 
 #### HystrixCircuitBreaker 实现原理
@@ -267,7 +271,9 @@ public static class HealthCounts {
 
 在 Hystrix 中，采用滑动窗口来采集的系统运行时健康数据包括成功请求数量、失败请求数、超时请求数、被拒绝的请求数等。然后每次取最近 10 秒的数据来进行计算，如果这 10 秒中请求的失败率计算下来超过了 50%，就会触发熔断器的熔断机制。这里的 10 秒就是一个滑动窗口，参考其官网的一幅图：
 
-<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image/M00/6C/20/Ciqc1F-qaXCACCVhAAFxRYCoxk8884.png"/>  
+
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image/M00/6C/20/Ciqc1F-qaXCACCVhAAFxRYCoxk8884.png"/> 
+  
 滑动窗口示意图（来自 Hystrix 官网）
 
 在上图中，每一个格子就是一个时间间隔，格子中的数据就是这个时间间隔内所处理的请求数量。通常我们把这种格子称为一个**桶（Bucket）**。然后每当收集好一个新桶之后，就会丢弃掉最旧的一个桶，这样时间窗口就能持续向前滑动。
@@ -284,7 +290,9 @@ public static class HealthCounts {
 
 window 操作符用于**开窗操作**，也就是把当前流中的元素采集并合并到另外的流中，该操作符示意图如下图所示：
 
-<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image/M00/6C/2B/CgqCHl-qaYCAFzIcAAMR9rxJnM0280.png"/>  
+
+<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image/M00/6C/2B/CgqCHl-qaYCAFzIcAAMR9rxJnM0280.png"/> 
+  
 window 操作符示意图（来自 Reactor 官网）
 
 以上图为例，我们看到有 5 个元素从流中输入，然后我们对其进行开窗操作（窗口大小为 3），这样输入流就变成了两个输出流。
@@ -293,7 +301,9 @@ window 操作符示意图（来自 Reactor 官网）
 
 flatMap，也就是拉平并转化。与常见的 map 不同，flatMap 操作符把输入流中的每个元素转换成另一个流，再把这些转换之后得到的流元素进行合并。flapMap 操作符示意图如下图所示：
 
-<Image alt="图片4.png" src="https://s0.lgstatic.com/i/image/M00/6C/20/Ciqc1F-qaY-ADEiHAAIH-Hu23tg037.png"/>  
+
+<Image alt="图片4.png" src="https://s0.lgstatic.com/i/image/M00/6C/20/Ciqc1F-qaY-ADEiHAAIH-Hu23tg037.png"/> 
+  
 flapMap 操作符示意图（来自 Reactor 官网）
 
 例如，我们对 1 和 5 使用 flatMap 操作，转换的逻辑是返回它们的平方值并进行合并，这样通过 flatMap 操作符之后这两个元素就变成了 1 和 25。
@@ -302,7 +312,9 @@ flapMap 操作符示意图（来自 Reactor 官网）
 
 reduce 操作符对流中包含的所有元素进行累积计算，该操作符示意图见下图所示：
 
-<Image alt="图片5.png" src="https://s0.lgstatic.com/i/image/M00/6C/20/Ciqc1F-qaZmAavNWAAKEDkEs9hw282.png"/>  
+
+<Image alt="图片5.png" src="https://s0.lgstatic.com/i/image/M00/6C/20/Ciqc1F-qaZmAavNWAAKEDkEs9hw282.png"/> 
+  
 reduce 操作符示意图（来自 Reactor 官网）
 
 上图中的具体累积操作通常也是通过一个函数来实现。例如，假如这个函数为一个求和函数，那么对 1 到 10 的数字进行求和时，reduce 操作符的运行结果即为 55。
@@ -313,7 +325,9 @@ reduce 操作符示意图（来自 Reactor 官网）
 
 我们首先来看一下 HealthCountsStream 类的类层结构，如下图所示：
 
-<Image alt="图片6.png" src="https://s0.lgstatic.com/i/image/M00/6C/2B/CgqCHl-qaaeAdcTgAANQkzIcceY943.png"/>  
+
+<Image alt="图片6.png" src="https://s0.lgstatic.com/i/image/M00/6C/2B/CgqCHl-qaaeAdcTgAANQkzIcceY943.png"/> 
+  
 HealthCountsStream 类层结构图
 
 显然，从类的命名上不难看出，BucketedCounterStream 类代表一个窗口类，将基础数据汇总成一个个的桶。它的子类 BucketedRollingCounterStream 在它的基础上添加了滑动窗口处理，将桶汇总成滑动窗口。而 HealthCountsStream 最终表现为一个运行时健康数据流。
@@ -372,3 +386,4 @@ Func1<Observable<Bucket>, Observable<Output>> reduceWindowToSummary = new Func1<
 这里给你留一道思考题：你能简要说明 Hystrix 中的滑动窗口机制是如何做到对运行时数据进行采集和计算的吗？
 
 讲完服务容错机制以及 Spring Cloud Circuit Breaker 框架，从下一课时开始，我们将进入一个新的主题的讲解，即配置中心。我们将首先讨论如何设计分布式环境下的配置中心解决方案。
+

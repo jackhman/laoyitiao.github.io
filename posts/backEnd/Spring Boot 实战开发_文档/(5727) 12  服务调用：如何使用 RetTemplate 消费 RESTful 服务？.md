@@ -1,3 +1,5 @@
+# 12服务调用：如何使用RetTemplate消费RESTful服务？
+
 11 讲我们介绍了如何使用 Spring Boot 构建 RESTful 风格 Web 服务的实现方法，而 SpringCSS 案例系统的演进过程也从单个服务上升到多个服务之间的交互。
 
 完成 Web 服务的构建后，我们需要做的事情就是如何对服务进行消费，这也是 12讲我们介绍的要点，接下来我们将基于 RestTemplate 模板工具类来完成这一目标。
@@ -74,7 +76,9 @@ public RestTemplate customRestTemplate(){
 
 在远程服务访问上，RestTemplate 内置了一批常用的工具方法，我们可以根据 HTTP 的语义以及 RESTful 的设计原则对这些工具方法进行分类，如下表所示。
 
-<Image alt="Lark20201225-135202.png" src="https://s0.lgstatic.com/i/image/M00/8C/1D/CgqCHl_lfhWAWs-DAACna_DO-CA750.png"/>  
+
+<Image alt="Lark20201225-135202.png" src="https://s0.lgstatic.com/i/image/M00/8C/1D/CgqCHl_lfhWAWs-DAACna_DO-CA750.png"/> 
+  
 RestTemplate 中的方法分类表
 
 接下来，我们将基于该表对 RestTemplate 中的工具方法进行详细介绍并给出相关示例。不过在此之前，我们想先来讨论一下请求的 URL。
@@ -369,3 +373,4 @@ public class OrderClient {
 这里给你留一道思考题：在使用 RestTemplate 时，如何实现对请求超时时间等控制逻辑的定制化处理？
 
 在 13 讲中，我们将对该类如何实现远程调用的过程进行原理分析。
+

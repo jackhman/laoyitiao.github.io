@@ -1,3 +1,5 @@
+# 08探索前端工具链生态，制定一个统一标准化babel-preet
+
 前端生态有着与生俱来的混乱和与之抗衡的秩序，有着新生力量的崛起以及随之而来的规范约束。在这个背景下，正面来看，欣欣向荣的前端生态带来了广阔的发展前景，但也造成了一些困扰。比如，我们都经历过在前端基础设施建设中，被各种冗杂的配置项困扰，一不小心就是 Error，步履蹒跚。也许我们可以通过搜索引擎暂时解决问题，但是恍恍惚惚、难以洞悉问题本源。
 
 另一方面，前端生态的重要一环是公共库。公共库的模块化规范、编译标准，甚至压缩方式都有讲究，同时公共库与使用它们的业务项目也要密切配合，这样才能打造一个顺滑的基建结果。请你仔细审视手上的项目，编译构建过程是否做到了最高效，产出代码是否达到了最高级别的安全保障，是否做到了性能体验的最佳实践？
@@ -69,7 +71,9 @@ module.exports = {
 
 至此，这个"iOS 11 系统白屏"问题就算告一段落了。我整理了解决路线，如下图所示：
 
-<Image alt="Lark20210105-174532.png" src="https://s0.lgstatic.com/i/image2/M01/04/A5/CgpVE1_0NWKAaju0AAMFDVpRq7Y221.png"/>
+
+<Image alt="Lark20210105-174532.png" src="https://s0.lgstatic.com/i/image2/M01/04/A5/CgpVE1_0NWKAaju0AAMFDVpRq7Y221.png"/> 
+
 
 我们回过头再来看这个问题，实际上**业务方对线上测试回归不彻底**是造成问题的直接原因，但问题其实出现在一个公共库上，因而前端生态的混乱和复杂也许是更本质的原因。这里涉及两方面问题：
 
@@ -472,7 +476,9 @@ module.exports = create({
 
 我们通过图示来表述整体架构：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/8C/C6/CgqCHl_0Bs2AS-oEABN0rwjVVsY144.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/8C/C6/CgqCHl_0Bs2AS-oEABN0rwjVVsY144.png"/> 
+
 
 需要说明以下内容。
 
@@ -515,4 +521,7 @@ module.exports = create({
 
 这一讲我们从一个"线上问题"出发，剖析了公共库和应用方的不同编译理念，并通过设计一个万能 Babel 预设，阐明了公共库的编译和应用的使用需要密切配合，才能在当前前端生态中保障一个更合理的基础建设根基。相关知识并未完结，我们将在下一讲中，从零打造一个公共库来实践说明相关理论。
 
-<Image alt="前端基建 金句.png" src="https://s0.lgstatic.com/i/image2/M01/04/A4/Cip5yF_0OaOAPb48AAf5-twsvFI497.png"/>
+
+<Image alt="前端基建 金句.png" src="https://s0.lgstatic.com/i/image2/M01/04/A4/Cip5yF_0OaOAPb48AAf5-twsvFI497.png"/> 
+
+

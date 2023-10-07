@@ -1,3 +1,5 @@
+# 16文件存储驱动：OverlayFS文件系统原理及生产环境的最佳配置
+
 前面课时我分别介绍了 Docker 常见的联合文件系统解决方案： AUFS 和 Devicemapper。今天我给你介绍一个性能更好的联合文件系统解决方案------ OverlayFS。
 
 OverlayFS 的发展分为两个阶段。2014 年，OverlayFS 第一个版本被合并到 Linux 内核 3.18 版本中，此时的 OverlayFS 在 Docker 中被称为`overlay`文件驱动。由于第一版的`overlay`文件系统存在很多弊端（例如运行一段时间后Docker 会报 "too many links problem" 的错误）， Linux 内核在 4.0 版本对`overlay`做了很多必要的改进，此时的 OverlayFS 被称之为`overlay2`。
@@ -321,3 +323,4 @@ overlay2 目前已经是 Docker 官方推荐的文件系统了，也是目前安
 那么你知道除了我介绍的这三种联合文件系统外，Docker 还可以使用哪些联合文件系统吗？ 思考后，可以把你的想法写在留言区。
 
 下一课时，我将带你进入 Docker 原理实践，自己动手使用 Golang 开发 Docker。
+

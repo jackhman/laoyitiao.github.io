@@ -25,23 +25,11 @@ function changeTitle(str){
 </script>
 
 
-::: tip TIP:
-目前基本使用`VitePress`默认主题，有点单调，有时间会重新定制`自定义主题`，如果您愿意提供好的设计可以[点击此处留言](https://github.com/laoyitiao/laoyitiao.github.io/issues/new?title=主题设计)
-
-内容来自互联网，经HTML转换为Markdown后，由VitePress生成SPA，转换后的Markdown内容与VitePress已`基本兼容`。
-
-::: warning 但仍存在以下问题【不影响使用】
-- 很多markdown内容中缺少`H1标题`，导致`页面标题`和搜索时的`索引`在显示时都不够精确
-- :sweat:markdown`内容格式`[标题混乱]，`主题风格`[胡乱使用引用、列表等]都不够统一，不够美观且影响插件编写
-- 部分代码块指定的语言存在错误导致`代码高亮`效果不太理想
-- 部分专栏Sidebar顺序存在错误, :rage:文件名太乱页面太多懒得修复了
-:::
-
 <br/>
 
 # 文章索引
 
-<p v-for="(post,pk) in data.folder">
+<p v-for="(post,pk) in data.folder" class="docIndex">
 
 ::: details {{pk === 'backEnd' ? ':pill:' : pk === 'frontEnd' ? ':dart:' : ':pick:'}} {{pk}}    <VPBadge :type="Object.keys(post).length>40 ? 'danger' : Object.keys(post).length>20 ? 'warning' : 'tip'">共 {{Object.keys(post).length}} 项专栏</VPBadge>
 
@@ -55,3 +43,15 @@ function changeTitle(str){
 :::
 
 </p>
+
+
+::: tip TIP:
+目前基本使用`VitePress`默认主题，有点单调，有时间会重新定制`自定义主题`，如果您愿意提供好的设计请[点击此处留言](https://github.com/laoyitiao/laoyitiao.github.io/issues/new?title=主题设计)
+
+内容来自互联网，经HTML转换为Markdown后，由VitePress生成SPA，转换后的Markdown内容与VitePress已`基本兼容`。
+
+::: warning 但仍存在以下问题【不影响使用】
+- :sweat:markdown`内容格式`[标题混乱]，`主题风格`[胡乱使用引用、列表等]都不够统一，不够美观且影响插件编写
+- 部分代码块指定的语言存在错误导致`代码高亮`效果不太理想
+- 部分专栏Sidebar顺序存在错误
+:::

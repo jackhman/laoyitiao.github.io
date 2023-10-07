@@ -1,3 +1,5 @@
+# 16如何自定义HandlerMethodArgumentReolver？
+
 上一讲我们介绍了 SpringDataWebConfiguration 类的用法，那么这次我们来看一下这个类是如何被加载的，PageableHandlerMethodArgumentResolver 和 SortHandlerMethodArgumentResolver 又是如何生效的，以及如何定义自己的 HandlerMethodArgumentResolvers 类，还有没有其他 Web 场景需要我们自定义呢？
 
 关于上述几个类，你要先在心里有点印象，我们接下来一个一个详细讲解。
@@ -6,25 +8,35 @@
 
 想要知道分页和排序参数的加载原理，我们可以通过源码发现是 @EnableSpringDataWebSupport 将这个类加载进去的，其关键代码如下图所示：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/67/F1/CgqCHl-ifKuAZqvLAAGaihgL6z0625.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/67/F1/CgqCHl-ifKuAZqvLAAGaihgL6z0625.png"/> 
+
 
 其中，@EnableSpringDataWebSupport 注解是上一讲讲解的核心，即 Spring Data JPA 对 Web 支持需要开启的入口，由于我们使用的是 Spring Boot，所以 @EnableSpringDataWebSupport 不需要我们手动去指定。
 
 这是由于 Spring Boot 有自动加载的机制，我们会发现 org.springframework.boot.autoconfigure.data.web.SpringDataWebAutoConfiguration 类里面引用了 @EnableSpringDataWebSupport 的注解，所以也不需要我们手动去引用了。这里面的关键代码如下图所示：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/67/E5/Ciqc1F-ifLGAXeScAACYeXQaXt0313.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/67/E5/Ciqc1F-ifLGAXeScAACYeXQaXt0313.png"/> 
+
 
 而 Spring Boot 的自动加载的核心文件就是 spring.factories 文件，那么我们打开 spring-boot-autoconfigure-2.3.3.jar 包，看一下 spring.factories 文件内容，可以找到 SpringDataWebAutoConfiguration 这个配置类，如下：
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/67/F1/CgqCHl-ifLiATqQNAADQjUYmp3o182.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/67/F1/CgqCHl-ifLiATqQNAADQjUYmp3o182.png"/> 
+
 
 所以可以得出结论：只要是 Spring Boot 项目，我们什么都不需要做，它就会天然地让 Spring Data JPA 支持 Web 相关的操作。
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/67/F1/CgqCHl-ifL2AJfQTAAA5uE86eqs914.png"/>
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/67/F1/CgqCHl-ifL2AJfQTAAA5uE86eqs914.png"/> 
+
 
 而 PageableHandlerMethodArgumentResolver 和 SortHandlerMethodArgumentResolver 两个类是通过 SpringDataWebConfiguration 加载进去的，所以我们基本可以知道 Spring Data JPA 的 Page 和 Sort 参数是因为 SpringDataWebConfiguration 里面 @Bean 的注入才生效的。
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/67/E6/Ciqc1F-ifMKAEkZ7AAD0bB-3aYU721.png"/>
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/67/E6/Ciqc1F-ifMKAEkZ7AAD0bB-3aYU721.png"/> 
+
 
 通过 PageableHandlerMethodArgumentResolver 和 SortHandlerMethodArgumentResolver 这两个类的源码，我们可以分析出它们分别实现了 Spring MVC Web 框架里面的 org.springframework.web.method.support.HandlerMethodArgumentResolver 这个接口，从而对 Request 里面的 Page 和 Sort 的参数做了处理逻辑和解析逻辑。
 
@@ -48,7 +60,9 @@ public interface HandlerMethodArgumentResolver {
 
 此接口的应用场景非常广泛，我们可以看到其子类非常多，如下图所示：
 
-<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/67/F1/CgqCHl-ifNKAUr5ZAAKB24GVNXo607.png"/>
+
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/67/F1/CgqCHl-ifNKAUr5ZAAKB24GVNXo607.png"/> 
+
 
 其中几个类的作用如下：
 
@@ -66,7 +80,9 @@ public interface HandlerMethodArgumentResolver {
 
 我们打开 RequestResponseBodyMethodProcessor 就会发现，这个类中主要处理的是，方法里面带 @RequestBody 注解的参数，如下图所示：
 
-<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/67/E6/Ciqc1F-ifNqALsgiAAPVRBCs4Q4327.png"/>
+
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/67/E6/Ciqc1F-ifNqALsgiAAPVRBCs4Q4327.png"/> 
+
 
 而其中的 readWithMessageConverters(webRequest, parameter, parameter.getNestedGenericParameterType()) 方法，如果我们点进去继续观察，发现里面会根据 Http 请求的 MediaType，来选择不同的 HttpMessageConverter 进行转化。
 
@@ -91,7 +107,9 @@ Spring 里面有个执行效率问题，就是一旦一次执行找到了需要�
 
 如果想要了解更多的 Resolver，你可以看下图这个类，我不一一细说了。
 
-<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/67/F1/CgqCHl-ifQaAX5YQAAN2flcVp0c284.png"/>
+
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/67/F1/CgqCHl-ifQaAX5YQAAN2flcVp0c284.png"/> 
+
 
 那么了解了这么多，能否举个实战的例子呢？
 
@@ -330,7 +348,9 @@ public class UserInfoController {
 
 有的时候我们也会更改 Pageable 的默认值和参数的名字，也可以在 application.properties 的文件里面通过如下的 Key 值对自定义进行配置，如下图所示：
 
-<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/67/E6/Ciqc1F-ifTSAY0xeAAIfdBh0SkQ798.png"/>
+
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/67/E6/Ciqc1F-ifTSAY0xeAAIfdBh0SkQ798.png"/> 
+
 
 关于 Spring MVC 和 Spring Data 相关的参数处理，你通过了解上面的内容并动手操作一下，基本上就可以掌握了。但是实际工作肯定不会这么简单，还会遇到 WebMvcConfigurer 里面其他方法的需求，我顺带给你介绍一下。
 
@@ -481,3 +501,4 @@ GET http://127.0.0.1:8089/user/1
 最后，如果你觉得有帮助就动动手指分享吧，也欢迎你在评论区留言，一起讨论、进步。下一讲我们将学习数据源相关的知识。到时见\~
 > 点击下方链接查看源码（不定时更新）  
 > <https://github.com/zhangzhenhuajack/spring-boot-guide/tree/master/spring-data/spring-data-jpa>
+

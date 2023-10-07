@@ -1,15 +1,21 @@
+# 18项目实战：实践Flutter交友功能
+
 本课时我会和大家一起来完善 App 的其他功能，其中包括：我的好友、我的消息、系统设置和搜索功能。按照我们之前课时所学的技术点，我们可以通过绘制组件树+布局来实现，在实现过程中也会介绍一些新的知识点，接下来我们就分别看下这几个功能的实现过程。
 
 ### 我的好友
 
 我们首先看下要实现的效果图，如图 1 所示。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/3E/A7/Ciqc1F8tC1OAa6iOAABaIAPOiu0051.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/3E/A7/Ciqc1F8tC1OAa6iOAABaIAPOiu0051.png"/> 
+  
 图 1 我的好友效果图
 
 根据图 1 的效果图，我们绘制出组件树+布局，如图 2 所示。
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/3E/A7/Ciqc1F8tC3SAJma7AACIdJvSfFY733.png"/>  
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/3E/A7/Ciqc1F8tC3SAJma7AACIdJvSfFY733.png"/> 
+  
 图 2 组件树
 
 图 2 很清晰地分析出了界面所转化的组件树，由于这里都不涉及动态组件，因此将 Text 和 Image 作为一个 card 组件即可。代码实现逻辑和我们之前介绍的推荐页面和关注页面基本一样，接下来我们看下"我的消息"的实现。
@@ -18,12 +24,16 @@
 
 我们先来看下"我的消息"要实现的界面效果，如图 3 所示。
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/3E/B2/CgqCHl8tC4CAKYbEAACBTQQFajM318.png"/>  
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/3E/B2/CgqCHl8tC4CAKYbEAACBTQQFajM318.png"/> 
+  
 图 3 我的消息界面效果
 
 根据图 3 的效果图，我们绘制出组件树+布局，如图 4 所示。
 
-<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/3E/B2/CgqCHl8tC4iAA2RQAAGgiSh8hy0630.png"/>  
+
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/3E/B2/CgqCHl8tC4iAA2RQAAGgiSh8hy0630.png"/> 
+  
 图 4 我的消息组件树+布局
 
 图 4 就非常清晰地描述了我们整个 UI 构造：
@@ -56,7 +66,9 @@ Widget _getFirstLine() {
 
 接下来我们来看下"系统设置"这部分界面效果，如图 5 所示。
 
-<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/3E/A7/Ciqc1F8tC5mAb80WAABCUd3CwUc272.png"/>  
+
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/3E/A7/Ciqc1F8tC5mAb80WAABCUd3CwUc272.png"/> 
+  
 图 5 系统设置的效果
 
 看到图 5 的效果后，其实组件设计可能不是关键。这里涉及两个新的知识点：
@@ -313,14 +325,18 @@ class SystemPageSwitchCard extends StatelessWidget {
 
 最后我们来看下搜索功能，前面我们已经实现了一个基本的搜索功能，但是其中的接口部分没有补齐，我们先来看下实际的效果，如图 6 所示。
 
-<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image/M00/3E/B2/CgqCHl8tC9yAB1kXAAC_xNdvVn4559.png"/>  
+
+<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image/M00/3E/B2/CgqCHl8tC9yAB1kXAAC_xNdvVn4559.png"/> 
+  
 图 6 搜索提示和搜索结果效果
 
 #### 组件树+布局
 
 根据图 6 的页面效果，我们来绘制组件树+布局，搜索提示就是一个列表，这里就不绘制了，搜索结果稍微复杂一些，主要看下这部分，绘制结果如图 7 所示。
 
-<Image alt="Drawing 13.png" src="https://s0.lgstatic.com/i/image/M00/3E/B3/CgqCHl8tC-aAConRAADrcMIRoXM555.png"/>  
+
+<Image alt="Drawing 13.png" src="https://s0.lgstatic.com/i/image/M00/3E/B3/CgqCHl8tC-aAConRAADrcMIRoXM555.png"/> 
+  
 图 7 搜索结果页面组件树+布局设计
 
 这个组件树的设计，包含了我们布局设计思想中的 8 个过程，竖横、高宽、上下和左右，具体细节就不再赘述。接下来我们看下这两部分逻辑的实现：搜索提示和搜索结果。
@@ -408,3 +424,4 @@ Widget _getUserListWidget(List<StructUserInfo> userList) {
 本课时之前，我们对 App 的安全并没有关注太多，可以说完全放任。下一课时我们将通过工具化的方式来上报异常，保证我们 App 的质量，提前发现并解决问题。
 
 [点击此链接查看本课时源码](https://github.com/love-flutter/flutter-column)
+

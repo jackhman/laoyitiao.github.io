@@ -1,3 +1,5 @@
+# 03HelloFlutter：三步法掌握Flutter，开始你的第一个应用
+
 本课时将进入 Flutter 开发实践应用。在进入实践应用之前，我先讲解最基础的环境搭建，然后会应用 Dart 语言开发第一个 App --- Hello Flutter，最后再讲解一些开发过程中常用的调试方法和工具。
 
 本课时需要一定的实践动手能力，因此在学习的时候建议你打开电脑按照里面的步骤进行学习。
@@ -85,7 +87,9 @@ C:\src\flutter\bin
 
 1. 选择新建一个 Start a new Flutter Project ，然后选择 Flutter Application ，如图 1。
 
-<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/21/12/Ciqc1F7pvnuANcQpAACTMSsFoo0714.png"/>  
+
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/21/12/Ciqc1F7pvnuANcQpAACTMSsFoo0714.png"/> 
+  
 
 图 1 New Flutter Project
 
@@ -95,19 +99,25 @@ C:\src\flutter\bin
 
 4. 创建完成后，会看到如图 2 的项目目录结构。
 
-<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/21/12/Ciqc1F7pvouAKi3mAAC2vjxyHVc774.png"/>  
+
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/21/12/Ciqc1F7pvouAKi3mAAC2vjxyHVc774.png"/> 
+  
 
 图 2 Flutter 项目目录结构
 
 5. 成功创建后，我们选择一个模拟器，然后在运行入口文件选择 main.dart ，最后点击右侧启动按钮进行编译运行。**如果下拉没有模拟器，Android Studio 会提供指引前往配置**。
 
-<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/21/1D/CgqCHl7pvrmAKD3eAAAhuRZycV0676.png"/>  
+
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/21/1D/CgqCHl7pvrmAKD3eAAAhuRZycV0676.png"/> 
+  
 
 图 3 运行启动说明
 
 6. 运行成功后，将会打开 iPhone 11 模拟器，然后启动我们的应用，如图 3。
 
-<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/21/12/Ciqc1F7pvsSAKTXCAAGu5cF8GWk440.png"/>  
+
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/21/12/Ciqc1F7pvsSAKTXCAAGu5cF8GWk440.png"/> 
+  
 
 图 4 iPhone 11 模拟器
 
@@ -121,7 +131,9 @@ C:\src\flutter\bin
 
 上述图 2 中已有相关工程目录的截图，我现在分别介绍下每个目录的作用。
 
-<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/21/1E/CgqCHl7pvuqAfnGbAAC2vjxyHVc400.png"/>  
+
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/21/1E/CgqCHl7pvuqAfnGbAAC2vjxyHVc400.png"/> 
+  
 
 图 2 Flutter 项目目录结构
 
@@ -188,13 +200,17 @@ class MyApp extends StatelessWidget {
 
 2. 将 main.dart 中 Scaffold 下的 body 下的 children 下的第一个 Text 内容修改为 "Hello Flutter"，并去掉下面一个 Text，如下图 5。
 
-<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/21/1E/CgqCHl7pvyyAAoyEAAGmjIkimiw325.png"/>  
+
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/21/1E/CgqCHl7pvyyAAoyEAAGmjIkimiw325.png"/> 
+  
 
 图 5 修改 main.dart 文件的代码指引
 
 修改完成后，保存文件，然后按照本课时中的"第二步：创建项目运行"运行本程序即可（如果已经运行过，保存文件模拟器会热加载），你将看到如下的结果，如图 6 所示。
 
-<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/21/1E/CgqCHl7pvzyAHXDxAAGn0n0MOsU471.png"/>  
+
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/21/1E/CgqCHl7pvzyAHXDxAAGn0n0MOsU471.png"/> 
+  
 
 图 6 Hello Flutter 运行结果
 
@@ -253,11 +269,15 @@ pub global activate devtools
 pub global run devtools
 ```
 
-<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/21/12/Ciqc1F7pv1iADPaQAABwzl3Sgow148.png"/>  
+
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/21/12/Ciqc1F7pv1iADPaQAABwzl3Sgow148.png"/> 
+  
 
 图 7 Flutter 调试工具按钮指引
 
-<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/21/12/Ciqc1F7pv2CAVgmvAAMQ0qCy2Nw964.png"/>  
+
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/21/12/Ciqc1F7pv2CAVgmvAAMQ0qCy2Nw964.png"/> 
+  
 
 图 8 Dart DevTools 工具
 
@@ -268,3 +288,4 @@ pub global run devtools
 本课时介绍了如何三步开启第一个应用程序 Hello Flutter，包括环境搭建、创建项目以及运行、修改示例代码。学完本课时，你需要掌握环境搭建的方法以及如何创建运行项目。
 
 [点击此链接查看本课时源码](https://github.com/love-flutter/flutter-column)
+

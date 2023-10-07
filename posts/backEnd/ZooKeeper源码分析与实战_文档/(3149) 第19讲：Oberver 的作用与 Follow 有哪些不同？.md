@@ -1,3 +1,5 @@
+# 第19讲：Oberver的作用与Follow有哪些不同？
+
 在上个课时中，我们学习了 ZooKeeper 集群中 Follow 服务器的作用。在 ZooKeeper 集群服务运行的过程中，Follow 服务器主要负责处理来自客户端的非事务性请求，其中大部分是处理客户端发起的查询会话等请求。而在 ZooKeeper 集群中，Leader 服务器失效时，会在 Follow 集群服务器之间发起投票，最终选举出一个 Follow 服务器作为新的 Leader 服务器。
 
 除了 Leader 和 Follow 服务器，ZooKeeper 集群中还有一个 Observer 服务器。在 ZooKeeper 集群中，Observer 服务器对于提升整个 ZooKeeper 集群运行的性能具有至关重要的作用。而本课时，我们就开始学习什么是 Observer 服务器，以及它在 ZooKeeper 集群中都做了哪些工作。
@@ -10,7 +12,9 @@
 
 要想解释这个问题，就要从 ZooKeeper 技术的发展过程说起，最早的 ZooKeeper 框架如下图所示，可以看到，其中是不存在 Observer 服务器的。
 
-<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/2E/C9/Ciqc1F8FnKWAQEJJAADU9xFvIIU685.png"/>
+
+<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/2E/C9/Ciqc1F8FnKWAQEJJAADU9xFvIIU685.png"/> 
+
 
 在早期的 ZooKeeper 集群服务运行过程中，只有 Leader 服务器和 Follow 服务器。不过随着 ZooKeeper 在分布式环境下的广泛应用，早期模式的设计缺点也随之产生，主要带来的问题有如下几点：
 
@@ -26,7 +30,9 @@
 
 在引入 Observer 角色服务器后，一个 ZooKeeper 集群服务在部署的拓扑结构，如下图所示：
 
-<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/2E/C9/Ciqc1F8FnLGAKhD0AAE5oGBLTTQ439.png"/>
+
+<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/2E/C9/Ciqc1F8FnLGAKhD0AAE5oGBLTTQ439.png"/> 
+
 
 在实际部署的时候，因为 Observer 不参与 Leader 节点等操作，并不会像 Follow 服务器那样频繁的与 Leader 服务器进行通信。因此，可以将 Observer 服务器部署在不同的网络区间中，这样也不会影响整个 ZooKeeper 集群的性能，也就是所谓的跨域部署。
 
@@ -127,3 +133,4 @@ public void processRequest(Request request) {
 与 Follow 服务器一样，他们都可以处理 ZooKeeper 集群中的非事务性会话请求，不同之处在于，Observer 不参与 ZooKeeper 集群中 Leader 服务器的选举以及事务性会话处理的投票工作。
 
 这里给你留一个思考题：利用 Observer 服务器的这一特性，在平时的生产环境中，我们可以采用什么样的方式，来提高 ZooKeeper 集群服务的性能呢？所谓的跨域部署最常见的就是将 ZooKeeper 集群中的物理机器部署在不同的地域或机房中。
+

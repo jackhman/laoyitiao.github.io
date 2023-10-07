@@ -1,3 +1,5 @@
+# 第08讲：哈希表在Facebook和Pinteret中的应用
+
 你好，我是你的数据结构课老师蔡元楠，欢迎进入第 08 课时的内容"哈希表在 Facebook 和 Pinterest 中的应用"。  
 
 <br />
@@ -68,7 +70,9 @@ Facebook 会把每个用户发布过的文字和视频、去过的地方、点�
 
 2016 年 Facebook 技术讲座的整体架构如下图所示：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/60/C6/Cgq2xl4YQN2AA74vAABzCbPb1_E500.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/60/C6/Cgq2xl4YQN2AA74vAABzCbPb1_E500.png"/> 
+
 
 从上图中可以看到，直播视频其实在经过处理之后首先会被存入数据库，然后在往上一层再做了一个 Memcache 内容缓存。
 
@@ -101,7 +105,9 @@ Pinterest 在全球拥有着超过 3 亿的活跃用户，上面也提到过，�
 
 下面以一个例子来说明一下，假设这里的哈希函数是 H(X)，键 A 和键 B 都已经插入到哈希表中了，而 C 并没有插入，所以我们判断出 A 和 B 是在这个集合里的，而 C 并不存在集合里。
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/60/C5/CgpOIF4YQN2AaykSAAEoFuAApMU699.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/60/C5/CgpOIF4YQN2AaykSAAEoFuAApMU699.png"/> 
+
 
 Sorted Sets 这个类型其实就是在 Set 外的基础上加上了一个 Score 的概念，Redis 内部会根据 Score 的大小对插入的键进行排序。比如说，Pinterest 会把一个用户所关注的其他用户按照以关注时间戳为 Score，关注的用户 ID 作为键存放在 Sorted Sets 里。
 
@@ -116,3 +122,4 @@ Pinterest 也会将对于一个 Board 的所有关注用户存放在 Redis 的 H
 <br />
 
 OK，这节课就讲到这里啦，下一课时我将分享"树的基本原理"，记得按时来听课哈。
+

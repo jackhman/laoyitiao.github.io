@@ -1,3 +1,5 @@
+# 第27讲：crontab与PurgeTxnLog：线上系统日志清理的最佳时间和方式
+
 本节课，我们主要学习对线上 ZooKeeper 服务器日志进行维护的操作，主要维护方式是备份和清理。几乎所有的生产系统都会产生日志文件，用来记录服务的运行状态，在服务发生异常的时候，可以用来作为分析问题原因的依据。ZooKeeper 作为分布式系统下的重要组件，在分布式网络中会处理大量的客户端请求，因此也会产生大量的日志文件，对这些问题的维护关系到整个 ZooKeeper 服务的运行质量。接下来我们就来学习如何维护这些日志文件。
 
 ### 日志类型
@@ -40,7 +42,9 @@ crontab [ -u user ] { -l | -r | -e }
 
 接下来我们打开系统的控制台，并输入 crontab -e 命令，开启定时任务的编辑功能。如下图所示，系统会显示出当前已有的定时任务列表。整个 crontab 界面的操作逻辑和 Vim 相同，为了新建一个定时任务，我们首先将光标移动到文件的最后一行，并敲击 i 键来开启编辑模式。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/3D/CD/CgqCHl8qlt2ALC7CAABlifm7LHs902.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/3D/CD/CgqCHl8qlt2ALC7CAABlifm7LHs902.png"/> 
+
 
 这个 crontab 定时脚本由两部分组成，第一部分是定时时间，第二部分是要执行的脚本。如下代码所示，脚本的执行时间是按照 f1 分、 f2 小时、f3 日、f4 月、f5 一个星期中的第几天这种固定顺序格式编写的。
 
@@ -58,7 +62,9 @@ f1 f2 f3 f4 f5 program
 
 当我们设定完定时任务后，就可以打开控制台，并输入 crontab -l 命令查询系统当前的定时任务。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/3D/CE/CgqCHl8qlu-AW-xZAAA50ErYH4s391.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/3D/CE/CgqCHl8qlu-AW-xZAAA50ErYH4s391.png"/> 
+
 
 到目前为止我们就完成了用 crontab 创建定时任务来自动清理和维护 ZooKeeper 服务产生的相关日志和数据的过程。
 
@@ -83,3 +89,4 @@ PurgeTxnLog 方式与 crontab 相比，使用起来更加容易而且也更加�
 ### 结束
 
 本节课我们介绍了线上 ZooKeeper 服务日志和数据快照的清理和维护工作，可以通过 crontab 和 PurgeTxnLog 两种方式实现。这两种方式唯一的不同在清理日志脚本的实现方式上，crontab 是通过我们自己手动编写的 shell 脚本实现的，在执行上需要考虑脚本权限相关的问题，而 PurgeTxnLog 则是 ZooKeeper 提供的专门用来处理日志清除相关的工具类，使用起来更加容易，开发人员不用考虑底层的实现细节。这里希望你结合自身工作中的生产环境来选择一种适合自己的 ZooKeeper 数据维护方式。
+

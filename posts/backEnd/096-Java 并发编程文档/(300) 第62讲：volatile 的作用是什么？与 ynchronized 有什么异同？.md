@@ -1,3 +1,5 @@
+# 第62讲：volatile的作用是什么？与ynchronized有什么异同？
+
 本课时我们主要介绍 volatile 的作用和适用场景，以及它与 synchronized 有什么异同。
 
 ### volatile 是什么
@@ -164,3 +166,4 @@ while (!initialized)
 ### 小结
 
 最后总结一下，本课时主要介绍了 volatile 是什么，以及它不适用的场景和两种非常典型的适用场景；然后我们介绍了 volatile 的两点作用，第一点是保证可见性，第二点是禁止重排序；最后我们分析了 volatile 和 synchronized 的关系。
+

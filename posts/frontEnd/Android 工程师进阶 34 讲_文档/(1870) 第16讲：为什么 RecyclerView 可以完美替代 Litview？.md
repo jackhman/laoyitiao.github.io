@@ -1,10 +1,14 @@
+# 第16讲：为什么RecyclerView可以完美替代Litview？
+
 本课时我们学习为什么 RecyclerView 可以完美替代 LI。
 
 RecyclerView 简称 RV， 是作为 ListView 和 GridView 的加强版出现的，目的是在有限的屏幕之上展示大量的内容，因此 RecyclerView 的复用机制的实现是它的一个核心部分。
 
 RV 常规使用方式如下：
 
-<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/09/9D/Ciqc1F68ue6AI3vLAACGhkLqn8M080.png"/>
+
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/09/9D/Ciqc1F68ue6AI3vLAACGhkLqn8M080.png"/> 
+
 
 解释说明。
 
@@ -21,7 +25,9 @@ RV 常规使用方式如下：
 
 RV 的 onMeasure 方法如下：
 
-<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/09/9D/CgqCHl68ufiAe8_uAAV5DJyDB7M094.png"/>
+
+<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/09/9D/CgqCHl68ufiAe8_uAAV5DJyDB7M094.png"/> 
+
 
 * 图中 1 处，表示在 XML 布局文件中，RV 的宽高被设置为 match_parent 或者具体值，那么直接将 skipMeasure 置为 true，并调用 mLayout（传入的 LayoutManager）的 onMeasure 方法测量自身的宽高即可。
 * 图中 2 处，表示在 XML 布局文件中，RV 的宽高设置为 wrap_content，则会执行下面的 dispatchLayoutStep2()，其实就是测量 RecyclerView 的子 View 的大小，最终确定 RecyclerView 的实际宽高。
@@ -34,23 +40,31 @@ RV 的 onMeasure 方法如下：
 
 RV 的 onLayout 方法如下：
 
-<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/09/9D/CgqCHl68ugWAAd26AAC9tEb_ppo563.png"/>
+
+<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/09/9D/CgqCHl68ugWAAd26AAC9tEb_ppo563.png"/> 
+
 
 很简单，只是调用了一层 dispatchLayout() 方法，此方法具体如下：
 
-<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/09/9D/CgqCHl68ugyAIYT4AAUpCeyxNoY082.png"/>
+
+<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/09/9D/CgqCHl68ugyAIYT4AAUpCeyxNoY082.png"/> 
+
 
 如果在 onMeasure 阶段没有执行 dispatchLayoutStep2() 方法去测量子 View，则会在 onLayout 阶段重新执行。
 
 dispatchLayoutStep2() 源码如下：
 
-<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/09/9D/Ciqc1F68uhOAau0zAADCKkMOvDk556.png"/>
+
+<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/09/9D/Ciqc1F68uhOAau0zAADCKkMOvDk556.png"/> 
+
 
 可以看出，核心逻辑是调用了 mLayout 的 onLayoutChildren 方法。这个方法是 LayoutManager 中的一个空方法，主要作用是测量 RV 内的子 View 大小，并确定它们所在的位置。LinearLayoutManager、GridLayoutManager，以及 StaggeredLayoutManager 都分别复写了这个方法，并实现了不同方式的布局。
 
 以 LinearLayoutManager 的实现为例，展开分析，实现如下 ：
 
-<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/09/9D/Ciqc1F68uhyAbDK-AAVKbLTTats711.png"/>
+
+<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/09/9D/Ciqc1F68uhyAbDK-AAVKbLTTats711.png"/> 
+
 
 解释说明：
 
@@ -60,7 +74,9 @@ dispatchLayoutStep2() 源码如下：
 
 layoutChunk 是一个非常核心的方法，这个方法执行一次就填充一个 ItemView 到 RV，部分代码如下：
 
-<Image alt="image (6).png" src="https://s0.lgstatic.com/i/image/M00/09/9D/Ciqc1F68uiWAUf1UAAXuHvOgyg0072.png"/>
+
+<Image alt="image (6).png" src="https://s0.lgstatic.com/i/image/M00/09/9D/Ciqc1F68uiWAUf1UAAXuHvOgyg0072.png"/> 
+
 
 说明：
 
@@ -72,13 +88,17 @@ layoutChunk 是一个非常核心的方法，这个方法执行一次就填充�
 
 测量和布局都完成之后，就剩下最后的绘制操作了。代码如下：
 
-<Image alt="image (7).png" src="https://s0.lgstatic.com/i/image/M00/09/9D/CgqCHl68ui6ATOvDAADD582WJrs779.png"/>
+
+<Image alt="image (7).png" src="https://s0.lgstatic.com/i/image/M00/09/9D/CgqCHl68ui6ATOvDAADD582WJrs779.png"/> 
+
 
 这个方法很简单，如果有添加 ItemDecoration，则循环调用所有的 Decoration 的 onDraw 方法，将其显示。至于所有的子 ItemView 则是通过 Android 渲染机制递归的调用子 ItemView 的 draw 方法显示到屏幕上。
 
 **小结**：RV 会将测量 onMeasure 和布局 onLayout 的工作委托给 LayoutManager 来执行，不同的 LayoutManager 会有不同风格的布局显示，这是一种策略模式。用一张图来描述这段过程如下：
 
-<Image alt="image (8).png" src="https://s0.lgstatic.com/i/image/M00/09/9D/Ciqc1F68ujuAJSpLAACb76c7LSA053.png"/>
+
+<Image alt="image (8).png" src="https://s0.lgstatic.com/i/image/M00/09/9D/Ciqc1F68ujuAJSpLAACb76c7LSA053.png"/> 
+
 
 ### 缓存复用原理 Recycler
 
@@ -86,11 +106,15 @@ layoutChunk 是一个非常核心的方法，这个方法执行一次就填充�
 
 核心代码是在 Recycler 中完成的，它是 RV 中的一个内部类，主要用来缓存屏幕内 ViewHolder 以及部分屏幕外 ViewHolder，部分代码如下：
 
-<Image alt="image (9).png" src="https://s0.lgstatic.com/i/image/M00/09/9D/Ciqc1F68ukSAZT3uAAD9_pc55Io230.png"/>
+
+<Image alt="image (9).png" src="https://s0.lgstatic.com/i/image/M00/09/9D/Ciqc1F68ukSAZT3uAAD9_pc55Io230.png"/> 
+
 
 Recycler 的缓存机制就是通过上图中的这些数据容器来实现的，实际上 Recycler 的缓存也是分级处理的，根据访问优先级从上到下可以分为 4 级，如下：
 
-<Image alt="image (10).png" src="https://s0.lgstatic.com/i/image/M00/09/9D/Ciqc1F68ukuAM0LVAACHb_a34AY925.png"/>
+
+<Image alt="image (10).png" src="https://s0.lgstatic.com/i/image/M00/09/9D/Ciqc1F68ukuAM0LVAACHb_a34AY925.png"/> 
+
 
 #### 各级缓存功能
 
@@ -100,7 +124,9 @@ RV 之所以要将缓存分成这么多块，是为了在功能上进行一些�
 
 是两个名为 Scrap 的 ArrayList，这两者主要用来缓存屏幕内的 ViewHolder。为什么屏幕内的 ViewHolder 需要缓存呢？做过 App 开发的应该都熟悉下面的布局场景：
 
-<Image alt="image (11).png" src="https://s0.lgstatic.com/i/image/M00/09/9D/CgqCHl68uleADj-bAAkZbbtqexQ425.png"/>
+
+<Image alt="image (11).png" src="https://s0.lgstatic.com/i/image/M00/09/9D/CgqCHl68uleADj-bAAkZbbtqexQ425.png"/> 
+
 
 通过下拉刷新列表中的内容，当刷新被触发时，只需要在原有的 ViewHolder 基础上进行重新绑定新的数据 data 即可，而这些旧的 ViewHolder 就是被保存在 mAttachedScrap 和 mChangedScrap 中。实际上当我们调用 RV 的 notifyXXX 方法时，就会向这两个列表进行填充，将旧 ViewHolder 缓存起来。
 
@@ -108,7 +134,9 @@ RV 之所以要将缓存分成这么多块，是为了在功能上进行一些�
 
 它用来缓存移除屏幕之外的 ViewHolder，默认情况下缓存个数是 2，不过可以通过 setViewCacheSize 方法来改变缓存的容量大小。如果 mCachedViews 的容量已满，则会根据 FIFO 的规则将旧 ViewHolder 抛弃，然后添加新的 ViewHolder，如下所示：
 
-<Image alt="mCachedViews.gif" src="https://s0.lgstatic.com/i/image/M00/09/9D/CgqCHl68umKATRCWAEsI2pK1Mbo977.gif"/>
+
+<Image alt="mCachedViews.gif" src="https://s0.lgstatic.com/i/image/M00/09/9D/CgqCHl68umKATRCWAEsI2pK1Mbo977.gif"/> 
+
 
 通常情况下刚被移出屏幕的 ViewHolder 有可能接下来马上就会使用到，所以 RV 不会立即将其设置为无效 ViewHolder，而是会将它们保存到 cache 中，但又不能将所有移除屏幕的 ViewHolder 都视为有效 ViewHolder，所以它的默认容量只有 2 个。
 
@@ -116,7 +144,9 @@ RV 之所以要将缓存分成这么多块，是为了在功能上进行一些�
 
 这是 RV 预留给开发人员的一个抽象类，在这个类中只有一个抽象方法，如下：
 
-<Image alt="image (12).png" src="https://s0.lgstatic.com/i/image/M00/09/9D/Ciqc1F68umuAdLe4AACjFw2gqeI470.png"/>
+
+<Image alt="image (12).png" src="https://s0.lgstatic.com/i/image/M00/09/9D/Ciqc1F68umuAdLe4AACjFw2gqeI470.png"/> 
+
 
 开发人员可以通过继承 ViewCacheExtension，并复写抽象方法 getViewForPositionAndType 来实现自己的缓存机制。只是一般情况下我们不会自己实现也不建议自己去添加缓存逻辑，因为这个类的使用门槛较高，需要开发人员对 RV 的源码非常熟悉。
 
@@ -135,15 +165,21 @@ RecycledViewPool 还有一个重要功能，官方对其有如下解释：
 
 看一下 layoutState.next 的详细代码：
 
-<Image alt="image (13).png" src="https://s0.lgstatic.com/i/image/M00/09/9E/CgqCHl68unSAJ7fRAAEcvzM2UaA043.png"/>
+
+<Image alt="image (13).png" src="https://s0.lgstatic.com/i/image/M00/09/9E/CgqCHl68unSAJ7fRAAEcvzM2UaA043.png"/> 
+
 
 代码继续往下跟：
 
-<Image alt="image (14).png" src="https://s0.lgstatic.com/i/image/M00/09/9E/CgqCHl68un6AKPaiAADjaBH3UEk983.png"/>
+
+<Image alt="image (14).png" src="https://s0.lgstatic.com/i/image/M00/09/9E/CgqCHl68un6AKPaiAADjaBH3UEk983.png"/> 
+
 
 可以看出最终调用 tryGetViewHolderForPositionByDeadline 方法来查找相应位置上的ViewHolder，在这个方法中会从上面介绍的 4 级缓存中依次查找：
 
-<Image alt="image (15).png" src="https://s0.lgstatic.com/i/image/M00/09/9E/Ciqc1F68uoaAefdEAASuYKk5V44193.png"/>
+
+<Image alt="image (15).png" src="https://s0.lgstatic.com/i/image/M00/09/9E/Ciqc1F68uoaAefdEAASuYKk5V44193.png"/> 
+
 
 如图中红框处所示，如果在各级缓存中都没有找到相应的 ViewHolder，则会使用 Adapter 中的 createViewHolder 方法创建一个新的 ViewHolder。
 
@@ -155,7 +191,9 @@ RecycledViewPool 还有一个重要功能，官方对其有如下解释：
 
 当调用 setLayoutManager 和 setAdapter 之后，RV 会经历第一次 layout 并被显示到屏幕上，如下所示：
 
-<Image alt="image (16).png" src="https://s0.lgstatic.com/i/image/M00/09/9E/CgqCHl68upCATZ2cAACZFf9DHQ0775.png"/>
+
+<Image alt="image (16).png" src="https://s0.lgstatic.com/i/image/M00/09/9E/CgqCHl68upCATZ2cAACZFf9DHQ0775.png"/> 
+
 
 此时并不会有任何 ViewHolder 的缓存，所有的 ViewHolder 都是通过 createViewHolder 创建的。
 
@@ -163,15 +201,21 @@ RecycledViewPool 还有一个重要功能，官方对其有如下解释：
 
 如果通过手势下拉刷新，获取到新的数据 data 之后，我们会调用 notifyXXX 方法通知 RV 数据发生改变，这回 RV 会先将屏幕内的所有 ViewHolder 保存在 Scrap 中，如下所示：
 
-<Image alt="image (17).png" src="https://s0.lgstatic.com/i/image/M00/09/9E/CgqCHl68upeAaYMqAAChKtO2D8A471.png"/>
+
+<Image alt="image (17).png" src="https://s0.lgstatic.com/i/image/M00/09/9E/CgqCHl68upeAaYMqAAChKtO2D8A471.png"/> 
+
 
 当缓存执行完之后，后续通过 Recycler 就可以从缓存中获取相应 position 的 ViewHolder（姑且称为旧 ViewHolder），然后将刷新后的数据设置到这些 ViewHolder 上，如下所示：
 
-<Image alt="image (18).png" src="https://s0.lgstatic.com/i/image/M00/09/9E/Ciqc1F68up6AKO1yAAChI3xlrRw121.png"/>
+
+<Image alt="image (18).png" src="https://s0.lgstatic.com/i/image/M00/09/9E/Ciqc1F68up6AKO1yAAChI3xlrRw121.png"/> 
+
 
 最后再将新的 ViewHolder 绘制到 RV 上：
 
-<Image alt="image (19).png" src="https://s0.lgstatic.com/i/image/M00/09/9E/CgqCHl68uqSAS-0JAACL6DDqSsw611.png"/>
+
+<Image alt="image (19).png" src="https://s0.lgstatic.com/i/image/M00/09/9E/CgqCHl68uqSAS-0JAACL6DDqSsw611.png"/> 
+
 
 ### 总结
 
@@ -181,3 +225,4 @@ RecycledViewPool 还有一个重要功能，官方对其有如下解释：
 * RecyclerView 的缓存复用机制，主要是通过内部类 Recycler 来实现。
 
 谷歌 Android 团队对 RecyclerView 做了很多优化，导致 RecyclerView 最终的代码极其庞大。这也是为什么当 RecyclerView 出现问题的时候，排查问题的复杂度相对较高。理解 RecyclerView 的源码实现，有助于我们快速定位问题原因、拓展 RecyclerView 功能、提高分析 RecyclerView 性能问题的能力。
+

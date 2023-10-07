@@ -1,20 +1,28 @@
+# 22消息发布：如何使用SpringCloudStream实现消息发布者和消费者？（上）
+
 从上一课时的内容中，我们对 Spring Cloud Stream 的基本架构有了全面的了解。今天，就让我们回到案例，来看看如何使用 Spring Cloud Stream 来完成消息发布者和消费者的构建。
 
 ### 设计 SpringHealth 中的消息发布场景
 
 在《消息驱动：如何理解 Spring 中对消息处理机制的抽象过程？》课时中，我们已经给出了在 SpringHealth 案例系统中应用消息处理机制的一个典型场景。类似 SpringHealth 这样的系统中的用户信息变动并不会太频繁，所以很多时候我们会想到通过缓存系统来存放用户信息。而一旦用户信息发生变化，user-service 可以发送一个事件，给到相关的订阅者并更新缓存信息，如下图所示：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/76/EF/CgqCHl_IvYmAAdzPAABKd1VzQCI715.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/76/EF/CgqCHl_IvYmAAdzPAABKd1VzQCI715.png"/> 
+  
 用户信息更新场景中的事件驱动架构
 
 一般而言，事件在命名上通常采用过去时态以表示该事件所代表的动作已经发生。所以，我们把这里的用户信息变更事件命名为 UserInfoChangedEvent。通常，我们也会建议使用一个独立的事件消费者来订阅这个事件，就像上图中的 consumer-service1 一样。但为了保持 SpringHealth 系统的简单性，我们不想再单独构建一个微服务，而是选择把事件订阅和消费的相关功能同样放在了 intervention-service 中，如下图所示：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/76/E4/Ciqc1F_IvgSAQ-k8AABA--dRdWc848.png"/>  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/76/E4/Ciqc1F_IvgSAQ-k8AABA--dRdWc848.png"/> 
+  
 简化之后的用户信息更新场景处理流程
 
 接下来我们关注于上图中的事件发布者 user-service。在 user-service 中需要设计并实现使用 Spring Cloud Stream 发布消息的各个组件，包括 Source、Channel 和 Binder。我们围绕 UserInfoChangedEvent 事件给出 user-service 内部的整个实现流程，如下图所示：
 
-<Image alt="3.png" src="https://s0.lgstatic.com/i/image/M00/76/EF/CgqCHl_IvjSAX_W6AAHB35Qu21g693.png"/>  
+
+<Image alt="3.png" src="https://s0.lgstatic.com/i/image/M00/76/EF/CgqCHl_IvjSAX_W6AAHB35Qu21g693.png"/> 
+  
 user-service 消息发布实现流程
 
 在 user-service 中，势必会存在一个对用户信息的修改操作，这个修改操作会上图中的触发 UserInfoChangedEvent 事件，然后该事件将被构建成一个消息并通过 UserInfoChangedSource 进行发送。UserInfoChangedSource 就是一种 Spring Cloud Stream 中的具体 Source 实现。然后 UserInfoChangedSource 使用默认的名为"output"的 Channel 进行消息发布。在案例中，我们将同时演示 Kafka 和 RabbitMQ，所以 Binder 组件分别封装了这两个消息中间件。
@@ -266,7 +274,9 @@ public class UserService {
 
 在 Spring Cloud Stream 中，负责消费消息的是 Sink 组件，因此，我们同样围绕 UserInfoChangedEvent 事件给出 intervention-service 内部的整个实现流程，如下图所示：
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/76/F0/CgqCHl_IvlKADfCXAAA8UAK4iIs978.png"/>  
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/76/F0/CgqCHl_IvlKADfCXAAA8UAK4iIs978.png"/> 
+  
 intervention-service 消息消费实现流程
 
 在上图中，UserInfoChangedEvent 事件通过消息中间件发送到 Spring Cloud Stream 中，Spring Cloud Stream 通过 Sink 获取消息并交由 UserInfoChangedSink 实现具体的消费逻辑。可以想象在这个 UserInfoChangedSink 中会负责实现缓存相关的处理逻辑。
@@ -290,7 +300,9 @@ public UserMapper getUserByUserName(String userName){
 
 这里我们直接通过调用 user-service 远程获取 User 信息。我们知道用户账户信息变更是一个低频事件，而每次通过 UserServiceClient 实现远程调用的成本很高且没有必要。现在我们可以通过 Spring Cloud Stream 获取用户信息更新的消息了，UserServiceClient 就有了优化的空间。基本思路就是缓存用户信息，并通过消息触发缓存更新，然后我们先从缓存中获取用户信息，只有在缓存中找不到对应的用户信息时才会发起远程调用。下图展示了采用这一设计思想之后的流程图：
 
-<Image alt="5.png" src="https://s0.lgstatic.com/i/image/M00/76/F0/CgqCHl_IvmGADKwmAAFJvHum5Z8651.png"/>  
+
+<Image alt="5.png" src="https://s0.lgstatic.com/i/image/M00/76/F0/CgqCHl_IvmGADKwmAAFJvHum5Z8651.png"/> 
+  
 用户账户更新流程图
 
 在上图中，我们看到 user-service 异步发送的 UserInfoChangedEvent 事件会被消费，该消息的处理器 UserInfoChangedSink 所消费，然后 UserInfoChangedSink 将更新后的用户账户信息进行缓存以供 intervertion-service 使用。显然，UserInfoChangedSink 是整个流程的关键。至于如何实现这个 UserInfoChangedSink，我们放在下一课时中进行详细展开并给出代码示例。
@@ -302,3 +314,4 @@ public UserMapper getUserByUserName(String userName){
 这里给你留一道思考题：在 Spring Cloud Stream 配置不同的 Binder 时，有哪些公共配置项，又有哪些是针对具体消息中间件的特定配置项？
 
 下一课时将继续讨论基于 Spring Cloud Stream 的开发过程，我们关注于消息消费者的实现，以及自定义消息通道、消费者分组以及消息分区等高级主题的实现方式。
+

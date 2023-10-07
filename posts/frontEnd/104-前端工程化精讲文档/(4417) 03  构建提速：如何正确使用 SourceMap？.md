@@ -1,3 +1,5 @@
+# 03构建提速：如何正确使用SourceMap？
+
 在上一课时中我们聊了开发时的热更新机制和其中的技术细节，热更新能帮助我们在开发时快速预览代码效果，免去了手动执行编译和刷新浏览器的操作。课后留的思考题是找一个实现了 HMR 的 Loader，查看其中用到哪些热替换的 API，希望通过这个题目能让你加深对相关知识点的印象。
 
 那么除了热更新以外，项目的开发环境还有哪些在影响着我们的开发效率呢？在过去的工作中，公司同事就曾问过我一个问题：为什么我的项目在开发环境下每次构建还是很卡？每次保存完代码都要过 1\~2 秒才能看到效果，这是怎么回事呢？其实这里面的原因主要是这位同事在开发时选择的 Source Map 设定不对。今天我们就来具体讨论下这个问题。首先，什么是 **Source Map** 呢？
@@ -6,7 +8,9 @@
 
 在前端开发过程中，通常我们编写的源代码会经过多重处理（编译、封装、压缩等），最后形成产物代码。于是在浏览器中调试产物代码时，我们往往会发现代码变得面目全非，例如：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/42/93/Ciqc1F85_FmAA4UeAABWNiHqsWQ595.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/42/93/Ciqc1F85_FmAA4UeAABWNiHqsWQ595.png"/> 
+
 
 因此，我们需要一种在调试时将产物代码显示回源代码的功能，**source map** 就是实现这一目标的工具。
 
@@ -94,7 +98,9 @@ if (options.devtool.includes("source-map")) {
 
 下面，以课程示例代码 [03_develop_environment](https://github.com/fe-efficiency/lessons_fe_efficiency/tree/master/03_develop_environment) 为例，我们来对比下几种常用预设的差异（为了使时间差异更明显，示例中引入了几个大的类库文件）：
 
-<Image alt="12.png" src="https://s0.lgstatic.com/i/image/M00/43/5E/Ciqc1F87kyiAZvHdAAIGvohk2F4144.png"/>
+
+<Image alt="12.png" src="https://s0.lgstatic.com/i/image/M00/43/5E/Ciqc1F87kyiAZvHdAAIGvohk2F4144.png"/> 
+
 > \*注1："/"前后分别表示产物 js 大小和对应 .map 大小。  
 >
 > \*注2："/"前后分别表示初次构建时间和开启 watch 模式下 rebuild 时间。对应统计的都是 development 模式下的笔者机器环境下几次构建时间的平均值，只作为相对快慢与量级的比较。
@@ -117,19 +123,27 @@ if (options.devtool.includes("source-map")) {
 
 * 源码且包含列信息
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/42/9E/CgqCHl85_KuANSVfAADSE8VO7Qg572.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/42/9E/CgqCHl85_KuANSVfAADSE8VO7Qg572.png"/> 
+
 
 * 源码不包含列信息
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/42/93/Ciqc1F85_LCAMTlgAADhqpZ4v9o628.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/42/93/Ciqc1F85_LCAMTlgAADhqpZ4v9o628.png"/> 
+
 
 * Loader转换后代码
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/42/9E/CgqCHl85_LqAPrYzAADfmUwS_JE006.png"/>
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/42/9E/CgqCHl85_LqAPrYzAADfmUwS_JE006.png"/> 
+
 
 * 生成后的产物代码
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/42/9E/CgqCHl85_MGAHhmMAAKGwvDeXIM418.png"/>
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/42/9E/CgqCHl85_MGAHhmMAAKGwvDeXIM418.png"/> 
+
 
 #### 开发环境下 Source Map 推荐预设
 
@@ -174,7 +188,9 @@ webpack.config.js
 
 在上面的示例中，我们将 devtool 设为 false，而直接使用 EvalSourceMapDevToolPlugin，通过传入 module: true 和 column:false，达到和预设 eval-cheap-module-source-map 一样的质量，同时传入 exclude 参数，排除第三方依赖包的 source map 生成。保存设定后通过运行可以看到，在文件体积减小（尽管开发环境并不关注文件大小）的同时，再次构建的速度相比上面表格中的速度提升了将近一倍，达到了最快一级。
 
-<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/42/9E/CgqCHl85_N2AUkcpAAEqvMKhgVQ549.png"/>
+
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/42/9E/CgqCHl85_N2AUkcpAAEqvMKhgVQ549.png"/> 
+
 
 类似这样的优化可以帮助我们在一些大型项目中，通过自定义设置来获取比预设更好的开发体验。
 
@@ -185,3 +201,4 @@ webpack.config.js
 限于篇幅原因，关于 source map 这一课时还有两个与提效无关的小细节没有提到，一个是生成的 source map 的内容，即浏览器工具是如何将 source map 内容映射回源文件的，如果你感兴趣可以通过这个[链接](http://www.ruanyifeng.com/blog/2013/01/javascript_source_map.html)进一步了解；另一个是我们在控制台的网络面板中通常看不到 source map 文件的请求，其原因是出于安全考虑 Chrome 隐藏了 source map 的请求，需要通过 [net-log](chrome://net-export/) 来查询。
 
 **最后还是留一个小作业**：不知道你有没有留意过自己项目里的 source map 使用的是哪一种生成方式吗？可以根据这一课时的内容对它进行调整和观察效果，也欢迎你在课后留言区讨论项目里对 source map 的优化方案。
+

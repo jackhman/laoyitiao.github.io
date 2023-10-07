@@ -1,3 +1,5 @@
+# (285)第47讲：内存泄漏——为何每次用完ThreadLocal都要调用remove？
+
 在本课时我们主要讲解为什么用完 ThreadLocal 之后都要求调用 remove 方法？
 
 首先，我们要知道这个事情和内存泄漏有关，所以就让我们先来看一下什么是内存泄漏。
@@ -59,7 +61,9 @@ static class Entry extends WeakReference<ThreadLocal<?>> {
 
 为了更好地分析这个问题，我们用下面这张图来看一下具体的引用链路（实线代表强引用，虚线代表弱引用）：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/68/C4/Cgq2xl5Pld-AHFhJAADLtGXmSxc833.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/68/C4/Cgq2xl5Pld-AHFhJAADLtGXmSxc833.png"/> 
+
 
 可以看到，左侧是引用栈，栈里面有一个 ThreadLocal 的引用和一个线程的引用，右侧是我们的堆，在堆中是对象的实例。
 
@@ -89,3 +93,4 @@ public void remove() {
 
 所以，在使用完了 ThreadLocal 之后，我们应该手动去调用它的 remove 方法，目的是防止内存泄漏的发生。
 > 注：第一张图片和引用链相关内容，参考自<https://blog.csdn.net/zhongxiangbo/article/details/70859181>，但未能找到更原始的出处，原作者若看到，欢迎联系，将进行标注。
+

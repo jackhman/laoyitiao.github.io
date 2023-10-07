@@ -1,3 +1,5 @@
+# 18观测分析：SkyWalking如何把观测和分析结合起来？
+
 上一节，我带你了解了链路追踪系统的原理以及 Zipkin 的架构。在这一节，我将带你细化链路追踪的关键点，链路分析。
 
 我在"**10 \| 链路分析：除了观测链路，还能做什么？**"中，讲到我们可以依据链路数据进行更细维度的数据分析，其中包含指标聚合和拓扑图这两个主要内容。SkyWalking 就是这样的链路分析系统，它提供链路追踪、链路分析、性能剖析、告警等一系列功能，帮助你定位问题。
@@ -14,7 +16,9 @@ SkyWalking 和 Zipkin 的定位不同，决定了它们不是相同类型的产�
 
 下面是官网提供的 SkyWalking 的系统架构图，我们先通过这张图来了解它：
 
-<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/59/57/CgqCHl9xYUSAMdjMAAM5S7oWJck457.png"/>
+
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/59/57/CgqCHl9xYUSAMdjMAAM5S7oWJck457.png"/> 
+
 
 从中间往上看，**首先是 Receiver Cluster，它代表接收器集群，是整个后端服务的接入入口，专门用来收集各个指标，链路信息，相当于我在上一节所讲的链路收集器。**
 
@@ -70,7 +74,9 @@ service_resp_time = from(Service.latency).longAvg();
 
 除了统计指标之外，链路分析中的另外一个关键点就是拓扑。拓扑图可以展示服务、端点、实例之间的引用关系，将引用关系与统计指标相结合后，我们能更快地了解到系统整体的运行情况，以及流量主要分布在哪里。下图就展示了在 SkyWalking 中，是怎样展现服务之间的拓扑的。
 
-<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/59/4C/Ciqc1F9xYeSAGKOBAAC5r84ETek340.png"/>
+
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/59/4C/Ciqc1F9xYeSAGKOBAAC5r84ETek340.png"/> 
+
 
 在这张图中，从左到右代表服务从接入流量到服务处理中的完整拓扑信息。用户发起访问，首先经由 ProjectA 服务，然后引入 ProjectB、ProjectC 和其他的云服务，ProjectB、ProjectC 又分别调用了其余的组件和服务。服务依赖之间使用线进行连接，可以清楚地描绘出彼此的关系。
 
@@ -84,7 +90,9 @@ SkyWalking 为了解决上面提到的延迟和内存问题，引入了一个新
 
 Zipkin 和 SkyWalking 在 OkHttp 框架的消息传递时，都会将链路信息放置在请求头中。**无论它们的采集器是如何实现的，在进行消息传递时，都会通过某种方式将链路信息设置到请求中**。如下图所示：
 
-<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/59/4D/Ciqc1F9xYgmAfvCDAAEDn5gIMBo308.png"/>
+
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/59/4D/Ciqc1F9xYgmAfvCDAAEDn5gIMBo308.png"/> 
+
 
 我们可以看到其中有三个"sw8"开头的 header 内容，"sw8"也是 SkyWalking 在进行链路上下文传递中的关键信息。这里进行了转码处理，我们可以通过阅读官方对跨线程消息透传协议的 [介绍](https://github.com/apache/skywalking/blob/6fe2041b470113e626cb3f41e3789261d31f2548/docs/en/protocols/Skywalking-Cross-Process-Propagation-Headers-Protocol-v3.md)，了解到它进行了信息的传递。我列出一些其中比较关键的部分。
 
@@ -111,3 +119,4 @@ Zipkin 和 SkyWalking 在 OkHttp 框架的消息传递时，都会将链路信�
 ### 总结
 
 在本节中，我带你了解了 SkyWalking 的整体系统架构，以及链路分析中比较关键的两部分内容，统计指标和拓扑图，在 SkyWalking 中的应用实现。在链路分析中，有哪些指标数据是你最为关心的呢？欢迎你在留言区分享你的想法。
+

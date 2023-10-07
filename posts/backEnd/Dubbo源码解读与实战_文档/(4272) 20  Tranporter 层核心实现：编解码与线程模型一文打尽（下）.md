@@ -1,3 +1,5 @@
+# 20Tranporter层核心实现：编解码与线程模型一文打尽（下）
+
 在上一课时中，我们深入分析了 Transporter 层中 Server 相关的核心抽象类以及基于 Netty 4 的实现类。本课时我们继续分析 Transporter 层中剩余的核心接口实现，主要涉及 Client 接口、Channel 接口、ChannelHandler 接口，以及相关的关键组件。
 
 ### Client 继承路线分析
@@ -59,7 +61,9 @@ protected void doOpen() throws Throwable {
 
 得到的 NettyClient 结构如下图所示：
 
-<Image alt="Lark20200930-161759.png" src="https://s0.lgstatic.com/i/image/M00/5A/2F/Ciqc1F90P1yAYThvAADLV6SJeac973.png"/>  
+
+<Image alt="Lark20200930-161759.png" src="https://s0.lgstatic.com/i/image/M00/5A/2F/Ciqc1F90P1yAYThvAADLV6SJeac973.png"/> 
+  
 NettyClient 结构图
 
 NettyClientHandler 的实现方法与上一课时介绍的 NettyServerHandler 类似，同样是实现了 Netty 中的 ChannelDuplexHandler，其中会将所有方法委托给 NettyClient 关联的 ChannelHandler 对象进行处理。两者在 userEventTriggered() 方法的实现上有所不同，NettyServerHandler 在收到 IdleStateEvent 事件时会断开连接，而 NettyClientHandler 则会发送心跳消息，具体实现如下：
@@ -93,7 +97,9 @@ public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exc
 
 另外，在 NettyChannel 中还有一个静态的 Map 集合（CHANNEL_MAP 字段），用来缓存当前 JVM 中 Netty 框架 Channel 与 Dubbo Channel 之间的映射关系。从下图的调用关系中可以看到，NettyChannel 提供了读写 CHANNEL_MAP 集合的方法：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/58/FF/CgqCHl9wcRiAZFTaAADTxIPND7k175.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/58/FF/CgqCHl9wcRiAZFTaAADTxIPND7k175.png"/> 
+
 
 NettyChannel 中还有一个要介绍的是 send() 方法，它会通过底层关联的 Netty 框架 Channel，将数据发送到对端。其中，可以通过第二个参数指定是否等待发送操作结束，具体实现如下：
 
@@ -124,7 +130,9 @@ public void send(Object message, boolean sent) throws RemotingException {
 
 这里我们就深入分析 ChannelHandler 的其他实现类，涉及的实现类如下所示：
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/58/F3/Ciqc1F9wcSGAXo7JAANZ2BjquOE739.png"/>  
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/58/F3/Ciqc1F9wcSGAXo7JAANZ2BjquOE739.png"/> 
+  
 ChannelHandler 继承关系图
 
 其中**ChannelHandlerDispatcher** 在[第 17](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=393#/detail/pc?id=4269)[课时](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=393#/detail/pc?id=4269)已经介绍过了，它负责将多个 ChannelHandler 对象聚合成一个 ChannelHandler 对象。
@@ -168,7 +176,9 @@ public void received(Channel channel, Object message) throws RemotingException {
 
 接下来，我们介绍 ChannelHandlerDelegate 接口的另一条继承线------**WrappedChannelHandler**，其子类主要是决定了 Dubbo 以何种线程模型处理收到的事件和消息，就是所谓的"消息派发机制"，与前面介绍的 ThreadPool 有紧密的联系。
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/58/FF/CgqCHl9wcTGAdInYAAJOSSxusf4539.png"/>  
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/58/FF/CgqCHl9wcTGAdInYAAJOSSxusf4539.png"/> 
+  
 WrappedChannelHandler 继承关系图
 
 从上图中我们可以看到，每个 WrappedChannelHandler 实现类的对象都由一个相应的 Dispatcher 实现类创建，下面是 Dispatcher 接口的定义：
@@ -299,7 +309,9 @@ ThreadlessExecutor 是一种特殊类型的线程池，与其他正常的线程�
 
 此时，Dubbo Consumer 同步请求的线程模型如下图所示：
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/58/FF/CgqCHl9wcUWAY3b0AAFKI4e5Oa0017.png"/>  
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/58/FF/CgqCHl9wcUWAY3b0AAFKI4e5Oa0017.png"/> 
+  
 Dubbo Consumer 同步请求线程模型
 
 从图中我们可以看到下面的请求-响应流程：
@@ -316,7 +328,9 @@ Dubbo Consumer 同步请求线程模型
 
 为了解决上述问题，Dubbo 在 2.7.5 版本之后，**引入了 ThreadlessExecutor**，将线程模型修改成了下图的样子：
 
-<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/58/FF/CgqCHl9wcVCAQdJjAAFE8eFivcY750.png"/>  
+
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/58/FF/CgqCHl9wcVCAQdJjAAFE8eFivcY750.png"/> 
+  
 引入 ThreadlessExecutor 后的结构图
 
 1. 业务线程发出请求之后，拿到一个 Future 对象。
@@ -389,12 +403,16 @@ protected ChannelHandler wrapInternal(ChannelHandler handler, URL url) {
 
 结合前面的分析，我们可以得到下面这张图：
 
-<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/58/F4/Ciqc1F9wcV-AFAcTAADpElrp-Wc888.png"/>  
+
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/58/F4/Ciqc1F9wcV-AFAcTAADpElrp-Wc888.png"/> 
+  
 Server 端 ChannelHandler 结构图
 
 我们可以在创建 NettyServerHandler 的地方添加断点 Debug 得到下图，也印证了上图的内容：
 
-<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/58/FF/CgqCHl9wcWaAJVA3AACBSF4eCzg786.png"/>
+
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/58/FF/CgqCHl9wcWaAJVA3AACBSF4eCzg786.png"/> 
+
 
 ### 总结
 
@@ -403,3 +421,4 @@ Server 端 ChannelHandler 结构图
 首先我们介绍了 AbstractClient 抽象接口以及基于 Netty 4 的 NettyClient 实现。接下来，介绍了 AbstractChannel 抽象类以及 NettyChannel 实现。最后，我们深入分析了 ChannelHandler 接口实现，其中详细分析 WrappedChannelHandler 等关键 ChannelHandler 实现，以及 ThreadlessExecutor 优化。
 
 关于Dubbo 的 Transporter 层，你若还有什么疑问或想法，欢迎你留言跟我分享。
+

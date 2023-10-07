@@ -1,3 +1,5 @@
+# 34UDP协议：UDP和TCP相比快在哪里？
+
 TCP 和 UDP 是目前使用最广泛的两个传输层协议，同时也是面试考察的重点内容。今天我会初步带你认识这两个协议，一起探寻它们之间最大的区别。
 
 在开始本讲的重点内容前，我们先来说说 RFC 文档（Request For Comments，请求评论），互联网的很多基础建设都是以 RFC 的形式文档化，它给用户提供了阅读和学习的权限。在给大家准备《**计算机网络**》专栏的时候，我也经常查阅 RFC 文档。
@@ -31,7 +33,9 @@ for(byte x in bytes) {
 
 `xor`是异或运算。上面的程序在计算字节数组 bytes 的校验和。`c`是最终的结果。你可以看到将所有`bytes`两两异或，最终的结果就是校验和。假设我们要传输 bytes，如果在传输过程中`bytes`发生了变化，校验和有**很大概率** 也会跟着变化。当然也可能存在`bytes`发生变化，校验和没有变化的特例，不过校验和可以很大程度上帮助我们识别数据是否损坏了。
 
-<Image alt="Lark20210113-153833.png" src="https://s0.lgstatic.com/i/image2/M01/05/49/CgpVE1_-o5GADgRkAABcTgxXiyw544.png"/>
+
+<Image alt="Lark20210113-153833.png" src="https://s0.lgstatic.com/i/image2/M01/05/49/CgpVE1_-o5GADgRkAABcTgxXiyw544.png"/> 
+
 
 当要传输数据的时候，数据会被分片，我们把每个分片看作一个字节数组。然后在分片中，预留几个字节去存储校验和。校验和随着数据分片一起传输到目的地，目的地会用同样的算法再次计算校验和。如果二者校验和不一致，代表中途数据发生了损坏。
 
@@ -55,7 +59,9 @@ for(byte x in bytes) {
 
 你可能会问，这明明是**四次握手，哪里是三次握手**呢？这是因为，Bob 给 Alice 的 ACK ，可以和 Bob 向 Alice 发起的 SYN 合并，称为一条 SYN-ACK 消息。TCP 协议以此来减少握手的次数，减少数据的传输，于是 TCP 就变成了三次握手。下图中绿色标签状是 Alice 和 Bob 的状态，完整的 TCP 三次握手的过程如下图所示：
 
-<Image alt="Lark20210113-153831.png" src="https://s0.lgstatic.com/i/image2/M01/05/49/CgpVE1_-o7OAHQP4AADkdEFtGfI902.png"/>
+
+<Image alt="Lark20210113-153831.png" src="https://s0.lgstatic.com/i/image2/M01/05/49/CgpVE1_-o7OAHQP4AADkdEFtGfI902.png"/> 
+
 
 **2. TCP 的四次挥手**
 
@@ -71,7 +77,9 @@ for(byte x in bytes) {
 
 之所以是四次挥手，是因为第 2 步和 第 3 步在挥手的过程中不能合并为 FIN-ACK。原因是在挥手的过程中，Alice 和 Bob 都可能有未完成的工作。比如对 Bob 而言，可能还存在之前发给 Alice 但是还没有收到 ACK 的请求。因此，Bob 收到 Alice 的 FIN 后，就马上给 ACK。但是 Bob 会在自己准备妥当后，再发送 FIN 给 Alice。完整的过程如下图所示：
 
-<Image alt="Lark20210113-153824.png" src="https://s0.lgstatic.com/i/image/M00/8D/61/Ciqc1F_-o7uASykoAAD1Eo7HnP4749.png"/>
+
+<Image alt="Lark20210113-153824.png" src="https://s0.lgstatic.com/i/image/M00/8D/61/Ciqc1F_-o7uASykoAAD1Eo7HnP4749.png"/> 
+
 
 **3. 连接**
 
@@ -124,3 +132,4 @@ for(byte x in bytes) {
 你可以把你的答案、思路或者课后总结写在留言区，这样可以帮助你产生更多的思考，这也是构建知识体系的一部分。经过长期的积累，相信你会得到意想不到的收获。如果你觉得今天的内容对你有所启发，欢迎分享给身边的朋友。期待看到你的思考！
 
 这一讲就到这里，发现求知的乐趣，我是林䭽。感谢你学习本次课程，下一讲我们学习 35 \| Linux 的 I/O 模型：select/poll/epoll 有什么区别？ 再见！
+

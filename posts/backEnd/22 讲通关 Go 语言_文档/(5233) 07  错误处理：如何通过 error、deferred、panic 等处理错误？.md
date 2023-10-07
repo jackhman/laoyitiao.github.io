@@ -1,3 +1,5 @@
+# 07错误处理：如何通过error、deferred、panic等处理错误？
+
 上节课我为你讲解了结构体和接口，并留了一个小作业，让你自己练习实现有两个方法的接口。现在我就以"人既会走也会跑"为例进行讲解。
 
 首先定义一个接口 WalkRun，它有两个方法 Walk 和 Run，如下面的代码所示：
@@ -308,7 +310,9 @@ func panic(v interface{})
 
 panic 异常是一种非常严重的情况，会让程序中断运行，使程序崩溃，所以**如果是不影响程序运行的错误，不要使用 panic，使用普通错误 error 即可。**
 
-<Image alt="pDE7ppQNyfRSIn1Q__thumbnail.png" src="https://s0.lgstatic.com/i/image/M00/6F/79/CgqCHl-15ZSAAsw5AAUnpsfN34w061.png"/>
+
+<Image alt="pDE7ppQNyfRSIn1Q__thumbnail.png" src="https://s0.lgstatic.com/i/image/M00/6F/79/CgqCHl-15ZSAAsw5AAUnpsfN34w061.png"/> 
+
 
 ### Recover 捕获 Panic 异常
 
@@ -346,3 +350,4 @@ ip 不能为空
 **本节课的思考题是**：一个函数中可以有多个 defer 语句吗？如果可以的话，它们的执行顺序是什么？可以先思考一下，然后通过写代码的方式验证是否正确。
 
 下节课我们进入本专栏的第二模块：Go 语言的高效并发。我将首先讲解"并发基础：Goroutines 和 Channels 的声明与使用"，记得来听课！
+

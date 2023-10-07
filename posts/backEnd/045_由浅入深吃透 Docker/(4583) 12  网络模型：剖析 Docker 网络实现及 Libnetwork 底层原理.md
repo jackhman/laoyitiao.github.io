@@ -1,3 +1,5 @@
+# 12网络模型：剖析Docker网络实现及Libnetwork底层原理
+
 前几课时，我介绍了 Linux 的 Namespace 和 Cgroups 技术，利用这两项技术可以实现各种资源的隔离和主机资源的限制，让我们的容器可以像一台虚拟机一样。但这时我们的容器就像一台未联网的电脑，不能被外部访问到，也不能主动与外部通信，这样的容器只能做一些离线的处理任务，无法通过外部访问。所以今天这一讲，我将介绍 Docker 网络相关的知识，使 Docker 容器接通网络。
 
 ### 容器网络发展史
@@ -140,7 +142,9 @@ Linux bridge 是一个虚拟设备，是用来连接网络的设备，相当于�
 
 * veth 与 bridge 的关系
 
-<Image alt="Lark20200929-162853.png" src="https://s0.lgstatic.com/i/image/M00/59/ED/Ciqc1F9y8IKAa-1NAABjDM-2kBk665.png"/>
+
+<Image alt="Lark20200929-162853.png" src="https://s0.lgstatic.com/i/image/M00/59/ED/Ciqc1F9y8IKAa-1NAABjDM-2kBk665.png"/> 
+
 
 通过图 1 ，我们可以看到，bridge 就像一台交换机，而 veth 就像一根网线，通过交换机和网线可以把两个不同 Net Namespace 的容器连通，使得它们可以互相通信。
 
@@ -259,10 +263,13 @@ RX bytes:0 (0.0 B) TX bytes:0 (0.0 B)
 
 以上就是 Libnetwork 常见的四种网络模式，它们的作用及业务场景帮你总结如下：
 
-<Image alt="Lark20200929-162901.png" src="https://s0.lgstatic.com/i/image/M00/59/ED/Ciqc1F9y8HGAaH1iAAClKDUq5FY736.png"/>
+
+<Image alt="Lark20200929-162901.png" src="https://s0.lgstatic.com/i/image/M00/59/ED/Ciqc1F9y8HGAaH1iAAClKDUq5FY736.png"/> 
+
 
 ### 结语
 
 我上面有说到 Libnetwork 的工作流程是完全围绕 CNM 的三个要素进行的，CNM 制定标准之初不仅仅是为了单台主机上的容器互通，更多的是为了定义跨主机之间的容器通信标准。但是后来由于 Kubernetes 逐渐成为了容器编排的标准，而 Kubernetes 最终选择了 CNI 作为容器网络的定义标准（具体原因可以参考[这里](https://kubernetes.io/blog/2016/01/why-kubernetes-doesnt-use-libnetwork/)），很遗憾 CNM 最终没有成为跨主机容器通信的标准，但是CNM 却为推动容器网络标准做出了重大贡献，且 Libnetwork 也是 Docker 的默认网络实现，提供了单独使用 Docker 容器时的多种网络接入功能。
 
 那你知道 libnetwork 除了我讲的四种网络模式外，还有什么网络模式吗？思考后，把你的想法写在留言区。
+

@@ -1,3 +1,5 @@
+# 第07课：基于Django_crontab、Xadmin做一套定时任务管理系统
+
 本课时介绍一个定时任务系统 Jcrontab，它用 Python3研发，并用到 Django_crontab 和 Xadmin 等模块。  
 
 <br />
@@ -142,7 +144,9 @@
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/71/C0/Cgq2xl5nIHuANsKGAAPpqjib5LM425.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/71/C0/Cgq2xl5nIHuANsKGAAPpqjib5LM425.png"/> 
+
 
 <br />
 
@@ -194,7 +198,9 @@ M 是指模型，V 是视图，T 是我们刚刚讲的目录结构里面的 temp
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/71/C0/Cgq2xl5nIHyAM5EnAAb-zfht2e4708.png"/>  
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/71/C0/Cgq2xl5nIHyAM5EnAAb-zfht2e4708.png"/> 
+  
 
 <br />
 
@@ -273,4 +279,5 @@ Django_crontab 是 Django 框架中的一个定时任务模块，我们可以在
 本专栏课中的所有案例配置及源代码,你可以课后通过这个地址 http://www.jesonc.com/jeson/2020/02/07/ywgs36/ 自己下载，密码为：mukelaoshi。
 
 <br />
+
 

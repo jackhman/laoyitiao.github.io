@@ -1,3 +1,5 @@
+# 06有无状态组件：如何巧妙地应用Flutter有无状态组件
+
 ### 无/有状态组件
 
 由于无状态组件在执行过程中只有一个 build 阶段，在执行期间只会执行一个 build 函数，没有其他生命周期函数，因此在执行速度和效率方面比有状态组件更好。所以在设计组件时，不要任何组件都使用有状态组件进行开发，要根据实际分析情况使用。
@@ -50,7 +52,9 @@ Flutter 功能的开发，可以总结为将基础组件组合并赋予一些交
 
 例如我们现在需要设计一个图 1 的主界面，其次可以进行点赞操作，点赞完成后数字增加 1 。
 
-<Image alt="image (10).png" src="https://s0.lgstatic.com/i/image/M00/26/C9/Ciqc1F7zAciAV3kHAAsOqdx9yX8344.png"/>  
+
+<Image alt="image (10).png" src="https://s0.lgstatic.com/i/image/M00/26/C9/Ciqc1F7zAciAV3kHAAsOqdx9yX8344.png"/> 
+  
 
 图 1 Two You 的首页推荐界面
 
@@ -76,13 +80,17 @@ Flutter 功能的开发，可以总结为将基础组件组合并赋予一些交
 
 第一步：**标记界面元素**，标记效果如图 2 所示：
 
-<Image alt="image (11).png" src="https://s0.lgstatic.com/i/image/M00/26/C9/Ciqc1F7zAdOAel6TAAtwHZn7wQw909.png"/>  
+
+<Image alt="image (11).png" src="https://s0.lgstatic.com/i/image/M00/26/C9/Ciqc1F7zAdOAel6TAAtwHZn7wQw909.png"/> 
+  
 
 图 2 组件标记
 
 第二步：记录**组件名称以及组件数据** ，以及**标记动态数据**，我们使用下面的表格 1 来处理，并且将每个小组件命名好。
 
-<Image alt="image (12).png" src="https://s0.lgstatic.com/i/image/M00/26/C9/Ciqc1F7zAemAA3hwAACRl_hUd40759.png"/>  
+
+<Image alt="image (12).png" src="https://s0.lgstatic.com/i/image/M00/26/C9/Ciqc1F7zAemAA3hwAACRl_hUd40759.png"/> 
+  
 
 表格 1 组件标记结果
 
@@ -90,19 +98,25 @@ Flutter 功能的开发，可以总结为将基础组件组合并赋予一些交
 
 第四部：**创建组件树**，1 由于是单独的一列，因此我们单独一个组件。2 和 3 以及 4 为同一行组件，因此可以合并为一个 Row 组件。然后 2 和 3 垂直排列，组合为一个 Column 组件。5、6、7、8、9、10 都在同一行，因此合并为一个组件。2、3、4、5、6、7、8、9、10 由于存在重复部分，因此合并为一个大的 Row 组件。根据上面的结论，我们绘制组件树如图 3 所示。
 
-<Image alt="5.png" src="https://s0.lgstatic.com/i/image/M00/31/5D/CgqCHl8MPo6AfA-wAACs_VZfuQw592.png"/>  
+
+<Image alt="5.png" src="https://s0.lgstatic.com/i/image/M00/31/5D/CgqCHl8MPo6AfA-wAACs_VZfuQw592.png"/> 
+  
 
 图 3 组件树
 
 图 3 中的黄色背景的表示动态组件，由于 9 和 10 组成的是最小组件，因此将 9 和 10 作为一个动态组件。所有的叶子节点上都是我们第一步所标记的基础组件，完成后看是否满足我们的设计规则。可以看到动态组件只有一个，在右下角的 Row 中，而该动态组件下只有最小的组件组合，因此是满足我们的设计要求。但为了减少动态组件 10 因状态改变而影响的范围，我们可以将 5、6、7、8 合 并为一个新的组件，将 9 和 10 单独作为一个组件，如图 4 所示。
 
-<Image alt="6.png" src="https://s0.lgstatic.com/i/image/M00/31/5D/CgqCHl8MPp2AZhKfAADFimfXDyg939.png"/>  
+
+<Image alt="6.png" src="https://s0.lgstatic.com/i/image/M00/31/5D/CgqCHl8MPp2AZhKfAADFimfXDyg939.png"/> 
+  
 
 图 4 优化后的组件设计图
 
 这样就完成了组件的分析和设计，按照这种方式，我们再实现其中的组件代码，完成界面效果。接下来我们将组件进行命名，将表格 1 根据上图的设计重新修改下，如表格 2 。
 
-<Image alt="image (15).png" src="https://s0.lgstatic.com/i/image/M00/26/C9/Ciqc1F7zAgaAJ59xAABi3IF6Ycw572.png"/>  
+
+<Image alt="image (15).png" src="https://s0.lgstatic.com/i/image/M00/26/C9/Ciqc1F7zAgaAJ59xAABi3IF6Ycw572.png"/> 
+  
 
 表格 2 最终组件设计结构
 
@@ -112,7 +126,9 @@ Flutter 功能的开发，可以总结为将基础组件组合并赋予一些交
 
 根据表格 2 的设计结构，我们先将目录层级结构，以及相应目录下的文件创建好。因为在表格中，组件都已经命名好了，所以创建就比较简单，如图 5 所示的目录结构。图 5 中的 struct 用来做数据结构描述，类似 TypeScript 中的 interface 作用，避免因为数据结构问题导致的异常。
 
-<Image alt="image (16).png" src="https://s0.lgstatic.com/i/image/M00/26/C9/Ciqc1F7zAg2AAeVzAACV_ulkeyM179.png"/>  
+
+<Image alt="image (16).png" src="https://s0.lgstatic.com/i/image/M00/26/C9/Ciqc1F7zAg2AAeVzAACV_ulkeyM179.png"/> 
+  
 
 图 5 组件目录结构
 
@@ -334,7 +350,9 @@ sh format_check.sh
 
 确认代码无误后，再打开手机模拟器，运行程序，即可看到图 6 的界面效果。
 
-<Image alt="image (17).png" src="https://s0.lgstatic.com/i/image/M00/26/CA/Ciqc1F7zAi6AIamAAAnwMrGReX8255.png"/>  
+
+<Image alt="image (17).png" src="https://s0.lgstatic.com/i/image/M00/26/CA/Ciqc1F7zAi6AIamAAAnwMrGReX8255.png"/> 
+  
 
 图 6 应用运行效果
 
@@ -345,3 +363,4 @@ sh format_check.sh
 以上就是本课时的所有内容，下一课时我将介绍 Flutter 中有状态组件的状态管理，学完本课时以及下一课时，你将可以掌握复杂的交互界面开发技巧。
 
 [点击此链接查看本课时源码](https://github.com/love-flutter/flutter-column)
+

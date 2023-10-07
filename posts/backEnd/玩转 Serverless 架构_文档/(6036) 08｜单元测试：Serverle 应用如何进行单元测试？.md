@@ -1,3 +1,5 @@
+# 08｜单元测试：Serverle应用如何进行单元测试？
+
 这一讲我将带你学习如何为 Serverless 应用编写单元测试。
 
 单元测试是保证代码质量和应用稳定性的重要手段，但很多同学却不喜欢写单元测试，觉得又麻烦，又要花很多时间，其实这与没有掌握正确的方法有很大关系。除此之外，还有的同学不知道怎么写单元测试，尤其是怎么对 Serverless 应用编写单元测试，**而这是所有 Serverless 开发者面临的问题。** 我们团队在使用 Serverless 的初期也踩过很多坑，总结起来主要有以下难点：
@@ -14,7 +16,9 @@
 
 著名的 Scrum 联盟创始人 Mike Cohn 在 2012 年提出了测试金字塔理论：
 
-<Image alt="Lark20210113-175325.png" src="https://s0.lgstatic.com/i/image2/M01/05/4E/CgpVE1_-wzCALcR9AAR8TB-B350408.png"/>  
+
+<Image alt="Lark20210113-175325.png" src="https://s0.lgstatic.com/i/image2/M01/05/4E/CgpVE1_-wzCALcR9AAR8TB-B350408.png"/> 
+  
 测试金字塔
 
 如果你写过单元测试，测试金字塔对你来说肯定不陌生，测试可分为单元测试、服务测试和 UI 测试，金字塔越上层测试速度越慢，成本越高，所以你应该写更多的单元测试。
@@ -385,8 +389,11 @@ Ran all test suites.
 
 总的来说，对 Serverless 应用编写单元测试的前提是将业务代码和云服务依赖分离，在设计和编写业务代码时就需要考虑代码是否利于测试，在此基础上，业务代码的单元测试和传统应用单元测试的方法是互通的。但单元测试只是保证系统质量的一部分，你依旧需要编写集成测试，来保证整个系统的质量和稳定性。
 
-<Image alt="Lark20210113-175329.png" src="https://s0.lgstatic.com/i/image2/M01/05/4E/CgpVE1_-w06AWX__AAEYrgALpK0776.png"/>
+
+<Image alt="Lark20210113-175329.png" src="https://s0.lgstatic.com/i/image2/M01/05/4E/CgpVE1_-w06AWX__AAEYrgALpK0776.png"/> 
+
 
 最后我给你留的作业：亲自实践一下 Serverless 应用的单元测试和集成测试。
 
 示例代码地址：<https://github.com/nodejh/serverless-class/tree/master/08/unit-testing>
+

@@ -1,9 +1,13 @@
+# 第46讲：多个ThreadLocal在Thread中的threadlocal里是怎么存储的？
+
 本课时我们主要分析一下在 Thread 中多个 ThreadLocal 是怎么存储的。
 
 ### Thread、 ThreadLocal 及 ThreadLocalMap 三者之间的关系
 
 在讲解本课时之前，先要搞清楚 Thread、 ThreadLocal 及 ThreadLocalMap 三者之间的关系。我们用最直观、最容易理解的图画的方式来看看它们三者的关系：  
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/67/E8/Cgq2xl5M5a6ADeCKAABC52ZxZCk238.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/67/E8/Cgq2xl5M5a6ADeCKAABC52ZxZCk238.png"/> 
+
 
 我们看到最左下角的 Thread 1，这是一个线程，它的箭头指向了 ThreadLocalMap 1，其要表达的意思是，每个 Thread 对象中都持有一个 ThreadLocalMap 类型的成员变量，在这里 Thread 1 所拥有的成员变量就是 ThreadLocalMap 1。
 
@@ -116,7 +120,9 @@ ThreadLocalMap 既然类似于 Map，所以就和 HashMap 一样，也会有包�
 
 比如其中一个不同点就是，我们知道 HashMap 在面对 hash 冲突的时候，采用的是拉链法。它会先把对象 hash 到一个对应的格子中，如果有冲突就用链表的形式往下链，如下图所示：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/67/E8/CgpOIF5M5mqAPY_GAABqhQqH5zw536.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/67/E8/CgpOIF5M5mqAPY_GAABqhQqH5zw536.png"/> 
+
 
 但是 ThreadLocalMap 解决 hash 冲突的方式是不一样的，它采用的是线性探测法。如果发生冲突，并不会用链表的形式往下链，而是会继续寻找下一个空的格子。这是 ThreadLocalMap 和 HashMap 在处理冲突时不一样的点。
 
@@ -124,3 +130,4 @@ ThreadLocalMap 既然类似于 Map，所以就和 HashMap 一样，也会有包�
 
 在本节课中，我们主要分析了 Thread、 ThreadLocal 和 ThreadLocalMap 这三个非常重要的类的关系。用图画的方式表明了它们之间的关系：一个 Thread 有一个 ThreadLocalMap，而 ThreadLocalMap 的 key 就是一个个的 ThreadLocal，它们就是用这样的关系来存储并维护内容的。之后我们对于 ThreadLocal 的一些重要方法进行了源码分析。
 > 注：第一张图片来自网络，未能找到原始出处，原作者若看到，欢迎联系，将进行标注。
+

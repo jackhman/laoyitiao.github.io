@@ -1,3 +1,5 @@
+# 第07讲：如何做到MySQL的高可用？
+
 本课时的主题是"MySQL 高可用"，主要内容包含：
 
 * 什么是高可用性
@@ -24,7 +26,9 @@
 
 可用性有一个计算公式，是 MTBF/(MTBF+MTTR)， 其值越高，代表可用性越高。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/48/CgoB5l12Kt-ARuuKAAAXUvypir8961.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/48/CgoB5l12Kt-ARuuKAAAXUvypir8961.png"/> 
+
 
 高可用性的指标，主要有可用性（也就是平时所说的几个 9）、平均故障间隔 MTBF、平均恢复时间 MTTR 三个部分。
 
@@ -33,7 +37,9 @@
 
 根据 HA 计算的值，业务常用的描述方法是"系统的可用性达到几个 9"。这"几个 9"就表示可用水平，正如下图所示，9 越多意味着可用性越高。常说的"5 个 9"意味着系统每年故障时间小于 5.3 分钟，其计算方式也很简单：系统 1 年内服务中断维护了 5 分钟，HA = 1 年/(1 年+5 分钟) = 99.999% 。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/68/CgotOV12Kt-AaksiAABW0I7flOA723.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/68/CgotOV12Kt-AaksiAABW0I7flOA723.png"/> 
+
 
 其中的 1 年就是 MTBF，表示平均故障间隔；5 分钟就是 MTTR，平均修复时间。
 
@@ -44,7 +50,9 @@ MTBF（全称是Mean Time Between Failures，即平均故障间隔），是指�
 
 <br />
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/48/CgoB5l12Kt-AMwSpAABYZ7wuoT0152.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/48/CgoB5l12Kt-AMwSpAABYZ7wuoT0152.png"/> 
+
 
 <br />
 
@@ -155,11 +163,15 @@ MMM
 
 从下图中可以看到，数据库集群节点各绑定了一个 VIP，VIP 赋有读节点、写节点的逻辑概念，应用程序使用读写 VIP 来配置读写数据源，当写节点 Master db1 出现故障时，由 MMM Monitor 或 Keepalived 触发切换脚本，将 VIP 漂移到可用的 Master db2 上。当出现网络抖动或网络分区时，MMM Monitor 会误判，严重时来回切换写 VIP 导致集群双写，当数据复制延迟时，应用程序会出现数据错乱或数据冲突的故障。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/68/CgotOV12Kt-AZCnzAAEMf1gh5I4969.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/68/CgotOV12Kt-AZCnzAAEMf1gh5I4969.png"/> 
+
 
 很明显，MMM Monitor 是单点判断的，存在单点故障的问题。这里总结下优缺点，如下图所示。虽然这类集群的缺点很致命，它无法解决网络抖动导致的数据冲突和错乱问题；但它好在部署简单。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/48/CgoB5l12KuCATvcmAABciE0J_Jw079.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/48/CgoB5l12KuCATvcmAABciE0J_Jw079.png"/> 
+
 
 MHA
 ---
@@ -168,13 +180,17 @@ MHA
 
 如下图，整个 MHA 架构分为 MHA Manager 节点和 MHA Node 节点，其中 MHA Manager 节点是单点部署，MHA Node 节点是部署在每个需要监控的 MySQL 集群节点上的。MHA Manager 会定时探测集群中的 Master 节点，当 Master 出现故障时，它可以自动将最新数据的 Standby Master 或 Slave 提升为新的 Master，然后将其他的 Slave 重新指向新的 Master。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/68/CgotOV12KuCAHY3zAABCkRv6FzM895.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/68/CgotOV12KuCAHY3zAABCkRv6FzM895.png"/> 
+
 
 MHA 相比 MMM 架构而言，能支持延迟数据补偿（最大保证）、支持半同步和 GTID 新特性，同时工具集更为强大，能做健康检查、集群节点挂载等运维工作。但是 MHA 存在单点判断、数据丢失的问题，这些问题也促成各个公司基于 MHA 进行二次开发和功能完善。
 
 如下图，一主两从的 MHA 集群，正常情况下集群运行良好。但仍需要考虑一种故障场景，当 Manager 出现 Crash 时碰巧 Master 出现故障，这时候集群就无法正常的发起切换，Standby Master 也无法接管集群正常对外提供的服务，应用服务受损。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/48/CgoB5l12KuCATDoPAAA2MVVZKss299.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/48/CgoB5l12KuCATDoPAAA2MVVZKss299.png"/> 
+
 
 这种故障更极端的情况是，Manager 和 Master 在一个机架位或一个交互机下，当机架位出现故障时需要人工切换集群。而当交互机出现网络隔离时，Manager 和 Master 形成内部网（即网络分区），那此时 Standby、Slave、应用程序是无法正常访问 Master 节点的。这里也体现出 Manager 单点判断的不合理性，合理的判断机制应该是多点判断，例如使用分布式集群节点发起投票进行决策（可以参考 Redis Sentienl 的处理机制）。
 
@@ -182,7 +198,9 @@ MHA Manager 和 MMM Monitor 一样，都没有 watch dog 守护进程，存在�
 
 再来看下脑裂和数据丢失的场景，如下图。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/68/CgotOV12KuCAbuB4AABOoEdThsk565.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/68/CgotOV12KuCAbuB4AABOoEdThsk565.png"/> 
+
 
 首先是集群脑裂，当一部分应用程序 Client 和 Master 形成内部网络，而 Manager、Slave、Standby 及其他 Client 端组成内部网络时。首先集群的复制状态中断，两边数据不一致。其次 Manager 会认为 Master 已经 Crash，会发起故障切换，例如将 Standby Master 提升为新主库，将 Slave 自动 change master 挂载到 Standby Master 节点下形成新的数据库集群。这时候集群一分为二，出现集群脑裂的故障。
 
@@ -199,7 +217,9 @@ Arksentinel 是一个分布式监控哨兵集群，如下图所示，可以监�
 
 <br />
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/48/CgoB5l12KuCAe9UwAAB64eDhFRA040.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/48/CgoB5l12KuCAe9UwAAB64eDhFRA040.png"/> 
+
 
 <br />
 
@@ -207,7 +227,9 @@ Arksentinel 通常在不同机房、不同机柜、不同交换机下部署 3\~5
 
 <br />
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/68/CgotOV12KuCAN8fuAABujt3Phzs364.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/68/CgotOV12KuCAN8fuAABujt3Phzs364.png"/> 
+
 
 <br />
 
@@ -264,7 +286,9 @@ QMHA
 
 <br />
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/48/CgoB5l12KuGAX-6IAAD3SKUBz0U208.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/48/CgoB5l12KuGAX-6IAAD3SKUBz0U208.png"/> 
+
 
 <br />
 
@@ -285,7 +309,9 @@ PXC/MGR
 
 对于 MySQL，PXC 集群和 MGR 集群同样可以使用分布式监控哨兵进行集群高可用性守护，如下图。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/68/CgotOV12KuGANfPsAAFhy0z3BwY428.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/68/CgotOV12KuGANfPsAAFhy0z3BwY428.png"/> 
+
 
 其流程描述如下。
 
@@ -306,7 +332,9 @@ PXC/MGR
 
 至此，MySQL 高可用架构的优化迭代，呼应了之前所说的好的架构是根据实际场景演进而来的。 当数据库中间层和分布式哨兵监控集群碰上 MySQL 全体系版本及数据库架构时，统一的数据库高可用架构即 MySQL 高可用守护系统就出现了，如下图。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/48/CgoB5l12KuGALf-cAAGuHVmMkHs743.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/48/CgoB5l12KuGALf-cAAGuHVmMkHs743.png"/> 
+
 
 它能够满足企业内部各类不同业务场景，提供不同的集群架构，确保高可用服务。使用统一管理方案实现对整个数据库集群的实时监控、实时评估集群的健康情况、发现故障节点，实时告警并及时降低服务等级或下线故障服务节点。可有效解决网络分区或网络抖动等常见网络异常。
 
@@ -331,25 +359,35 @@ PXC/MGR
 
 还有一种能够有效避免单点失效的架构就是采用共享存储，如下图。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/68/CgotOV12KuGAYRWUAAB1m4gWCqI505.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/68/CgotOV12KuGAYRWUAAB1m4gWCqI505.png"/> 
+
 
 对于 MySQL 而言，实现共享存储的分布式数据库有 Amazon Aurora、极数云舟 ArkDB 和阿里云 PolarDB，借助 MySQL 插件式引擎的架构，将数据存储节点（Engine 层）构建在一个分布式存储系统之上，上游 MySQL Server 节点共享同一份数据。最快的理解方式是使用原生 MySQL Server，实现一个分布式的存储引擎，例如将 InnoDB 存储引擎层构建在分布式存储系统之上。由于上游使用的是原生 MySQL Server，可以 100% 兼容原生 MySQL，对于应用程序而言无需进行代码修改即可无缝迁移。这类架构是分布式存储数据库，并没有分布式事务处理，使用的还是 MySQL Server 原生事务。通过分布式存储拥有的数据多副本、快照备份及恢复等功能特性保证数据存储节点的高可用性。
 
 下图是 Amazon Aurora 的实现架构图，它使用了专门的 S3 存储及 RDS 组件，为了方便讲解，我们以 ArkDB 的架构为例讲解这类共享存储的 MySQL 高可用集群的实现方式。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/68/CgotOV12KuGAKdrfAADLQ_q2BfU641.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/68/CgotOV12KuGAKdrfAADLQ_q2BfU641.png"/> 
+
 
 首先是接入层，采用数据库中间件为业务端提供统一的对外访问入口，其 100% 兼容 MySQL 语法和原生协议的特性，对于应用程序而言，访问数据库中间件跟访问原生 MySQL 的方式是一样的。接入层的主要职责是负责用户权限认证、接收并转发 SQL 访问请求，提供透明读写分离、负载均衡、连接数限制统计及连接池支持等。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/48/CgoB5l12KuKAHjTnAADLPn99ByA736.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/48/CgoB5l12KuKAHjTnAADLPn99ByA736.png"/> 
+
 
 其次是计算层，对应 MySQL Server 层，简单理解计算层就是原生的 MySQL Server，不一样的是 Aurora 等公有云服务当前支持的最高版本是 MySQL 5.7，ArkDB 支持的版本是 MySQL 8.0；计算层为数据库接入层，负责响应客户端链接和权限验证，接收并处理 SQL 请求，包含连接管理、权限验证、分析器、优化器和执行器等。MySQL Server 为无状态节点，自身不存储数据，可以快速无限水平扩展，同时通过操作 MySQL Server 节点，实现整个数据库机器的高可用切换。在 MySQL Server 层处理 SQL 请求的时候，需要适当的内存和 CPU 资源，对存储则无要求。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/68/CgotOV12KuKAfVFUAADLa7Il3eg908.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/68/CgotOV12KuKAfVFUAADLa7Il3eg908.png"/> 
+
 
 最后是存储层，对于 MySQL Engine 层，以 ArkDB 为准，存储层 ArkDB Engine 负责数据存储和读取，底层采用分布式存储。每个数据存储单位默认存储 3 个副本，副本间的数据保持强一致性和容灾。ArkDB Engine 负责存储数据并实现数据共享。上层 Server 节点访问 ArkDB Engine 同一份数据。ArkDB Engine 支持根据业务访问策略对数据存储分级，用户可以根据预算、性能指标、容量请求、访问场景按需使用不同的存储硬件，同时针对闪存卡进行软硬件结合优化。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/48/CgoB5l12KuKAQZZbAADLvEioLhc882.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/48/CgoB5l12KuKAQZZbAADLvEioLhc882.png"/> 
+
 
 无论是 Amazon Aurora，还是极数云舟 ArkDB 和阿里云 PolarDB。其架构都是基于 MySQL 实现的，这决定了它们非常简单易用，对于开发人员和 DBA 而言可以复用 MySQL 的知识和技术栈，能快速运维。其核心特性有以下几点。
 
@@ -383,7 +421,9 @@ PXC/MGR
 
 至此，我们从基础软硬件避免单点故障和 MySQL 高可用架构选型及演进两个方面，6 个小节深入讲解了如何避免单点失效，知识结构如下图。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/68/CgotOV12KuKAe_HOAABl-wRATa0772.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/68/CgotOV12KuKAe_HOAABl-wRATa0772.png"/> 
+
 
 故障转移和故障恢复
 =========
@@ -437,7 +477,9 @@ PXC/MGR
 
 <br />
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/48/CgoB5l12KuKALVmmAACJhmrtz7g094.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/48/CgoB5l12KuKALVmmAACJhmrtz7g094.png"/> 
+
 
 总结回顾
 ====
@@ -446,7 +488,9 @@ PXC/MGR
 
 <br />
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/68/CgotOV12KuKAOZqTAAA607PieN0507.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/89/68/CgotOV12KuKAOZqTAAA607PieN0507.png"/> 
+
 
 <br />
 
@@ -455,4 +499,5 @@ PXC/MGR
 下一课时，将分享如何搭建稳固的 MySQL 运维体系。
 
 <br />
+
 

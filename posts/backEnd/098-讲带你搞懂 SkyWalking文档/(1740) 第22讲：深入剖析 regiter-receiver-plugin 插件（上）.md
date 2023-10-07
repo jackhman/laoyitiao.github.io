@@ -1,8 +1,12 @@
+# 第22讲：深入剖析regiter-receiver-plugin插件（上）
+
 在上一课时中，重点介绍了 SkyWalking 存储层的框架设计以及核心接口。从本节课开始，我们将深入 SkyWalking OAP 的 receiver 模块，分析其中的各类插件是如何接收 SkyWalking Agent 上报请求、处理数据以及持久化数据的。
 
 本课时介绍的是 register-receiver-plugin 模块，它负责接收 SkyWalking Agent 发送的各类注册请求以及同步请求，处理的数据都是 RegisterSource 抽象类的子类，如下图所示。
 
-<Image alt="image001.png" src="https://s0.lgstatic.com/i/image/M00/13/BD/Ciqc1F7PkEKAKK6lAAF6WcTGXXU722.png"/>
+
+<Image alt="image001.png" src="https://s0.lgstatic.com/i/image/M00/13/BD/Ciqc1F7PkEKAKK6lAAF6WcTGXXU722.png"/> 
+
 
 在上一课时中，已经对 RegisterSource 抽象类以及其中各个字段的含义进行了详细介绍，下面来看它的四个实现类：
 
@@ -26,19 +30,27 @@
 
 RegisterServiceHandler 继承了 gRPC 为 Register 接口提供 Server 端辅助类 RegisterGrpc.RegisterImplBase（Register 的 proto 定义可以回顾前面的第 11 课时），并提供了具体实现逻辑，如下图所示：
 
-<Image alt="image003.png" src="https://s0.lgstatic.com/i/image/M00/13/C8/CgqCHl7PkEyAGPg5AAPkW2R-quM844.png"/>
+
+<Image alt="image003.png" src="https://s0.lgstatic.com/i/image/M00/13/C8/CgqCHl7PkEyAGPg5AAPkW2R-quM844.png"/> 
+
 
 其中 doServiceRegister() 方法负责处理服务注册请求，具体实现就是从服务注册请求（即 Register.proto 文件中定义的 messsage Services）中拿出 ServiceName，然后交给 IServiceInventoryRegister 生成对应的 ServiceId，然后返回给 Agent。核心流程如下图所示：
 
-<Image alt="image005.png" src="https://s0.lgstatic.com/i/image/M00/13/C8/CgqCHl7PkFOAIDDLAAE21B-7DJQ258.png"/>
+
+<Image alt="image005.png" src="https://s0.lgstatic.com/i/image/M00/13/C8/CgqCHl7PkFOAIDDLAAE21B-7DJQ258.png"/> 
+
 
 IServiceInventoryRegister 接口以及实现位于 servier-core 模块中，如下图所示：
 
-<Image alt="image007.png" src="https://s0.lgstatic.com/i/image/M00/13/C8/CgqCHl7PkFqAdvyxAAHxgz_olVE671.png"/>
+
+<Image alt="image007.png" src="https://s0.lgstatic.com/i/image/M00/13/C8/CgqCHl7PkFqAdvyxAAHxgz_olVE671.png"/> 
+
 
 这里对于不同的 RegisterSource 实现提供了不同的 Register 接口以及实现类，如下图所示。
 
-<Image alt="image009.png" src="https://s0.lgstatic.com/i/image/M00/13/BD/Ciqc1F7PkGOAFvRXAAFUkChUCBE068.png"/>
+
+<Image alt="image009.png" src="https://s0.lgstatic.com/i/image/M00/13/BD/Ciqc1F7PkGOAFvRXAAFUkChUCBE068.png"/> 
+
 
 在 ServiceInventoryRegister 这个实现类的 getOrCreate() 方法中，首先会通过 ServiceInventoryCache 确定 ServiceName 是否应有了对应的 ServiceId，如果有，则直接返回。
 
@@ -93,7 +105,9 @@ private int get(String id) { //
 
 ServiceInventory 是 RegisterSource 抽象类的实现之一，表示的是服务注册数据。在 ModelInstaller 创建 ES 索引时，会根据 ServiceInventory 中的 @Column 注解字段创建 service_inventory 索引，所以我们可以看到两者的字段是一一对应的，如下图所示：
 
-<Image alt="image011.png" src="https://s0.lgstatic.com/i/image/M00/13/C8/CgqCHl7PkHKAch62ABCOeHi1PmI006.png"/>
+
+<Image alt="image011.png" src="https://s0.lgstatic.com/i/image/M00/13/C8/CgqCHl7PkHKAch62ABCOeHi1PmI006.png"/> 
+
 
 另外，ServiceInventory 还标注了 @Stream 注解，在前文中提到，OAP 会在初始化时扫描 @Stream 注解，并根据其中的信息初始化对应的 Model 对象。
 
@@ -125,7 +139,9 @@ public void scan(Runnable callBack) throws IOException {
 
 这种设计方式非常灵活，我们可以轻松地扩展新的注解和 AnnotationListener 实现类，无须修改已有代码。OAP 提供的 AnnotationListener 的实现类如下图所示：
 
-<Image alt="image013.png" src="https://s0.lgstatic.com/i/image/M00/13/BD/Ciqc1F7PkHuAL-IrAADVxgjoSQM699.png"/>
+
+<Image alt="image013.png" src="https://s0.lgstatic.com/i/image/M00/13/BD/Ciqc1F7PkHuAL-IrAADVxgjoSQM699.png"/> 
+
 
 从名字就可以看出，StreamAnnotationListener 就是处理 @Stream 注解的 AnnotationListener 实现类。
 
@@ -135,7 +151,9 @@ public void scan(Runnable callBack) throws IOException {
 * **builder**：前面提到每个 StorageData 实现类都关联了一个 StorageBuilder 实现类（多数为 StorageData 实现的内部类），两者就是通过该字段进行关联的。StorageBuilder 负责 StorageData 对象与 Map\<String，Object\> 之间的转换。ServiceInventory 关联的就是其自身的内部类 ------ ServiceInventory.Builder。
 * **processor**：含义是收到该类型的数据时会交给 processor 指定的处理器进行处理。processor 指定的处理器都是 StreamProcessor 类型的，下图展示了 StreamProcessor 接口以及全部实现类，四个不同的实现类负责处理不同类型的数据。
 
-<Image alt="image015.png" src="https://s0.lgstatic.com/i/image/M00/13/C8/CgqCHl7PkIuAVQGmAADxp_xR4Yg365.png"/>
+
+<Image alt="image015.png" src="https://s0.lgstatic.com/i/image/M00/13/C8/CgqCHl7PkIuAVQGmAADxp_xR4Yg365.png"/> 
+
 
 * **InventoryStreamProcessor**：负责处理 RegisterSource 类型的数据。ServiceInventory 关联的就是 InventoryStreamProcessor。
 * **MetricsStreamProcessor**：负责处理 Metrics 类型的数据。
@@ -144,7 +162,9 @@ public void scan(Runnable callBack) throws IOException {
 
 StreamAnnotationListener 的核心逻辑 ------ notify() 方法，就是为各个 StorageData 关联相应的 StreamProcessor 处理器，核心代码如下：
 
-<Image alt="image017.png" src="https://s0.lgstatic.com/i/image/M00/13/BD/Ciqc1F7PkJ-ALvUSAAFXBPgFILQ073.png"/>
+
+<Image alt="image017.png" src="https://s0.lgstatic.com/i/image/M00/13/BD/Ciqc1F7PkJ-ALvUSAAFXBPgFILQ073.png"/> 
+
 
 这里的 ServiceInventory 就会被分配给 InventoryStreamProcessor 处理。
 
@@ -183,7 +203,9 @@ public Model putIfAbsent(Class aClass, int scopeId, Storage storage) {
 
 前面看到，ServiceInventory 除了实现 StorageData 接口，还是实现了 StreamData 接口。在完成 Model 实例的创建之后，create() 方法要做的第二件事是为各个 StreamData 实现类关联全局唯一 ID。StreamData 实现类与其对应的唯一 ID 是由 StreamDataMapping 管理的，它实现了 StreamDataMappingGetter、StreamDataMappingSetter 两个接口，如下图所示：
 
-<Image alt="image019.png" src="https://s0.lgstatic.com/i/image/M00/13/BD/Ciqc1F7PkK6AZmcSAAA7OnJZChM497.png"/>
+
+<Image alt="image019.png" src="https://s0.lgstatic.com/i/image/M00/13/BD/Ciqc1F7PkK6AZmcSAAA7OnJZChM497.png"/> 
+
 
 StreamDataMapping 底层维护了两个 Map，维护了 StreamData 与唯一 ID 之间的双向映射，也是基于这两个 Map 实现了 StreamDataMappingGetter 的双向查询接口。StreamData 映射的唯一 ID 将在后面介绍跨 OAP 节点交互时看到其具体作用。
 
@@ -191,7 +213,9 @@ create() 方法要做的第三件事就是为每个 StorageData 类型初始化 
 
 InventoryStreamProcessor 中的 entryWorks 集合的 Key 为 RegisterSource 子类，Value 为 RegisterDistinctWorker 类型：
 
-<Image alt="image021.png" src="https://s0.lgstatic.com/i/image/M00/13/C9/CgqCHl7PkLaAeB2tAAA05mZdfLA098.png"/>
+
+<Image alt="image021.png" src="https://s0.lgstatic.com/i/image/M00/13/C9/CgqCHl7PkLaAeB2tAAA05mZdfLA098.png"/> 
+
 
 create() 方法中与创建 Worker 处理链的相关片段：
 
@@ -213,7 +237,9 @@ public void create(...) {
 
 这里涉及三个 Worker，它们都实现了 AbstractWorker 这个抽象类，如下图所示：
 
-<Image alt="image023.png" src="https://s0.lgstatic.com/i/image/M00/13/C9/CgqCHl7PkL6ATU7LAAFFIIhucdY966.png"/>
+
+<Image alt="image023.png" src="https://s0.lgstatic.com/i/image/M00/13/C9/CgqCHl7PkL6ATU7LAAFFIIhucdY966.png"/> 
+
 
 ### AbstractWorker
 
@@ -221,7 +247,9 @@ public void create(...) {
 
 回到 InventoryStreamProcessor，处理 ServiceInventory 的 Worker 链中包含了三个 Worker，具体的执行顺序如下图所示：
 
-<Image alt="image025.png" src="https://s0.lgstatic.com/i/image/M00/13/C9/CgqCHl7PkMeAcbnnAADlzfEUJUs797.png"/>
+
+<Image alt="image025.png" src="https://s0.lgstatic.com/i/image/M00/13/C9/CgqCHl7PkMeAcbnnAADlzfEUJUs797.png"/> 
+
 
 #### RegisterDistinctWorker
 
@@ -232,7 +260,9 @@ public void create(...) {
 
 RegisterDistinctWorker 的模型如下图所示：
 
-<Image alt="image027.png" src="https://s0.lgstatic.com/i/image/M00/13/C9/CgqCHl7PkNGAIfMBAAKLevDoMcM794.png"/>
+
+<Image alt="image027.png" src="https://s0.lgstatic.com/i/image/M00/13/C9/CgqCHl7PkNGAIfMBAAKLevDoMcM794.png"/> 
+
 
 每个 RegisterDistinctWorker 都有一个独享的 DataCarrier（默认 channelSize 为 1，bufferSize 为 1000），但全局共享同一个名为 "REGISTER_L1" 的 BulkConsumePool。在其他类型的 Worker 中，会用到其他的全局 BulkConsumePool 对象，这些 BulkConsumePool 都会按照名称注册到 ConsumerPoolFactory 中统一管理。当有新的 Consumer 要消费 DataCarrier 的时候，会从指定的全局 BulkConsumePool 中分配的一条线程来处理（可能会出现一条线程处理多个 DataCarrier 的情况）。
 
@@ -362,17 +392,23 @@ public void onNext(RemoteMessage message) {
 
 RemoteClientManager 维护了 clientsA 和 clientsB 两个 Client 集合，其中只有一个 Client 集合是当前正在使用的（即 usingClients 指向的），另一个处于备用空闲状态，如下图所示：
 
-<Image alt="image029.png" src="https://s0.lgstatic.com/i/image/M00/13/BD/Ciqc1F7PkOGALBZaAADIkvKIxRk791.png"/>
+
+<Image alt="image029.png" src="https://s0.lgstatic.com/i/image/M00/13/BD/Ciqc1F7PkOGALBZaAADIkvKIxRk791.png"/> 
+
 
 RemoteClientManager 初始化时会启动一个后台线程，定期通过 ClusterNodesQuery 拉取 OAP 集群中的节点信息，如果 OAP 集群中的节点变化，则会调用 reBuildRemoteClients() 方法更新 usingClients 集合。
 
 这里通过一个具体的示例介绍更新逻辑，例如：OAP 集群中目前有 1、2、3、4 四个节点，此时，节点 1 的 usingClients 集合指向 clientsA，如下图所示，其中 Client 1 是 SelfRemoteClient 类型的 Client 表示节点 1 自身，Client 2、3、4 都是 GRPCRemoteClient 类型的 Client，通过网络连接对应的 OAP 节点。
 
-<Image alt="image031.png" src="https://s0.lgstatic.com/i/image/M00/13/C9/CgqCHl7PkOiAFx85AAC1YVJi368187.png"/>
+
+<Image alt="image031.png" src="https://s0.lgstatic.com/i/image/M00/13/C9/CgqCHl7PkOiAFx85AAC1YVJi368187.png"/> 
+
 
 假设某一时间点，OAP 集群发生变化，节点 2 下线，节点 5 上线，在 Zookeeper 中注册 RemoteInstance 也会随之发生变化，从而触发 usingClients 集合的更新。如下图所示，此时的Zookeeper 中包括节点 1、3、4、5 这四个节点的信息，通过与 clientsA 集合比较可知，节点 5 是新上线的，对应的 Client 5 需要进行初始化；节点 2 是要下线的，对应的 Client 2 需要关闭；其余的节点没有变化，对应的 Client 全部复用，拷贝到 clientsB 集合中。最后更新 usingClients 字段，指向 clientsB 集合即可。
 
-<Image alt="image033.png" src="https://s0.lgstatic.com/i/image/M00/13/BD/Ciqc1F7PkO-AD6VOAAG8IcM-tew372.png"/>
+
+<Image alt="image033.png" src="https://s0.lgstatic.com/i/image/M00/13/BD/Ciqc1F7PkO-AD6VOAAG8IcM-tew372.png"/> 
+
 
 使用双 Client 集合可以保证在更新 clientsB 集合的过程中，不影响上层调用方继续使用 clientsA 集合。在 clientsB 集合更新之后，通过 volatile 修饰的 usingClients 字段切换，上层调用方就可以立即使用 clientsB 集合中的 Client 了。
 
@@ -380,19 +416,25 @@ RemoteClientManager 初始化时会启动一个后台线程，定期通过 Clust
 
 RemoteClient 接口中定义的 push() 方法表示向 OAP 节点发送数据 ，这里涉及两个实现类，如下图所示：
 
-<Image alt="image035.png" src="https://s0.lgstatic.com/i/image/M00/13/C9/CgqCHl7PkPeAD80SAAGxevzW4-Y972.png"/>
+
+<Image alt="image035.png" src="https://s0.lgstatic.com/i/image/M00/13/C9/CgqCHl7PkPeAD80SAAGxevzW4-Y972.png"/> 
+
 
 SelfRemoteClient 对应当前节点自身，其 push() 方法中会直接根据 nextWorkerId 参数查找下一个 Worker 实例来处理 StreamData 数据，不涉及任何网络请求。
 
 GRPCRemoteClient 对应一个远端的 OAP 节点，其 push() 方法会将 nextWorkerId 等信息封装成 RemoteMessage 对象，然后写入 DataCarrier 缓冲区，然后由后台独立的 Consumer 线程通过 GRPCClient 将 DataCarrier 缓冲区中的 RemoteMessage 发送给远端 OAP 节点。这里的 DataCarrier 缓冲区以及 Consumer 线程都是 GRPCRemoteClient 独占的，整体的结构图如下：
 
-<Image alt="image037.png" src="https://s0.lgstatic.com/i/image/M00/13/C9/CgqCHl7PkP-AWdpoAAI3RpMlQy4440.png"/>
+
+<Image alt="image037.png" src="https://s0.lgstatic.com/i/image/M00/13/C9/CgqCHl7PkP-AWdpoAAI3RpMlQy4440.png"/> 
+
 
 #### RegisterPersistentWorker
 
 RegisterPersistentWorker 是处理 ServiceInventory 最后一个 Worker ，主要负责二次聚合操作以及持久化操作，属于前文介绍的" L2 级别聚合"。RegisterPersistentWorker 的核心结构与RegisterDistinctWorker 基本一致，核心结构如下图所示。首先，ServiceInventory 实例会进入一个 DataCarrier 缓存，然后由 BulkConsumerPool 中的消费线程完成聚合以及持久化操作。这里的 DataCarrier 是每个 RegisterPersistentWorker 对象独占的，BulkConsumerPool 线程池是全局共享的，注册在 ConsumerPoolFactory 中的名称为"REGISTER_L2"。
 
-<Image alt="image039.png" src="https://s0.lgstatic.com/i/image/M00/13/C9/CgqCHl7PkQaAOsx2AAJhu4VD5Sc586.png"/>
+
+<Image alt="image039.png" src="https://s0.lgstatic.com/i/image/M00/13/C9/CgqCHl7PkQaAOsx2AAJhu4VD5Sc586.png"/> 
+
 
 RegisterPersistentWorker 的消费逻辑同样封装在 onWorker() 方法中，其中实现了 DataCarrier 缓存中相同 ServiceInventory 的合并，以及内存中 ServiceInventory 与底层存储中的 ServiceInventory 的合并，大致实现如下：
 
@@ -453,3 +495,4 @@ private void onWork(RegisterSource registerSource) {
 ### 总结
 
 本课时重点介绍了 SkyWalking OAP 如何处理 Agent 发送的服务注册请求。首先介绍了处理服务注册请求的 RegisterServiceHandler，接下来分析了相关的缓存实现。之后介绍了 ServiceInventory 对服务注册数据的抽象、@Stream 注解的工作原理。最后介绍了 InventoryStreamProcessor 处理服务注册请求的核心流程，展开分析了每个 Worker 的核心实现，涉及 RegisterDistinctWorker 实现的 "L1 级别聚合"、R egisterRemoteWorker 如何实现跨节点交互以及底层的选择策略和双队列实现、RegisterPersistentWorker 实现的 "L2 级别聚合"以及底层持久化的相关操作。
+

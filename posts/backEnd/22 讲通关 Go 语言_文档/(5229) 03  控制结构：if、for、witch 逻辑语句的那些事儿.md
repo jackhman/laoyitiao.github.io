@@ -1,3 +1,5 @@
+# 03控制结构：if、for、witch逻辑语句的那些事儿
+
 在上节课中我留了一个思考题，在一个字符串中查找另外一个字符串是否存在，这个其实是字符串查找的功能，假如我需要在"飞雪无情"这个字符串中查找"飞雪"，可以这么做：
 
 ```go
@@ -223,3 +225,4 @@ Go 语言提供的控制语句非常强大，本节课我并没有全部介绍�
 **《Java 就业集训营》**
 
 零基础 180 天高薪就业，[点击链接，快来领取！](https://kaiwu.lagou.com/java_basic.html?utm_source=zhuanlan%20article&utm_medium=bottom&utm_campaign=Go%E8%AF%AD%E8%A8%80%E4%B8%93%E6%A0%8F#/index)
+

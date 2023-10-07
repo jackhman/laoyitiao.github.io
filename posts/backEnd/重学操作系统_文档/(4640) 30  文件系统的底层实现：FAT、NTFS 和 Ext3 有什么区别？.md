@@ -1,3 +1,5 @@
+# 30文件系统的底层实现：FAT、NTFS和Ext3有什么区别？
+
 **这一讲给你带来的面试题是： FAT、NTFS 和 Ext3 文件系统有什么区别**？
 
 10 年前 FAT 文件系统还是常见的格式，而现在 Windows 上主要是 NTFS，Linux 上主要是 Ext3、Ext4 文件系统。关于这块知识，一般资料只会从支持的磁盘大小、数据保护、文件名等各种维度帮你比较，但是最本质的内容却被一笔带过。**它们最大的区别是文件系统的实现不同，具体怎么不同** ？**文件系统又有哪些实现**？这一讲，我将带你一起来探索和学习这部分知识。
@@ -12,7 +14,9 @@
 
 因此，**为了提高性能，通常会将物理存储（硬盘）划分成一个个小块**，比如每个 4KB。这样做也可以让硬盘的使用看起来非常整齐，方便分配和回收空间。况且，数据从磁盘到内存，需要通过电子设备，比如 DMA、总线等，如果一个字节一个字节读取，速度较慢的硬盘就太耗费时间了。过去的机械硬盘的速度可以比内存慢百万倍，现在的固态硬盘，也会慢几十到几百倍。即便是最新的 NvMe 接口的硬盘，和内存相比速度仍然有很大的差距。因此，一次读/写一个块（Block）才是可行的方案。
 
-<Image alt="Lark20201225-174103.png" src="https://s0.lgstatic.com/i/image2/M01/03/FB/Cip5yF_ls_aAEer_AADHBXF7EHw534.png"/>
+
+<Image alt="Lark20201225-174103.png" src="https://s0.lgstatic.com/i/image2/M01/03/FB/Cip5yF_ls_aAEer_AADHBXF7EHw534.png"/> 
+
 
 如上图所示，操作系统会将磁盘分成很多相等大小的块。这样做还有一个好处就是如果你知道块的序号，就可以准确地计算出块的物理位置。
 
@@ -30,7 +34,9 @@
 
 早期人们找到了一种方案就是文件分配表（File Allocate Table，FAT）。如下图所示：
 
-<Image alt="Lark20201225-174106.png" src="https://s0.lgstatic.com/i/image2/M01/03/FD/CgpVE1_ltAKAZe8tAACczq1tAiY181.png"/>
+
+<Image alt="Lark20201225-174106.png" src="https://s0.lgstatic.com/i/image2/M01/03/FD/CgpVE1_ltAKAZe8tAACczq1tAiY181.png"/> 
+
 
 **一个文件，最基本的就是要描述文件在硬盘中到底对应了哪些块。FAT 表通过一种类似链表的结构描述了文件对应的块**。上图中：文件 1 从位置 5 开始，这就代表文件 1 在硬盘上的第 1 个块的序号是 5 的块 。然后位置 5 的值是 2，代表文件 1 的下一个块的是序号 2 的块。顺着这条链路，我们可以找到 5 → 2 → 9 → 14 → 15 → -1。-1 代表结束，所以文件 1 的块是：5,2,9,14,15。同理，文件 2 的块是 3,8,12。
 
@@ -40,7 +46,9 @@
 
 为了改进 FAT 的容量限制问题，可以考虑为每个文件增加一个索引节点（inode）。这样，随着虚拟内存的使用，当文件导入内存的时候，先导入索引节点（inode），然后索引节点中有文件的全部信息，包括文件的属性和文件物理块的位置。
 
-<Image alt="Lark20201225-174108.png" src="https://s0.lgstatic.com/i/image2/M01/03/FD/CgpVE1_ltBCAP9AZAAC1vcuIPkE631.png"/>
+
+<Image alt="Lark20201225-174108.png" src="https://s0.lgstatic.com/i/image2/M01/03/FD/CgpVE1_ltBCAP9AZAAC1vcuIPkE631.png"/> 
+
 
 如上图，索引节点除了属性和块的位置，还包括了一个指针块的地址。这是为了应对文件非常大的情况。一个大文件，一个索引节点存不下，需要通过指针链接到其他的块去描述文件。
 
@@ -50,21 +58,29 @@
 
 有了文件的描述，接下来我们来思考如何实现目录（Directory）。目录是特殊的文件，所以每个目录都有自己的 inode。目录是文件的集合，所以目录的内容中必须有所有其下文件的 inode 指针。
 
-<Image alt="Lark20201225-174111.png" src="https://s0.lgstatic.com/i/image2/M01/03/FB/Cip5yF_ltBqAG_agAAB0qsKok0o713.png"/>
+
+<Image alt="Lark20201225-174111.png" src="https://s0.lgstatic.com/i/image2/M01/03/FB/Cip5yF_ltBqAG_agAAB0qsKok0o713.png"/> 
+
 
 文件名也最好不要放到 inode 中，而是放到文件夹中。这样就可以灵活设置文件的别名，及实现一个文件同时在多个目录下。
 
-<Image alt="Lark20201225-174114.png" src="https://s0.lgstatic.com/i/image2/M01/03/FB/Cip5yF_ltCKAQ8wsAACxv79iv44798.png"/>
+
+<Image alt="Lark20201225-174114.png" src="https://s0.lgstatic.com/i/image2/M01/03/FB/Cip5yF_ltCKAQ8wsAACxv79iv44798.png"/> 
+
 
 如上图，/foo 和 /bar 两个目录中的 b.txt 和 c.txt 其实是一个文件，但是拥有不同的名称。这种形式我们称作"硬链接"，就是多个文件共享 inode。
 
-<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image2/M01/03/FB/Cip5yF_ltCmANmxDAAEX0KEBlYU772.png"/>
+
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image2/M01/03/FB/Cip5yF_ltCmANmxDAAEX0KEBlYU772.png"/> 
+
 
 硬链接有一个非常显著的特点，硬链接的双方是平等的。上面的程序我们用`ln`指令为文件 a 创造了一个硬链接`b`。如果我们创造完删除了 a，那么 b 也是可以正常工作的。如果要删除掉这个文件的 inode，必须 a,b 同时删除。这里你可以看出 a,b 是平等的。
 
 和硬链接相对的是软链接，软链接的原理如下图：
 
-<Image alt="Lark20201225-174117.png" src="https://s0.lgstatic.com/i/image2/M01/03/FD/CgpVE1_ltDGAXzaKAADF0IcW0HA765.png"/>
+
+<Image alt="Lark20201225-174117.png" src="https://s0.lgstatic.com/i/image2/M01/03/FD/CgpVE1_ltDGAXzaKAADF0IcW0HA765.png"/> 
+
 
 图中`c.txt`是`b.txt`的一个软链接，软链接拥有自己的`inode`，但是文件内容就是一个快捷方式。因此，如果我们删除了`b.txt`，那么`b.txt`对应的 inode 也就被删除了。但是`c.txt`依然存在，只不过指向了一个空地址（访问不到）。如果删除了`c.txt`，那么不会对`b.txt`造成任何影响。
 
@@ -92,7 +108,9 @@ ln -s a b # 将b设置为a的软链接(b是a的快捷方式)
 
 加速写入的一种方式，就是利用缓冲区。
 
-<Image alt="Lark20201225-174119.png" src="https://s0.lgstatic.com/i/image2/M01/03/FD/CgpVE1_ltEeASFyHAAD52tSCqME475.png"/>
+
+<Image alt="Lark20201225-174119.png" src="https://s0.lgstatic.com/i/image2/M01/03/FD/CgpVE1_ltEeASFyHAAD52tSCqME475.png"/> 
+
 
 上图中所有写操作先存入缓冲区，然后每过一定的秒数，才进行一次持久化。 这种设计，是一个很好的思路，但最大的问题在于容错。 比如上图的步骤 1 或者步骤 2 只执行了一半，如何恢复？如果步骤 2 只写入了一半，那么数据就写坏了。如果步骤 1 只写入了一半，那么数据就丢失了。无论出现哪种问题，都不太好处理。更何况写操作和写操作之间还有一致性问题，比如说一次删除 inode 的操作后又发生了写入......
 
@@ -108,7 +126,9 @@ A=3
 
 从性能上分析，如果日志造成了 3 倍的数据冗余，那么读取的速度并不会真的慢三倍。因为我们多数时候是从内存和 CPU 缓存中读取数据。而写入的时候，因为采用日志的形式，可以考虑下图这种方式，在内存缓冲区中积累一批日志才写入一次磁盘。
 
-<Image alt="Lark20201225-174123.png" src="https://s0.lgstatic.com/i/image2/M01/03/FB/Cip5yF_ltD-ANGHYAAD43z0foHQ229.png"/>
+
+<Image alt="Lark20201225-174123.png" src="https://s0.lgstatic.com/i/image2/M01/03/FB/Cip5yF_ltD-ANGHYAAD43z0foHQ229.png"/> 
+
 
 上图这种设计可以让写入变得非常快速，多数时间都是写内存，最后写一次磁盘。**而上图这样的设计成不成立，核心在能不能解决容灾问题**。
 
@@ -118,7 +138,9 @@ A=3
 
 为了进一步避免损失，一种可行的方案就是创建还原点（Checkpoint），比如说系统把最近 30s 的日志都写入一个区域中。下一个 30s 的日志，写入下一个区域中。每个区域，我们称作一个还原点。创建还原点的时候，我们将还原点涂成红色，写入完成将还原点涂成绿色。
 
-<Image alt="Lark20201225-174058.png" src="https://s0.lgstatic.com/i/image2/M01/03/FD/CgpVE1_ltFyACwCsAADstiN6HAk886.png"/>
+
+<Image alt="Lark20201225-174058.png" src="https://s0.lgstatic.com/i/image2/M01/03/FD/CgpVE1_ltFyACwCsAADstiN6HAk886.png"/> 
+
 
 如上图，当日志文件系统写入磁盘的时候，每隔一段时间就会把这段时间内的所有日志写入一个或几个连续的磁盘块，我们称为还原点（Checkpoint）。操作系统读入文件的时候，依次读入还原点的数据，如果是绿色，那么就应用这些日志，如果是红色，就丢弃。所以上图中还原点 3 的数据是不完整的，这个时候会丢失不到 30s 的数据。如果将还原点的间隔变小，就可以控制风险的粒度。另外，我们还可以对还原点 3 的数据进行深度恢复，这里可以有人工分析，也可以通过一些更加复杂的算法去恢复。
 
@@ -143,3 +165,4 @@ A=3
 **最后我再给你出一道需要查资料的思考题：思考日志文件系统的数据冗余如何处理**？
 
 你可以把你的答案、思路或者课后总结写在留言区，这样可以帮助你产生更多的思考，这也是构建知识体系的一部分。经过长期的积累，相信你会得到意想不到的收获。如果你觉得今天的内容对你有所启发，欢迎分享给身边的朋友。期待看到你的思考！
+

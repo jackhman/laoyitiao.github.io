@@ -1,3 +1,5 @@
+# 第25讲：Selenium常用自动化API
+
 本课时我们进入 Selenium 常用自动化 API 的学习，我们先来看下 Selenium 有哪几种常用的 API。
 
 Web 控件定位与常见操作
@@ -87,7 +89,9 @@ self.driver.find_element(By.CSS_SELECTOR,'#search-term')
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6D/3D/Cgq2xl5c9UOARr4jAAG5zhiZE-8151.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6D/3D/Cgq2xl5c9UOARr4jAAG5zhiZE-8151.png"/> 
+
 
 <br />
 
@@ -134,4 +138,5 @@ def test_testingstudio(self):
 再一个是多窗口切换，我们点开一个控件出现一个新窗口的时候，也需要检测切换，如果不检测切换就算你的控件存在也无法检测到，在这种情况下我们需要使用 window_handles、switch_to.window、switch_to.frame 这 3 个 API。window_handles 可以获取目前浏览器中有几个窗口，switch_to 可以切换到对应的窗口或 frame 里，还有更多的 API 你可以课后查看 self.driver的具体方法的官方文档，这里就不再具体讲解了。
 
 <br />
+
 

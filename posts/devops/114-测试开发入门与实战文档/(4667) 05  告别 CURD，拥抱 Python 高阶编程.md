@@ -1,3 +1,5 @@
+# 05告别CURD，拥抱Python高阶编程
+
 上节课我们一起学习了 Python 的基础编程知识，本课时我将带你继续进阶，向你讲解 Python 的高阶编程知识。
 
 我想，你在自主开发测试框架的过程中，经常会碰见这样的困惑：
@@ -276,21 +278,29 @@ if __name__ == "__main__":
 
 * 当代码运行时，首先执行的是入口函数，即第 8 行代码，接着是第 10 行代码。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/55/2C/CgqCHl9pzJ2AGcCRAAEDr2CYkic136.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/55/2C/CgqCHl9pzJ2AGcCRAAEDr2CYkic136.png"/> 
+
 
 * 继续向后执行，就会进入到第 1 行代码，即 outer() 函数内部；接着第 2 行代码开始执行，变量cheer被定义，并且赋值为"hello"；接着第 3 行代码开始运行，需要注意的是，第 3 行代码执行完，并不会执行第 4 行代码，而是执行第 5 行代码。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/55/2C/CgqCHl9pzKSAbpBPAAFuLtfzxWU099.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/55/2C/CgqCHl9pzKSAbpBPAAFuLtfzxWU099.png"/> 
+
 
 * 第 5 行代码执行完毕后，outer() 函数的整个生命周期就已经结束了，继续往后执行：
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/55/21/Ciqc1F9pzKqAVnrtAAFpN4pwEGg451.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/55/21/Ciqc1F9pzKqAVnrtAAFpN4pwEGg451.png"/> 
+
 
 可以看到，代码进入了 inner 函数内部，而且 inner 函数内部可以访问生命周期已经结束的 outer 函数的成员变量 cheer，这个就是闭包的魔力。
 
 最后，inner 函数继续执行，outer 函数里定义的 cheer 被取出，并且连同 name 一起返回。我们就获得到了函数的最终结果"hello kevin"。
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/55/2C/CgqCHl9pzLGAdIdCAAF2FPx794k879.png"/>
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/55/2C/CgqCHl9pzLGAdIdCAAF2FPx794k879.png"/> 
+
 
 了解了闭包如何起作用的，我来总结下闭包的特点。
 
@@ -459,3 +469,4 @@ if __name__ == "__main__":
 *** ** * ** ***
 
 ["测试开发工程师名企直推营" 入口，免费领取 50G 资料包](https://shenceyun.lagou.com/t/eka)
+

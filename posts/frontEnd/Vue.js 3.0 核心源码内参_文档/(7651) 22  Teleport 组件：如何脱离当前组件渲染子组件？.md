@@ -1,3 +1,5 @@
+# 22Teleport组件：如何脱离当前组件渲染子组件？
+
 我们都知道，Vue.js 的核心思想之一是组件化，组件就是 DOM 的映射，我们通过嵌套的组件构成了一个组件应用程序的树。
 
 但是，有些时候组件模板的一部分在逻辑上属于该组件，而从技术角度来看，最好将模板的这一部分移动到应用程序之外的其他位置。
@@ -359,3 +361,4 @@ Teleport 的 remove 方法实现很简单，首先通过 hostRemove 移除主视
 > packages/runtime-core/src/components/Teleport.ts  
 >
 > packages/runtime-core/src/renderer.ts
+

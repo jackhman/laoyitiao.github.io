@@ -5,14 +5,36 @@
   "maxDepth": 10,
   "selectors": {
     "lvl0": {
-      "selector": "",
-      "defaultValue": "Documentation"
+      "selector": ".content .docIndex a",
+      "default_value": "专栏",
+      "global": true
     },
-    "lvl1": ".content h1,.title h1 strong,.VPSidebarItem a p.text",
-    "lvl2": ".content h2",
-    "lvl3": ".content h3",
-    "lvl4": ".content h4",
-    "lvl5": ".content h5",
+    "lvl1": {
+      "selector": ".content h1",
+      "default_value": "文章",
+      "global": true
+    },
+    "lvl2": {
+      "selector": ".content h2",
+      "default_value": "文章",
+      "global": true
+    },
+    "lvl3": {
+      "selector": ".content h3",
+      "default_value": "文章",
+      "global": true
+    },
+    "lvl4": {
+      "selector": ".content h4",
+      "default_value": "文章",
+      "global": true
+    },
+    "lvl5": {
+      "selector": ".content h5",
+      "default_value": "文章",
+      "global": true
+    },
+    "text": ".content p,.content li",
     "lang": {
       "selector": "/html/@lang",
       "type": "xpath",

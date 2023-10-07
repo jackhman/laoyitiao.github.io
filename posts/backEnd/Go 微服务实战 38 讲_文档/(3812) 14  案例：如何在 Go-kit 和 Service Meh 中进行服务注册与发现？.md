@@ -1,3 +1,5 @@
+# 14案例：如何在Go-kit和ServiceMeh中进行服务注册与发现？
+
 今天我和你分享的是如何在 Go-kit 和 Service Mesh 中进行服务注册与发现的案例。
 
 在上一课时中，我们基于搭建好的 Consul 集群，通过 Consul 中提供的 HTTP API 实现了 register 的服务注册与发现功能。我们采用手动构造 HTTP 请求的方式，在服务启动时发送服务实例数据到 Consul 中完成服务注册，在服务关闭时向 Consul 请求服务注销，并通过 Consul 提供的服务发现接口根据服务名获取可用的服务实例信息列表。
@@ -82,14 +84,18 @@ Istio 由多个组件组成，核心组件及其作用为如下：
 
 * **Proxy**，作为服务代理，调节所有 Service Mesh 单元的入口和出口流量。
 
-<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/41/DA/CgqCHl82RMaAO4wvAARr5zliZpw337.png"/>  
+
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/41/DA/CgqCHl82RMaAO4wvAARr5zliZpw337.png"/> 
+  
 Istio 架构图
 
 这其中 Proxy 属于数据平面，以 Sidecar 的方式与应用程序一同部署到 Pod 中，而 Pilot、Citadel 和 Galley 属于控制平面。除此之外，Istio 中还提供一些额外的插件，如 grafana、istio-tracing、kiali 和 prometheus，用于进行可视化的数据查看、流量监控和链路追踪等。
 
 Istio 默认提供了以下几种安装 profile 形式，它们开启的组件配置如下表所示（+ 表示开启，空白表示未开启，- 表示未知）：
 
-<Image alt="图片7.png" src="https://s0.lgstatic.com/i/image/M00/41/CE/Ciqc1F82RNKADQe4AACin_AYfxg655.png"/>
+
+<Image alt="图片7.png" src="https://s0.lgstatic.com/i/image/M00/41/CE/Ciqc1F82RNKADQe4AACin_AYfxg655.png"/> 
+
 
 这其中，istiod 组件封装了 Pilot、Citadel 和 Galley 等控制平面组件，将它们进行统一打包部署，降低多组件维护和管理的困难性。从上表可以看出，demo profile 是功能最全的配置清单，适合于学习和功能演示。preview profile 将可能使用一些开发阶段的测试组件，开启的组件不定。官方推荐使用 default profile 进行安装，因为它在核心组件和插件上做到了最优的选择，比如组件只开启了 Ingressgateway 和 istiod，插件只开启了 prometheus。
 
@@ -163,7 +169,9 @@ spec:
 istioctl dashboard kiali
 ```
 
-<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/41/CF/Ciqc1F82RT2AaFOvAABX9ZrCcO8542.png"/>  
+
+<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/41/CF/Ciqc1F82RT2AaFOvAABX9ZrCcO8542.png"/> 
+  
 kiali 控制台
 
 从上图可以看出在 kiali 控制台中存在多个维度查看 Istio 中部署的应用：
@@ -182,12 +190,16 @@ kiali 控制台
 
 register 服务启动后，我们在 Applications、Workloads、Services 维度中均可查看到 register 的身影，如下 Applications 维度图所示：
 
-<Image alt="QQ20200813-103436.png" src="https://s0.lgstatic.com/i/image/M00/41/DA/CgqCHl82RTKAGJclAABrWEPqyEA895.png"/>  
+
+<Image alt="QQ20200813-103436.png" src="https://s0.lgstatic.com/i/image/M00/41/DA/CgqCHl82RTKAGJclAABrWEPqyEA895.png"/> 
+  
 kiali Applications 维度下的 register
 
 Istio 依托 Kubernetes 的快速发展和推广，对 Kubernetes 有着极强的依赖性，其服务注册与发现的实现也主要依赖于 Kubernetes 的 Service 管理。我们可以通过以下这张图理解 Istio 的服务注册与发现。
 
-<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/41/DA/CgqCHl82RSqALb27AARr5zliZpw854.png"/>  
+
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/41/DA/CgqCHl82RSqALb27AARr5zliZpw854.png"/> 
+  
 Istio 服务注册与发现逻辑图
 
 通过该逻辑图，我们可以看到 Istio 服务注册与发现主要有以下模块参与。
@@ -211,3 +223,4 @@ Pilot 组件会从各个 Service Registry，比如 Kubernetes 中的 Service 和
 在本课时，我们首先介绍了 Go-kit 中服务注册与发现工具包，并使用其中的 Consul 工具包改善了 register 服务的服务注册与发现的实现。接着我们介绍了 Service Mesh 中的佼佼者 Istio，以及其服务注册与发现的实现。Istio 本身并不提供服务发现的能力，但是它可以依托 Kubernetes 或者第三方的服务注册中心获取服务信息列表，并根据设定的路由规则进行有效的动态调用。希望通过本课时的学习，不仅能加深你对 Go 微服务中服务注册与发现的认识，也能了解到 Istio 是如何在代理层实现服务注册与发现。
 
 最后，关于 Go-kit 和 Service Mesh 的服务注册与发现，你还有什么独到的见解？欢迎在评论区与我分享。
+

@@ -1,3 +1,5 @@
+# 第20讲：日均数据量30亿的Filebeat+Kafka+Mirrormaker跨机房实时日志传送案例
+
 ### 案例环境介绍
 
 这是我们之前的一个应用案例，先说一下业务场景，这是一款电商 App 产品，此 App 运行在某公有云上，每天都会产生大量日志，其中涉及访问日志、购买日志、订单日志等多个信息，这些信息比较敏感。因此需要日志产生后马上回传到我们自建的 IDC 数据中心，然后存储在内部的大数据平台上，最后进行各种维度的分析和报表展示。我们的日志数据量每天平均在 30 亿左右，数据是实时产生，要求能实时的传输到 IDC 数据中心，数据延时不能超过 10 秒钟。
@@ -18,7 +20,9 @@
 
 下图是一个 MirrorMaker 原理架构图：
 
-<Image alt="6.png" src="https://s0.lgstatic.com/i/image/M00/2B/C8/Ciqc1F7-_leALHMZAADu46coWFk590.png"/>
+
+<Image alt="6.png" src="https://s0.lgstatic.com/i/image/M00/2B/C8/Ciqc1F7-_leALHMZAADu46coWFk590.png"/> 
+
 
 从图中可以看出，MirrorMaker 位于源 Kafka 集群和目标 Kafka 集群之间，MirrorMaker 从源 Kafka 集群消费数据，此时 MirrorMaker 是一个 Consumer；接着，Kafka 将消费过来的数据直接通过网络传输到目标的 Kafka 集群中，此时 MirrorMaker 是一个 Producer。在实际的使用中，源 Kafka 集群和目标 Kafka 集群可以在不同的网络中，也可以跨广域网，此时的 MirrorMaker 就是一个 Kafka 集群的镜像，实现了数据的实时同步和异地备份。
 
@@ -28,7 +32,9 @@
 
 上面提到了 Filebeat 加双 Kafka 集群，然后通过 Kafka MirrorMaker 在两个 Kafka 集群之间同步数据的应用架构。我们的 App 服务器有 20 台，每台都安装 Filebeat，然后指定要收集的日志，而两个 Kafka 集群，都采用 6 个节点构建，MirrorMaker 分布式部署在 3 个节点上。整个实时日志传输架构如下图所示：
 
-<Image alt="7.png" src="https://s0.lgstatic.com/i/image/M00/2B/C8/Ciqc1F7-_mOAV8jJAAI6p1ez7Zc179.png"/>
+
+<Image alt="7.png" src="https://s0.lgstatic.com/i/image/M00/2B/C8/Ciqc1F7-_mOAV8jJAAI6p1ez7Zc179.png"/> 
+
 
 从此图可以看出，此架构总共需要 15 台服务器，公有云 6 台、IDC 数据中心 9 台，其中，6 台部署 Kafka 集群，3 台部署 MirrorMaker 来消费公有云的 Kafka 集群数据。由于是实时传输数据，公有云每个 Kafka 节点的带宽设置为 20M 即可。
 
@@ -166,7 +172,9 @@ request.timeout.ms=90000
 
 注意，这个命令中指定的 bootstrap-server，是公有云 Kafka 集群的地址和端口。命令执行后，可获得下图所示的状态：
 
-<Image alt="8.png" src="https://s0.lgstatic.com/i/image/M00/2B/C8/Ciqc1F7-_pKAF4RAAABpI2OKlhc572.png"/>
+
+<Image alt="8.png" src="https://s0.lgstatic.com/i/image/M00/2B/C8/Ciqc1F7-_pKAF4RAAABpI2OKlhc572.png"/> 
+
 
 在这个输出中，分为 9 列。第 1 列是消费组名，第 2 列是同步的 Topic 名，第 3 列 Topic 是对应的 Partition，第 4 列 CURRENT-OFFSET 是现在消费到的 OFFSET 位置，第 5 列 LOG-END-OFFSET 是公有云的 Kafka 集群目前的 OFFSET，第 6 列 LAG 是数据同步延时值，其实就是 LOG-END-OFFSET 减去 CURRENT-OFFSE 的结果，第 7 列是消费者的 ID，如果开启了 16 个消费线程，那么就会有 16 个消费 ID，第 8 列的 HOST 表示 MirrorMaker 服务对应的主机地址，最后一列显示的是消费者对应的客户端 ID。
 
@@ -185,3 +193,4 @@ request.timeout.ms=90000
 ### 总结
 
 本课时主要介绍了如何通过 MirrorMaker 实现两个 Kafka 集群之间的数据同步，此架构部署起来比较简单，但是要做到稳定运行，并不容易。因为网络环境不同，业务量不同，要具体优化的参数也不同，所以，我们要在了解此架构的基础上，根据具体的应用场景进行针对性地调试和优化，做到灵活应用。
+

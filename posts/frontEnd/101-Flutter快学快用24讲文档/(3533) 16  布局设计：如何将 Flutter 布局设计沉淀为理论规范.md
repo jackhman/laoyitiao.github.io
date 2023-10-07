@@ -1,3 +1,5 @@
+# 16布局设计：如何将Flutter布局设计沉淀为理论规范
+
 前面课时只介绍了组件设计，并没有过多涉及布局的讲解，可能你了解一些布局组件，比如 Container、Row、Column、Padding、Center 等，但是对于如何从 UI 稿到组件再到布局，却没有非常清晰的思路。本课时就从我的角度来分析，如何进行组件的布局。
 
 ### 常见布局组件
@@ -36,7 +38,9 @@
 
 根据设计好的组件树，从上往下分析，遇到块状不同内容组，则设计为一个 Column 的子元素。例如图 2 的一个界面，从上往下分析，我们可以得到 6 个 Column 布局组件的子组件（这里为了演示效果，我们把组件也设计为 6 个部分）。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/3B/70/CgqCHl8j_LCAP9HUAAHcncNZZmY563.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/3B/70/CgqCHl8j_LCAP9HUAAHcncNZZmY563.png"/> 
+  
 图 1 帖子详情页
 
 分析完成以后，我们再来看下每一行组件中所涉及的子组件。行子组件一般也是基于：Container、Row、Center 等布局组件来实现的，根据图 1 的效果，我们来分析：
@@ -151,11 +155,15 @@ Widget build(BuildContext context) {
 ### 实践应用
 
 我们先来看下我们需要实现的效果，如图 2 所示。  
-<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/3B/66/Ciqc1F8kAQiAQlZeAAyBiY_2das872.png"/>  
+
+<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/3B/66/Ciqc1F8kAQiAQlZeAAyBiY_2das872.png"/> 
+  
 图 2 客人态页面
 
 根据图 2 的界面我们还是先绘制一个组件树，如图 3 所示。  
-<Image alt="3.png" src="https://s0.lgstatic.com/i/image/M00/3B/72/CgqCHl8kARSAEVsNAAnCRb3Xg8U183.png"/>  
+
+<Image alt="3.png" src="https://s0.lgstatic.com/i/image/M00/3B/72/CgqCHl8kARSAEVsNAAnCRb3Xg8U183.png"/> 
+  
 图 3 客人态组件树设计
 
 接下来，我们在图 3 的基础上，应用布局设计的 8 个过程，一步步来优化这个组件树。
@@ -174,7 +182,9 @@ Widget build(BuildContext context) {
 
 分析完后，我们将会得到图 4 组件树。
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/3B/70/CgqCHl8j_UCAYzQpAAC8p58g-Ys713.png"/>  
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/3B/70/CgqCHl8j_UCAYzQpAAC8p58g-Ys713.png"/> 
+  
 图 4 组件树+布局设计
 
 从图 4 我们可以看到，在组件与组件之间增加了布局组件的应用 Column 、Row 和 Expanded。
@@ -191,7 +201,9 @@ Widget build(BuildContext context) {
 
 根据这个规则，我们看下每个 Row 组件下的子节点之间是否需要设置 Padding 。根据 UI 稿分析，我们可以了解到 user_info 和 guest_bar 组件的子组件都需要设置左右填充，因此在图 2 基础上，我们增加 Padding 布局设计，并重新绘制组件图，可以最终得到图 5 的一个组件+布局的设计结果。
 
-<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/3B/70/CgqCHl8j_YeAGTGoAADPvQkoceM879.png"/>  
+
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/3B/70/CgqCHl8j_YeAGTGoAADPvQkoceM879.png"/> 
+  
 图 5 组件树+布局设计结果
 
 在将组件树和布局设计完成后，我们再去进行组件的代码编写，这部分代码大家可以前往 github 的源码的 pages/user_page/guest.dart 文件中查看，具体的代码比较相似，这里就不过多介绍了。
@@ -203,3 +215,4 @@ Widget build(BuildContext context) {
 下一课时我们将带着现有的 Two You Friend App 代码，教大家如何打包 Android 和 iOS 发布包。
 
 [点击此链接查看本课时源码](https://github.com/love-flutter/flutter-column)
+

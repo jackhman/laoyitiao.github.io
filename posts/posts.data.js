@@ -39,7 +39,7 @@ export const traverseFolder = function (folderPath) {
             })
         }
     })
-    // TODO: 遍历/posts/*/*/*.md
+    //  遍历/posts/*/*/*.md
     Object.keys(res).forEach((s)=>{
         Object.keys(res[s]).forEach((d)=>{
             var p = path.join(folderPath,s,d);

@@ -1,3 +1,5 @@
+# 03｜基础入门：编写你的第一个Serverle应用
+
 从今天开始，我们正式进入 Serverless 的开发阶段。
 
 学习一门新技术，除了了解其基础概念，更重要的是把理论转化为实践，所以学会开发 Serverless 应用尤为重要。考虑到很多刚开始接触 Serverless 开发的同学在短时间很难适应 Serverless 的开发思想，知识也不够体系化，所以我除了带你实现一个 Serverless 应用之外，还会介绍应用开发时涉及的重要知识点，让你更深刻地理解 Serverless，建立属于自己的知识体系。
@@ -8,7 +10,9 @@
 
 目前主流的 FaaS 产品有 AWS Lambda、阿里云函数计算等。不同 FaaS 支持的编程语言和触发器不尽相同，为了让你更快地了解它们异同点，我提供给你一个简单的对比图：
 
-<Image alt="Lark20201228-185348.jpeg" src="https://s0.lgstatic.com/i/image2/M01/04/20/Cip5yF_puUaAJfw3AANPRrI1kS820.jpeg"/>
+
+<Image alt="Lark20201228-185348.jpeg" src="https://s0.lgstatic.com/i/image2/M01/04/20/Cip5yF_puUaAJfw3AANPRrI1kS820.jpeg"/> 
+
 
 从表格中，你可以总结出这样几点信息。
 
@@ -46,17 +50,23 @@ app.listen(port, () => {
 
 **那怎么把接口分享给别人呢？** （我在"[02 \| 概念新知：到底什么是 Serverless?](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=589#/detail/pc?id=6030)"的时候提到了这部分内容，你可以回顾一下，我就不多说了）。当然如果你对域名解析、Nginx 配置等流程不熟悉，那就需要耗费很多时间和精力了。**可能代码开发几分钟，部署上线几小时。**
 
-<Image alt="1.png" src="https://s0.lgstatic.com/i/image2/M01/04/28/Cip5yF_qmTqAJI5SAAGC15t2JGc253.png"/>  
+
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image2/M01/04/28/Cip5yF_qmTqAJI5SAAGC15t2JGc253.png"/> 
+  
 传统应用开发流程
 
 而基于 Serverless FaaS 平台进行开发就很简单了，你开发完的函数代码部署到 FaaS 平台并为函数配置 HTTP 触发器，FaaS 会自动帮你初始化运行环境，并且 HTTP 触发器会自动为你提供一个测试域名。
 
-<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/8C/50/CgqCHl_qmUWAbbsDAADn5znl1KY310.png"/>  
+
+<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/8C/50/CgqCHl_qmUWAbbsDAADn5znl1KY310.png"/> 
+  
 Serverless 应用开发流程
 
 **以函数计算为例，** 你可以直接点击[新建函数](https://fc.console.aliyun.com/fc/service/cn-hangzhou/function/create)的链接进入函数计算控制台，新建一个函数。**请注意，你会用到 HTTP 触发器，函数计算的 HTTP 触发器要在创建函数时就指定。**
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image2/M01/03/D5/CgpVE1_jBXmAb9TJAAPuNbsOSKo931.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image2/M01/03/D5/CgpVE1_jBXmAb9TJAAPuNbsOSKo931.png"/> 
+
 
 函数创建成功后，就会进入到代码编辑页面，在编辑器中写入如下代码：
 
@@ -82,7 +92,9 @@ exports.handler = (request, response, context) => {
 
 由此可见，相比 Express.js 框架，基于 FaaS 的 Serverless 应用的代码更简单，就像写一个普通函数，接收参数并处理，然后返回。写完代码后，你就可以在"触发器"标签下看到函数计算为你默认创建的 API Endpoint：
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/8B/F1/Ciqc1F_jBYOAFmttAAJZChiCxxw894.png"/>
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/8B/F1/Ciqc1F_jBYOAFmttAAJZChiCxxw894.png"/> 
+
 
 然后你可以用该 API Endpoint 对函数进行测试。我们通过 curl 命令测试一下：
 
@@ -155,7 +167,9 @@ exports.sayHello = function (name) {
 
 **这也是我的建议：把业务逻辑拆分到入口函数之外**。另外，你也可以用一份源文件去创建多个函数。因为应用通常是由多个函数组成，为了方便管理，你可能会在一个源文件中编写所有的入口函数。
 
-<Image alt="3.png" src="https://s0.lgstatic.com/i/image/M00/8C/50/CgqCHl_qmV-AKjTHAAGR7LVSJSs782.png"/>  
+
+<Image alt="3.png" src="https://s0.lgstatic.com/i/image/M00/8C/50/CgqCHl_qmV-AKjTHAAGR7LVSJSs782.png"/> 
+  
 使用一份源文件创建多个函数
 
 既然你知道了函数名 handler 的由来， 那handler 函数具体是怎么定义的呢？
@@ -261,7 +275,9 @@ exports.handler = (event, context, callback) => {
 
 在众多 FaaS 平台中，函数计算直接提供了 HTTP 触发器，HTTP 触发器通过发送 HTTP 请求来触发函数执行，一般都会支持 POST、GET、PUT、HEAD 等方法。所以你可以用 HTTP 触发器来构建 Restful 接口或 Web 系统。
 
-<Image alt="4.png" src="https://s0.lgstatic.com/i/image/M00/8C/50/CgqCHl_qmXCARXH9AAF-_DuU4lw021.png"/>  
+
+<Image alt="4.png" src="https://s0.lgstatic.com/i/image/M00/8C/50/CgqCHl_qmXCARXH9AAF-_DuU4lw021.png"/> 
+  
 HTTP 触发器
 
 HTTP 触发器会根据 HTTP 请求和请求参数生成事件，然后以参数形式传递给函数。那么 HTTP 触发器的入口函数参数中的 request 和 response 参数具体有哪些属性呢？
@@ -317,7 +333,9 @@ exports.handler = function (request, response, context) {
 
 API 网关触发器与 HTTP 触发器类似，它主要用于构建 Web 系统。本质是利用 API 网关接收 HTTP 请求，然后再产生事件，将事件传递给 FaaS。FaaS 将函数执行完毕后将函数返回值传递给 API 网关，API 网关再将返回值包装为 HTTP 响应返回给用户。
 
-<Image alt="5.png" src="https://s0.lgstatic.com/i/image/M00/8C/50/CgqCHl_qmXuAZBHIAAGGcHsdzWI696.png"/>  
+
+<Image alt="5.png" src="https://s0.lgstatic.com/i/image/M00/8C/50/CgqCHl_qmXuAZBHIAAGGcHsdzWI696.png"/> 
+  
 API 网关触发器
 
 下面是 Lambda 的 API 网关触发器 event 参数示例：
@@ -353,7 +371,9 @@ API 网关触发器
 
 定时触发器就是定时执行函数，它经常用来做一些周期任务，比如每天定时查询天气并给自己发送通知、每小时定时处理分析日志等等。
 
-<Image alt="6.png" src="https://s0.lgstatic.com/i/image/M00/8C/45/Ciqc1F_qmYWAE9fxAAD1A7kgncU172.png"/>  
+
+<Image alt="6.png" src="https://s0.lgstatic.com/i/image/M00/8C/45/Ciqc1F_qmYWAE9fxAAD1A7kgncU172.png"/> 
+  
 定时触发器
 
 定时触发器的`event`对象很简单：
@@ -377,7 +397,9 @@ API 网关触发器
 
 以函数计算为例，如果你在控制台创建函数，则函数计算默认会使用日志服务来为你存储日志。在 "日志查询" 标签下可以查看函数调用日志。日志服务是一个日志采集、分析产品，所以如果你要实现业务监控，则可以将日志输出到日志服务，然后在日志服务中对日志进行分析，并设置报警项。
 
-<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/8B/F2/Ciqc1F_jBdKAQddrAANmkQx2nJs904.png"/>  
+
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/8B/F2/Ciqc1F_jBdKAQddrAANmkQx2nJs904.png"/> 
+  
 函数调用日志
 
 基本上，各个云厂商的 FaaS 会选择自己的日志服务来存储函数日志， FaaS 平台也提供了基本的函数监控，包括函数的运行时长、内存使用等。国外也有很多第三方的 SaaS 产品帮你实现 Serverless 应用的日志存储分析、系统监控报警，比如 [dashbird](https://dashbird.io/)、[thundra](https://www.thundra.io/)。**国内这方面的产品非常少，我觉得这对你我来说是一个机会。**
@@ -386,7 +408,9 @@ API 网关触发器
 
 函数在运行过程中，会出现异常情况。当函数执行异常或主动抛出异常时，FaaS 平台会捕捉到异常信息，记录异常日志，并将异常信息以 JSON 对象返回。下面是一个 Node.js 代码抛出异常的示例，在这个例子中，我使用 throw new Error() 主动抛出一个异常的日志：
 
-<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/8B/FD/CgqCHl_jBd6AdHX_AAKNGxRYIKQ705.png"/>
+
+<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/8B/FD/CgqCHl_jBd6AdHX_AAKNGxRYIKQ705.png"/> 
+
 
 其中 Response 就是函数返回值，Function Logs 就是调用日志。
 
@@ -398,7 +422,9 @@ API 网关触发器
 
 此外我觉得，对一个 Serverless FaaS 平台来说，除了要具备基本的函数执行能力外，还要提供便利的开发工具、丰富的触发器、完善的日志监控以及与其他服务集成等各方面能力。你在进行技术选型时，也需要考虑这些方面。这一讲我强调这样几个重点：
 
-<Image alt="7.png" src="https://s0.lgstatic.com/i/image/M00/8C/50/CgqCHl_qmZCAdIFmAAFS6TtGLlQ407.png"/>
+
+<Image alt="7.png" src="https://s0.lgstatic.com/i/image/M00/8C/50/CgqCHl_qmZCAdIFmAAFS6TtGLlQ407.png"/> 
+
 
 * Serverless 的应用基本组成单位是函数，函数之间互相独立，因此 Serverless 能提高应用稳定性；
 
@@ -411,3 +437,4 @@ API 网关触发器
 在实际工作中，我经常用 Serverless 来处理业务逻辑，比如快速开发一个测试接口、实时处理日志等，如果你有类似需求也可以尝试使用 Serverless 来实现。
 
 本节课的作业相对来讲比较简单，那就是动手实现你的第一个 Serverless 应用，希望你能夯实基础，游刃有余地学习接下来的内容，我们下一讲见。
+

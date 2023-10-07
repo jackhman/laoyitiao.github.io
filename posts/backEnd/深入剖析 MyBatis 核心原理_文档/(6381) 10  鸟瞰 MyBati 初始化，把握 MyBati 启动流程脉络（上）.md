@@ -1,3 +1,5 @@
+# 10鸟瞰MyBati初始化，把握MyBati启动流程脉络（上）
+
 很多开源框架之所以能够流行起来，是因为它们解决了领域内的一些通用问题。但在实际使用这些开源框架的时候，我们都是要解决通用问题中的一个特例问题，所以这时我们就需要使用一种方式来控制开源框架的行为，这就是开源框架提供各种各样配置的核心原因之一。
 
 现在控制开源框架行为主流的配置方式就是 XML 配置方式和注解方式。在[《02 \| 订单系统持久层示例分析，20 分钟带你快速上手 MyBatis》](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=612&sid=20-h5Url-0&buyFrom=2&pageId=1pz4#/detail/pc?id=6373)这一讲中我们介绍过，MyBatis 有两方面的 XML 配置，**一个是 mybatis-config.xml 配置文件中的整体配置，另一个是 Mapper.xml 配置文件中的 SQL 语句**。当然，MyBatis 中也有注解，前面的课程中也多少有涉及，其核心实现与 XML 配置基本类似，所以这一讲我们就重点分析 XML 配置的初始化过程，注解相关的内容就留给你自己分析了。
@@ -12,7 +14,9 @@ MyBatis 在加载配置文件、创建配置对象的时候，会使用到经典
 
 构造者模式的类图如下所示：
 
-<Image alt="2021223-18655.png" src="https://s0.lgstatic.com/i/image6/M01/08/8C/Cgp9HWA01CyAP_FuAAGR6B2VRBg565.png"/>  
+
+<Image alt="2021223-18655.png" src="https://s0.lgstatic.com/i/image6/M01/08/8C/Cgp9HWA01CyAP_FuAAGR6B2VRBg565.png"/> 
+  
 构造者模式类图
 
 从图中，我们可以看到构造者模式的四个核心组件。
@@ -37,7 +41,9 @@ MyBatis 在加载配置文件、创建配置对象的时候，会使用到经典
 
 这里**创建的 XMLConfigBuilder 对象的核心功能就是解析 mybatis-config.xml 配置文件**。XMLConfigBuilder 有一部分能力继承自 BaseBuilder 抽象类，具体继承关系如下图所示：
 
-<Image alt="2021223-1877.png" src="https://s0.lgstatic.com/i/image6/M01/08/8C/Cgp9HWA01DeAFFn1AAEKQNyimxk937.png"/>  
+
+<Image alt="2021223-1877.png" src="https://s0.lgstatic.com/i/image6/M01/08/8C/Cgp9HWA01DeAFFn1AAEKQNyimxk937.png"/> 
+  
 BaseBuilder 继承关系图
 
 BaseBuilder 抽象类扮演了构造者模式中 Builder 接口的角色，下面我们先来看 BaseBuilder 中各个字段的定义。
@@ -281,7 +287,9 @@ private void databaseIdProviderElement(XNode context) throws Exception {
 
 可以看到，解析`<databaseIdProvider>` 标签之后会得到一个 DatabaseIdProvider 对象，其核心方法是 getDatabaseId() 方法，主要是根据前面解析得到的 DataSource 对象来生成 DatabaseId。DatabaseIdProvider 的继承关系如下图所示：
 
-<Image alt="2021223-1874.png" src="https://s0.lgstatic.com/i/image6/M01/08/89/CioPOWA01E6AM0S_AAFq9Ci2CSc510.png"/>  
+
+<Image alt="2021223-1874.png" src="https://s0.lgstatic.com/i/image6/M01/08/89/CioPOWA01E6AM0S_AAFq9Ci2CSc510.png"/> 
+  
 DatabaseIdProvider 继承关系图
 
 从继承关系图中可以看出，DefaultDatabaseIdProvider 是个空实现，而且已被标记为过时了，所以这里我们就重点来看 VendorDatabaseIdProvider 实现。
@@ -365,8 +373,11 @@ private void mapperElement(XNode parent) throws Exception {
 
 *** ** * ** ***
 
-[<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/6D/3E/CgqCHl-s60-AC0B_AAhXSgFweBY762.png"/>](https://shenceyun.lagou.com/t/Mka)
+[
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/6D/3E/CgqCHl-s60-AC0B_AAhXSgFweBY762.png"/> 
+](https://shenceyun.lagou.com/t/Mka)
 
 **《Java 工程师高薪训练营》**
 
 实战训练+面试模拟+大厂内推，想要提升技术能力，进大厂拿高薪，[点击链接，提升自己](https://shenceyun.lagou.com/t/Mka)！
+

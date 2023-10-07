@@ -1,3 +1,5 @@
+# 19Serverle的实践：进一步提升系统的稳定性
+
 上一讲我们学习了机器部署的一些方案和策略，比如当你要将一个服务部署到多台（2台以上）机时，你会发现为了尽可能地利用资源、避免浪费，更不能在高并发时引起现网问题，每次都要精细地分析每台机器的部署方案，那有没有可以弹性地根据当前负载情况进行自动化的方案呢？
 
 当然有，就是我们这一讲要学习的 Serverless 技术，目前市面上 Serverless 技术的资料非常多（拉勾教育也有一门课 《 玩转 Serverless 架构》，感兴趣可以看一下）。而我们这一讲主要学习的是，Serverless 是怎么帮我们解决 Node.js 的问题点的；以及怎么将课程中的 KOA 框架应用接入到 Serverless 服务中去。
@@ -83,14 +85,18 @@ if(process.env.Serverless) {
 
 在代码上传完成以后，我们可以看到类似图 1 所示的结果。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M01/3B/F6/Cgp9HWCHw--AIb5jAAEa4Dzd7Bs282.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M01/3B/F6/Cgp9HWCHw--AIb5jAAEa4Dzd7Bs282.png"/> 
+  
 图 1 Serverless 服务
 
 接下来我们只需要访问图 1 的 API 网关的 URL 。
 
 打开地址后，我们就可以看到我们熟悉的框架响应数据了，如下图 2 所示。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M01/3B/F6/Cgp9HWCHw_aAEDyzAAAmkVZjuso799.png"/>  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M01/3B/F6/Cgp9HWCHw_aAEDyzAAAmkVZjuso799.png"/> 
+  
 图 2 KOA 框架响应
 
 接下来我们访问一个我们正确的路径地址，如下 URL：
@@ -114,7 +120,9 @@ module.exports = Page;
 
 代码逻辑比较简单，获取 name 字段，然后将 name 返回给到 API 调用方。因此当访问 page/index?name=lagou-nodejs 后，会响应如下数据，如图 3 示。
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M00/3B/F6/Cgp9HWCHw_6AX42UAAAzwZkU7Fc325.png"/>  
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M00/3B/F6/Cgp9HWCHw_6AX42UAAAzwZkU7Fc325.png"/> 
+  
 图 3 KOA 正常响应数据
 
 由于需要独立部署项目，所以我们本讲的[GitHub 源码](https://github.com/love-flutter/serverless?fileGuid=xxQTRXtVcqtHK6j8)做了一定的调整，单独启用了一个新项目，你在实践时，可以直接 fork 该项目，然后去尝试接。
@@ -128,3 +136,4 @@ module.exports = Page;
 由于项目迁移成本不大，因此主要是在项目应用前可以先和团队进行价格分析，从价格入手让团队尝试 Serverless 的应用，帮助团队/老板减少费用占用问题。Serverless 在多方面是可以减少我们项目的维护成本，我们只需要关注服务开发即可，因此是能够大大的节省人力和资源，在小型公司更建议你尝试应用。
 
 到此为止，本专栏的知识点部分已经全部介绍完了，今天给你留的作业是：应用本框架开发一个新的接口，并按照本课时的内容部署到 Serverless 云服务上。
+

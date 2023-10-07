@@ -1,3 +1,5 @@
+# 第15课：服务向Kubernete容器平台迁移必须了解的事情
+
 <br />
 
 本课时我们讲解：服务向 Kubernetes 容器平台迁移必须了解的知识点。我将这个课时分为两个模块，第 1 个模块会列出一个服务，在非容器化的 K8S 架构下，要向 K8S+ 容器的架构迁移需要了解的一些相关问题。第 2 个模块中我将为你介绍通用的迁移步骤。
@@ -21,7 +23,9 @@
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/16/Ciqah16MTOCAHEBfAAPnCtCdK5Y628.png"/>  
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/16/Ciqah16MTOCAHEBfAAPnCtCdK5Y628.png"/> 
+  
 
 <br />
 
@@ -31,7 +35,9 @@
 
 ### 业务日志收集排查
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/16/Ciqah16MTOCAQCSAAAKhbPhNDg4966.png"/>  
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/16/Ciqah16MTOCAQCSAAAKhbPhNDg4966.png"/> 
+  
 
 <br />
 
@@ -51,7 +57,9 @@ EFK 是个什么样的架构呢？E 表示 Elasticsearch，它是一个搜索存
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/16/Ciqah16MTOGAGl1PAAPqPWzdVpo519.png"/>  
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/16/Ciqah16MTOGAGl1PAAPqPWzdVpo519.png"/> 
+  
 
 <br />
 
@@ -162,7 +170,9 @@ data:
 
 ### 步骤一：封装应用容器
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/16/Ciqah16MTOKAMC3nAADut5Hn2xI668.png"/>  
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/16/Ciqah16MTOKAMC3nAADut5Hn2xI668.png"/> 
+  
 
 <br />
 
@@ -182,7 +192,9 @@ data:
 
 ### 步骤二：PV/PVC 持久化数据
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/16/Ciqah16MTOKAFeWAAALlWm1EIKQ939.png"/>  
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/16/Ciqah16MTOKAFeWAAALlWm1EIKQ939.png"/> 
+  
 
 <br />
 
@@ -198,7 +210,9 @@ data:
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/16/Ciqah16MTOKAfz10AAHg6mVlC2E229.png"/>  
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/16/Ciqah16MTOKAfz10AAHg6mVlC2E229.png"/> 
+  
 
 <br />
 
@@ -206,7 +220,9 @@ data:
 
 ### 步骤五：配置 Service
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/16/Ciqah16MTOOAXFDwAAL8KTjCLf4820.png"/>  
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/16/Ciqah16MTOOAXFDwAAL8KTjCLf4820.png"/> 
+  
 
 <br />
 
@@ -218,8 +234,11 @@ data:
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/16/Ciqah16MTOOABerKAAQ882_XZBc624.png"/>  
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/16/Ciqah16MTOOABerKAAQ882_XZBc624.png"/> 
+  
 
 <br />
 
 在做完 Ingress 后，把服务迁移到 K8S 集群的步骤基本上就已经完成了，这是一个通用的6个步骤。
+

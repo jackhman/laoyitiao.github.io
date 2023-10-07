@@ -1,3 +1,5 @@
+# 20如何将JavaScript应用切换至TypeScript？
+
 在前面几讲，我们学习了如何从零开始新建 TypeScript Node.js、Web 项目。
 
 然而，TypeScript 作为 JavaScript 的超集，花费了漫长的时间才替代了 JavaScript，并成长为构建应用的主流技术。比如我自己所负责的项目，最初也主要是基于 ES6（JavaScript） 源码构建的，甚至极个别项目是基于无须转译的 ES5（JavaScript） 代码构建的。
@@ -274,7 +276,9 @@ type AnyToFix = any;
 
 这样，我们就可以在任何地方使用 AnyToFix 替代 any ，比如下图中的 func 函数参数 arg 的类型就是 AnyToFix。并且在条件成熟时，我们可以很方便地筛选出需要类型重构的 func 函数，然后将其参数类型修改为更明确的类型。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M01/4A/53/CioPOWDe5jaAcn06AAE09h1BBNU745.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M01/4A/53/CioPOWDe5jaAcn06AAE09h1BBNU745.png"/> 
+
 
 #### 动态类型
 
@@ -363,3 +367,4 @@ function mult(first: number, second: number): number {
 下一讲是结束语，我们将一起回顾过往课程中涉及的一些重难知识点、实用技巧，以及概览 TypeScript 新版本中新增的若干重要特性，敬请期待。
 
 如果你觉得本专栏有价值，欢迎分享给更多好友\~
+

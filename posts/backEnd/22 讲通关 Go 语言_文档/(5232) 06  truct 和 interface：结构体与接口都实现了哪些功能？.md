@@ -1,3 +1,5 @@
+# 06truct和interface：结构体与接口都实现了哪些功能？
+
 上节课我留了一个思考题：方法是否可以赋值给一个变量？如果可以，要怎么调用它呢？答案是完全可以，方法赋值给变量称为方法表达式，如下面的代码所示：
 
 ```go
@@ -262,7 +264,9 @@ func (p *person) String()  string{
 
 我用如下表格为你总结这两种接收者类型的接口实现规则：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/6E/59/Ciqc1F-yPMSAZ4k7AABU_GW4VxE080.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/6E/59/Ciqc1F-yPMSAZ4k7AABU_GW4VxE080.png"/> 
+
 
 可以这样解读：
 
@@ -430,8 +434,11 @@ panic: interface conversion: fmt.Stringer is *main.person, not main.address
 
 结构体是对现实世界的描述，接口是对某一类行为的规范和抽象。通过它们，我们可以实现代码的抽象和复用，同时可以面向接口编程，把具体实现细节隐藏起来，让写出来的代码更灵活，适应能力也更强。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/6E/65/CgqCHl-yPTiAWp5CAAXli5Grm8o875.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/6E/65/CgqCHl-yPTiAWp5CAAXli5Grm8o875.png"/> 
+
 
 这节课的**练习题是**：自己练习实现有两个方法的接口。
 
 下节课我将会为你继续讲解 Go 语言对错误、异常的处理，记得来听课！
+

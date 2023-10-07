@@ -31,17 +31,7 @@ onMounted(() => {
       "weight": .2
     },{
       "type": "svg",
-      "src": "/confettiWidget/corgi.png",
-      "size": 40,
-      "weight": .1
-    },{
-      "type": "svg",
-      "src": "/confettiWidget/cute.png",
-      "size": 40,
-      "weight": .1
-    },{
-      "type": "svg",
-      "src": "/confettiWidget/hamster.png",
+      "src": "/confettiWidget/panda-bear.png",
       "size": 40,
       "weight": .1
     },{
@@ -57,11 +47,6 @@ onMounted(() => {
     },{
       "type": "svg",
       "src": "/confettiWidget/octopus.png",
-      "size": 40,
-      "weight": .1
-    },{
-      "type": "svg",
-      "src": "/confettiWidget/workout.png",
       "size": 40,
       "weight": .1
     }],

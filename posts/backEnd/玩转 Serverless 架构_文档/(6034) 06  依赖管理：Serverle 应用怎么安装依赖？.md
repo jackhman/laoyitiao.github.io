@@ -1,3 +1,5 @@
+# 06依赖管理：Serverle应用怎么安装依赖？
+
 今天这一讲我会带你学习 Serverless 应用中的依赖管理。
 
 在前面的内容中，我们的 Serverless 应用代码都是独立的函数，不涉及其他依赖（在 Serverless 应用中，依赖可以分为两种：通过具体编程语言的包管理工具，如 npm、pip 等安装的包；通过 apt 等工具安装的程序运行时需要的软件包）。而在实际进行应用开发时，大部分情况下都会有第三方依赖。比如你要用 Node.js 操作 MySQL 时，肯定要用到操作数据库的依赖包（如 node-mysql2），然后你很快就写出如下的函数代码：
@@ -28,7 +30,9 @@ module.exports.handler = function(event, context, callback) {
 
 而我说过，Serverless 应用是由函数组成的，函数在被触发执行时会生成函数实例，所以 Serverless 应用的依赖，本质上就是每个函数代码的依赖。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image2/M01/04/98/Cip5yF_z5MaAbj6SAAHFwPqDRvM991.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image2/M01/04/98/Cip5yF_z5MaAbj6SAAHFwPqDRvM991.png"/> 
+
 
 **函数实例的实体就是容器，** 容器的实现方案可以是 Docker、CoreOS rkt 甚至 LXC 等。FaaS 通过容器来隔离每个函数实例，也通过容器实现函数运行时的内存和 CPU 限制。比如你给函数分配 128MB 的内存，则函数实例对应的容器内存资源就只有 128MB。
 
@@ -68,7 +72,9 @@ module.exports.handler = function(event, context, callback) {
 
 要解决编译环境的问题，就要有一个统一的构建机了，不让开发同学直接编译部署 Java 应用。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/8C/C1/CgqCHl_z5OCAZTJ3AAKzw8wyRJo086.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/8C/C1/CgqCHl_z5OCAZTJ3AAKzw8wyRJo086.png"/> 
+
 
 如图所示，我们开发 Java 时可以通过 maven 的 pom.xml 来定义代码的依赖。部署 Java 应用时，需要将业务代码和 pom.xml 都上传到构建机，在构建机上统一安装依赖编译代码，得到一个可执行的 jar 包，最后再将 jar 包部署到 FaaS 平台。
 
@@ -114,7 +120,9 @@ pip 提供了多种把依赖安装在指定目录中的方案，但都存在一�
 
 pip 提供了 --install-option 参数，可以让你精确控制某种类型的依赖安装路径。 如表格所示，--install-option 参数有多个可选项：
 
-<Image alt="Lark20210106-141708.png" src="https://s0.lgstatic.com/i/image2/M01/04/B7/Cip5yF_1Ve-AWbO8AALiP2fR8-E458.png"/>
+
+<Image alt="Lark20210106-141708.png" src="https://s0.lgstatic.com/i/image2/M01/04/B7/Cip5yF_1Ve-AWbO8AALiP2fR8-E458.png"/> 
+
 
 其中 --install-lib 是指将所有模块都安装到指定目录。例如：
 
@@ -182,7 +190,9 @@ import pymysql.cursors
 
 由于不同编程语言包管理机制不同，安装依赖的方式也不尽相同，**但本质上，都是需要将依赖安装到应用项目中，并且随项目一起部署到 FaaS 平台。**
 
-<Image alt="Lark20210106-141448.png" src="https://s0.lgstatic.com/i/image/M00/8C/E1/CgqCHl_1VaKAfRq1AAFoIplyjVs354.png"/>
+
+<Image alt="Lark20210106-141448.png" src="https://s0.lgstatic.com/i/image/M00/8C/E1/CgqCHl_1VaKAfRq1AAFoIplyjVs354.png"/> 
+
 
 当然，如果你已经开始使用一些开发框架，你可能已经发现开发框架也在解决依赖安装问题，让用户尽可能更低成本完成应用开发。关于这一讲，我想要强调这几个点：
 
@@ -193,3 +203,4 @@ import pymysql.cursors
 * 如果代码或依赖需要编译，则编译环境需要和 FaaS 运行环境兼容，不然编译后的产物可能无法运行。
 
 这节课我留给你的作业是：编写并部署一个需要安装依赖的函数代码。希望今天的内容能让你有所收获，我们下一讲见。
+

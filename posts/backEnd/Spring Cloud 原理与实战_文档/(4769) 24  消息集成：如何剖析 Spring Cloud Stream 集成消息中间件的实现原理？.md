@@ -1,3 +1,5 @@
+# 24消息集成：如何剖析SpringCloudStream集成消息中间件的实现原理？
+
 Spring Cloud Stream 中的内容比较多，今天我们重点关注的是如何实现 Spring Cloud Stream 与其他消息中间件的整合过程，因此只介绍消息发送和接收的主流程。我们将分别从**Spring Cloud Stream** 以及**消息中间件**的角度出发，分析如何基于这一主流程，完成两者之间的无缝集成。
 
 ### Spring Cloud Stream 中的 Binder
@@ -174,7 +176,9 @@ Binder<T, ?, ?> binder = binderProducingContext.getBean(Binder.class);
 
 既然我们已经能够获取 Binder 实例，接下去就来讨论 Binder 实例中对 bindConsumer 和 bindProducer 方法的实现过程。在 Spring Cloud Stream 中，Binder 接口的类层关系如下所示，注意到这里还展示了 spring-cloud-stream-binder-rabbit 代码工程中的 RabbitMessageChannelBinder 类，这个类在本课时讲到 Spring Cloud Stream 与 RabbitMQ 进行集成时会具体展开：
 
-<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image/M00/81/B6/Ciqc1F_RmKqAehbuAAUIZHxCJ9g730.png"/>  
+
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image/M00/81/B6/Ciqc1F_RmKqAehbuAAUIZHxCJ9g730.png"/> 
+  
 Binder 接口类层结构图
 
 Spring Cloud Stream 首先提供了一个 AbstractBinder，这是一个抽象类，提供的 bindConsumer 和 bindProducer 方法实现如下所示：
@@ -270,7 +274,9 @@ consumerEndpoint.setOutputChannel(inputChannel);
 
 作为总结，我们可以用如下所示的流程图来概括整个消息发送和消费流程：
 
-<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image/M00/81/C1/CgqCHl_RmIOAbYcHAAHhiR5WQIE310.png"/>  
+
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image/M00/81/C1/CgqCHl_RmIOAbYcHAAHhiR5WQIE310.png"/> 
+  
 消息发送和消费整体流程图
 
 ### Spring Cloud Stream 集成 RabbitMQ
@@ -368,3 +374,4 @@ Binder 是 Spring Cloud Stream 的核心组件，通过这个组件，Spring Clo
 这里给你留一道思考题：在 Spring Cloud Stream 中，Binder 组件对于消息发送和消费做了哪些抽象？
 
 介绍完 Spring Cloud Stream 之后，我们又将启动一个新的话题，即安全性。在微服务架构中，安全性的重要性往往被忽略，值得我们系统的进行分析和实现。下一课时，我们首先关注如何理解微服务访问的安全需求和实现方案。
+

@@ -1,6 +1,8 @@
+# 04集合类型：如何正确使用array、lice和map？
+
 上节课的思考题是练习使用 for 循环中的 continue，通过上节课的学习，你已经了解 continue 是跳出本次循环的意思，现在我就以计算 100 以内的偶数之和为例，演示 continue 的用法：
 
-```html
+```cpp
 sum := 0
 for i:=1; i<100; i++{
    if i%2!=0 {
@@ -36,7 +38,9 @@ array:=[5]string{"a","b","c","d","e"}
 
 数组在内存中都是连续存放的，下面通过一幅图片形象地展示数组在内存中如何存放：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/6A/8F/Ciqc1F-pBzmAWUQ0AAAttSjgTjQ158.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/6A/8F/Ciqc1F-pBzmAWUQ0AAAttSjgTjQ158.png"/> 
+
 
 可以看到，数组的每个元素都是连续存放的，每一个元素都有一个下标（Index）。下标从 0 开始，比如第一个元素 a 对应的下标是 0，第二个元素 b 对应的下标是 1。以此类推，通过 array+\[下标\] 的方式，我们可以快速地定位元素。
 
@@ -136,7 +140,9 @@ slice:=array[start:end]
 
 通过下图可以看出，切片是一个具备三个字段的数据结构，分别是指向数组的指针 data，长度 len 和容量 cap：
 
-<Image alt="图片28.png" src="https://s0.lgstatic.com/i/image/M00/6A/9B/Ciqc1F-pC5mAbYE_AABTz22B9TY540.png"/>
+
+<Image alt="图片28.png" src="https://s0.lgstatic.com/i/image/M00/6A/9B/Ciqc1F-pC5mAbYE_AABTz22B9TY540.png"/> 
+
 
 这里有一些小技巧，切片表达式 array\[start:end\] 中的 start 和 end 索引都是可以省略的，如果省略 start，那么 start 的值默认为 0，如果省略 end，那么 end 的默认值为数组的长度。如下面的示例：
 
@@ -381,3 +387,4 @@ for i,r:=range s{
 此外，如果 map 的 Key 的类型是整型，并且集合中的元素比较少，应该尽量选择切片，因为效率更高。在实际的项目开发中，数组并不常用，尤其是在函数间作为参数传递的时候，用得最多的是切片，它更灵活，并且内存占用少。
 
 下节课，我会为你讲解函数和方法，这也是我们代码复用、实现高效开发的第一步。
+

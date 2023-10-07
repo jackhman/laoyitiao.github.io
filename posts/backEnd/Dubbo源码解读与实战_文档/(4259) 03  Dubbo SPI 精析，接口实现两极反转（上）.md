@@ -1,3 +1,5 @@
+# 03DubboSPI精析，接口实现两极反转（上）
+
 Dubbo 为了更好地达到 OCP 原则（即"对扩展开放，对修改封闭"的原则），采用了"**微内核+插件**"的架构。那什么是微内核架构呢？微内核架构也被称为插件化架构（Plug-in Architecture），这是一种面向功能进行拆分的可扩展性架构。内核功能是比较稳定的，只负责管理插件的生命周期，不会因为系统功能的扩展而不断进行修改。功能上的扩展全部封装到插件之中，插件模块是独立存在的模块，包含特定的功能，能拓展内核系统的功能。
 
 微内核架构中，内核通常采用 Factory、IoC、OSGi 等方式管理插件生命周期，**Dubbo 最终决定采用 SPI 机制来加载插件**，Dubbo SPI 参考 JDK 原生的 SPI 机制，进行了性能优化以及功能增强。因此，在讲解 Dubbo SPI 之前，我们有必要先来介绍一下 JDK SPI 的工作原理。
@@ -12,7 +14,9 @@ SPI（Service Provider Interface）主要是被**框架开发人员**使用的�
 
 下面我们通过一个简单的示例演示下 JDK SPI 的基本使用方式：
 
-<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/3D/03/CgqCHl8o_UCAI01eAABGsg2cqbw825.png"/>
+
+<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/3D/03/CgqCHl8o_UCAI01eAABGsg2cqbw825.png"/> 
+
 
 首先我们需要创建一个 Log 接口，来模拟日志打印的功能：
 
@@ -71,7 +75,9 @@ public class Main {
 
 在 ServiceLoader.load() 方法中，首先会尝试获取当前使用的 ClassLoader（获取当前线程绑定的 ClassLoader，查找失败后使用 SystemClassLoader），然后调用 reload() 方法，调用关系如下图所示：
 
-<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/3C/F8/Ciqc1F8o_V6AR93jAABeDIu_Kso211.png"/>
+
+<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/3C/F8/Ciqc1F8o_V6AR93jAABeDIu_Kso211.png"/> 
+
 
 在 reload() 方法中，首先会清理 providers 缓存（LinkedHashMap 类型的集合），该缓存用来记录 ServiceLoader 创建的实现对象，其中 Key 为实现类的完整类名，Value 为实现类的对象。之后创建 LazyIterator 迭代器，用于读取 SPI 配置文件并实例化实现类对象。
 
@@ -88,7 +94,9 @@ public void reload() {
 
 在前面的示例中，main() 方法中使用的迭代器底层就是调用了 ServiceLoader.LazyIterator 实现的。Iterator 接口有两个关键方法：hasNext() 方法和 next() 方法。这里的 LazyIterator 中的next() 方法最终调用的是其 nextService() 方法，hasNext() 方法最终调用的是 hasNextService() 方法，调用关系如下图所示：
 
-<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/3C/F8/Ciqc1F8o_WmAZSkmAABmcc0uM54214.png"/>
+
+<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/3C/F8/Ciqc1F8o_WmAZSkmAABmcc0uM54214.png"/> 
+
 
 首先来看 LazyIterator.hasNextService() 方法，该方法主要**负责查找 META-INF/services 目录下的 SPI 配置文件**，并进行遍历，大致实现如下所示：
 
@@ -239,3 +247,4 @@ private static Connection getConnection(String url, java.util.Properties info, C
 本文我们通过一个示例入手，介绍了 JDK 提供的 SPI 机制的基本使用，然后深入分析了 JDK SPI 的核心原理和底层实现，对其源码进行了深入剖析，最后我们以 MySQL 提供的 JDBC 实现为例，分析了 JDK SPI 在实践中的使用方式。
 
 JDK SPI 机制虽然简单易用，但是也存在一些小瑕疵，你可以先思考一下，在下一课时剖析 Dubbo SPI 机制的时候，我会为你解答该问题。
+

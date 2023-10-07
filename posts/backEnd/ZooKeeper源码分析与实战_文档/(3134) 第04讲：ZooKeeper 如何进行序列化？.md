@@ -1,3 +1,5 @@
+# 第04讲：ZooKeeper如何进行序列化？
+
 通过前几课时的学习，我们大概清楚了使用 ZooKeeper 实现一些功能的主要方式，也就是通过客户端与服务端之间的相互通信。那么首先要解决的问题就是通过网络传输数据，而要想通过网络传输我们定义好的 Java 对象数据，必须要先对其进行序列化。例如，我们通过 ZooKeeper 客户端发送 ACL 权限控制请求时，需要把请求信息封装成 packet 类型，经过序列化后才能通过网络将 ACL 信息发送给 ZooKeeper 服务端进行处理。
 
 #### 什么是序列化，为什么要进行序列化操作
@@ -108,13 +110,17 @@ Record 接口的内部实现逻辑非常简单，只是定义了一个 序列化
 
 在 OutputArchive 中定义了可进行序列化的参数类型，根据不同的序列化方式调用不同的实现类进行序列化操作。如下图所示，Jute 可以通过 Binary 、 Csv 、Xml 等方式进行序列化操作。
 
-<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/0A/C3/Ciqc1F6-a8CAUVfhAABcAV_NNXw402.png"/>
+
+<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/0A/C3/Ciqc1F6-a8CAUVfhAABcAV_NNXw402.png"/> 
+
 
 而对应于序列化操作，在反序列化时也会相应调用不同的实现类，来进行反序列化操作。  
 
 如下图所示：
 
-<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/0A/C3/CgqCHl6-a8mAOP1YAABW8fO1GAM913.png"/>
+
+<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/0A/C3/CgqCHl6-a8mAOP1YAABW8fO1GAM913.png"/> 
+
 
 注意：无论是序列化还是反序列化，都可以对多个对象进行操作，所以当我们在定义序列化和反序列化方法时，需要字符类型参数 tag 表示要序列化或反序列化哪个对象。
 
@@ -127,3 +133,4 @@ Record 接口的内部实现逻辑非常简单，只是定义了一个 序列化
 到现在我们已经对 ZooKeeper 中的序列化知识有了一个全面的掌握，请你思考一个问题：如果说序列化就是将对象转化成字节流的格式，那么为什么 ZooKeeper 的 Jute 序列化框架还提供了对 Byte/Buffer 这两种类型的序列化操作呢？
 
 其实这其中最关键的作用就是在不同操作系统中存在大端和小端的问题，为了避免不同操作系统环境的差异，在传输字节类型时也要进行序列化和反序列化。这里你需要在日常使用中多注意。
+

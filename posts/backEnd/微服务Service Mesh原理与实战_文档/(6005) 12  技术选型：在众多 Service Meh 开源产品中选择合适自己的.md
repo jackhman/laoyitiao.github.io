@@ -1,3 +1,5 @@
+# 12技术选型：在众多ServiceMeh开源产品中选择合适自己的
+
 今天我要跟你分享的内容是 Service Mesh 开源产品中的技术选型。在导读部分["Service Mesh：从单体服务出发，独立于业务演进的微服务架构"](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=586#/detail/pc?id=5993)中，我已经简单介绍了 Service Mesh 的基本知识，下面我们简单回顾一下这部分内容。
 
 Mesh 这个词汇我们听到的应该非常多，在家用路由器领域有 Mesh 组网，在智能家居领域有蓝牙 Mesh。之所以叫作 Mesh，是因为它们都有一个共同的特征------**去中心化**。我们这里讲到的 Service Mesh 同样具有这一特性，微服务之间通过 Sidecar 联通网络，移除了中心网关的概念。
@@ -106,7 +108,9 @@ Nginx 包含一个**处理东西流量的 NGINX Plus 数据面** 和一个**用�
 
 需要注意的是，NGINX Plus 是 Nginx 收费版本，并不是开源软件，无法进行二次开发。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/91/C1/Ciqc1GAPkTuAI9qkAAFRd_frjBQ269.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/91/C1/Ciqc1GAPkTuAI9qkAAFRd_frjBQ269.png"/> 
+  
 NGINX Service Mesh 架构图
 
 #### Traefik Mesh
@@ -115,14 +119,18 @@ Traefik Mesh 由 Go 语言编写的开源网关系统 Traefik 演进而来，与
 
 但这种做法也有缺点，资源隔离性不好，容易相互影响，比如同一个 Node 节点上某个服务出现了问题，从而占用了更多的资源，其他的 Pod 可能就没有资源可用了。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image2/M01/09/B4/CgpVE2APkUeAJgTwAACV4xlXkAY740.png"/>  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image2/M01/09/B4/CgpVE2APkUeAJgTwAACV4xlXkAY740.png"/> 
+  
 Traefik Mesh 架构图
 
 #### Consul Connect
 
 Consul Connect 是 HashiCorp 公司开源的 Service Mesh 解决方案，需要和 Consul 绑定使用，同样采用 Envoy 作为数据面，Consul Connect 充当控制面的角色。
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image2/M01/09/B2/Cip5yGAPkVOAbJG1AAF-LOUj7H0281.png"/>  
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image2/M01/09/B2/Cip5yGAPkVOAbJG1AAF-LOUj7H0281.png"/> 
+  
 Consul Connect 架构图
 
 #### GCP Traffic Director
@@ -131,7 +139,9 @@ Traffic Director 是Google Cloud Platform（谷歌云平台）提供的 Service 
 
 Traffic Director 通过**集中化的健康检查**代替了 Envoy 内置网格的健康检查方式，这样做的好处是减少了网格健康检查带来的服务压力，但需要注意的是集中式的健康检查无法处理网络分区故障的问题。
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image2/M01/09/B4/CgpVE2APkV2ABiA_AACPWphx1FM106.png"/>  
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image2/M01/09/B4/CgpVE2APkV2ABiA_AACPWphx1FM106.png"/> 
+  
 Traffic Director 架构图
 
 ### 总结
@@ -140,8 +150,11 @@ Traffic Director 架构图
 
 下面我们通过一张对比表格进一步总结上述解决方案的特点：
 
-<Image alt="1-1.png" src="https://s0.lgstatic.com/i/image/M00/91/E3/CgqCHmAP1DiAEeobAAHFe0eUSUk269.png"/>
+
+<Image alt="1-1.png" src="https://s0.lgstatic.com/i/image/M00/91/E3/CgqCHmAP1DiAEeobAAHFe0eUSUk269.png"/> 
+
 
 本讲内容到这里就结束了，下一讲我会讲解最常用的数据面 Envoy，Envoy 特性丰富，支持多种协议代理、多种负载均衡策略，它拥有着丰富的服务治理功能，下一讲我们都会一一介绍。
 
 结合今天学习的内容，如果让你选择，根据公司现有的情况，你会选择哪种 Service Mesh 解决方案呢。欢迎在留言区和我分享你的观点，我们下一讲再见！
+

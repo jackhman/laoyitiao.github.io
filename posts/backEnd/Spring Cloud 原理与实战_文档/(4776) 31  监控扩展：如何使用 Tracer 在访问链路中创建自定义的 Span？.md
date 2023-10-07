@@ -1,3 +1,5 @@
+# 31监控扩展：如何使用Tracer在访问链路中创建自定义的Span？
+
 在了解了 Spring Cloud Sleuth 的基本工作原理以及与 Zipkin 之间的集成方案之后，我们不禁要想，虽然内置的日志埋点和采集功能已经能够满足日常开发的大多数场景需要，但如果我想在业务系统中重点监控某些业务操作时，是不是有办法来创建自定义的 Span 并纳入可视化监控机制中呢？答案是肯定的，今天的内容我们就围绕如何使用 Spring Cloud Sleuth 底层的 Brave 框架在服务访问链路中添加自定义Span这一话题展开讨论。
 
 ### 使用 Brave 创建自定义 Span
@@ -6,7 +8,9 @@
 
 事实上，Brave 是 Java 版的 Zipkin 客户端，它将收集的跟踪信息，以 Span 的形式上报给 Zipkin 系统。我们首先来关注 Brave 中的 Span 类，该类的方法列表如下所示：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image2/M01/04/49/CgpVE1_sSpqAX8fHAAAsCx2fAiU688.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image2/M01/04/49/CgpVE1_sSpqAX8fHAAAsCx2fAiU688.png"/> 
+  
 Span 类的方法列表
 
 注意到 Span 是一个抽象类，在上面的方法列表中，我们也看到该类的几乎所有方法都是抽象方法，需要子类进行实现。在 Brave 中，该抽象类的子类就是 RealSpan。RealSpan 中的 start 方法如下所示：
@@ -191,7 +195,9 @@ void myMethod(@SpanTag("mykey") String param);
 
 我们来考虑如下场景，假设在服务调用链路中，某一个方法调用时间比较长，但通过默认所创建的基于该方法的 Span，通常无法判断响应时间过长的原因。那么就可能出现一个需求，即通过添加一系列的自定义 Span 的方式进一步对长时间的服务调用进行拆分，把该请求中所涉及的多种操作分别创建 Span，然后找到最影响性能的 Span 并进行优化，这也是服务监控系统实现过程中的一项最佳实践，如下图所示：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/8C/65/Ciqc1F_sSrKAUJKgAAAtpNjayF4547.png"/>  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/8C/65/Ciqc1F_sSrKAUJKgAAAtpNjayF4547.png"/> 
+  
 通过自定义 Span 找到性能瓶颈点示意图
 
 ### 使用 Tracer 添加自定义 Span
@@ -230,17 +236,23 @@ public class DeviceService {
 
 我们先来回顾在不添加上述自定义 Span 之前调用 <http://localhost:5555/springhealth/device/devices/device1> 时 Zipkin 上所生成的效果图，如下所示：
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/8C/71/CgqCHl_sSr2AH503AABAn4kpV9A498.png"/>  
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/8C/71/CgqCHl_sSr2AH503AABAn4kpV9A498.png"/> 
+  
 Zipkin 中系统自动生成 Span 效果界面
 
 显然，这三个 Span 都是系统自定生成的。现在我们重新启动 device-service，然后再次访问该端口，就会得到如下图所示的可视化效果：
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/8C/65/Ciqc1F_sSsiATG_0AABPUjTB7og302.png"/>  
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/8C/65/Ciqc1F_sSsiATG_0AABPUjTB7og302.png"/> 
+  
 Zipkin中添加自定义Span效果界面
 
 请注意在上图中，我们看到在原有默认可视化效果的基础上又多了一个名为"findByDeviceCode"的自定义 Span。点击该 Span，我们也将得到这个 Span 对应的各项事件明细数据，如下图所示：
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/8C/65/Ciqc1F_sSs-ACuYCAABBZOB6BPU918.png"/>  
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/8C/65/Ciqc1F_sSs-ACuYCAABBZOB6BPU918.png"/> 
+  
 Zipkin 中自定义 Span 中每个关键事件明细数据界面
 
 这里看到了"deviceObtained"这个自定义事件。同时，基于数据，我们也不难发现在 device-service 处理请求的时间中实际上大部分是消耗在访问数据库以获取设备数据的过程中。同样，我们也可以在其他服务中添加不同的 Span 以实现对服务调用过程更加精细化的管理。
@@ -252,3 +264,4 @@ Zipkin 中自定义 Span 中每个关键事件明细数据界面
 这里给你留一道思考题：通过 Brave 框架，开发人员创建自定义 Span 有哪些具体的实现方法？
 
 在介绍完服务监控之后，接下来是整个课程的最后一个主题，即微服务测试。我们将先从微服务系统中与测试相关的需求和解决方案讲起并引出 Spring 家族中的 Spring Cloud Contract 框架。
+

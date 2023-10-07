@@ -1,3 +1,5 @@
+# 第42讲：使用SpringHATEOAS增强REST服务的语义
+
 从本课时开始，我们将介绍一些与云原生微服务开发相关的话题，这些话题之间相互独立，都围绕一个较小的主题来展开。本课时将介绍如何使用 Spring HATEOAS 增强 REST 服务的语义。
 
 ### HATEOAS
@@ -78,7 +80,9 @@ Link link = Link.of(uriTemplate, "order")
 
 下面是 RepresentationModel 类及其子类的结构图。
 
-<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/3E/BC/CgqCHl8tFzaAcnP-AAA8DI88jKY723.png"/>
+
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/3E/BC/CgqCHl8tFzaAcnP-AAA8DI88jKY723.png"/> 
+
 
 这些模型的说明如下表所示。
 
@@ -306,3 +310,4 @@ public class AreaProcessor implements
 HATEOAS 可以增强 REST 服务的语义，从而方便客户端更好地使用服务，自动发现服务所提供的功能。通过本课时的学习，你可以了解 REST 成熟度模型、HATEOAS 的基本概念，以及如何使用 Spring HATEOAS 为 Spring Boot 微服务增加 HATEOAS 支持。
 
 最后呢，成老师邀请你为本专栏课程进行结课评价，因为你的每一个观点都是我们最关注的点。[点击链接，即可参与课程评价](https://wj.qq.com/s2/6902680/3fb2/)。
+

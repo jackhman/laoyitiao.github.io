@@ -1,3 +1,5 @@
+# 03诊断利器：Java性能分析神器AlibabaArtha
+
 Arthas 是阿里开源的 Java 诊断工具，可以让开发者快速定位故障问题，那么为什么用"神器"来形容 Arthas 呢？
 
 Arthas 由阿里早期的开源诊断工具 Greys 演进而来，你可以将 Arthas 看作是Greys的升级产品。由于 Arthas 提供了更加丰富的工具，在 2018 年底发布，就受到了很多开发者的青睐，并且也得到了来自 Java 官方的赞许。
@@ -26,7 +28,9 @@ Arthas 的核心应用场景如下。
 
 Arthas 目前已经集成了 41 个在线命令，那么如何快速掌握这么多的命令呢？我建议的学习路径是：命令+场景+原理，你可以按照这三个方向，来持续迭代自己掌握 Arthas 的能力。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M01/2D/B7/Cgp9HWBm5BaAPOoWAABxIX9uEqs906.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M01/2D/B7/Cgp9HWBm5BaAPOoWAABxIX9uEqs906.png"/> 
+
 
 #### 1.通过实操，熟悉命令
 
@@ -41,7 +45,9 @@ Arthas 目前已经集成了 41 个在线命令，那么如何快速掌握这么
 
 下面便是我对 Arthas 官网上七大场景的总结，这七个场景也最能体现 Arthas 产品的价值。
 
-<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M00/2D/D6/CioPOWBm-0GAZC_MAATTkxNsFlc217.png"/>
+
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M00/2D/D6/CioPOWBm-0GAZC_MAATTkxNsFlc217.png"/> 
+
 
 比如在"场景 3：遇到问题无法在线上 debug，难道只能通过加日志再重新发布吗？"中，通过 4 个命令的组合，便实现了热发布功能。Arthas 设计的理念和[Unix 哲学](https://en.wikipedia.org/wiki/Unix_philosophy?fileGuid=xxQTRXtVcqtHK6j8)很像，每个命令只专注做好一个任务，然后充分发挥开发者的能力，通过不断地使用这些命令排查问题，在实践场景中积累实战经验。之后，再遇到相似场景时，便能快速通过一系列组合的命令，诊断出问题所在了。
 
@@ -69,7 +75,9 @@ Arthas 的原理，我们可以通过在线文档和源码，并根据实际场�
 
 所以，我们需要一种形式将这些海量数据呈现出来。从而我们就设计了一张图，X 轴表示调用函数被采集的情况（按照函数字母排序），Y 轴表示详细描述了调用栈。整个绘制出来的图案，加上暖色后看起来很像一副[火焰图](https://github.com/brendangregg/FlameGraph?fileGuid=xxQTRXtVcqtHK6j8)（火焰图的颜色没有特殊含义）。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M01/2D/B8/Cgp9HWBm5DKAU6qGAAXfqh87K-I401.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M01/2D/B8/Cgp9HWBm5DKAU6qGAAXfqh87K-I401.png"/> 
+
 
 在这个过程中，你会发现我们并没有学习 Arthas profiler 实现火焰图源码，而是通过对火焰图的产品设计进行了深入学习，就达到了掌握火焰图和 Arthas profiler 命令的效果，可见精读设计，略读源码的效果。
 
@@ -81,7 +89,9 @@ Arthas 的原理，我们可以通过在线文档和源码，并根据实际场�
 
 以下面购买服务的 CPU 火焰图为例：
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M00/2D/C0/CioPOWBm5D6AelwSAAC2dlxp9uc971.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M00/2D/C0/CioPOWBm5D6AelwSAAC2dlxp9uc971.png"/> 
+
 
 非预期的屏顶出现在 failAccountError() 和 failNotEnoughMoney() 两个函数上，接下来我可以通过 tt 和 watch 命令详细观察性能问题的原因。
 > 这里我只是以"场景 7 的火焰图"为例，至于其他场景及其命令，也可以按照这两点建议进行原理探索。
@@ -96,7 +106,9 @@ Arthas 的学习路径讲完了，你会发现：**使用 Arthas 命令进行问
 
 我这里有两套部署方案，你可以根据自身团队的情况，针对各个方案的优势进行部署：
 
-<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M00/2D/D6/CioPOWBm-2iAFQfSAAHJSv_DCB0568.png"/>
+
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M00/2D/D6/CioPOWBm-2iAFQfSAAHJSv_DCB0568.png"/> 
+
 
 ### 小结与思考
 
@@ -108,4 +120,7 @@ Arthas 目前有非常多的在线诊断命令，我们要对问题场景进行�
 
 那么，你用 Arthas 定位过什么那些场景呢？请把你的场景特点，使用哪些命令、事中事后的总结与思考写在评论区，期待与你讨论。
 
-<Image alt="应用性能分析实战金句-03.png" src="https://s0.lgstatic.com/i/image6/M00/2D/D6/CioPOWBm-x6AH9BYAAE8EwU18Vg656.png"/>
+
+<Image alt="应用性能分析实战金句-03.png" src="https://s0.lgstatic.com/i/image6/M00/2D/D6/CioPOWBm-x6AH9BYAAE8EwU18Vg656.png"/> 
+
+

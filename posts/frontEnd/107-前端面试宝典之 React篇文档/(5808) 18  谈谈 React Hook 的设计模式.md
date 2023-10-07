@@ -1,3 +1,5 @@
+# 18谈谈ReactHook的设计模式
+
 关于 React Hooks 还有一个高概率命中的题，就是聊设计模式。跟组件一样，如何协调地组合相关的代码是一个强需求，所以设计模式是一个不可避免的问题。
 
 ### 审题
@@ -44,7 +46,9 @@ function Counter() {
 
 我们就可以根据上文分析到的"道、术、势"来答题了：道就是认知基础；术就是常规操作与个人实践；势就是工程实践上的运用。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image2/M01/08/34/CgpVE2AKhZCAHGhGAABO7J0ONKw763.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image2/M01/08/34/CgpVE2AKhZCAHGhGAABO7J0ONKw763.png"/> 
+
 
 ### 破题
 
@@ -286,7 +290,9 @@ export default Users;
 >
 > 以上就是我在设计上的一些思考。
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image2/M01/08/32/Cip5yGAKhcCAKZY2AAB3d7s2Ur4216.png"/>
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image2/M01/08/32/Cip5yGAKhcCAKZY2AAB3d7s2Ur4216.png"/> 
+
 
 ### 总结
 
@@ -296,8 +302,11 @@ React Hook 是未来仍然需要关注的一个技术点，由于与类组件不
 
 *** ** * ** ***
 
-[<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/72/94/Ciqc1F_EZ0eANc6tAASyC72ZqWw643.png"/>](https://shenceyun.lagou.com/t/mka)
+[
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/72/94/Ciqc1F_EZ0eANc6tAASyC72ZqWw643.png"/> 
+](https://shenceyun.lagou.com/t/mka)
 
 《大前端高薪训练营》
 
 对标阿里 P7 技术需求 + 每月大厂内推，6 个月助你斩获名企高薪 Offer。[点击链接](https://shenceyun.lagou.com/t/mka)，快来领取！
+

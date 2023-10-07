@@ -1,3 +1,5 @@
+# (293)第55讲：Condition、object.wait和notify的关系？
+
 本课时我们主要介绍 Condition、Object 的 wait() 和 notify() 的关系。
 
 下面先讲一下 Condition 这个接口，来看看它的作用、如何使用，以及需要注意的点有哪些。
@@ -233,3 +235,4 @@ await 方法会自动释放持有的 Lock 锁，和 Object 的 wait 一样，不
 ### 总结
 
 首先介绍了 Condition 接口的作用，并给出了基本用法；然后讲解了它的几个注意点，复习了之前 Condition 和 wait/notify 实现简易版阻塞队列的代码，并且对这两种方法，不同的实现进行了对比；最后分析了它们之间的关系。
+

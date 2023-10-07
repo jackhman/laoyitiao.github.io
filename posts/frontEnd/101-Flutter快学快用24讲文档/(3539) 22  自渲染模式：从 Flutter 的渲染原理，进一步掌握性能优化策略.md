@@ -1,3 +1,5 @@
+# 22自渲染模式：从Flutter的渲染原理，进一步掌握性能优化策略
+
 在自渲染模式中，Flutter 三棵树是一个比较关键的知识点。本课时将带你学习 Flutter 自渲染模式的三棵树，然后从三棵树的绘制过程中了解 Flutter 是如何做性能优化和如何进行 Flutter App 的性能提升。
 
 ### 三棵树
@@ -12,7 +14,9 @@
 
 在 Flutter 中经过一系列处理后，将会生成一份这样的配置信息，如图 1 所示（你可以使用 debug 模式得到这份渲染树的结构信息）。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/44/E0/Ciqc1F8_i_CAfmbFAAJQmkbVhaU299.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/44/E0/Ciqc1F8_i_CAfmbFAAJQmkbVhaU299.png"/> 
+  
 图 1 渲染树结构
 
 在图 1 中比较关键的是 3 个属性：
@@ -44,7 +48,9 @@ class FirstRoute extends StatelessWidget {
 
 上面代码描述的是一个简单的页面组件，不过在这个简单页面组件背后是一个非常复杂的树型结构，具体看看渲染的 Element 树到底是个什么样子，如图 2 所示。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/44/E0/Ciqc1F8_i_uAHvbgAAFqAXyCe9s498.png"/>  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/44/E0/Ciqc1F8_i_uAHvbgAAFqAXyCe9s498.png"/> 
+  
 图 2 Element 树结构
 
 你有没有发现就一个非常简单的 Widget ，在 Flutter 中实际生成的 Element 树结构图是如此的复杂。你有没有发现在树的最底层才是我们使用的组件 FirstRoute-\>Center-\>Text-\>RichText（如图 2 中红色的部分）。了解完三棵树结构后，我们再来看下三棵树是如何进行转化的。
@@ -53,7 +59,9 @@ class FirstRoute extends StatelessWidget {
 
 在 Flutter 中，Widget 和 Element 树是一一对应的，但是与 RenderObject 不是一一对应的。因为有些 Widget 是不需要渲染的，比如我们上面测试代码中的 FirstRoute 就是不需要渲染的 Widget。最终只有 RenderObjectWidget 相关的 Widget 才会转化为 RenderObject，也只有这种类型才需要进行渲染。可以看下表格 1 所展示的三棵树部分类型的对应关系。
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/44/E0/Ciqc1F8_jAWASaH5AABxjuioTcw001.png"/>  
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/44/E0/Ciqc1F8_jAWASaH5AABxjuioTcw001.png"/> 
+  
 表格 1 Widget 、 Element 和 RenderObject 对应关系
 
 接下来我们看下三者是如何进行转化的。
@@ -77,7 +85,9 @@ void main() {
 
 在介绍函数之前我们先来看下整体的架构流程图，如图 3 所示。
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/44/E0/Ciqc1F8_jBaAPZtCAADE5IavI9E126.png"/>  
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/44/E0/Ciqc1F8_jBaAPZtCAADE5IavI9E126.png"/> 
+  
 图 3 Flutter 树转化图
 
 上述图比较复杂，你可以先简单了解下，等下我们会详细拆分来讲解。我们先来看下这几个关键函数的作用。
@@ -163,7 +173,9 @@ if (hasSameSuperclass && child.widget == newWidget) {
 
 当我们首次加载一个页面组件的时候，由于所有节点都是不存在的，因此这时候的流程大部分情况下都是创建新的节点，流程会如图 4 所示。
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/44/E0/Ciqc1F8_jEiAbM-GAAFJbtV_XLo642.png"/>  
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/44/E0/Ciqc1F8_jEiAbM-GAAFJbtV_XLo642.png"/> 
+  
 图 4 首次 build 流程
 
 runApp 到 RenderObjectToWidgetElement(mount) 逻辑都是一样的，在 _rebuild 中会调用 updateChild 更新节点，由于节点是不存在的，因此这时候就调用 inflateWidget 来创建 Element。
@@ -178,7 +190,9 @@ runApp 到 RenderObjectToWidgetElement(mount) 逻辑都是一样的，在 _rebui
 
 当我们调用 setState 后，我们实际上调用的是组件的 markNeedsBuild ，而这个函数上面已经介绍到是将组件设置为 dirty ，并且添加下一次 buildScope 的逻辑，等待下一次 rebuild 循环。如图 5 流程。buildScope 会调用 rebuild 然后进入 build 操作，从而进入 updateChild 的循环体系。
 
-<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/44/E0/Ciqc1F8_jJGATAlDAAFF3eMI6D8595.png"/>  
+
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/44/E0/Ciqc1F8_jJGATAlDAAFF3eMI6D8595.png"/> 
+  
 图 5 setState 流程
 
 在图 5 中，我们就可以了解到，在 Flutter 中，如果父节点更新以后，也就是 setState 调用必定会引起子节点的递归循环判断 build 逻辑，虽然不一定会进行 RenderObject 树的创建（因为可能子节点没有变化，因此没有改变），但还是存在一定的性能影响。
@@ -270,3 +284,4 @@ final Element newChild = newWidget.createElement();
 学完本课时后，你需要掌握 Flutter 的三棵树概念，并非常清晰的了解三棵树的转化过程，通过对转化过程中性能优化知识的学习，从而在编码过程中养成一个非常好的编码习惯。
 
 [点击链接，查看本课时源码](https://github.com/love-flutter/flutter-column)
+

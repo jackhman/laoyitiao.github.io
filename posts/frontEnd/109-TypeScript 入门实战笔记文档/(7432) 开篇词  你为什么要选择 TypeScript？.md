@@ -1,3 +1,5 @@
+# 开篇词你为什么要选择TypeScript？
+
 你好，我是乾元，在 10 年的前端开发工作中，我曾就职于去哪儿、搜狗等大厂。作为核心成员，我曾负责过多个前端框架、组件库、开源项目核心模块的开发和维护，还为知名 MVVM 框架 Avalon 核心模块贡献过十多个 Commit。
 
 2018 年起，我正式推动 TypeScript 在部门级业务方向的全面应用。至今，我构建了 TypeScript + React、Redux、Nest.js 的全栈技术生态，并积累了丰富的 TypeScript 设计开发经验。同时，我还从 0-1 打造了一支全栈技术架构团队，目前该团队已平稳支撑了公司数百个业务项目。
@@ -97,7 +99,9 @@ function UserInfo(props: IUserInfo) {
 
 而能够熟练掌握 TypeScript 的开发人员，**将能轻松拿下大厂 Offer**。下面我截取了拉勾招聘官网的一些大厂招聘要求，你可以参考。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M01/3D/3F/Cgp9HWCToWWAd44HAA6s79WBA5M709.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M01/3D/3F/Cgp9HWCToWWAd44HAA6s79WBA5M709.png"/> 
+
 
 ### 好工具，需要好的学习方式
 
@@ -130,3 +134,4 @@ TypeScript 发版频繁，特性日新月异，从构思课程到截稿，TypeSc
 看明白知识点很容易，而难点在于融会贯通。除了关注工程实践，我们更应该关注核心知识点的深入理解和吸收，避免从理论到实践无从着手的无力感，因为**只有吃透其中的原理（生硬的知识点），才能真正打造属于自己的强有力武器**。
 
 本专栏经过精心打磨，并巧妙打磨大量示例，带你轻松学习、有效吸收。你还在犹豫吗？赶紧搭上 TypeScript 学习班车，大厂 Offer 就在前方！
+

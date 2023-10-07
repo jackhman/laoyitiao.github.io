@@ -1,3 +1,5 @@
+# 开篇词这一次，真正吃透React知识链路与底层逻辑
+
 在接下来的一段时间里，我们将一起深入 React 这个框架领域，完成从"小工"到"专家"的蜕变。
 
 作为一名React 重度用户，与其说我对 React 源码、底层原理及周边生态有着较为深入的探究，不如说我对它们有着浓厚的兴趣。早期，我专注于性能优化和前端工程化，曾将线上大型应用性能提升率做到 40%，并基于 React 打造过团队新基建。此外，我还担任过多年一线前端面试官，积累了丰富的面试经验。
@@ -8,7 +10,9 @@
 
 ### 学好 React，到底有多爽？
 
-<Image alt="Lark20201012-154736.png" src="https://s0.lgstatic.com/i/image/M00/5D/40/CgqCHl-ECi-Aeep6AACZ17MFsQw154.png"/>
+
+<Image alt="Lark20201012-154736.png" src="https://s0.lgstatic.com/i/image/M00/5D/40/CgqCHl-ECi-Aeep6AACZ17MFsQw154.png"/> 
+
 
 在过去的几年，"变化"始终是前端框架世界里的一号关键词：前有 jQuery 刚刚式微时各路神仙各显神通，后有 React/Vue/Angular 三分天下，如今又渐渐演变成了 React/Vue 两分天下。
 
@@ -22,11 +26,15 @@
 
 若单说岗位数量，我不敢妄言，但**在一二线的互联网大厂中，React 的绝对优势凸显无疑。** （比如，阿里就统一使用 React 作为底层技术栈，并且在内部紧密共建 React 生态。）国外的一份["2019 年度 JavaScript 趋势报告"](https://2019.stateofjs.com/front-end-frameworks/)中，React 也被评估为综合指数最高的前端框架：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/5D/1E/CgqCHl-D4tuAIhZGAACpSU_Pme8543.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/5D/1E/CgqCHl-D4tuAIhZGAACpSU_Pme8543.png"/> 
+
 
 在招聘上，大厂普遍青睐 React 人才，各种高薪职位中不乏"精通 React""掌握 React"的字眼。作为前端，我们必须认识到这样一个现状：**大厂（包括国内、国外）更喜欢 React，当我们立下一个有朝一日进大厂的志愿时，就意味着必须先下定决心搞定 React**。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/5D/13/Ciqc1F-D4uWAEDz9AACMs7KhhTk568.png"/>  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/5D/13/Ciqc1F-D4uWAEDz9AACMs7KhhTk568.png"/> 
+  
 （信息来源：拉勾网）
 
 #### 强化项目实战能力：吃透 React，疑难杂症不在话下
@@ -95,7 +103,9 @@ React 正是一个优秀前端框架的典型 ，它在架构上融合了数据�
 
 * **模块四：生产实践**。对于一个优秀的前端应用来说，性能和设计模式是永恒的主题，性能决定用户体验，设计模式决定研发效率。这部分将结合我团队的实践经验以及当下行业里推崇的最佳实践，为你输出实战观点。对于这些最佳实践，你不仅要知道怎么做，还要理解"为什么这么做"。学完个模块可以强化你的实际应用能力，提升自主研发创新实践的线索和灵感。
 
-<Image alt="Lark20201208-111532.png" src="https://s0.lgstatic.com/i/image/M00/7E/2E/CgqCHl_O8AiAMsLrAAOzA7Lqfa0393.png"/>
+
+<Image alt="Lark20201208-111532.png" src="https://s0.lgstatic.com/i/image/M00/7E/2E/CgqCHl_O8AiAMsLrAAOzA7Lqfa0393.png"/> 
+
 
 ### 讲师寄语
 
@@ -104,3 +114,4 @@ React 正是一个优秀前端框架的典型 ，它在架构上融合了数据�
 为了将晦涩的知识转化为你手里实实在在的生产力，专栏的框架和内容也历经了多次的迭代和重构。每一次的果断推翻早期设想，每一次的重构表达逻辑，都是希望帮你更好地消化吸收这份知识。希望你也能够不吝耐心和智慧，顺利走完整个 React 学习曲线中最难的一段路。
 
 到这里，我的故事就结束了，而你和我的故事才刚刚开始。欢迎在留言区分享你的前端经历，或者写写学习 React 过程中遇到的问题、想要学习的内容，让我们一起写出"我们"的故事，开启 React 奇幻之旅。
+

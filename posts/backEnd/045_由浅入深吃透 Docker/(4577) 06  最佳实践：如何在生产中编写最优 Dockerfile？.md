@@ -1,3 +1,5 @@
+# 06最佳实践：如何在生产中编写最优Dockerfile？
+
 在介绍 Dockerfile 最佳实践前，这里再强调一下，**生产实践中一定优先使用 Dockerfile 的方式构建镜像。** 因为使用 Dockerfile 构建镜像可以带来很多好处：
 
 * 易于版本化管理，Dockerfile 本身是一个文本文件，方便存放在代码仓库做版本管理，可以很方便地找到各个版本之间的变更历史；
@@ -254,3 +256,4 @@ RUN wget -O /tmp/memtester-4.3.0.tar.gz http://pyropus.ca/software/memtester/old
 好了，到此为止，相信你已经对 Dockerfile 的书写原则和一些重要指令有了较深的认识。
 
 当你需要编写编译型语言（例如 Golang、Java）的 Dockerfile 时，如何分离编译环境和运行环境，使得镜像体积尽可能小呢？思考后，可以把你的想法写在留言区。
+

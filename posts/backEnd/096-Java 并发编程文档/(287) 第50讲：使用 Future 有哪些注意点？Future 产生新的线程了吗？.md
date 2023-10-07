@@ -1,3 +1,5 @@
+# 第50讲：使用Future有哪些注意点？Future产生新的线程了吗？
+
 在本课时我们将讲解使用 Future 有哪些注意点，以及 Future 产生新的线程了吗？
 
 ### Future 的注意点
@@ -76,7 +78,9 @@ public class FutureDemo {
 ```
 
 可以看到，这个执行结果是打印 4 行语句，前面两个是速度慢的任务，后面两个是速度快的任务。虽然结果是正确的，但实际上在执行的时候会先等待 5 秒，然后再很快打印出这 4 行语句。  
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/D6/CgpOIF5Y0OGAKVKjAACCEFYDuCw593.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/D6/CgpOIF5Y0OGAKVKjAACCEFYDuCw593.png"/> 
+
 
 这里有一个问题，即第三个的任务量是比较小的，它可以很快返回结果，紧接着第四个任务也会返回结果。但是由于前两个任务速度很慢，所以我们在利用 get 方法执行时，会卡在第一个任务上。也就是说，虽然此时第三个和第四个任务很早就得到结果了，但我们在此时使用这种 for 循环的方式去获取结果，依然无法及时获取到第三个和第四个任务的结果。直到 5 秒后，第一个任务出结果了，我们才能获取到，紧接着也可以获取到第二个任务的结果，然后才轮到第三、第四个任务。
 
@@ -89,7 +93,9 @@ public class FutureDemo {
 Future 的生命周期不能后退，一旦完成了任务，它就永久停在了"已完成"的状态，不能从头再来，也不能让一个已经完成计算的 Future 再次重新执行任务。
 
 这一点和线程、线程池的状态是一样的，线程和线程池的状态也是不能后退的。关于线程的状态和流转路径，第 03 讲已经讲过了，如图所示。  
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/D6/CgpOIF5Y0PiAcNyAAADVM7mENKE892.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/D6/CgpOIF5Y0PiAcNyAAADVM7mENKE892.png"/> 
+
 
 这个图也是我们当时讲解所用的图，如果有些遗忘，可以回去复习一下当时的内容。这一讲，我推荐你采用看视频的方式，因为视频中会把各个路径都标明清楚，看起来会更加清晰。
 
@@ -102,3 +108,4 @@ Future 的生命周期不能后退，一旦完成了任务，它就永久停在�
 其实 Callable 和 Future 本身并不能产生新的线程，它们需要借助其他的比如 Thread 类或者线程池才能执行任务。例如，在把 Callable 提交到线程池后，真正执行 Callable 的其实还是线程池中的线程，而线程池中的线程是由 ThreadFactory 产生的，这里产生的新线程与 Callable、Future 都没有关系，所以 Future 并没有产生新的线程。
 
 以上就是本讲的内容了。首先介绍了 Future 的两个注意点：第一个，在 get 的时候应当使用超时限制；第二个，Future 生命周期不能后退；然后又讲解了 Callable 和 Future 实际上并不是新建线程的第三种方式。
+

@@ -1,4 +1,8 @@
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/68/87/CgqCHl-j3qaAVQfkACNvx19akQc735.png"/>  
+# 22安全机制：Kubernete如何保障集群安全？
+
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/68/87/CgqCHl-j3qaAVQfkACNvx19akQc735.png"/> 
+  
 
 （[https://rancher.com/blog/2019/2019-01-17-101-more-kubernetes-security-best-practices/）](https://rancher.com/blog/2019/2019-01-17-101-more-kubernetes-security-best-practices/%EF%BC%89)
 
@@ -14,7 +18,9 @@ Kubernetes 作为一个分布式集群的管理工具，提供了非常强大的
 
 [A Security Checklist for Cloud Native Kubernetes Environments](https://thenewstack.io/a-security-checklist-for-cloud-native-kubernetes-environments/) 这篇文章对 Kubernetes 的安全性总结得非常好，将它 Kubernetes 的安全性归纳为了以下四个方面： Infrastructure（基础设施）、Kubernetes 集群自身、Containers（容器）及其运行时和 Applications（业务应用）。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/68/7C/Ciqc1F-j3r-AS8V0AAHzD-VlJ8M782.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/68/7C/Ciqc1F-j3r-AS8V0AAHzD-VlJ8M782.png"/> 
+
 
 ([https://thenewstack.io/a-security-checklist-for-cloud-native-kubernetes-environments/)](https://thenewstack.io/a-security-checklist-for-cloud-native-kubernetes-environments/))
 
@@ -56,7 +62,9 @@ APIServer 是整个 Kubernetes 的大脑，及流量入口，所有的数据都�
 
 当然你还需要尽可能减少集群的端口暴露。如下是 Kubernetes 各组件需要的端口，在使用的时候，可以限制只允许固定节点对这些端口的访问。
 
-<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image/M00/68/86/Ciqc1F-j-c-AbItzAAERT0Op8K0385.png"/>
+
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image/M00/68/86/Ciqc1F-j-c-AbItzAAERT0Op8K0385.png"/> 
+
 
 #### 5. 限制对 Kubelet 的访问
 
@@ -88,7 +96,9 @@ APIServer 支持对所有的请求进行[审计](https://kubernetes.io/zh/docs/t
 
 通过 namespace 来隔离工作负载和数据，比如区分不用的用户，不同的业务场景，以及一些关键的业务。你可以通过对这些 namespace 内的资源设置一些 RBAC 的规则，来进一步增强安全性。
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/68/7C/Ciqc1F-j3vOAFJcHAAF4VRsEQdc795.png"/>
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/68/7C/Ciqc1F-j3vOAFJcHAAF4VRsEQdc795.png"/> 
+
 
 #### 8. 使用网络策略进行限制
 
@@ -114,7 +124,9 @@ Kubernetes 提供了基于 namespace 的[网络策略](https://kubernetes.io/zh/
 
 这里我要跟你介绍一个开源工具[kube-bench](https://github.com/aquasecurity/kube-bench)，它能帮助你排查 95% Kubernetes 集群的配置风险。这里我推荐你使用 kube-bench 对你的Kubernetes 集群进行一次全面的安全性检测，并根据反馈采取安全加固措施。
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/68/87/CgqCHl-j3xiAe4TMAAFscw-4NYk411.png"/>
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/68/87/CgqCHl-j3xiAe4TMAAFscw-4NYk411.png"/> 
+
 
 （[https://github.com/aquasecurity/kube-bench）](https://github.com/aquasecurity/kube-bench%EF%BC%89)
 
@@ -125,3 +137,4 @@ Kubernetes 提供了基于 namespace 的[网络策略](https://kubernetes.io/zh/
 在云原生时代，拥有强大的安全非常重要，我们不能掉以轻心。在一开始我们就应该尽量把安全性纳入开发周期，将安全风险消灭在萌芽状态。
 
 好的，如果你对本节课有什么想法或者疑问，欢迎你在留言区留言，我们一起讨论。
+

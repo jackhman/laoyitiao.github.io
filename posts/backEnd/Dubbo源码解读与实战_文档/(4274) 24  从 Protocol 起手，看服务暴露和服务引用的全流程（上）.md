@@ -1,13 +1,19 @@
+# 24从Protocol起手，看服务暴露和服务引用的全流程（上）
+
 在上一课时我们讲解了 Protocol 的核心接口，那本课时我们就以 Protocol 接口为核心，详细介绍整个 Protocol 的核心实现。下图展示了 Protocol 接口的继承关系：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/5D/C5/Ciqc1F-FTHGAOVGKAAJe5PD5u9A015.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/5D/C5/Ciqc1F-FTHGAOVGKAAJe5PD5u9A015.png"/> 
+  
 Protocol 接口继承关系图
 
 其中，**AbstractProtocol**提供了一些 Protocol 实现需要的公共能力以及公共字段，它的核心字段有如下三个。
 
 * exporterMap（Map\<String, Exporter\<?\>\>类型）：用于存储出去的服务集合，其中的 Key 通过 ProtocolUtils.serviceKey() 方法创建的服务标识，在 ProtocolUtils 中维护了多层的 Map 结构（如下图所示）。首先按照 group 分组，在实践中我们可以根据需求设置 group，例如，按照机房、地域等进行 group 划分，做到就近调用；在 GroupServiceKeyCache 中，依次按照 serviceName、serviceVersion、port 进行分类，最终缓存的 serviceKey 是前面三者拼接而成的。
 
-<Image alt="Lark20201016-164613.png" src="https://s0.lgstatic.com/i/image/M00/5F/74/Ciqc1F-JXfmAJK8RAAHUliqXmBc629.png"/>  
+
+<Image alt="Lark20201016-164613.png" src="https://s0.lgstatic.com/i/image/M00/5F/74/Ciqc1F-JXfmAJK8RAAHUliqXmBc629.png"/> 
+  
 groupServiceKeyCacheMap 结构图
 
 * serverMap（Map\<String, ProtocolServer\>类型）：记录了全部的 ProtocolServer 实例，其中的 Key 是 host 和 port 组成的字符串，Value 是监听该地址的 ProtocolServer。ProtocolServer 就是对 RemotingServer 的一层简单封装，表示一个服务端。
@@ -59,7 +65,9 @@ public <T> Exporter<T> export(Invoker<T> invoker) throws RpcException {
 
 这里涉及的第一个点是 DubboExporter 对 Invoker 的封装，DubboExporter 的继承关系如下图所示：
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/5D/D0/CgqCHl-FTJSAd9oTAAAm0DgOmVo715.png"/>  
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/5D/D0/CgqCHl-FTJSAd9oTAAAm0DgOmVo715.png"/> 
+  
 DubboExporter 继承关系图
 
 AbstractExporter 中维护了一个 Invoker 对象，以及一个 unexported 字段（boolean 类型），在 unexport() 方法中会设置 unexported 字段为 true，并调用 Invoker 对象的 destory() 方法进行销毁。
@@ -70,7 +78,9 @@ DubboExporter 也比较简单，其中会维护底层 Invoker 对应的 ServiceK
 
 了解了 Exporter 实现之后，我们继续看 DubboProtocol 中服务发布的流程。从下面这张调用关系图中可以看出，openServer() 方法会一路调用前面介绍的 Exchange 层、Transport 层，并最终创建 NettyServer 来接收客户端的请求。
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/5D/D0/CgqCHl-FTKGAJNO8AAElldtvsRM104.png"/>  
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/5D/D0/CgqCHl-FTKGAJNO8AAElldtvsRM104.png"/> 
+  
 export() 方法调用栈
 
 下面我们将逐个介绍 export() 方法栈中的每个被调用的方法。
@@ -137,7 +147,9 @@ private ProtocolServer createServer(URL url) {
 
 在 createServer() 方法中还有几个细节需要展开分析一下。第一个是创建 ExchangeServer 时，使用的 Codec2 接口实现实际上是 DubboCountCodec，对应的 SPI 配置文件如下：
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/5D/D0/CgqCHl-FTK-AUlLCAADTWhhySe8432.png"/>  
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/5D/D0/CgqCHl-FTK-AUlLCAADTWhhySe8432.png"/> 
+  
 Codec2 SPI 配置文件
 
 DubboCountCodec 中维护了一个 DubboCodec 对象，编解码的能力都是 DubboCodec 提供的，DubboCountCodec 只负责在解码过程中 ChannelBuffer 的 readerIndex 指针控制，具体实现如下：
@@ -173,7 +185,9 @@ public Object decode(Channel channel, ChannelBuffer buffer) throws IOException {
 
 DubboCountCodec、DubboCodec 都实现了第 22 课时介绍的 Codec2 接口，其中 DubboCodec 是 ExchangeCodec 的子类。
 
-<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/5D/C5/Ciqc1F-FTLuAZ-AoAACeZ02hpEg723.png"/>  
+
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/5D/C5/Ciqc1F-FTLuAZ-AoAACeZ02hpEg723.png"/> 
+  
 DubboCountCodec 及 DubboCodec 继承关系图
 
 我们知道 ExchangeCodec 只处理了 Dubbo 协议的请求头，而 DubboCodec 则是通过继承的方式，在 ExchangeCodec 基础之上，添加了解析 Dubbo 消息体的功能。在第 22 课时介绍 ExchangeCodec 实现的时候，我们重点分析了 encodeRequest() 方法，即 Request 请求的编码实现，其中会调用 encodeRequestData() 方法完成请求体的编码。
@@ -211,7 +225,9 @@ protected void encodeRequestData(Channel channel, ObjectOutput out, Object data,
 
 RpcInvocation 实现了上一课时介绍的 Invocation 接口，如下图所示：
 
-<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/5D/D0/CgqCHl-FTMSAYeP7AAA_pzU2CPA016.png"/>  
+
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/5D/D0/CgqCHl-FTMSAYeP7AAA_pzU2CPA016.png"/> 
+  
 RpcInvocation 继承关系图
 
 下面是 RpcInvocation 中的核心字段，通过读写这些字段即可实现 Invocation 接口的全部方法。
@@ -240,7 +256,9 @@ RpcInvocation 继承关系图
 
 我们在上面的继承图中看到 RpcInvocation 的一个子类------ DecodeableRpcInvocation，它是用来支持解码的，其实现的 decode() 方法正好是 DubboCodec.encodeRequestData() 方法对应的解码操作，在 DubboCodec.decodeBody() 方法中就调用了这个方法，调用关系如下图所示：
 
-<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/5D/C5/Ciqc1F-FTM2Ae73pAAC0_daI0N4088.png"/>  
+
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/5D/C5/Ciqc1F-FTM2Ae73pAAC0_daI0N4088.png"/> 
+  
 decode() 方法调用栈
 
 这个解码过程中有个细节，在 DubboCodec.decodeBody() 方法中有如下代码片段，其中会根据 DECODE_IN_IO_THREAD_KEY 这个参数决定是否在 DubboCodec 中进行解码（DubboCodec 是在 IO 线程中调用的）。
@@ -342,7 +360,9 @@ private void optimizeSerialization(URL url) throws RpcException {
 
 SerializableClassRegistry 底层维护了一个 static 的 Map（REGISTRATIONS 字段），registerClass() 方法就是将待优化的类写入该集合中暂存，在使用 Kryo、FST 等序列化算法时，会读取该集合中的类，完成注册操作，相关的调用关系如下图所示：
 
-<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/5D/C5/Ciqc1F-FTOGAEWu7AADOU3xBmjA069.png"/>  
+
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/5D/C5/Ciqc1F-FTOGAEWu7AADOU3xBmjA069.png"/> 
+  
 getRegisteredClasses() 方法的调用位置
 
 按照 Dubbo 官方文档的说法，即使不注册任何类进行优化，Kryo 和 FST 的性能依然普遍优于Hessian2 和 Dubbo 序列化。
@@ -352,3 +372,4 @@ getRegisteredClasses() 方法的调用位置
 本课时我们重点介绍了 DubboProtocol 发布一个 Dubbo 服务的核心流程。首先，我们介绍了 AbstractProtocol 这个抽象类为 Protocol 实现类提供的公共能力和字段，然后我们结合 Dubbo 协议对应的 DubboProtocol 实现，讲解了发布一个 Dubbo 服务的核心流程，其中涉及整个服务端核心启动流程、RpcInvocation 实现、DubboProtocol.requestHandler 字段调用 Invoker 对象以及序列化相关的优化处理等内容。
 
 下一课时，我们将继续介绍 DubboProtocol 引用服务的相关实现。
+

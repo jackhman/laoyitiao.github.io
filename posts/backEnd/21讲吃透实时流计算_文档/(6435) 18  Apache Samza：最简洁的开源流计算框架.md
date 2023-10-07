@@ -1,3 +1,5 @@
+# 18ApacheSamza：最简洁的开源流计算框架
+
 今天，我们来看第三种开源流计算框架 Apache Samza。我们同样是从**系统架构、流的描述、流的处理、流的状态、消息处理可靠性**这五个方面来进行分析和讲解。
 
 ### Apache Samza
@@ -14,7 +16,9 @@ Samza 将流数据的管理委托给 Kafka 等消息中间件，再将资源管�
 
 我们先来看 Samza 的系统架构。以运行在 YARN 上的 Samza 为例，它就是一个典型的 YARN 应用。下面的图 1 是 Samza 的系统架构。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M01/20/56/Cgp9HWBTAICAQKcbAADaTiM90DM832.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M01/20/56/Cgp9HWBTAICAQKcbAADaTiM90DM832.png"/> 
+  
 图 1 Samza 系统架构图
 
 在上面的图 1 中，Samza 的 YARN 客户端向 YARN 提交 Samza 作业，并从 YARN 集群中申请资源（主要是 CPU 和内存）用于执行 Samza 应用中包含的作业（Job）。Samza 作业在运行时，表现为多个副本的任务。Samza 任务正是流计算应用的处理逻辑所在，它们从 Kafka 中读取消息，然后进行处理，并最终将处理结果重新发回 Kafka。可以看到，Samza 任务在计算过程中，还会在本地节点上使用到状态存储。
@@ -29,7 +33,9 @@ Samza 将流数据的管理委托给 Kafka 等消息中间件，再将资源管�
 
 比如下面的图 2 描述了一个实现 join 操作的作业。在该图中，输入流划分为了两个分区，对应地就启动了两个任务来执行 join 操作。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M01/20/56/Cgp9HWBTAJWAOCvNAAGd5xWqg8s797.png"/>  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M01/20/56/Cgp9HWBTAJWAOCvNAAGd5xWqg8s797.png"/> 
+  
 图 2 一个描述 join 操作的 Samza 作业
 
 **再然后是 Partition（分区）**。Samza 的流和分区很明显是继承自 Kafka 的概念。当然 Sazma 也对这两个概念进行了抽象和泛化。Samza 的流被切分成了一个或多个分区，每个分区都是一个有序的消息序列。
@@ -42,7 +48,9 @@ Samza 将流数据的管理委托给 Kafka 等消息中间件，再将资源管�
 
 在后面我们还会介绍 StreamApplication，需要注意 StreamApplication 和数据流图的不同之处。图 3 就展示了同样的数据流图，使用不同 StreamApplication 组合实现的例子。
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M01/20/53/CioPOWBTAJ6APec7AAW1YATqB_E870.png"/>  
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M01/20/53/CioPOWBTAJ6APec7AAW1YATqB_E870.png"/> 
+  
 图 3 同样的数据流图可以使用多种方法实现
 
 **再接下来是 Containers（容器）**。前面所讲的分区和任务都是逻辑上的并行单元，它们不是对计算资源的真实划分。那什么才是对计算资源的真实划分呢？这就是容器。容器是物理上的并行单元，每一个容器都代表着一定配额的计算资源。每个容器可以运行一个或多个任务。任务的数量由输入流的分区数确定，而容器的数量则可以由用户在运行时任意指定。
@@ -159,4 +167,7 @@ Samza 目前只提供了 at-least-once 级别的消息处理可靠性保证，�
 
 下面是本课时的脑图，以帮助你理解。
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M00/20/56/Cgp9HWBTAM-Aak0MAA15MLW0GdY079.png"/>
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M00/20/56/Cgp9HWBTAM-Aak0MAA15MLW0GdY079.png"/> 
+
+

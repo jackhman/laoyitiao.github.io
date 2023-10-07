@@ -1,3 +1,5 @@
+# 第20讲：一个运行中的ZooKeeper服务会产生哪些数据和文件？
+
 之前的课程我们都在介绍 ZooKeeper 框架能够实现的功能，而无论是什么程序，其本质就是对数据的操作。比如 MySQl 数据库操作的是数据表，Redis 数据库操作的是存储在内存中的 Key-Value 值。不同的数据格式和存储方式对系统运行的效率和处理能力都有很大影响。本课时就来学习，在 ZooKeeper 程序运行期间，都会处理哪些数据，以及他们的存储格式和存储位置。
 
 ZooKeeper 服务提供了创建节点、添加 Watcher 监控机制、集群服务等丰富的功能。这些功能服务的实现，离不开底层数据的支持。从数据存储地点角度讲，ZooKeeper 服务产生的数据可以分为内存数据和磁盘数据。而从数据的种类和作用上来说，又可以分为事务日志数据和数据快照数据。
@@ -35,7 +37,9 @@ public class DataTree {
 
 * lastZxidSeen：最后一次更新日志得到的 ZXID。
 
-<Image alt="image (11).png" src="https://s0.lgstatic.com/i/image/M00/2F/DF/Ciqc1F8IC-uAcS1bAABJoZ4awKg473.png"/>
+
+<Image alt="image (11).png" src="https://s0.lgstatic.com/i/image/M00/2F/DF/Ciqc1F8IC-uAcS1bAABJoZ4awKg473.png"/> 
+
 
 定义了事务日志操作的相关指标参数后，在 FileTxnLog 类中调用 static 静态代码块，来将这些配置参数进行初始化。比如读取 preAllocSize 参数分配给日志文件的空间大小等操作。
 
@@ -134,3 +138,4 @@ public void save(DataTree dataTree,
 通过本课时的学习，我们知道在 ZooKeeper 服务的运行过程中，**会涉及内存数据** 、**事务日志** 、**数据快照这三种数据文件**。从存储位置上来说，事务日志和数据快照一样，都存储在本地磁盘上；而从业务角度来讲，内存数据就是我们创建数据节点、添加监控等请求时直接操作的数据。事务日志数据主要用于记录本地事务性会话操作，用于 ZooKeeper 集群服务器之间的数据同步。事务快照则是将内存数据持久化到本地磁盘。
 
 这里要注意的一点是，**数据快照是每间隔一段时间才把内存数据存储到本地磁盘，因此数据并不会一直与内存数据保持一致**。在单台 ZooKeeper 服务器运行过程中因为异常而关闭时，可能会出现数据丢失等情况。
+

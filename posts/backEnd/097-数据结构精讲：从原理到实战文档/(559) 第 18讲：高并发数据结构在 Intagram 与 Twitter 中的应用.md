@@ -1,3 +1,5 @@
+# 第18讲：高并发数据结构在Intagram与Twitter中的应用
+
 你好，我是你的数据结构课老师蔡元楠，欢迎进入第 18 课时的"高并发数据结构在 Instagram 与 Twitter 中的应用"学习。  
 
 <br />
@@ -36,7 +38,9 @@
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6D/E2/Cgq2xl5ePyKATcCBAAAzdnzmfEA225.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6D/E2/Cgq2xl5ePyKATcCBAAAzdnzmfEA225.png"/> 
+
 
 <br />
 
@@ -52,7 +56,9 @@
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6D/E1/CgpOIF5eP0iAK2IlAABLkmXIPwQ677.png"/>  
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6D/E1/CgpOIF5eP0iAK2IlAABLkmXIPwQ677.png"/> 
+  
 
 <br />
 
@@ -60,7 +66,9 @@
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6D/E2/CgpOIF5eP-qAM80jAABMtsiYhKk386.png"/>  
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6D/E2/CgpOIF5eP-qAM80jAABMtsiYhKk386.png"/> 
+  
 
 <br />
 
@@ -80,7 +88,9 @@
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6D/E2/CgpOIF5eQBqAExy4AACDJT3LYV8511.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6D/E2/CgpOIF5eQBqAExy4AACDJT3LYV8511.png"/> 
+
 
 <br />
 
@@ -102,7 +112,9 @@
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6D/E2/Cgq2xl5eQGGAbUzBAAAu3TPwDpk565.png"/>  
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6D/E2/Cgq2xl5eQGGAbUzBAAAu3TPwDpk565.png"/> 
+  
 
 <br />
 
@@ -110,11 +122,15 @@
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6D/E2/CgpOIF5eQHOAQU7HAAB6dVZWkok346.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6D/E2/CgpOIF5eQHOAQU7HAAB6dVZWkok346.png"/> 
+
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6D/E3/Cgq2xl5eQIqAF4ytAAEEHYHBeFQ133.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6D/E3/Cgq2xl5eQIqAF4ytAAEEHYHBeFQ133.png"/> 
+
 
 <br />
 
@@ -126,9 +142,13 @@
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6D/E2/CgpOIF5eQKCAYgHhAAA34pEyWzs606.png"/>
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6D/E3/CgpOIF5eQKmACKs7AAEN1blx-Co190.png"/>
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6D/E2/CgpOIF5eQKCAYgHhAAA34pEyWzs606.png"/> 
+
+
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6D/E3/CgpOIF5eQKmACKs7AAEN1blx-Co190.png"/> 
+
 
 <br />
 
@@ -157,3 +177,4 @@
 <br />
 
 OK，这节课就讲到这里啦，我们数据结构这个专栏到此也结束了，希望对你有所帮助。
+

@@ -1,3 +1,5 @@
+# 第32讲：消息队列选型：RocketMQ适用哪些场景？
+
 关于消息队列的应用场景有很多，不同消息队列由于在实现上有着细微的差别，所以就有各自适合的应用场景。
 
 如果你的工作以业务开发为主，建议了解一下消息队列背后的设计思想，以及其基本的特性，这样才能在业务开发中应用消息队列时，对消息队列进行合理的选型。这一课时我们一起来对 RocketMQ 做一个拆解。
@@ -8,7 +10,9 @@ RocketMQ 在阿里巴巴被大规模应用，其前身是淘宝的 MetaQ，后�
 
 RocketMQ 整体设计和其他的 MQ 类似，除了 Producer、Consumer，还有 NameServer 和 Broker。
 
-<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/37/53/CgqCHl8ZTYKAUg3wAAM3B8uYJ2w877.png"/>
+
+<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/37/53/CgqCHl8ZTYKAUg3wAAM3B8uYJ2w877.png"/> 
+
 
 NameServer 存储了 Topic 和 Broker 的信息，主要功能是管理 Broker，以及进行消费的路由信息管理。
 
@@ -42,7 +46,9 @@ RocketMQ 消息中间件的使用场景比较广泛，对于需要通过 MQ 进�
 
 使用 RocketMQ 实现 Binlog 数据同步，有一个成熟的方案，那就是 RocketMQ 结合阿里的 Canal。Canal 是阿里巴巴开源的数据库组件，可以基于 MySQL 数据库进行增量日志解析，实现增量数据订阅和消费，目前已经在很多大公司中应用。
 
-<Image alt="image (7).png" src="https://s0.lgstatic.com/i/image/M00/37/48/Ciqc1F8ZTamASw8yAABP8I4Z9dc951.png"/>
+
+<Image alt="image (7).png" src="https://s0.lgstatic.com/i/image/M00/37/48/Ciqc1F8ZTamASw8yAABP8I4Z9dc951.png"/> 
+
 
 Canal 的实现原理特别巧妙。不知道你有没有看过谍战题材的影片，比如 007 系列。Canal 在这里就好像一个伪装的特工，它模拟 MySQL Slave 的交互协议，把自己作为 MySQL 主从同步中的一个从节点，拉取 Binlog 日志信息，然后进行分发。
 
@@ -73,3 +79,4 @@ RocketMQ 实现的事务消息，其实和本地消息表非常类似。RokcetMQ
 首先，源码之下无秘密，想要彻底学习并且搞懂一个组件，学习源码是最有效的手段之一；其次，专栏的读者中有相当一部分是做 Java 语言开发的，RocketMQ 的源码就是 Java 语言，比起 Kafka 或者 RabbitMQ 的源码，阅读起来要简单很多。
 
 在你的项目中是否应用到了 RocketMQ，在应用时又利用了它的哪些特性呢？欢迎留言讨论。
+

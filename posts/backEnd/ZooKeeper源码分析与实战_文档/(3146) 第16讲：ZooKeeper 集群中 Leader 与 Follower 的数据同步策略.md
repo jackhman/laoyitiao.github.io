@@ -1,3 +1,5 @@
+# 第16讲：ZooKeeper集群中Leader与Follower的数据同步策略
+
 在前面的课时中，我们已经对 ZooKeeper 集群中 Leader 服务器的选举等相关操作进行了详细介绍。本课时我们继续将焦点集中在 ZooKeeper 集群中的相关操作。在 Leader 节点选举后，还需要把 Leader 服务器和 Follow 服务器进行数据同步。在保证整个 ZooKeeper 集群中服务器数据一致的前提下，ZooKeeper 集群才能对外提供服务。
 
 ### 为什么要进行同步
@@ -20,7 +22,9 @@
 
 在数据同步的过程中，ZooKeeper 集群的主要工作就是将那些没有在 Learnning 服务器上执行过的事务性请求同步到 Learning 服务器上。**这里请你注意，事务性的会话请求会被同步，而像数据节点的查询等非事务性请求则不在数据同步的操作范围内。** 而在具体实现数据同步的时候，ZooKeeper 集群又提供四种同步方式，如下图所示：
 
-<Image alt="image (28).png" src="https://s0.lgstatic.com/i/image/M00/26/F3/CgqCHl7zLYaASBk3AAA-I033owc988.png"/>
+
+<Image alt="image (28).png" src="https://s0.lgstatic.com/i/image/M00/26/F3/CgqCHl7zLYaASBk3AAA-I033owc988.png"/> 
+
 
 #### DIFF 同步
 
@@ -89,3 +93,4 @@ if (!writeToTxnLog) {
 本课时我们学习了 ZooKeeper 集群中数据同步的相关知识。知道了 ZooKeeper 集群之所以进行数据同步，是为了避免在处理事务性会话请求时，服务器上的数据状态发生变化，最终导致在 ZooKeeper 集群中出现数据不一致的情况。因此，在处理新增数据节点等会话请求的时候，需要在 ZooKeeper 集群中进行数据同步。
 
 而在 ZooKeeper 集群数据同步的过程中，一般采用四种同步方式，这里我们要注意的是 TRUNC+DIFF 这种同步方式，我们上面讲到过，这种同步方式是先回滚数据再同步数据。而回滚到的状态可以看作是删除在 Leader 服务器上不存在的事务性操作记录。
+

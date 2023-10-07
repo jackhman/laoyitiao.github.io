@@ -1,3 +1,5 @@
+# 第74讲：为什么String被设计为是不可变的？
+
 本课时我们主要讲解为什么 String 被设计为是不可变的？这样设计有什么好处？
 
 ### String 是不可变的
@@ -56,7 +58,9 @@ String s2 = "lagou";
 
 其实 s1 和 s2 背后指向的都是常量池中的同一个"lagou"，如下图所示：
 
-<Image alt="并发.png" src="https://s0.lgstatic.com/i/image3/M01/15/19/Ciqah16inuiAShobAAEQTGOzcvs087.png"/>
+
+<Image alt="并发.png" src="https://s0.lgstatic.com/i/image3/M01/15/19/Ciqah16inuiAShobAAEQTGOzcvs087.png"/> 
+
 
 在图中可以看到，左边这两个引用都指向常量池中的同一个"lagou"，正是因为这样的机制，再加上 String 在程序中的应用是如此广泛，我们就可以**节省大量的内存空间**。
 
@@ -112,3 +116,4 @@ String 不可变的第四个好处就是**线程安全** ，因为具备**不变
 > "字符串常量池"参考了王磊老师的《 Java 源码剖析 34 讲》的 01 讲的部分内容；  
 >
 > "缓存 HashCode"和"多线程安全"思路参考自 Deecyn：<https://juejin.cn/post/6844904006909689864>
+

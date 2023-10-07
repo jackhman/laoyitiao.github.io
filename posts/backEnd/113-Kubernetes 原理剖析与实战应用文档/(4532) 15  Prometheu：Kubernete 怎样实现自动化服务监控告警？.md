@@ -1,3 +1,5 @@
+# 15Prometheu：Kubernete怎样实现自动化服务监控告警？
+
 通过之前的学习，我们已经对 Kubernetes 有了一定的理解，也知道如何在 Kubernetes 中部署自己的业务系统。
 
 Kubernetes 强大的能力让我们非常方便地使用容器部署业务。Kubernetes 自带的副本保持能力，可以避免部署的业务系统出现单点故障，提高可用性。各种探针也可以帮助我们对运行中的容器进行一些简单的周期性检查。
@@ -76,7 +78,9 @@ Prometheus 在早期开发的时候，参考了Google 内部 Borg 的监控实�
 
 我们来看一个例子，如下图是 Prometheus + Grafana 组成的监控方案。
 
-<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/5D/C8/Ciqc1F-FUAaABRE2AAFto-2ifvc966.png"/>  
+
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/5D/C8/Ciqc1F-FUAaABRE2AAFto-2ifvc966.png"/> 
+  
 
 (<https://www.prometheus.io/assets/architecture.png>)
 
@@ -99,3 +103,4 @@ Prometheus 在早期开发的时候，参考了Google 内部 Borg 的监控实�
 Kubernetes 的副本保持及自愈能力，可以尽可能地保持应用程序的运行，但这并不意味着我们就不需要了解应用程序运行的情况了。因此，当我们开始将业务部署到 Kubernetes 中时，还需要去部署一套监控系统，来帮助我们了解到业务内部运行的一些细节情况，同时我们也需要监控 Kubernetes 系统本身，帮助我们了解整个集群当前的形态，指导我们作出决策。Prometheus 和 Grafana 是目前使用较广泛的监控组合方案，很多监控方案也都是基于此做了二次开发和定制。
 
 这节课到这里就结束了，如果你有什么想法或者疑问，欢迎你在留言区留言，我们一起讨论。
+

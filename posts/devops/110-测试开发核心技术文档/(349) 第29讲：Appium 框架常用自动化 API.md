@@ -1,3 +1,5 @@
+# 第29讲：Appium框架常用自动化API
+
 本课时我们开始学习 Appium 框架中常用的自动化 API。  
 
 Appium 常用 API
@@ -35,7 +37,9 @@ noReset fullReset 设置可以判断在测试前后是否需要去清理 App 的
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/4C/CgpOIF5wZS-ARQX_AAKCUn-qSck582.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/4C/CgpOIF5wZS-ARQX_AAKCUn-qSck582.png"/> 
+
 
 <br />
 
@@ -51,7 +55,9 @@ noReset fullReset 设置可以判断在测试前后是否需要去清理 App 的
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/4D/Cgq2xl5wZS-AErgaAAGdXiNhIc8313.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/4D/Cgq2xl5wZS-AErgaAAGdXiNhIc8313.png"/> 
+
 
 <br />
 
@@ -59,7 +65,9 @@ noReset fullReset 设置可以判断在测试前后是否需要去清理 App 的
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/4C/CgpOIF5wZS-AXSp5AAJGOBnUUVg131.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/4C/CgpOIF5wZS-AXSp5AAJGOBnUUVg131.png"/> 
+
 
 <br />
 
@@ -75,7 +83,9 @@ noReset fullReset 设置可以判断在测试前后是否需要去清理 App 的
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/4D/Cgq2xl5wZTCAKiTKAAMDhTaXVUk924.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/4D/Cgq2xl5wZTCAKiTKAAMDhTaXVUk924.png"/> 
+
 
 <br />
 
@@ -131,7 +141,9 @@ iOS 与 Android 在属性的命名上有一些差别，但是整个UI的界面�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/4C/CgpOIF5wZTCAbNmKAANOyGoom8U844.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/4C/CgpOIF5wZTCAbNmKAANOyGoom8U844.png"/> 
+
 
 <br />
 
@@ -151,7 +163,9 @@ iOS 与 Android 在属性的命名上有一些差别，但是整个UI的界面�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/4D/Cgq2xl5wZTCAAmUsAAGoOl4VKDs656.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/4D/Cgq2xl5wZTCAAmUsAAGoOl4VKDs656.png"/> 
+
 
 <br />
 
@@ -192,7 +206,9 @@ iOS 与 Android 在属性的命名上有一些差别，但是整个UI的界面�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/4C/CgpOIF5wZTCANImEAALK32skzIY053.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/4C/CgpOIF5wZTCANImEAALK32skzIY053.png"/> 
+
 
 <br />
 
@@ -204,7 +220,9 @@ iOS 与 Android 在属性的命名上有一些差别，但是整个UI的界面�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/4D/Cgq2xl5wZTCAOieUAAHxtHNfr54405.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/4D/Cgq2xl5wZTCAOieUAAHxtHNfr54405.png"/> 
+
 
 <br />
 
@@ -220,7 +238,9 @@ iOS 与 Android 在属性的命名上有一些差别，但是整个UI的界面�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/4C/CgpOIF5wZTCAbgebAABe4rzTUkY522.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/4C/CgpOIF5wZTCAbgebAABe4rzTUkY522.png"/> 
+
 
 <br />
 
@@ -228,7 +248,9 @@ iOS 与 Android 在属性的命名上有一些差别，但是整个UI的界面�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/4D/Cgq2xl5wZTCAJZB0AAHT7G2hTLk140.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/4D/Cgq2xl5wZTCAJZB0AAHT7G2hTLk140.png"/> 
+
 
 <br />
 
@@ -236,7 +258,9 @@ iOS 与 Android 在属性的命名上有一些差别，但是整个UI的界面�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/4C/CgpOIF5wZTCAenCBAAGbZT7_m-M180.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/4C/CgpOIF5wZTCAenCBAAGbZT7_m-M180.png"/> 
+
 
 <br />
 
@@ -244,7 +268,9 @@ iOS 与 Android 在属性的命名上有一些差别，但是整个UI的界面�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/4D/Cgq2xl5wZTGAZMhhAALp2bU7Auw475.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/4D/Cgq2xl5wZTGAZMhhAALp2bU7Auw475.png"/> 
+
 
 <br />
 
@@ -264,7 +290,9 @@ iOS 与 Android 在属性的命名上有一些差别，但是整个UI的界面�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/4C/CgpOIF5wZTGAFfYQAAGZZKFHP_s235.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/4C/CgpOIF5wZTGAFfYQAAGZZKFHP_s235.png"/> 
+
 
 <br />
 
@@ -272,7 +300,9 @@ iOS 与 Android 在属性的命名上有一些差别，但是整个UI的界面�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/4D/Cgq2xl5wZTGAF0mKAAUaAF6331Q902.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/4D/Cgq2xl5wZTGAF0mKAAUaAF6331Q902.png"/> 
+
 
 <br />
 
@@ -292,7 +322,9 @@ swipe 里面还有 start x、start y、 end x、 end y 以及时间参数。如�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/4C/CgpOIF5wZTGANn-AAAJVxg2UHaM829.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/4C/CgpOIF5wZTGANn-AAAJVxg2UHaM829.png"/> 
+
 
 <br />
 
@@ -300,7 +332,9 @@ swipe 里面还有 start x、start y、 end x、 end y 以及时间参数。如�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/4D/Cgq2xl5wZTGAUEdAAAB0n6WnbHY274.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/4D/Cgq2xl5wZTGAUEdAAAB0n6WnbHY274.png"/> 
+
 
 <br />
 
@@ -308,7 +342,9 @@ swipe 里面还有 start x、start y、 end x、 end y 以及时间参数。如�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/4C/CgpOIF5wZTGAfuAQAAELOsiMYUI745.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/4C/CgpOIF5wZTGAfuAQAAELOsiMYUI745.png"/> 
+
 
 <br />
 
@@ -325,3 +361,4 @@ swipe 里面还有 start x、start y、 end x、 end y 以及时间参数。如�
 <br />
 
 除此之外，Appium 官方文档里面也有一些关于各个 API 功能的介绍，你可以详细的去学习它们。
+

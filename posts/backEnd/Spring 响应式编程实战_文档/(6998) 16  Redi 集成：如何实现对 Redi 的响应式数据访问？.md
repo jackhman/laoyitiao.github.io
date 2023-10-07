@@ -1,3 +1,5 @@
+# 16Redi集成：如何实现对Redi的响应式数据访问？
+
 上一讲，我们介绍了 Spring Data MongoDB Reactive 组件，它是 Spring Data MongoDB 的响应式版本。今天我们要讨论的是 Spring Data Redis Reactive 组件，它专门针对 Redis 这款 NoSQL 数据库提供了响应式编程能力。
 
 使用该组件的步骤与 MongoDB 类似，我们同样围绕开发环境的初始化、Repository 的创建以及与 Service 层之间的集成这些步骤展开讨论，并结合 ReactiveSpringCSS 案例来集成这款主流的缓存中间件。
@@ -53,7 +55,9 @@ public interface ReactiveRedisOperations<K, V> {
 
 然后我们通过 Maven 可以得到如下图所示的组件依赖图，可以看到 spring-boot-starter-data-redis-reactive 组件同时依赖于 spring-data-redis 和 luttuce-core 组件。
 
-<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M01/3A/1D/Cgp9HWB-UKuAHIxRAA0aJtyWMgI410.png"/>  
+
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M01/3A/1D/Cgp9HWB-UKuAHIxRAA0aJtyWMgI410.png"/> 
+  
 spring-boot-starter-data-redis-reactive 组件依赖图
 
 在上图中，我们同时看到 luttuce-core 组件中使用了 Project Reactor 框架中的 reactor-core 组件，这点与前面介绍的技术栈是完全一致的。
@@ -217,7 +221,9 @@ public class AccountService {
 
 在 ReactiveSpringCSS 中，Redis 的作用是实现缓存，这里就需要考虑它的具体应用场景。我们知道，在整体架构上，customer-service 一般会与用户服务 account-service 进行交互，但因为用户账户信息的更新属于低频事件，所以我们设计的实现方式是 account-service 通过消息中间件的方式将用户账户变更信息主动推送给 customer--service。而在这个时候，customer--service 就可以把接收到的用户账户信息保存在 Redis 中，两者之间的交互过程如下图所示。
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M00/39/FD/CioPOWB9VM-AZWmYAADG17Qg_-g409.png"/>  
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M00/39/FD/CioPOWB9VM-AZWmYAADG17Qg_-g409.png"/> 
+  
 customer-service 服务与 account-service 服务交互图
 
 在"10 \| WebFlux（上）：如何使用注解编程模式构建异步非阻塞服务"中，我们已经梳理了 customer-service 中用于生成客户工单的 generateCustomerTicket 方法的整体流程，我带你回顾一下其伪代码。
@@ -390,3 +396,4 @@ Redis 是一款主流的缓存数据库，和 MongoDB 一样提供了实现响�
 在 Spring Data 中，除了 MongoDB 和 Redis 之外，还针对 Cassandra 和 CouchBase 提供了响应式驱动程序，对于关系型数据库而言则没有直接的解决方案。因此，如何在系统中为关系型数据库添加响应式数据访问机制，从而确保全栈式的响应式数据流是一大挑战。下一讲，我们将深入讨论这一话题。
 > 点击链接，获取课程相关代码 ↓↓↓  
 > [https://github.com/lagoueduCol/ReactiveProgramming-jianxiang.git](https://github.com/lagoueduCol/ReactiveProgramming-jianxiang.git?fileGuid=xxQTRXtVcqtHK6j8)
+

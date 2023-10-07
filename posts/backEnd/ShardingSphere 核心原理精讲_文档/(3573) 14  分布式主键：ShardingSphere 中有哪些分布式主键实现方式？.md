@@ -1,3 +1,5 @@
+# 14分布式主键：ShardingSphere中有哪些分布式主键实现方式？
+
 本课时我将为你讲解 ShardingSphere 中的分布式主键实现方式。
 
 在传统数据库软件开发过程中，主键自动生成技术是基本需求。各个数据库对该需求也提供了相应的支持，比如 MySQL 的自增键，Oracle 的自增序列等。而在分片场景下，问题就变得有点复杂，我们不能依靠单个实例上的自增键来实现不同数据节点之间的全局唯一主键，这时分布式主键的需求就应运而生。ShardingSphere 作为一款优秀的分库分表开源软件，同样提供了分布式主键的实现机制，今天，我们就对这一机制的基本原理和实现方式展开讨论。
@@ -103,7 +105,9 @@ public final class ShardingKeyGeneratorServiceLoader extends TypeBasedSPIService
 
 我们在 sharding-core-common 工程的 META-INF/services 目录中看到了具体的 SPI 定义：
 
-<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/3A/E1/Ciqc1F8iliiAVywgAAByh__z6Bw582.png"/>  
+
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/3A/E1/Ciqc1F8iliiAVywgAAByh__z6Bw582.png"/> 
+  
 分布式主键 SPI 配置
 
 可以看到，这里有两个 ShardingKeyGenerator，分别是 SnowflakeShardingKeyGenerator 和 UUIDShardingKeyGenerator，它们都位于org.apache.shardingsphere.core.strategy.keygen 包下。
@@ -137,7 +141,9 @@ public final class UUIDShardingKeyGenerator implements ShardingKeyGenerator {
 
 再来看 SnowFlake（雪花）算法，SnowFlake 是 ShardingSphere 默认的分布式主键生成策略。它是 Twitter 开源的分布式 ID 生成算法，其核心思想是使用一个 64bit 的 long 型数字作为全局唯一 ID，且 ID 引入了时间戳，基本上能够保持自增。SnowFlake 算法在分布式系统中的应用十分广泛，SnowFlake 算法中 64bit 的详细结构存在一定的规范：
 
-<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/3A/ED/CgqCHl8ilkuAHxUeAAHYgqa5Z0Q435.png"/>  
+
+<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/3A/ED/CgqCHl8ilkuAHxUeAAHYgqa5Z0Q435.png"/> 
+  
 64bit 的 ID 结构图
 
 <br />
@@ -282,3 +288,4 @@ idGen.get(properties.getProperty(LeafPropertiesConstant.LEAF_KEY)).getId();
 这里给你留一道思考题：ShardingSphere 中如何分别实现基于号段的 Leaf 以及基于 Snowflake 的 Leaf 来生成分布式 ID？
 
 从下一课时开始，我们将进入到 ShardingSphere 分片引擎实现原理的讲解过程中，我将首先为你介绍解析引擎的执行流程，记得按时来听课。
+

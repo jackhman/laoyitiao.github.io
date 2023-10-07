@@ -1,3 +1,5 @@
+# 第16讲：Tomcat插件原理精析，看SkyWalking如何增强这只Cat（下）
+
 #### TomcatInstrumentation
 
 回顾完 ClassEnhancePluginDefine 抽象类的相关设计，我们回到 tomcat-7.x-8.x-plugin 插件中继续分析 TomcatInstrumentation 这个插件类，重点关注四个问题：拦截哪个类、拦截哪个方法、由谁进行增强、具体增强逻辑。
@@ -39,19 +41,25 @@ TomcatInvokeInterceptor 实现了 InstanceMethodsAroundInterceptor 接口，定�
 
 1. 当 Tomcat 作为用户请求接入层的场景时，如下图所示：
 
-<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/00/AF/CgqCHl6qTfmAEU6RAAC170V3ef8022.png"/>
+
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/00/AF/CgqCHl6qTfmAEU6RAAC170V3ef8022.png"/> 
+
 
 此时请求没有与任何 Trace 关联，也就不会携带 ContextCarrier 请求头，beforeMethod() 方法中会创建全新的 TracingContext 以及 EntrySpan。
 
 2. tomcat-7.x-8.x-plugin 插件被嵌套在其他插件之后的场景，如下图所示：
 
-<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/00/AF/CgqCHl6qTheAD0FbAADiLfWhOis706.png"/>
+
+<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/00/AF/CgqCHl6qTheAD0FbAADiLfWhOis706.png"/> 
+
 
 此时请求在经过其他插件的时候，已经创建了关联的 TracingContext 以及 EntrySpan，beforeMethod() 方法无需创建 TracingContext，只需重新调用 EntrySpan 的 start() 方法即可。
 
 3. Tomcat 作为下游系统被其他系统调用的场景，如下图所示：
 
-<Image alt="3.png" src="https://s0.lgstatic.com/i/image/M00/00/AF/CgqCHl6qTi-AFnZOAADQxYkP_ok501.png"/>
+
+<Image alt="3.png" src="https://s0.lgstatic.com/i/image/M00/00/AF/CgqCHl6qTi-AFnZOAADQxYkP_ok501.png"/> 
+
 
 此时请求已经在上游系统中关联了 Trace，在跨进程 HTTP 调用时就会携带 ContextCarrier 请求头，在 TomcatInstrumentation 的 beforeMethod() 方法中进行反序列化，并填充到全新的 TracingContext 中，还会新建 EntrySpan 并调用其 start() 方法。
 
@@ -91,11 +99,15 @@ public void beforeMethod(EnhancedInstance objInst, Method method,
 
 在 TomcatInvokeInterceptor 反序列化 ContextCarrier 的逻辑中，没有看到 deserialize() 方法的调用，而是看到 CarrierItem 这个类。在 SkyWalking 的 3.x 版本和 6.x 版本中，CarrierContext 的序列化格式略有区别（V1 版本和 V2 版本），我们可以通过 CarrierItem 同时兼容两个版本的格式。CarrierItem 的继承关系如下图所示：
 
-<Image alt="4.png" src="https://s0.lgstatic.com/i/image/M00/00/BB/CgqCHl6qZFmASH0MAABQy3R7qxw376.png"/>
+
+<Image alt="4.png" src="https://s0.lgstatic.com/i/image/M00/00/BB/CgqCHl6qZFmASH0MAABQy3R7qxw376.png"/> 
+
 
 先来看序列化过程，ContextCarrier.items() 方法会根据 ACTIVE_V2_HEADER 配置以及 ACTIVE_V1_HEADER 配置决定当前 Agent 支持哪个版本的格式（也可以同时支持），下图展示了在同时支持 V1、V2 两个版本序列化格式时，ContextCarrier.items() 方法创建的 CarrierItem 链表：
 
-<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/00/BB/Ciqc1F6qZHCAW4yoAAFesp2L980140.png"/>
+
+<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/00/BB/Ciqc1F6qZHCAW4yoAAFesp2L980140.png"/> 
+
 
 在 CarrierItem 中有 headKey 和 headValue 两个核心字段，其中 headKey 由 agent.namespace 和版本标记两部分构成，headValue 则是 ContextCarrier 按照相应版本格式序列化后得到的字符串。下面是 SW6CarrierItem 的构造方法：
 
@@ -177,7 +189,9 @@ response.sendRedirect("跳转到的目标URL");
 
 下图展示了 redirect 跳转的流程：
 
-<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/00/BB/CgqCHl6qZNuANBrFAAHuLLyTujQ360.png"/>
+
+<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/00/BB/CgqCHl6qZNuANBrFAAHuLLyTujQ360.png"/> 
+
 
 注意，redirect 跳转可以跳转到任意 URL，Servlet 1 和 Servlet 2 不一定要在一个 Webapp 中。
 
@@ -201,7 +215,9 @@ setSuspended(true); // Cause the response to be finished
 
 forward 跳转是 Webapp 内部的跳转，对用户来说是无感知的，跳转期间不会返回响应，用户浏览器的 URL 地址栏也不会发生变化。注意，forward 跳转无法跨越多个 Webapp。forward 跳转的具体流程如下所示：
 
-<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/00/BC/CgqCHl6qZcmAJZYZAAGM2VAIvQ8947.png"/>
+
+<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/00/BC/CgqCHl6qZcmAJZYZAAGM2VAIvQ8947.png"/> 
+
 
 实际的 forward 跳转代码如下所示：
 
@@ -228,7 +244,9 @@ objInst.setSkyWalkingDynamicField(allArguments[1]);
 }
 ```
 
-<Image alt="image (6).png" src="https://s0.lgstatic.com/i/image/M00/00/BC/CgqCHl6qZkKAB_A5AABVHOMz99A638.png"/>
+
+<Image alt="image (6).png" src="https://s0.lgstatic.com/i/image/M00/00/BC/CgqCHl6qZkKAB_A5AABVHOMz99A638.png"/> 
+
 
 ForwardInterceptor 对 forward() 方法的增强比较简单，会在 beforeMethod() 方法中将跳转 URL 地址作为 Log 记录到当前 Span 中，同时会在 RuntimeContext 中记录 forward 跳转标记：
 
@@ -253,8 +271,11 @@ ContextManager.getRuntimeContext() // 记录forward标记哦
 
 本课时第 1 部分介绍了 Tomcat 的整体架构，帮助你梳理了 Tomcat 处理请求的逻辑。Tomcat 在接收到用户请求时，首先由 Connector 将请求转换成 Request 对象，然后调用容器的 Pipeline 来处理该 Request 对象。Pipeline 由多个自定义 Valve 与标准 Valve 构成，Pipeline 首先会调用自定义 Valve 处理请求，最后标准 Valve 调用子容器，这是典型的责任链模式。整个调用流程如下图所示：
 
-<Image alt="image (7).png" src="https://s0.lgstatic.com/i/image/M00/00/BC/CgqCHl6qZmuASJgqAAHvghToaYo778.png"/>
+
+<Image alt="image (7).png" src="https://s0.lgstatic.com/i/image/M00/00/BC/CgqCHl6qZmuASJgqAAHvghToaYo778.png"/> 
+
 
 当请求经过所有的 Pipeline-Valve 的处理之后，Tomcat 会将返回的结果交给 Connector，Connector 会通过底层的 Socket 连接将响应结果返回给用户。
 
 理清 Tomcat 架构之后，本课时的第 2 部分深入介绍了 tomcat-7.x-8.x-plugin 插件对 StandardHostValve 中 invoke() 方法的增强，同时还深入讲解了 ContextCarrier 同时支持多个序列化版本的实现原理。最后介绍了 forward 跳转、redirect 跳转的原理，以及 tomcat-7.x-8.x-plugin 插件对 forward 跳转的处理。
+

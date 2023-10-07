@@ -1,3 +1,5 @@
+# 第28讲：使用Prometheu和Grafana处理性能指标数据
+
 用户对于应用的性能总是有着苛刻的要求。在目前的市场上，每一个服务都有着不少的替代选项。如果你的网页打开速度不够快，或者你的 App 在每次刷新时总是长时间显示加载中的图标，那么你多半会失去这个用户。提升性能的前提是了解应用的性能，知道整个系统的瓶颈在哪里。这就需要收集足够多的性能指标数据，并以可视化的形式展现出来。本课时介绍性能指标数据的捕获、收集、分析和展示，用到的工具包括 Micrometer、Prometheus 和 Grafana 等。
 
 ### 捕获数据
@@ -276,12 +278,17 @@ kubectl port-forward -n monitoring svc/prometheus-operated 9090:9090
 
 在下图所展示的 Prometheus 的抓取目标界面中，可以看到新添加的地址管理服务。
 
-<Image alt="prometheus-targets.png" src="https://s0.lgstatic.com/i/image/M00/22/BD/CgqCHl7sZxyATTFdAAFwKlrVwNk076.png"/>
+
+<Image alt="prometheus-targets.png" src="https://s0.lgstatic.com/i/image/M00/22/BD/CgqCHl7sZxyATTFdAAFwKlrVwNk076.png"/> 
+
 
 通过 Grafana 的界面可以创建出各种类型的图表。下图是地址管理服务的搜索操作的请求处理速度。
 
-<Image alt="grafana.png" src="https://s0.lgstatic.com/i/image/M00/22/B1/Ciqc1F7sZyOALneTAADTwktOkp4086.png"/>
+
+<Image alt="grafana.png" src="https://s0.lgstatic.com/i/image/M00/22/B1/Ciqc1F7sZyOALneTAADTwktOkp4086.png"/> 
+
 
 ### 总结
 
 提升系统性能的首要前提是了解系统的性能，只有收集足够多的性能指标数据，才能找到性能优化的正确方向，并及时处理性能相关的问题。通过本课时的学习，你应该掌握如何使用 Micrometer 来在代码中捕获性能指标数据，以及如何用 Prometheus 来抓取数据。对于 Prometheus 中的数据，可以使用 Grafana 来进行展示，你还应该了解如何在 Kubernetes 上使用 Prometheus Operator，从而构建自己的性能监控的技术栈。
+

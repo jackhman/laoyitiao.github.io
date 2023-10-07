@@ -1,3 +1,5 @@
+# 19事件轮询：如何理解浏览器中的EventLoop？
+
 上一讲我们探讨了 JavaScript 引擎的内存管理及垃圾回收机制，那么这一讲依然要讨论和 JS 引擎相关的 Eventloop，我会带你深入理解 JavaScript 引擎所做的工作。
 
 我会先讲解浏览器端的 Eventloop 的运行机制，待你对浏览器端有了一定的理解之后，再带你设计一些 Node.js 的 Eventloop 的底层逻辑。你可以发现，无论是浏览器端还是服务端，都在使用 Eventloop，虽然两者机制不同，但都利用了 JavaScript 语言的单线程和非阻塞的特点。希望你能扎实地掌握这部分内容，因为这对你在工作中编写高性能的 JavaScript 代码有所帮助。
@@ -16,17 +18,23 @@ Eventloop 是 JavaScript 引擎异步编程背后需要特别关注的知识点�
 
 **1.调用堆栈（call stack）负责跟踪所有要执行的代码**。每当一个函数执行完成时，就会从堆栈中弹出（pop）该执行完成函数；如果有代码需要进去执行的话，就进行 push 操作，如下图所示：
 
-<Image alt="图片4.png" src="https://s0.lgstatic.com/i/image6/M00/17/42/CioPOWBHazGAfzOQAAIO77agDbw772.png"/>
+
+<Image alt="图片4.png" src="https://s0.lgstatic.com/i/image6/M00/17/42/CioPOWBHazGAfzOQAAIO77agDbw772.png"/> 
+
 
 **2.事件队列（event queue）负责将新的 function 发送到队列中进行处理**。它遵循 queue 的数据结构特性，先进先出，在该顺序下发送所有操作以进行执行。如下图所示：
 
-<Image alt="图片5.png" src="https://s0.lgstatic.com/i/image6/M00/17/46/Cgp9HWBHa0uAO5oEAAIrTDhci3M926.png"/>
+
+<Image alt="图片5.png" src="https://s0.lgstatic.com/i/image6/M00/17/46/Cgp9HWBHa0uAO5oEAAIrTDhci3M926.png"/> 
+
 
 **3.每当调用事件队列（event queue）中的异步函数时，都会将其发送到浏览器 API**。根据从调用堆栈收到的命令，API 开始自己的单线程操作。其中 setTimeout 方法就是一个比较典型的例子，在堆栈中处理 setTimeout 操作时，会将其发送到相应的 API，该 API 一直等到指定的时间将此操作送回进行处理。它将操作发送到哪里去呢？答案是事件队列（event queue）。这样，就有了一个循环系统，用于在 JavaScript 中运行异步操作。
 
 **4.JavaScript 语言本身是单线程的，而浏览器 API 充当单独的线程**。事件循环（Eventloop）促进了这一过程，它会不断检查调用堆栈是否为空。如果为空，则从事件队列中添加新的函数进入调用栈（call stack）；如果不为空，则处理当前函数的调用。我们把整个过程串起来就是这样的一个循环执行流程，如下图所示：
 
-<Image alt="图片6.png" src="https://s0.lgstatic.com/i/image6/M00/17/43/CioPOWBHaz-AIvXzAAMjXUqLjBw024.png"/>
+
+<Image alt="图片6.png" src="https://s0.lgstatic.com/i/image6/M00/17/43/CioPOWBHaz-AIvXzAAMjXUqLjBw024.png"/> 
+
 
 通过上面这张图就能很清晰地看出调用栈、事件队列以及 Eventloop 和它们之间相互配合的关系。
 
@@ -48,7 +56,9 @@ process.nextTick, Promises, Object.observe, MutationObserver
 3. 然后再从宏任务队列中取下一个，执行完毕后，再次将 microtask queue 中的全部取出，循环往复，直到两个 queue 中的任务都取完。
 
 总结起来就是：**一次 Eventloop 循环会处理一个宏任务和所有这次循环中产生的微任务** 。  
-<Image alt="刘烨的js.png" src="https://s0.lgstatic.com/i/image6/M00/17/45/CioPOWBHbTWAFHeGAAU2r3znzGU909.png"/>
+
+<Image alt="刘烨的js.png" src="https://s0.lgstatic.com/i/image6/M00/17/45/CioPOWBHbTWAFHeGAAU2r3znzGU909.png"/> 
+
 
 关于宏任务和微任务暂时先说到这里，更详细的内容我会在"21 \| 引擎进阶（上）：探究宏任务\&微任务的运行机制"中详细讲解。
 
@@ -61,7 +71,9 @@ process.nextTick, Promises, Object.observe, MutationObserver
 
 简单翻译过来就是：当 Node.js 开始启动时，会初始化一个 Eventloop，处理输入的代码脚本，这些脚本会进行 API 异步调用，process.nextTick() 方法会开始处理事件循环。下面就是 Node.js 官网提供的 Eventloop 事件循环参考流程。
 
-<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M00/17/46/Cgp9HWBHaxyAMv7yAAC2Vr6vRw4319.png"/>
+
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M00/17/46/Cgp9HWBHaxyAMv7yAAC2Vr6vRw4319.png"/> 
+
 
 整个流程分为六个阶段，当这六个阶段执行完一次之后，才可以算得上执行了一次 Eventloop 的循环过程。我们来分别看下这六个阶段都做了哪些事情。
 
@@ -73,7 +85,9 @@ process.nextTick, Promises, Object.observe, MutationObserver
 
 * **poll 阶段**：poll 阶段是一个重要且复杂的阶段，几乎所有 I/O 相关的回调，都在这个阶段执行（除了setTimeout、setInterval、setImmediate 以及一些因为 exception 意外关闭产生的回调），这个阶段的主要流程如下图所示。
 
-<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M00/17/42/CioPOWBHawOAK71oAAFclaJ2RLA602.png"/>
+
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M00/17/42/CioPOWBHawOAK71oAAFclaJ2RLA602.png"/> 
+
 
 * **check 阶段**：执行 setImmediate() 设定的 callbacks。
 
@@ -108,7 +122,9 @@ Node.js 和浏览器端宏任务队列的另一个很重要的不同点是，浏
 
 但是 requestIdlecallback 却是一个更好理解的概念。当宏任务队列中没有任务可以处理时，浏览器可能存在"空闲状态"。这段空闲时间可以被 requestIdlecallback 利用起来执行一些优先级不高、不必立即执行的任务，如下图所示：
 
-<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image6/M01/17/45/Cgp9HWBHavCAdApzAACc58yaa0Q304.png"/>
+
+<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image6/M01/17/45/Cgp9HWBHavCAdApzAACc58yaa0Q304.png"/> 
+
 
 当然为了防止浏览器一直处于繁忙状态，导致 requestIdlecallback 可能永远无法执行回调，它还提供了一个额外的 timeout 参数，为这个任务设置一个截止时间。浏览器就可以根据这个截止时间规划这个任务的执行。
 
@@ -119,3 +135,4 @@ Node.js 和浏览器端宏任务队列的另一个很重要的不同点是，浏
 到这里，你基本就能理解 Eventloop 在不同的端上的情况了。虽然说 Eventloop 本身并不是一个难理解的概念，但是由于 JS 不同平台的实现的差异，让这个知识点很难一下说清楚，因此我就拿出这一讲带你来分析 Eventloop。希望你可以反复琢磨这一概念，将它理解透彻。
 
 下一讲我们来聊聊 JS 的代码是如何被编译执行的。如果本讲的内容对你有帮助，就留言和我说说你的学习感悟吧。我们下一讲再见。
+

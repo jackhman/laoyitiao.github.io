@@ -1,3 +1,5 @@
+# 08Reactor操作符（下）：如何多样化裁剪响应式流？
+
 通过前两讲的内容可以知道，Reactor 框架为我们提供了各种操作符，使用这些操作符可以高效地操作 Flux 和 Mono 对象。Reactor 中的操作符可以分成不同的类型，上一讲我们关注转换、过滤和组合类的操作符，而今天我将继续为你介绍剩余的条件、裁剪、工具类的操作符。
 
 ### 条件操作符
@@ -124,7 +126,9 @@ Flux.concat(
 
 裁剪操作符中最经典的就是这个 reduce 操作符。reduce 操作符对来自 Flux 序列中的所有元素进行累积操作并得到一个 Mono 序列，该 Mono 序列中包含了最终的计算结果。reduce 操作符示意图如下所示。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/2C/98/CioPOWBlYDaAMg1pAAPcwZ2XS_I628.png"/>  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/2C/98/CioPOWBlYDaAMg1pAAPcwZ2XS_I628.png"/> 
+  
 reduce 操作符示意图（来自 Reactor 官网）
 
 在上图中，具体的累积计算很简单，我们也可以通过一个 BiFunction 来实现任何自定义的复杂计算逻辑。reduce 操作符的示例代码如下所示，这里的 BiFunction 就是一个求和函数，用来对 1 到 10 的数字进行求和，运行结果为 55。
@@ -317,3 +321,4 @@ Error has been observed by the following operator(s):
 那么介绍完 Spring 内置的 Reactor 框架之后，从下一讲开始，我们要讨论在 Spring 中使用这一框架来实现响应式组件的具体过程，首先要说的就是全新的 WebFlux 组件。下一讲，我们将详细分析 WebFlux 与传统 WebMVC 之间的区别，希望会带给你新的思路，我们到时见。
 > 点击链接，获取课程相关代码↓↓↓  
 > [https://github.com/lagoueduCol/ReactiveProgramming-jianxiang.git](https://github.com/lagoueduCol/ReactiveProgramming-jianxiang.git?fileGuid=oD5pMrGWYzgDig8d)
+

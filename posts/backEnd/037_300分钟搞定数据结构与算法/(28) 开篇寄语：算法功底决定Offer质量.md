@@ -1,3 +1,5 @@
+# 开篇寄语：算法功底决定Offer质量
+
 你好，欢迎学习由拉勾和力扣（LeetCode）联合出品的《300分钟搞定算法面试》课。  
 
 <br />
@@ -10,13 +12,17 @@
 
 近年来，我一直致力于写出最简洁、最能清晰体现思路的算法题解法并分享出去，希望帮更多人意识到算法在工作和求职中的重要性。至今，我已在力扣（LeetCode）发布算法解题方法近 200 个，并有幸获得不少同行的赞同和分享。同时，我还在知网发表了多篇算法论文。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9D/51/CgotOV2td9qAFNJZAAVW-BReZVA180.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9D/51/CgotOV2td9qAFNJZAAVW-BReZVA180.png"/> 
+
 
 <br />
 
 非常开心拉勾和力扣能强强联手策划这算法课。我作为技术面试官，有大量技术人才选拔经验，参与了面试考题、评分标准设计等各个重要环节。过程中我发现，很多人并没认识到，不论在国内还是国外，算法和数据结构早已经成为技术面试的必考项，尤其是重视技术品牌的互联网一线大厂，算法是否合格直接决定了候选人能否获得 Offer。常常有其他项表现不错的程序员，由于算法不过关而错失心仪 Offer。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9D/32/CgoB5l2td9qAf2VuAABerHKNze4736.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9D/32/CgoB5l2td9qAf2VuAABerHKNze4736.png"/> 
+
 
 <br />
 
@@ -34,7 +40,9 @@
 
 <br />
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9D/51/CgotOV2td9qAGBDwAABEsYGN5S0631.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9D/51/CgotOV2td9qAGBDwAABEsYGN5S0631.png"/> 
+
 
 数据结构与算法能力的考核在以 BAT 为代表的国内大厂，乃至硅谷高科技公司的面试里占了相当大的比重。总结起来，考察的原因有四：
 
@@ -48,7 +56,9 @@
 
 ###### 数据结构和算法对工作的影响﻿
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9D/32/CgoB5l2td9qAWazAAABmDjYtcgw390.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9D/32/CgoB5l2td9qAWazAAABmDjYtcgw390.png"/> 
+
 
 如果你问，不会数据结构和算法，对工作有没有什么影响吗？我觉得肯定是有的。
 
@@ -62,9 +72,13 @@
 
 结合拉勾 40万 研发相关岗位标准大数据、力扣（LeetCode）海量大厂面试算法题库及我多年算法实战经验，三方合力打磨出了这门算法课，旨在帮你在 300 分钟内快速绘制出数据结构与算法的重点知识体系，并辅以 35 道来自顶级互联网大厂的精选高频面试真题为你深度剖析算法每个考察点与解题思路。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9D/51/CgotOV2td9qAQ1iLAACgvHlWNWo866.png"/>
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9D/32/CgoB5l2td9uASVpjAAJeTS0Bj5g377.png"/>
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9D/51/CgotOV2td9qAQ1iLAACgvHlWNWo866.png"/> 
+
+
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9D/32/CgoB5l2td9uASVpjAAJeTS0Bj5g377.png"/> 
+
 
 课程由 4 部分组成：
 
@@ -83,4 +97,5 @@
 那么，这门课程我就介绍完了。从下节课开始，我会先来讲解算法面试中常用的数据结构和技巧，帮助你为学好后续课程打下一个坚实的基础。
 
 <br />
+
 

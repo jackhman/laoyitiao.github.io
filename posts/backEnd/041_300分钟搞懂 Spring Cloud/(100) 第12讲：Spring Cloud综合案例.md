@@ -1,8 +1,12 @@
+# 第12讲：SpringCloud综合案例
+
 你好，我是你的 Spring Cloud 讲师尹吉欢，欢迎来到第 12 课时"综合案例"的学习。
 
 ### 综合案例架构图
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/27/50/Cgp9HWBcIOuACRh7AADDrLDk4gs631.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/27/50/Cgp9HWBcIOuACRh7AADDrLDk4gs631.png"/> 
+
 
 相信你对案例的架构图并不陌生，在开词篇中我有介绍过。经过几个月的学习，终于到了最后总结的时刻。
 
@@ -16,7 +20,9 @@
 
 ### 案例项目模块
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M01/27/51/Cgp9HWBcIPaAYc_qAABYROhyDiA390.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M01/27/51/Cgp9HWBcIPaAYc_qAABYROhyDiA390.png"/> 
+
 
 接下来讲解案例的项目模块，整个项目采用 Maven 多模块的结构，总共 8 个模块。
 
@@ -40,11 +46,15 @@ Web 中采用 Controller 来进行页面的跳转，到页面后通过 Vue 来�
 
 ### 前端页面
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M01/27/4E/CioPOWBcIQWAAit7AABjdZD-Hs4729.png"/>
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M01/27/4E/CioPOWBcIQWAAit7AABjdZD-Hs4729.png"/> 
+
 
 前端页面只实现了 2 个，一个是登录的页面，负责登录的功能，一个是文章详情的页面，负责获取文章信息展示，同时在这边还有个退出登录的按钮，执行退出操作。
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image6/M01/27/4E/CioPOWBcIQyAJveUAACBu7riNqg956.png"/>
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image6/M01/27/4E/CioPOWBcIQyAJveUAACBu7riNqg956.png"/> 
+
 
 ### 案例实现功能
 
@@ -113,3 +123,4 @@ Apollo 的集成只需要在配置文件中指定 appid 和 metaserver 地址，
 最后演示下案例的效果，将 Eureka 和 zuul、webpage、article-provider、user-provider 启动，访问 webpage，进行登录，登录成功后调整到文章详情页面，获取到了文章的信息。右上角退出登录的按钮用于注销。
 
 好了，到这里本专栏的内容就全部讲完了，在最后的彩蛋中，我将分享第二代微服务架构 Spring Cloud Alibaba，记得按时来听课啊，下节课见。
+

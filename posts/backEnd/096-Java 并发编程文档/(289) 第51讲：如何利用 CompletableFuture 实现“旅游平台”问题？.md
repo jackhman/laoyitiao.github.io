@@ -1,16 +1,22 @@
+# 第51讲：如何利用CompletableFuture实现“旅游平台”问题？
+
 本课时我们主要讲解如何利用 CompletableFuture 实现旅游平台问题。
 
 ### 旅游平台问题
 
 什么是旅游平台问题呢？如果想要搭建一个旅游平台，经常会有这样的需求，那就是用户想同时获取多家航空公司的航班信息。比如，从北京到上海的机票钱是多少？有很多家航空公司都有这样的航班信息，所以应该把所有航空公司的航班、票价等信息都获取到，然后再聚合。由于每个航空公司都有自己的服务器，所以分别去请求它们的服务器就可以了，比如请求国航、海航、东航等，如下图所示：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6D/26/CgpOIF5c0buAO8NTAABvjMfQrLA070.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6D/26/CgpOIF5c0buAO8NTAABvjMfQrLA070.png"/> 
+
 
 ### 串行
 
 一种比较原始的方式是用串行的方式来解决这个问题。
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6D/27/CgpOIF5c0t-AQ8b-AAB6FEgKj0Q005.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6D/27/CgpOIF5c0t-AQ8b-AAB6FEgKj0Q005.png"/> 
+
 
 比如我们想获取价格，要先去访问国航，在这里叫作 website 1，然后再去访问海航 website 2，以此类推。当每一个请求发出去之后，等它响应回来以后，我们才能去请求下一个网站，这就是串行的方式。
 
@@ -20,7 +26,9 @@
 
 接下来我们就对刚才的思路进行改进，最主要的思路就是把串行改成并行，如下图所示：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6D/27/CgpOIF5c0vyAN-_5AAE8NqcuyL8450.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6D/27/CgpOIF5c0vyAN-_5AAE8NqcuyL8450.png"/> 
+
 
 我们可以并行地去获取这些机票信息，然后再把机票信息给聚合起来，这样的话，效率会成倍的提高。
 
@@ -30,7 +38,9 @@
 
 下面我们就来看看下面这种有超时的并行获取的情况。
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6D/28/Cgq2xl5c0xaASO8FAAFKHNM1bu8607.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6D/28/Cgq2xl5c0xaASO8FAAFKHNM1bu8607.png"/> 
+
 
 在这种情况下，就属于有超时的并行获取，同样也在并行的去请求各个网站信息。但是我们规定了一个时间的超时，比如 3 秒钟，那么到 3 秒钟的时候如果都已经返回了那当然最好，把它们收集起来即可；但是如果还有些网站没能及时返回，我们就把这些请求给忽略掉，这样一来用户体验就比较好了，它最多只需要等固定的 3 秒钟就能拿到信息，虽然拿到的可能不是最全的，但是总比一直等更好。
 
@@ -220,3 +230,4 @@ public class CompletableFutureDemo {
 最后做一下总结。在本课时中，我们先给出了一个旅游平台问题，它需要获取各航空公司的机票信息，随后进行了代码演进，从串行到并行，再到有超时的并行，最后到不仅有超时的并行，而且如果大家速度都很快，那么也不需要一直等到超时时间到，我们进行了这样的一步一步的迭代。
 
 当然除了这几种实现方案之外，还会有其他的实现方案，你能想到哪些实现方案呢？不妨在下方留言告诉我，谢谢。
+

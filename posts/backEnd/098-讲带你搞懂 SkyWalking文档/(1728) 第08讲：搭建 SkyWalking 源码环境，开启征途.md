@@ -1,3 +1,5 @@
+# 第08讲：搭建SkyWalking源码环境，开启征途
+
 在第一课时中，我们已经成功安装并运行了 SkyWalking 环境，本课时将带你完成 SkyWalking 源码环境的搭建 ，并在 IDEA 中尝试调试 SkyWalking Agent。  
 
 搭建 SkyWalking 源码环境
@@ -69,7 +71,9 @@ mvn clean package -DskipTests -Dcheckstyle.skip
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/06/BA/Ciqah16DGjyAQXgGAAeBF-jQ5aw073.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/06/BA/Ciqah16DGjyAQXgGAAeBF-jQ5aw073.png"/> 
+
 
 <br />
 
@@ -115,7 +119,9 @@ Server started, host 0.0.0.0 listening on 11800
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7F/D0/Cgq2xl6DGj2AHgB8AAAjQ0VaZ8E159.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7F/D0/Cgq2xl6DGj2AHgB8AAAjQ0VaZ8E159.png"/> 
+
 
 <br />
 
@@ -142,7 +148,9 @@ SkyWalking源码目录/skywalking-agent/skywalking-agent.jar
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/06/BA/Ciqah16DGj2AHzBqAAGUjaX3Mcg617.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/06/BA/Ciqah16DGj2AHzBqAAGUjaX3Mcg617.png"/> 
+
 
 SkyWalking源码结构
 ==============
@@ -155,7 +163,9 @@ SkyWalking 源码的整体结构如下图所示：
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7F/D0/Cgq2xl6DGj2AZaUkAABKcoi4_5c009.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7F/D0/Cgq2xl6DGj2AZaUkAABKcoi4_5c009.png"/> 
+
 
 <br />
 
@@ -163,7 +173,9 @@ SkyWalking 源码的整体结构如下图所示：
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/06/BA/Ciqah16DGj2AYS6GAABWyHp4-sA345.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/06/BA/Ciqah16DGj2AYS6GAABWyHp4-sA345.png"/> 
+
 
 <br />
 
@@ -171,7 +183,9 @@ SkyWalking 源码的整体结构如下图所示：
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7F/D0/Cgq2xl6DGj2AKJXJAAALnVoaWe4943.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7F/D0/Cgq2xl6DGj2AKJXJAAALnVoaWe4943.png"/> 
+
 
 <br />
 
@@ -183,7 +197,9 @@ SkyWalking 源码的整体结构如下图所示：
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/06/BA/Ciqah16DGj2AeTteAAATxoHTmQg700.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/06/BA/Ciqah16DGj2AeTteAAATxoHTmQg700.png"/> 
+
 
 <br />
 
@@ -195,7 +211,9 @@ SkyWalking 源码的整体结构如下图所示：
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7F/D0/Cgq2xl6DGj2AZUcYAABRh7Zo8YU356.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7F/D0/Cgq2xl6DGj2AZUcYAABRh7Zo8YU356.png"/> 
+
 
 <br />
 
@@ -207,7 +225,9 @@ SkyWalking 源码的整体结构如下图所示：
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/06/BA/Ciqah16DGj2AXOXhAAAsDflYjvk001.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/06/BA/Ciqah16DGj2AXOXhAAAsDflYjvk001.png"/> 
+
 
 <br />
 
@@ -221,7 +241,9 @@ SkyWalking 源码的整体结构如下图所示：
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7F/D0/Cgq2xl6DGj2Ad7RDAAA3iUNIOfA774.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7F/D0/Cgq2xl6DGj2Ad7RDAAA3iUNIOfA774.png"/> 
+
 
 <br />
 
@@ -229,7 +251,9 @@ SkyWalking 源码的整体结构如下图所示：
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/06/BA/Ciqah16DGj2AF3cKAAAzFmh2Hhw354.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/06/BA/Ciqah16DGj2AF3cKAAAzFmh2Hhw354.png"/> 
+
 
 <br />
 
@@ -243,7 +267,9 @@ SkyWalking 源码的整体结构如下图所示：
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7F/D0/Cgq2xl6DGj6Ab69uAAB3rQXuurE063.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7F/D0/Cgq2xl6DGj6Ab69uAAB3rQXuurE063.png"/> 
+
 
 <br />
 
@@ -253,7 +279,9 @@ SkyWalking 源码的整体结构如下图所示：
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/06/BA/Ciqah16DGj6ADeNJAABfQxiOcoo599.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/06/BA/Ciqah16DGj6ADeNJAABfQxiOcoo599.png"/> 
+
 
 <br />
 
@@ -265,3 +293,4 @@ SkyWalking 源码的整体结构如下图所示：
 ===
 
 本课时重点介绍了 SkyWalking 源码环境的搭建流程，并在搭建完成之后，启动 skywalking-demo 项目进行了简单的测试。之后深入介绍了 SkyWalking 源码中各个模块的核心功能，了解各模块的主要功能可以让你对后续的源码分析更加游刃有余。
+

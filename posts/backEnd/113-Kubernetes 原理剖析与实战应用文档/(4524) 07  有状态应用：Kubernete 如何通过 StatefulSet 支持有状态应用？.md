@@ -1,3 +1,5 @@
+# 07有状态应用：Kubernete如何通过StatefulSet支持有状态应用？
+
 在上一节课中，我们学习了 Kubernetes 中的无状态工作负载，并上手实践了 Deployment 对象，相信现在你已经慢慢喜欢上 Kubernetes 了。
 
 那么本节课，我们来一起看看Kubernetes 中的另外一种工作负载 StatefulSet。从名字就可以看出，这个工作负载主要用于有状态的服务发布。关于有状态服务和无状态服务，你可以参考上一节课的内容。
@@ -312,3 +314,4 @@ RollingUpdate策略是**默认的更新策略** 。可以实现 Pod 的滚动升
 借助 StatefulSet 的这些能力，我们就可以去部署一些有状态服务，比如 MySQL、ZooKeeper、MongoDB 等。你可以跟着这个[教程](https://kubernetes.io/zh/docs/tutorials/stateful-application/zookeeper/)在 Kubernetes 中搭建一个 ZooKeeper 集群。
 
 到这里这节课就结束了，下节课我们就来学习配置管理。如果你对本节课有什么想法或者疑问，欢迎你在留言区留言，我们一起讨论。
+

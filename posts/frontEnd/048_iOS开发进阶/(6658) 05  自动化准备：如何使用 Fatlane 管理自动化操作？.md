@@ -1,3 +1,5 @@
+# 05自动化准备：如何使用Fatlane管理自动化操作？
+
 要成为一个优秀的 iOS 开发者，我们要做的事情远多于"开发"，例如我们要构建和打包 App，管理证书，为 App 进行签名，把 App 分发给测试组，上传 App 到 App Store，等等。这些操作不但繁琐费时，而且容易出错。那么，有没有更便利的方法呢？有，那就是使用 fastlane 来完成这些重复性的工作。接下来这一讲，我们主要聊的也就是这个主题。
 
 ### fastlane 安装
@@ -36,13 +38,17 @@ fastlane 为我们提供了一百多个 Action，它们是 iOS 项目开发中�
 
 这些 Action 怎么执行呢？我们可以通过`fastlane <action>`（例如`fastlane scan`）来执行。下面是执行效果，它提示我选择其中一个 Scheme 来继续执行。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/16/10/CioPOWBF-DaAV56WAAR8Ne2bQ4c230.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/16/10/CioPOWBF-DaAV56WAAR8Ne2bQ4c230.png"/> 
+
 
 从运行情况可知，尽管这些 Action 为我们提供了不少便利，但还是需要手工输入来继续。所以，我不推荐你直接使用这些 Action，而是根据项目需要，在开发自己的自动化操作时通过传入合适的参数来调用 fastlane 所提供的 Action。
 
 具体来说，我们可以把所需的 Action 组合在一起，开发出对应的自动化操作。在 fastlane 中，我们把这个自动化操作或者任务叫作 **Lane** 。**实际上， iOS 开发中的所有自动化操作，主要通过 Lane 来封装和配置的。**
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M00/16/10/CioPOWBF-EqACKcpAAC6PT8Ghi4740.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M00/16/10/CioPOWBF-EqACKcpAAC6PT8Ghi4740.png"/> 
+
 
 Lane 和 Action 的关系如上图所示， 一条 Lane 可以通过参数调用一个或几个 Action 。以 Moments app 为例，我们要自动打包和签名 App，那么我就建了一条名叫`archive_appstore`的 Lane。因为这条 Lane 用到的"更新签名"和"打包"在 fastalne 里已经提供了相关的 Action------`update_code_signing_settings`和`gym`，我就可以到它官网去寻找，从而减轻了开发工作量。
 
@@ -206,7 +212,9 @@ fastlane 首先调用`foo`Lane，然后进去`get_pi`Lane 并返回到`foo`，�
 
 3. 当我们调用 fastlane 所提供的 Action 时，要明确传递各个参数，在执行过程中就无须任何手工交互就能从头到尾执行整个操作。
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image6/M00/16/13/Cgp9HWBF-HeACPAgAAQVQ3FLLec967.png"/>
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image6/M00/16/13/Cgp9HWBF-HeACPAgAAQVQ3FLLec967.png"/> 
+
 
 有了项目需要的所有 Lane 以后，能有效减轻团队成员的重复劳动，并为项目的自动化和工程化打下坚实的基础。在后面的章节中，我会详细介绍如何使用 fastlane 来管理证书，打包 App 和上传到 App Store。
 
@@ -217,3 +225,4 @@ fastlane 首先调用`foo`Lane，然后进去`get_pi`Lane 并返回到`foo`，�
 
 **源码地址：**
 > Fastfile 文件地址：<https://github.com/lagoueduCol/iOS-linyongjian/blob/main/fastlane/Fastfile#L19-L50>
+

@@ -1,16 +1,22 @@
+# 第23讲：深入剖析regiter-receiver-plugin插件（下）
+
 本课时将紧接上一课时的内容，继续介绍服务实例注册请求、EndpointName 以及 NetworkAddress 同步请求的处理。
 
 ### IRegisterLockDAO原理分析
 
 紧接上一课时，当一个服务的注册请求首次到达 RegisterPersistentWorker 时，会通过 IRegisterLockDAO 为其生成全局唯一 ID 。IRegisterLockDAO 接口有两个实现类，如下图所示：
 
-<Image alt="image (13).png" src="https://s0.lgstatic.com/i/image/M00/16/D1/Ciqc1F7WHyuAehevAADKLauus4I955.png"/>
+
+<Image alt="image (13).png" src="https://s0.lgstatic.com/i/image/M00/16/D1/Ciqc1F7WHyuAehevAADKLauus4I955.png"/> 
+
 
 这里要重点分析的是 RegisterLockDAOImpl 这个实现类，其底层是依赖 ElasticSearch 的 version 机制实现的乐观锁。
 
 RegisterLockDAOImpl 这个分布式乐观锁底层使用的索引名称是 register_lock，它为每个 RegisterSource 都分配了一个单独的 Document。Document ID 就是 @Stream 注解中的 scopeId 的值，例如，ServiceInventory 的 scopeId 就是 14，ServiceInstanceInventory 的 scopeId 就是 15，如下所示：
 
-<Image alt="image (14).png" src="https://s0.lgstatic.com/i/image/M00/16/DD/CgqCHl7WHzWAQfHPAAYFXpVpP-Y709.png"/>
+
+<Image alt="image (14).png" src="https://s0.lgstatic.com/i/image/M00/16/DD/CgqCHl7WHzWAQfHPAAYFXpVpP-Y709.png"/> 
+
 
 在 register_lock 索引中只有一个 sequence 字段，它是一个 int 值，初始值为 0，RegisterLockDAOImpl 就是通过自增该字段来分配唯一 ID。
 
@@ -47,7 +53,9 @@ lock() 方法写回 sequence 值时，会发送一个带 version 的 UpdateReque
 
 通过本课程第二部分的介绍可知，SkyWalking Agent 在完成服务注册之后，会立即进行服务实例的注册。 SkyWalking OAP 处理服务实例注册请求的大致流程与前文介绍的服务注册处理流程基本类似，如下图所示。
 
-<Image alt="image (15).png" src="https://s0.lgstatic.com/i/image/M00/16/DD/CgqCHl7WHz-AadgsAAFmWx71MBY433.png"/>
+
+<Image alt="image (15).png" src="https://s0.lgstatic.com/i/image/M00/16/DD/CgqCHl7WHz-AadgsAAFmWx71MBY433.png"/> 
+
 
 服务实例注册的 gRPC 请求由 RegisterServiceHandler.doServiceInstanceRegister() 方法进行处理：
 
@@ -68,7 +76,9 @@ ServiceInstanceInventoryRegister 处理服务实例注册请求的逻辑与前�
 
 最后，我们一起来看一下 ServiceInstanceInventory 中的核心字段，以及与相应 ES 索引字段的映射关系，如下图所示：
 
-<Image alt="image (16).png" src="https://s0.lgstatic.com/i/image/M00/16/D1/Ciqc1F7WH0mAIjcKAAefOW_jMVc517.png"/>
+
+<Image alt="image (16).png" src="https://s0.lgstatic.com/i/image/M00/16/D1/Ciqc1F7WH0mAIjcKAAefOW_jMVc517.png"/> 
+
 
 ### NetWorkAddress、EndpointName 同步
 
@@ -78,7 +88,9 @@ ServiceInstanceInventoryRegister 处理服务实例注册请求的逻辑与前�
 
 NetworkAddress 同步请求的处理流程如下：
 
-<Image alt="image (17).png" src="https://s0.lgstatic.com/i/image/M00/16/DD/CgqCHl7WH1KASBKJAAH06v4jr4g358.png"/>
+
+<Image alt="image (17).png" src="https://s0.lgstatic.com/i/image/M00/16/DD/CgqCHl7WH1KASBKJAAH06v4jr4g358.png"/> 
+
 
 NetworkAddressInventoryRegister.getOrCreate() 方法的处理步骤如下：
 
@@ -127,3 +139,4 @@ ServiceInstancePingServiceHandler.doPing() 方法会从心跳请求中解析出�
 ### 总结
 
 本课时紧接上一课时的内容，首先通过介绍 RegisterLockDAOImpl 的核心原理，完成了对整个服务注册流程的介绍，接下来，又介绍了服务实例注册请求、NetworkAddress 同步请求以及心跳请求的处理流程。
+

@@ -1,3 +1,5 @@
+# 结束语ServiceMeh会是微服务演进的终极方向吗？
+
 在写这个专栏的时候，正好赶上张一山版的《鹿鼎记》热播，鹿鼎记的主线就是寻找四十二章经。因为我这个专栏正好是二十四篇，还经常被爱人开玩笑说在写"二十四章经"。
 
 相对于传统的 IT 架构，互联网的架构在最近十几年变化非常迅速，究其原因还是互联网业务本身的飞速发展。如今中国互联网公司的用户规模已经全球领先，这得益于中国网络基础设施的建设，得益于智能手机的普及。
@@ -32,7 +34,9 @@
 
 结合我们上一讲提过的这张图，虽然 Knative 充分利用了 Istio\&Envoy 的能力，但是也受限于开源的 Service Mesh 方案，没有办法更进一步。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/19/F1/CioPOWBK13KARAmNAAFOLVdbxMk461.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/19/F1/CioPOWBK13KARAmNAAFOLVdbxMk461.png"/> 
+  
 Knative 架构图
 
 你可以试想一下，作为 Route（Istio Gateway）是否有存在的必要，而 Activator 是否又有必要呢？
@@ -56,3 +60,4 @@ Activator 的功能就是在服务 Pod 为 0 的时候，通知 Autoscaler 组�
 最后，我想邀请你参与对本专栏的评价，你的每一个观点对我们来说都是最重要的。[点击链接，即可参与评价，还有机会获得惊喜奖品！](https://wj.qq.com/s2/8177891/91b1/)
 
 本专栏到此结束，衷心希望各位读者一切顺利。
+

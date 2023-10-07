@@ -1,3 +1,5 @@
+# 第26讲：PageObject模式（Web端）
+
 <br />
 
 本课时我们进入 Page Object 模式的讲解，首先我们来了解 Page Object 模式的基础概念。
@@ -5,7 +7,9 @@
 传统测试用例问题
 --------
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6F/11/Cgq2xl5gs92AIuvBAAP8QZgz0qs996.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6F/11/Cgq2xl5gs92AIuvBAAP8QZgz0qs996.png"/> 
+
 
 <br />
 
@@ -36,7 +40,9 @@ PO 封装
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6F/10/CgpOIF5gs92AGCGXAAGM0fHgeW4741.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6F/10/CgpOIF5gs92AGCGXAAGM0fHgeW4741.png"/> 
+
 
 <br />
 
@@ -49,7 +55,9 @@ PO 封装
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6F/11/Cgq2xl5gs92ABdGpAAGvfSpvxmM165.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6F/11/Cgq2xl5gs92ABdGpAAGvfSpvxmM165.png"/> 
+
 
 <br />
 
@@ -124,4 +132,5 @@ PO中的字段代表的意义：
 一旦编写完用例的断言之后，我们就可以重新实现 PO 内的方法了，将原有 pass 内容改写成与自动化框架结合的具体实现，实现完成之后就可以运行了，测试通过就代表整个 case 没有问题，整个实现风格类似于 TDD 风格，也就是测试驱动开发的风格编写 PO 用例。
 
 <br />
+
 

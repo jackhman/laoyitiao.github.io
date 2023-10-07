@@ -1,3 +1,5 @@
+# 13刷新加载：下拉刷新上拉加载，在Flutter中的实现
+
 你好，欢迎来到第 13 课时，上一课时我们实现了多种列表样式，但是缺乏下拉刷新和上拉加载更多的功能，本课时就来完善这部分的功能。实现下拉刷新和上拉加载更多，需要应用到 RefreshIndicator 组件 ，接下来我们就先了解这个组件的一些作用。
 
 ### RefreshIndicator
@@ -21,7 +23,9 @@ RefreshIndicator({
 
 了解完 RefreshIndicator 组件，我们再来看下本课时所要实现的一个效果，如图 1 动画所示。
 
-<Image alt="20200711_155132.gif" src="https://s0.lgstatic.com/i/image/M00/36/B5/CgqCHl8X9e6AN6lyAH6AtsDFbHo367.gif"/>  
+
+<Image alt="20200711_155132.gif" src="https://s0.lgstatic.com/i/image/M00/36/B5/CgqCHl8X9e6AN6lyAH6AtsDFbHo367.gif"/> 
+  
 
 图 1 下拉刷新上拉加载效果
 
@@ -449,3 +453,4 @@ Widget build(BuildContext context) {
 下一课时我们将在 App 基础上完成个人页面，并且在个人页面增加红点提醒功能，丰富 App 整体功能。
 
 [点击此链接查看本课时源码](https://github.com/love-flutter/flutter-column)
+

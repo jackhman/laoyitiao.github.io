@@ -1,3 +1,5 @@
+# 06流式操作：如何使用Flux和Mono高效构建响应式数据流？
+
 在上一讲中，我为你介绍了 Reactor 响应式编程框架，该框架实现了响应式流规范。我们知道在响应式流规范中，存在代表发布者的 Publisher 接口，而 Reactor 提供了这一接口的两种实现，即 Flux 和 Mono，它们是我们利用 Reactor 框架进行响应式编程的基础组件。在引入 Flux 和 Mono 的概念之后，这一讲的内容将围绕如何创建这两个组件展开。
 
 ### 通过 Flux 对象创建响应式流
@@ -58,7 +60,9 @@ Flux.range(2020, 5).subscribe(System.out::println);
 
 在 Reactor 框架中，interval() 方法可以用来生成从 0 开始递增的 Long 对象的数据序列。通过 interval() 所具备的一组重载方法，我们可以分别指定这个数据序列中第一个元素发布之前的延迟时间，以及每个元素之间的时间间隔。interval() 方法相对复杂，我们先附上它的弹珠图，如下所示。
 
-<Image alt="图片9.png" src="https://s0.lgstatic.com/i/image6/M00/27/AE/Cgp9HWBdhB-ASNRVAAJo-Y1sCZw573.png"/>  
+
+<Image alt="图片9.png" src="https://s0.lgstatic.com/i/image6/M00/27/AE/Cgp9HWBdhB-ASNRVAAJo-Y1sCZw573.png"/> 
+  
 使用 interval() 方法创建 Flux 示意图（来自 Reactor 官网）
 
 可以看到，上图中每个元素发布时相当于添加了一个定时器的效果。使用 interval() 方法的示例代码如下所示。
@@ -250,3 +254,4 @@ onComplete
 一旦我们创建了 Flux 和 Mono 对象，就可以使用操作符来操作这些对象从而实现复杂的数据流处理。下一讲，我们就要引入 Reactor 框架所提供的各种操作符来达成这一目标，到时候见。
 > 点击链接，获取课程相关代码↓↓↓  
 > [https://github.com/lagoueduCol/ReactiveProgramming-jianxiang.git](https://github.com/lagoueduCol/ReactiveProgramming-jianxiang.git?fileGuid=xxQTRXtVcqtHK6j8)
+

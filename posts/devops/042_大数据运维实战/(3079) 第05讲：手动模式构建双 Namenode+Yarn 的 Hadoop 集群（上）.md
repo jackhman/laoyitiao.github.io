@@ -1,3 +1,5 @@
+# 第05讲：手动模式构建双Namenode+Yarn的Hadoop集群（上）
+
 本课时主要讲"手动模式构建双 NameNode + Yarn 的 Hadoop 集群"的内容。
 
 ### 双 NameNode 实现原理与应用架构
@@ -34,7 +36,9 @@ ZKFailoverController（ZKFC）是 ZK 集群的客户端，用来监控 NN 的状
 
 JournalNode 集群以及与 NameNode 之间如何共享元数据，可参照下图所示。
 
-<Image alt="01.png" src="https://s0.lgstatic.com/i/image/M00/07/4E/CgqCHl65FrmAJkEYAADp0NN0xGw607.png"/>
+
+<Image alt="01.png" src="https://s0.lgstatic.com/i/image/M00/07/4E/CgqCHl65FrmAJkEYAADp0NN0xGw607.png"/> 
+
 
 由图可知，JournalNode 集群可以几乎实时的去 NameNode 上拉取元数据，然后保存元数据到 JournalNode 集群；同时，处于 standby 状态的 NameNode 也会实时的去 JournalNode 集群上同步 JNS 数据，通过这种方式，就实现了两个 NameNode 之间的数据同步。
 
@@ -44,7 +48,9 @@ JournalNode 集群以及与 NameNode 之间如何共享元数据，可参照下�
 
 下图是 JournalNode 集群的内部运行架构图。
 
-<Image alt="02.png" src="https://s0.lgstatic.com/i/image/M00/07/4E/CgqCHl65FsmAReOgAACOMp8vfYQ648.png"/>
+
+<Image alt="02.png" src="https://s0.lgstatic.com/i/image/M00/07/4E/CgqCHl65FsmAReOgAACOMp8vfYQ648.png"/> 
+
 
 由图可知，JN1、JN2、JN3 等是 JournalNode 集群的节点，QJM（Qurom Journal Manager）的基本原理是用 2N+1 台 JournalNode 存储 EditLog，每次写数据操作有 N/2+1 个节点返回成功，那么本次写操作才算成功，保证数据高可用。当然这个算法所能容忍的是最多有 N 台机器挂掉，如果多于 N 台挂掉，算法就会失效。
 
@@ -56,7 +62,9 @@ ANN 表示处于 Archive 状态的 NameNode，SNN 表示处于 Standbye 状态�
 
 下图是一个高可用的 Hadoop 集群运行原理图。
 
-<Image alt="03.png" src="https://s0.lgstatic.com/i/image/M00/07/55/Ciqc1F65G7aAKwckAADqfdUc2EA969.png"/>
+
+<Image alt="03.png" src="https://s0.lgstatic.com/i/image/M00/07/55/Ciqc1F65G7aAKwckAADqfdUc2EA969.png"/> 
+
 
 此架构主要解决了两个问题，一是 NameNode 元数据同步问题，二是主备 NameNode 切换问题，由图可知，解决主、备 NameNode 元数据同步是通过 JournalNode 集群来完成的，而解决主、备 NameNode 切换可通过 ZooKeeper 来完成。
 
@@ -72,7 +80,9 @@ ZooKeeper 是一个独立的集群，在两个 NameNode 上还需要启动一个
 
 本着节约成本、优化资源、合理配置的原则，下面的部署通过 5 台独立的服务器来实现，操作系统均采用 Centos7.7 版本，每个服务器主机名、IP 地址以及功能角色如下表所示：
 
-<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image/M00/07/55/CgqCHl65G9OAUprTAADj0vKtWPY235.png"/>
+
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image/M00/07/55/CgqCHl65G9OAUprTAADj0vKtWPY235.png"/> 
+
 
 由表可知，namenodemaster 和 yarnserver 是作为 NameNode 的主、备两个节点，同时 yarnserver 还充当了 ResourceManager 和 JobHistoryServer 的角色。如果服务器资源充足，可以将 ResourceManager 和 JobHistoryServer 服务放在一台独立的机器上。
 
@@ -80,7 +90,9 @@ ZooKeeper 是一个独立的集群，在两个 NameNode 上还需要启动一个
 
 在软件部署上，每个软件采用的版本如下表所示：
 
-<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image/M00/07/56/CgqCHl65G-SAIyUlAABHEvoc-ZI303.png"/>
+
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image/M00/07/56/CgqCHl65G-SAIyUlAABHEvoc-ZI303.png"/> 
+
 
 最后，还需要考虑**磁盘存储规划**，HDFS 文件系统的数据块都存储在本地的每个 datanode 节点上。因此，每个 datanode 节点要有大容量的磁盘，磁盘类型可以是普通的机械硬盘，有条件的话 SSD 硬盘最好，单块硬盘推荐 4T 或者 8T，这些硬盘无需做 RAID，单盘使用即可，因为 HDFS 本身已经有了副本容错机制。
 
@@ -122,7 +134,7 @@ hadoopconfigfile: /etc/hadoop
 
 这里面定义了 6 个角色变量，在后面 playbook 中会用到。最后，编写 playbook 脚本，内容如下：
 
-```html
+```sql
 - hosts: hadoophosts
   gather_facts: no
   roles:
@@ -152,7 +164,7 @@ ing no"
 
 将此playbook脚本命名为sshk.yml，然后在命令行执行如下命令完成ssh单向信任：
 
-```html
+```sql
 [root@server239 ansible]# pwd
 /etc/ansible
 [root@server239 ansible]# ansible-playbook  sshk.yml -k
@@ -164,7 +176,7 @@ ing no"
 
 紧接上面的 ansible 配置环境，要实现批量自动修改主机名，执行如下 playbook 脚本即可：
 
-```html
+```sql
 - hosts: hadoophosts
   remote_user: root
   tasks:
@@ -176,7 +188,7 @@ ing no"
 
 将此 playbook 脚本命名为 hostname.yml，然后在命令行执行如下命令完成主机名修改：
 
-```html
+```sql
  [root@server239 ansible]# ansible-playbook  hostname.yml
 ```
 
@@ -203,7 +215,7 @@ ing no"
 
 将 playbook 脚本命名为 hosts.yml，然后在命令行执行如下命令，完成构建本地解析 hosts 文件并分发集群每个节点：
 
-```html
+```sql
 [root@server239 ansible]# pwd
 /etc/ansible
 [root@server239 ansible]# ansible-playbook  hosts.yml
@@ -235,7 +247,7 @@ playbook 脚本依次执行了关闭 selinux、添加用户资源配置、关闭
 
 将 playbook 脚本命名为 os.yml，然后在命令行执行如下命令，完成优化系统参数：
 
-```html
+```sql
 [root@server239 ansible]# ansible-playbook  os.yml
 ```
 
@@ -257,7 +269,7 @@ Hadoop 用户作为集群的管理员用户，需要在每个集群节点进行�
 
 将 playbook 脚本命名为 adduser.yml，然后在命令行执行如下命令完成用户创建：
 
-```html
+```sql
 [root@server239 ansible]# ansible-playbook  adduser.yml
 ```
 
@@ -293,7 +305,7 @@ Hadoop 用户作为集群的管理员用户，需要在每个集群节点进行�
 
 将 playbook 脚本命名为 jdk.yml，然后在命令行执行如下命令完成 JDK 安装：
 
-```html
+```sql
 [root@server239 ansible]# ansible-playbook  jdk.yml
 ```
 
@@ -341,7 +353,7 @@ server.3={ {zk3_hostname}}:2888:3888
 
 将 playbook 脚本命名为 zk.yml，然后在命令行执行如下命令，完成 ZooKeeper 的自动化安装与配置：
 
-```html
+```sql
 [root@server239 ansible]# ansible-playbook  zk.yml
 ```
 
@@ -387,7 +399,8 @@ ate=present
 
 将此 playbook 脚本命名为 hadoop.yml，然后在命令行执行如下命令，完成 Hadoop 的自动化安装与配置：
 
-```html
+```sql
 [root@server239 ansible]# ansible-playbook  hadoop.yml
 ```
+
 

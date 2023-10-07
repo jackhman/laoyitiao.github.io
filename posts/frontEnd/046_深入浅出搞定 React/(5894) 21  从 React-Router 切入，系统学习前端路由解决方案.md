@@ -1,3 +1,5 @@
+# 21从React-Router切入，系统学习前端路由解决方案
+
 React-Router 是 React 场景下的路由解决方案，本讲我们将学习 React-Router 的实现机制，并基于此提取和探讨通用的前端路由解决方案。
 > 注：没有使用过 React-Router 的同学，可以点击[这里](https://reactrouter.com/web/guides/quick-start)完成快速上手。
 
@@ -61,15 +63,21 @@ export default BasicExample;
 
 这个 Demo 渲染出的页面效果如下图所示：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/8B/20/CgqCHl_bOA2AfagHAAAwif17aiI096.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/8B/20/CgqCHl_bOA2AfagHAAAwif17aiI096.png"/> 
+
 
 当我点击不同的链接时，ul 元素内部就会展示不同的组件内容。比如当我点击"About"链接时，就会展示 About 组件的内容，效果如下图所示：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image2/M01/02/F3/CgpVE1_bOBOAQTs_AAAuMzu6RbY087.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image2/M01/02/F3/CgpVE1_bOBOAQTs_AAAuMzu6RbY087.png"/> 
+
 
 注意，点击 About 后，界面中发生变化的地方有两处（见下图标红处），除了 ul 元素的内容改变了之外，路由信息也改变了。
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image2/M01/02/F2/Cip5yF_bOBmAfCOxAAA2a1pswj4899.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image2/M01/02/F2/Cip5yF_bOBmAfCOxAAA2a1pswj4899.png"/> 
+
 
 在 React-Router 中，各种细碎的功能点有不少，但作为 React 框架的前端路由解决方案，它最基本也是最核心的能力，其实正是你刚刚所见到的这一幕------**路由的跳转**。这也是我们接下来讨论的重点。
 
@@ -109,11 +117,15 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 HashRouter、BrowserRouter，这俩人名字这么像，该不会底层逻辑区别也不大吧？别说，还真是如此。我们首先来瞟一眼 HashRouter 的源码：
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image2/M01/02/F2/Cip5yF_bOCSAErIlAAEU7gTEf-c538.png"/>
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image2/M01/02/F2/Cip5yF_bOCSAErIlAAEU7gTEf-c538.png"/> 
+
 
 再瞟一眼 BrowserRouter 的源码：
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/8B/15/Ciqc1F_bOCyAFB9oAADQnB3x2AY718.png"/>
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/8B/15/Ciqc1F_bOCyAFB9oAADQnB3x2AY718.png"/> 
+
 
 我们会发现这两个文件惊人的相似，而最关键的区别我也已经在图中分别标出，即它们调用的 history 实例化方法不同：HashRouter 调用了 [createHashHistory](https://github.com/ReactTraining/history/blob/v4.7.2/modules/createHashHistory.js)，BrowserRouter 调用了 [createBrowserHistory](https://github.com/ReactTraining/history/blob/v4.7.2/modules/createBrowserHistory.js)。
 
@@ -121,11 +133,15 @@ HashRouter、BrowserRouter，这俩人名字这么像，该不会底层逻辑区
 
 * `createBrowserHistory`：它将在浏览器中使用 [HTML5 history API](https://developer.mozilla.org/zh-CN/docs/Web/API/History) 来处理 URL（见下图标红处的说明），它能够处理形如这样的 URL，example.com/some/path。由此可得，**BrowserRouter 是使用 HTML 5 的 history API 来控制路由跳转的。**
 
-<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image2/M01/03/78/Cip5yF_cKqmATWf8AAN3hb7gX3k493.png"/>
+
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image2/M01/03/78/Cip5yF_cKqmATWf8AAN3hb7gX3k493.png"/> 
+
 
 * `createHashHistory`：它是使用 hash tag (#) 处理 URL 的方法，能够处理形如这样的 URL，example.com/#/some/path。我们可以看到[它的源码中](https://github.com/ReactTraining/history/blob/v4.7.2/modules/createHashHistory.js)对各种方法的定义基本都围绕 hash 展开（如下图所示），由此可得，**HashRouter 是通过 URL 的 hash 属性来控制路由跳转的**。
 
-<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/8B/15/Ciqc1F_bOFaAWDI8AAD_FnBQsTc850.png"/>
+
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/8B/15/Ciqc1F_bOFaAWDI8AAD_FnBQsTc850.png"/> 
+
 > 注：关于 hash 和 history 这两种模式，我们在下文中还会持续探讨。
 
 现在，见识了表面现象，了解了背后机制。我们不妨回到故事的原点，再多问自己一个问题：为什么我们需要 React-Router？
@@ -208,7 +224,9 @@ window.addEventListener('hashchange', function(event){
 
 大家知道，在我们浏览器的左上角，往往有这样的操作点：
 
-<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/8B/20/CgqCHl_bOGeAQW2AAACAaTKsTyM327.png"/>
+
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/8B/20/CgqCHl_bOGeAQW2AAACAaTKsTyM327.png"/> 
+
 
 通过点击前进后退箭头，就可以实现页面间的跳转。这样的行为，其实是可以通过 API 来实现的。
 
@@ -259,3 +277,4 @@ window.addEventListener('popstate', function(e) {
 本讲我们以 React-Router 为切入点，结合源码剖析了 React-Router 中"跳转"这一动作的实现原理，由此牵出了针对"前端路由方案"这个知识点相对系统的探讨。行文至此，React 周边生态所涉及的重难点知识，相信已经深深地烙印在了你的脑海里。
 
 下一讲开始，我们将围绕"React 设计模式与最佳实践"以及"React 性能优化"两条主线展开学习。彼时，站在"生产实践"这个全新的视角去认识 React 后，相信各位对它的理解定会更上一层楼。大家加油！
+

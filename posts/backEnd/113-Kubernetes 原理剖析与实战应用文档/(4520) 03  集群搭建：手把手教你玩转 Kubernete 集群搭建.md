@@ -1,3 +1,5 @@
+# 03集群搭建：手把手教你玩转Kubernete集群搭建
+
 通过上一节课的学习，我们已经对 Kubernetes 的架构有了清楚的认识。但是到现在还没有和 Kubernetes 集群真正打过交道，所以你可能有一种"不识庐山真面目"的云里雾里的感觉。那么本节课，我们就来学习如何搭建 Kubernetes 集群，开启探索 Kubernetes 的第一站。
 
 ### 在线 Kubernetes 集群
@@ -18,7 +20,9 @@
 
 现在，我们来回顾一下上一节课中提到的 Kubernetes 整体架构：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/48/F9/Ciqc1F9ODKeAZpfbAAHPVgKdC98766.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/48/F9/Ciqc1F9ODKeAZpfbAAHPVgKdC98766.png"/> 
+
 
 我们可以看到，Kubernetes 集群如果要生产可用，就需要签发一些证书，我们具体来看一下都需要哪些证书。
 
@@ -48,13 +52,17 @@
 
 **我们先来看** [Kind](https://github.com/kubernetes-sigs/kind)，它的名字取自 Kubernetes IN Docker 的简写，Kind 最初仅仅是用来在 Docker 中搭建本地的 Kubernetes 开发测试环境。**如果你本地没有太多的物理资源** ，这个工具比较适合你。使用前，你可以通过[这个文档](https://docs.docker.com/engine/install/)安装 Docker；然后在[官方文档](https://kind.sigs.k8s.io/docs/user/quick-start)中有安装 kind 的指令，这里我就不赘述啦，你可以在其中了解它的详细使用方法和参数配置，安装的时候注意 kind 的版本号，以及其支持的 Kubernetes 版本。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/49/05/CgqCHl9ODL6AT7NmAADHwHBbdN8589.png"/>  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/49/05/CgqCHl9ODL6AT7NmAADHwHBbdN8589.png"/> 
+  
 
 （<https://github.com/kubernetes-sigs/kind/blob/master/logo/logo.png>）
 
 **接下来我们来看一下** [Minikube](https://github.com/kubernetes/minikube)，和 Kind 相比，Minikube 的功能就强大的多了。虽说两者都是用于搭建本地集群的，但是 minikube 支持虚拟化的能力。minikube 可以借助于本地的虚拟化能力，通过 [Hyperkit](https://minikube.sigs.k8s.io/docs/drivers/hyperkit/)、[Hyper-V](https://minikube.sigs.k8s.io/docs/drivers/hyperv/)、[KVM](https://minikube.sigs.k8s.io/docs/drivers/kvm2/)、[Parallels](https://minikube.sigs.k8s.io/docs/drivers/parallels/)、[Podman](https://minikube.sigs.k8s.io/docs/drivers/podman/)、[VirtualBox](https://minikube.sigs.k8s.io/docs/drivers/virtualbox/) 和 [VMWare](https://minikube.sigs.k8s.io/docs/drivers/vmware/) 等创建出虚拟机，然后在虚拟机中搭建出 Kubernetes 集群来。这里可以根据自己的实际情况，选择合适的 [driver](https://minikube.sigs.k8s.io/docs/drivers/)。
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/49/05/CgqCHl9ODN2ABABqAAWTMYoqIPs597.png"/>  
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/49/05/CgqCHl9ODN2ABABqAAWTMYoqIPs597.png"/> 
+  
 <https://raw.githubusercontent.com/kubernetes/minikube/master/images/logo/logo.png>
 
 当然，Minikube 也支持和 Kind 相似的能力，直接[利用 Docker 创建集群](https://minikube.sigs.k8s.io/docs/drivers/docker/)：
@@ -69,7 +77,9 @@ $ minikube start --driver=docker \
 
 **第三个是** [Kubeadm](https://kubernetes.io/docs/reference/setup-tools/kubeadm/)，我想给你重点介绍一下它。这个工具是我平时使用最多，也是最推荐你去使用的。上面介绍的 Kind 和 Minikube 这两个工具主要是用于快速搭建本地的开发测试环境，没办法用来搭建生产集群。
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/48/FA/Ciqc1F9ODPOAFmDaAAIPc4_Rx-E545.png"/>  
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/48/FA/Ciqc1F9ODPOAFmDaAAIPc4_Rx-E545.png"/> 
+  
 
 （<https://raw.githubusercontent.com/kubernetes/kubeadm/master/logos/horizontal/color/kubeadm-horizontal-color.png>）
 
@@ -93,7 +103,9 @@ Kubeadm 是社区官方持续维护的集群搭建工具，在 Kubernertes v1.13
 
 这里我给出了一张图，你可以看到，Kubeadm 在设计之初的定位就是只关心集群的 bootstrapping，并不负责物理资源的管理和申请。在集群 bootstrapping 搭建完成后，你可以根据自己的需要，在集群中部署自己的 add-on 组件，比如 CNI 插件、Dashboard 等。
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/49/05/CgqCHl9ODQyAV3kOAAUDNPm292s107.png"/>
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/49/05/CgqCHl9ODQyAV3kOAAUDNPm292s107.png"/> 
+
 
 知道了这些，现在我们来详细说一下用 Kubeadm 如何搭建集群。
 
@@ -192,3 +204,4 @@ Kubernetes 社区异常活跃，每隔三个月就会发布一个小版本，比
 集群搭建只是第一步，重要的是后续集群的维护工作，比如集群组件宕机、集群版本升级等。所以选择合适的工具很重要，因为这可以很大程度降低升级的风险以及运维难度。最后我还想再强调一下，**千万不要跨小版本进行升级** ，**要按小版本依次升上来**。
 
 下一节课，我们将深入学习 Kubernetes 的核心定义。如果你对本节课有什么想法或者疑问，欢迎你在留言区留言，我们一起讨论。
+

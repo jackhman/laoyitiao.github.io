@@ -1,3 +1,5 @@
+# 14消息驱动：如何使用KafkaTemplate集成Kafka？
+
 从今天开始，我们将进入 Spring Boot 中另一个重要话题的讨论，即消息通信。
 
 消息通信是 Web 应用程序中间层组件中的代表性技术体系，主要用于构建复杂而又灵活的业务流程。在互联网应用中，消息通信被认为是实现系统解耦和高并发的关键技术体系。本节课我们将在 SpringCSS 案例中引入消息通信机制来实现多个服务之间的异步交互。
@@ -18,7 +20,9 @@
 
 整个场景的示意图见下图：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/8B/F3/CgqCHl_ivJ2AZMUlAABJyFFnmMc174.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/8B/F3/CgqCHl_ivJ2AZMUlAABJyFFnmMc174.png"/> 
+  
 用户账户更新场景中的消息通信机制
 
 上图中我们发现，消息通信机制使得我们不必花费太大代价即可实现整个交互过程，简单而方便。
@@ -27,7 +31,9 @@
 
 消息通信机制的整体工作流程如下图所示：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/8B/F3/CgqCHl_ivKyAXQR_AABdUOvR5RQ298.png"/>  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/8B/F3/CgqCHl_ivKyAXQR_AABdUOvR5RQ298.png"/> 
+  
 消息通信机制示意图
 
 上图中位于流程中间的就是各种消息中间件，**消息中间件**一般提供了消息的发送客户端和接收客户端组件，这些客户端组件会嵌入业务服务中。
@@ -50,7 +56,9 @@
 
 Kafka 基本架构参考下图，从中我们可以看到 Broker、Producer、Consumer、Push、Pull 等消息通信系统常见概念在 Kafka 中都有所体现，生产者使用 Push 模式将消息发布到 Broker，而消费者使用 Pull 模式从 Broker 订阅消息。
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/8B/E8/Ciqc1F_ivLaAVULIAABdyI31l0s036.png"/>  
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/8B/E8/Ciqc1F_ivLaAVULIAABdyI31l0s036.png"/> 
+  
 Kafka 基本架构图
 
 **在上图中我们注意到，Kafka 架构图中还使用了 Zookeeper。**
@@ -165,7 +173,9 @@ public @interface KafkaListener {
 
 消费者组的基本结构如下图所示：
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image2/M01/03/CB/Cip5yF_ivMqAG6llAAA6iqKiy-M353.png"/>  
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image2/M01/03/CB/Cip5yF_ivMqAG6llAAA6iqKiy-M353.png"/> 
+  
 Kafka 消费者组示意图
 
 使用 @KafkaListener 注解时，我们把它直接添加在处理消息的方法上即可，如下代码所示：
@@ -290,3 +300,4 @@ spring:
 这里给你留一道思考题：在 Kafka 中，消费者组的作用是什么，如何都消费者组进行配置？
 
 在下一课时中，我们将继续介绍另一款主流的消息中间件 ActiveMQ，以及 Spring Boot 中提供的模板工具类 JmsTemplate。
+

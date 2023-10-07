@@ -1,10 +1,14 @@
+# 11WebFlux（下）：如何使用函数式编程模型构建异步非阻塞服务？
+
 上一讲，我们引入了 Spring 框架中专门用于构建响应式 Web 服务的 WebFlux 框架，同时我也给出了两种创建 RESTful 风格 HTTP 端点实现方法中的一种，即注解编程模型。今天，我将介绍另一种实现方法------如何使用函数式编程模型创建响应式 RESTful 服务，这种编程模型与传统的基于 Spring MVC 构建 RESTful 服务的方法有较大差别。
 
 ### WebFlux 函数式编程模型
 
 在引入函数式编程模型之前，让我先带你回顾一下 Spring WebFlux 的系统架构图，如下所示。
 
-<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M01/32/E0/Cgp9HWBuf--Aek0BAAT9zBvy7qI451.png"/>  
+
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M01/32/E0/Cgp9HWBuf--Aek0BAAT9zBvy7qI451.png"/> 
+  
 Spring WebFlux 架构图（来自 Spring 官网）
 
 在上图的后半部分，你可以看到在 Spring WebFlux 中，函数式编程模型的核心概念是 Router Functions，对标 Spring MVC 中的 @Controller、@RequestMapping 等标准注解。而 Router Functions 则提供一套函数式风格的 API，其中最重要的就是 Router 和 Handler 接口。我们可以简单把 Router 对应成 RequestMapping，把 Controller 对应为 Handler。
@@ -262,3 +266,4 @@ public Mono<CustomerTicket> generateCustomerTicket(String accountId, String orde
 现在，我们已经通过 WebFlux 构建了响应式 Web 服务，下一步就是如何来消费它们了。Spring 也专门提供了一个非阻塞式的 WebClient 工具类来完成这一目标，下一讲我就来和你系统地讨论这个工具类的使用方法，到时见。
 > 点击链接，获取课程相关代码↓↓↓  
 > [https://github.com/lagoueduCol/ReactiveProgramming-jianxiang.git](https://github.com/lagoueduCol/ReactiveProgramming-jianxiang.git?fileGuid=xxQTRXtVcqtHK6j8)
+

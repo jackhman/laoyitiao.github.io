@@ -1,6 +1,10 @@
+# 16WinMacUnixLinux的区别和联系：为什么Debian漏洞排名第一还这么多人用？
+
 在我的印象中 Windows 才是最容易被攻击的操作系统，没想到 2020 年美国 NIST 的报告中， Debian 竟然是过去 20 年中漏洞最多的操作系统。Debain 以 3067 个漏洞稳居第一，第二名是 Android，第三名是 Linux Kernel。那么为什么 Debian 漏洞数会排在第一位呢？
 
-<Image alt="sm6HBMt28BODYgyh__thumbnail.png" src="https://s0.lgstatic.com/i/image/M00/65/A7/Ciqc1F-bn1-AS5raAAS__DN2p5g400.png"/>
+
+<Image alt="sm6HBMt28BODYgyh__thumbnail.png" src="https://s0.lgstatic.com/i/image/M00/65/A7/Ciqc1F-bn1-AS5raAAS__DN2p5g400.png"/> 
+
 
 NIST的数据报告：软件漏洞排名
 
@@ -24,7 +28,9 @@ IBM（International Business Machines Corporation）一开始是卖机器的。�
 
 我以第一台可编程通用计算机 ENIAC 为例，ENIAC 虽然支持循环、分支判断语句，但是只支持写机器语言。ENIAC 的程序通常需要先写在纸上，然后再由专业的工程师输入到计算机中。 对于 ENIAC 来说执行的是一个个作业，就是每次把输入的程序执行完。
 
-<Image alt="Fm6eVsIl2e6E6btZ__thumbnail.png" src="https://s0.lgstatic.com/i/image/M00/65/A7/Ciqc1F-bn9eAXyISAAPLfwdfvrE593.png"/>
+
+<Image alt="Fm6eVsIl2e6E6btZ__thumbnail.png" src="https://s0.lgstatic.com/i/image/M00/65/A7/Ciqc1F-bn9eAXyISAAPLfwdfvrE593.png"/> 
+
 
 上图中的画面正是一位程序员通过操作面板在写程序。 那个时候写程序就是接线和使用操作面板开关，和今天我们所说的"写程序"还是有很大区别的。
 
@@ -36,11 +42,15 @@ IBM（International Business Machines Corporation）一开始是卖机器的。�
 
 早期的大型机厂商往往会为每个大型机写一个操作系统。后来 1964 年 IBM 自研了 OS/360 操作系统，在这个操作系统之上 IBM 推出了 System/360 大型机，然后在 1965\~1978 年间，IBM 以 System/360 的代号陆陆续续推出了多款机器。开发 System/360 大型机的过程也被称为 IBM 的一次世纪豪赌，雇用了 6W 员工，新建了 5 个工厂。这么大力度的投资背后是小沃森的支持，几乎是把 IBM 的家底掏空转型去做计算机了。 IBM 这家公司喜欢押注，而且一次比一次大------2019 年 IBM 以 340 亿美金收购红帽，可能是 IBM 想在云计算和操作系统市场发力。
 
-<Image alt="F8YIaQiv1EKO9qtX__thumbnail.png" src="https://s0.lgstatic.com/i/image/M00/65/B3/CgqCHl-bn_aAAPzxAAIv-JIly3Q368.png"/>
+
+<Image alt="F8YIaQiv1EKO9qtX__thumbnail.png" src="https://s0.lgstatic.com/i/image/M00/65/B3/CgqCHl-bn_aAAPzxAAIv-JIly3Q368.png"/> 
+
 
 IBM 投入了大量人力物力在 System/360 上，也推进了 OS/360 的开发。当时 IBM 还自研了磁盘技术，IBM 自己叫作 DASD（Direct access storage devices）。
 
-<Image alt="ko2gUuSIc2bozIJ3__thumbnail.png" src="https://s0.lgstatic.com/i/image/M00/65/A8/Ciqc1F-boAeAGCmkAAOXtV5e6Kk533.png"/>
+
+<Image alt="ko2gUuSIc2bozIJ3__thumbnail.png" src="https://s0.lgstatic.com/i/image/M00/65/A8/Ciqc1F-boAeAGCmkAAOXtV5e6Kk533.png"/> 
+
 
 从上图中你可以看到，IBM 自研的磁盘，非常类似今天硬盘的结构的。当时支持磁盘的操作系统往往叫作 DOS（Disk Operating System）。还有一些是支持磁带的操作系统，叫作 TOS（Tape Operating System）。所以 OS/360 早期叫作 BOS/360，就是 Basic Operating System，后来分成了 DOS/360 和 TOS/360。现在我们不再根据硬件的不同来区分系统了，而是通过驱动程序驱动硬件工作，对硬件的支持更像是插件一样。
 
@@ -70,13 +80,17 @@ IBM 是一家商业驱动的公司，至今已经 100 多年历史。因为 IBM 
 
 后来 IBM 逐渐对 Multics 引起了重视， 推出 TSS/360 系统，这只是做出防御性部署的一个举措。但是同在贝尔实验室 Multics 项目组的丹尼斯·里奇（C 语言的作者）和肯·汤普逊却看到了希望。他们都是 30 岁不到，正是意气风发的时候。两个人对程序设计、操作系统都有着浓厚的兴趣，特别是肯·汤普逊，之前已经做过大量的操作系统开发，还写过游戏，他们都觉得 Multics 设计太过于复杂了。再加上 Multics 没取得商业成功，贝尔实验室叫停了这个项目后，两个人就开始合作写 Unix。Unix 这个名字一方面参考 Multics，另一方面参考了 Uniplexed，它是 Multiplexed 的反义词，含义有点像统一和简化。
 
-<Image alt="WiPI95BWeW02HNk8__thumbnail.png" src="https://s0.lgstatic.com/i/image/M00/65/B3/CgqCHl-boDWAWq5VAAFpIdJc_T0867.png"/>
+
+<Image alt="WiPI95BWeW02HNk8__thumbnail.png" src="https://s0.lgstatic.com/i/image/M00/65/B3/CgqCHl-boDWAWq5VAAFpIdJc_T0867.png"/> 
+
 
 Unix 早期开放了源代码，可以说是现代操作系统的奠基之作------支持多任务、多用户，还支持分级安全策略。拥有内核、内存管理、文件系统、正则表达式、开发工具、可执行文件格式、命令行工具等等。**可以说，到今天 Unix 不再代表某种操作系统，而是一套统一的，大家都认可的架构标准**。
 
 因为开源的原因，Unix 的版本非常复杂。具体你可以看下面这张大图。
 
-<Image alt="zHoi2igGQMDahWvh__thumbnail.png" src="https://s0.lgstatic.com/i/image/M00/65/B3/CgqCHl-boE-AKrskAAOSZ46MgxM476.png"/>
+
+<Image alt="zHoi2igGQMDahWvh__thumbnail.png" src="https://s0.lgstatic.com/i/image/M00/65/B3/CgqCHl-boE-AKrskAAOSZ46MgxM476.png"/> 
+
 
 绿色的是开源版本，黄色的是混合版本，红色的是闭源版本。这里面有大型机使用的版本，有给工作站使用的版本，也有个人电脑版本。比如 Mac OS、SunOS、Solaris 都有用于个人电脑和工作站；HP-UX 还用作过大型机操作系统。另外，Linux 系统虽然不是 Unix，但是参考了 Unix 的设计，并且遵照 Unix 的规范，它从 Unix 中继承过去不少好用的工具，这种我们称为 Unix-like 操作系统。
 
@@ -84,7 +98,9 @@ Unix 早期开放了源代码，可以说是现代操作系统的奠基之作---
 
 从大型机兴起后，就陆续有人开始做个人电脑。但是第一台真正火了的个人电脑，是 1975 年 MITS 公司推出的 Altair 8800。
 
-<Image alt="c7rFnIITUd4IoFsP__thumbnail.png" src="https://s0.lgstatic.com/i/image/M00/65/A8/Ciqc1F-boGqAHx-SAAYue5wu2tA081.png"/>
+
+<Image alt="c7rFnIITUd4IoFsP__thumbnail.png" src="https://s0.lgstatic.com/i/image/M00/65/A8/Ciqc1F-boGqAHx-SAAYue5wu2tA081.png"/> 
+
 
 里面有套餐可选，套餐价是 $439。MITS 的创始人 ED Roberts，和投资人承诺可以卖出去 800 台，没想到第一个月就卖出了 1000 台。对于一台没有显示器、没有键盘，硬件是组装的也不是自有品牌的电脑，它的购买者更多的是个人电脑爱好者们。用户可以通过上面的开关进行编程，然后执行简单的程序，通过观察信号灯看到输出。所以，市场对个人电脑的需求，是普遍存在的，哪怕是好奇心，大家也愿意为之买单。比尔·盖茨也买了这台机器，我们后面再说。
 
@@ -92,11 +108,15 @@ Altair 8800 出品半年后，做个人电脑的公司就如雨后春笋一样�
 
 1976 年 21 岁的乔布斯在一次聚会中说服了 26 岁的沃兹尼亚克一起设计 Apple I 电脑。 沃兹尼亚克大二的时候，做过一台组装电脑，在这次聚会上，他的梦想被乔布斯点燃了，当晚就做了 Apple I 的设计图。1976 年 6 月份，Apple I 电脑就生产出了 200 台，最终卖出去 20 多台。 当时 Apple I 只提供一块板，不提供键盘、显示器等设备。这样的电脑竟然有销量，在今天仍然是不可想象的。
 
-<Image alt="KC2Kv4gSGBr9JLVT__thumbnail.png" src="https://s0.lgstatic.com/i/image/M00/65/B3/CgqCHl-boIKAMVzSAALtwnEkw-w387.png"/>
+
+<Image alt="KC2Kv4gSGBr9JLVT__thumbnail.png" src="https://s0.lgstatic.com/i/image/M00/65/B3/CgqCHl-boIKAMVzSAALtwnEkw-w387.png"/> 
+
 
 Apple I 在商业上的发展不太成功，但是 1977 年，乔布斯又说服了投资人，投资生产 Apple II。结果当年就让乔布斯身价上百万，两年后就让他身价过亿。
 
-<Image alt="nWYA0SyTHnn7jRAC__thumbnail.png" src="https://s0.lgstatic.com/i/image/M00/65/A8/Ciqc1F-boJiALGjlAAF0EX3mI_E161.png"/>
+
+<Image alt="nWYA0SyTHnn7jRAC__thumbnail.png" src="https://s0.lgstatic.com/i/image/M00/65/A8/Ciqc1F-boJiALGjlAAF0EX3mI_E161.png"/> 
+
 
 你可以看到 Apple II 就已经是一个完整的机器了。一开始 Apple II 是苹果自研的操作系统，并带有沃兹尼亚克写的简单的 BASIC 语言解释器。1978 年 Apple 公司花了 13000 美金采购了一家小公司的操作系统，这家小公司负责给苹果开发系统，也就是后来的 Apple DOS 操作系统。这家公司还为 Apple DOS 增加了文件浏览器。
 
@@ -110,7 +130,9 @@ IBM 没有个人电脑上可用的操作系统，因此找到了当时一家做�
 
 最后，Project Chess 小组在 1 年内，成功完成了使命，做出了 IBM 个人电脑，看上去非常像 APPLE II。名字就叫 Personal Computer， 就是我们今天说的 PC。86-DOS 也改成了 PC DOS，IBM 的加入又给 PC 市场带了一波节奏，让更多的人了解到了个人电脑。
 
-<Image alt="xT4EqQcel0sJAGDa__thumbnail.png" src="https://s0.lgstatic.com/i/image/M00/65/B3/CgqCHl-boLSAYZf9AAHQwVvmQAk488.png"/>
+
+<Image alt="xT4EqQcel0sJAGDa__thumbnail.png" src="https://s0.lgstatic.com/i/image/M00/65/B3/CgqCHl-boLSAYZf9AAHQwVvmQAk488.png"/> 
+
 
 微软也跟着水涨船高，每销售 1 台 PC，微软虽然拿不到利润，但保留了 PC DOS 的版权。而且拿到 IBM 的合同，为 IBM 开发核心系统，这也使得微软的地位大涨。盖茨相信马上就会有其他厂商开始和 IBM 竞争，会需要 PC DOS，而微软只需要专心做好操作系统就足够了。
 
@@ -130,7 +152,9 @@ IBM 没有个人电脑上可用的操作系统，因此找到了当时一家做�
 
 斯托曼也觉得 GNU 不能没有操作系统，就统称为 GNU/Linux，并且利用自己的影响力帮助林纳斯推广 Linux。这样就慢慢吸引了世界上一批顶级的黑客，一起来写 Linux。后来 Linux 慢慢成长壮大，成为一块主流的服务器操作系统。当然 Linux 后来也衍生了大量的版本，下图是不同版本的 Linux 的分布。
 
-<Image alt="BYJbTW5Cib4ROoRc__thumbnail.png" src="https://s0.lgstatic.com/i/image/M00/65/A8/Ciqc1F-boM-AWo1kAABSw_eB0VI629.png"/>
+
+<Image alt="BYJbTW5Cib4ROoRc__thumbnail.png" src="https://s0.lgstatic.com/i/image/M00/65/A8/Ciqc1F-boM-AWo1kAABSw_eB0VI629.png"/> 
+
 
 数据取自 W3Techs.com 2020
 
@@ -181,3 +205,4 @@ Linux Kernel 代码量级相对 Debian、Android 小，但是有更多的人在�
 **最后我再给你出一道需要查资料的思考题：林纳斯 21 岁写出 Linux，那么开发一个操作系统的难度到底大不大**？
 
 你可以把你的答案、思路或者课后总结写在留言区，这样可以帮助你产生更多的思考，这也是构建知识体系的一部分。经过长期的积累，相信你会得到意想不到的收获。如果你觉得今天的内容对你有所启发，欢迎分享给身边的朋友。期待看到你的思考！
+

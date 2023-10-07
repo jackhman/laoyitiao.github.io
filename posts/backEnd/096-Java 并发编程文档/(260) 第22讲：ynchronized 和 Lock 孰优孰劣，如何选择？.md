@@ -1,3 +1,5 @@
+# 第22讲：ynchronized和Lock孰优孰劣，如何选择？
+
 本课时我们主要学习 synchronized 和 Lock 的异同点，以及该如何选择。
 
 ### 相同点
@@ -12,11 +14,15 @@ synchronized 和 Lock 的相同点非常多，我们这里重点讲解 3 个比�
 
 对于 synchronized 而言，线程 A 在进入 synchronized 块之前或在 synchronized 块内进行操作，对于后续的获得同一个 monitor 锁的线程 B 是可见的，也就是线程 B 是可以看到线程 A 之前的操作的，这也体现了 happens-before 针对 synchronized 的一个原则。
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/5B/48/Cgq2xl4EG32AOox-AADNKxopmhk051.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/5B/48/Cgq2xl4EG32AOox-AADNKxopmhk051.png"/> 
+
 
 而对于 Lock 而言，它和 synchronized 是一样，都可以保证可见性，如图所示，在解锁之前的所有操作对加锁之后的所有操作都是可见的。
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/5B/47/CgpOIF4EG4WAML9mAACrPzwbiwo300.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/5B/47/CgpOIF4EG4WAML9mAACrPzwbiwo300.png"/> 
+
 
 如果你之前不了解什么是可见性，此时理解可能会有一定的困难，可以在学习本专栏的 Java 内存模型相关内容后，再复习本课时，就会豁然开朗。
 
@@ -88,4 +94,5 @@ Lock 根据实现不同，有不同的原理，例如 ReentrantLock 内部是通
 1. 如果能不用最好既不使用 Lock 也不使用 synchronized。因为在许多情况下你可以使用 java.util.concurrent 包中的机制，它会为你处理所有的加锁和解锁操作，也就是推荐优先使用工具类来加解锁。
 2. 如果 synchronized 关键字适合你的程序， 那么请尽量使用它，这样可以减少编写代码的数量，减少出错的概率。因为一旦忘记在 finally 里 unlock，代码可能会出很大的问题，而使用 synchronized 更安全。
 3. 如果特别需要 Lock 的特殊功能，比如尝试获取锁、可中断、超时功能等，才使用 Lock。
+
 

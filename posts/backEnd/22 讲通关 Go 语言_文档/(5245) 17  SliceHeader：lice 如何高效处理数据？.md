@@ -1,3 +1,5 @@
+# 17SliceHeader：lice如何高效处理数据？
+
 在"[第 4 讲\|集合类型：如何正确使用 array、slice 和 map？](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=536#/detail/pc?id=5230)"中，你已经学习了 slice（切片），并且知道如何使用。这节课我会详细介绍 slice 的原理，带你学习它的底层设计。
 
 ### 数组
@@ -146,7 +148,9 @@ type slice struct {
 
 如果从集合类型的角度考虑，数组、切片和 map 都是集合类型，因为它们都可以存放元素，但是数组和切片的取值和赋值操作要更高效，因为它们是连续的内存操作，通过索引就可以快速地找到元素存储的地址。
 
-<Image alt="金句.png" src="https://s0.lgstatic.com/i/image/M00/8B/ED/Ciqc1F_i6yGAXy-tAAV617lfKek460.png"/>
+
+<Image alt="金句.png" src="https://s0.lgstatic.com/i/image/M00/8B/ED/Ciqc1F_i6yGAXy-tAAV617lfKek460.png"/> 
+
 > 小提示：当然 map 的价值也非常大，因为它的 Key 可以是很多类型，比如 int、int64、string 等，但是数组和切片的索引只能是整数。
 
 进一步对比，在数组和切片中，切片又是高效的，因为它在赋值、函数传参的时候，并不会把所有的元素都复制一遍，而只是复制 SliceHeader 的三个字段就可以了，共用的还是同一个底层数组。
@@ -276,3 +280,4 @@ Go 语言设计切片的思路非常有借鉴意义，你也可以使用 uintptr
 在这节课的最后，给你留一个思考题：你还可以找到哪些通过 unsafe.Pointer、uintptr 提升性能的例子呢？欢迎留言讨论。
 
 下节课我们将进入工程管理模块，首先学习"质量保证：Go 语言如何通过测试保证质量？"记得来听课！
+

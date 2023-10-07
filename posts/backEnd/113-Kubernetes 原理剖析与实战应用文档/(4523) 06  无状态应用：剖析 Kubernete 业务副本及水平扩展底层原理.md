@@ -1,3 +1,5 @@
+# 06无状态应用：剖析Kubernete业务副本及水平扩展底层原理
+
 在上两节课中，我们已经了解了 Kubernetes 中最关键的对象 Pod，也学习了一些 Pod 的常见用法。
 
 每一个 Pod 都是应用的一个实例，但是通常来说你不会直接在 Kubernetes 中创建和运行单个 Pod。因为 Pod 的生命周期是短暂的，即"用后即焚"。理解这一点很重要，这也是"不可变基础设施"这一理念在 Kubernetes 中的最佳实践。同样，对于你后续进行业务改造和容器化上云也具有指导意义。
@@ -72,7 +74,9 @@ kubectl get pods -l 'environment in (production),tier in (frontend)'
 
 通过 Deployment，我们就不需要再关心和操作 ReplicaSet 了。
 
-<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/4D/56/CgqCHl9Z5ayANEsBAAPzg_vpPBs686.png"/>  
+
+<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/4D/56/CgqCHl9Z5ayANEsBAAPzg_vpPBs686.png"/> 
+  
 
 （<https://storage.googleapis.com/cdn.thenewstack.io/media/2017/11/07751442-deployment.png>）
 
@@ -267,3 +271,4 @@ Kubernetes 中这些高阶的抽象对象，都是通过标签选择器来控制
 有了 Deployment 这个高级对象，我们可以很方便地完成无状态服务的发布、更新升级，无须多余的人工参与，就能保证业务的高可用性。这也是 Kubernetes 迷人之处------声明式 API。
 
 如果你对本节课有什么想法或者疑问，欢迎你在留言区留言，我们一起讨论。
+

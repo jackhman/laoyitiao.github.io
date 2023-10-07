@@ -1,10 +1,14 @@
+# 第17讲：Dubbo插件核心剖析，Trace是这样跨服务传播的
+
 今天我们进入 Dubbo 插件核心剖析的学习。
 
 #### Dubbo 架构剖析
 
 Dubbo 是 Alibaba 开源的分布式服务框架，在前面的课时中，我们搭建的 demo-webapp 示例就是通过 Dubbo 实现远程调用 demo-provider 项目中 HelloService 服务的。通过前面 demo 示例的演示，你可能已经大概了解 Dubbo 的架构，如下图所示：
 
-<Image alt="image (12).png" src="https://s0.lgstatic.com/i/image/M00/02/8A/Ciqc1F6xg_2AezlaAAlvM3IJlyE080.png"/>
+
+<Image alt="image (12).png" src="https://s0.lgstatic.com/i/image/M00/02/8A/Ciqc1F6xg_2AezlaAAlvM3IJlyE080.png"/> 
+
 
 这里简单说明一下上图中各个步骤与 Demo 示例之间的关系：
 
@@ -16,7 +20,9 @@ Dubbo 是 Alibaba 开源的分布式服务框架，在前面的课时中，我�
 
 了解了 Dubbo 框架顶层的运行逻辑之后，我们进一步深入了解一下 Dubbo 框架架构。Dubbo 最大的特点是按照分层的方式来进行架构的，这种方式可以使各个层之间的耦合降到最低。从服务模型的角度来看，Dubbo 采用的是一种非常简单的模型，要么是提供方提供服务，要么是消费者消费服务，基于这一点可以抽象出服务提供方（Provider）和服务消费方（Consumer）两个角色。如下图所示，图左侧蓝色部分为 Dubbo Consumer 相关接口和实现类，右边绿色部分为 Dubbo Provider 相关的接口和实现类， 位于中轴线上的为双方都用到的接口：
 
-<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/02/8A/CgqCHl6xhB6Ac8xeAAUdCw2BNJU591.png"/>
+
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/02/8A/CgqCHl6xhB6Ac8xeAAUdCw2BNJU591.png"/> 
+
 
 下面我将结合 Dubbo 官方文档，分别介绍一下 Dubbo 框架这 10 层的核心功能。
 
@@ -33,7 +39,9 @@ Dubbo 是 Alibaba 开源的分布式服务框架，在前面的课时中，我�
 
 了解了 Dubbo 10 层架构中每一层的核心功能之后，我们通过一次请求将 Dubbo 这 10 个层次串联起来，如下图所示：
 
-<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/02/8A/CgqCHl6xhHyATgFyAAcdl8xbycM744.png"/>
+
+<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/02/8A/CgqCHl6xhHyATgFyAAcdl8xbycM744.png"/> 
+
 
 图中底部的蓝色部分是 Consumer，上层绿色部分是 Provider。请求通过 Consumer 一侧的 Proxy 代理发出，在 Invoker 处会有 Cluster、Registry 两层参与进来，我们可以根据 Provider 地址列表以及负载均衡算法选择一个 Provider 进行调用。调用之后会经过 Filter，Dubbo 中的 Filter 可以做很多事情，例如，限流（limit）、监控（monitor），甚至可以直接创建 Mock 响应，返回给上层的 Consumer 服务。最后 Invoker 会选择合适的协议和序列化方式，通过 Client（封装了 Netty 等网络库）将请求发送出去。
 
@@ -73,7 +81,9 @@ private static <T> Invoker<T> buildInvokerChain(final Invoker<T>
 
 buildInvokeChain() 方法的调用点如下图所示，其中传入的 Invoker 对象分别对应 Consumer 和 Provider：
 
-<Image alt="使用Dubbo Filter链表的地方.png" src="https://s0.lgstatic.com/i/image/M00/02/8A/CgqCHl6xhLWAf_qVAAD_d-gi4bI785.png"/>
+
+<Image alt="使用Dubbo Filter链表的地方.png" src="https://s0.lgstatic.com/i/image/M00/02/8A/CgqCHl6xhLWAf_qVAAD_d-gi4bI785.png"/> 
+
 
 在 getActivateExtension() 方法中，不是直接使用 SPI 方式加载 Filter 实现，中间还会有其他的过程，比如：
 
@@ -81,7 +91,9 @@ buildInvokeChain() 方法的调用点如下图所示，其中传入的 Invoker �
 * 根据用户配置开启或关闭某些特定的 Filter。
 * 结合 Filter 默认优先级以及用户配置的优先级进行排序。
 
-<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/02/8A/CgqCHl6xhMiAekQOAADLuNv3QQ4506.png"/>
+
+<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/02/8A/CgqCHl6xhMiAekQOAADLuNv3QQ4506.png"/> 
+
 
 getActivateExtension() 方法的代码非常长，但是逻辑并不复杂，如果你感兴趣可以翻看一下具体的代码实现。
 
@@ -190,8 +202,11 @@ DubboInterceptor.afterMethod() 方法的实现就比较简单了，它会检查�
 
 下图展示了 Dubbo 插件的整个处理逻辑：
 
-<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/02/8B/Ciqc1F6xhReAQwqkAAKW-g53Uqc000.png"/>
+
+<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/02/8B/Ciqc1F6xhReAQwqkAAKW-g53Uqc000.png"/> 
+
 
 #### 总结
 
 本课时结合了 demo 示例，介绍了 Dubbo 框架远程调用的基本运行原理，并进一步介绍了 Dubbo 框架的 10 层结构。之后，重点介绍了 Dubbo 中 Filter 的工作原理以及 MonitorFilter 的相关实现。最后，结合上述基础知识分析了 SkyWalking Dubbo 插件的核心原理及实现。
+

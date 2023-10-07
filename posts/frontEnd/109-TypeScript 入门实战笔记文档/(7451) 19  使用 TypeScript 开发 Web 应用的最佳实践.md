@@ -1,3 +1,5 @@
+# 19使用TypeScript开发Web应用的最佳实践
+
 18 讲我们学习了如何使用 TypeScript 开发运行 Node.js 端的静态文件服务模块，然而对于大多数的前端人而言，Web 端可能才是主战场。因此，这一讲我们将从 DOM 原生操作和 React 框架这两个方面学习 Web + TypeScript 开发实践。
 > 学习建议：请按照这一讲中的操作步骤，实践一个完整的开发流程。
 
@@ -420,3 +422,4 @@ test('renders learn react link', () => {
 20 讲我们将学习如何从 JavaScript 迁移到 TypeScript，敬请期待。
 
 另外，如果你觉得本专栏有价值，欢迎分享给更多好友\~
+

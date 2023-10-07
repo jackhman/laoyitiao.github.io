@@ -1,3 +1,5 @@
+# 14系统迁移传统应用如何迁移到Serverle？
+
 Serverless 有很多优点，可以让你不用关心运维、按量付费节省成本......所以很多同学一直想把已有应用迁移到 Serverless 架构上。但因为 Serverless 是一项新的技术，和传统开发方式区别很大，迁移成本也很大。
 
 另外，基于 Serverless 架构的应用是由 FaaS 和 BaaS 组成的（FaaS 提供计算资源，BaaS 提供数据存储和服务），而传统应用的计算和存储都在同一台服务器上，所以传统应用要想迁移到 Serverless 架构上，就要进行相关的改造。
@@ -10,7 +12,9 @@ Serverless 有很多优点，可以让你不用关心运维、按量付费节省
 
 以 Web 服务为例，要部署一个应用，你要买服务器，然后把代码部署到服务器上，启动服务进程，监听服务器相关的端口，然后等待客户端请求，收到请求后进行处理并返回处理结构。这个服务进程是常驻的，就算没有客户端的请求，也会占用服务器资源。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image2/M01/0C/93/Cip5yGAZAUSAcAJEAAE7WwPpQs0967.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image2/M01/0C/93/Cip5yGAZAUSAcAJEAAE7WwPpQs0967.png"/> 
+  
 传统 Web 服务架构
 
 因为应用进程常驻，同一个服务器上的内存可以共享，所以传统应用通常可以在内存中缓存数据，以便提升计算性能（比如在内存中保存用户信息），这样每次处理用户请求时，就可以从内存读取用户信息，不用查询数据库了。但基于 Serverless 架构的应用，内存缓存通常没有意义，因为函数生命周期有限，且函数实例之间无法共享内存。**所以传统应用迁移到 Serverless 架构面临的第一个改造点就是内存缓存问题。**
@@ -19,7 +23,9 @@ Serverless 有很多优点，可以让你不用关心运维、按量付费节省
 
 此外，在传统应用中，我们通常也会使用二级缓存，同时将数据缓存在内存和缓存数据库中。读取缓存时，首先读取内存缓存，如果内存中没有数据，再读取缓存数据库中的数据，如果缓存数据库中也没有数据，再通过网络请求从远程读取数据。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image2/M01/0C/96/CgpVE2AZAU6AIsGDAAF6SNrHN1c948.png"/>  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image2/M01/0C/96/CgpVE2AZAU6AIsGDAAF6SNrHN1c948.png"/> 
+  
 二级缓存
 
 缓存带来的另一个问题就是身份认证，**身份认证是传统应用迁移到 Serverless 的第二个改造点**。传统应用的身份认证通常有 cookie-session 和 JWT 两种方式。
@@ -30,13 +36,17 @@ Serverless 有很多优点，可以让你不用关心运维、按量付费节省
 
 而 Serverless 函数是运行在 FaaS 平台上的，函数运行时只会有一个临时目录的读写权限，一旦运行环境被释放，该临时目录也会被释放，所以磁盘数据无法持续存储。并且和内存问题类似，不同函数实例的临时目录也是独立的。**那么对于有读写磁盘需求的应用，应该如何迁移到 Serverless 架构呢？** 要解决这个问题，我们可以为 Serverless 函数挂载一个持久存储，比如云盘或 NAS 等，这些持久化存储和 FaaS 平台是相互独立的，只要不释放数据可以永久保存。并且不同函数可以共用同一个持久化存储，这样不同函数就可以读写同一份数据了，甚至函数间还可以基于持久化存储进行通信。采用持久化存储还有一个好处就是，计算和存储分离了，这样更利于应用扩缩容。**总的来说，数据持久化是传统应用迁移到 Serverless 的第三个改造点。**
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image2/M01/0C/93/Cip5yGAZAVqAEQ_ZAARFv9c7O6A392.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image2/M01/0C/93/Cip5yGAZAVqAEQ_ZAARFv9c7O6A392.png"/> 
+
 
 其实不难看出，如果传统应用本身是分布式架构，很容易满足前面三点。因为分布式架构的应用就需要考虑内存缓存、身份认证、持久化存储等问题，而 Serverless 架构本身也是分布式的。
 
 对于传统分布式应用，要对外提供 HTTP 服务，通常也会有一个统一接入层来实现负载均衡、高可用等，例如我们会通过负载均衡使用户流量均衡分配到背后的每台服务器上，其中可能会使用到 Nginx、SLB 等产品。而对于 Serverless 架构的应用，我们可以使用 API 网关来做统一接入，由 API 网关承接用户请求，然后触发具体函数的执行。
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image2/M01/0C/93/Cip5yGAZAWCALB5LAAG1Ybf7G7c701.png"/>
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image2/M01/0C/93/Cip5yGAZAWCALB5LAAG1Ybf7G7c701.png"/> 
+
 
 使用 API 网关做统一接入是架构上的改造，除此之外，应用代码也需要改造。因为在传统应用中，运行在服务器上的应用是直接处理来自用户的 HTTP 请求的，而在 Serverless 应用中，函数处理的是 API 网关的事件，两者的数据结构和请求响应方式都有很大差异。你要对传统应用提供 HTTP 服务的代码进行改造，才能使其部署在 Serverless 平台上，**所以将传统 Web 服务 Serverless 化是传统应用迁移到 Serverless 架构的又一个改造点。**
 
@@ -46,7 +56,9 @@ Serverless 有很多优点，可以让你不用关心运维、按量付费节省
 
 传统的 Web 服务请求参数与 Serverless 函数参数有较大差异，所以将 Web 服务 Serverless 化的核心工作就是开发一个适配层，通过适配层将函数的事件对象转化为标准的 Web 请求，这样我们就可以接着用传统 Web 服务去处理用户请求和响应了。整体流程如下图所示：
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image2/M01/0C/96/CgpVE2AZAWmAchYZAAHYDXbY_9c062.png"/>  
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image2/M01/0C/96/CgpVE2AZAWmAchYZAAHYDXbY_9c062.png"/> 
+  
 传统 Web 服务 Serverless 化流程
 
 在 03 和 04 讲中，我们已经学习了 Serverless 函数是由事件触发的，事件形式上就是一个 JSON 数据，不同事件的数据不一样，Serverless 平台接收到事件后，会以事件对象为参数来执行入口函数。
@@ -189,7 +201,9 @@ module.exports.handler = function(event, context, callback) {
 
 * 将 HTTP 响应转换为函数返回值。
 
-<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image2/M01/0C/93/Cip5yGAZAX6AFyFKAALzp61gPVQ447.png"/>  
+
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image2/M01/0C/93/Cip5yGAZAX6AFyFKAALzp61gPVQ447.png"/> 
+  
 Web 服务 Serverless 化的实现原理
 
 说到这儿，不知道你有没有想起我们前面所讲的内容？我们在"07｜运行时：使用自定义运行时支持自定义编程语言"学习了如何实现一个自定义运行时，其中自定义运行时的原理，本质上也是在函数中实现一个 HTTP 服务，接下来 FaaS 平台会将事件转发到我们的 HTTP 服务上。不难发现，传统 Web 服务 Serverless 化的原理与自定义运行时的原理是非常类似的。因此基于自定义运行时，我们也可以很轻松将传统 Web 服务 Serverless 化，这样还不用开发适配层。
@@ -219,3 +233,4 @@ Web 服务 Serverless 化的实现原理
 虽然这一讲学习了很多关于将传统应用迁移到 Serverless 的方案，但实际操作起来可能还会遇到一些未知困难。不过我觉得相比困难，Serverless 带给我们的收益是值得去尝试的。
 
 最后，我留给你的作业是：开发一个简单的 Express.js 应用，并将其部署到 Serverless 平台上。我们下一讲见。
+

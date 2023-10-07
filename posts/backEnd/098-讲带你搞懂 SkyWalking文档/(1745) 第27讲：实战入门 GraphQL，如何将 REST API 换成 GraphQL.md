@@ -1,3 +1,5 @@
+# 第27讲：实战入门GraphQL，如何将RESTAPI换成GraphQL
+
 从本节开始将深入介绍 query-graphql-plugin 插件，我们会启动 SkyWalking Rocketbot 来查询 Trace 数据和 JVM 监控数据，这些用户查询请求最终都会路由到 query-graphql-plugin 插件中进行处理。
 
 ### GraphQL 简介
@@ -22,7 +24,9 @@ GraphQL 的类型系统与 Java 的类型系统非常相似，主要有下面 6 
 
 1. Scalar，类似于 Java 中的基本变量。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/21/B6/CgqCHl7q_OOAPGBqAAPjNVHf5Xk878.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/21/B6/CgqCHl7q_OOAPGBqAAPjNVHf5Xk878.png"/> 
+
 
 2. Object，类似于 Java 中的对象，这里使用 GraphQL 定义一个 Book 类型，它就是 Object 类型，在 GraphQL Java 中对应的是 GraphQLObjectType。
 
@@ -217,13 +221,17 @@ GraphQL Schema 中的每个字段都会关联一个 DataFetcher，如果未通�
 
 最后我们回顾整个示例项目，其核心逻辑如下图：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/21/AB/Ciqc1F7q_W-AJHWvAALYJGT3C0E099.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/21/AB/Ciqc1F7q_W-AJHWvAALYJGT3C0E099.png"/> 
+
 
 #### 启动
 
 启动该 Spring 项目之后，可以使用 GraphQL Playground 这个工具访问"/graphql"，并传入查询 Book 的请求，如下图所示：
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/21/AB/Ciqc1F7q_b2ASlkPAAG_Pnp7t9o721.png"/>
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/21/AB/Ciqc1F7q_b2ASlkPAAG_Pnp7t9o721.png"/> 
+
 
 如果想查看 Http 请求，可以点击 COPY CURL 按钮获取相应的 curl 命令，如下所示：
 
@@ -233,7 +241,9 @@ curl 'http://localhost:8080/graphql' -H 'Content-Type: application/json' --data-
 
 list 请求如下图所示：
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/21/AB/Ciqc1F7q_ciALYuxAAKZFgwrgvo996.png"/>
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/21/AB/Ciqc1F7q_ciALYuxAAKZFgwrgvo996.png"/> 
+
 
 到此为止，GraphQL Java Demo 项目的涉及的基础知识就全部介绍完了。
 
@@ -381,8 +391,13 @@ public Author getAuthorById(String id) {
 
 最后，我们启动该 Demo 项目，使用 GraphQL Playground 分别请求 Query 和 Mutation 中定义的接口，如下图所示：
 
-<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/21/B7/CgqCHl7q_i-AIWISAAH5fsYHv6s340.png"/>
 
-<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/21/B7/CgqCHl7q_jWAYBBBAAH-aJOU-Zk683.png"/>
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/21/B7/CgqCHl7q_i-AIWISAAH5fsYHv6s340.png"/> 
+
+
+
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/21/B7/CgqCHl7q_jWAYBBBAAH-aJOU-Zk683.png"/> 
+
 
 到此为止，GraphQL 入门示例分析就结束了。
+

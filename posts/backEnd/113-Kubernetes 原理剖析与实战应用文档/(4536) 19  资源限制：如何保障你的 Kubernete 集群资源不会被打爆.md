@@ -1,3 +1,5 @@
+# 19资源限制：如何保障你的Kubernete集群资源不会被打爆
+
 你好，我是正范。
 
 前面的课时中，我们曾提到通过 HPA 控制业务的资源水位，通过 ClusterAutoscaler 自动扩充集群的资源。但如果集群资源本身就是受限的情况下，或者一时无法短时间内扩容，那么我们该如何控制集群的整体资源水位，保障集群资源不会被"打爆"？
@@ -139,7 +141,9 @@ cpu-demo   1000m        0Mi
 
 这里 QoS 的一个作用就是跟[oom_score](https://www.baidu.com/s?ie=utf-8&tn=baidu&wd=oom%20score)进行挂钩。Kubernetes 会根据 QoS 设置 OOM 的评分调整参数oom_score_adj，有兴趣可以阅读[详细的计算代码](https://github.com/kubernetes/kubernetes/blob/master/pkg/kubelet/qos/policy.go#L34)。当发生 OOM 时，oom_score_adj数值越高就越优先被 Kill。这里我给你展示了三个 QoS 对应的oom_score_adj计算公式。
 
-<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/64/34/Ciqc1F-X4kSAWDiXAABGicJIZQU816.png"/>
+
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/64/34/Ciqc1F-X4kSAWDiXAABGicJIZQU816.png"/> 
+
 
 除此之外，QoS 还与 Pod 驱逐有关系。当节点的内存、CPU 资源不足时，Kubelet 会开始驱逐节点上的 Pod，它会依据 QoS 的优先级确定驱逐的顺序，跟上面 OOM kill 的次序一样。我们会在后续的课程中单独讲这部分。
 
@@ -254,3 +258,4 @@ spec:
 此外，你可以用 ResourceQuota 限制命名空间中所有容器的内存请求总量、内存限制总量、CPU 请求总量、CPU 限制总量等。而如果你想对单个容器而不是所有容器进行限制，就可以使用 LimitRange。
 
 到这里这节课就结束了，如果你对本节课有什么想法或者疑问，欢迎你在留言区留言，我们一起讨论。
+

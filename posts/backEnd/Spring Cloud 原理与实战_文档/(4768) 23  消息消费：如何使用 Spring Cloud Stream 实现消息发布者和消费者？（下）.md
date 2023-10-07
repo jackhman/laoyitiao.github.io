@@ -1,10 +1,14 @@
+# 23消息消费：如何使用SpringCloudStream实现消息发布者和消费者？（下）
+
 在上一课时中，我们给出了 SpringHealth 案例中基于 Spring Cloud Stream 的消息发布场景以及实现方式，同时也给出了消息消费的应用场景。今天我们将延续上一课时的内容，来具体讲解如何在服务中添加消息消费者，以及使用各项消息消费的高级主题，并给出案例的运行效果。
 
 ### 在服务中添加消息消费者
 
 在介绍消息消费者的具体实现方法之前，我们先来回顾消息消费的实现流程，如下图所示：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/7E/C4/CgqCHl_PVBSAeL1XAAA8UAK4iIs917.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/7E/C4/CgqCHl_PVBSAeL1XAAA8UAK4iIs917.png"/> 
+  
 消息消费实现流程
 
 针对上图中各个消费者组件的实现过程，我们采用与介绍发布者时相同的方式进行展开。首当其冲的还是要使用 @EnableBinding 注解。
@@ -202,7 +206,9 @@ spring:
 
 在微服务架构中，服务多实例部署的场景非常常见。在集群环境下，我们希望服务的不同实例被放置在竞争的消费者关系中，同一服务集群中只有一个实例能够处理给定消息。Spring Cloud Stream 提供的消费者分组可以很方便地实现这一需求，效果图如下所示：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/7E/C4/CgqCHl_PVEeALTgMAABKYpkIj8Y721.png"/>  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/7E/C4/CgqCHl_PVEeALTgMAABKYpkIj8Y721.png"/> 
+  
 intervention-service 消息分组效果示意图
 
 在上图中，两个 intervention-service 实例构成了一个 interventionGroup。在这个 interventionGroup 中，UserInfoChangedEvent 事件只会被一个 intervention-service 实例所消费。
@@ -230,7 +236,9 @@ spring:
 
 最后一项 Spring Cloud Stream 使用上的高级主题是使用消费分区。同样是在集群环境下，假设存在两个 intervention-service 实例，我们希望用户信息中 id 为单号的 UserInfoChangedEvent 始终由第一个 intervention-service 实例进行消费，而id为双号的 UserInfoChangedEvent 则始终由第二个 intervention-service 实例进行消费。基于类似这样的需求，我们就可以构建消息分区，如下所示：
 
-<Image alt="Lark20201208-182244.png" src="https://s0.lgstatic.com/i/image/M00/7E/B9/Ciqc1F_PVFGABcKNAAI1undYfJw543.png"/>  
+
+<Image alt="Lark20201208-182244.png" src="https://s0.lgstatic.com/i/image/M00/7E/B9/Ciqc1F_PVFGABcKNAAI1undYfJw543.png"/> 
+  
 intervention-service 消息分区效果示意图
 
 要想实现上图所示的消息消费效果，我们唯一要做的事情还是重构 Binder 配置。这次以 RabbitMQ 为例给出示例配置，如下所示：
@@ -305,3 +313,4 @@ spring:
 这里给你留一道思考题：在 Spring Cloud Stream 中，如何配置消费者组和消费分区功能？
 
 通过前面课程的学习，我们感受到了 Spring Cloud Stream 中 Binder 组件的强大功能。基于这个组件，我们可以使用同一套开发模式来分别集成 RabbitMQ 和 Kafka 等主流的消息中间件。介绍完消息发布和消费之后，我们有必要对 Binder 组件的内部实现机制做深入分析，这就是下一课时的内容。
+

@@ -1,3 +1,5 @@
+# 第48讲：Callable和Runnable的不同？
+
 你好，欢迎来到第 48 课时，在本课时我们将讲解 Callable 和 Runnable 的不同。
 
 ### 为什么需要 Callable？Runnable 的缺陷
@@ -90,3 +92,4 @@ public interface Callable<V> {
 * 和 Callable 配合的有一个 Future 类，通过 Future 可以了解任务执行情况，或者取消任务的执行，还可获取任务执行的结果，这些功能都是 Runnable 做不到的，Callable 的功能要比 Runnable 强大。
 
 以上就是本课时的内容了。首先介绍了 Runnable 的两个缺陷，第一个是没有返回值，第二个是不能抛出受检查异常；然后分析了为什么会有这样的缺陷，以及为什么设计成这样；接下来分析了 Callable 接口，并且把 Callable 接口和 Runnable 接口的区别进行了对比和总结。
+

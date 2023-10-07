@@ -1,3 +1,5 @@
+# 20ViewModel架构：如何准备UI层的数据？
+
 UI 是 App 的重要组成部分，因为所有 App 都必须呈现 UI，并接收用户的事件。为了让 UI 能正确显示，我们需要把 Model 数据进行转换。例如，当我们显示图片的时候，需要把字符串类型的 URL 转换成 iOS 所支持 URL 类型；当显示时间信息时，需要把 UTC 时间值转换成设备所在的时区。
 
 不过存在一个问题，如果我们把所有类型转换的逻辑都放在 UI/View 层里面，作为 View 层的 View Controller 往往会变得越来越臃肿。 为了避免这一情况，我使用了 MVVM 模式和 RxSwift 来架构 Moments App。MVVM 模式的核心部分是 ViewModel 模块，主要用于把 Model 转换成 UI/View 层所需的数据。为了简化转换的工作，我使用了 RxSwift 的操作符（Operator）。
@@ -8,7 +10,9 @@ UI 是 App 的重要组成部分，因为所有 App 都必须呈现 UI，并接�
 
 首先我们以朋友圈功能为例，看看 ViewModel 模式的架构图。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/3C/0F/CioPOWCH7COAXcMTAAPT7Gr7yvg197.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/3C/0F/CioPOWCH7COAXcMTAAPT7Gr7yvg197.png"/> 
+
 
 **View 模块** 负责呈现 UI，并接收用户的事件。在朋友圈功能中，`MomentsTimelineViewController`负责呈现朋友圈的时间轴列表。为了正确显示该页面，我们需要为它准备好一些的数据，例如朋友的名字，朋友头像的 URL 等等，那些数据可以从 ViewModel 模块中读取。
 
@@ -176,7 +180,9 @@ Observable.of(2, 23, 5, 60, 1, 31)
     .disposed(by: disposeBag)
 ```
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M01/3C/06/Cgp9HWCH7E6AcOAxAAD0m4P1ZAs382.png"/>  
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M01/3C/06/Cgp9HWCH7E6AcOAxAAD0m4P1ZAs382.png"/> 
+  
 过滤操作符 filter 的效果
 
 **distinctUntilChanged**用于把相同的事件过滤掉。如下面例子中的第二个 1 和第四个 2，使用distinctUntilChanged 就可以把它们给过滤掉，然后打印出 1、 2、 1。代码和图例如下所示。
@@ -190,7 +196,9 @@ Observable.of(1, 1, 2, 2, 1)
     .disposed(by: disposeBag)
 ```
 
-<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image6/M01/3C/06/Cgp9HWCH7Q-AVcVjAAEFCx3nsK4458.png"/>  
+
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image6/M01/3C/06/Cgp9HWCH7Q-AVcVjAAEFCx3nsK4458.png"/> 
+  
 过滤操作符 distinctUntilChanged 的效果
 
 除了相同的事件，我们还可以使用操作符**distinctUntilChanged**过滤掉相同的状态，从而避免频繁更新 UI。例如，我们先使用本地缓存数据呈现 UI，然后发起网络请求。当请求成功以后可以把结果数据与缓存进行对比，如果数据一致就没必要再次更新 UI。
@@ -210,7 +218,9 @@ Observable.of(1, 2)
     .disposed(by: disposeBag)
 ```
 
-<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image6/M01/3C/07/Cgp9HWCH7R6ASEB0AAD5Z_BYeoQ092.png"/>  
+
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image6/M01/3C/07/Cgp9HWCH7R6ASEB0AAD5Z_BYeoQ092.png"/> 
+  
 转换操作符 map 的效果
 
 **compactMap** 常用于过滤掉值为`nil`的操作符，你可以把 compactMap 理解为同时使用 filter 和 map 的两个操作符。filter 把`nil`的值过滤掉，而 map 把非空的值进行转换。
@@ -226,7 +236,9 @@ Observable.of("1", "not-a-number", "2")
     .disposed(by: disposeBag)
 ```
 
-<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image6/M01/3C/0F/CioPOWCH7SeAfVeYAAEfEP1ULSY822.png"/>  
+
+<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image6/M01/3C/0F/CioPOWCH7SeAfVeYAAEfEP1ULSY822.png"/> 
+  
 转换操作符 compactMap 效果
 
 **flatMap**用于把两层的 Observable 序列合并到一层。我们通过一个例子来解析到底怎样合并。
@@ -253,7 +265,9 @@ Observable.of(sensor1, sensor2)
 
 具体来说，我们在`flatMap`方法的闭包里面返回`temperature`属性，由于该属性是一个`Observable`对象，因此`flatMap`方法会把这些序列统一合并到一个单独的 Observable 序列里面，并打印出 21、23、22、25。
 
-<Image alt="Drawing 11.png" src="https://s0.lgstatic.com/i/image6/M01/3C/0F/CioPOWCH7TKAWC3hAAEPlMCt_uM223.png"/>  
+
+<Image alt="Drawing 11.png" src="https://s0.lgstatic.com/i/image6/M01/3C/0F/CioPOWCH7TKAWC3hAAEPlMCt_uM223.png"/> 
+  
 转换操作符 flatMap 的效果
 
 #### 合并操作符
@@ -271,7 +285,9 @@ Observable.of(1, 2)
     .disposed(by: disposeBag)
 ```
 
-<Image alt="Drawing 13.png" src="https://s0.lgstatic.com/i/image6/M01/3C/0F/CioPOWCH7USAKIvoAADtwXiN318148.png"/>  
+
+<Image alt="Drawing 13.png" src="https://s0.lgstatic.com/i/image6/M01/3C/0F/CioPOWCH7USAKIvoAADtwXiN318148.png"/> 
+  
 合并操作符 startWith 效果
 
 **日常中我们可以通过** `startWith`方法，把加载事件插入网络数据事件之前，以此**来保持 UI 状态的自动更新。**
@@ -287,7 +303,9 @@ Observable.of(1, 2)
     .disposed(by: disposeBag)
 ```
 
-<Image alt="Drawing 15.png" src="https://s0.lgstatic.com/i/image6/M00/3C/0F/CioPOWCH7VeAeMD5AACnQDe-5Nk532.png"/>  
+
+<Image alt="Drawing 15.png" src="https://s0.lgstatic.com/i/image6/M00/3C/0F/CioPOWCH7VeAeMD5AACnQDe-5Nk532.png"/> 
+  
 合并操作符 concat 效果
 
 **merge**，常用于合并多个 Observable 序列的操作符，和 concat 不一样的地方是它能保持原来事件的顺序。我们可以通过一个例子来看看，它是怎样合并 Observable 序列的。代码示例如下：
@@ -311,7 +329,9 @@ first.onNext(4)
 ```
 
 我们调用`merge`方法把两个 PublishSubject 合并在一起，然后不同的 PublishSubject 会分别发出不同的`next`事件，订阅者根据事件发生的顺序来接收到相关事件。如下图所示，程序执行时会打印 1、2、11、3、12、13、4。  
-<Image alt="Drawing 17.png" src="https://s0.lgstatic.com/i/image6/M00/3C/0F/CioPOWCH7W6AOGypAAEmk4CaMh0083.png"/>  
+
+<Image alt="Drawing 17.png" src="https://s0.lgstatic.com/i/image6/M00/3C/0F/CioPOWCH7W6AOGypAAEmk4CaMh0083.png"/> 
+  
 合并操作符 merge 的效果
 
 **combineLatest**会把两个 Observable 序列里最后的事件合并起来，代码示例如下。
@@ -335,7 +355,9 @@ first.onNext("4")
 
 在程序执行过程中，当其中一个 PublishSubject 发出`next`事件时，就会从另外一个 PublishSubject 取出其最后一个事件，然后调用`combineLatest`方法的闭包，把这两个事件合并起来并通知订阅者。上述的例子在执行时会打印 1a、2a、2b、2c、3c、4c。
 
-<Image alt="Drawing 19.png" src="https://s0.lgstatic.com/i/image6/M00/3C/0F/CioPOWCH7X6AJXQvAAEo9AcsIGo039.png"/>  
+
+<Image alt="Drawing 19.png" src="https://s0.lgstatic.com/i/image6/M00/3C/0F/CioPOWCH7X6AJXQvAAEo9AcsIGo039.png"/> 
+  
 合并操作符 combineLatest
 
 在实际开发中，`combineLatest`方法非常实用。我们可以用它来监听多个 Observable 序列，然后组合起来统一更新状态。例如在一个登录页面里面，我们可以同时监听用户名和密码两个输入框，当它们同时有值的时候才激活登录按钮。
@@ -363,7 +385,9 @@ first.onNext("4")
 
 在上述的例子中，有两个 PublishSubject，其中`first`发出 1、2、3、4，而`second`发出 a、b、c。`zip`方法会返回它们的合并事件 1a、2b、3c。由于`first`所发出`next("4")`事件没有在`second`里面找到对应的事件，所以合并后的 Observable 序列只有三个事件。
 
-<Image alt="图片5.png" src="https://s0.lgstatic.com/i/image6/M01/3C/9B/Cgp9HWCLocCASVLAAAEE-3Z6-aU135.png"/>
+
+<Image alt="图片5.png" src="https://s0.lgstatic.com/i/image6/M01/3C/9B/Cgp9HWCLocCASVLAAAEE-3Z6-aU135.png"/> 
+
 
 合并操作符 zip 的效果
 
@@ -392,3 +416,4 @@ RxSwift 为我们提供了 50 多个操作符，我建议你到 rxmarbles.com �
 >
 > 朋友圈功能 ViewModel 实现的源码地址：  
 > [https://github.com/lagoueduCol/iOS-linyongjian/tree/main/Moments/Moments/Features/Moments/ViewModels](https://github.com/lagoueduCol/iOS-linyongjian/tree/main/Moments/Moments/Features/Moments/ViewModels?fileGuid=xxQTRXtVcqtHK6j8)
+

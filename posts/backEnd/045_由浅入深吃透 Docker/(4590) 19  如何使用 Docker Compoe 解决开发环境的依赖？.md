@@ -1,3 +1,5 @@
+# 19如何使用DockerCompoe解决开发环境的依赖？
+
 前两个模块，我们从 Docker 的基本操作到 Docker 的实现原理，为你一步一步揭开了 Docker 神秘的面纱。然而目前为止，我们所有的操作都是围绕单个容器进行的，但当我们的业务越来越复杂时，需要多个容器相互配合，甚至需要多个主机组成容器集群才能满足我们的业务需求，这个时候就需要用到容器的编排工具了。因为容器编排工具可以帮助我们批量地创建、调度和管理容器，帮助我们解决规模化容器的部署问题。
 
 从这一课时开始，我将向你介绍 Docker 三种常用的编排工具：Docker Compose、Docker Swarm 和 Kubernetes。了解这些编排工具，可以让你在不同的环境中选择最优的编排框架。
@@ -420,7 +422,9 @@ Starting wordpress_wordpress_1 ... done
 
 执行完以上命令后，Docker Compose 首先会为我们启动一个 MySQL 数据库，按照 MySQL 服务中声明的环境变量来设置 MySQL 数据库的用户名和密码。然后等待 MySQL 数据库启动后，再启动 WordPress 服务。WordPress 服务启动后，我们就可以通过 <http://localhost:8080> 访问它了，访问成功后，我们就可以看到以下界面，然后按照提示一步一步设置就可以拥有属于自己的专属博客系统了。
 
-<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/63/AF/Ciqc1F-WuHqAMc6gAAGSco9Zyvc339.png"/>  
+
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/63/AF/Ciqc1F-WuHqAMc6gAAGSco9Zyvc339.png"/> 
+  
 图 1 WordPress 启动界面
 
 #### 停止 WordPress
@@ -440,3 +444,4 @@ Docker Compose 是一个用来定义复杂应用的单机编排工具，通常�
 那么，学完本课时的课程，你可以试着使用 Docker Compose 一键启动一个 [LNMP](https://baike.baidu.com/item/LNMP) 开发环境吗？
 
 下一课时，我将为你讲解容器的另一个编排系统 Docker Swarm。
+

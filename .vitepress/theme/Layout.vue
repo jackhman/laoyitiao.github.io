@@ -4,8 +4,6 @@ import DefaultTheme from 'vitepress/theme'
 import { nextTick, provide,ref,watch,onMounted } from 'vue'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
-import { useSidebar  } from 'vitepress/theme'
-
 const route = useRoute()
 
 const title = ref('');
@@ -24,7 +22,7 @@ watch(route,changeTitle)
 
 
 const router = useRouter();
-NProgress.configure({ showSpinner: true }); // 显示右上角螺旋加载提示
+NProgress.configure({ showSpinner: false }); // 显示右上角螺旋加载提示
 router.onBeforeRouteChange=(to)=>{
   NProgress.start();
   return true;
@@ -32,7 +30,6 @@ router.onBeforeRouteChange=(to)=>{
 router.onAfterRouteChanged=(to)=>{
   NProgress.done();
 }
-
 </script>
 
 <template>
@@ -40,7 +37,7 @@ router.onAfterRouteChanged=(to)=>{
   <DefaultTheme.Layout>
     <template #sidebar-nav-before>
       <div class="title" style="padding: 20px 0px 0px 0px">
-        <h1><strong>{{ title }}</strong></h1>
+        <strong>{{ title }} ：</strong>
       </div>
     </template>
   </DefaultTheme.Layout>

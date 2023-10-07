@@ -1,3 +1,5 @@
+# 第10讲：使用OpenAPI和Swagger实现API优先设计
+
 从本课时开始，我们将进入到云原生微服务架构应用的实战开发环节，在介绍微服务的具体实现之前，首要的工作是设计和确定每个微服务的**开放 API** 。开放 API 在近几年得到了广泛的流行，很多在线服务和政府机构都对外提供了开放 API，其已经成为在线服务的标配功能。开发者可以利用开放 API 开发出各种不同的应用。  
 
 <br />
@@ -32,7 +34,9 @@ API 实现方式
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/03/D7/CgoCgV6ZTAOAe8LCAAAmZRAsEQw388.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/03/D7/CgoCgV6ZTAOAe8LCAAAmZRAsEQw388.png"/> 
+
 
 <br />
 
@@ -61,7 +65,9 @@ OpenAPI 规范中定义了几种基本类型，分别是 integer、number、stri
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/11/06/Ciqah16ZTAOAAwW0AACP-qu5xrk547.png"/>  
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/11/06/Ciqah16ZTAOAAwW0AACP-qu5xrk547.png"/> 
+  
 
 ### Info 对象
 
@@ -69,7 +75,9 @@ Info 对象包含了 API 的元数据，可以帮助使用者更好的了解 API
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/8A/1C/Cgq2xl6ZTAOAdpURAABX1Kfh-DM443.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/8A/1C/Cgq2xl6ZTAOAdpURAABX1Kfh-DM443.png"/> 
+
 
 <br />
 
@@ -97,7 +105,9 @@ Server 对象表示 API 的服务器，下表给出了 Server 对象中可以包
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/03/D7/CgoCgV6ZTAOABcF1AAA-57NeBGQ901.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/03/D7/CgoCgV6ZTAOABcF1AAA-57NeBGQ901.png"/> 
+
 
 <br />
 
@@ -128,7 +138,9 @@ Paths 对象中的字段是动态的。每个字段表示一个路径，以"/"�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/11/06/Ciqah16ZTAOAC-XoAAC9Yc_U9FY508.png"/>  
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/11/06/Ciqah16ZTAOAC-XoAAC9Yc_U9FY508.png"/> 
+  
 
 ### Parameter 对象
 
@@ -136,7 +148,9 @@ Parameter 对象表示操作的参数。下表给出了 Parameter 对象中可�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/8A/1C/Cgq2xl6ZTAOANejbAADhE2FZLo4096.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/8A/1C/Cgq2xl6ZTAOANejbAADhE2FZLo4096.png"/> 
+
 
 <br />
 
@@ -159,7 +173,9 @@ RequestBody 对象表示 HTTP 请求的内容，下表给出了 RequestBody 对�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/03/D7/CgoCgV6ZTAOAU9XxAAA4YbmwX3A208.png"/>  
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/03/D7/CgoCgV6ZTAOAU9XxAAA4YbmwX3A208.png"/> 
+  
 
 ### Responses 对象
 
@@ -167,7 +183,9 @@ Responses 对象表示 HTTP 请求的响应，该对象中的字段是动态的�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/11/06/Ciqah16ZTAOAHz9LAAB3y1Wy79M022.png"/>  
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/11/06/Ciqah16ZTAOAHz9LAAB3y1Wy79M022.png"/> 
+  
 
 ### Reference 对象
 
@@ -343,7 +361,9 @@ docker run -d -p 8000:8080 swaggerapi/swagger-editor
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/8A/1C/Cgq2xl6ZTASABJOwAAFARz_LfhM630.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/8A/1C/Cgq2xl6ZTASABJOwAAFARz_LfhM630.png"/> 
+
 
 ### Swagger 界面
 
@@ -375,7 +395,9 @@ docker run -p 8010:8080 -e SWAGGER_JSON=/api/openapi.yml -v $PWD:/api sw
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/03/D7/CgoCgV6ZTASAXGi3AAH17b7200I115.png"/>  
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/03/D7/CgoCgV6ZTASAXGi3AAH17b7200I115.png"/> 
+  
 
 ### 代码生成
 
@@ -418,3 +440,4 @@ java -jar swagger-codegen-cli-3.0.19.jar generate -i openapi.yml -l nodej
 ---
 
 API 优先的策略保证了微服务的 API 在设计时，充分考虑到 API 使用者的需求，使得 API 成为提供者和使用者之间的良好契约。本课时首先介绍了 API 优先的设计策略，然后介绍了 API 的不同实现方式，接着介绍了 REST API 的 OpenAPI 规范，最后介绍了 OpenAPI 的相关工具。
+

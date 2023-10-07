@@ -1,3 +1,5 @@
+# 23执行引擎：如何把握ShardingSphere中的Executor执行模型？（下）
+
 在上一课时，我们已经对 ShardingSphere 执行引擎中关于底层的 SQLExecuteTemplate，以及上层的 StatementExecutor 和 PreparedStatementExecutor 对象进行了全面介绍。
 
 今天，我们在此基础上更上一层，重点关注 ShardingStatement 和 ShardingPreparedStatement 对象，这两个对象分别是 StatementExecutor 和 PreparedStatementExecutor 的使用者。
@@ -29,7 +31,9 @@ public ShardingStatement(final ShardingConnection connection, final int resultSe
 
 根据这一点，我们可以想象 ShardingStatement 应该具备与 ShardingConnection 类似的类层结构：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/48/9D/CgqCHl9MzLGAdeNfAACM0dnojxQ073.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/48/9D/CgqCHl9MzLGAdeNfAACM0dnojxQ073.png"/> 
+
 
 然后我们来到上图中 AbstractStatementAdapter 类，这里的很多方法的风格都与 ShardingConnection 的父类 AbstractConnectionAdapter 一致，例如如下所示的 setPoolable 方法：
 
@@ -223,7 +227,9 @@ protected final void replaySetParameter(final PreparedStatement preparedStatemen
 
 关于 AbstractShardingPreparedStatementAdapter 还需要注意的是它的**类层结构**，如下图所示，可以看到 AbstractShardingPreparedStatementAdapter 继承了 AbstractUnsupportedOperationPreparedStatement 类；而 AbstractUnsupportedOperationPreparedStatement 却又继承了 AbstractStatementAdapter 类并实现了 PreparedStatement：
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/48/92/Ciqc1F9MzNeACiagAACzQd-8eig186.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/48/92/Ciqc1F9MzNeACiagAACzQd-8eig186.png"/> 
+
 
 形成这种类层结构的原因在于，PreparedStatement 本来就是在 Statement 的基础上添加了各种参数设置功能，换句话说，Statement 的功能 PreparedStatement 都应该有。
 
@@ -457,3 +463,4 @@ ShardingSphere 通过在准备阶段获取的连接模式，在执行阶段生�
 这里给你留一道思考题：ShardingSphere 中，AbstractShardingPreparedStatementAdapter 的类层结构为什么会比 AbstractStatementAdapter 复杂很多？欢迎你在留言区与大家讨论，我将逐一点评解答。
 
 现在，我们已经通过执行引擎获取了来自不同数据源的结果数据，对于查询语句而言，我们通常都需要对这些结果数据进行归并才能返回给客户端。在接下来的内容中，就让我们来分析一下 ShardingSphere 的归并引擎。
+

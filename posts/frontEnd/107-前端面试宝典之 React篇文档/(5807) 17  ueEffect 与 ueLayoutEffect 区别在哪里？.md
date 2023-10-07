@@ -1,3 +1,5 @@
+# 17ueEffect与ueLayoutEffect区别在哪里？
+
 在 React 的面试中会对 Hooks API 进行一个区分度考察，重点往往会落在 useEffect 与 useLayoutEffect 上。很有意思，光从名字来看，它们就很相像，所以被点名的概率就很高。这一讲我们来重点讲解下这部分内容。
 
 ### 审题
@@ -26,7 +28,9 @@
 
 * **未来趋势**，两者在未来的发展趋势上有什么区别，是否存在一方可能在使用频率上胜出或者淡出的情况。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/90/3F/Ciqc1GAKhGuAeJVzAABnKbg5gv0029.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/90/3F/Ciqc1GAKhGuAeJVzAABnKbg5gv0029.png"/> 
+
 
 ### 破题
 
@@ -170,7 +174,9 @@ export default () => {
 
 然后执行代码， 你就会发现红圈在渲染后出现了肉眼可见的瞬移，一下飘到了中间。
 
-<Image alt="GIF1.gif" src="https://s0.lgstatic.com/i/image2/M01/08/32/Cip5yGAKhLOADIYUAAIoKyWYNqU863.gif"/>
+
+<Image alt="GIF1.gif" src="https://s0.lgstatic.com/i/image2/M01/08/32/Cip5yGAKhLOADIYUAAIoKyWYNqU863.gif"/> 
+
 
 那如果使用 useLayoutEffect 又会怎么样呢？其他代码都不需要修改，只需要像下面这样，将 useEffect 替换为 useLayoutEffect：
 
@@ -194,7 +200,9 @@ export default () => {
 
 接下来再看执行的效果，你会发现红圈是静止在页面中央，仿佛并没有使用代码强制调整样式的过程。
 
-<Image alt="GIF2.gif" src="https://s0.lgstatic.com/i/image2/M01/08/34/CgpVE2AKhLyANGs2AAIwo7CyA_E780.gif"/>
+
+<Image alt="GIF2.gif" src="https://s0.lgstatic.com/i/image2/M01/08/34/CgpVE2AKhLyANGs2AAIwo7CyA_E780.gif"/> 
+
 
 虽然在实际的项目中，我们并不会这么粗暴地去调整组件样式，但这个案例足以说明两者的区别与使用场景。在 React 社区中最佳的实践是这样推荐的，大多数场景下可以直接使用**useEffect** ，但是如果你的代码引起了页面闪烁，也就是引起了组件突然改变位置、颜色及其他效果等的情况下，就推荐使用**useLayoutEffect**来处理。那么总结起来就是如果有直接操作 DOM 样式或者引起 DOM 样式更新的场景更推荐使用 useLayoutEffect。
 
@@ -204,7 +212,9 @@ export default () => {
 
 首先可以看下这个图：
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image2/M01/08/34/CgpVE2AKhP6AFNRnAAB9M55aj8I408.png"/>
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image2/M01/08/34/CgpVE2AKhP6AFNRnAAB9M55aj8I408.png"/> 
+
 
 这个图表达了什么意思呢？首先所有的 Hooks，也就是 useState、useEffect、useLayoutEffect 等，都是导入到了 Dispatcher 对象中。在调用 Hook 时，会通过 Dispatcher 调用对应的 Hook 函数。所有的 Hooks 会按顺序存入对应 Fiber 的状态队列中，这样 React 就能知道当前的 Hook 属于哪个 Fiber，这里就是[上一讲](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=566&sid=20-h5Url-0#/detail/pc?id=5806)所提到的**Hooks 链表**。但 Effect Hooks 会有些不同，它涉及了一些额外的处理逻辑。每个 Fiber 的 Hooks 队列中保存了 effect 节点，而每个 effect 的类型都有可能不同，需要在合适的阶段去执行。
 
@@ -251,7 +261,9 @@ function mountLayoutEffect(
 >
 > 在未来的趋势上，两个 API 是会长期共存的，暂时没有删减合并的计划，需要开发者根据场景去自行选择。React 团队的建议非常实用，如果实在分不清，先用 useEffect，一般问题不大；如果页面有异常，再直接替换为 useLayoutEffect 即可。
 
-<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image2/M01/08/32/Cip5yGAKhRCAX99HAAD0YKYP40c980.png"/>
+
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image2/M01/08/32/Cip5yGAKhRCAX99HAAD0YKYP40c980.png"/> 
+
 
 ### 总结
 
@@ -265,8 +277,11 @@ function mountLayoutEffect(
 
 *** ** * ** ***
 
-[<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/72/94/Ciqc1F_EZ0eANc6tAASyC72ZqWw643.png"/>](https://shenceyun.lagou.com/t/mka)
+[
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/72/94/Ciqc1F_EZ0eANc6tAASyC72ZqWw643.png"/> 
+](https://shenceyun.lagou.com/t/mka)
 
 《大前端高薪训练营》
 
 对标阿里 P7 技术需求 + 每月大厂内推，6 个月助你斩获名企高薪 Offer。[点击链接](https://shenceyun.lagou.com/t/mka)，快来领取！
+

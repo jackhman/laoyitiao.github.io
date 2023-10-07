@@ -1,3 +1,5 @@
+# 21如何利用JavaScript实现经典数据结构？
+
 前面几讲我们从编程思维的角度分析了软件设计哲学。从这一讲开始，我们将深入数据结构这个话题。
 
 数据结构是计算机中组织和存储数据的特定方式，它的目的是方便且高效地对数据进行访问和修改。数据结构体现了数据之间的关系，以及操作数据的一系列方法。数据又是程序的基本单元，因此无论哪种语言、哪种领域，都离不开数据结构；另一方面，数据结构是算法的基础，其本身也包含了算法的部分内容。也就是说，想要掌握算法，有一个坚固的数据结构基础是必要条件。
@@ -129,7 +131,9 @@ class Queue {
 
 * 
 
-<Image alt="图片12.png" src="https://s0.lgstatic.com/i/image6/M01/04/F5/CioPOWAvYtuAEfl-AAIhGegvMJU666.png"/>
+
+<Image alt="图片12.png" src="https://s0.lgstatic.com/i/image6/M01/04/F5/CioPOWAvYtuAEfl-AAIhGegvMJU666.png"/> 
+
 
 首先，根据双向链表的特点，我们实现一个节点构造函数（节点类），如下代码：
 
@@ -780,6 +784,9 @@ BFS 的实现重点在于队列，而 DFS 的重点在于递归，这是它们�
 
 本讲内容总结如下：
 
-<Image alt="如何利用 JavaScript 实现经典数据结构？.png" src="https://s0.lgstatic.com/i/image6/M00/04/F5/CioPOWAvYweAUX2mAAHhvq_M9XU847.png"/>
+
+<Image alt="如何利用 JavaScript 实现经典数据结构？.png" src="https://s0.lgstatic.com/i/image6/M00/04/F5/CioPOWAvYweAUX2mAAHhvq_M9XU847.png"/> 
+
 
 随着需求的复杂度上升，前端工程师越来越离不开数据结构。是否能够掌握这个难点内容，将是进阶的重要考量。下一讲，我们将解析数据结构在前端中的具体应用场景，来帮助你加深理解，做到灵活应用。
+

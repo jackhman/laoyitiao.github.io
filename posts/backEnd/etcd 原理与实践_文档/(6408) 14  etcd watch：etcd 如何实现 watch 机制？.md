@@ -1,3 +1,5 @@
+# 14etcdwatch：etcd如何实现watch机制？
+
 etcd v2 和 v3 版本之间发生的其中一个重要变化就是 watch 机制的优化。etcd v2 watch 机制采用的是基于 HTTP/1.x 协议的**客户端轮询机制**，历史版本则通过滑动窗口存储。在大量的客户端连接场景或集群规模较大的场景下，etcd 服务端的扩展性和稳定性都无法保证。etcd v3 在此基础上进行优化，满足了 Kubernetes Pods 部署和状态管理等业务场景诉求。
 
 这一讲我们就来介绍 watch 的用法，包括如何通过 etcdctl 命令行工具及 clientv3 客户端实现键值对的监控。在了解基本用法的基础上，我们再来重点介绍 etcd watch 实现的原理和细节。
@@ -98,7 +100,9 @@ func testWatch() {
 
 在上述实现中，我们调用了 watchableStore。为了实现 watch 监测，我们创建了一个 watchStream，watchStream 监听的 key 为 hello，之后我们就可以消费`w.Chan()`返回的 channel。key 为 hello 的任何变化，都会通过这个 channel 发送给客户端。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/19/19/Cgp9HWBJu_WAfdpGAAAef8_AVBQ682.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/19/19/Cgp9HWBJu_WAfdpGAAAef8_AVBQ682.png"/> 
+
 
 结合这张图，我们可以看到：watchStream 实现了在大量 KV 的变化事件中，**过滤出当前所指定监听的 key，并将键值对的变更事件输出**。
 
@@ -134,7 +138,9 @@ watchableStore 组合了 store 结构体的字段和方法，除此之外，还�
 
 根据 watchableStore 的定义，我们可以结合下图描述前文示例 watch 监听的过程。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M01/19/17/CioPOWBJvWKAN2GEAAArY0rVWO4011.png"/>  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M01/19/17/CioPOWBJvWKAN2GEAAArY0rVWO4011.png"/> 
+  
 watch 监听流程
 
 watchableStore 收到了所有 key 的变更后，将这些 key 交给 synced（watchGroup），synced 使用了 map 和 ADT（红黑树），能够快速地从所有 key 中找到监听的 key，将这些 key 发送给对应的 watcher，这些 watcher 再通过 chan 将变更信息发送出去。
@@ -202,7 +208,9 @@ func (s *watchableStore) syncWatchers() int {
 
 简化后的 syncWatchers 方法中有三个核心步骤，首先是根据当前的版本从未同步的 watcherGroup 中选出一些待处理的任务，然后从 BoltDB 中获取当前版本范围内的数据变更，并将它们转换成事件，事件和 watcherGroup 在打包之后会通过 send 方法发送到每一个 watcher 对应的 channel 中。
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M01/19/17/CioPOWBJvXaAJROAAAAlohW0T4M993.png"/>  
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M01/19/17/CioPOWBJvXaAJROAAAAlohW0T4M993.png"/> 
+  
 syncWatchers 方法调用流程图
 
 ### 客户端监听事件
@@ -364,7 +372,9 @@ func (s *watchableStore) notify(rev int64, evs []mvccpb.Event) {
 
 channel 已满的情况下，有一个写操作写入 foo = bar。监听 foo 的 watcher 将从 synced 中移除，同时 foo=bar 也被保存到 victims 中。
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M01/19/1A/Cgp9HWBJvY6AFDZcAAAvIEpMXI4453.png"/>  
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M01/19/1A/Cgp9HWBJvY6AFDZcAAAvIEpMXI4453.png"/> 
+  
 channel 已满时的处理流程
 
 接下来该 watcher 不会记录对 foo 的任何变更。那么这些变更消息怎么处理呢？
@@ -409,6 +419,9 @@ watch 可以用来监听一个或一组 key，key 的任何变化都会发出事
 
 本讲内容总结如下：
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image6/M01/19/1A/Cgp9HWBJvZyAFPLNAAIuCsjxWZQ162.png"/>
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image6/M01/19/1A/Cgp9HWBJvZyAFPLNAAIuCsjxWZQ162.png"/> 
+
 
 刚刚我们说 etcd 也实现了发布订阅模式，那么它和消息中间件 Kafka 有什么异同，是否能够替换呢？欢迎你在留言区和我交流自己的想法。下一讲，我们将继续介绍 etcd Lease 租约的实现原理。
+

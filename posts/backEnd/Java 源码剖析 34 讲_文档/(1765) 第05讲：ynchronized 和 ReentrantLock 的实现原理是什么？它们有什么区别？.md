@@ -1,3 +1,5 @@
+# 第05讲：ynchronized和ReentrantLock的实现原理是什么？它们有什么区别？
+
 在 JDK 1.5 之前共享对象的协调机制只有 synchronized 和 volatile，在 JDK 1.5 中增加了新的机制 ReentrantLock，该机制的诞生并不是为了替代 synchronized，而是在 synchronized 不适用的情况下，提供一种可以选择的高级功能。
 
 我们本课时的面试题是，synchronized 和 ReentrantLock 是如何实现的？它们有什么区别？
@@ -185,7 +187,9 @@ private static boolean shouldParkAfterFailedAcquire(Node pred, Node node) {
 
 到这里整个加锁的流程就已经走完了，最后的情况是，没有拿到锁的线程会在队列中被挂起，直到拥有锁的线程释放锁之后，才会去唤醒其他的线程去获取锁资源，整个运行流程如下图所示：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/02/7D/Ciqah157DAiAK_DJAAC0JawhGp4730.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/02/7D/Ciqah157DAiAK_DJAAC0JawhGp4730.png"/> 
+
 
 unlock 相比于 lock 来说就简单很多了，源码如下：
 
@@ -254,3 +258,4 @@ JDK 1.6 引入了自适应式自旋锁意味着自旋的时间不再是固定的
 本课时首先讲了 synchronized 和 ReentrantLock 的实现过程，然后讲了 synchronized 和 ReentrantLock 的区别，最后通过源码的方式讲了 ReentrantLock 加锁和解锁的执行流程。接着又讲了 JDK 1.6 中的锁优化，包括自适应式自旋锁的实现过程，以及 synchronized 的三种锁状态和锁升级的执行流程。
 
 synchronized 刚开始为偏向锁，随着锁竞争越来越激烈，会升级为轻量级锁和重量级锁。如果大多数锁被不同的线程所争抢就不建议使用偏向锁了。
+

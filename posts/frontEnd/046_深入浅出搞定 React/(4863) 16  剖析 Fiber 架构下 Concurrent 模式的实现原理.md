@@ -1,3 +1,5 @@
+# 16剖析Fiber架构下Concurrent模式的实现原理
+
 你好，欢迎来到第 16 讲，关于 Fiber 架构的实现原理和编码形态，其实我们已经洋洋洒洒地分析了 3 讲了。
 
 在过去的 3 讲里，通过对整个 ReactDOM.render 所触发的渲染链路进行了分析和串联，我们已经把 Fiber 架构在实现层面的大部分要点都过了一遍。刚讲过的这部分知识，一方面相对来说复杂度比较高，需要一些耐心反复地理解和消化；另一方面，本讲接下来要讲解的内容，也和它存在着较强的依赖关系，因此对这些前置知识的把握就显得尤为重要。
@@ -66,7 +68,9 @@ export default App;
 
 这个组件挂载后呈现出的界面很简单，就是一个数字 0，如下图所示：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/73/AB/CgqCHl_GIlaAHn_FAAAchawzt4s009.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/73/AB/CgqCHl_GIlaAHn_FAAAchawzt4s009.png"/> 
+
 
 每点击数字 0 一下，它的值就会 +1，这就是我们的更新动作。
 
@@ -74,11 +78,15 @@ export default App;
 
 关于 Fiber 树的构建过程，前面已经详细讲解过，这里不再重复。下面我直接为你展示挂载时的 render 阶段结束后，commit 执行前，两棵 Fiber 树的形态，如下图所示：
 
-<Image alt="图片14.png" src="https://s0.lgstatic.com/i/image/M00/73/AD/Ciqc1F_GK5KAPsNRAADXbk-KIQg893.png"/>
+
+<Image alt="图片14.png" src="https://s0.lgstatic.com/i/image/M00/73/AD/Ciqc1F_GK5KAPsNRAADXbk-KIQg893.png"/> 
+
 
 待 commit 阶段完成后，右侧的 workInProgress 树对应的 DOM 树就被真正渲染到了页面上，此时 current 指针会指向 workInProgress 树：
 
-<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/73/AB/CgqCHl_GImqABNjLAACxddF2jhY942.png"/>
+
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/73/AB/CgqCHl_GImqABNjLAACxddF2jhY942.png"/> 
+
 
 由于挂载是一个从无到有的过程，在这个过程中我们是在不断地创建新节点，因此还谈不上什么"节点复用"。节点复用要到更新过程中去看。
 
@@ -86,27 +94,37 @@ export default App;
 
 现在我点击数字 0，触发一次更新。这次更新中，下图高亮的 rootFiber 节点就会被复用：
 
-<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/73/AB/CgqCHl_GInGAAhaiAADrvJFiOdA159.png"/>
+
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/73/AB/CgqCHl_GInGAAhaiAADrvJFiOdA159.png"/> 
+
 
 这段复用的逻辑在 beginWork 调用链路中的 createWorkInProgress 方法里。这里我为你截取了 createWorkInProgress 方法里面一段非常关键的逻辑，请看下图：
 
-<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/73/AB/CgqCHl_GIneAPBZcAAKQF1HrIv0329.png"/>
+
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/73/AB/CgqCHl_GIneAPBZcAAKQF1HrIv0329.png"/> 
+
 
 在 createWorkInProgress 方法中，会先取当前节点的 alternate 属性，将其记为 workInProgress 节点。对于 rootFiber 节点来说，它的 alternate 属性，其实就是上一棵 current 树的 rootFiber，如下图高亮部分所示：
 
-<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image/M00/73/A0/Ciqc1F_GIn2AK_7QAADrvJFiOdA218.png"/>
+
+<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image/M00/73/A0/Ciqc1F_GIn2AK_7QAADrvJFiOdA218.png"/> 
+
 
 **当检查到上一棵 current 树的 rootFiber 存在时，React 会直接复用这个节点，让它作为下一棵 workInProgress 的节点存在下去**，也就是说会走进 createWorkInProgress 的 else 逻辑里去。如果它和目标的 workInProgress 节点之间存在差异，直接在该节点上修改属性、使其与目标节点一致即可，而不必再创建新的 Fiber 节点。
 
 至于剩下的 App、div、p 等节点，由于没有对应的 alternate 节点存在，因此它们的 createWorkInProgress 调用会走进下图高亮处的逻辑中：
 
-<Image alt="Drawing 11.png" src="https://s0.lgstatic.com/i/image/M00/73/A0/Ciqc1F_GIoSAIIE5AAJG_0ANgrg415.png"/>
+
+<Image alt="Drawing 11.png" src="https://s0.lgstatic.com/i/image/M00/73/A0/Ciqc1F_GIoSAIIE5AAJG_0ANgrg415.png"/> 
+
 
 在这段逻辑里，将调用 createFiber 来新建一个 FiberNode。
 
 第一次更新结束后，我们会得到一棵新的 workInProgress Fiber 树，current 指针最后将会指向这棵新的 workInProgress Fiber 树，如下图所示：
 
-<Image alt="Drawing 13.png" src="https://s0.lgstatic.com/i/image/M00/73/AC/CgqCHl_GIouAVjKDAAEwJVqKwHY353.png"/>
+
+<Image alt="Drawing 13.png" src="https://s0.lgstatic.com/i/image/M00/73/AC/CgqCHl_GIouAVjKDAAEwJVqKwHY353.png"/> 
+
 
 ##### 第二次更新
 
@@ -120,7 +138,9 @@ export default App;
 
 在上一讲，我们已经学习了挂载阶段的渲染链路。同步模式下的更新链路与挂载链路的 render 阶段基本是一致的，都是通过 performSyncWorkOnRoot 来触发包括 beginWork、completeWork 在内的深度优先搜索过程。这里我为你展示一个更新过程的调用栈，请看下图：
 
-<Image alt="Drawing 14.png" src="https://s0.lgstatic.com/i/image/M00/73/AC/CgqCHl_GIpSAfb9qAACwnR8L9Po005.png"/>
+
+<Image alt="Drawing 14.png" src="https://s0.lgstatic.com/i/image/M00/73/AC/CgqCHl_GIpSAfb9qAACwnR8L9Po005.png"/> 
+
 
 你会发现还是熟悉的配方，还是原来的味道。**其实，挂载可以理解为一种特殊的更新，ReactDOM.render 和 setState 一样，也是一种触发更新的姿势** 。在 React 中，ReactDOM.render、setState、useState 等方法都是可以触发更新的，这些方法发起的调用链路很相似，是因为它们最后"殊途同归"，**都会通过创建 update 对象来进入同一套更新工作流**。
 
@@ -128,21 +148,29 @@ export default App;
 
 接下来我继续以开篇的 Demo 为例，为你拆解更新链路中的要素。在点击数字后，点击相关的回调被执行，它首先触发的是 dispatchAction 这个方法，如下图所示：
 
-<Image alt="Drawing 15.png" src="https://s0.lgstatic.com/i/image/M00/73/AC/CgqCHl_GIpqAFVQWAAE4Rdg6o0g228.png"/>
+
+<Image alt="Drawing 15.png" src="https://s0.lgstatic.com/i/image/M00/73/AC/CgqCHl_GIpqAFVQWAAE4Rdg6o0g228.png"/> 
+
 
 请你关注图中两处标红的函数调用，你会看到 dispatchAction 方法在 performSyncWorkOnRoot 的左边。也就是说整体的更新链路应该是这样的：
 
-<Image alt="Drawing 16.png" src="https://s0.lgstatic.com/i/image/M00/73/A1/Ciqc1F_GIqKAP_3fAABp3EtlwDk160.png"/>
+
+<Image alt="Drawing 16.png" src="https://s0.lgstatic.com/i/image/M00/73/A1/Ciqc1F_GIqKAP_3fAABp3EtlwDk160.png"/> 
+
 
 dispatchAction 中，会完成 update 对象的创建，如下图标红处所示：
 
-<Image alt="Drawing 17.png" src="https://s0.lgstatic.com/i/image/M00/73/AC/CgqCHl_GIqiAOf4aAAQVWAWjjt0722.png"/>
+
+<Image alt="Drawing 17.png" src="https://s0.lgstatic.com/i/image/M00/73/AC/CgqCHl_GIqiAOf4aAAQVWAWjjt0722.png"/> 
+
 
 #### 从 update 对象到 scheduleUpdateOnFiber
 
 等等，这段逻辑你是否觉得似曾相识？如果你对 ReactDOM.render 系列的第一课时还有印象的话，我希望你能回忆起 updateContainer 这个方法。在 updateContainer 中，React 曾经有过性质一模一样的行为，这里我为你截取了 updateContainer 函数中的相关逻辑：
 
-<Image alt="Drawing 18.png" src="https://s0.lgstatic.com/i/image/M00/73/AC/CgqCHl_GIrCAJiUaAACZL_H8ts8659.png"/>
+
+<Image alt="Drawing 18.png" src="https://s0.lgstatic.com/i/image/M00/73/AC/CgqCHl_GIrCAJiUaAACZL_H8ts8659.png"/> 
+
 
 图中这一段代码的逻辑是非常清晰的，以 enqueueUpdate 为界，它一共做了以下三件事。
 
@@ -152,15 +180,21 @@ dispatchAction 中，会完成 update 对象的创建，如下图标红处所示
 
 3. scheduleUpdateOnFiber：**调度 update**。如果你对之前学过的知识还有印象，会记得同步挂载链路中，这个方法后面紧跟的就是 performSyncWorkOnRoot 所触发的 render 阶段，如下图所示：
 
-<Image alt="Drawing 19.png" src="https://s0.lgstatic.com/i/image/M00/73/AC/CgqCHl_GIrmAO5UJAABDaDLvIyM528.png"/>
+
+<Image alt="Drawing 19.png" src="https://s0.lgstatic.com/i/image/M00/73/AC/CgqCHl_GIrmAO5UJAABDaDLvIyM528.png"/> 
+
 
 现在我们再回过头来看 dispatchAction 的逻辑，你会发现 dispatchAction 里面同样有对这三个动作的处理。上面我对 dispatchAction 的局部截图，包含了对 update 对象的创建和入队处理。dispatchAction 的更新调度动作，在函数的末尾，如下图所示：
 
-<Image alt="Drawing 20.png" src="https://s0.lgstatic.com/i/image/M00/73/AC/CgqCHl_GIsGADUaBAAAYE3Ps56g927.png"/>
+
+<Image alt="Drawing 20.png" src="https://s0.lgstatic.com/i/image/M00/73/AC/CgqCHl_GIsGADUaBAAAYE3Ps56g927.png"/> 
+
 
 这里有一个点需要提示一下：dispatchAction 中，**调度的是当前触发更新的节点** ，这一点和挂载过程需要区分开来。在挂载过程中，updateContainer 会直接调度根节点。其实，对于更新这种场景来说，**大部分的更新动作确实都不是由根节点触发的**，而 render 阶段的起点则是根节点。因此在 scheduleUpdateOnFiber 中，有这样一个方法，见下图标红处：
 
-<Image alt="Drawing 21.png" src="https://s0.lgstatic.com/i/image/M00/73/A1/Ciqc1F_GIseASLuzAAVy6vkOrOA579.png"/>
+
+<Image alt="Drawing 21.png" src="https://s0.lgstatic.com/i/image/M00/73/A1/Ciqc1F_GIseASLuzAAVy6vkOrOA579.png"/> 
+
 
 markUpdateLaneFromFiberToRoot 将会从当前 Fiber 节点开始，向上遍历直至根节点，并将根节点返回。
 
@@ -168,7 +202,9 @@ markUpdateLaneFromFiberToRoot 将会从当前 Fiber 节点开始，向上遍历�
 
 如果你对之前学过的同步渲染链路分析还有印象，相信你对下面这段逻辑不会陌生：
 
-<Image alt="Drawing 22.png" src="https://s0.lgstatic.com/i/image/M00/73/A1/Ciqc1F_GItCAerpyAAQXnhAd3k4018.png"/>
+
+<Image alt="Drawing 22.png" src="https://s0.lgstatic.com/i/image/M00/73/A1/Ciqc1F_GItCAerpyAAQXnhAd3k4018.png"/> 
+
 
 这是 scheduleUpdateOnFiber 中的一段逻辑。在同步的渲染链路中，lane === SyncLane 这个条件是成立的，因此会直接进入 performSyncWorkOnRoot 的逻辑，开启同步的 render 流程；而在异步渲染模式下，则将进入 else 的逻辑。
 
@@ -196,7 +232,9 @@ if (newCallbackPriority === SyncLanePriority) {
 
 Scheduler 从架构上来看，是 Fiber 架构分层中的"调度层"；从实现上来看，它并非一段内嵌的逻辑，而是一个与 react-dom 同级的文件夹，如下图所示，其中收敛了所有相对通用的调度逻辑：
 
-<Image alt="Drawing 23.png" src="https://s0.lgstatic.com/i/image/M00/73/A2/Ciqc1F_GIt-AVQdjAAEHWIrq_Po945.png"/>
+
+<Image alt="Drawing 23.png" src="https://s0.lgstatic.com/i/image/M00/73/A2/Ciqc1F_GIt-AVQdjAAEHWIrq_Po945.png"/> 
+
 
 通过前面的学习，我们已经知道 Fiber 架构下的异步渲染（即 Concurrent 模式）的核心特征分别是"**时间切片** "与"**优先级调度**"。而这两点，也正是 Scheduler 的核心能力。接下来，我们就以这两个特征为线索，解锁 Scheduler 的工作原理。
 
@@ -228,11 +266,15 @@ export default App;
 
 这个 App 组件会在界面上渲染出 1000 行文本，局部效果如下图所示：
 
-<Image alt="Drawing 24.png" src="https://s0.lgstatic.com/i/image/M00/73/A2/Ciqc1F_GIuyABtYCAABNHJ0zT3I546.png"/>
+
+<Image alt="Drawing 24.png" src="https://s0.lgstatic.com/i/image/M00/73/A2/Ciqc1F_GIuyABtYCAABNHJ0zT3I546.png"/> 
+
 
 当我使用 ReactDOM.render 来渲染这个长列表时，它的调用栈如下图所示：
 
-<Image alt="Drawing 25.png" src="https://s0.lgstatic.com/i/image/M00/73/A2/Ciqc1F_GIvOALbOqAAOn8pi1lpw155.png"/>
+
+<Image alt="Drawing 25.png" src="https://s0.lgstatic.com/i/image/M00/73/A2/Ciqc1F_GIvOALbOqAAOn8pi1lpw155.png"/> 
+
 
 在这张图中，你就不必再重复去关注 beginWork、completeWork 之流了，请把目光放在调用栈的上层，也就是图中标红的地方------一个不间断的灰色"Task"长条，对浏览器来说就意味着是一个**不可中断**的任务。
 
@@ -240,7 +282,9 @@ export default App;
 
 若将 ReactDOM.render 调用改为 createRoot 调用（即开启 Concurrent 模式），调用栈就会变成下面这样：
 
-<Image alt="Drawing 26.png" src="https://s0.lgstatic.com/i/image/M00/73/A2/Ciqc1F_GIvuATEYcAALRQfAuBFI173.png"/>
+
+<Image alt="Drawing 26.png" src="https://s0.lgstatic.com/i/image/M00/73/A2/Ciqc1F_GIvuATEYcAALRQfAuBFI173.png"/> 
+
 
 请继续将你的注意力放在顶层的 Task 长条上。
 
@@ -250,13 +294,17 @@ export default App;
 
 在同步渲染中，循环创建 Fiber 节点、构建 Fiber 树的过程是由 **workLoopSync** 函数来触发的。这里我们来复习一下 workLoopSync 的源码，请看下图：
 
-<Image alt="Drawing 27.png" src="https://s0.lgstatic.com/i/image/M00/73/AD/CgqCHl_GIwKAHTjDAACgXrFd5c0290.png"/>
+
+<Image alt="Drawing 27.png" src="https://s0.lgstatic.com/i/image/M00/73/AD/CgqCHl_GIwKAHTjDAACgXrFd5c0290.png"/> 
+
 
 在 workLoopSync 中，只要 workInProgress 不为空，while 循环就不会结束，它所触发的是一个同步的 performUnitOfWork 循环调用过程。
 
 而在异步渲染模式下，这个循环是由 **workLoopConcurrent** 来开启的。workLoopConcurrent 的工作内容和 workLoopSync 非常相似，仅仅在循环判断上有一处不同，请注意下图源码中标红部分：
 
-<Image alt="Drawing 28.png" src="https://s0.lgstatic.com/i/image/M00/73/AD/CgqCHl_GIwiAAsOJAADS76o4FHc058.png"/>
+
+<Image alt="Drawing 28.png" src="https://s0.lgstatic.com/i/image/M00/73/AD/CgqCHl_GIwiAAsOJAADS76o4FHc058.png"/> 
+
 
 shouldYield 直译过来的话是"需要让出"。顾名思义，**当 shouldYield() 调用返回为 true 时，就说明当前需要对主线程进行让出了，此时 whille 循环的判断条件整体为 false，while 循环将不再继续**。
 
@@ -270,11 +318,15 @@ var shouldYield = Scheduler_shouldYield;
 
 从这两行代码中我们可以看出，shouldYield 的本体其实是 **Scheduler.unstable_shouldYield**，也就是 Scheduler 包中导出的 unstable_shouldYield 方法，该方法本身比较简单。其源码如下图标红处所示：
 
-<Image alt="Drawing 29.png" src="https://s0.lgstatic.com/i/image/M00/73/A2/Ciqc1F_GIxeAJas8AAEiY1Hfbsw871.png"/>
+
+<Image alt="Drawing 29.png" src="https://s0.lgstatic.com/i/image/M00/73/A2/Ciqc1F_GIxeAJas8AAEiY1Hfbsw871.png"/> 
+
 
 其中 unstable_now 这里实际取的就是 performance.now() 的值，即"**当前时间** "。那么 deadline 又是什么呢？它可以被理解为**当前时间切片的到期时间**，它的计算过程在 Scheduler 包中的 performWorkUntilDeadline 方法里可以找到，也就是下图的标红部分：
 
-<Image alt="Drawing 30.png" src="https://s0.lgstatic.com/i/image/M00/73/A2/Ciqc1F_GIx-AL94QAAHs2HJQXfA804.png"/>
+
+<Image alt="Drawing 30.png" src="https://s0.lgstatic.com/i/image/M00/73/A2/Ciqc1F_GIx-AL94QAAHs2HJQXfA804.png"/> 
+
 
 在这行算式里，currentTime 是当前时间，yieldInterval 是**时间切片的长度**。注意，时间切片的长度并不是一个常量，它是由 React 根据浏览器的帧率大小计算所得出来的，与浏览器的性能有关。
 
@@ -452,7 +504,9 @@ taskQueue 里存储的是已过期的任务，peek(taskQueue) 取出的任务若
 
 这里为了方便大家理解，我将 unstable_scheduleCallback 方法的工作流总结进一张大图：
 
-<Image alt="Drawing 32.png" src="https://s0.lgstatic.com/i/image/M00/73/AE/CgqCHl_GIzeAHilIAAFT8rmskL8314.png"/>
+
+<Image alt="Drawing 32.png" src="https://s0.lgstatic.com/i/image/M00/73/AE/CgqCHl_GIzeAHilIAAFT8rmskL8314.png"/> 
+
 
 这张大图需要结合楼上的文字解析一起消化，如果你是跳读至此，还请回到文章中细嚼慢咽\~\^_\^
 
@@ -461,3 +515,4 @@ taskQueue 里存储的是已过期的任务，peek(taskQueue) 取出的任务若
 这一讲我们首先认识了"双缓存"模式在 Fiber 架构下的实现，接着对更新链路的种种要素进行了拆解，理解了挂载 / 更新等动作的本质。最后，我们结合源码对 Scheduler（调度器）的核心能力，也就是"时间切片"和"优先级调度"两个方面进行了剖析，最终揭开了 Fiber 架构异步渲染的神秘面纱，理解了 Concurrent 模式背后的实现逻辑。
 
 到这里，关于 Fiber 架构的探讨，就要告一段落了。下一讲将讲解"特别的事件系统：React 事件与 DOM 事件有何不同"，到时见\~
+

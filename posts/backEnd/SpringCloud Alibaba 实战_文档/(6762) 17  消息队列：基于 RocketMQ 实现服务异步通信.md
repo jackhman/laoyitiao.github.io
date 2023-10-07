@@ -1,3 +1,5 @@
+# 17 消息队列：基于RocketMQ实现服务异步通信
+
 上一讲，我们讲解了分布式事务的解决方案以及 Seata 分布式事务中间件AT模式的实现原理，在后面的实战篇，我们还将围绕 Seata 进行进一步的学习。本讲我们先来介绍分布式架构下另外一块重要拼图：消息队列 RocketMQ。
 
 本讲咱们将学习以下三方面内容：
@@ -18,7 +20,9 @@
 
 这么说太过学术，我们看一个项目的实际案例，假设市级税务系统向省级税务系统上报本年度税务汇总数据，按以往的设计市级税务系统作为数据的生产者需要了解省级税务系统的 IP、端口、接口等诸多细节，然后通过 RPC、RESTful 等方式同步向省级税务系统发送数据，省级税务系统作为数据的消费者接受后响应"数据已接收"。
 
-<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M00/33/1C/Cgp9HWBu2EuANOnqAAEJZsgHoCk159.png"/>  
+
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M00/33/1C/Cgp9HWBu2EuANOnqAAEJZsgHoCk159.png"/> 
+  
 系统间跨进程通信
 
 虽然从逻辑上是没有问题的，但是从技术层面却衍生出三个新问题：
@@ -33,7 +37,9 @@
 
 为了解决这种情况，我们需要在架构中部署消息中间件，这个组件应提供可靠的、稳定的、与业务无关的特性，使进程间通信解耦，而这一类消息中间件的代表产品就是 MQ 消息队列。当引入 MQ 消息队列后，消息传递过程会产生以下变化。
 
-<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M00/33/24/CioPOWBu2FaAD6pQAAEtpzXgzW8765.png"/>  
+
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M00/33/24/CioPOWBu2FaAD6pQAAEtpzXgzW8765.png"/> 
+  
 引入 MQ 后通信过程
 
 可以看到，引入消息队列后，生产者与消费者都只面向消息队列进行数据处理，数据生产者根本不需要了解具体消费者的信息，只要把数据按事先约定放在指定的队列中即可。而消费者也是一样的，消费者端监听消息队列，如果队列中产生新的数据，MQ 就会通过"推送 PUSH"或者"抽取 PULL"的方式让消费者获取到新数据进行后续处理。
@@ -56,7 +62,9 @@
 
 RocketMQ 是一款分布式消息队列中间件，官方地址为[http://rocketmq.apache.org/](http://rocketmq.apache.org/?fileGuid=xxQTRXtVcqtHK6j8)，目前最新版本为4.8.0。RocketMQ 最初设计是为了满足阿里巴巴自身业务对异步消息传递的需要，在 3.X 版本后正式开源并捐献给 Apache，目前已孵化为 Apache 顶级项目，同时也是国内使用最广泛、使用人数最多的 MQ 产品之一。
 
-<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image6/M00/33/1C/Cgp9HWBu2GKABJW5AAPatFf4EbA571.png"/>
+
+<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image6/M00/33/1C/Cgp9HWBu2GKABJW5AAPatFf4EbA571.png"/> 
+
 
 RocketMQ 有很多优秀的特性，在可用性方面，RocketMQ 强调集群无单点，任意一点高可用，客户端具备负载均衡能力，可以轻松实现水平扩容；在性能方面，在天猫双 11 大促背后的亿级消息处理就是通过 RocketMQ 提供的保障；在 API 方面，提供了丰富的功能，可以实现异步消息、同步消息、顺序消息、事务消息等丰富的功能，能满足大多数应用场景；在可靠性方面，提供了消息持久化、失败重试机制、消息查询追溯的功能，进一步为可靠性提供保障。
 
@@ -74,7 +82,9 @@ RocketMQ 有很多优秀的特性，在可用性方面，RocketMQ 强调集群�
 
 * 消费者组 Consumer Group：对于消费同一类消息的消费者，RocketMQ 对其分组，成为消费者组。
 
-<Image alt="图片4.png" src="https://s0.lgstatic.com/i/image6/M00/33/1C/Cgp9HWBu2G-ASqw3AAELZIiTELk603.png"/>  
+
+<Image alt="图片4.png" src="https://s0.lgstatic.com/i/image6/M00/33/1C/Cgp9HWBu2G-ASqw3AAELZIiTELk603.png"/> 
+  
 RocketMQ 组成示意图
 
 在理解这些基本概念后，咱们正式进入 RocketMQ 的部署与使用环节，通过案例代码理解 RocketMQ 的执行过程。对于 RocketMQ 来说，使用它需要两个阶段：搭建 RocketMQ 服务器集群与应用接入 RocketMQ 队列，首先咱们来部署 RocketMQ 集群。
@@ -91,7 +101,9 @@ RocketMQ 天然采用集群模式，常见的 RocketMQ 集群有三种形式：*
 
 本讲我们将搭建一个双 Master 服务器集群，首先来看一下部署架构图：
 
-<Image alt="图片5.png" src="https://s0.lgstatic.com/i/image6/M00/33/24/CioPOWBu2HyAJB6-AACJ2Or_yLg890.png"/>  
+
+<Image alt="图片5.png" src="https://s0.lgstatic.com/i/image6/M00/33/24/CioPOWBu2HyAJB6-AACJ2Or_yLg890.png"/> 
+  
 双 Master 架构图
 
 在双 Master 架构中，出现了一个新角色 NameServer（命名服务器），NameServer 是 RocketMQ 自带的轻量级路由注册中心，支持 Broker 的动态注册与发现。在 Broker 启动后会自动向 NameServer 发送心跳包，通知 Broker 上线。当 Provider 向 NameServer 获取路由信息，然后向指定 Broker 建立长连接完成数据发送。
@@ -222,7 +234,9 @@ sh mqadmin clusterList -n 192.168.31.200:9876
 
 通过查询 NameServer 上的注册信息，得到以下结果。
 
-<Image alt="图片6.png" src="https://s0.lgstatic.com/i/image6/M00/33/1C/Cgp9HWBu2J6APWfJAAH7nUt8GHs198.png"/>  
+
+<Image alt="图片6.png" src="https://s0.lgstatic.com/i/image6/M00/33/1C/Cgp9HWBu2J6APWfJAAH7nUt8GHs198.png"/> 
+  
 Broker 集群信息
 
 可以看到在 DefaultCluster 集群中存在两个 Broker，因为 BID 编号为 0，代表它们都是 Master 主节点。
@@ -266,7 +280,9 @@ ConsumeMessageThread_12 Receive New Messages: [MessageExt [brokerName=broker-b, 
 
 ### 应用接入 RocketMQ 集群
 
-<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M00/33/24/CioPOWBu2KuAeQ6nAAEtpzXgzW8352.png"/>  
+
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M00/33/24/CioPOWBu2KuAeQ6nAAEtpzXgzW8352.png"/> 
+  
 案例说明
 
 我们以前面的报税为例，利用 Spring Boot 集成 MQ 客户端实现消息收发，首先咱们模拟生产者 Producer。
@@ -436,3 +452,4 @@ public class RocketmqConsumerApplication {
 这里为你留一道思考题：目前主流的 MQ 产品有 RocketMQ、RabbitMQ、Kafka、ActiveMQ、ZeroMQ......不同的产品有不同的设计，假设在银行的金融交易基于 MQ 实现，对 MQ 的可靠性与一致性要求较高，但对数据的响应时间不敏感。如果你是架构师该如何选型，欢迎你把自己的思考写在评论区和大家一起分享。
 
 下一讲我们将开始一个新的篇章，将之前学过的 Spring Cloud Alibaba 综合运用，看在实际项目中有哪些成熟的经验可以为我所用。
+

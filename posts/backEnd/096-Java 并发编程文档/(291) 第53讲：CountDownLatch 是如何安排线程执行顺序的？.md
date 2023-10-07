@@ -1,3 +1,5 @@
+# 第53讲：CountDownLatch是如何安排线程执行顺序的？
+
 本课时我们主要介绍 CountDownLatch 是如何安排线程执行顺序的。
 
 我们先来介绍一下 CountDownLatch，它是 JDK 提供的**并发流程控制**的工具类，它是在 java.util.concurrent 包下，在 JDK1.5 以后加入的。下面举个例子来说明它主要在什么场景下使用。
@@ -8,7 +10,9 @@
 
 我们把激流勇进的例子用流程图的方式来表示：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6F/9D/Cgq2xl5h8oSAKLBQAABld2EcD7Q385.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6F/9D/Cgq2xl5h8oSAKLBQAABld2EcD7Q385.png"/> 
+
 
 可以看到，最开始 CountDownLatch 设置的初始值为 3，然后 T0 线程上来就调用 await 方法，它的作用是让这个线程开始等待，等待后面的 T1、T2、T3，它们每一次调用 countDown 方法，3 这个数值就会减 1，也就是从 3 减到 2，从 2 减到 1，从 1 减到 0，一旦减到 0 之后，这个 T0 就相当于达到了自己触发继续运行的条件，于是它就恢复运行了。
 
@@ -148,3 +152,4 @@ public class RunDemo2 {
 ### 总结
 
 CountDownLatch 类在创建实例的时候，需要在构造函数中传入倒数次数，然后由需要等待的线程去调用 await 方法开始等待，而每一次其他线程调用了 countDown 方法之后，计数便会减 1，直到减为 0 时，之前等待的线程便会继续运行。
+

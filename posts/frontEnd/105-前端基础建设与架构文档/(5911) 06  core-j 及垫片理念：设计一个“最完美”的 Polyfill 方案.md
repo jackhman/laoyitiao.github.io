@@ -1,3 +1,5 @@
+# 06core-j及垫片理念：设计一个“最完美”的Polyfill方案
+
 即便你不知道 [core-js](https://github.com/zloirock/core-js)，也一定在项目中直接或间接地使用过它。core-js 是一个 JavaScript 标准库，它包含了 ECMAScript 2020 在内的多项特性的 polyfills，以及 ECMAScript 在 proposals 阶段的特性、WHATWG/W3C 新特性等。因此它是一个现代化前端项目的"标准套件"。
 
 除了 core-js 本身的重要性，它的实现理念、设计方式都值得我们学习。事实上，core-js 是一扇大门：
@@ -95,7 +97,9 @@ require('./packages/core-js-builder')({ filename: './packages/core-js-bundle/ind
 
 [Array.prototype.every](https://tc39.es/ecma262/#sec-array.prototype.every) 是一个常见且常用的数组原型上的方法。该方法用于测试一个数组内所有元素是否都能通过某个指定函数的测试，并最终返回一个布尔值来表示测试是否通过。它的浏览器兼容性[如下图](https://www.caniuse.com/?search=array.prototype.every)所示：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/8C/4F/Ciqc1F_q7bKAcYXcAALU37lw2JY310.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/8C/4F/Ciqc1F_q7bKAcYXcAALU37lw2JY310.png"/> 
+
 
 Array.prototype.every 的函数签名如下：
 
@@ -312,7 +316,9 @@ import "core-js/XXXX/XXXXX";
 
 上文提到了 babel-polyfill 融合了 core-js 和 regenerator-runtime，既然如此，我们也可以不使用 babel-polyfill，而直接使用 core-js。这里我根据 [babel-polyfill vs core-js vs es5-shim vs es6-shim](https://www.npmtrends.com/babel-polyfill-vs-core-js-vs-es5-shim-vs-es6-shim) 的使用频率情况，进行比对，如下图所示：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/8C/4F/Ciqc1F_q7dKAanOXAAHwZCycIb4392.png"/>  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/8C/4F/Ciqc1F_q7dKAanOXAAHwZCycIb4392.png"/> 
+  
 babel-polyfill vs core-js vs es5-shim vs es6-shim 使用频率对比图
 
 我们看到，**core-js 使用最多**，这是因为它既可以在项目中单独使用，也可以和 Babel 绑定，作为更低层的依赖出现。
@@ -323,7 +329,9 @@ babel-polyfill vs core-js vs es5-shim vs es6-shim 使用频率对比图
 
 除了在打包构建阶段植入 polyfill 以外，另外一个思路是"在线动态打补丁"，这种方案以 [Polyfill.io](https://polyfill.io/v3/) 为代表，它提供了 CDN 服务，使用者可以按照所需环境，[生成打包链接](https://polyfill.io/v3/url-builder/)：
 
-<Image alt="Lark20201230-104425.png" src="https://s0.lgstatic.com/i/image/M00/8C/5A/Ciqc1F_r6aWAUh6OAAGLnnSGGnY780.png"/>
+
+<Image alt="Lark20201230-104425.png" src="https://s0.lgstatic.com/i/image/M00/8C/5A/Ciqc1F_r6aWAUh6OAAGLnnSGGnY780.png"/> 
+
 
 如`https://polyfill.io/v3/polyfill.min.js?features=es2015`，在业务中我们可以直接引入 polyfills bundle：
 
@@ -350,3 +358,4 @@ babel-polyfill vs core-js vs es5-shim vs es6-shim 使用频率对比图
 * core-js 如何和 @babel/preset-env + useBuiltins（usage）配合，并利用 AST 技术，实现代码级别的按需引入？
 
 前端基础建设和工程化，每一个环节都相互关联，我们将会在"梳理混乱的 Babel，不再被编译报错困扰"一讲中，继续进行更多探索。
+

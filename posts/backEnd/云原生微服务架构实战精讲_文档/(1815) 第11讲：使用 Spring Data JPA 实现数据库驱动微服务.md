@@ -1,3 +1,5 @@
+# 第11讲：使用SpringDataJPA实现数据库驱动微服务
+
 在确定了微服务的 API 之后，我们就可以开始微服务的具体实现，微服务在实现时，并不限制所使用的编程语言或框架。虽然微服务的功能各有不同，但大部分微服务都是以数据库来驱动的。也就是说，这些微服务有一个后台数据库，可能是关系型数据库或 NoSQL 数据库。很多开发人员应该都有过开发数据库驱动的应用的经验，数据库驱动的微服务实现，与一般的数据库驱动的应用并没有太大的区别。
 
 因为数据库驱动的应用十分流行，市面上相关的参考资料也非常多，本课时不打算对很多实现细节进行介绍，而是侧重于一些与微服务相关的内容，以及需要特别注意的内容。本课时以乘客管理微服务作为示例进行说明，数据库相关的实现使用 Spring Data JPA 访问 PostgreSQL 数据库。完整的实现请参考示例应用的源代码。
@@ -171,8 +173,11 @@ public class PassengerController {
 
 在开发中的一个常见需求是发送 HTTP 请求来测试 REST API ，如果使用 Postman 或其他工具，可以直接导入 OpenAPI 文档来生成 HTTP 请求的模板，如下图所示，Postman 自动生成了 POST 请求的内容。
 
-<Image alt="微服务11.png" src="https://s0.lgstatic.com/i/image3/M01/13/79/Ciqah16f2byAMICiAADnG6dPSdw777.png"/>
+
+<Image alt="微服务11.png" src="https://s0.lgstatic.com/i/image3/M01/13/79/Ciqah16f2byAMICiAADnG6dPSdw777.png"/> 
+
 
 #### 总结
 
 数据库驱动的微服务代表了一大类的微服务。通过 Spring Boot 和 Spring 框架，我们可以很容易的创建出暴露 REST API 的数据库驱动的微服务。本课时对数据库驱动的微服务中的重点内容进行了说明，可以帮助掌握重要的知识点。
+

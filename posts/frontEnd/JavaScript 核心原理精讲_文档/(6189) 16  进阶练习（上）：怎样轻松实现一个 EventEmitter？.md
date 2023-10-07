@@ -1,3 +1,5 @@
+# 16进阶练习（上）：怎样轻松实现一个EventEmitter？
+
 前两讲我们探讨了 JS 异步编程中 Generator 和 async/await 的相关内容，那么这一讲我们就进入 Node.js 的 events 模块以及 EventEmitter 的学习，并且我将带你在浏览器端实现一遍它的底层逻辑。
 
 之所以要特地讲解这部分知识，是因为虽然严格意义上来说，events 模块属于 Node.js 服务端的知识，但是由于大多数 Node.js 核心 API 构建用的是异步事件驱动架构，因此这里单独加了一讲来带你学习这部分内容。我希望通过这一讲的学习，你能够自己实现一个EventEmitter。
@@ -33,11 +35,15 @@ eventEmitter.emit('say','Jonh');
 
 除了上面的那段代码中已经使用的 on 和emit 这两个 API，EventEmitter还提供了其他的 API 方法，我通过一个表格简单整理了一下对应的方法和功能总结。
 
-<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M01/0E/14/Cgp9HWA8LMiAEVlGAAJEpecSYyo071.png"/>
+
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M01/0E/14/Cgp9HWA8LMiAEVlGAAJEpecSYyo071.png"/> 
+
 
 除此之外，还有两个特殊的事件，不需要额外手动添加，下表所示的就是 Node.js 的 EventEmitter 模块自带的特殊事件。
 
-<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M01/0E/14/Cgp9HWA8LLaAdnhdAADOmTg9zw8428.png"/>
+
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M01/0E/14/Cgp9HWA8LLaAdnhdAADOmTg9zw8428.png"/> 
+
 
 从上面的表格可以看出，Node.js的EventEmitter 模块看起来方法很多且复杂，但通过仔细学习，其实其使用和实现并不困难。下面我就来挑几个比较重要 API 方法为你进行讲解。
 
@@ -262,3 +268,4 @@ EventEmitter.prototype.allOff = function(eventName) {
 通过这一学习，你应该基本能实现一个 EventEmitter 了。单就浏览器端使用场景来说，其实也有运用同样的思路解决问题的工具，在 Vue 框架中不同组件之间的通讯里，有一种解决方案叫 EventBus。和 EventEmitter的思路类似，它的基本用途是将 EventBus 作为组件传递数据的桥梁，所有组件共用相同的事件中心，可以向该中心注册发送事件或接收事件，所有组件都可以收到通知，使用起来非常便利，其核心其实就是发布-订阅模式的落地实现。
 
 好了，这一讲就先探讨到这，下一讲我们将继续进阶，带你实现一个符合规范的Promise。同时希望你能自己手动实现一遍代码，也欢迎你留言提出自己在学习过程中遇到的困惑，以及学习感悟等，让我们共同进步。
+

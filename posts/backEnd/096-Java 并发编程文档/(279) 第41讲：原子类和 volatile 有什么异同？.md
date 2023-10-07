@@ -1,3 +1,5 @@
+# 第41讲：原子类和volatile有什么异同？
+
 本课时我们主要讲解原子类和 volatile 有什么异同。  
 
 **案例** **说明** **volatile** **和原子类的异同**
@@ -7,7 +9,9 @@
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/64/9F/CgpOIF49B7qAIJThAAB6qxJtvhs898.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/64/9F/CgpOIF49B7qAIJThAAB6qxJtvhs898.png"/> 
+
 
 <br />
 
@@ -27,7 +31,9 @@
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/64/A0/Cgq2xl49B9GAHIQWAABs3zG_-08605.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/64/A0/Cgq2xl49B9GAHIQWAABs3zG_-08605.png"/> 
+
 
 <br />
 
@@ -39,7 +45,9 @@
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/64/A0/Cgq2xl49B-mAArdMAACJefFgK2k906.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/64/A0/Cgq2xl49B-mAArdMAACJefFgK2k906.png"/> 
+
 
 <br />
 
@@ -47,7 +55,9 @@
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/64/A0/Cgq2xl49CACANaAbAACTXNZMnjQ802.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/64/A0/Cgq2xl49CACANaAbAACTXNZMnjQ802.png"/> 
+
 
 <br />
 
@@ -59,7 +69,9 @@
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/64/9F/CgpOIF49CBeAUzqHAABbWQsq8Q8832.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/64/9F/CgpOIF49CBeAUzqHAABbWQsq8Q8832.png"/> 
+
 
 <br />
 
@@ -67,7 +79,9 @@
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/64/9F/CgpOIF49CCqALcWIAABfoeCHiaA363.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/64/9F/CgpOIF49CCqALcWIAABfoeCHiaA363.png"/> 
+
 
 <br />
 
@@ -79,7 +93,9 @@
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/64/9F/CgpOIF49CD6AQpviAACRYw_n1i4430.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/64/9F/CgpOIF49CD6AQpviAACRYw_n1i4430.png"/> 
+
 
 <br />
 
@@ -91,7 +107,9 @@
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/64/A0/CgpOIF49Ca2AL79uAACSZRAVJcg684.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/64/A0/CgpOIF49Ca2AL79uAACSZRAVJcg684.png"/> 
+
 
 <br />
 
@@ -117,3 +135,4 @@
 <br />
 
 而对于会被多个线程同时操作的计数器 Counter 的场景，这种场景的一个典型特点就是，它不仅仅是一个简单的赋值操作，而是需要先读取当前的值，然后在此基础上进行一定的修改，再把它给赋值回去。这样一来，我们的 volatile 就不足以保证这种情况的线程安全了。我们需要使用原子类来保证线程安全。
+

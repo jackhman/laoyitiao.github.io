@@ -1,3 +1,5 @@
+# 第42讲：JenkinJob管理
+
 本课时我们开始进入 Jenkins Job 管理的学习。我们在上一课时已经搭建好了一个崭新的 Jenkins，但 Jenkins 部署完成后，还需要做一些基础的配置。
 
 #### 修改系统配置
@@ -8,27 +10,37 @@
 
 然后是安全，Jenkins 启动之后默认有一个自己的安全机制，无论你是要改成自己公司关联的安全认证体系，还是基于项目设置权限，都可以进行配置。
 
-<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/0E/D8/Ciqc1F7GV2OAC29ZAAGVjgHtjWQ238.png"/>
+
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/0E/D8/Ciqc1F7GV2OAC29ZAAGVjgHtjWQ238.png"/> 
+
 
 时区配置相对来说会比较复杂一点，在 Jenkins 里面配置时区需要修改系统的配置。如果你使用 docker 安装，可以用这样一个简单的办法来处理，首先删除原来的 docker 实例，接着在 docker 实例启动过程中加一个参数：-e JAVA_OPTS，在里面设置一个数据，比如改成北京时间，这个时候，你的 Jenkins 就可以自动更改为指定的本地时间。如果你没有设置，它默认显示的是美国时间，会影响到你的使用。
 
-<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/0E/E4/CgqCHl7GV2yAJ_KVAAFGA_fzlXE743.png"/>
+
+<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/0E/E4/CgqCHl7GV2yAJ_KVAAFGA_fzlXE743.png"/> 
+
 
 插件管理可以用于安装、更新插件，必要的时候需要配置代理以加速插件的安装。可以在 Available 里挑选需要的插件，常用的的插件是 git、pipeline、blueocean等，更多插件按需安装即可。
 
-<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/0E/D8/Ciqc1F7GV3SADKBKAAG86XgJj0g712.png"/>
+
+<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/0E/D8/Ciqc1F7GV3SADKBKAAG86XgJj0g712.png"/> 
+
 
 还有一个部分是 slave 节点，它在 Jenkins 的 Nodes 模块下面，你可以自己创建一个新的节点，这个节点主要是为了执行 job。通常 Jenkins所在主机称之为 master，是一个主控机，它要管理很多 job，所以它本身的任务比较重，需要把具体的job执行放到分布式的node上。
 
 通常对每一个 job、每个任务的执行，我们不会在主机上直接执行，而是通过多台机器来进行分担。不同的机器，比如 Windows、Mac、Linux，它们的职责是不一样的，你可以通过节点来管理所有需要控制的资源。那么 slave 节点是在 manager Jenkins 下面的 manager nodes and clouds 里面，你可以写上自己的设备，比如这是我写的一个设备。后面你可以通过把任务与节点进行关联，在特定的节点进行运行。
 
-<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/0E/E4/CgqCHl7GV3yAB9M7AAJkJgTs8Eg515.png"/>
+
+<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/0E/E4/CgqCHl7GV3yAB9M7AAJkJgTs8Eg515.png"/> 
+
 
 slave 节点的连接方法，在前面我们启动 docker 的时候，用到了一个叫 50000 的端口，这个端口其实就是在这个地方使用的。8080 是 Jenkins 默认的对外访问的 UI 交互地址，而 50000 端口主要是 slave 节点与 Jenkins 之间进行通信的。创建一个节点之后，你可以使用 8080 端口连接 Jenkins，然后，通过 50000 端口建立真正的连接，所以你要确保这两个端口一定是开启并且配对的，不然你的 slave 是连接不上的。
 
 #### 一个 job 的组成部分
 
-<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/0E/E4/CgqCHl7GV4OAJUdSAAFnYw4JkGE523.png"/>
+
+<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/0E/E4/CgqCHl7GV4OAJUdSAAFnYw4JkGE523.png"/> 
+
 
 了解了一个系统的基本设置之后，我们来看一看一个基本 job 的重要组成部分。从图上可以看到，一个基本的 job 配置通常分为五大模块：
 
@@ -55,3 +67,4 @@ slave 节点的连接方法，在前面我们启动 docker 的时候，用到了
 那么有了这些知识点，接下来你就可以去创建自己的 job 了，你可以看到我的 Jenkins 上的测试环境，创建了一个小小的 job，按照刚才的配置已经配置完成，你可以在这里触发构建，构建之后，job 就会多了一层执行分析结果。
 
 具体的每个项目怎么配置呢？比如 ui 分化我怎么集成？接口测试怎么集成？我们会放在下一节课来给你去讲，比如测试结果，你可以点这个图了解一下，这次构建的有多少个测试用例？每个测试用例是成功还是失败？你都可以在这个地方查看。
+

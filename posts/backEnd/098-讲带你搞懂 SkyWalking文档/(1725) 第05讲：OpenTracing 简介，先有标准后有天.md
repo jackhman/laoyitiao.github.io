@@ -1,3 +1,5 @@
+# 第05讲：OpenTracing简介，先有标准后有天
+
 自从 Google Dapper 的论文发布之后，各大互联网公司和开源社区开发的分布式链路追踪产品百花齐放，同时也给使用者带来了一个问题，各个分布式链路追踪产品的 API 并不兼容，如果用户在各个产品之间进行切换，成本非常高。  
 
 <br />
@@ -11,7 +13,9 @@ Trace 简介
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/77/FE/Cgq2xl5zIEeAIG1BAABPpgHQZkc045.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/77/FE/Cgq2xl5zIEeAIG1BAABPpgHQZkc045.png"/> 
+
 
 <br />
 
@@ -23,7 +27,9 @@ Trace 简介
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/77/FD/CgpOIF5zIEeAHos0AAAZLZRufhU976.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/77/FD/CgpOIF5zIEeAHos0AAAZLZRufhU976.png"/> 
+
 
 <br />
 
@@ -70,7 +76,9 @@ Span 代表系统中具有开始时间和执行时长的逻辑单元，Span 之�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/77/FD/CgpOIF5zIEeANSJ1AAAvjIyS4ac173.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/77/FD/CgpOIF5zIEeANSJ1AAAvjIyS4ac173.png"/> 
+
 
 <br />
 
@@ -78,7 +86,9 @@ Span 代表系统中具有开始时间和执行时长的逻辑单元，Span 之�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/77/FE/Cgq2xl5zIEeAP7J6AAAieIn1LW8813.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/77/FE/Cgq2xl5zIEeAP7J6AAAieIn1LW8813.png"/> 
+
 
 <br />
 
@@ -86,7 +96,9 @@ Span 代表系统中具有开始时间和执行时长的逻辑单元，Span 之�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/77/FD/CgpOIF5zIEiACY7bAAHw5sz9rVs412.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/77/FD/CgpOIF5zIEiACY7bAAHw5sz9rVs412.png"/> 
+
 
 Logs 简介
 =======
@@ -95,7 +107,9 @@ Logs 简介
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/77/FE/Cgq2xl5zIEiAGoMzAAVtWur3mGc633.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/77/FE/Cgq2xl5zIEiAGoMzAAVtWur3mGc633.png"/> 
+
 
 Tags 简介
 =======
@@ -104,7 +118,9 @@ Tags 简介
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/77/FD/CgpOIF5zIEiAOAr-AAH8CUUmFf8447.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/77/FD/CgpOIF5zIEiAOAr-AAH8CUUmFf8447.png"/> 
+
 
 SpanContext 和 Baggage
 =====================
@@ -164,3 +180,4 @@ Tracer 接口必须实现以下功能：
 ===
 
 本课时主要介绍了 Trace、Span、Logs、Tags、SpanContext 等 OpenTracing 规范的核心概念，还介绍了 OpenTracing 规范定义的核心接口的功能。SkyWalking 作为 OpenTracing 的实现之一，了解 OpenTracing 的核心概念可以更好的帮助理解 SkyWalking 的实现。
+

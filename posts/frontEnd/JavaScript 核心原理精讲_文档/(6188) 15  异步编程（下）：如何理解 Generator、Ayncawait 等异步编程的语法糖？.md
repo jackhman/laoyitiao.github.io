@@ -1,3 +1,5 @@
+# 15异步编程（下）：如何理解Generator、Ayncawait等异步编程的语法糖？
+
 前两讲我们探讨了 JS 异步编程以及其中 Promise 的编程方式，那么这一讲作为延续，我再带你了解另外两种异步编程的方式。Generator 是 ES6 标准中的异步编程方式，而 async/await 是 ES7 标准中的。希望通过本讲的学习，你能对这两种编程方式有更深的理解。
 
 那么在课程开始前请你先思考一下：
@@ -279,7 +281,9 @@ console.log(func());
 
 这样看来，ES7 加入的 async/await 的确解决了之前的问题，使开发者在编程过程中更容易理解，语法更清晰，并且也不用再单独引用 co 函数库了。因此用 async/await 写出的代码也更加优雅，相比于之前的 Promise 和 co+Generator 的方式更容易理解，上手成本也更低，不愧是 JS 异步的终极解决方案。
 
-<Image alt="金句1.png" src="https://s0.lgstatic.com/i/image6/M00/08/76/Cgp9HWA0wYmAKbOFAAVCoaU0ifI951.png"/>
+
+<Image alt="金句1.png" src="https://s0.lgstatic.com/i/image6/M00/08/76/Cgp9HWA0wYmAKbOFAAVCoaU0ifI951.png"/> 
+
 
 ### 总结
 
@@ -287,8 +291,11 @@ console.log(func());
 
 最后，我整理了这几个异步编程的特点，你可以对比着来回顾，以加深记忆，请看下面的表格。
 
-<Image alt="图片6.png" src="https://s0.lgstatic.com/i/image6/M01/08/70/Cgp9HWA0vFyAfpfGAAGGpm0z-f8269.png"/>
+
+<Image alt="图片6.png" src="https://s0.lgstatic.com/i/image6/M01/08/70/Cgp9HWA0vFyAfpfGAAGGpm0z-f8269.png"/> 
+
 
 现在你可以回过头思考我在这一讲开头提出的两个问题了，是不是比较容易回答出来了呢？如果你对这部分内容还有不清楚的地方，可以有针对性地去学习。
 
 后面，我会继续带着你对 JS 异步编程的知识点进行更深入的剖析，下一讲我们就进入 EventEmitter 的学习，它是结合着设计模式实现 JS 异步编程的一种思路，也是值得深入研究和学习的。
+

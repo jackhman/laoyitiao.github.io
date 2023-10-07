@@ -1,3 +1,5 @@
+# 第08讲：借助TetOwner角色，完成团队转型？
+
 三年前的一天，我碰到了一个之前在思科的老同事，问了下他现在软件开发采用的是什么模式？  
 
 他回答："已全面实施敏捷开发模式了，有些团队都没有测试人员，测试都是开发人员自己做。"
@@ -37,7 +39,9 @@
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6D/CB/Cgq2xl5eH-eAdcX0AAVtUaK_J8w145.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6D/CB/Cgq2xl5eH-eAdcX0AAVtUaK_J8w145.png"/> 
+
 
 图1 研发组织从传统向敏捷演化（以 Scrum 为例）
 
@@ -98,7 +102,9 @@ Test Owner（TO）是以敏捷中最流行的 Scrum 方式来定义这个角色�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6D/CB/CgpOIF5eH_uASvi2AANL2NAEMxQ709.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6D/CB/CgpOIF5eH_uASvi2AANL2NAEMxQ709.png"/> 
+
 
 图2 大规模软件敏捷研发团队的构成
 
@@ -109,3 +115,4 @@ Test Owner（TO）是以敏捷中最流行的 Scrum 方式来定义这个角色�
 <br />
 
 最后，给你出一道思考题：会在你的敏捷团队中设置 TO 这样的角色吗？如果不会，原因是什么？或者会设置 QA Owner 或其他类似的角色吗？欢迎留言讨论。
+

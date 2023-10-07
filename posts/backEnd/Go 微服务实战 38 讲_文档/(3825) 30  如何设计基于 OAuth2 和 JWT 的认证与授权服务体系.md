@@ -1,3 +1,5 @@
+# 30如何设计基于OAuth2和JWT的认证与授权服务体系
+
 在上一课时中，我们介绍了**统一认证与授权** 在微服务架构中存在的一些必要性和挑战，并介绍了 3 种主流的统一认证与授权方案，包括 OAuth2、分布式 Session 和 JWT。在本课时，我们将基于 OAuth2 和 JWT 设计一个认证与授权服务，让其**为我们微服务的信息安全保驾护航**。
 
 微服务架构的演进使得服务体系变得分散，如果让每个微服务独立管理自身的用户信息容易造成信息隔离，阻碍应用的发展，因此将分散的认证和授权进行统一管理显得尤为必要。我们接下来就按照权限模型设计、OAuth2 与 JWT 结合、Token 中继和整体结构设计这个思路来阐述统一认证与授权服务体系的设计。
@@ -20,7 +22,9 @@ RBAC 模型将用户的操作过程抽象为 Who、What 和 How 这三者之间�
 
 RBAC96 模型族关系图如下所示：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/5C/7E/CgqCHl-BjmSASE66AAAcST7W53k950.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/5C/7E/CgqCHl-BjmSASE66AAAcST7W53k950.png"/> 
+  
 RBAC96 模型族关系图
 
 除了 RBAC 外，还有一种比较流行的权限设计方案------**ACL（Access Control Lists）模型** ，即**访问控制列表** 。ACL 的核心思想是**将用户直接和权限关联**，这样就可以非常简单地完成访问控制。但是在权限过多时，却又很容易造成授予权限时的复杂性，访问控制列表的管理最终会演变成极为烦琐的工作。
@@ -29,7 +33,9 @@ RBAC96 模型族关系图
 
 为了简化权限设计方案，便于实践的开展，我们就基于 RBAC0 模型描述的用户、角色、权限和会话关系，设计如下的权限模型：
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/5C/73/Ciqc1F-BjoeAOEb7AAC052s4Czk102.png"/>  
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/5C/73/Ciqc1F-BjoeAOEb7AAC052s4Czk102.png"/> 
+  
 简易角色权限模型图
 
 上图中分别有用户、角色和权限 3 个实体，每个用户可以拥有多种角色，每一种角色都是一定数量权限的集合，它们之间通过关联表关联起来。当要授予某个用户部分权限时，可以将对应的角色赋予用户，比如在一个论坛系统中，帖子管理员具备审核帖子、删除帖子等权限，当有新的用户希望管理帖子时，可以将帖子管理员的角色授予该用户，这样他就具备了帖子管理的权限。
@@ -42,12 +48,16 @@ OAuth2 作为当前授权行业的标准，允许用户授权客户端访问它�
 
 **第三方客户端应用** 基本为外部系统，希望请求本系统内的资源或者服务，为了避免将系统内的用户信息泄漏给第三方客户端，系统将通过授权码类型给这类客户端提供访问令牌。而对于**自家客户端应用**，因为是可信任的客户端，所以可以允许它们通过密码类型获取访问令牌，即它们能够直接接触和保存用户的密码凭证等信息。
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/5C/7F/CgqCHl-BjpWAOslFAAA3GP2cSQQ804.png"/>  
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/5C/7F/CgqCHl-BjpWAOslFAAA3GP2cSQQ804.png"/> 
+  
 多客户端访问模型图
 
 JWT 是高度紧凑和自包含的安全传输对象，关于 JWT 头部、有效负载和签名的介绍可以参考上一课时。我们可以将 JWT 用作访问令牌和刷新令牌的载体，将签发 JWT 的 secret 保存在授权服务器，由授权服务器签发 JWT 样式的访问令牌。同时，我们还可以将用户的相关信息，比如用户 ID、用户角色码和权限码等信息放到有效负载中，当下游资源服务器使用用户的信息时，可以直接从访问令牌中解析获取，而无须重复查询数据库，这就减少了请求消耗，提升了访问效率。
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/5C/7F/CgqCHl-BjqKAJH-jAAAqGAJDXv8651.png"/>  
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/5C/7F/CgqCHl-BjqKAJH-jAAAqGAJDXv8651.png"/> 
+  
 携带用户信息的 JWT 样式访问令牌
 
 ### Token 中继
@@ -56,7 +66,9 @@ JWT 是高度紧凑和自包含的安全传输对象，关于 JWT 头部、有�
 
 我们可以**将访问令牌在多个请求中进行传递** ，也就是**Token 中继**，由资源服务器根据自身的认证和鉴权配置，对访问令牌中用户身份和权限进行鉴权，如下图所示：
 
-<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/5C/73/Ciqc1F-BjrSAFuiKAACSXWInd6I057.png"/>  
+
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/5C/73/Ciqc1F-BjrSAFuiKAACSXWInd6I057.png"/> 
+  
 在资源服务器中传递访问令牌
 
 如果访问令牌是 JWT 样式，并且其中包含了用户身份信息和权限信息，那么资源服务器就可以直接根据其内的信息进行鉴权操作，从而避免频繁向权限系统请求用户的角色和权限信息。同时，资源服务器应该具备 Token 中继的能力，自动将请求中的访问令牌携带到下游，让鉴权操作对业务开发人员透明。
@@ -65,7 +77,9 @@ JWT 是高度紧凑和自包含的安全传输对象，关于 JWT 头部、有�
 
 基于上面的介绍，我们可以将微服务统一认证与授权服务体系设计为如下：
 
-<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/5C/73/Ciqc1F-Bjr2AVEhFAABGPArWoOo510.png"/>  
+
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/5C/73/Ciqc1F-Bjr2AVEhFAABGPArWoOo510.png"/> 
+  
 统一认证与授权服务整体结构设计
 
 上述这个设计图的整体结构可描述为如下：
@@ -85,3 +99,4 @@ JWT 是高度紧凑和自包含的安全传输对象，关于 JWT 头部、有�
 在本课时，我们基于 OAuth2 和 JWT 设计了微服务架构下的认证与授权服务体系，借助 RBAC 设计了系统的权限模型，还讲解了 Token 中继机制如何在诸多资源服务器中简易地传递用户角色和权限信息。希望通过本课时的学习，能够加深你对微服务架构下统一认证与授权的设计与认知。在下一课时，我们将根据本课时中的设计，实践如何通过 Go 实现授权服务器。
 
 最后，你对统一认证与授权的设计有什么独到的想法或者见解，欢迎在留言区分享！
+

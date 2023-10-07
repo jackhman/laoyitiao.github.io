@@ -1,3 +1,5 @@
+# 08Mapper文件与Java接口的优雅映射之道
+
 在[使用 MyBatis 实现订单系统示例的时候](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=612&sid=20-h5Url-0#/detail/pc?id=6373)，我们会为每个 Mapper.xml 配置文件创建一个对应的 Mapper 接口，例如，订单系统示例中的 CustomerMapper.xml 配置文件与 CustomerMapper 接口，定义完 CustomerMapper 接口之后，我们无须提供 CustomerMapper 接口实现，就可以直接调用 CustomerMapper 对象的方法执行 CustomerMapper.xml 配置文件中的 SQL 语句。
 
 这里你可能会有几个疑惑：
@@ -20,7 +22,9 @@ MyBatis 中的 Mapper 接口就可以很好地解决这个问题。
 
 **在 MyBatis 中，实现 CustomerMapper 接口与 CustomerMapper.xml 配置文件映射功能的是 binding 模块**，其中涉及的核心类如下图所示：
 
-<Image alt="图片5.png" src="https://s0.lgstatic.com/i/image6/M01/04/83/CioPOWAs1vuAT8xsAAEXCFQuFx4772.png"/>  
+
+<Image alt="图片5.png" src="https://s0.lgstatic.com/i/image6/M01/04/83/CioPOWAs1vuAT8xsAAEXCFQuFx4772.png"/> 
+  
 binding 模块核心组件关系图
 
 下面我们就开始详细分析 binding 模块中涉及的这些核心组件。
@@ -162,7 +166,9 @@ private MapperMethodInvoker cachedInvoker(Method method) throws Throwable {
 
 其中使用到的 DefaultMethodInvoker 和 PlainMethodInvoker 都是 MapperMethodInvoker 接口的实现，如下图所示：
 
-<Image alt="图片6.png" src="https://s0.lgstatic.com/i/image6/M01/04/86/Cgp9HWAs1wuAE1PMAAFC-IQ3qjE268.png"/>  
+
+<Image alt="图片6.png" src="https://s0.lgstatic.com/i/image6/M01/04/86/Cgp9HWAs1wuAE1PMAAFC-IQ3qjE268.png"/> 
+  
 MapperMethodInvoker 接口继承关系图
 
 在 DefaultMethodInvoker.invoke() 方法中，会通过底层维护的 MethodHandle 完成方法调用，核心实现如下：
@@ -278,7 +284,9 @@ private MappedStatement resolveMappedStatement(Class<?> mapperInterface, String 
 
 如果我们将 useActualParamName 配置为 false，ParamNameResolver 会使用参数的下标索引作为其名称。另外，names 集合会跳过 RowBounds 类型以及 ResultHandler 类型的参数，如果使用下标索引作为参数名称，在 names 集合中就会出现 KV 不一致的场景。例如下图就很好地说明了这种不一致的场景，其中 saveCustomer(long id, String name, RowBounds bounds, String address) 方法对应的 names 集合为 { {0, "0"}, {1, "1"}, {2, "3"}}。
 
-<Image alt="图片7.png" src="https://s0.lgstatic.com/i/image6/M01/04/83/CioPOWAs1x-ARSPuAAEfe6Ixv48515.png"/>  
+
+<Image alt="图片7.png" src="https://s0.lgstatic.com/i/image6/M01/04/83/CioPOWAs1x-ARSPuAAEfe6Ixv48515.png"/> 
+  
 names 集合中 KV 不一致示意图
 
 从图中可以看到，由于 RowBounds 参数的存在，第四个参数在 names 集合中的 KV 出现了不一致（即 key = 2 与 value = "3" 不一致）。
@@ -431,8 +439,11 @@ public Object execute(SqlSession sqlSession, Object[] args) {
 
 *** ** * ** ***
 
-[<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/6D/3E/CgqCHl-s60-AC0B_AAhXSgFweBY762.png"/>](https://shenceyun.lagou.com/t/Mka)
+[
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/6D/3E/CgqCHl-s60-AC0B_AAhXSgFweBY762.png"/> 
+](https://shenceyun.lagou.com/t/Mka)
 
 **《Java 工程师高薪训练营》**
 
 实战训练+面试模拟+大厂内推，想要提升技术能力，进大厂拿高薪，[点击链接，提升自己](https://shenceyun.lagou.com/t/Mka)！
+

@@ -1,3 +1,5 @@
+# 11K8Service：轻松搞定服务发现和负载均衡
+
 经过前面几节课的学习，我们已经可以发布高可用的业务了，通过 PV 持久化地保存数据，通过 Deployment或Statefulset 这类工作负载来管理多实例，从而保证服务的高可用。
 
 想一想，这个时候如果有别的应用来访问我们的服务的话，该怎么办呢？直接访问后端的 Pod IP 吗？不，这里我们还需要做服务发现（Service Discovery）。
@@ -14,7 +16,9 @@
 
 在之前的课程中，我们知道 Deployment、StatefulSet 这类工作负载都是通过 labelSelector 来管理一组 Pod 的。那么 Kubernetes 中的 Service 也采用了同样的做法，如下图。
 
-<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/56/EA/Ciqc1F9sPFSAMnmPAAO5U6ZAsB0716.png"/>  
+
+<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/56/EA/Ciqc1F9sPFSAMnmPAAO5U6ZAsB0716.png"/> 
+  
 
 （<https://platform9.com/wp-content/uploads/2019/05/kubernetes-service-discovery.jpg>）
 
@@ -167,7 +171,9 @@ spec:
 
 顾名思义，这种类型的 Service 通过任一 Node 节点的 IP 地址，再加上端口号就可以访问 Service 后端负载了。我们看下面这个流量图，方便理解。
 
-<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/56/F5/CgqCHl9sPGuAbYFBAAR9dQ-LWLw022.png"/>  
+
+<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/56/F5/CgqCHl9sPGuAbYFBAAR9dQ-LWLw022.png"/> 
+  
 
 （<https://miro.medium.com/max/1680/1>\*CdyUtG-8CfGu2oFC5s0KwA.png）
 
@@ -217,7 +223,9 @@ NGINX_PROD_SVC_DEMO_PORT_80_TCP=tcp://10.111.193.186:80
 
 目前 kube-proxy 默认的工作方式是 iptables 模式，我们来通过如下一个 iptables 模式的例子来看一下实际访问链路是什么样的。
 
-<Image alt="image (6).png" src="https://s0.lgstatic.com/i/image/M00/56/F5/CgqCHl9sPH6AMn4jAA32mDhWECM868.png"/>  
+
+<Image alt="image (6).png" src="https://s0.lgstatic.com/i/image/M00/56/F5/CgqCHl9sPH6AMn4jAA32mDhWECM868.png"/> 
+  
 
 （<https://d33wubrfki0l68.cloudfront.net/27b2978647a8d7bdc2a96b213f0c0d3242ef9ce0/e8c9b/images/docs/services-iptables-overview.svg>）
 
@@ -309,3 +317,4 @@ Service 是 Kubernetes 很重要的对象，主要负责为各种工作负载暴
 正是因为有了 Service 的支持，你在 Kubernetes 部署业务会非常方便，这是相比较于 Docker Swarm 以及 Mesos Marathon 巨大的技术优势，可以说，它是 Kubernetes 是运行大规模微服务的最佳载体。
 
 好的，如果你对本节课有什么想法或者疑问，欢迎你在留言区留言，我们一起讨论。
+

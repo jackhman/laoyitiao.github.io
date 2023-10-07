@@ -1,3 +1,5 @@
+# 第04讲：waitnotifynotifyAll方法的使用注意事项？
+
 本课时我们主要学习 wait/notify/notifyAll 方法的使用注意事项。
 
 我们主要从三个问题入手：
@@ -115,3 +117,4 @@ while (condition does not hold)
 以上就是关于 wait/notify 与 sleep 的异同点。
 
 好了，本课时的内容就全部讲完了，下一课时我将讲解"有哪几种实现生产者-消费者模式的方法？"记得按时来听课啊，下一课时见。
+

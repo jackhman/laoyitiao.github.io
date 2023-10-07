@@ -1,3 +1,5 @@
+# 09项目脚手架：一个命令构建Flutter项目
+
 在基础功能部分，我已经讲解了从基础到规范的应用，接下来我们进入项目实战部分。本课时将介绍项目基础框架，并且应用脚手架功能实现轻松的初始化项目。
 
 ### 项目基础框架
@@ -8,7 +10,9 @@
 
 核心代码主要是在 lib 目录下，我们将 lib 下的各个功能进行了整理，可以用图 1 来表示各个模块之间的关系。
 
-<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/2E/C3/Ciqc1F8Flb-AGmmvAADAcKsYMc8004.png"/>  
+
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/2E/C3/Ciqc1F8Flb-AGmmvAADAcKsYMc8004.png"/> 
+  
 
 图 1 lib 核心目录结构
 
@@ -28,13 +32,17 @@
 
 例如 pages 需要三个页面，一个是首页内容，一个是用户个人信息页面，另外一个则是用户信息修改页面，那么我们可以按照表格 1 这样命名文件以及类。
 
-<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/2E/C3/Ciqc1F8FldOAPQ-gAABVfTIEj5I407.png"/>  
+
+<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/2E/C3/Ciqc1F8FldOAPQ-gAABVfTIEj5I407.png"/> 
+  
 
 表格 1 pages 业务划分目录结构
 
 widgets 下则与 pages 目录结构保持一致即可，model 、api 以及 struct 则需要根据的服务端协议的业务功能来定义目录结构。使用上面的目录方式，我们创建出了如图 2 所示的一个结构，提供大家参考。
 
-<Image alt="image2.png" src="https://s0.lgstatic.com/i/image/M00/2E/CF/CgqCHl8FleuAcV39AABWvTrY5U8584.png"/>  
+
+<Image alt="image2.png" src="https://s0.lgstatic.com/i/image/M00/2E/CF/CgqCHl8FleuAcV39AABWvTrY5U8584.png"/> 
+  
 
 图 2 项目目录结构示例
 
@@ -68,7 +76,9 @@ flutter test
 
 为了保证代码的健壮性，还需要生成对应的单元测试目录。针对上面的 lib 结构，我们生成对应的目录结构即可，唯一需要去掉的就是 styles 目录，例如，初始化的时候，我们对应生成下图 3 的目录层级结构。
 
-<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/2E/C3/Ciqc1F8Flg2AZvgFAABbTxGj0PU912.png"/>  
+
+<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/2E/C3/Ciqc1F8Flg2AZvgFAABbTxGj0PU912.png"/> 
+  
 
 图 3 单元测试目录结构
 
@@ -169,3 +179,4 @@ void main() {
 ### 总结
 
 以上就是本课时的主要内容，本课时通过工具化的方式来初始化项目，学完本课时你需要掌握 Flutter 项目基础结构，需要了解 flutter-pro-cli 的一个简单应用，最后希望你使用本课时的工具（或者手动的方式）创建一个 two you friend 项目，后面的课时我会逐步在该项目基础上完善功能。
+

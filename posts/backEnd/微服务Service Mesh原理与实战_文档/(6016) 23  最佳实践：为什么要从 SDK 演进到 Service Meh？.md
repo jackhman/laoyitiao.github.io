@@ -1,3 +1,5 @@
+# 23最佳实践：为什么要从SDK演进到ServiceMeh？
+
 上一讲我们提到了微服务和 Service Mesh 架构在落地中的遇到的问题和困难，也讲解了 Service Mesh 相较于传统微服务架构的优势，以及在落地过程中业务方对 Service Mesh 架构可能提出的一些疑问和处理办法。这一讲我们从实践角度出发，继续分析 Service Mesh 架构到底解决了哪些线上问题。
 
 ### 线上故障梳理
@@ -90,8 +92,11 @@
 
 本讲内容总结如下：
 
-<Image alt="最佳实践：为什么要从 SDK 演进到 Service Mesh？.png" src="https://s0.lgstatic.com/i/image6/M00/13/54/CioPOWBCBymAbElLAAHzHabcr4w419.png"/>
+
+<Image alt="最佳实践：为什么要从 SDK 演进到 Service Mesh？.png" src="https://s0.lgstatic.com/i/image6/M00/13/54/CioPOWBCBymAbElLAAHzHabcr4w419.png"/> 
+
 
 结合今天的内容，你能谈一谈在现实的工作场景中，还有哪些问题可以用 Service Mesh 的架构解决吗？欢迎在留言区和我分享你的想法。
 
 今天内容到这里就结束了，下一讲我们将迎来专栏的最后内容《未来展望：中间件 Mesh 化的可行性》。此外，在下一讲中我还会讲解 FaaS 和 Service Mesh 的结合。请你继续阅读。
+

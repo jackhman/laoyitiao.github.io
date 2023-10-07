@@ -1,3 +1,5 @@
+# 24Tranition组件：过渡动画的实现原理是怎样的？（上）
+
 作为一名前端开发工程师，平时开发页面少不了要写一些过渡动画，通常可以用 CSS 脚本来实现，当然一些时候也会使用 JavaScript 操作 DOM 来实现动画。那么，如果我们使用 Vue.js 技术栈，有没有好的实现动画的方式呢？
 
 答案是肯定的------有，Vue.js 提供了内置的 Transition 组件，它可以让我们轻松实现动画过渡效果。
@@ -164,7 +166,9 @@ Transition 组件也允许在一个过渡组件中定义它过渡生命周期的
 
 6. **v-leave-to**：定义离开过渡的结束状态。在离开过渡被触发之后下一帧生效 (与此同时 v-leave-from 被删除)，在过渡动画完成之后移除。
 
-<Image alt="transitions.png" src="https://s0.lgstatic.com/i/image/M00/55/F3/CgqCHl9q7XSAZVLbAAIHrhK4PT8658.png"/>
+
+<Image alt="transitions.png" src="https://s0.lgstatic.com/i/image/M00/55/F3/CgqCHl9q7XSAZVLbAAIHrhK4PT8658.png"/> 
+
 
 其实说白了 Transition 组件的核心思想就是，**Transition 包裹的元素插入删除时** ，**在适当的时机插入这些 CSS 样式**，而这些 CSS 的实现则决定了元素的过渡动画。
 
@@ -472,3 +476,4 @@ function resolveTransitionHooks(vnode, props, state, instance) {
 > packages/runtime-core/src/renderer.ts  
 >
 > packages/runtime-dom/src/components/Transition.ts
+

@@ -1,3 +1,5 @@
+# 第30讲：PageObject模式（移动端）（下）
+
 上一课时我们已经把整个 case 的测试用例写完，并构建了模型，本课时我们按照 TDD 思想具体实现流程中的方法。  
 
 <br />
@@ -6,7 +8,9 @@
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/D2/Ciqah1552qmATLy7AADA19Jdf7o158.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/D2/Ciqah1552qmATLy7AADA19Jdf7o158.png"/> 
+
 
 <br />
 
@@ -14,7 +18,9 @@
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7A/E8/Cgq2xl552qmAFibwAADdJn5VaXI447.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7A/E8/Cgq2xl552qmAFibwAADdJn5VaXI447.png"/> 
+
 
 <br />
 
@@ -22,7 +28,9 @@
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/D2/Ciqah1552qmAdTKnAAEUcgQUm5g927.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/D2/Ciqah1552qmAdTKnAAEUcgQUm5g927.png"/> 
+
 
 <br />
 
@@ -30,7 +38,9 @@
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7A/E8/Cgq2xl552qqAWbHoAAN8twHM8Q4603.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7A/E8/Cgq2xl552qqAWbHoAAN8twHM8Q4603.png"/> 
+
 
 <br />
 
@@ -54,7 +64,9 @@
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/D2/Ciqah1552qqAMbVYAAKXJed200M562.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/D2/Ciqah1552qqAMbVYAAKXJed200M562.png"/> 
+
 
 <br />
 
@@ -62,7 +74,9 @@
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7A/E8/Cgq2xl552qqAbK0mAAEHNVCKEeo399.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7A/E8/Cgq2xl552qqAbK0mAAEHNVCKEeo399.png"/> 
+
 
 <br />
 
@@ -70,7 +84,9 @@
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/D2/Ciqah1552qqAa3AnAAFPx4qpUkI977.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/D2/Ciqah1552qqAa3AnAAFPx4qpUkI977.png"/> 
+
 
 <br />
 
@@ -82,7 +98,9 @@
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7A/E8/Cgq2xl552quAdz-FAAFkFE2puOg905.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7A/E8/Cgq2xl552quAdz-FAAFkFE2puOg905.png"/> 
+
 
 <br />
 
@@ -99,3 +117,4 @@
 <br />
 
 除了 find 方法，比如说 get_text、click、send_keys 有可能有因为各种原因导致异常。其实你都可以借助于 exception handle 这样的装饰器，增强底层框架 API 的稳定性。
+

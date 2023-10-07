@@ -1,3 +1,5 @@
+# 16 分布式事务：AlibabaSeata如何实现分布式事务
+
 上一讲咱们了解了 APM 系统与 SkyWalking 的配置使用方法。本讲咱们要解决分布式事务这一技术难题，这一讲咱们将介绍三方面内容：
 
 * 讲解分布式事务的解决方案；
@@ -20,7 +22,9 @@
 
 在这个过程中，因为程序操作的是单点数据库，所以在一个数据库事务中便可完成所有操作，利用数据库事务自带的原子性保证了所有数据要么全部处理成功，要么全部回滚撤销。但是放在以微服务为代表的分布式架构下问题就没那么简单了，我们来看一下示意图。
 
-<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M00/31/3A/CioPOWBsQPKAN4wTAAEBb9VqWsQ374.png"/>  
+
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M00/31/3A/CioPOWBsQPKAN4wTAAEBb9VqWsQ374.png"/> 
+  
 分布式架构下调用关系图
 
 可以看到，商城应用作为业务的发起者分别向订单、会员、库存服务发起了调用，而这些服务又拥有自己独立的数据存储，因为在物理上各个数据库服务器都是独立的，每一个步骤的操作都会创建独立的事务，这就意味着在分布式处理时无法通过单点数据库利用一个事务保证数据的完整性，我们必须引入某种额外的机制来协调多个事务要么全部提交、要么全部回滚，以此保证数据的完整性，这便是"分布式事务"的由来。
@@ -31,12 +35,16 @@
 
 首先咱们分析下二阶段提交的处理过程，下面是二阶段提交中的**第一个阶段：事务预处理阶段。**
 
-<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M00/31/3A/CioPOWBsQQCARCHWAAFYFUA6lfU789.png"/>  
+
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M00/31/3A/CioPOWBsQQCARCHWAAFYFUA6lfU789.png"/> 
+  
 2PC 阶段一：事务预处理阶段
 
 可以看到，相比单点事务，分布式事务中增加了一个新的角色：事务协调者（Coordinator），它的职责就是协调各个分支事务的开启与提交、回滚的处理。以上图为例，当商城应用订单创建后，首先事务协调者会向各服务下达"处理本地事务"的通知，所谓本地事务就是每个服务应该做的事情，如订单服务中负责创建新的订单记录；会员服务负责增加会员的积分；库存服务负责减少库存数量。在这个阶段，被操作的所有数据都处于未提交（uncommit）的状态，会被排它锁锁定。当本地事务都处理完成后，会通知事务协调者"本地事务处理完毕"。当事务协调者陆续收到订单、会员、库存服务的处理完毕通知后，便进入"**阶段二：提交阶段**"。
 
-<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image6/M01/31/32/Cgp9HWBsQQ-AO4-SAAEqPzPTZ7w364.png"/>  
+
+<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image6/M01/31/32/Cgp9HWBsQQ-AO4-SAAEqPzPTZ7w364.png"/> 
+  
 2PC 阶段二：提交阶段
 
 在提交阶段，事务协调者会向每一个服务下达提交命令，每个服务收到提交命令后在本地事务中对阶段一未提交的数据执行 Commit 提交以完成数据最终的写入，之后服务便向事务协调者上报"提交成功"的通知。当事务协调者收到所有服务"提交成功"的通知后，就意味着一次分布式事务处理已完成。
@@ -45,7 +53,9 @@
 
 对于二阶段提交来说，它有一个致命问题，当阶段二某个服务因为网络原因无法收到协调者下达的提交命令，则未提交的数据就会被长时间阻塞，可能导致系统崩溃。
 
-<Image alt="图片4.png" src="https://s0.lgstatic.com/i/image6/M00/31/3A/CioPOWBsQUSADeWqAAEyyNR7o8E788.png"/>  
+
+<Image alt="图片4.png" src="https://s0.lgstatic.com/i/image6/M00/31/3A/CioPOWBsQUSADeWqAAEyyNR7o8E788.png"/> 
+  
 二阶段提交的缺陷
 
 以上图为例，假如在提交阶段，库存服务实例与事务协调者之间断网。提交指令无法下达，这会导致库存中的"飞科剃须刀"商品库存记录会长期处于未提交的状态，因为这条记录被数据库排他锁长期独占，之后再有其他线程要访问"飞科剃须刀"库存数据，该线程就会长期处于阻塞状态，随着阻塞线程的不断增加，库存服务会面临崩溃的风险。
@@ -56,14 +66,18 @@
 
 三阶段提交实质是将二阶段中的提交阶段拆分为"**预提交阶段** "与"**提交阶段**"，同时在服务端都引入超时机制，保证数据库资源不会被长时间锁定。下面是三阶段提交的示意流程：
 
-<Image alt="图片5.png" src="https://s0.lgstatic.com/i/image6/M01/31/32/Cgp9HWBsQVCAZH3SAAFYFUA6lfU014.png"/>  
+
+<Image alt="图片5.png" src="https://s0.lgstatic.com/i/image6/M01/31/32/Cgp9HWBsQVCAZH3SAAFYFUA6lfU014.png"/> 
+  
 3PC 阶段一：事务预处理阶段
 
 * **阶段一：事务预处理阶段。**
 
 3PC 的事务预处理阶段与 2PC 是一样的，用于处理本地事务，锁定数据库资源，当所有服务返回成功后，进入阶段二。
 
-<Image alt="图片6.png" src="https://s0.lgstatic.com/i/image6/M00/31/3A/CioPOWBsQWqABC-IAAEeBWGqOLQ853.png"/>  
+
+<Image alt="图片6.png" src="https://s0.lgstatic.com/i/image6/M00/31/3A/CioPOWBsQWqABC-IAAEeBWGqOLQ853.png"/> 
+  
 3PC 阶段二：预提交阶段
 
 * **阶段二：预提交阶段。**
@@ -82,16 +96,22 @@
 
 Alibaba Seata 是一款开源的分布式事务解决方案，致力于在微服务架构下提供高性能和简单易用的分布式事务服务。它的官网是[http://seata.io/](http://seata.io/?fileGuid=xxQTRXtVcqtHK6j8),截止到目前 Seata 在 GitHub 已有 18564 star，最新版本已迭代到 1.4.0，阿里多年的技术沉淀让 Seata 的内部版本平稳渡过了多次双 11 的考验。2019 年 1 月为了打造更加完善的技术生态和普惠技术成果，Seata 正式宣布对外开源，未来 Seata 将以社区共建的形式帮助其技术更加可靠与完备，按官方的说法Seata目前已具备了在生产环境使用的条件。
 
-<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image6/M00/2C/C1/CioPOWBlidqAOQe-AASTbag_bO0476.png"/>
+
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image6/M00/2C/C1/CioPOWBlidqAOQe-AASTbag_bO0476.png"/> 
+
 
 Seata 提供了多种分布式事务的解决方案，包含 AT 模式、TCC 模式、SAGA 模式以及 XA 模式。其中 AT 模式提供了最简单易用且无侵入的事务处理机制，通过自动生成反向 SQL 实现事务回滚。从 AT 模式入手使用，使我们理解分布式事务处理机制是非常好的学习办法。
 
-<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image6/M01/2C/C1/CioPOWBlieOAReN5AADg3SbfFhE124.png"/>  
+
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image6/M01/2C/C1/CioPOWBlieOAReN5AADg3SbfFhE124.png"/> 
+  
 Seata 的特色功能
 
 AT 模式是 Seata 独创的模式，它是基于 2PC 的方案，核心理念是利用数据库 JDBC 加上 Oracle、MySQL 自带的事务方式来对我们分布式事务进行管理。说起来有点晦涩，下边我就结合这张 AT 模式方案图给大家介绍，在 Seata 中关于分布式事务到底需要哪些组件，以及他们都起到了什么样的职能。
 
-<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image6/M01/2C/C1/CioPOWBlieyAWtXpAAF71Z7iu4s460.png"/>  
+
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image6/M01/2C/C1/CioPOWBlieyAWtXpAAF71Z7iu4s460.png"/> 
+  
 Seata 组件图
 
 通过Seata组件图我们可以看到三个组成部分：
@@ -106,7 +126,9 @@ Seata 组件图
 
 ### Seata AT 模式执行过程
 
-<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M01/31/32/Cgp9HWBsQXmAElvTAAEBb9VqWsQ307.png"/>  
+
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M01/31/32/Cgp9HWBsQXmAElvTAAEBb9VqWsQ307.png"/> 
+  
 创建订单调用逻辑
 
 这里我先给出商城应用中会员采购业务的伪代码。
@@ -127,7 +149,9 @@ Seata 组件图
 
 为了方便理解，我画了时序图介绍 Seata 的执行过程。
 
-<Image alt="图片7.png" src="https://s0.lgstatic.com/i/image6/M01/31/32/Cgp9HWBsQYmAcXTtAAFjr2n0qsc325.png"/>  
+
+<Image alt="图片7.png" src="https://s0.lgstatic.com/i/image6/M01/31/32/Cgp9HWBsQYmAcXTtAAFjr2n0qsc325.png"/> 
+  
 Seata 时序图
 
 第一步，在商城应用（TM）与三个服务（RM）启动后自动向事务协调者Seata-Server（TC）进行注册，让 TC 知晓各个组件的详细信息。
@@ -186,3 +210,4 @@ Seata AT模式就是通过执行反向 SQL 达到数据还原的目的，当反�
 这里我为你留一道讨论题：既然分布式事务相比单点式事务要复杂得多，在项目中有什么好办法可以规避分布式事务呢？欢迎你把自己的想法写在评论区和大家一起分享。
 
 下一讲我们讲解 Spring Cloud Alibaba 体系下的消息队列中间件 Alibaba RocketMQ，看通过 RocketMQ 如何解决服务间异步通信的问题。
+

@@ -1,3 +1,5 @@
+# 17数据猎手：基于Binlog，用Canal快速搭建BI监控
+
 这一讲我将带领你学习如何基于 Mysql 数据的 Binlog，通过阿里开源的数据同步神器 Canal 来构建无侵入高扩展的业务 BI 监控架构。
 
 业务 BI 监控对战略决策非常重要，它不仅要满足日常企业内部对业务 BI 需求，如交易系统的交易订单数据分析报表、实时的交易图表等；而且还需要通过业务 BI 监控出的数据，提前对系统做出扩缩的部署指导，实现多方面的降本提效。所以业务 BI 监控是每个企业的必要基建。
@@ -94,7 +96,9 @@ Mysql 的主从复制就是通过 Binlog 实现，从节点通过读取主库的
 
 通过以上几个步骤，实现了主从同步架构。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M01/40/6F/Cgp9HWCk4g2ARr8vAAUdkIbJM8c153.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M01/40/6F/Cgp9HWCk4g2ARr8vAAUdkIbJM8c153.png"/> 
+
 
 #### 2.Canal 工作原理
 
@@ -108,7 +112,9 @@ Canal 的工作原理也不复杂（如下图所示）：
 
 * Canal 解析 Mysql Binlog 数据发送给下游。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/40/78/CioPOWCk4hOAbZVeAAHP3TFA6b4794.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/40/78/CioPOWCk4hOAbZVeAAHP3TFA6b4794.png"/> 
+
 
 Canal 对比 Mysql 的从节点最大的不同，就是拉起时不需要预先同步一个时间点的数据快照。Canal 可以对接的下游有很多，最简单直接的方式是通过 Canal 将增量数据转化为 Elasticsearch 搜索引擎的时序索引。然后根据我们前面课程所讲述的，通过 Grafana 或是 Kibana 等可视化套件，将 BI 数据展示出来。
 
@@ -137,3 +143,4 @@ Canal 对比 Mysql 的从节点最大的不同，就是拉起时不需要预先�
 * 相对复杂的业务 BI 监控场景，可以将增量数据消费到消息队列后，进行专项的业务 BI 监控的二次开发。总之是要实现与业务系统的解耦，让业务系统专注于业务需求的实现，让 BI 监控需求有专门的承接系统。
 
 那么你在工作中是如何实现业务 BI 监控的呢？欢迎在评论区写下你的思考，期待与你的讨论。
+

@@ -1,3 +1,5 @@
+# 第13讲：Curator：如何降低ZooKeeper使用的复杂性？
+
 今天我们开始学习 Curator，并了解如何通过其降低 ZooKeeper 使用的复杂性。
 
 作为进阶篇的最后一节课，与前面几节课侧重于会话的知识不同，今天这节课比较轻松易学，我会给你介绍一个日常可以提高开发 ZooKeeper 服务效率和质量的开源框架 Curator 。
@@ -111,7 +113,9 @@ client.delete().guaranteed().deletingChildrenIfNeeded().withVersion(10086).forPa
 
 ConnectionStateListener 来监控会话的连接状态，当连接状态改变的时候，根据参数设置 ZooKeeper 服务会采取不同的处理方式，而一个会话基本有六种状态，如下图所示：
 
-<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/21/18/Ciqc1F7pw-CAZMcMAABbJUFbJOY244.png"/>
+
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/21/18/Ciqc1F7pw-CAZMcMAABbJUFbJOY244.png"/> 
+
 
 下面我来为你详细讲解这六种状态的作用：
 
@@ -150,7 +154,9 @@ class sessionConnectionListener implements ConnectionStateListener {
 
 在分布式环境中，ZooKeeper 集群起到了关键作用。在之前的课程中我们讲过，Leader 选举是保证 ZooKeeper 集群可用性的解决方案，可以避免在集群使用中出现单点失效等问题。在 ZooKeeper 服务开始运行的时候，首先会选举出 Leader 节点服务器，之后在服务运行过程中，Leader 节点服务器失效时，又会重新在集群中进行 Leader 节点的选举操作。
 
-<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/21/18/Ciqc1F7pxGCAPkfEAAAxSw3ff2o475.png"/>
+
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/21/18/Ciqc1F7pxGCAPkfEAAAxSw3ff2o475.png"/> 
+
 
 而在日常开发中，使用 ZooKeeper 原生的 API 开发 Leader 选举相关的功能相对比较复杂。Curator 框架中的 recipe 包为我们提供了高效的，方便易用的工具函数，分别是 LeaderSelector 和 LeaderLatch。
 
@@ -173,3 +179,4 @@ LeaderLatch 方法也是通过构造函数的方式实现 LeaderLatch 实例对�
 通过本课时的学习，我们掌握了 Curator 框架的主要使用方法，在日常工作中能够运用 Curator 提高我们的开发效率和程序的可靠性。
 
 Curator 是一个功能丰富的框架，除了上述功能外，还可以实现诸如分布式锁、分布式计数器、分布式队列等功能。本课时主要起到引导作用，希望你在这节课的基础上进一步学习相关的技术知识，在日常开发中多使用 Curator 提高代码的开发效率和工程服务的质量。
+

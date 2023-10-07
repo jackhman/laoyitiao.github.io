@@ -1,3 +1,5 @@
+# 加餐1：搭建基于K8和Docker的Jenkin可伸缩持续集成系统
+
 根据前面用户的反馈，这里补充一个完整的动手实践的案例------搭建"基于 K8s 和 Docker 的 Jenkins 可伸缩持续集成系统"，让模块 3 所介绍的内容落地。
 
 <br />
@@ -19,7 +21,9 @@
 工作流程图
 =====
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/02/56/CgoCgV6VqwKAajirAAOot2kHSIM714.jpg"/>  
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/02/56/CgoCgV6VqwKAajirAAOot2kHSIM714.jpg"/> 
+  
 
 **系统配置**
 ========
@@ -341,7 +345,9 @@ Harbor 是 VMWare 公司开源的企业级 Docker Registry 项目，项目地址
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/88/9A/Cgq2xl6VqwOAQO5oAAFotppxiS8332.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/88/9A/Cgq2xl6VqwOAQO5oAAFotppxiS8332.png"/> 
+
 
 <br />
 
@@ -349,7 +355,9 @@ Harbor 是 VMWare 公司开源的企业级 Docker Registry 项目，项目地址
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0F/84/Ciqah16VqwOAIEKcAABK8b1J5Pk588.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0F/84/Ciqah16VqwOAIEKcAABK8b1J5Pk588.png"/> 
+
 
 <br />
 
@@ -419,7 +427,9 @@ sh ./install.sh
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/02/56/CgoCgV6VqwOAJy7rAADUBv3omAM239.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/02/56/CgoCgV6VqwOAJy7rAADUBv3omAM239.png"/> 
+
 
 **Docker 主机访问 Harbor**
 ----------------------
@@ -451,7 +461,9 @@ vi docker-compose.yml
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/88/9A/Cgq2xl6VqwSAb3T1AACLTw_peWM870.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/88/9A/Cgq2xl6VqwSAb3T1AACLTw_peWM870.png"/> 
+
 
 <br />
 
@@ -590,7 +602,9 @@ service jenkins start/stop/restart
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/88/9A/Cgq2xl6VqwSAQcWQAAIi7I6BGhU522.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/88/9A/Cgq2xl6VqwSAQcWQAAIi7I6BGhU522.png"/> 
+
 
 <br />
 
@@ -645,7 +659,9 @@ server.port=40080
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/02/56/CgoCgV6VqwSAJIY2AAAIQDo_SXo223.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/02/56/CgoCgV6VqwSAJIY2AAAIQDo_SXo223.png"/> 
+
 
 ### 添加 Dockerfile
 
@@ -828,7 +844,9 @@ pipeline {
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/88/9A/Cgq2xl6VqwWAZFSOAAHcXpy5dUQ145.png"/>  
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/88/9A/Cgq2xl6VqwWAZFSOAAHcXpy5dUQ145.png"/> 
+  
 
 ### **配置 pipeline 任务**
 
@@ -836,17 +854,23 @@ pipeline {
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0F/84/Ciqah16VqwWAHp5dAAEiQclu3N0609.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0F/84/Ciqah16VqwWAHp5dAAEiQclu3N0609.png"/> 
+
 
 ### **配置 harbor 账号与密码**
 
 选择"凭据"，然后在下图所示位置单击"添加凭据"按钮。在新凭据设置界面，类型选择为"Username with password"，ID 设置为"jenkins-harbor-creds"（此处的 ID 必须与 Jenkinsfile 中的保持一致）。Username 与 Password 分别设置为 harbor 镜像私库的用户名和密码。
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/02/56/CgoCgV6VqwWAPUy5AAGuJhe8aC0834.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/02/56/CgoCgV6VqwWAPUy5AAGuJhe8aC0834.png"/> 
+
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/88/9A/Cgq2xl6VqwaAOCwNAADQwtyky3E891.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/88/9A/Cgq2xl6VqwaAOCwNAADQwtyky3E891.png"/> 
+
 
 ### **配置 K8s 的 kube.config** **信息**
 
@@ -894,7 +918,9 @@ base64 kube-config.yml > kube-config.txt
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0F/84/Ciqah16VqwaAagi2AADuteUwitQ741.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0F/84/Ciqah16VqwaAagi2AADuteUwitQ741.png"/> 
+
 
 **测试 pipeline 任务**
 ------------------
@@ -903,7 +929,9 @@ base64 kube-config.yml > kube-config.txt
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/02/56/CgoCgV6VqweAUtIeAAGPNqdcCX8865.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/02/56/CgoCgV6VqweAUtIeAAGPNqdcCX8865.png"/> 
+
 
 <br />
 
@@ -911,7 +939,9 @@ base64 kube-config.yml > kube-config.txt
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/88/9A/Cgq2xl6VqweAQ7a8AAIM89lGIAQ017.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/88/9A/Cgq2xl6VqweAQ7a8AAIM89lGIAQ017.png"/> 
+
 
 <br />
 
@@ -919,7 +949,9 @@ base64 kube-config.yml > kube-config.txt
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0F/84/Ciqah16VqweADadcAAEwylSrC84442.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0F/84/Ciqah16VqweADadcAAEwylSrC84442.png"/> 
+
 
 <br />
 
@@ -933,7 +965,9 @@ kubectl get deployment
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/02/56/CgoCgV6VqwiATbn1AABaEnvkQGA790.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/02/56/CgoCgV6VqwiATbn1AABaEnvkQGA790.png"/> 
+
 
 <br />
 
@@ -947,7 +981,9 @@ kubectl get pod
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/88/9A/Cgq2xl6VqwiAfRQ1AAB6C4ZT3sw648.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/88/9A/Cgq2xl6VqwiAfRQ1AAB6C4ZT3sw648.png"/> 
+
 
 **遇到的问题及解决方法**
 ==============
@@ -968,7 +1004,9 @@ kubectl get pod
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0F/84/Ciqah16VqwmAYg73AADiqrgm5wY712.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0F/84/Ciqah16VqwmAYg73AADiqrgm5wY712.png"/> 
+
 
 <br />
 
@@ -1040,4 +1078,5 @@ service docker restart
 cd /usr/libexec/docker/
  ln -s docker-runc-current docker-runc
 ```
+
 

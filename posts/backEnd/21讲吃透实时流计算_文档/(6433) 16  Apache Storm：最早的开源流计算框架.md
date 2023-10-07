@@ -1,3 +1,5 @@
+# 16ApacheStorm：最早的开源流计算框架
+
 从今天开始，我们就正式步入第四个模块的学习了。在这个模块中，我们将根据前面课程中的各种流计算系统核心概念和关键技术点，来对多种开源流计算框架进行分析和验证。从而，实现一种从"形而上谓之道"向"形而下谓之器"的具象，让你在以后面对各种流计算工具和实际业务问题时，能够做到胸有成竹。
 
 ### 分析流计算框架的整体思路
@@ -58,7 +60,9 @@ Apache Storm（后续简称为 Storm）是一款由 Twitter 开源的大规模�
 
 首先我们来看下 Storm 的系统架构。下图 1 是 Storm 的系统架构图。
 
-<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image6/M00/1D/29/Cgp9HWBPNJeAKplDAAUaSRkAgRU447.png"/>
+
+<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image6/M00/1D/29/Cgp9HWBPNJeAKplDAAUaSRkAgRU447.png"/> 
+
 
 从 Storm的系统架构图可以看出，Storm 集群由两种类型节点组成：Master 节点和 Worker 节点。
 
@@ -78,7 +82,9 @@ Apache Storm（后续简称为 Storm）是一款由 Twitter 开源的大规模�
 
 接下来，我们就来看看在 Storm 中是如何描述一个流计算过程的。下面的图 2 源自[Storm 官网](http://storm.apache.org/)，它描述了 Storm Topology 的各个组件。我在原图基础上，对各个组件做了标注。
 
-<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image6/M00/1D/29/Cgp9HWBPNKGAJWe-AAKT6PRHEik789.png"/>
+
+<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image6/M00/1D/29/Cgp9HWBPNKGAJWe-AAKT6PRHEik789.png"/> 
+
 
 在上面的图中，包含了 Storm 中 Topology、Tuple、Stream、Spout 和 Bolt这几个概念。
 
@@ -231,4 +237,7 @@ Storm 提供了不同级别的消息处理可靠性保证，包括尽力而为�
 
 下面是本课时的脑图，以帮助你理解。
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M01/1A/2F/CioPOWBLGBSALeuEAA80RYFOiF8544.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M01/1A/2F/CioPOWBLGBSALeuEAA80RYFOiF8544.png"/> 
+
+

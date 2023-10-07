@@ -1,3 +1,5 @@
+# 13熔断之器：如何使用SpringCloudCircuitBreaker实现服务容错？（上）
+
 在上一课时中，我们全面梳理了在微服务架构中实现服务容错的设计思想和实现方案，也引出了 Spring Cloud 中专门用于实现服务容错的 Spring Cloud Circuit Breaker 框架。我们知道 Spring Cloud Circuit Breaker 是一个集成性的框架，内部整合了 Netflix Hystrix、Resilience4j、Sentinel 和 Spring Retry 这四款独立的熔断器组件。由于课时有限，我们无意对这四款组件都进行详细的展开，而是更多关注于 Netflix 旗下的 Hystrix，以及受 Hystrix 启发而诞生的 Resilience4j。在今天的课时中，我们先来讨论 Netflix Hystrix。
 
 ### 引入 Hystrix
@@ -330,3 +332,4 @@ private UserMapper getUser(String userName) {
 这里给你留一道思考题：你能说出 Hystrix 中有哪些常见的配置项吗？
 
 讲完 Hystrix，我们将进一步讲解 Spring Cloud Circuit Breaker 框架。我们知道 Spring Cloud Circuit Breaker 中集成了多种服务容错框架，其中包括 Hystrix 却也不仅包括 Hystrix。下一课时，我们将首先探讨 Spring Cloud Circuit Breaker 中对服务容错的抽象机制，并完成对 Hystrix 使用方式的重构，以及介绍另一款主流的服务熔断工具 Resilience4j。
+

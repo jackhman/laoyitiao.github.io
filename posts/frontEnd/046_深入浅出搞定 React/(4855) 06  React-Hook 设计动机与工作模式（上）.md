@@ -1,3 +1,5 @@
+# 06React-Hook设计动机与工作模式（上）
+
 从本课时开始，我们将逐步进入 React-Hooks 的世界。
 
 在动笔写 React-Hooks 之前，我发现许多人对这块的知识非常不自信，至少在面试场景下，几乎没有几个人在聊到 React-Hooks 的时候，能像聊 Diff 算法、Fiber 架构一样滔滔不绝、言之有物。后来我仔细反思了一下，认为问题应该出在学习姿势上。
@@ -12,7 +14,9 @@
 
 这其中，我们尤其不能忽略对"Why"的把控。
 
-<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/65/48/CgqCHl-aaC-AP5wdAACO3S8xt5c566.png"/>
+
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/65/48/CgqCHl-aaC-AP5wdAACO3S8xt5c566.png"/> 
+
 
 React-Hooks 自 React 16.8 以来才真正被推而广之，对我们每一个老 React 开发来说，它都是一个新事物。如果在认知它的过程当中，我们能够遵循"Why→What→How"这样的一个学习法则，并且以此为线索，梳理出属于自己的完整知识链路。那么我相信，面对再刁钻的面试官，你都可以做到心中有数、对答如流。
 
@@ -188,7 +192,9 @@ function DemoFunction(props) {
 
 说得更具体一点，**函数组件更加契合 React 框架的设计理念**。何出此言？不要忘了这个赫赫有名的 React 公式：
 
-<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/65/49/CgqCHl-aaQSAFRMAAAA9kdaM6Jw090.png"/>
+
+<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/65/49/CgqCHl-aaQSAFRMAAAA9kdaM6Jw090.png"/> 
+
 
 不夸张地说，**React 组件本身的定位就是函数，一个吃进数据、吐出 UI 的函数** 。作为开发者，我们编写的是声明式的代码，而 React 框架的主要工作，就是及时地**把声明式的代码转换为命令式的 DOM 操作，把数据层面的描述映射到用户可见的 UI 变化中去** 。这就意味着从原则上来讲，**React 的数据应该总是紧紧地和渲染绑定在一起的** ，**而类组件做不到这一点**。
 
@@ -212,7 +218,9 @@ class ProfilePage extends React.Component {
 
 看起来好像没啥毛病，但是如果你在这个[在线 Demo](https://codesandbox.io/s/pjqnl16lm7)中尝试点击基于类组件形式编写的 ProfilePage 按钮后 3s 内把用户切换为 Sophie，你就会看到如下图所示的效果：
 
-<Image alt="3.png" src="https://s0.lgstatic.com/i/image/M00/65/3D/Ciqc1F-aaNGAQ0imAAETlLd2DpM458.png"/>
+
+<Image alt="3.png" src="https://s0.lgstatic.com/i/image/M00/65/3D/Ciqc1F-aaNGAQ0imAAETlLd2DpM458.png"/> 
+
 
 图源：<https://overreacted.io/how-are-function-components-different-from-classes/>
 
@@ -263,3 +271,4 @@ React-Hooks 的出现，就是为了帮助函数组件补齐这些（相对于�
 行文至此，关于"Why"的研究已经基本到位，对于"What"的认知也已经初见眉目。虽然本课时并没有贴上哪怕一行 React-Hooks 相关的代码，但我相信，你对 React-Hooks 本质的把握已经超越了非常多的 React 开发者。
 
 在下个课时，我们将会和 React-Hooks 面对面交锋，从编码层面上认知"What"，从实践角度理解"How"。相信在课时的最后，你会对本文所讲解的"Why"有更深刻的理解和感悟。
+

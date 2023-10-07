@@ -1,10 +1,14 @@
+# 18不只HTTP，玩转WebService接口测试
+
 通过前面课时的讲解，我们已经对如何进行 UI 自动化和接口自动化测试有了相当深刻的理解。但是对于接口测试的分享，在前面课程的讲解中，我主要讲解了基于 HTTP 的 RESTFUL 的接口。
 
 实际上，接口有很多形式，除了我们常见的 HTTP 形式的 RESTFUL 接口外，还有 Web Services 类型的接口，以及 RPC 接口。不同类型的接口测试方式各有不同。
 
 今天我们就来看下，如何测试 Web Services 类型的接口，这节课的内容如下：
 
-<Image alt="图片9.png" src="https://s0.lgstatic.com/i/image/M00/6A/99/Ciqc1F-pCv6AaQg5AAYAaUPRT5M790.png"/>
+
+<Image alt="图片9.png" src="https://s0.lgstatic.com/i/image/M00/6A/99/Ciqc1F-pCv6AaQg5AAYAaUPRT5M790.png"/> 
+
 
 ### 什么是 Web Services？
 
@@ -26,7 +30,9 @@ Web Service 平台的构成，依赖以下技术：
 
 Web service 的调用原理如下：
 
-<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image/M00/6A/A3/CgqCHl-pCsSAD1CUAAFHQFINvZY722.png"/>
+
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image/M00/6A/A3/CgqCHl-pCsSAD1CUAAFHQFINvZY722.png"/> 
+
 
 * Step 1. 客户端想调用一个服务，但是不知道去哪里调用，于是它向 UDDI 注册中心（UDDI Registry）询问；
 
@@ -43,7 +49,9 @@ Web service 的调用原理如下：
 ### Web Services 接口和 API（应用程序接口）的区别
 
 Web Services 接口和我们常用的 API（应用程序接口）有哪些区别呢？下面的表格展示了它们的区别：  
-<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image/M00/6A/A4/CgqCHl-pCtaAIlaHAAGumDmnrfI772.png"/>
+
+<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image/M00/6A/A4/CgqCHl-pCtaAIlaHAAGumDmnrfI772.png"/> 
+
 
 在我们的日常工作中，接口是以 Web Service、API，还是 RESTFUL API 形式提供给我们测试，常常取决于业务的实际情况。
 
@@ -197,7 +205,9 @@ python -mzeep http://www.webxml.com.cn/WebServices/IpAddressSearchWebService.asm
 
 执行后，会发现输出如下：
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/6A/6D/CgqCHl-o-M2AMf3RAAC1Nxb0gQc472.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/6A/6D/CgqCHl-o-M2AMf3RAAC1Nxb0gQc472.png"/> 
+
 
 从结果中可以看出，IpAddressSearchWebService 提供了 3 个 method，分别是 getCountryCityByIp，getGeoIPContext 和 getVersionTime。
 
@@ -246,7 +256,9 @@ if __name__ == "__main__":
 #### 3.Zeep 和 suds 的比较
 
 suds 是一个老牌的 SOAP 客户端，而 Zeep 是当前特别流行的一个 SOAP 客户端。那么我们应该如何选用呢？ 这里列出来几点两者的区别，供你参考：  
-<Image alt="图片5.png" src="https://s0.lgstatic.com/i/image/M00/6A/99/Ciqc1F-pCu2AbMxCAAF3kfMvMmE625.png"/>
+
+<Image alt="图片5.png" src="https://s0.lgstatic.com/i/image/M00/6A/99/Ciqc1F-pCu2AbMxCAAF3kfMvMmE625.png"/> 
+
 
 综上所述，Zeep 对最新版本的 Python 支持的更好，而且没有性能问题。如果你的项目是新设立的，在选用Web Service客户端时，不妨直接使用Zeep。
 
@@ -263,3 +275,4 @@ suds 是一个老牌的 SOAP 客户端，而 Zeep 是当前特别流行的一个
 *** ** * ** ***
 
 [课程评价入口，挑选 5 名小伙伴赠送小礼品～](https://wj.qq.com/s2/7506053/9b01)
+

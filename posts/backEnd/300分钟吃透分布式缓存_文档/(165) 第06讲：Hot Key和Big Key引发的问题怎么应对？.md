@@ -1,3 +1,5 @@
+# 第06讲：HotKey和BigKey引发的问题怎么应对？
+
 你好，我是你的缓存老师陈波，欢迎进入第6课时"缓存特殊 key 相关的经典问题"。
 
 ###### Hot key
@@ -20,7 +22,9 @@ Hot key 引发缓存系统异常，主要是因为突发热门事件发生时，
 
 找到热 key 后，就有很多解决办法了。首先可以将这些热 key 进行分散处理，比如一个热 key 名字叫 hotkey，可以被分散为 hotkey#1、hotkey#2、hotkey#3，......hotkey#n，这 n 个 key 分散存在多个缓存节点，然后 client 端请求时，随机访问其中某个后缀的 hotkey，这样就可以把热 key 的请求打散，避免一个缓存节点过载，如下图所示。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/72/CgoB5l2kSmaALnx3AADSQZPFHOM649.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/72/CgoB5l2kSmaALnx3AADSQZPFHOM649.png"/> 
+
 
 其次，也可以 key 的名字不变，对缓存提前进行多副本+多级结合的缓存架构设计。
 
@@ -42,7 +46,9 @@ Hot key 引发缓存系统异常，主要是因为突发热门事件发生时，
 
 大 key 的业务场景也比较常见。比如互联网系统中需要保存用户最新 1万 个粉丝的业务，比如一个用户个人信息缓存，包括基本资料、关系图谱计数、发 feed 统计等。微博的 feed 内容缓存也很容易出现，一般用户微博在 140 字以内，但很多用户也会发表 1千 字甚至更长的微博内容，这些长微博也就成了大 key，如下图。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/92/CgotOV2kSmaAPcVbAAB3WSWtgpo221.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/92/CgotOV2kSmaAPcVbAAB3WSWtgpo221.png"/> 
+
 
 ###### 解决方案
 
@@ -50,15 +56,21 @@ Hot key 引发缓存系统异常，主要是因为突发热门事件发生时，
 
 * 第一种方案，如果数据存在 Mc 中，可以设计一个缓存阀值，当 value 的长度超过阀值，则对内容启用压缩，让 KV 尽量保持小的 size，其次评估大 key 所占的比例，在 Mc 启动之初，就立即预写足够数据的大 key，让 Mc 预先分配足够多的 trunk size 较大的 slab。确保后面系统运行时，大 key 有足够的空间来进行缓存。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/72/CgoB5l2kSmaAMET9AACrkN0JqFc011.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/72/CgoB5l2kSmaAMET9AACrkN0JqFc011.png"/> 
+
 
 * 第二种方案，如果数据存在 Redis 中，比如业务数据存 set 格式，大 key 对应的 set 结构有几千几万个元素，这种写入 Redis 时会消耗很长的时间，导致 Redis 卡顿。此时，可以扩展新的数据结构，同时让 client 在这些大 key 写缓存之前，进行序列化构建，然后通过 restore 一次性写入，如下图所示。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/92/CgotOV2kSmaAXnFGAAC1hm9Qofg743.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/92/CgotOV2kSmaAXnFGAAC1hm9Qofg743.png"/> 
+
 
 * 第三种方案时，如下图所示，将大 key 分拆为多个 key，尽量减少大 key 的存在。同时由于大 key 一旦穿透到 DB，加载耗时很大，所以可以对这些大 key 进行特殊照顾，比如设置较长的过期时间，比如缓存内部在淘汰 key 时，同等条件下，尽量不淘汰这些大 key。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/72/CgoB5l2kSmeAeayMAAD0DTkVh1k994.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/72/CgoB5l2kSmeAeayMAAD0DTkVh1k994.png"/> 
+
 
 至此，本课时缓存的 7 大经典问题全部讲完。
 
@@ -71,3 +83,4 @@ Hot key 引发缓存系统异常，主要是因为突发热门事件发生时，
 <br />
 
 OK，这节课就讲到这里，下一课时我会分享"Memcached 的原理及特性"，记得按时来听课哈。好，下节课见，拜拜！
+

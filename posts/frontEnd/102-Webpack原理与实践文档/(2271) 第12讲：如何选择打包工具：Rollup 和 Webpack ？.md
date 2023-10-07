@@ -1,6 +1,10 @@
+# 第12讲：如何选择打包工具：Rollup和Webpack？
+
 今天我要跟你介绍另外一款同样十分优秀的打包工具：Rollup。
 
-<Image alt="image (10).png" src="https://s0.lgstatic.com/i/image/M00/12/F6/Ciqc1F7OSZeAPB_DAAFyVhG38TI683.png"/>
+
+<Image alt="image (10).png" src="https://s0.lgstatic.com/i/image/M00/12/F6/Ciqc1F7OSZeAPB_DAAFyVhG38TI683.png"/> 
+
 
 Rollup 是一款 ES Modules 打包器。它也可以将项目中散落的细小模块打包为整块代码，从而使得这些划分的模块可以更好地运行在浏览器环境或者 Node.js 环境。
 
@@ -71,7 +75,9 @@ $ npx rollup
 
 执行 rollup 命令，在不传递任何参数的情况下，这个命令会自动打印出它的帮助信息。具体如下图：
 
-<Image alt="image (11).png" src="https://s0.lgstatic.com/i/image/M00/13/01/CgqCHl7OSaeAFukyAAE1QDF-mHI012.png"/>
+
+<Image alt="image (11).png" src="https://s0.lgstatic.com/i/image/M00/13/01/CgqCHl7OSaeAFukyAAE1QDF-mHI012.png"/> 
+
 
 在这个帮助信息的一开始，就已经告诉我们 rollup 命令的正确用法了：我们应该通过参数指定一个打包入口文件。正确命令如下：
 
@@ -81,7 +87,9 @@ $ npx rollup ./src/index.js
 
 这里指定的打包入口是 src/index.js 文件。再次执行 rollup 命令，具体执行结果如下：
 
-<Image alt="image (12).png" src="https://s0.lgstatic.com/i/image/M00/12/F6/Ciqc1F7OSa-AOq5aAAEb_vSj5jo673.png"/>
+
+<Image alt="image (12).png" src="https://s0.lgstatic.com/i/image/M00/12/F6/Ciqc1F7OSa-AOq5aAAEb_vSj5jo673.png"/> 
+
 
 根据控制台的输出结果，我们发现 Rollup 直接将打包结果打印到控制台中了。
 
@@ -95,7 +103,9 @@ $ npx rollup ./src/index.js --file ./dist/bundle.js
 
 完成以后，我们找到 Rollup 打包输出的文件，具体结果如下：
 
-<Image alt="image (13).png" src="https://s0.lgstatic.com/i/image/M00/12/F6/Ciqc1F7OSbeAHIZBAADh3GsHnjA087.png"/>
+
+<Image alt="image (13).png" src="https://s0.lgstatic.com/i/image/M00/12/F6/Ciqc1F7OSbeAHIZBAADh3GsHnjA087.png"/> 
+
 
 在这个文件中我们的第一印象就是，Rollup 打包结果惊人的简洁，基本上就跟我们手写的代码一样。相比于 Webpack 大量的引导代码和一堆的模块函数，这里的输出结果没有任何多余代码，就是把打包过程中的各个模块按照依赖顺序，先后拼接到了一起。
 
@@ -158,7 +168,9 @@ export default formats.map(format => ({
 
 配置完成之后，我们回到命令行终端，再次运行 Rollup 打包。那这次打包过后，dist 目录下就会生成不同格式的输出结果，如下图所示：
 
-<Image alt="image (14).png" src="https://s0.lgstatic.com/i/image/M00/12/F6/Ciqc1F7OScSAL2axAABjmxxZoIs900.png"/>
+
+<Image alt="image (14).png" src="https://s0.lgstatic.com/i/image/M00/12/F6/Ciqc1F7OScSAL2axAABjmxxZoIs900.png"/> 
+
 
 你可以自己依次去了解一下每种格式的输出结果，其实不同的输出格式大都是为了适配不同的运行环境，并没有什么需要额外理解的地方。
 
@@ -207,7 +219,9 @@ console.log(name, version)
 
 完成以后，我们打开命令行终端，再次运行 Rollup 打包。打包完成以后，我们找到输出的 bundle.js，具体结果如下：
 
-<Image alt="image (15).png" src="https://s0.lgstatic.com/i/image/M00/12/F6/Ciqc1F7OSc6AWooYAABuIh3cPUs738.png"/>
+
+<Image alt="image (15).png" src="https://s0.lgstatic.com/i/image/M00/12/F6/Ciqc1F7OSc6AWooYAABuIh3cPUs738.png"/> 
+
 
 此时你就能看到，package.json 中的 name 和 version 正常被打包进来了，而且其他没用到的属性也都被 Tree-shaking 移除掉了。
 
@@ -298,7 +312,9 @@ import('./logger').then(({ log }) => {
 
 Rollup 内部也会处理代码拆分。不过按照之前的配置方式，这里直接打包会报出一个错误：
 
-<Image alt="image (16).png" src="https://s0.lgstatic.com/i/image/M00/12/F6/Ciqc1F7OSduAVJ9yAAJP3ntcGOo011.png"/>
+
+<Image alt="image (16).png" src="https://s0.lgstatic.com/i/image/M00/12/F6/Ciqc1F7OSduAVJ9yAAJP3ntcGOo011.png"/> 
+
 
 出现这个错误的原因是：在 Rollup 在分包过后会输出多个 JS 文件，需要我们在配置中指定输出的目录，而不是一个具体的文件名，具体配置如下：
 
@@ -318,7 +334,9 @@ export default {
 
 这样的话，再次打包就可以正常输出了。具体输出结果如下：
 
-<Image alt="image (17).png" src="https://s0.lgstatic.com/i/image/M00/12/F6/Ciqc1F7OSeKAKBygAAA30G6xG-U506.png"/>
+
+<Image alt="image (17).png" src="https://s0.lgstatic.com/i/image/M00/12/F6/Ciqc1F7OSeKAKBygAAA30G6xG-U506.png"/> 
+
 
 这次打包过程中，Rollup 就会自动提取动态导入的模块到单独的 JS 文件中了。
 
@@ -326,7 +344,9 @@ export default {
 
 目前采用的输出格式是 es，所以自动分包过后，得到的代码还是使用 ES Modules 实现的动态模块加载，具体输出结果如下：
 
-<Image alt="image (18).png" src="https://s0.lgstatic.com/i/image/M00/13/02/CgqCHl7OSemATtitAAFsfyPbzKs108.png"/>
+
+<Image alt="image (18).png" src="https://s0.lgstatic.com/i/image/M00/13/02/CgqCHl7OSemATtitAAFsfyPbzKs108.png"/> 
+
 
 很明显，这种方式的代码仍然会存在环境兼容性问题：如果在低版本浏览器，这种输出结果是无法正常执行的。
 
@@ -347,7 +367,9 @@ export default {
 
 这样的话，再次打包输出的结果就是采用 AMD 标准组织的代码了，具体如下：
 
-<Image alt="image (19).png" src="https://s0.lgstatic.com/i/image/M00/12/F6/Ciqc1F7OSfGAMQ5VAAIowWpAVAg558.png"/>
+
+<Image alt="image (19).png" src="https://s0.lgstatic.com/i/image/M00/12/F6/Ciqc1F7OSfGAMQ5VAAIowWpAVAg558.png"/> 
+
 
 需要注意一点，这种 AMD 标准在浏览器中也不是直接支持的，也就是说我们还是需要使用一个支持这个标准的库来加载这些输出的模块，例如 [Require.js](https://requirejs.org)，具体使用方式参考：
 
@@ -393,3 +415,4 @@ export default {
 不过这并不是绝对的标准，只是经验法则。因为 Rollup 也可用于构建绝大多数应用程序，而 Webpack 同样也可以构建类库或者框架。
 
 另外随着近几年 Webpack 的发展，Rollup 中的很多优势几乎已经抹平了，所以这种对比慢慢地也就没有太大意义了。
+

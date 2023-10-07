@@ -1,3 +1,5 @@
+# 27分布式事务：如何理解ShardingSphere中对分布式事务的抽象过程？
+
 从今天开始，我们将进入一个全新模块，即**ShardingSphere 分布式事务**。这是一个非常重要的主题，我们将通过三个课时来全面介绍 ShardingSphere 的事务实现机制。
 
 ### ShardingTransactionManagerEngine
@@ -179,7 +181,9 @@ XA 接口是双向的系统接口，在 TransactionManager，以及一个或多�
 
 XA 的整体结构以及 TransactionManager 和 ResourceManager 之间的交互过程参考下图：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/4E/E8/Ciqc1F9fO8mADc8eAAClhM8LyC0111.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/4E/E8/Ciqc1F9fO8mADc8eAAClhM8LyC0111.png"/> 
+  
 XA 协议组成结构图
 
 所有关于分布式事务的介绍中都必然会讲到两阶段提交，因为它是实现 XA 分布式事务的关键。我们知道在两阶段提交过程中，存在协调者和参与者两种角色。在上图中，XA 引入的 TransactionManager 充当着全局事务中的"协调者"角色，而图中的 ResourceManager 相当于"参与者"角色，对自身内部的资源进行统一管理。
@@ -246,7 +250,9 @@ Atomikos、Bitronix 等第三方工具的实现方式。我们会在下一课时
 
 作为总结，我们梳理在 ShardingSphere 中与 XA 两阶段提交相关的核心类之间的关系，如下图所示：
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/4E/E9/Ciqc1F9fO-GALidCAABl39blOv8975.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/4E/E9/Ciqc1F9fO-GALidCAABl39blOv8975.png"/> 
+
 
 #### 2.SeataATShardingTransactionManager
 
@@ -258,12 +264,16 @@ Atomikos、Bitronix 等第三方工具的实现方式。我们会在下一课时
 
 Seata 的整体架构图如下所示：
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/4E/E9/Ciqc1F9fO-uAZyMCAAEoW9aLAuQ436.png"/>  
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/4E/E9/Ciqc1F9fO-uAZyMCAAEoW9aLAuQ436.png"/> 
+  
 Seata 分布式事务组成结构图（来自 Seata 官网）
 
 基于Seata 框架，一个分布式事务的执行流程包含如下五个步骤：
 
-<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/4E/E9/Ciqc1F9fO_WAHRyqAACL8p3Fa_E119.png"/>
+
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/4E/E9/Ciqc1F9fO_WAHRyqAACL8p3Fa_E119.png"/> 
+
 
 我们同样会在下一课时中对这些步骤，以及其中涉及的核心类进行具体展开。
 
@@ -280,3 +290,4 @@ Seata 分布式事务组成结构图（来自 Seata 官网）
 在接下来的两个课时中，我们就将基于今天讲到的很多概念和步骤，从源码角度出发深入剖析分布式事务的实现原理和过程。
 
 [课程评价入口，挑选 5 名小伙伴赠送小礼品\~](https://wj.qq.com/s2/7238084/d702/)
+

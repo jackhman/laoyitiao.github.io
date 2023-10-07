@@ -1,15 +1,21 @@
+# 16StatementHandler：参数绑定、SQL执行和结果映射的奠基者
+
 **StatementHandler 接口是 MyBatis 中非常重要的一个接口**，其实现类完成 SQL 语句执行中最核心的一系列操作，这也是后面我们要介绍的 Executor 接口实现的基础。
 
 StatementHandler 接口的定义如下图所示：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/1F/5B/Cgp9HWBRyPSAPnqwAADa0tXnYqQ008.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/1F/5B/Cgp9HWBRyPSAPnqwAADa0tXnYqQ008.png"/> 
+  
 StatementHandler 接口中定义的方法
 
 可以看到，其中提供了创建 Statement 对象（prepare() 方法）、为 SQL 语句绑定实参（parameterize() 方法）、执行单条 SQL 语句（query() 方法和 update() 方法）、批量执行 SQL 语句（batch() 方法）等多种功能。
 
 下图展示了 MyBatis 中提供的所有 StatementHandler 接口实现类，以及它们的继承关系：
 
-<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image6/M00/1F/64/Cgp9HWBR0IaAXG4BAAGLvM_7w1Y255.png"/>  
+
+<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image6/M00/1F/64/Cgp9HWBR0IaAXG4BAAGLvM_7w1Y255.png"/> 
+  
 StatementHandler 接口继承关系图
 
 今天这一讲我们就来详细分析该继承关系图中每个 StatementHandler 实现的核心逻辑。
@@ -57,7 +63,9 @@ public RoutingStatementHandler(Executor executor, MappedStatement ms, Object par
 
 我们知道不同数据库的自增 id 生成策略并不完全一样。例如，我们常见的 Oracle DB 是通过sequence 实现自增 id 的，如果使用自增 id 作为主键，就需要我们先获取到这个自增的 id 值，然后再使用；MySQL 在使用自增 id 作为主键的时候，insert 语句中可以不指定主键，在插入过程中由 MySQL 自动生成 id。KeyGenerator 接口支持 insert 语句执行前后获取自增的 id，分别对应 processBefore() 方法和 processAfter() 方法，下图展示了 MyBatis 提供的两个 KeyGenerator 接口实现：
 
-<Image alt="图片4.png" src="https://s0.lgstatic.com/i/image6/M00/1F/64/Cgp9HWBR0HmAAYIQAAE2FEB8sfU102.png"/>  
+
+<Image alt="图片4.png" src="https://s0.lgstatic.com/i/image6/M00/1F/64/Cgp9HWBR0HmAAYIQAAE2FEB8sfU102.png"/> 
+  
 KeyGenerator 接口继承关系图
 
 **Jdbc3KeyGenerator 用于获取数据库生成的自增 id（例如 MySQL 那种生成模式）**，其 processBefore() 方法是空实现，processAfter() 方法会将 insert 语句执行后生成的主键保存到用户传递的实参中。我们在使用 MyBatis 执行单行 insert 语句时，一般传入的实参是一个 POJO 对象或是 Map 对象，生成的主键会设置到对应的属性中；执行多条 insert 语句时，一般传入实参是 POJO 对象集合或 Map 对象的数组或集合，集合中每一个元素都对应一次插入操作，生成的多个自增 id 也会设置到每个元素的相应属性中。
@@ -223,8 +231,11 @@ public <E> List<E> query(Statement statement, ResultHandler resultHandler) throw
 
 *** ** * ** ***
 
-[<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/6D/3E/CgqCHl-s60-AC0B_AAhXSgFweBY762.png"/>](https://shenceyun.lagou.com/t/Mka)
+[
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/6D/3E/CgqCHl-s60-AC0B_AAhXSgFweBY762.png"/> 
+](https://shenceyun.lagou.com/t/Mka)
 
 **《Java 工程师高薪训练营》**
 
 实战训练+面试模拟+大厂内推，想要提升技术能力，进大厂拿高薪，[点击链接，提升自己](https://shenceyun.lagou.com/t/Mka)！
+

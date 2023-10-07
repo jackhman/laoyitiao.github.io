@@ -1,3 +1,5 @@
+# 01FlutterDart语法：从JavaScript角度学习Dart
+
 本课时我主要从 JavaScript 角度来讲解如何学习 Dart。
 
 在学习本课时之前，你需要有一定的 JavaScript 基础，比如基础数据类型、函数、基础运算符、类、异步原理和文件库引入等，这也是 JavaScript 的核心知识点。接下来将通过对比与 JavaScript 的差异点来学习 Dart 语言。
@@ -6,7 +8,9 @@
 
 与 JavaScript 相比较，我们整体上看一下图 1 两种语言的对比情况，相似的部分这里就不介绍了，比如 Number 和 String，其使用方式基本一致。下面主要基于两者的差异点逐一讲解，避免混淆或错误使用。
 
-<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/1C/5F/CgqCHl7gWVGAdOndAACK0gUBRW0309.png"/>
+
+<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/1C/5F/CgqCHl7gWVGAdOndAACK0gUBRW0309.png"/> 
+
 
 图 1 Dart 与 JavaScript 基础数据类型对比
 
@@ -265,3 +269,4 @@ import 'package:startup_namer/pages/homepage.dart';
 下一课时，我将介绍 Dart 的事件循环机制，掌握了其核心运行机制原理，才能编写出更高效、更有质量的代码。
 
 点击这里下载本课时源码，Flutter 专栏，源码地址：<https://github.com/love-flutter/flutter-column>
+

@@ -1,3 +1,5 @@
+# 第49讲：Future的主要功能是什么？
+
 在本课时我们将讲解 Future 的主要功能是什么。
 
 ### Future 类
@@ -48,7 +50,9 @@ get 方法最主要的作用就是获取任务执行的结果，该方法在执�
 
 下面用图的形式让过程更清晰：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6A/F4/Cgq2xl5WX0OAUkXdAADovQH3upQ950.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6A/F4/Cgq2xl5WX0OAUkXdAADovQH3upQ950.png"/> 
+
 
 在图中，右侧是一个线程池，线程池中有一些线程来执行任务。重点在图的左侧，可以看到有一个 submit 方法，该方法往线程池中提交了一个 Task，这个 Task 实现了 Callable 接口，当我们去给线程池提交这个任务的时候，调用 submit 方法会立刻返回一个 Future 类型的对象，这个对象目前内容是空的，其中还不包含计算结果，因为此时计算还没有完成。
 
@@ -200,7 +204,9 @@ public interface RunnableFuture<V> extends Runnable, Future<V> {
 
 可以看出，它是 extends Runnable 和 Future 这两个接口的，它们的关系如下图所示：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6A/F4/Cgq2xl5WX1SADhlVAAC-Fertc-E743.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6A/F4/Cgq2xl5WX1SADhlVAAC-Fertc-E743.png"/> 
+
 
 既然 RunnableFuture 继承了 Runnable 接口和 Future 接口，而 FutureTask 又实现了 RunnableFuture 接口，所以 FutureTask 既可以作为 Runnable 被线程执行，又可以作为 Future 得到 Callable 的返回值。
 
@@ -250,3 +256,4 @@ class Task implements Callable<Integer> {
 ### 总结
 
 最后对本课时进行一下总结，在本课时中，我们首先在宏观上讲解了 Future 的作用，然后讲解了 Callable 和 Future 的关系，接着对于 Future 的各个方法进行了详细介绍，最后还给出了 FutureTask 这种方法来创建 Future 的用法。
+

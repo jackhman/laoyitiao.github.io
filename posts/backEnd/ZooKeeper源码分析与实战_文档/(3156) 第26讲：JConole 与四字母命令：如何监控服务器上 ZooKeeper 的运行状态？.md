@@ -1,10 +1,14 @@
+# 第26讲：JConole与四字母命令：如何监控服务器上ZooKeeper的运行状态？
+
 在上节课中我们学习了在生产环境中，如何部署 ZooKeeper 集群服务。为了我们的程序服务能够持续稳定地对外提供服务，除了在部署的时候尽量采用分布式、集群服务等方式提高 ZooKeeper 服务的可靠性外，在服务上线运行的时候，我们还可以通过对 ZooKeeper 服务的运行状态进行监控，如运行 ZooKeeper 服务的生产服务器的 CPU 、内存、磁盘等使用情况来达到目的。在系统性能达到瓶颈的时候，可以增加服务器资源，以保证服务的稳定性。
 
 ### JConsole 介绍
 
 通常使用 Java 语言进行开发的技术人员对 JConsole 并不陌生。JConsole 是 JDK 自带的工具，用来监控程序运行的状态信息。如下图所示，我们打开系统的控制终端，输入 JConsole 就会弹出一个这样的监控界面。
 
-<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/3B/72/CgqCHl8kAy2ANt38AADolBOTa2s256.png"/>
+
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/3B/72/CgqCHl8kAy2ANt38AADolBOTa2s256.png"/> 
+
 
 ### JConsole 使用
 
@@ -28,7 +32,9 @@ JMX 可以跨越一系列异构操作系统平台、系统体系结构和网络�
 
 配置完 JMX 的开启功能后，接下来我们通过系统终端启动 JConsole ，再在弹出的对话框中选择远程连接，然后在远程连接的地址中输入要监控的 ZooKeeper 服务器地址，之后就可以通过 JConsole 监控 ZooKeeper 服务器了。
 
-<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/3B/67/Ciqc1F8kA0CAF9c9AACQw_N29Fg373.png"/>
+
+<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/3B/67/Ciqc1F8kA0CAF9c9AACQw_N29Fg373.png"/> 
+
 
 ### 四字母命令
 
@@ -163,3 +169,4 @@ public class ZooKeepInfo(){
 本节课我们主要学习了 ZooKeeper 集群在日常生产环境中的维护问题。首先介绍了 ZooKeeper 集群通过 JMX 方式进行远程监控的方法，然后学习了 JConsole 以及四字母命令的使用方式，最后介绍了在实际工作中，面对大规模的 ZooKeeper 集群时，我们如何做到自动化的获取监控数据。
 
 本节课在实现自动化的数据获取时，利用了一个开源的性能监控工具 Zabbix 。除了课中提到的一些性能监控参数外，我们也可以利用 Zabbix 监控一些和自身业务相关的数据信息，比如在对数据节点的创建数量有严格要求的情况下，我们可以编写相关的脚本对某一个数据节点下子节点的创建个数进行监控，当该子节点个数大于我们设置的某一个临界值时，会给出报警或禁止该节点再进行创建操作。
+

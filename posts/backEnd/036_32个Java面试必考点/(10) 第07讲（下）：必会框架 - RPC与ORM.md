@@ -1,10 +1,14 @@
+# 第07讲（下）：必会框架-RPC与ORM
+
 ###### 详解 Netty
 
 下面我们来看 Netty 相关的知识点，如下图所示。
 
 <br />
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/C8/CgoB5l14qRCAXHEcAAF5eJmBAIE201.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/C8/CgoB5l14qRCAXHEcAAF5eJmBAIE201.png"/> 
+
 
 ###### 特点
 
@@ -40,7 +44,9 @@ Netty 线程模型采用"服务端监听线程"和"IO 线程"分离的方式，�
 
 <br />
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/E8/CgotOV14qRCAOMXfAACEn9bOiF8679.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/E8/CgotOV14qRCAOMXfAACEn9bOiF8679.png"/> 
+
 
 Worker 线程组负责 IO 处理。线程组由 EventLoopGroup 实现，其中包含了多个 EventLoop 事件处理器，每个 EventLoop 包含一个处理线程。通常情况下在 NIO 非阻塞模式下，Netty 为每个 Channel 分配一个 EventLoop，并且它的整个生命周期中的事件都由这个 EventLoop 来处理。一个 EventLoop 可以绑定多个 Channel。
 
@@ -56,7 +62,9 @@ RPC 是远程过程调用的简写，RPC 与 HTTP 一样都可以实现远程服
 
 <br />
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/C8/CgoB5l14qRCAD22_AAAwyeZIb9A096.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/C8/CgoB5l14qRCAD22_AAAwyeZIb9A096.png"/> 
+
 
 为了保持较高的性能，Client 端一般都是直接请求远端的 Server 节点。因此，RPC 框架需要自动的服务注册与发现的能力，上方的绿色的注册中心就是用来动态维护可用服务节点信息的模块。
 
@@ -72,7 +80,9 @@ RPC 是远程过程调用的简写，RPC 与 HTTP 一样都可以实现远程服
 
 <br />
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/E8/CgotOV14qRGALP4IAACKCkAICAg250.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/E8/CgotOV14qRGALP4IAACKCkAICAg250.png"/> 
+
 
 Dubbo 是阿里开源的 RPC 框架，提供完善的服务治理能力，可以快速为 Java 服务提供 RPC 能力。Dubbo 提供了随机、轮询、最少调用优先等多种负载均衡策略，提供对 ZK 等多种注册中心等支持，能够自动完成服务的注册与发现。Dubbo 提供可视化的管理后台，方便对服务状态进行监控和管理。Dubbo 的数据通信默认使用我 Netty 来实现，拥有非常不错的性能。
 
@@ -88,7 +98,9 @@ Google 开源的 gRPC。gRPC 默认使用 Protobuf 进行消息序列化，非�
 
 <br />
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/C8/CgoB5l14qRGATSOHAAF3bP90vkw672.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/C8/CgoB5l14qRGATSOHAAF3bP90vkw672.png"/> 
+
 
 MyBatis 的优点：
 
@@ -150,7 +162,9 @@ MyBatis 的插件机制是通过拦截器组成责任链来对 Executor、Statem
 
 <br />
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/E8/CgotOV14qRGANGszAABEHrKX1zU413.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/E8/CgotOV14qRGANGszAABEHrKX1zU413.png"/> 
+
 
 在执行 SQL 时，首先会从 SqlSessionFactory 中创建一个新的 SqlSession。
 
@@ -200,7 +214,9 @@ StatementHandler 调用 ParameterHandler 的 setParameters 方法，把用户传
 
 <br />
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/C8/CgoB5l14qRGAfS0KAABYryfVTDc376.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/C8/CgoB5l14qRGAfS0KAABYryfVTDc376.png"/> 
+
 
 第 1 题，除了说出 SSH 框架是 Struct+Spring+Hibernate，SSM 是指的 Spring MVC+Spring+MyBatis，另外要重点说一下 SpringMVC 和 Struts 的区别，以及 MyBatis 和 Hibernate 的区别。
 
@@ -212,7 +228,9 @@ StatementHandler 调用 ParameterHandler 的 setParameters 方法，把用户传
 
 <br />
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/E8/CgotOV14qRGAavpoAABhTu0HeK8332.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/E8/CgotOV14qRGAavpoAABhTu0HeK8332.png"/> 
+
 
 第 7 题，题目给出的就是执行顺序。
 
@@ -233,4 +251,5 @@ StatementHandler 调用 ParameterHandler 的 setParameters 方法，把用户传
 下一课时将重点讲解 Memcache 和 Redis 相关的知识。
 
 <br />
+
 

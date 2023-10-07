@@ -1,3 +1,5 @@
+# 第34讲：实现线程级别监控，轻松搞定ThreadDump
+
 本课时我们来学习 Thread Dump 功能。
 
 ### 背景
@@ -8,7 +10,9 @@
 
 SkyWalking 已经满足了我们日常监控和运维的绝大多数需求，但是并没有覆盖到所有运维场景。假设我们发现请求在某个服务中的耗时特别长，远远超过了预期，例如开篇示例中的 demo-webapp ，如下图所示，在 HelloWorldController 在开始调用 Dubbo 服务的前后，会有耗时超过 1s 以上情况：
 
-<Image alt="耗时高Trace截图.png" src="https://s0.lgstatic.com/i/image/M00/32/07/CgqCHl8NcY-AR8DqAAE4jw3ZU4w560.png"/>
+
+<Image alt="耗时高Trace截图.png" src="https://s0.lgstatic.com/i/image/M00/32/07/CgqCHl8NcY-AR8DqAAE4jw3ZU4w560.png"/> 
+
 
 此时，SkyWalking 的 Trace 信息只能提示我们 HelloWorldController.hello() 方法中有一些耗时的逻辑，但是耗时的具体原因是什么无法准确地说明。实际的业务逻辑比较复杂，请求处理耗时高的原因也可能千奇百怪，例如（可能但不限于）：
 
@@ -32,7 +36,9 @@ SkyWalking 已经满足了我们日常监控和运维的绝大多数需求，但
 
 为了解决在上述场景下手动 Thread Dump 带来的问题，本课时将为 SkyWalking 添加 Thread Dump 功能。下面先说明一下 Thread Dump 的需求：一般场景中，用户会通过一个外网的入口请求我们的接入层（例如机房的 Nginx 集群），然后接入层会进行负载均衡，将请求发送到后端的 API 服务集群进行处理（例如 Tomcat 集群），API 服务会根据业务需求调用后端的 RPC 服务（例如 Dubbo、gRPC 等），在 RPC 服务中会调用 Service 层、DAO 层等完成存储的读写或是再次调用其他 RPC 服务。单个请求的路径如下图所示：
 
-<Image alt="image (16).png" src="https://s0.lgstatic.com/i/image/M00/32/07/CgqCHl8NcbiATQCtAAFX5iKjEXQ354.png"/>
+
+<Image alt="image (16).png" src="https://s0.lgstatic.com/i/image/M00/32/07/CgqCHl8NcbiATQCtAAFX5iKjEXQ354.png"/> 
+
 
 为了实现自动 Thread Dump 功能，我们会在入口处为 Http 请求追加一个 Http Header（Key 为 ENABLE_DUMP_FLAG，Value 为"true"），作为是否进行 Thread Dump 的标识。如果请求带有该标识，线程在处理该请求时每隔一段时间（例如 300ms）会被 dump 一次，这些 dump 下来的信息会记录到请求的 Trace 中，一并发送给 SkyWalking OAP 进行持久化存储。在后续通过 query-graphql-plugin 插件查询某条 Trace 信息的时候，可以将这些 dump 信息一起查询出来，在 SkyWalking Rocketbot UI 进行展示时，可以根据 Thread Dump 的时间将其显示在相应的 Span 处，当然，也可以在 OAP 接收到 Trace 数据时对其中的 Thread Dump 信息进出分析并完成与 Span 的关联。
 
@@ -63,7 +69,9 @@ for (ThreadInfo threadInfo : threadInfos) {
 
 从 demo-webapp 这个 API 服务处理"/hello/xxx"接口请求的 Trace 中可以看到，请求首先到达了 Spring Boot 内嵌的 Tomcat 容器，然后走到 Spring Container 中调用 HelloWorldController.hello() 方法 ，最后调用 demo-provider 这个 Dubbo 服务。下图展示了请求的全过程、涉及插件以及插件做的事情：
 
-<Image alt="image (17).png" src="https://s0.lgstatic.com/i/image/M00/32/07/CgqCHl8NcdWAM9Y7AAHmR7mU2eY385.png"/>
+
+<Image alt="image (17).png" src="https://s0.lgstatic.com/i/image/M00/32/07/CgqCHl8NcdWAM9Y7AAHmR7mU2eY385.png"/> 
+
 
 请求的第一站是 Tomcat ，我们可以在 tomcat-7.x-8.x-plugin 插件创建 TracingContext 之前将请求 Header 中携带的 ENABLE_DUMP_FLAG 标记提取出来，并记录到 Trace 的 RuntimeContext 上下文中，这样就可以让 ENABLE_DUMP_FLAG 标记随 Trace 在当前线程继续传播了，实现如下：
 
@@ -96,7 +104,9 @@ private void postConstruct() {
 
 下面我们需要提供了一个 TracingContextPostConstructListener 接口的实现 ------ ThreadDumpManager，它同时实现了 BootService、TracingContextListener、TracingContextPostConstructListener 三个接口，如下图所示，下面将详细分析该实现针对每个接口的实现逻辑：
 
-<Image alt="ThreadDumpManager继承关系图.png" src="https://s0.lgstatic.com/i/image/M00/31/FC/Ciqc1F8NcZ6AU8e4AABDtSvDmRA656.png"/>
+
+<Image alt="ThreadDumpManager继承关系图.png" src="https://s0.lgstatic.com/i/image/M00/31/FC/Ciqc1F8NcZ6AU8e4AABDtSvDmRA656.png"/> 
+
 
 首先在 onComplete() 方法（对 BootService 接口的实现）中会启动一个单独的线程执行一个定时任务，该定时任务主要做两件事：
 
@@ -407,7 +417,9 @@ mvn package -Dcheckstyle.skip -DskipTests
 
 本课时最后将通过一张图来总结 Thread Dump 功能的关键点：
 
-<Image alt="image (18).png" src="https://s0.lgstatic.com/i/image/M00/31/FD/Ciqc1F8NcpiAEXK3AANCpmKvbm8849.png"/>
+
+<Image alt="image (18).png" src="https://s0.lgstatic.com/i/image/M00/31/FD/Ciqc1F8NcpiAEXK3AANCpmKvbm8849.png"/> 
+
 
 * Http 请求进入 demo-webapp 之后，tomcat-7.x-8.x-plugin 插件会从其 Header 中查找 ENABLE_DUMP_FLAG 标记并记录到 RuntimeContext 中。之后通过 ContextManager 创建此次请求对应的 TracingContext 对象以及 EntrySpan，在完成 TracingContext 的初始化之后会触发 TracingContextPostConstructListener，即 ThreadDumpManager，记录需要进行 dump 的线程 ID。后续请求执行过程中会调用 create\*Span() 方法创建 Span，同时 ThreadDumpManager 中的后台线程也会定时 dump 线程信息，如图中（3）和（4）处所示。
 
@@ -420,3 +432,4 @@ mvn package -Dcheckstyle.skip -DskipTests
 * OAP 服务中的 query-graphql-plugin 插件负责处理查询 Trace 的请求，这里会从 SegmentObject 中获取全部 ThreadDump 填充到 Trace 中返回给用户。
 
 好了，本专栏的全部内容就讲完了，最后的彩蛋我将带你回顾 SkyWalking 架构并展望未来。
+

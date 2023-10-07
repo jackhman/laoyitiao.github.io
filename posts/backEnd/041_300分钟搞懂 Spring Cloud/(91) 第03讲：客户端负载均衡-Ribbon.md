@@ -1,3 +1,5 @@
+# 第03讲：客户端负载均衡-Ribbon
+
 本课时我们主要学习：集中式负载均衡、客户端负载均衡、Ribbon 主要组件及使用方法、负载均衡策略、饥饿加载模式等内容。  
 
 负载均衡
@@ -18,7 +20,9 @@
 集中式负载均衡
 -------
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/76/CgoB5l2Nux-AfPsoAADd9v--bG8534.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/76/CgoB5l2Nux-AfPsoAADd9v--bG8534.png"/> 
+
 
 首先我们来看下集中式负载均衡，如上图所示，就是集中式负载均衡的工作原理，负载均衡器负责维护需要负载的服务实例信息，如：192.168.1.1:8080 和 192.168.1.2:8080 这两个实例。
 
@@ -29,7 +33,9 @@
 客户端负载均衡
 -------
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/96/CgotOV2Nux-AJFXQAADoD2hUjBg382.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/96/CgotOV2Nux-AJFXQAADoD2hUjBg382.png"/> 
+
 
 如上图所示，为客户端负载均衡，客户端负载均衡需要自己维护服务实例的信息，然后通过某些负载均衡算法，从实例中选取一个实例，直接进行访问。
 
@@ -47,7 +53,9 @@ Ribbon 是由 Netflix 发布的负载均衡器，它有助于控制 HTTP 和 TCP
 
 我们使用 Ribbon 主要用于负载均衡场景，实现一个通用的负载均衡框架，则需要很多组件支持，Ribbon 中就提供了这些组件，有了这些组件，整个框架的扩展性便会更好，更灵活，我们可以根据业务需求，选择是否要自定义对应的组件来满足特定场景下的需求。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/76/CgoB5l2Nux-AKiebAAF1UKNOoxU513.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/76/CgoB5l2Nux-AKiebAAF1UKNOoxU513.png"/> 
+
 
 如上图所示为 Ribbon 中的主要组件，以及每个组件下目前已有的一些实现，但这里并没有把所有的内容都整理出来，需要课后自己去补充。
 
@@ -55,7 +63,9 @@ Ribbon 是由 Netflix 发布的负载均衡器，它有助于控制 HTTP 和 TCP
 
 在这个选择服务实例的过程中，服务实例信息是怎么来的呢？
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/96/CgotOV2Nux-AO2PcAAEcl4M1Zi4629.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/96/CgotOV2Nux-AO2PcAAEcl4M1Zi4629.png"/> 
+
 
 这就需要一个服务实例的存储组件来支持，ServerList 就是这个组件。存储分为静态和动态两种方式。静态存储需要事先配置好固定的服务实例信息，动态存储需要从注册中心获取对应的服务实例信息。
 
@@ -75,7 +85,9 @@ ILoadBalancer 就上场了，ILoadBalancer 中定义了软件负载均衡操作�
 
 各组件作用如下图所示。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/76/CgoB5l2NuyCALoefAAAdV1DlSHY088.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/76/CgoB5l2NuyCALoefAAAdV1DlSHY088.png"/> 
+
 
 * ILoadBalancer：定义一系列的操作接口，比如选择服务实例。
 
@@ -102,11 +114,15 @@ Ribbon 的使用方式主要分为下面这三种，
 
 ### 原生 API
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/96/CgotOV2NuyCAPft3ABW4LlkHoJg474.gif"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/96/CgotOV2NuyCAPft3ABW4LlkHoJg474.gif"/> 
+
 
 Ribbon 原生 API 使用非常方便，首先我们需要配置一个服务列表，数据格式为 IP + PORT，你可以固定写几个服务列表，也可以从别处读取，比如注册中心。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/76/CgoB5l2NuyCAf1N5AC_hQLUg1TE978.gif"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/76/CgoB5l2NuyCAf1N5AC_hQLUg1TE978.gif"/> 
+
 
 然后构建一个负载实例，将服务列表传入，再指定对应的负载均衡策略，RandomRule 是随机策略。具体的应用逻辑写在 call 方法里，call 方法的参数是 Server 对象，Server 也就是我们第一步构建的服务列表信息，得到 Server 后就可以获取到对应的 IP 和端口，然后进行接口的调用。
 
@@ -116,27 +132,39 @@ Ribbon 原生 API 使用非常方便，首先我们需要配置一个服务列�
 
 RestTemplate 是 Spring 提供的用于访问 Rest 服务的客户端，RestTemplate 提供了多种便捷访问远程 HTTP 服务的方法，能够大大提高客户端的编写效率。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/96/CgotOV2NuyCAMUxsABDh3ktKji8118.gif"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/96/CgotOV2NuyCAMUxsABDh3ktKji8118.gif"/> 
+
 
 将 RestTemplate 和 Ribbon 整合起来，只需要在配置 RestTemplate 实例的时候，加一个 @LoadBalanced 的注解，这样 RestTemplate 在调用接口时，就不需要用固定的 IP 加端口的方式调用接口，而是可以用服务名称的方式进行接口的调用，自动具备客户端负载均衡的效果。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/76/CgoB5l2NuyGAcnCEACln-yTNlAo555.gif"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/76/CgoB5l2NuyGAcnCEACln-yTNlAo555.gif"/> 
+
 
 这里调用了 user-service 的 /user/get 接口，user-service 可以用配置的方式指定对应的实例信息，打开配置文件，listOfServers 配置了 2 个实例信息。RestTemplate 在调用的时候会用 Ribbon 进行实例的选择，然后发起调用。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/96/CgotOV2NuyGAXnx_AB8qt3FKbTI249.gif"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/96/CgotOV2NuyGAXnx_AB8qt3FKbTI249.gif"/> 
+
 
 手动配置 listOfServers 可以让我们在某些场景下更加方便的进行调试工作，在正式的使用中，所有的服务实例信息都是从注册中心拉取的，也就是从我们前面讲的 Eureka 中获取。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/96/CgotOV2NuyKAcy0OACvKAp3p87g274.gif"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/96/CgotOV2NuyKAcy0OACvKAp3p87g274.gif"/> 
+
 
 需要从 Eureka 中获取实例信息，项目中就必须要集成 Eureka Client，首先在 pom 中增加 spring-cloud-starter-netflix-eureka-client 的依赖，然后配置 defaultZone=http://localhost:8761/eureka/。配置完成后 listOfServers 的值就会从 Eureka 中进行获取了。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/7B/CgoB5l2Nwf2AKecGAABixVUmyyU627.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/7B/CgoB5l2Nwf2AKecGAABixVUmyyU627.png"/> 
+
 
 RestTemplate 能够直接使用服务名称调用对应的接口，功劳得归功于 @LoadBalanced。如果没有 @LoadBalanced，RestTemplate 是不具备服务名调用的方式的。那么这个小小的注解，为何如此厉害，我们来深入分析一下它的原理。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/96/CgotOV2NuyOAAFR8AG7ge7vxxeU097.gif"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/96/CgotOV2NuyOAAFR8AG7ge7vxxeU097.gif"/> 
+
 
 在源码 LoadBalancerAutoConfiguration 中，注入了所有加了 @LoadBalanced 注解的 restTemplate的Bean 实例，将 restTemplate的Bean 实例设置到 RestTemplateCustomizer 中，然后给 restTemplate 设置 LoadBalancerInterceptor 拦截器。这样 restTemplate 在调用的时候会进入 LoadBalancerInterceptor 拦截器，拦截器中的 createRequest 中通过 ServiceRequestWrapper 来执行替换 URI 的逻辑，ServiceRequestWrapper 中将 URI 的获取交给 LoadBalancerClient#reconstructURI 方法。整理的流程就是这样，更细节的点大家课后按照我的思路去梳理一遍。
 
@@ -145,7 +173,9 @@ RestTemplate 能够直接使用服务名称调用对应的接口，功劳得归�
 
 ### 内置负载均衡策略
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/76/CgoB5l2NuyOAC-DyAAE1XQ3-tTg353.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/76/CgoB5l2NuyOAC-DyAAE1XQ3-tTg353.png"/> 
+
 
 Ribbon 作为一款优秀的客户端负载均衡框架，内置了很多经典实用的算法，可以直接拿来用。这里只介绍几个比较常用的，其他的不再一一介绍。
 
@@ -161,7 +191,9 @@ BestAvailableRule 选择一个最小的并发请求 server，如果有 A、B 两
 
 ### 自定义负载均衡算法
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/96/CgotOV2NuyOARYP2AAAR2bNgmS4386.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/96/CgotOV2NuyOARYP2AAAR2bNgmS4386.png"/> 
+
 
 自定义负载均衡算法有实现和继承两种方式，实现方式需要实现 Irule 接口，实现 choose 方法的逻辑。继承方式需要继承 AbstractLoadBalancerRule 类，也需要实现 choose 方法的逻辑。
 
@@ -169,7 +201,9 @@ AbstractLoadBalancerRule 类本身也实现了 Irule 接口。
 
 当你有自定义需求时，你得知道怎么去自定义，如果不会，那么就通过参考其他算法类源码的方式来进行，学习固然要努力，但是学习方式更为重要。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/9A/CgotOV2NwMuAQnJZACz3yxqWFgk226.gif"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/9A/CgotOV2NwMuAQnJZACz3yxqWFgk226.gif"/> 
+
 
 打开 RandomRule 的源码，最基本的最基本的就是继承了 AbstractLoadBalancerRule，然后就是实现 choose 方法的逻辑了，核心的功能是通过 ILoadBalancer 获取可用的服务信息，基于服务数量产生一个一定范围内的随机数，通过随机数获取对应的服务信息，这就是随机算法。
 
@@ -177,11 +211,15 @@ AbstractLoadBalancerRule 类本身也实现了 Irule 接口。
 
 自定义完成后就剩下如何让 Ribbon 使用的我们自定义的算法，有两种方式：
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/7A/CgoB5l2NwLaAFKRuACbqdLG-Vjo049.gif"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/7A/CgoB5l2NwLaAFKRuACbqdLG-Vjo049.gif"/> 
+
 
 1. 通过在代码中直接配置的方式，创建一个 BeanConfiguration 用于配置 Ribbon，通过 @Bean 实例化自定义的算法类，然后定义一个 RibbonClientConfig，类上加一个 @RibbonClient 的注解来定义 Ribbon 的信息，name 也就是要调用的服务名，configuration 配置成前面定义的 BeanConfiguration，这样就为指定的 Ribbon Client 自定义了配置信息，配置中定义了自定义的算法，Ribbon 会使用这个算法来进行服务实例的选择。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/9A/CgotOV2NwKaAXIZQABkpahTgx3c920.gif"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/9A/CgotOV2NwKaAXIZQABkpahTgx3c920.gif"/> 
+
 
 1. 通过纯配置文件的方式来指定算法类，格式为 \<clientName\>.ribbon.NFLoadBalancerRuleClassName = 算法类的包名 + 类名，推荐使用这种方式，简单方便。
 
@@ -222,7 +260,9 @@ enabled 要设置成 true，clients 表示要加载的客户端，也就是我�
 
 如果在面试过程中，面试官刚好问了你这个问题，你将配置的内容都回答了，然后面试官进一步追问，这个配置是在哪个类中体现的？这种问题很明显面试官是在考察你有没有看过源码，有没有去对这个问题做深入的了解。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/9A/CgotOV2NwJyAM4RiAEXTgUzJhZ8504.gif"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/9A/CgotOV2NwJyAM4RiAEXTgUzJhZ8504.gif"/> 
+
 
 对应的代码在 RibbonAutoConfiguration 中，找到 ribbonApplicationContextInitializer 这个方法，通过 @ConditionalOnProperty 注解来指定启用的配置，进入 RibbonApplicationContextInitializer 中，在 onApplicationEvent 方法中会进行初始化，也就是循环的根据每个客户端获取上下文。
 
@@ -231,7 +271,9 @@ enabled 要设置成 true，clients 表示要加载的客户端，也就是我�
 配置方式自定义 Ribbon Client
 ---------------------
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/76/CgoB5l2NuyOAYdoKAABBhuH7qKg404.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/93/76/CgoB5l2NuyOAYdoKAABBhuH7qKg404.png"/> 
+
 
 从 1.2.0 版本开始，支持通过属性配置的方式来定义 Ribbon Client。配置格式也是标准的，clientName 就是服务名称，比如 user-service，当我们需要配置一个自定义算法的时候，那就是 user-service.ribbon.NFLoadBalancerRuleClassName = 算法类的路径。
 
@@ -242,4 +284,5 @@ enabled 要设置成 true，clients 表示要加载的客户端，也就是我�
 下一课时我将分享"服务容错保护-Hystrix"，记得按时来听课哈。好，下节课见，拜拜！
 
 <br />
+
 

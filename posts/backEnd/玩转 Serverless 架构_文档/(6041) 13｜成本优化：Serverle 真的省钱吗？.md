@@ -1,3 +1,5 @@
+# 13｜成本优化：Serverle真的省钱吗？
+
 今天这一讲我想和你讨论一下 Serverless 应用的成本优化。
 
 我们一直说 Serverless 可以节省成本，各大云厂商也是这样宣传的。可能一些同学会有疑惑：Serverless 真的省钱吗？到底有多省钱呢？之前有同学给了我一个数据：同规格（1G内存）情况下，函数一小时的费用比云服务器一小时的费用大约要高 2.5 倍，所以 Serverless 云计算要比传统的 Serverful 云计算贵得多。那么实际情况是什么样呢？
@@ -98,10 +100,14 @@ FaaS 平台的计费模式和收费标准最早是 AWS Lambda 提出来的，各
 
 为函数实例设置并发，不仅能提升函数性能，还能节省函数成本。因为单个函数实例可以支持更多请求，多个请求共用一个函数实例，执行时间是从第一个请求开始，到最后一个请求结束为止，这样并发处理多个请求就能大幅降低成本。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/94/41/CgqCHmAXusuAPUuzAAZNxvjF9MA299.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/94/41/CgqCHmAXusuAPUuzAAZNxvjF9MA299.png"/> 
+  
 单实例单并发
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/94/41/CgqCHmAXutWATIu3AAes0bVKSe4361.png"/>  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/94/41/CgqCHmAXutWATIu3AAes0bVKSe4361.png"/> 
+  
 单实例多并发
 
 如图所示，单实例单并发情况下，T1-T2，T3-T4 之间都会计费，并且计费周期是两个函数的执行时长。而在单实例多并发的情况下，只计算 T1-T4 的整体时间，并且一个实例可以同时处理多个请求，最终按执行时间最长的请求计算执行耗时。假设单函数实例并发为 10，理论上可以节省 10 倍成本。
@@ -112,7 +118,9 @@ FaaS 平台的计费模式和收费标准最早是 AWS Lambda 提出来的，各
 
 例如在生产环境中，如果应用流量一直很高且比较平稳，对延迟也比较敏感，通常你可以使用预留模式，预留一定函数实例，这样就能极大减少冷启动，从而降低成本。而日常测试或离线处理数据时，函数可能是临时大量执行，这时就可以使用按量付费，在不需要执行函数时就不会消耗任何资源，这样就能保持较高的资源利用率，进而降低成本。
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image2/M01/0C/2E/Cip5yGAXuuKAZuKXAAbyIr7ir5M253.png"/>  
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image2/M01/0C/2E/Cip5yGAXuuKAZuKXAAbyIr7ir5M253.png"/> 
+  
 预留资源
 
 如图所示，这是预留资源的情况，T1 时刻用户创建预留资源，这时 FaaS 平台开始创建函数实例，同时开始计费，之后所有请求都会使用预留的函数实例，T2 时刻用户释放预留实例，计费结束。
@@ -170,3 +178,4 @@ FaaS 平台的计费模式和收费标准最早是 AWS Lambda 提出来的，各
 * 我们可以通过提升 Serverless 函数的性能来优化成本。
 
 那么除了今天的内容，你还知道哪些成本优化的方案呢？欢迎在评论区留言。我们下一讲见。
+

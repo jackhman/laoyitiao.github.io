@@ -1,3 +1,5 @@
+# 14熔断之器：如何使用SpringCloudCircuitBreaker实现服务容错？（下）
+
 在上一课时中，我们系统介绍了 Hystrix 所提供了服务隔离、服务容错和服务回退功能。我们发现这个框架确实非常强大，能够灵活处理服务容错的各种场景。事实上，业界也存在一批类似 Hystrix 的框架。Spring Cloud 基于这些框架的共性，专门抽象并开发了一个 Spring Cloud Circuit Breaker 框架。在今天的课程中，我们将引入 Spring Cloud Circuit Breaker 框架，并给出使用这个框架来满足各种服务容错需求的实现方法。
 
 ### 理解 Spring Cloud Circuit Breaker 中的熔断器抽象
@@ -306,3 +308,4 @@ hystrix:
 这里给你留一道思考题：Spring Cloud Circuit Breaker 是如何对各种不同的 Circuit Breaker 的使用方法进行统一抽象的？
 
 讲完 Spring Cloud Circuit Breaker 的使用方法，我们有必要对熔断器的实现原理做一定的展开。作为一款强大而完善的熔断器工具，Hystrix 内部使用了滑动窗口机制来对运行时度量数据进行采集和计算，从而实现自动熔断。下一课时，就让我们继续围绕 Hystrix 的内部结构和实现机制展开深入分析。
+

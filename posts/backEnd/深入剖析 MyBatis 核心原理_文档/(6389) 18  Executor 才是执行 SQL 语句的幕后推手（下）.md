@@ -1,6 +1,10 @@
+# 18Executor才是执行SQL语句的幕后推手（下）
+
 在上一讲中，我们首先介绍了模板方法模式的相关知识，然后介绍了 Executor 接口的核心方法，最后分析了 BaseExecutor 抽象类是如何利用模板方法模式为其他 Executor 抽象了一级缓存和事务管理的能力。这一讲，我们再来介绍剩余的四个重点 Executor 实现。
 
-<Image alt="图片13.png" src="https://s0.lgstatic.com/i/image6/M00/26/66/CioPOWBa7q-Aa_fiAAF6eDPI3C0273.png"/>  
+
+<Image alt="图片13.png" src="https://s0.lgstatic.com/i/image6/M00/26/66/CioPOWBa7q-Aa_fiAAF6eDPI3C0273.png"/> 
+  
 Executor 接口继承关系图
 
 ### SimpleExecutor
@@ -212,7 +216,9 @@ private void flushPendingEntries() {
 
 * 事务 T2 会查询记录 A。
 
-<Image alt="图片12.png" src="https://s0.lgstatic.com/i/image6/M01/26/66/CioPOWBa7oCAaZuSAAF5PEDTpm8320.png"/>  
+
+<Image alt="图片12.png" src="https://s0.lgstatic.com/i/image6/M01/26/66/CioPOWBa7oCAaZuSAAF5PEDTpm8320.png"/> 
+  
 两事务并发操作的示意图
 
 如果事务 T1 查询记录 A 时，就将 A 对应的结果对象写入二级缓存，那在事务 T2 查询记录 A 时，会从二级缓存中直接拿到结果对象。此时的事务 T1 仍然未提交，也就出现了"脏读"。
@@ -306,8 +312,11 @@ public <E> List<E> query(MappedStatement ms, Object parameterObject, RowBounds r
 
 *** ** * ** ***
 
-[<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/6D/3E/CgqCHl-s60-AC0B_AAhXSgFweBY762.png"/>](https://shenceyun.lagou.com/t/Mka)
+[
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/6D/3E/CgqCHl-s60-AC0B_AAhXSgFweBY762.png"/> 
+](https://shenceyun.lagou.com/t/Mka)
 
 **《Java 工程师高薪训练营》**
 
 实战训练+面试模拟+大厂内推，想要提升技术能力，进大厂拿高薪，[点击链接，提升自己](https://shenceyun.lagou.com/t/Mka)！
+

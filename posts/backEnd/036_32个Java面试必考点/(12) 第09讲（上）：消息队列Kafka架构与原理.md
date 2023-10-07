@@ -1,3 +1,5 @@
+# 第09讲（上）：消息队列Kafka架构与原理
+
 本课时主要讲解消息队列与数据库相关的知识，重点讲解三部分知识点：
 
 1. Kafka 的架构与消息交互流程；
@@ -10,7 +12,9 @@
 
 先来看看相关知识点汇总，如下图。首先为了防止歧义进行说明，本课时中提到的"队列"就是指"消息队列"。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/AB/57/CgotOV3WANuANlgNAAE1sI_RJDk707.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/AB/57/CgotOV3WANuANlgNAAE1sI_RJDk707.png"/> 
+
 
 ###### 消息队列
 
@@ -125,7 +129,9 @@ TiDB 是开源的分布式关系数据库，几乎完全兼容 MySQL，能够支
 
 <br />
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/AB/37/CgoB5l3WANyAF3c_AADzlbSKXcQ261.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/AB/37/CgoB5l3WANyAF3c_AADzlbSKXcQ261.png"/> 
+
 
 首先 Kafka 消息队列由三个角色组成，左面的是消息的生产方 Producer；中间是 Kafka 集群， Kafka 集群由多台 Kafka server 组成，每个 Server 称为一个 Broker，也就是消息代理；右面的是消息的消费方 Consumer。
 
@@ -143,7 +149,9 @@ Kafka 通过对消费方进行分组管理来支持消息一写多读，流程�
 
 <br />
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/AB/57/CgotOV3WANyAeuEAAAEVCeRMppA370.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/AB/57/CgotOV3WANyAeuEAAAEVCeRMppA370.png"/> 
+
 
 来看图中的例子，这个 Topic 分为 4 个 Partition，就是图中绿色的 P1到 P4，上部的生产方根据规则选择一个 Partition 进行写入，默认规则是轮询策略。也可以由生产方指定 Partition 或者指定 key 来根据 Hash 值选择 Partition。
 
@@ -171,7 +179,9 @@ Kafka 在 ZK 中保存了每个 Topic 中每个 Partition 在不同 Group 的消
 
 <br />
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/AB/37/CgoB5l3WANyAYcRMAABaLbJGT1Q369.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/AB/37/CgoB5l3WANyAYcRMAABaLbJGT1Q369.png"/> 
+
 
 第一个原子性，指事务由原子的操作序列组成，所有操作要么全部成功，要么全部失败回滚。
 
@@ -187,7 +197,9 @@ Kafka 在 ZK 中保存了每个 Topic 中每个 Partition 在不同 Group 的消
 
 <br />
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/AB/57/CgotOV3WAN2ANddVAADwY17WNNE095.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/AB/57/CgotOV3WAN2ANddVAADwY17WNNE095.png"/> 
+
 
 <br />
 
@@ -215,7 +227,9 @@ Kafka 在 ZK 中保存了每个 Topic 中每个 Partition 在不同 Group 的消
 
 <br />
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/AB/37/CgoB5l3WANuAZCmHAACv9TI5H7A917.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/AB/37/CgoB5l3WANuAZCmHAACv9TI5H7A917.png"/> 
+
 
 第一个是扁平化事务，在扁平事务中，所有的操作都在同一层次，这也是我们平时使用最多的一种事务。它的主要限制是不能提交或者回滚事务的某一部分，要么都成功，要么都回滚。
 
@@ -238,4 +252,5 @@ Kafka 在 ZK 中保存了每个 Topic 中每个 Partition 在不同 Group 的消
 第四种方案可以了解一下阿里云中的全局事务服务 GTS，对应的开源版本是 Fescar。Fescar 基于两段式提交进行改良，剥离了分布式事务方案对数据库在协议支持上的要求。使用 Fescar 的前提是分支事务中涉及的资源，必须是支持 ACID 事务的关系型数据库。分支的提交和回滚机制，都依赖于本地事务来保障。 Fescar 的实现目前还存在一些局限，比如事务隔离级别最高支持到读已提交级别。
 
 <br />
+
 

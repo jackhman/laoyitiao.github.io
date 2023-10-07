@@ -1,3 +1,5 @@
+# 06代码管理：如何使用Git与GitHub统一代码管理流程？
+
 在软件开发当中，代码管理一直是其中重要的一环，每当软件出现问题，我们就需要查看源码，及时发现其中的漏洞加以修复。并且，由于分工不同，软件开发需要多个人共同完成，如何保证每个人编写的代码符合要求，能够相互配合，也是一个重要的问题。所以，一个非常实用的代码管理工具和一套统一的代码管理流程在开发当中必不可少。
 
 而在这方面，StackOverflow 曾调查发现，有超过 87% 的开发者使用 Git，有超过 82% 的开发者使用 GitHub 来进行代码托管和开发协作。可以说，熟练使用 Git 和 GitHub 已经成为开发者的基本技能，而如何结合它们来规范代码管理也是 iOS 开发工程化实践当中的基础。
@@ -27,7 +29,9 @@
 
 来看下面这幅。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/16/11/CioPOWBF-duAKS0tAAC-6ZH1k9w147.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/16/11/CioPOWBF-duAKS0tAAC-6ZH1k9w147.png"/> 
+
 
 举例来说，我有一个同事要开发点赞功能，他就从主分支最新的`MC1`commit 签出（checkout）并新建`feature/add-like-button-to-moments-screen`来进行点赞功能的开发。与此同时，另外一个同事发现了一个用户头像的 UI Bug，她也从`MC1`commit 签出并新建了`bugfix/fix-avatar-ui-bug`来修改 Bug。
 
@@ -39,7 +43,9 @@
 
 有了发布分支以后，一旦发生严重的线上事故，例如出现引起高崩溃率的 Bug 时，我们可以马上在发布分支上进行修复。一般的做法是从发布分支上签出一个功能分支，例如当修复点赞按钮引起的崩溃时，我们可以建立一个叫作`bugfix/fix-like-button-crash`的功能分支，在修复该崩溃以后马上合并到发布分支，并提交到 App Store ，更新线上的 App。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/16/14/Cgp9HWBF-eaARQ3lAACY5uUYZq0336.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/16/14/Cgp9HWBF-eaARQ3lAACY5uUYZq0336.png"/> 
+
 
 由上图可见，当我们把主分支最新的`MC1`commit 合并到`release`分支以后，提交了一个版本号为`V2.0`的 App 到 App Store。当我们通过查看崩溃报告，得知新上线的点缀功能引起很多崩溃时，可以采取如下措施：
 
@@ -61,7 +67,9 @@
 
 下面我们一起看一套完整的，并经过我们多年实践证明过的 PR 流程。
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M00/16/14/Cgp9HWBF-fKAVu_QAAKUNfBQLr8841.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M00/16/14/Cgp9HWBF-fKAVu_QAAKUNfBQLr8841.png"/> 
+
 
 这套流程分成六步。
 
@@ -73,13 +81,17 @@
 
 在我们 Moments App 项目中，为了方便开发者编写 PR 描述文档，我们建立了一个模板文件`pull_request_template.md`。当我们提交 PR 的时候，GitHub 会自动读取并准备好描述文档的模板，我们只需要填写相关内容即可。
 
-<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M00/1A/11/Cgp9HWBK9gSAXnguAAMUTTFvSAg277.png"/>
+
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M00/1A/11/Cgp9HWBK9gSAXnguAAMUTTFvSAg277.png"/> 
+
 
 你可以到[拉钩的代码仓库](https://github.com/lagoueduCol/iOS-linyongjian/blob/main/.github/pull_request_template.md)查看该模板文件。
 
 在提交 PR 的时候，我们还可以加上代码审查人（Reviewer）来通知他/她审查代码。同时也可以加上分类的标签（Label）来方便管理所有的 PR，例如使用`enhancement`表示功能开发，使用`bug`表示 Bug 修改。如果你的项目由多团队同时开发，我们还会为每个产品团队都建立一个标签，这样就能清楚地知道这个 PR 来自那个产品团队了。
 
-<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M00/1A/0E/CioPOWBK9fKAaGtgAAHLCg2avjU907.png"/>
+
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M00/1A/0E/CioPOWBK9fKAaGtgAAHLCg2avjU907.png"/> 
+
 
 第四步，一旦 PR 提交以后，其他成员就会收到通知消息，他们可以进行代码审查，并把反馈意见留言到 RP 里面。提交者可以根据留言来修改代码和提交新的 commit。当所有留言都修正和完善以后，可以再次通知审查人进行进一步的审查。
 
@@ -97,15 +109,21 @@
 
 首先，我们可以把主分支保护起来，不允许任何人直接 Push 到主分支。
 
-<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image6/M01/1A/11/Cgp9HWBK9eKAGESRAAJW2j80OLg852.png"/>
+
+<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image6/M01/1A/11/Cgp9HWBK9eKAGESRAAJW2j80OLg852.png"/> 
+
 
 然后要求所有 PR 在合并之前都必须经过一个或以上的代码审查人批准。审查人的数量可以根据团队的情况进行调整。
 
-<Image alt="图片7.png" src="https://s0.lgstatic.com/i/image6/M01/1A/10/CioPOWBK9pGAWYgdAANH9SPivxA932.png"/>
+
+<Image alt="图片7.png" src="https://s0.lgstatic.com/i/image6/M01/1A/10/CioPOWBK9pGAWYgdAANH9SPivxA932.png"/> 
+
 
 当 Github 检查到有某些条件不完全符合时，就不允许我们合并该 PR。
 
-<Image alt="图片6.png" src="https://s0.lgstatic.com/i/image6/M01/1A/0F/CioPOWBK9lyAEzO1AAOXuc4tDlg494.png"/>
+
+<Image alt="图片6.png" src="https://s0.lgstatic.com/i/image6/M01/1A/0F/CioPOWBK9lyAEzO1AAOXuc4tDlg494.png"/> 
+
 
 比如，因为我们的 Moments 项目配置了所有的 PR 都必须有一个或以上的代码审查人批准后才能合并。上图可以见 GitHub PR 页面上的**Merge pull request**按钮是失效的，并提示 "Merging can be performed automatically with 1 approving review" （需要一个代码审查通过后才能合并）。
 
@@ -113,7 +131,9 @@
 
 在这一讲我介绍了 Git 的分支管理和 GitHub 的 Pull Request 流程。根据多年的项目经验，我给出了一套完整的统一代码管理流程，其重点是把 Git 分支分成三类，主分支、功能分支和发布分支，然后严格按照 GitHub Pull Request 流程来把代码合并到主分支里面。
 
-<Image alt="思维导图+二维码.png" src="https://s0.lgstatic.com/i/image6/M00/1A/14/Cgp9HWBK-BSAHpViAAapoc7YA9U941.png"/>
+
+<Image alt="思维导图+二维码.png" src="https://s0.lgstatic.com/i/image6/M00/1A/14/Cgp9HWBK-BSAHpViAAapoc7YA9U941.png"/> 
+
 
 有了这个规范，开发者就能严格遵循这个流程贡献代码，从而保证主分支在管控状态，同时也为项目的自动化和工程化打下基础。
 
@@ -125,3 +145,4 @@
 源码地址：
 > pull_request_template.md  
 > <https://github.com/lagoueduCol/iOS-linyongjian/blob/main/.github/pull_request_template.md>
+

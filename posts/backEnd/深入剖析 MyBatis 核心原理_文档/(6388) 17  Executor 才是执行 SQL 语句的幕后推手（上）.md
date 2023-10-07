@@ -1,3 +1,5 @@
+# 17Executor才是执行SQL语句的幕后推手（上）
+
 这一讲我们开始介绍 MyBatis 中的另一个核心接口------ Executor 接口。在 Executor 接口的实现过程中，MyBatis 使用了**装饰器模式** 和**模板方法模式** 这两种经典的设计模式，在前面的[《09 \| 基于 MyBatis 缓存分析装饰器模式的最佳实践》](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=612&sid=20-h5Url-0&buyFrom=2&pageId=1pz4#/detail/pc?id=6380&fileGuid=xxQTRXtVcqtHK6j8)这一讲中，我们已经详细分析过装饰器模式的实现细节和优缺点，今天我们就一起来看一下模板方法模式的相关内容，这些都是理解 Executor 接口的基础。
 
 ### 模板方法模式
@@ -6,7 +8,9 @@
 
 这里我们以转账流程为例，如下图所示，整个转账流程是固定的，但是"验证密码""验证余额"和"扣除金额"这三步针对不同的银行卡，要调用不同银行的接口去完成。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M01/1F/5C/Cgp9HWBRybGAVCakAADpGtj3zWY699.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M01/1F/5C/Cgp9HWBRybGAVCakAADpGtj3zWY699.png"/> 
+  
 不同银行卡转账流程示意图
 
 为了让整个复杂流程的代码具有更好的扩展性，我们一般会使用模板方法模式来处理。
@@ -17,7 +21,9 @@
 
 下图展示了模板方法模式的核心类，其中 template() 方法是我们上面描述的模板方法，part1() 方法和 part3() 方法是逻辑不变的基本方法实现，而 part2()、part4() 方法是两个随场景变化的基本方法。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M01/1F/59/CioPOWBRybmACYSWAAVsA89p6H4687.png"/>  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M01/1F/59/CioPOWBRybmACYSWAAVsA89p6H4687.png"/> 
+  
 模板方法模式示意图
 
 我们可以**通过模板方法控制整个流程的走向以及其中固定不变的步骤，子类来实现流程的某些变化细节**，这就实现了"变化与不变"的解耦，也实现了"整个流程与单个步骤"的解耦。当业务需要改变流程中某些步骤的具体行为时，直接添加新的子类即可实现，这也非常符合"开放-封闭"原则。另外，模板方法模式能够充分利用面向对象的多态特性，在系统运行时再选择一种具体子类来执行完整的流程，这也从另一个角度提高了系统的灵活性。
@@ -28,12 +34,16 @@
 
 首先来看 Executor 接口定义的核心方法，如下图所示，Executor 接口定义了数据库操作的基本方法，其中 query\*() 方法、update() 方法、flushStatement() 方法是执行 SQL 语句的基础方法，commit() 方法、rollback() 方法以及 getTransaction() 方法与事务的提交/回滚相关，clearLocalCache() 方法、createCacheKey() 方法与缓存有关。
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M01/1F/59/CioPOWBRycSAIT9sAAIepMCg8VA941.png"/>  
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M01/1F/59/CioPOWBRycSAIT9sAAIepMCg8VA941.png"/> 
+  
 Executor 接口结构图
 
 MyBatis 中有多个 Executor 接口的实现类，如下图所示：
 
-<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M01/20/4C/CioPOWBS-s2AUysXAAFqkAUOqx0880.png"/>  
+
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M01/20/4C/CioPOWBS-s2AUysXAAFqkAUOqx0880.png"/> 
+  
 Executor 接口继承关系图
 
 该图中的 CachingExecutor 是 Executor 的装饰器实现，在其他 Executor 实现的基础上添加了缓存的功能；BaseExecutor 实现了 Executor 接口的全部方法，主要定义了这些方法的核心流程（也就是模板方法），然后由子类进行具体实现。
@@ -110,7 +120,9 @@ return list;
 
 除了上述两个配置会影响缓存数据的生命周期之外，修改操作也会清空缓存，涉及以下展示的 commit()、rollback()、update() 方法：
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image6/M00/1F/5C/Cgp9HWBRykSAb6pcAAF-EFg4WfE845.png"/>  
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image6/M00/1F/5C/Cgp9HWBRykSAb6pcAAF-EFg4WfE845.png"/> 
+  
 clearLocalCache() 方法调用位置
 
 为了保持一级缓存与数据库的一致性，这些修改数据的操作需要清空一级缓存，因为执行修改操作之后，数据库中存储的数据已更新，如果一级缓存的内容不更新的话，就会与数据库中的数据不一致，成为"脏数据"。
@@ -131,8 +143,11 @@ clearLocalCache() 方法调用位置
 
 *** ** * ** ***
 
-[<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/6D/3E/CgqCHl-s60-AC0B_AAhXSgFweBY762.png"/>](https://shenceyun.lagou.com/t/Mka)
+[
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/6D/3E/CgqCHl-s60-AC0B_AAhXSgFweBY762.png"/> 
+](https://shenceyun.lagou.com/t/Mka)
 
 **《Java 工程师高薪训练营》**
 
 实战训练+面试模拟+大厂内推，想要提升技术能力，进大厂拿高薪，[点击链接，提升自己](https://shenceyun.lagou.com/t/Mka)！
+

@@ -1,3 +1,5 @@
+# 35Linux的IO模式：electpollepoll有什么区别？
+
 我们总是想方设法地提升系统的性能。操作系统层面不能给予处理业务逻辑太多帮助，但对于 I/O 性能，操作系统可以通过底层的优化，帮助应用做到极致。
 
 这一讲我将和你一起讨论 I/O 模型。为了引发你更多的思考，我将同步/异步、阻塞/非阻塞等概念滞后讲解。**我们先回到一个最基本的问题：如果有一台服务器，需要响应大量的请求，操作系统如何去架构以适应这样高并发的诉求**。
@@ -12,7 +14,9 @@
 
 Linux 中用一个双向链表作为缓冲区，你可以观察下图中的 Buffer，看上去像一个有很多个凹槽的线性结构，每个凹槽（节点）可以存储一个封包，这个封包可以从网络层看（IP 封包），也可以从传输层看（TCP 封包）。操作系统不断地从 Buffer 中取出数据，数据通过一个协议栈，你可以把它理解成很多个协议的集合。协议栈中数据封包找到对应的协议程序处理完之后，就会形成 Socket 文件。
 
-<Image alt="1111.png" src="https://s0.lgstatic.com/i/image2/M01/05/F3/Cip5yGABb8uAECMGAAERrnFoSrI090.png"/>!
+
+<Image alt="1111.png" src="https://s0.lgstatic.com/i/image2/M01/05/F3/Cip5yGABb8uAECMGAAERrnFoSrI090.png"/> 
+!
 
 如果高并发的请求量级实在太大，有可能把 Buffer 占满，此时，操作系统就会拒绝服务。网络上有一种著名的攻击叫作**拒绝服务攻击** ，就是利用的这个原理。**操作系统拒绝服务，实际上是一种保护策略。通过拒绝服务，避免系统内部应用因为并发量太大而雪崩**。
 
@@ -28,13 +32,17 @@ Linux 中用一个双向链表作为缓冲区，你可以观察下图中的 Buff
 
 通过前面讲述，我们知道 Socket 在操作系统中，有一个非常具体的从 Buffer 到文件的实现。但是对于进程而言，Socket 更多是一种编程的模型。接下来我们讨论作为编程模型的 Socket。
 
-<Image alt="Lark20210115-150702.png" src="https://s0.lgstatic.com/i/image/M00/8D/F3/Ciqc1GABP3OAHezqAABndlGAu9c457.png"/>
+
+<Image alt="Lark20210115-150702.png" src="https://s0.lgstatic.com/i/image/M00/8D/F3/Ciqc1GABP3OAHezqAABndlGAu9c457.png"/> 
+
 
 如上图所示，Socket 连接了应用和协议，如果应用层的程序想要传输数据，就创建一个 Socket。应用向 Socket 中写入数据，相当于将数据发送给了另一个应用。应用从 Socket 中读取数据，相当于接收另一个应用发送的数据。而具体的操作就是由 Socket 进行封装。具体来说，**对于 UNIX 系的操作系统，是利用 Socket 文件系统，Socket 是一种特殊的文件------每个都是一个双向的管道。一端是应用，一端是缓冲**区。
 
 那么作为一个服务端的应用，如何知道有哪些 Socket 呢？也就是，哪些客户端连接过来了呢？这是就需要一种特殊类型的 Socket，也就是服务端 Socket 文件。
 
-<Image alt="Lark20210115-150706.png" src="https://s0.lgstatic.com/i/image/M00/8D/F3/Ciqc1GABP3qADKbBAAB564sk120429.png"/>
+
+<Image alt="Lark20210115-150706.png" src="https://s0.lgstatic.com/i/image/M00/8D/F3/Ciqc1GABP3qADKbBAAB564sk120429.png"/> 
+
 
 如上图所示，当有客户端连接服务端时，服务端 Socket 文件中会写入这个客户端 Socket 的文件描述符。进程可以通过 accept() 方法，从服务端 Socket 文件中读出客户端的 Socket 文件描述符，从而拿到客户端的 Socket 文件。
 
@@ -48,11 +56,15 @@ Linux 中用一个双向链表作为缓冲区，你可以观察下图中的 Buff
 
 在上面的讨论当中，进程拿到了它关注的所有 Socket，也称作关注的集合（Intersting Set）。如下图所示，这种过程相当于进程从所有的 Socket 中，筛选出了自己关注的一个子集，但是这时还有一个问题没有解决：**进程如何监听关注集合的状态变化，比如说在有数据进来，如何通知到这个进程**？
 
-<Image alt="Lark20210115-150708.png" src="https://s0.lgstatic.com/i/image/M00/8D/F3/Ciqc1GABP4OAdKBcAACAbVkbI0g191.png"/>
+
+<Image alt="Lark20210115-150708.png" src="https://s0.lgstatic.com/i/image/M00/8D/F3/Ciqc1GABP4OAdKBcAACAbVkbI0g191.png"/> 
+
 
 其实更准确地说，一个线程需要处理所有关注的 Socket 产生的变化，或者说消息。实际上一个线程要处理很多个文件的 I/O。**所有关注的 Socket 状态发生了变化，都由一个线程去处理，构成了 I/O 的多路复用问题**。如下图所示：
 
-<Image alt="Lark20210115-150711.png" src="https://s0.lgstatic.com/i/image/M00/8D/F3/Ciqc1GABP4uAW8-dAAB_SubmZ4Q301.png"/>
+
+<Image alt="Lark20210115-150711.png" src="https://s0.lgstatic.com/i/image/M00/8D/F3/Ciqc1GABP4uAW8-dAAB_SubmZ4Q301.png"/> 
+
 
 处理 I/O 多路复用的问题，需要操作系统提供内核级别的支持。Linux 下有三种提供 I/O 多路复用的 API，分别是：
 
@@ -64,7 +76,9 @@ Linux 中用一个双向链表作为缓冲区，你可以观察下图中的 Buff
 
 如下图所示，内核了解网络的状态。因此不难知道具体发生了什么消息，比如内核知道某个 Socket 文件状态发生了变化。但是内核如何知道该把哪个消息给哪个进程呢？
 
-<Image alt="Lark20210115-150654.png" src="https://s0.lgstatic.com/i/image/M00/8D/F3/Ciqc1GABP5KAVSWVAAFSurtl2bU931.png"/>
+
+<Image alt="Lark20210115-150654.png" src="https://s0.lgstatic.com/i/image/M00/8D/F3/Ciqc1GABP5KAVSWVAAFSurtl2bU931.png"/> 
+
 
 **一个 Socket 文件，可以由多个进程使用；而一个进程，也可以使用多个 Socket 文件** 。进程和 Socket 之间是多对多的关系。**另一方面，一个 Socket 也会有不同的事件类型**。因此操作系统很难判断，将哪样的事件给哪个进程。
 
@@ -74,7 +88,7 @@ Linux 中用一个双向链表作为缓冲区，你可以观察下图中的 Buff
 
 select 和 poll 都采用线性结构，select 允许用户传入 3 个集合。如下面这段程序所示：
 
-```html
+```cpp
 fd_set read_fd_set, write_fd_set, error_fd_set;
 while(true) {
   select(..., &read_fd_set, &write_fd_set, &error_fd_set); 
@@ -85,7 +99,7 @@ while(true) {
 
 \*\*用户程序可以根据不同集合中是否有某个 Socket 判断发生的消息类型，\*\*程序如下所示：
 
-```html
+```cpp
 fd_set read_fd_set, write_fd_set, error_fd_set;
 while(true) {
   select(..., &read_fd_set, &write_fd_set, &error_fd_set); 
@@ -104,7 +118,7 @@ while(true) {
 
 接下来我给出一个完整的、用 select 实现的服务端程序供你参考，如下所示：
 
-```html
+```cpp
 #include <stdio.h>
 #include <errno.h>
 #include <stdlib.h>
@@ -222,7 +236,7 @@ main (void)
 
 * 通过文件描述符，可以进行实际地读、写、错误处理。
 
-```html
+```cpp
 while(true) {
   events = poll(fds, ...)
   for(evt in events) {
@@ -260,7 +274,7 @@ poll 虽然优化了编程模型，但是从性能角度分析，它和 select �
 
 2. 对于程序员而言，非阻塞的模型更容易处理各种各样的情况。程序员习惯了写出每一条语句就可以马上得到结果，这样不容易出 Bug。
 
-```html
+```cpp
 // Asynchronous Socket server - accepting multiple clients concurrently,
 	// multiplexing the connections with epoll.
 	//
@@ -586,3 +600,4 @@ asleep(100ms, () -> {
 你可以把你的答案、思路或者课后总结写在留言区，这样可以帮助你产生更多的思考，这也是构建知识体系的一部分。经过长期的积累，相信你会得到意想不到的收获。如果你觉得今天的内容对你有所启发，欢迎分享给身边的朋友。期待看到你的思考！
 
 这一讲就到这里，发现求知的乐趣，我是林䭽。感谢你学习本次课程，下一讲我们将学习 36 \| 公私钥体系和网络安全：什么是中间人攻击？再见！
+

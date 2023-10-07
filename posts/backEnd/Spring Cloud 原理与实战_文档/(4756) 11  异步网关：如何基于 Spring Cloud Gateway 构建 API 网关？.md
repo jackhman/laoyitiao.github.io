@@ -1,3 +1,5 @@
+# 11异步网关：如何基于SpringCloudGateway构建API网关？
+
 我们知道在微服务架构中，可以根据需要在服务提供者和消费者之间架设 API 网关，来满足需要服务路由和控制的各种场景。在前面两个课时中，我们分析了 Zuul 网关的使用方式和实现原理。今天我们继续介绍另一款 API 网关，即 Spring Cloud Gateway。
 
 ### Spring Cloud Gateway 简介
@@ -38,7 +40,9 @@ public class GatewayApplication {
 
 Spring Cloud Gateway 中的核心概念有两个，一个是过**滤器（Filter）** ，一个是**谓词（Predicate）**。Spring Cloud Gateway 的整体架构图如下图所示：
 
-<Image alt="Lark20201027-164157.png" src="https://s0.lgstatic.com/i/image/M00/64/30/Ciqc1F-X3WqATvJfAAGAafgQhSE126.png"/>  
+
+<Image alt="Lark20201027-164157.png" src="https://s0.lgstatic.com/i/image/M00/64/30/Ciqc1F-X3WqATvJfAAGAafgQhSE126.png"/> 
+  
 Spring Cloud Gateway 基本架构图
 
 Spring Cloud Gateway 中的过滤器和 Zuul 中的过滤器是同一个概念。它们都可以用于在处理 HTTP 请求之前或之后修改请求本身，及对应响应结果。区别在于两者的类型和实现方式不同。Spring Cloud Gateway 的种类非常丰富，我们在今天的后续内容中会有专门主题对其进行详细的展开。
@@ -210,3 +214,4 @@ spring:
 这里给你留一道思考题：在 Spring Cloud Gateway中，如果想要给每个请求路径添加一个前缀有哪些实现方法？
 
 从下一课时开始，我们将进入新主题的探讨，即如何在微服务架构中引入服务容错的设计思想和实现技术，而在具体应用过程中，服务容错与 API 网关也有紧密的关联。
+

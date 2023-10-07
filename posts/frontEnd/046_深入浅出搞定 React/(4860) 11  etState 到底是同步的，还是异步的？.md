@@ -1,3 +1,5 @@
+# 11etState到底是同步的，还是异步的？
+
 setState 对于许多的 React 开发者来说，像是一个"最熟悉的陌生人"：
 
 * 当你入门 React 的时候，接触的第一波 API 里一定有 setState------数据驱动视图，没它就没法创造变化；
@@ -73,11 +75,15 @@ ReactDOM.render(
 
 此时浏览器里渲染出来的是如下图所示的三个按钮：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/6C/16/Ciqc1F-qYzOAEHeBAAAouh3EFik606.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/6C/16/Ciqc1F-qYzOAEHeBAAAouh3EFik606.png"/> 
+
 
 此时有个问题，若从左到右依次点击每个按钮，控制台的输出会是什么样的？读到这里，建议你先暂停 1 分钟在脑子里跑一下代码，看看和下图实际运行出来的结果是否有出入。
 
-<Image alt="图片4.png" src="https://s0.lgstatic.com/i/image/M00/6D/8A/Ciqc1F-uMdqAVUoFAAIqtDlymxs173.png"/>
+
+<Image alt="图片4.png" src="https://s0.lgstatic.com/i/image/M00/6D/8A/Ciqc1F-uMdqAVUoFAAIqtDlymxs173.png"/> 
+
 
 如果你是一个熟手 React 开发，那么 increment 这个方法的输出结果想必难不倒你------正如许许多多的 React 入门教学所声称的那样，"setState 是一个异步的方法"，这意味着当我们执行完 setState 后，state 本身并不会立刻发生改变。 因此紧跟在 setState 后面输出的 state 值，仍然会维持在它的初始状态（0）。在同步代码执行完毕后的某个"神奇时刻"，state 才会"恰恰好"地增加到 1。
 
@@ -91,7 +97,9 @@ ReactDOM.render(
 
 我们首先要认知的一个问题：在 setState 调用之后，都发生了哪些事情？基于截止到现在的专栏知识储备，你可能会更倾向于站在生命周期的角度去思考这个问题，得出一个如下图所示的结论：
 
-<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image/M00/6D/8A/Ciqc1F-uMeSAYK6FAABN0Vwnq5M814.png"/>
+
+<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image/M00/6D/8A/Ciqc1F-uMeSAYK6FAABN0Vwnq5M814.png"/> 
+
 
 从图上我们可以看出，一个完整的更新流程，涉及了包括 re-render（重渲染） 在内的多个步骤。re-render 本身涉及对 DOM 的操作，它会带来较大的性能开销。假如说"一次 setState 就触发一个完整的更新流程"这个结论成立，那么每一次 setState 的调用都会触发一次 re-render，我们的视图很可能没刷新几次就卡死了。这个过程如我们下面代码中的箭头流程图所示：
 
@@ -143,7 +151,9 @@ test = () => {
 
 也只是会增加 state 任务入队的次数，并不会带来频繁的 re-render。当 100 次调用结束后，仅仅是 state 的任务队列内容发生了变化， state 本身并不会立刻改变：
 
-<Image alt="图片5.png" src="https://s0.lgstatic.com/i/image/M00/6D/8B/Ciqc1F-uMfKALHLXAAEBeCrt5lE676.png"/>
+
+<Image alt="图片5.png" src="https://s0.lgstatic.com/i/image/M00/6D/8B/Ciqc1F-uMfKALHLXAAEBeCrt5lE676.png"/> 
+
 
 ### "同步现象"背后的故事：从源码角度看 setState 工作流
 
@@ -177,7 +187,9 @@ reduce = () => {
 
 点击后的输出结果如下图所示：
 
-<Image alt="图片6.png" src="https://s0.lgstatic.com/i/image/M00/6D/96/CgqCHl-uMguADJiMAAEld6KAKBI013.png"/>
+
+<Image alt="图片6.png" src="https://s0.lgstatic.com/i/image/M00/6D/96/CgqCHl-uMguADJiMAAEld6KAKBI013.png"/> 
+
 
 现在问题就变得清晰多了：为什么 setTimeout 可以将 setState 的执行顺序从异步变为同步？
 
@@ -190,7 +202,9 @@ reduce = () => {
 
 我们阅读任何框架的源码，都应该带着问题、带着目的去读。React 中对于功能的拆分是比较细致的，setState 这部分涉及了多个方法。为了方便你理解，我这里先把主流程提取为一张大图：
 
-<Image alt="3.png" src="https://s0.lgstatic.com/i/image2/M01/04/81/Cip5yF_yswuAWzDfAAEc1lISh-Q211.png"/>
+
+<Image alt="3.png" src="https://s0.lgstatic.com/i/image2/M01/04/81/Cip5yF_yswuAWzDfAAEc1lISh-Q211.png"/> 
+
 
 接下来我们就沿着这个流程，逐个在源码中对号入座。首先是 setState 入口函数：
 
@@ -341,7 +355,9 @@ var TRANSACTION_WRAPPERS = [FLUSH_BATCHED_UPDATES, RESET_BATCHED_UPDATES];
 
 我们把这两个 wrapper 套进 Transaction 的执行机制里，不难得出一个这样的流程：
 
-<Image alt="图片5.png" src="https://s0.lgstatic.com/i/image/M00/6E/2E/Ciqc1F-x-tyAbioYAACikzik89A130.png"/>
+
+<Image alt="图片5.png" src="https://s0.lgstatic.com/i/image/M00/6E/2E/Ciqc1F-x-tyAbioYAACikzik89A130.png"/> 
+
 
 到这里，相信你对 isBatchingUpdates 管控下的批量更新机制已经了然于胸。但是 setState 为何会表现同步这个问题，似乎还是没有从当前展示出来的源码里得到根本上的回答。这是因为 batchedUpdates 这个方法，不仅仅会在 setState 之后才被调用。若我们在 React 源码中全局搜索 batchedUpdates，会发现调用它的地方很多，但与更新流有关的只有这两个地方：
 
@@ -424,3 +440,4 @@ reduce = () => {
 setState 并不是单纯同步/异步的，它的表现会因调用场景的不同而不同：在 React 钩子函数及合成事件中，它表现为异步；而在 setTimeout、setInterval 等函数中，包括在 DOM 原生事件中，它都表现为同步。这种差异，本质上是由 React 事务机制和批量更新机制的工作方式来决定的。
 
 行文至此，相信你已经对 setState 有了知根知底的理解。我们整篇文章的讨论，目前都建立在 React 15 的基础上。React 16 以来，整个 React 核心算法被重写，setState 也不可避免地被"Fiber化"。那么到底什么是"Fiber"，它到底怎样改变着包括 setState 在内的 React 的各个核心技术模块，这就是我们下面两讲要重点讨论的问题了。
+

@@ -1,3 +1,5 @@
+# 16RESTful应用实践：构建一个介于前后台之间的服务
+
 在学习了 Node.js 相关的知识以后，我们怎么才能在实际工作中将这些知识应用起来呢？在这之前，我们应该思考，是完全应用 Node.js 改造原来的后台，还是与现有后台技术，进行兼容。
 
 这一讲，我就带你掌握如何快速地在项目中尝试应用 Node.js ，构建一个介入前后台之间的服务，逐步替换部分线上后台服务。
@@ -14,7 +16,9 @@
 
 现实情况下，大部分是第二种方案，在此基础上我们绘制了一个简单的架构图：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/39/F3/Cgp9HWB9T6WALOD3AAESrBDsph0977.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/39/F3/Cgp9HWB9T6WALOD3AAESrBDsph0977.png"/> 
+  
 图 1 Node.js 与后台兼容方案
 
 由于我在该课程测试过程中没有非 Node.js 的后台服务，所以我们需要模拟使用 Node.js 来模拟一个后台服务。
@@ -82,7 +86,9 @@ upstream lagou-backend {
 
 接下来就是在 Nginx 中配置不同路径的转发规则，我们先看下 /test/index 和 /music/info/index 的配置：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/39/F3/Cgp9HWB9T7aAdPm4AAGL6gtb52U583.png"/>  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/39/F3/Cgp9HWB9T7aAdPm4AAGL6gtb52U583.png"/> 
+  
 图 2 lagou-nodejs Nginx 配置
 
 图 2 中 /test/index 转发到[http://lagou-nodejs](http://lagou-nodejs?fileGuid=xxQTRXtVcqtHK6j8)虚拟 host 下（以 music 开头的也是一样的配置），而其他的都是转发到[http://lagou-backend](http://lagou-backend?fileGuid=xxQTRXtVcqtHK6j8)下。注意所有 Nginx 配置修改，都需要使用 nginx -s reload 进行重启。
@@ -95,7 +101,9 @@ upstream lagou-backend {
 
 首先你肯定要知道在 Node.js 服务中是否有相应的路径处理服务，所以要修改 router.js 中的代码，在匹配到具体的 Controller 逻辑时，在 ctx 中标记已匹配服务，而如果没有匹配到相应的 Controller 时则不做任何标记，如图 3 中红色框部分逻辑：
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M00/39/FB/CioPOWB9T8CARhfuAAJXX2CAbd0870.png"/>  
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M00/39/FB/CioPOWB9T8CARhfuAAJXX2CAbd0870.png"/> 
+  
 图 3 router.js 标记匹配到服务
 
 接下来我们在 routerMiddleware 中间件下增加一个新的中间件 backendRouter，用来处理转发到后台服务的功能：
@@ -152,7 +160,9 @@ module.exports = NameService;
 
 复制一个 app.js 为 app-3001.js 文件，然后将其中的 3000 端口修改为 3001 （包括里面的 console.log 中的 3000，避免误解），其次修改 pm2.config.js 在配置文件中的 apps 数组中增加一项启动配置，两个数组元素的配置差异就是启动文件和进程名，改动如下图 4 所示：
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M00/39/F3/Cgp9HWB9T8yAUpkWAAHVHZ00FDk139.png"/>  
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M00/39/F3/Cgp9HWB9T8yAUpkWAAHVHZ00FDk139.png"/> 
+  
 图 4 pm2.config.js 文件配置
 
 以上修改完成后，我们使用下面的命令来启动服务：
@@ -188,7 +198,9 @@ pm2 list
 
 可以看到图 5 所示。
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image6/M00/39/FB/CioPOWB9T9WAPFx3AAFhIzbGogw453.png"/>  
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image6/M00/39/FB/CioPOWB9T9WAPFx3AAFhIzbGogw453.png"/> 
+  
 图 5 当前 PM2 进程列表
 
 接下来我们再次访问下面 4 个连接：
@@ -239,3 +251,4 @@ http://lagou-nodejs.com/activity/info/index
 除此之外，学完这一讲内容之后，希望你可以在自己项目中进行一些简单尝试，比如一些新的后台服务类的需求，可以主动的要求，使用 Node.js 来实现一个技术方案，并做一些 demo 演示给你们团队，在应用 Node.js 来实现技术方案时，多从高效开发、可扩展性、后期维护性以及高性能方面来体现其优势。
 
 接下来，我们将实现一个通用抢票系统，下一讲见。
+

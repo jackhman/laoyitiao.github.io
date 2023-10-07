@@ -1,3 +1,5 @@
+# 第77讲：AQS在CountDownLatch等类中的应用原理是什么？
+
 本课时我们主要讲解 AQS 在 CountDownLatch 类中的应用原理，即在 CountDownLatch 中如何利用 AQS 去实现 CountDownLatch 自己的线程协作逻辑的。本课时会包含一定的源码分析。
 
 ### AQS 用法
@@ -235,3 +237,4 @@ getState 方法获取到的值是剩余需要倒数的次数，如果此时剩�
 在本课时中我们主要介绍了 AQS 的用法，通常分为三步，然后以 CountDownLatch 为例，介绍了如何利用 AQS 实现自己的业务逻辑。
 
 以上就是本课时的内容。在下一课时，我将对整门课程进行回顾，即一份独家的 Java 并发图谱，下一课时见！
+

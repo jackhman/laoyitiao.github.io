@@ -1,8 +1,12 @@
+# 第22讲：AndroidApp的安装过程
+
 之前的两节课我们了解了 Android 系统中两个比较重要的系统服务ActivityManagerService（AMS）和 WindowManagerService（WMS），这节课我们通过分析 apk 的安装过程来了解一下 Android 中另一个比较重要的系统服务------PackageManagerService（PMS）。
 
 在分析安装过程之前，需要先了解一下 Android 项目是如何经过编译-\>打包生成最终的 .apk 格式的安装包。谷歌有一张官方图片来描述 apk 的打包流程，如下图所示。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/18/66/CgqCHl7YnimALWVSAAEh1GToKmQ996.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/18/66/CgqCHl7YnimALWVSAAEh1GToKmQ996.png"/> 
+
 
 一个完整的 Android 项目可能包含多个 module，而从宏观上看每一个 module 中的内容可以分为 2 部分：Resources 资源文件、Java 或者 Kotlin 源代码。因此整个项目的编译打包过程也是针对这 2 部分来完成。
 
@@ -14,7 +18,9 @@
 
 资源文件编译之后的产物包括两部分：resources.arsc 文件和一个 R.java。前者保存的是一个资源索引表，后者定义了各个资源 ID 常量。这两者结合就可以在代码中找到对应的资源引用。比如如下的 R.java 文件：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/18/5B/Ciqc1F7YnjeAWBwcAAJm6yVrw2E631.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/18/5B/Ciqc1F7YnjeAWBwcAAJm6yVrw2E631.png"/> 
+
 
 可以看出，R.java 中的资源 ID 是一个 4 字节的无符号整数，用 16 进制表示。其中，最高的 1 字节表示 Package ID，次高的 1 个字节表示 Type ID，最低的 2 字节表示 Entry ID。
 
@@ -42,11 +48,15 @@ PMS 在安装过程中会检查 apk 中的签名证书的合法性，具体内�
 
 至此一个完整的 apk 安装包就创建成功，一个完整的 apk 解压缩之后的内容如下所示：
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/18/66/CgqCHl7YnkaARuuYAABXIRNJSsg192.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/18/66/CgqCHl7YnkaARuuYAABXIRNJSsg192.png"/> 
+
 
 整个编译打包流程可以用下图来描述：
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/18/66/CgqCHl7Ynk6AEMsbAAGPn3-pe0U243.png"/>
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/18/66/CgqCHl7Ynk6AEMsbAAGPn3-pe0U243.png"/> 
+
 
 接下来看一下 PMS 是如何将其安装到手机设备中的。
 
@@ -54,7 +64,9 @@ PMS 在安装过程中会检查 apk 中的签名证书的合法性，具体内�
 
 当我们点击某一个 App 安装包进行安装时，首先会弹出一个系统界面指示我们进行安装操作。这个界面是 Android Framework 中预置的一个 Activity---PackageInstallerActivity.java。当点击安装后，PackageInstallerActivity 最终会将所安装的 apk 信息通过 PackageInstallerSession 传给 PMS，具体方法在 commitLocked 方法中，如下所示：
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/18/66/CgqCHl7YnliANsdAAADChIoYQGY542.png"/>
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/18/66/CgqCHl7YnliANsdAAADChIoYQGY542.png"/> 
+
 
 图中的 mPm 就是系统服务 PackageManagerService。installStage 方法就是正式开始 apk 的安装过程。
 
@@ -67,7 +79,9 @@ PMS 在安装过程中会检查 apk 中的签名证书的合法性，具体内�
 
 从 installStage 方法开始看起，代码如下：
 
-<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/18/66/CgqCHl7YnmOAKxwJAAeDPbSMt08082.png"/>
+
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/18/66/CgqCHl7YnmOAKxwJAAeDPbSMt08082.png"/> 
+
 
 解释说明：
 
@@ -76,7 +90,9 @@ PMS 在安装过程中会检查 apk 中的签名证书的合法性，具体内�
 
 Message 发送出去之后，由 PMS 的内部类 PackageHandler 接收并处理，如下：
 
-<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/18/66/CgqCHl7YnmyAIOEcAAOwIJUcb7I626.png"/>
+
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/18/66/CgqCHl7YnmyAIOEcAAOwIJUcb7I626.png"/> 
+
 
 解释说明：
 
@@ -85,15 +101,21 @@ Message 发送出去之后，由 PMS 的内部类 PackageHandler 接收并处理
 
 #### PackageHandler 的 connectToService 方法
 
-<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/18/5B/Ciqc1F7YnnWAa7t4AAGTtgn9n84775.png"/>
+
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/18/5B/Ciqc1F7YnnWAa7t4AAGTtgn9n84775.png"/> 
+
 
 通过隐式 Intent 绑定 Service，实际绑定的 Service 类型是 DefaultContainerService 类型。当绑定 Service 成功之后，会在 onServiceConnection 方法中发送一个绑定操作的 Message，如下所示：
 
-<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/18/5B/Ciqc1F7Ynn2ACJWVAAFb51BBXdQ949.png"/>
+
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/18/5B/Ciqc1F7Ynn2ACJWVAAFb51BBXdQ949.png"/> 
+
 
 MCS_BOUND 的 Message 接收者还是 PackageHandler，具体如下：
 
-<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/18/5B/Ciqc1F7YnoKAHEXMAAEJ3nJLNYc383.png"/>
+
+<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/18/5B/Ciqc1F7YnoKAHEXMAAEJ3nJLNYc383.png"/> 
+
 
 mPendingInstalls 是一个等待队列，里面保存所有需要安装的 apk 解析出来的 HandlerParams 参数，从 mPendingInstalls 中取出第一个需要安装的 HandlerParams 对象，并调用其 startCopy 方法，在 startCopy 方法中会继续调用一个抽象方法 handleStartCopy 处理安装请求。通过之前的分析，我们知道 HandlerParams 实际类型是 InstallParams 类型，因此最终调用的是 InstallParams 的 handlerStartCopy 方法，
 
@@ -101,7 +123,9 @@ mPendingInstalls 是一个等待队列，里面保存所有需要安装的 apk �
 
 这个方法是整个安装包拷贝的核心方法，具体如下：
 
-<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image/M00/18/67/CgqCHl7YnoyAMNWXAAVf4iF2VqM771.png"/>
+
+<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image/M00/18/67/CgqCHl7YnoyAMNWXAAVf4iF2VqM771.png"/> 
+
 
 解释说明：
 
@@ -112,7 +136,9 @@ mPendingInstalls 是一个等待队列，里面保存所有需要安装的 apk �
 
 #### FileInstallArgs 的 copyApk 方法
 
-<Image alt="Drawing 11.png" src="https://s0.lgstatic.com/i/image/M00/18/67/CgqCHl7YnpWAO46fAAUi29eLnk8266.png"/>
+
+<Image alt="Drawing 11.png" src="https://s0.lgstatic.com/i/image/M00/18/67/CgqCHl7YnpWAO46fAAUi29eLnk8266.png"/> 
+
 
 可以看出在 copyApk 方法中调用了 doCopyApk 方法，doCopyAPk 方法中主要做了 3 件事情：
 
@@ -122,7 +148,9 @@ mPendingInstalls 是一个等待队列，里面保存所有需要安装的 apk �
 
 上图中的 IMediaContainerService 实际上就是在开始阶段进行连接操作的 DefaultContainerService 对象，其内部 copyPackage 方法本质上就是执行 IO 流操作，具体如下：
 
-<Image alt="Drawing 12.png" src="https://s0.lgstatic.com/i/image/M00/18/67/CgqCHl7Ynp6Aew4nAAOlzQeDuuU439.png"/>
+
+<Image alt="Drawing 12.png" src="https://s0.lgstatic.com/i/image/M00/18/67/CgqCHl7Ynp6Aew4nAAOlzQeDuuU439.png"/> 
+
 
 最终安装包在 data/app 目录下以 base.apk 的方式保存，至此安装包拷贝工作就已经完成。
 
@@ -132,11 +160,15 @@ mPendingInstalls 是一个等待队列，里面保存所有需要安装的 apk �
 
 代码回到上述的 HandlerParams 中的 startCopy 方法：
 
-<Image alt="Drawing 13.png" src="https://s0.lgstatic.com/i/image/M00/18/67/CgqCHl7YnqaAVd8eAAC7pLWZqFU880.png"/>
+
+<Image alt="Drawing 13.png" src="https://s0.lgstatic.com/i/image/M00/18/67/CgqCHl7YnqaAVd8eAAC7pLWZqFU880.png"/> 
+
 
 可以看出当安装包拷贝操作结束之后，继续调用 handleReturnCode 方法来处理返回结果，最终调用 processPendingInstall 方法处理安装过程，代码具体如下：
 
-<Image alt="Drawing 14.png" src="https://s0.lgstatic.com/i/image/M00/18/5B/Ciqc1F7Ynq6AYUaKAAGFA25LwV4100.png"/>
+
+<Image alt="Drawing 14.png" src="https://s0.lgstatic.com/i/image/M00/18/5B/Ciqc1F7Ynq6AYUaKAAGFA25LwV4100.png"/> 
+
 
 解释说明：
 
@@ -146,7 +178,9 @@ mPendingInstalls 是一个等待队列，里面保存所有需要安装的 apk �
 
 installPackageLI 是 apk 安装阶段的核心代码，方法实现很长，部分核心代码如下：
 
-<Image alt="Drawing 15.png" src="https://s0.lgstatic.com/i/image/M00/18/5B/Ciqc1F7YnreAMnZMAAOyzccSfS0859.png"/>
+
+<Image alt="Drawing 15.png" src="https://s0.lgstatic.com/i/image/M00/18/5B/Ciqc1F7YnreAMnZMAAOyzccSfS0859.png"/> 
+
 
 解释说明：
 
@@ -157,7 +191,9 @@ installPackageLI 是 apk 安装阶段的核心代码，方法实现很长，部�
 
 installNewPackageLI 方法负责完成最后的 apk 安装过程，具体代码如下：
 
-<Image alt="Drawing 16.png" src="https://s0.lgstatic.com/i/image/M00/18/67/CgqCHl7YnsCAdCILAAJ1TeRtXoQ877.png"/>
+
+<Image alt="Drawing 16.png" src="https://s0.lgstatic.com/i/image/M00/18/67/CgqCHl7YnsCAdCILAAJ1TeRtXoQ877.png"/> 
+
 
 解释说明：
 
@@ -170,3 +206,4 @@ installNewPackageLI 方法负责完成最后的 apk 安装过程，具体代码�
 ### 总结
 
 这节课主要介绍了一个 Android 项目从编译成 apk 文件，然后被安装到手机设备上的简要过程。其中编译分 2 块内容：资源 + 源代码。并且生成 apk 之后还要经过签名、对齐等操作。apk 安装也分 2 块进行：安装包拷贝和代码装载。
+

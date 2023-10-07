@@ -1,3 +1,5 @@
+# 第29讲：使用Fluentd、ElaticSearch和Kibana管理日志
+
 当系统在运行出现问题时，进行错误排查的首要目标是系统的日志，日志在系统维护中的重要性不言而喻。与单体应用相比，微服务架构应用的每个服务都独立运行，会产生各自的日志。这就要求把来自不同服务的日志记录聚合起来，形成统一的查询视图。云原生应用运行在 Kubernetes 上，对日志记录有不同的要求。本课时将介绍微服务架构的云原生应用，如何使用 Fluentd、ElasticSearch 和 Kibana 来管理日志。
 
 ### 记录日志
@@ -349,8 +351,11 @@ spec:
 
 在首次使用 Kibana 时，需要配置索引的模式，使用 logstash-\* 作为模式即可。下图是 Kibana 查询日志的界面，可以通过标签来快速对日志消息进行过滤。
 
-<Image alt="kibana.png" src="https://s0.lgstatic.com/i/image/M00/26/C2/Ciqc1F7y-cuAFBf_AAJiFWEnj7g432.png"/>
+
+<Image alt="kibana.png" src="https://s0.lgstatic.com/i/image/M00/26/C2/Ciqc1F7y-cuAFBf_AAJiFWEnj7g432.png"/> 
+
 
 ### 总结
 
 应用的开发和维护都离不开日志的支持，对于微服务架构的云原生应用来说，完整的日志聚合、分析和查询的技术栈是必不可少的。通过本课时的学习，你可以掌握 Java 应用中记录日志的方式和最佳实践，还可以了解如何基于 Fluentd、Elasticsearch 和 Kibana，在 Kubernetes 上构建自己的日志聚合、分析和查询的完整技术栈。
+

@@ -1,3 +1,5 @@
+# 25Tranition组件：过渡动画的实现原理是怎样的？（下）
+
 上节课，我们已经知道了，Vue.js 提供了内置的 Transition 组件帮我们实现动画过渡效果。在之前的分析中我把 Transition 组件的实现分成了三个部分：组件的渲染、钩子函数的执行、模式的应用。这节课我们从钩子函数的执行继续探究 Transition 组件的实现原理。
 
 ### 钩子函数的执行
@@ -422,3 +424,4 @@ if (mode === 'out-in') {
 > packages/runtime-core/src/renderer.ts  
 >
 > packages/runtime-dom/src/components/Transition.ts
+

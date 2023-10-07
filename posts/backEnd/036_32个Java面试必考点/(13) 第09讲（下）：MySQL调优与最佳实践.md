@@ -1,10 +1,14 @@
+# 第09讲（下）：MySQL调优与最佳实践
+
 ###### 详解 MySQL
 
 下面来学习互联网行业使用最为广泛的关系型数据库 MySQL，它的知识点结构图如下所示。
 
 <br />
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/EF/CgotOV14tcCAAj4qAAG5pZSsGg0126.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/EF/CgotOV14tcCAAj4qAAG5pZSsGg0126.png"/> 
+
 
 ###### 常用 SQL 语句
 
@@ -92,7 +96,9 @@ MySQL 的调优也是研发人员需要掌握的一项技能，一般 MySQL 调�
 
 <br />
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/CF/CgoB5l14tcCAW4TEAAA4gPziGLI076.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/CF/CgoB5l14tcCAW4TEAAA4gPziGLI076.png"/> 
+
 
 * 第一个纬度是针对数据库设计、表结构设计以及索引设置纬度进行的优化；
 
@@ -112,7 +118,9 @@ MySQL 的调优也是研发人员需要掌握的一项技能，一般 MySQL 调�
 
 <br />
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/EF/CgotOV14tcCADvHvAAC0X6SqEbk666.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/EF/CgotOV14tcCADvHvAAC0X6SqEbk666.png"/> 
+
 
 先看到图中左边的模块，关于表结构和索引的优化，应该掌握如下原则。
 
@@ -173,7 +181,9 @@ MySQL 的调优也是研发人员需要掌握的一项技能，一般 MySQL 调�
 
 最后将面试真题汇总如下。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/CF/CgoB5l14tcGASkb-AABwwI5lamM754.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/CF/CgoB5l14tcGASkb-AABwwI5lamM754.png"/> 
+
 
 * 第 2 题，可以从消息的发送者保证投递到消息队列、消息对象自身的高可用、消费方处理完成后修改 offset 这三个方面来保证消息的可靠性。这个题目可以结合 Kafka 的消息发送同步、异步，消息可靠性配置来回答。
 
@@ -188,4 +198,5 @@ MySQL 的调优也是研发人员需要掌握的一项技能，一般 MySQL 调�
 下一课时将会学习系统架构与项目案例详解的相关内容。
 
 <br />
+
 

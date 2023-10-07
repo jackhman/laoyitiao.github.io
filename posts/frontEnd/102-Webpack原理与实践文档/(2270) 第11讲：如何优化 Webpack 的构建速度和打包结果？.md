@@ -1,3 +1,5 @@
+# 第11讲：如何优化Webpack的构建速度和打包结果？
+
 你好，我是汪磊，今天我们要一起探索的是 Webpack 在生产模式打包过程中的常用配置以及一些优化插件。
 
 在前面的课时中，我们了解到的一些用法和特性都是为了在开发阶段能够拥有更好的开发体验。而随着这些体验的提升，一个新的问题出现在我们面前：我们的打包结果会变得越来越臃肿。
@@ -193,7 +195,9 @@ console.log(API_BASE_URL)
 
 完成以后我们打开控制台，然后运行 webpack 打包。打包完成过后我们找到打包的结果，然后找到 main.js 对应的模块。具体结果如下：
 
-<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/10/E9/Ciqc1F7LaHWAV84JAADT7IV7CvE825.png"/>
+
+<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/10/E9/Ciqc1F7LaHWAV84JAADT7IV7CvE825.png"/> 
+
 
 这里我们发现 DefinePlugin 其实就是把我们配置的字符串内容直接替换到了代码中，而目前这个字符串的内容为 https://api.example.com，字符串中并没有包含引号，所以替换进来语法自然有问题。
 
@@ -215,7 +219,9 @@ module.exports = {
 
 这样代码内的 API_BASE_URL 就会被替换为 "https://api.example.com"。具体结果如下：
 
-<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/10/F5/CgqCHl7LaH-AMPKrAADQsK6wHzM717.png"/>
+
+<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/10/F5/CgqCHl7LaH-AMPKrAADQsK6wHzM717.png"/> 
+
 
 另外，这里有一个非常常用的小技巧，如果我们需要注入的是一个值，就可以通过 JSON.stringify 的方式来得到表示这个值的字面量。这样就不容易出错了。具体实现如下：
 
@@ -290,11 +296,15 @@ module.exports = {
 
 我们回到命令行，这里我们以生产模式运行打包。那按照之前的了解，生产模式下会自动压缩输出的结果，我们可以打开打包生成的 JS 文件。具体结果如下：
 
-<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/10/E9/Ciqc1F7LaIqATAzSAAQyyz8qCXE919.png"/>
+
+<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/10/E9/Ciqc1F7LaIqATAzSAAQyyz8qCXE919.png"/> 
+
 
 然后我们再打开输出的样式文件。具体结果如下：
 
-<Image alt="image (6).png" src="https://s0.lgstatic.com/i/image/M00/10/E9/Ciqc1F7LaJGAKXO2AAEBLBn8-rQ140.png"/>
+
+<Image alt="image (6).png" src="https://s0.lgstatic.com/i/image/M00/10/E9/Ciqc1F7LaJGAKXO2AAEBLBn8-rQ140.png"/> 
+
 
 这里我们发现 JavaScript 文件正常被压缩了，而样式文件并没有被压缩。
 
@@ -346,7 +356,9 @@ module.exports = {
 
 打包完成过后，我们的样式文件就会以压缩格式输出了。具体结果如下：
 
-<Image alt="image (7).png" src="https://s0.lgstatic.com/i/image/M00/10/E9/Ciqc1F7LaJqAAsfEAAJeBFjqfT8020.png"/>
+
+<Image alt="image (7).png" src="https://s0.lgstatic.com/i/image/M00/10/E9/Ciqc1F7LaJqAAsfEAAJeBFjqfT8020.png"/> 
+
 
 不过这里还有个额外的小点，可能你会在这个插件的官方文档中发现，文档中的这个插件并不是配置在 plugins 数组中的，而是添加到了 optimization 对象中的 minimizer 属性中。具体如下：
 
@@ -392,7 +404,9 @@ module.exports = {
 
 但是这么配置也有个缺点，此时我们再次运行生产模式打包，打包完成后再来看一眼输出的 JS 文件，此时你会发现，原本可以自动压缩的 JS，现在却不能压缩了。具体 JS 的输出结果如下：
 
-<Image alt="image (8).png" src="https://s0.lgstatic.com/i/image/M00/10/F5/CgqCHl7LaKeAOdc4AAJbN7rhhA8880.png"/>
+
+<Image alt="image (8).png" src="https://s0.lgstatic.com/i/image/M00/10/F5/CgqCHl7LaKeAOdc4AAJbN7rhhA8880.png"/> 
+
 
 那这是因为我们设置了 minimizer，Webpack 认为我们需要使用自定义压缩器插件，那内部的 JS 压缩器就会被覆盖掉。我们必须手动再添加回来。
 
@@ -447,3 +461,4 @@ module.exports = {
 最后再来简单总结一下，本课时我们介绍了如何为 Webpack 添加不同环境下的不同配置，以及在生产模式打包时我们经常用到的几个插件。
 
 这当中需要你理解的地方并没有太多，更多的是了解这些插件的具体作用和使用方法。除此之外，你也需要更多地了解社区当中其他的常用插件。
+

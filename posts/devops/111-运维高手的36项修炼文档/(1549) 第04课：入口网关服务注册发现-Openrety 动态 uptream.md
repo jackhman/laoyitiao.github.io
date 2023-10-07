@@ -1,3 +1,5 @@
+# 第04课：入口网关服务注册发现-Openrety动态uptream
+
 本课时，我将带你一起了解入口网关服务的注册发现，并使用 OpenResty 实现一套动态 Upstream。  
 
 课前学习提示
@@ -20,7 +22,9 @@
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/69/CgpOIF5XlqGAJ1iwAAE2ca-U8Go037.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/69/CgpOIF5XlqGAJ1iwAAE2ca-U8Go037.png"/> 
+
 
 <br />
 
@@ -57,7 +61,9 @@
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/69/Cgq2xl5XlrOAW-n0AAFbOCQssio629.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/69/Cgq2xl5XlrOAW-n0AAFbOCQssio629.png"/> 
+
 
 <br />
 
@@ -78,7 +84,9 @@
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/69/CgpOIF5XlsKAFA4dAACi4m6_YDE387.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/69/CgpOIF5XlsKAFA4dAACi4m6_YDE387.png"/> 
+
 
 <br />
 
@@ -106,7 +114,9 @@
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/69/Cgq2xl5Xls6AJ57nAAEo03hFxpQ626.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/69/Cgq2xl5Xls6AJ57nAAEo03hFxpQ626.png"/> 
+
 
 <br />
 
@@ -208,3 +218,4 @@ OP 主要是有哪两个方法呢？这个接口代码支持是增加（add）\\
 <br />
 
 课程中的演示脚本及配置可以课后通过这个链接<http://www.jesonc.com/jeson/2020/02/07/ywgs36/>自己下载，密码为：mukelaoshi。
+

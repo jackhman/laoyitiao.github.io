@@ -1,3 +1,5 @@
+# 第26课：防火墙：iptable企业级安全策略
+
 本课时我们来学习安全模块：iptables 企业级安全策略。
 
 #### 什么是 iptables
@@ -10,7 +12,9 @@
 
 在现实中，其实很多应用服务都调用了 Netfilter。这里我给你画了一张图：
 
-<Image alt="image (11).png" src="https://s0.lgstatic.com/i/image/M00/0E/E8/CgqCHl7GXLmAQNIJAAAx_JTgoQQ756.png"/>
+
+<Image alt="image (11).png" src="https://s0.lgstatic.com/i/image/M00/0E/E8/CgqCHl7GXLmAQNIJAAAx_JTgoQQ756.png"/> 
+
 
 可以看到，在最中央就是 Netfilter 的 Linux 内核模块了，我们看到最下层 iptables 会调用 Netfilter 模块来作为安全防火墙。在 CentOS7 以后，出来一款新的防火墙服务叫作 firewalld，其实也是调用了 Netfilter 模块。总体来说，无论是 iptables，还是 firewalld，它们都是调用了 Linux 的 Netfilter 内核模块。
 
@@ -48,7 +52,9 @@ iptables 默认是允许访问服务或者通过数据包进行访问的，如�
 
 那么说到了 iptables 的规则设置，你可能需要了解，通过 iptables 命令进行安全防护规则设置都有哪些选项，下面逐一为你列举了几个具体的一些常见的选项：
 
-<Image alt="image (12).png" src="https://s0.lgstatic.com/i/image/M00/0E/DC/Ciqc1F7GXNaAWc-BAACVfKp2FC8903.png"/>
+
+<Image alt="image (12).png" src="https://s0.lgstatic.com/i/image/M00/0E/DC/Ciqc1F7GXNaAWc-BAACVfKp2FC8903.png"/> 
+
 
 * -A 指向指定链添加一个或多个新规则；
 * -D 表示从指定链中删除一个或多个规则；
@@ -73,7 +79,7 @@ iptables 默认是允许访问服务或者通过数据包进行访问的，如�
 
 首先第一个安全防护规则就是通过 iptables 命令来进行设置的，每次设置完具体的命令后，就会把这些命令转化为 iptables 所能识别的一条规则生成到配置文件里。通常对于用户来说对配置文件的管理可能是非常容易理解的，所以为了方便进行 iptables 设置，我们更愿意把 iptables 命令的使用和选项的使用，封装成一些 Shell 脚本来直接批量化设置。这里会看到我使用的 iptables 命令进行设置的同时，也结合了一些 Shell 脚本的语法格式。我们来看一下：
 
-```html
+```sql
 iptables -A INPUT -i lo -j ACCEPT  //允许本地访问
 LOCAL_NET="xxx.xxx.xxx.xxx/xx"  //允许内部指定网段访问
 if [ "$LOCAL_NET" ]
@@ -232,3 +238,4 @@ ptables -A INPUT -p tcp -m multiport --dports $HTTP -j ACCEPT
 ```
 
 这样就完成了一个完整的规则设置了。本课时我们讲解的 iptables 的规则设置，还有他的一些整个使用关系，以及具体的安全设置上的一些设置样例，你可以再多多理解，下个课时我将讲解"应用安全：基于 HTTP、HTTPS 请求过程中常见 waf 攻防策略"，记得按时听课。
+

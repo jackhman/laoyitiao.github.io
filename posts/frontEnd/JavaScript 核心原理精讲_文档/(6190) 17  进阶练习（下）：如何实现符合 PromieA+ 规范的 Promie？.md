@@ -1,3 +1,5 @@
+# 17进阶练习（下）：如何实现符合PromieA+规范的Promie？
+
 我在上一讲带你实现了一个浏览器端的 EventEmitter，那么这一讲还是继续进阶，我们来实现一个符合 Promise/A+ 规范的 Promise。
 
 其实在"[14 \| 异步编程（中）：如何深入理解异步编程的核心 Promise](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=601#/detail/pc?id=6187)"中，我已经专门介绍了 Promise 的基本原理和使用情况。由于 Promise 在异步编程中的重要性不言而喻，因此在很多互联网大厂面试中，现场实现 Promise 相关方法的题目经常会出现，比如 all、race 或者 any 等。
@@ -458,3 +460,4 @@ promises-aplus-tests Promise.js
 下一讲开始，我们就要进入一个新的模块------JS 引擎篇，我要带你了解 JS 引擎中的垃圾回收机制、事件轮询等，这对于写出高性能的 JavaScript 代码有着很好的帮助。
 
 我们到时见。
+

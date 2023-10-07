@@ -1,3 +1,5 @@
+# 第13讲：剖析Trace在SkyWalking中的落地实现方案（下）
+
 TraceSegmentRef
 ===============
 
@@ -56,7 +58,9 @@ AbstractTraceContext 有两个实现类，如下图所示：
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/89/94/Cgq2xl6X_6-ATLgTAAApyYi2z4g447.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/89/94/Cgq2xl6X_6-ATLgTAAApyYi2z4g447.png"/> 
+
 
 <br />
 
@@ -113,7 +117,9 @@ public AbstractSpan createEntrySpan(final String operationName) {
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/03/50/CgoCgV6X_7CAIrmBAABEHpBozXI630.png"/>  
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/03/50/CgoCgV6X_7CAIrmBAABEHpBozXI630.png"/> 
+  
 
 <br />
 
@@ -121,7 +127,9 @@ public AbstractSpan createEntrySpan(final String operationName) {
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/10/7E/Ciqah16X_7CADwCpAAQ3K_wSU4k128.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/10/7E/Ciqah16X_7CADwCpAAQ3K_wSU4k128.png"/> 
+
 
 <br />
 
@@ -214,7 +222,9 @@ public boolean stopSpan(AbstractSpan span) {
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/89/95/Cgq2xl6X_7CATU_aAAFxCpVbciQ707.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/89/95/Cgq2xl6X_7CATU_aAAFxCpVbciQ707.png"/> 
+
 
 <br />
 
@@ -255,4 +265,5 @@ ContextCarrier 序列化之后得到的字符串分为 9 个部分，每个部�
 在后面的课时中，我们将深入学习与 Trace 相关的 BootService 实现，分析 SkyWalking Agent 如何在这些基础组件上有条不紊的收集并发送 Trace 数据。
 
 <br />
+
 

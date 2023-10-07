@@ -1,3 +1,5 @@
+# 第02讲：链路追踪利器，快速上手SkyWalking
+
 在上一课时中，我们介绍了 SkyWalking 的整体架构以及 Service、Endpoint、ServiceInstance 等核心概念。本课时将带领同学们搭建 SkyWalking 的环境搭建，并上手使用 SkyWalking。
 
 ### SkyWalking 环境搭建
@@ -38,7 +40,9 @@ tail -f logs/elasticsearch.log
 
 最后，我们可以请求 localhost:9200 这地址，看到下图输出的这段 JSON 即安装成功：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/71/BD/CgpOIF5nHMCAYb-sAABorqyP-yg322.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/71/BD/CgpOIF5nHMCAYb-sAABorqyP-yg322.png"/> 
+
 
 ### Kibana 安装
 
@@ -65,7 +69,9 @@ elasticsearch.hosts: ["http://localhost:9200"]
 
 最后我们通过访问 http://localhost:5601/ 地址即可进入 Kibana 界面：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/71/BD/Cgq2xl5nHMCAABXxAAEuKrTbLVw100.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/71/BD/Cgq2xl5nHMCAABXxAAEuKrTbLVw100.png"/> 
+
 
 ### SkyWalking 安装
 
@@ -77,7 +83,9 @@ tar -zxf apache-skywalking-apm-6.2.0.tar.gz
 
 解压完成之后进入 apache-skywalking-apm-bin 目录，编辑 config/application.yml 文件，将其中 ElasticSearch 配置项以及其子项的全部注释去掉，将 h2 配置项及其子项全部注释掉，如下图所示，这样 SkyWalking 就从默认的存储 h2 切换成了 ElasticSearch ：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/71/BD/CgpOIF5nHMCAH0O5AAfpg2pNpsw425.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/71/BD/CgpOIF5nHMCAH0O5AAfpg2pNpsw425.png"/> 
+
 
 接下来执行 ./bin/startup.sh 文件即可启动 SkyWalking OAP 以及 UI 界面，看到的输出如下：
 
@@ -124,7 +132,9 @@ agent
 
 下面搭建 demo-webapp、demo-provider 两个 Spring-Boot 项目，并且接入 SkyWalking Agent 进行监控，具体结构如下：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/71/BD/Cgq2xl5nHMCAB9f7AAB00fhMQNk918.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/71/BD/Cgq2xl5nHMCAB9f7AAB00fhMQNk918.png"/> 
+
 
 demo-webapp 会 Dubbo 远程调用 demo-provider 的接口，而 Dubbo 依赖了 Zookeeper，所以要先安装 Zookeeper。首先下载 zookeeper-3.4.14.tar.gz 包（下载地址：<https://archive.apache.org/dist/zookeeper/zookeeper-3.4.14/>）。下载完成之后执行如下命令解压缩：
 
@@ -144,7 +154,9 @@ Starting zookeeper ... STARTED # 启动成功
 
 下面在 IDEA 中创建 skywalking-demo 项目，并在其中创建 demo-api、demo-webapp、demo-provider 两个 Module，如下图所示：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/71/BD/CgpOIF5nHMCALuSFAADAqK6QHPc083.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/71/BD/CgpOIF5nHMCALuSFAADAqK6QHPc083.png"/> 
+
 
 在 skywalking-demo 下面的 pom.xml 中，将父 pom 指向 spring-boot-starter-parent 并添加 demo-api 作为公共依赖，如下所示：
 
@@ -295,7 +307,9 @@ agent.service_name=${SW_AGENT_NAME:demo-provider}
 
 编辑好 agent.config 配置文件之后，我们需要在启动 demo-provider 之前通过参数告诉 JVM SkyWalking Agent 配置文件的位置，IDEA 中的配置如下图所示：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/71/BD/Cgq2xl5nHMCAPGmdAAJd59aKb9w948.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/71/BD/Cgq2xl5nHMCAPGmdAAJd59aKb9w948.png"/> 
+
 
 最后启动 DemoProviderApplication 这个入口类，可以看到如下输出：
 
@@ -387,7 +401,9 @@ demo-webpp 模块的入口 main() 方法与 demo-provider 相同，不再赘述�
 
 为了接入 SkyWalking Agent，启动 demo-webapp 项目之前也需要配置相应的 VM options 参数，指定 agent.config 配置文件的地址，如下图所示：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/71/BD/CgpOIF5nHMCAJ8EKAAIq6sznBy0160.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/71/BD/CgpOIF5nHMCAJ8EKAAIq6sznBy0160.png"/> 
+
 
 最后，启动 demo-webapp 项目，通过浏览器访问 <http://localhost:8000/hello/xxx> 地址得到正常相应，访问 <http://localhost:8000/err> 得到 500 响应，即表示启动成功。
 
@@ -399,7 +415,9 @@ demo-webpp 模块的入口 main() 方法与 demo-provider 相同，不再赘述�
 
 如下图所示，在 Skywalking Rocketbot 首页顶部（1）处，有四个主 Tab 页，在【仪表盘】这个 Tab 中，（2）处可以选择查询的服务（Service）、端点（Endpoint） 以及服务实例（ServiceInstance）。在（3）处可以选择展示的不同维度，下图展示了 Global 这个全局视图：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/71/BD/Cgq2xl5nHMCASh6sAAFikMiwg_o077.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/71/BD/Cgq2xl5nHMCASh6sAAFikMiwg_o077.png"/> 
+
 
 其中有五个面板（（4）\~（8）），分别是：
 
@@ -413,7 +431,9 @@ demo-webpp 模块的入口 main() 方法与 demo-provider 相同，不再赘述�
 
 将（3）处切换到 Service 面板，可以看到针对 Service 的监控面板，如下图所示：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/71/BD/CgpOIF5nHMGACMCRAAEzi1SuLKw557.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/71/BD/CgpOIF5nHMGACMCRAAEzi1SuLKw557.png"/> 
+
 
 * **Service (Avg) ResponseTime 面板**：展示了指定服务的（平均）耗时。
 * **Service (Avg) Throughput 面板**：展示了指定服务的（平均）吞吐量。
@@ -426,28 +446,39 @@ demo-webpp 模块的入口 main() 方法与 demo-provider 相同，不再赘述�
 
 将（3）处切换到 Instance 面板，可以看到针对 ServiceInstance 的监控面板，如下图所示：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/71/BD/Cgq2xl5nHMGAGZlwAAHCkizkpVs483.png"/>   
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/71/BD/Cgq2xl5nHMGAGZlwAAHCkizkpVs483.png"/> 
+   
 
 在 ServiceInstance 面板中展示了很多 ServiceInstance 相关的监控信息，例如，JVM 内存使用情况、GC 次数、GC 耗时、CPU 使用率、ServiceInstance SLA 等等信息，这里不再一一展开介绍。
 
 下面我们切换到【拓扑图】这个主 Tab，如下图所示，在（1）处展示当前整个业务服务的拓扑图。点击拓扑图中的任意节点，可在（2）处看到服务相应的状态信息，其中包括响应的平均耗时、SLA 等监控信息。点击拓扑图中任意一条边，可在（3）处看到一条调用链路的监控信息，其中会分别从客户端（上游调用方）和服务端（下游接收方）来观测这条调用链路的状态，其中展示了该条链路的耗时、吞吐量、SLA 等信息：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/71/BD/CgpOIF5nHMGAceZOAAHozO2Mq14310.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/71/BD/CgpOIF5nHMGAceZOAAHozO2Mq14310.png"/> 
+
 
 下面我们切换到【追踪】这个主 Tab来查询 Trace 信息，如下图所示。在（1）、（2）处可以选择 Trace 的查询条件，其中可以指定 Trace 涉及到的 Service、ServiceInstance、Endpoint 以及Trace 的状态继续模糊查询，还可以指定 TraceId 和时间范围进行精确查询。在（3）处展示了 Trace 的简略信息，下图中 "/err" 接口这条 Trace 被显示为红色表示该 Trace 关联的请求出现了异常。在（4）和（5）处展示了 Trace 的具体信息以及所有 Span 信息，我们可以通过（6）处按钮调整 Span 的展示方式：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/71/BD/Cgq2xl5nHMGAUPpGAAEyWm6Aqo8753.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/71/BD/Cgq2xl5nHMGAUPpGAAEyWm6Aqo8753.png"/> 
+
 
 点击 Trace 中的 Span，就可以将该 Span 的具体信息展示出来，如下下图所示，点击"/err" 接口相关 Trace 中的 Span，即可看到相应的 TRuntimeException 异常信息：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/71/BD/CgpOIF5nHMGAb41NAAHBIhP98Z0352.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/71/BD/CgpOIF5nHMGAb41NAAHBIhP98Z0352.png"/> 
+
 
 最后，我们将主 Tab 也切换到【告警】，这里展示了 Skywalking 发出来的告警信息，如下图所示，这里也提供了相应的查询条件和关键字搜索框。
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/71/BD/Cgq2xl5nHMGAVek0AAM9HlRD-nQ059.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/71/BD/Cgq2xl5nHMGAVek0AAM9HlRD-nQ059.png"/> 
+
 
 ### 总结
 
 本课时搭建 SkyWalking 的运行环境，完成 ElasticSearch、Kibana、Skywalking 等的安装，并搭建了 skywalking-demo 项目作为演示示例，带同学们上手体验了 Skywalking Agent 的接入的流程。
 
 最后介绍了 SkyWalking Rocketbot UI 界面强大的功能，包括 Service、Endpoint、ServiceInstance 等不同级别的监控，展示了整个服务的拓扑图、Trace 查询以及告警信息查询等功能。
+

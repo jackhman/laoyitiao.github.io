@@ -1,3 +1,5 @@
+# 23最后的防线：怎样对Kubernete集群进行灾备和恢复？
+
 Kubernetes 隐藏了所有容器编排的复杂细节，让我们可以专注在应用本身，而无须过多关注如何去做部署和维护。此外，Kubernetes 还支持多副本，可以保证我们业务的高可用性。而对于集群本身而言，我们一样也要保证其高可用性，你可以参考官方文档：[利用 Kubeadm 来创建高可用集群](https://kubernetes.io/zh/docs/setup/production-environment/tools/kubeadm/high-availability/)。
 
 但是这些并不足以让我们高枕无忧，因为 Kubernetes 在帮助我们编排调度容器的同时，往往还保存了很多关键数据，比如集群自身关键数据、密钥、业务配置信息、业务数据等。我们在使用 Kubernetes 的时候，非常有必要进行灾备，防止出现操作失误（比如大规模无删除）、自然灾害、磁盘损坏无法修复、网络异常、机房断电等情况导致的数据丢失，严重时甚至会导致整个集群不可用。
@@ -10,7 +12,9 @@ Kubernetes 隐藏了所有容器编排的复杂细节，让我们可以专注在
 
 我们从整个 Kubernetes 的架构为出发点，来看看整个集群的组件。我在《[02 \| 高屋建瓴：Kubernetes 的架构为什么是这样的？](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=447#/detail/pc?id=4519)》中讲到 Kubernetes 的官方架构图，如下：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/6B/F9/Ciqc1F-qTFCAfuayAAHPVgKdC98338.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/6B/F9/Ciqc1F-qTFCAfuayAAHPVgKdC98338.png"/> 
+  
 图 1：Kubernetes 官方架构图
 
 从上图可以看出，整个 Kubernetes 集群可分为Master 节点（左侧）和 Node 节点（右侧）。
@@ -129,7 +133,9 @@ spec:
 
 这是 Velero 的架构图：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/6C/04/CgqCHl-qTK6ADCLwAAFaThL2Fxk754.png"/>  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/6C/04/CgqCHl-qTK6ADCLwAAFaThL2Fxk754.png"/> 
+  
 图 2：Velero 架构图
 
 Velero 由两部分组成：
@@ -165,3 +171,4 @@ Velero 支持两种关于后端存储的 CRD，分别是 BackupStorageLocation �
 在分布式的世界里，我们很难保证万无一失。当你在 Kubernetes 集群中部署越来越多的业务的时候，对集群和数据的灾备是非常有必要的。在今年 7 月份，我们常用的代码托管平台 Github 就发生了 Kubernetes 故障 ，导致了持续 4 个半小时的严重故障。所以，我建议对于关键性的业务数据，要记得时常备份。
 
 那么，你对于 Kubernetes 的备份还有哪些想要了解的呢？欢迎在留言区留言。
+

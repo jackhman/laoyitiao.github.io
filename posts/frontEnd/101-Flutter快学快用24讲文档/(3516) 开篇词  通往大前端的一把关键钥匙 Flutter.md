@@ -1,3 +1,5 @@
+# 开篇词通往大前端的一把关键钥匙Flutter
+
 你好，欢迎来到 Flutter 课程，我是清弦。
 
 近 10 年来，我一直在一线大厂从事 Web 前端研发工作，负责前端、中台业务以及跨端平台的研发和团队管理。目前**大前端因为"一套代码，多端运行"的特性成为大势所趋**，因此我也在致力于将团队培养为 Web 前端全栈及大前端双通道人员，借此提升前端技术人员在未来很长一段时间的竞争力，而其中选用的技术就是 Flutter。
@@ -6,13 +8,19 @@
 
 除了大量为适应快速发展节奏和节省人力成本的中小型企业，很多一线互联网企业也在重要项目中落地了 Flutter 技术，包括阿里（闲鱼）、蚂蚁金服（蚂蚁财富）、腾讯（多款在线教育App）、字节跳动（头条和西瓜视频），以及美团（美团 App）和快手（快手 App），等等。
 
-<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/1A/8E/CgqCHl7dpHyAVUFFAAMDht1Dqhw894.png"/>
+
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/1A/8E/CgqCHl7dpHyAVUFFAAMDht1Dqhw894.png"/> 
+
 
 有需求，就有人才市场。目前我们可以看到很多企业在招聘 Flutter 工程师，甚至一些前端或移动端的招聘岗位中也会备注"熟悉 Flutter 优先"，并且这些岗位大多来自一些知名企业，薪资优势也非常明显：
 
-<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/1A/8E/CgqCHl7dpImAb78FAABB4lUE4Eg359.png"/>
 
-<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/1A/8F/CgqCHl7dpJWAPAEQAAA8gGP-BEU300.png"/>
+<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/1A/8E/CgqCHl7dpImAb78FAABB4lUE4Eg359.png"/> 
+
+
+
+<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/1A/8F/CgqCHl7dpJWAPAEQAAA8gGP-BEU300.png"/> 
+
 
 （来自：拉勾网）
 
@@ -48,7 +56,9 @@
 
 * **模块三，进阶原理**：在掌握了基础的开发能力后，进阶才是体现能力的部分。这个模块中，我抽取了 Flutter 的几个关键知识点，包括如何与原生平台相互调用、性能分析和优化实践、渲染原理，以及 Flutter 内部的架构设计整体实现。学完后，你不仅能够掌握如何设计与原生平台交互的通道，还能够掌握性能优化的策略，而不是照搬他人想法。
 
-<Image alt="flutter.png" src="https://s0.lgstatic.com/i/image/M00/1A/FA/Ciqc1F7d_AOAHF1SAAH-YX7OsXI340.png"/>
+
+<Image alt="flutter.png" src="https://s0.lgstatic.com/i/image/M00/1A/FA/Ciqc1F7d_AOAHF1SAAH-YX7OsXI340.png"/> 
+
 
 此外，本课程还会为你提供一套 App 对应的 Node.js 服务端源码，按照源码指引将服务部署后，你可以将本课程实践的 App 应用发布到 Android 市场或者 App Store，作为一个线上的 App 进行运营。
 
@@ -59,3 +69,4 @@
 因为前几年的技术红利，前端技术人才越来越多，企业对于人才的能力要求也水涨船高，仅掌握单一平台编程开发能力已经稍显欠缺。希望这个课程能助你一臂之力，让你在招聘面试和日常工作中取得更多竞争优势，让你的职业发展更加长劲、有力。
 
 假如你有任何问题，欢迎在留言区给我留言。
+

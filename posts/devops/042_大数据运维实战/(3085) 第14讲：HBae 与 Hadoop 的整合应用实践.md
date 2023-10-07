@@ -1,3 +1,5 @@
+# 第14讲：HBae与Hadoop的整合应用实践
+
 ### Spark 与 Yarn 的整合过程
 
 Spark 独立模式下集群资源配置比较灵活，但是当用户较多时，资源调度无法控制，则会出现资源争抢的情况。此时可以考虑使用 Yarn 的资源调度，也就是将 Spark 整合到 Yarn 资源管理器中，然后通过 Yarn 的资源调度策略来实现 Spark 集群资源的调度。下面我们就来讲解它们在整合时的步骤。
@@ -108,7 +110,9 @@ spark.yarn.archive                  hdfs://bigdata/libs/sparkjars.zip
 
 此时，打开 Hadoopgateway.cloud 的 18080 端口，如下图所示：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/1E/05/CgqCHl7jGbWAT7miAAFO4men7ro476.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/1E/05/CgqCHl7jGbWAT7miAAFO4men7ro476.png"/> 
+
 
 上图是执行 Spark 任务后的状态截图，默认此页面为空，当执行过 Spark 任务后，查看 HDFS 上的 spark-job-log 目录，应该也有数据了。
 
@@ -127,7 +131,9 @@ Pi is roughly 3.140115700578503
 
 可以看到，yarn client 模式的结果输出到了屏幕上，在任务执行过程中，查看 yarn 的 8080 页面状态，如下图所示：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/1E/05/CgqCHl7jGeKAXnM_AAB3883x8X0596.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/1E/05/CgqCHl7jGeKAXnM_AAB3883x8X0596.png"/> 
+
 
 从此图中可以看出，Spark 任务成功提交到了 Yarn 集群，并且获取了集群资源。
 
@@ -141,11 +147,15 @@ Pi is roughly 3.140115700578503
 
 此模式下，任务执行完成后，并不会输出结果到屏幕，而是输出到某个节点上了，在任务执行过程中，查看 yarn 的 8080 页面状态，如下图所示：
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/1D/FA/Ciqc1F7jGeyARH34AAB3mPGS0uc270.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/1D/FA/Ciqc1F7jGeyARH34AAB3mPGS0uc270.png"/> 
+
 
 从此图中可以看出 yarn cluster 模式与 yarn client 模式的区别，要查看任务执行结果，点击 application_1591072251901_0006 链接，会得到如下图所示结果：
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/1D/FA/Ciqc1F7jGfOAbX23AACmBCRrkXI928.png"/>
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/1D/FA/Ciqc1F7jGfOAbX23AACmBCRrkXI928.png"/> 
+
 
 #### 5. yarn client 模式与 yarn cluster 模式流程解析
 
@@ -155,7 +165,9 @@ Pi is roughly 3.140115700578503
 
 下图展示了 yarn client 模式的执行流程：
 
-<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/1E/37/CgqCHl7jS8yAIiJMAAPhjp_QNho263.png"/>
+
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/1E/37/CgqCHl7jS8yAIiJMAAPhjp_QNho263.png"/> 
+
 
 从图中可以看出，yarn client 模式的执行流程大致如下：
 
@@ -171,7 +183,9 @@ Pi is roughly 3.140115700578503
 
 如下图所示，展示了 yarn cluster 模式的执行流程：
 
-<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/1E/37/CgqCHl7jS9eAOG7XAAN1IuQJ5aM015.png"/>
+
+<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/1E/37/CgqCHl7jS9eAOG7XAAN1IuQJ5aM015.png"/> 
+
 
 从图中可以看出，yarn cluster 模式的执行流程大致如下：
 
@@ -193,13 +207,17 @@ HBase 依赖于 HDFS 用于存储数据，所以在部署 HBase 时，需要 Had
 
 安装 HBase 时，要考虑选择正确的 Hadoop 版本，否则可能出现不兼容的情况，一般情况下需要根据 Hadoop 版本来决定要使用的 HBase 版本，[具体版本匹配信息可点击 HBase 官网链接查看](https://hbase.apache.org/book.html)。从左侧的 Basic Prerequisites 中可找到 HBase 与 JDK、Hadoop 的匹配关系，如下图所示：
 
-<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/1E/06/CgqCHl7jGguAbt2QAAAt8CLbu90367.png"/>
+
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/1E/06/CgqCHl7jGguAbt2QAAAt8CLbu90367.png"/> 
+
 
 其中，图标为 x 这个符号表示不支持；图标为叹号表示未测试；绿色的对钩表示支持。从图中可以看出，HBase1.3 以后的版本支持 JDK7 和 JDK8，而 HBase2.1 以后的版本仅支持 JDK8，而 JDK9、10、11 目前还没有进行测试，所以这里我们选择 JDK8 版本。
 
 下面再看一下 Hadoop 和 HBase 的对应关系，如下图所示：
 
-<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/1D/FA/Ciqc1F7jGhKAYUZeAAB8kpIUqzM819.png"/>
+
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/1D/FA/Ciqc1F7jGhKAYUZeAAB8kpIUqzM819.png"/> 
+
 
 从图中可以看出，Hadoop-3.1.1 以后的版本可以支持 HBase-2.1.x、HBase-2.2.x 和 HBase-2.3.x。这里我们仍然采用 Hadoop3.2.1 版本，而 HBase 采用 HBase-2.2.5，这两个版本之间是兼容的。
 
@@ -433,7 +451,9 @@ yarnserver.cloud
 
 所有服务启动完成后，可以查看 HBase 的 Web 页面，访问 \[http://nnmaster.cloud: 16010\](http://nnmaster.cloud: 16010)，其中，16010 是 HMaster 的默认 Web 端口，如下图所示：
 
-<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/1D/FA/Ciqc1F7jGimARMbTAAEmF_9ksnw081.png"/>
+
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/1D/FA/Ciqc1F7jGimARMbTAAEmF_9ksnw081.png"/> 
+
 
 从图中可以看出，活跃的 HMaster 和备用的 HMaster，以及 regionserver 节点的状态信息。
 
@@ -447,16 +467,21 @@ HBase 集群服务启动后，我们可以在 HBase client 主机上（hadoopgat
 
 进入 HBase 命令行后，即可执行创建表等操作，如下图所示：
 
-<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/1E/06/CgqCHl7jGjGAEldpAABaTagrA4Q930.png"/>
+
+<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/1E/06/CgqCHl7jGjGAEldpAABaTagrA4Q930.png"/> 
+
 
 创建的表默认会存储在 HDFS 的 /hbase 路径下，可以查看是否生成相关目录和文件。
 
 上面我们配置了 HMaster 的 HA，要测试是否实现了 HA 功能，只需要停止目前处于 active 状态的 HMaster 服务，然后通过 HMaster 的 16010 端口页面观察是否自动实现了主、备切换。如下图所示：
 
-<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image/M00/1E/06/CgqCHl7jGjiANLxqAAEXwGiry1k445.png"/>
+
+<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image/M00/1E/06/CgqCHl7jGjiANLxqAAEXwGiry1k445.png"/> 
+
 
 从图中可以看出，yarnserver.cloud 节点自动变成了主 HMaster，而没有 Backup Masters 节点了。当重新启动 nnmaster.cloud 节点的 HMaster 服务，此节点将变成 Backup Masters 节点。
 
 ### 总结
 
 本课时主要讲解了 Spark 与 Yarn 的整合，以及 HBase 与 Hadoop 集群的整合应用，作为 Hadoop 集群的外围组件，Spark、HBase 在企业的使用非常广泛。作为运维要熟练掌握这些外围组件和 Hadoop 的整合应用，并能够熟练处理整合过程中出现的各种问题。
+

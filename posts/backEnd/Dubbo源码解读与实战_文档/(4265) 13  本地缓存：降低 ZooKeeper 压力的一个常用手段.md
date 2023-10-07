@@ -1,6 +1,10 @@
+# 13本地缓存：降低ZooKeeper压力的一个常用手段
+
 从这一课时开始，我们就进入了第二部分：注册中心。注册中心（Registry）在微服务架构中的作用举足轻重，有了它，**服务提供者（Provider）** 和**消费者（Consumer）** 就能感知彼此。从下面的 Dubbo 架构图中可知：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/4B/FF/CgqCHl9W91KABCfoAAB7_C-aKWA893.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/4B/FF/CgqCHl9W91KABCfoAAB7_C-aKWA893.png"/> 
+  
 Dubbo 架构图
 
 * Provider 从容器启动后的初始化阶段便会向注册中心完成注册操作；
@@ -15,18 +19,24 @@ Dubbo 中存在很多概念，但有些理解起来就特别费劲，如本文�
 
 从本课时开始，我们就真正开始分析 Dubbo 源码了。首先看一下本课程第二部分内容在 Dubbo 架构中所处的位置（如下图红框所示），可以看到这部分内容在整个 Dubbo 体系中还是相对独立的，没有涉及 Protocol、Invoker 等 Dubbo 内部的概念。等介绍完这些概念之后，我们还会回看图中 Registry 红框之外的内容。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/4C/00/CgqCHl9W92uAEdHNAC1YtFrPHGA595.png"/>  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/4C/00/CgqCHl9W92uAEdHNAC1YtFrPHGA595.png"/> 
+  
 整个 Dubbo 体系图
 
 ### 核心接口
 
 作为"注册中心"部分的第一课时，我们有必要介绍下 dubbo-registry-api 模块中的核心抽象接口，如下图所示：
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/4B/F4/Ciqc1F9W94aAIB3iAAE7RxqxFDw401.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/4B/F4/Ciqc1F9W94aAIB3iAAE7RxqxFDw401.png"/> 
+
 
 在 Dubbo 中，一般使用 Node 这个接口来抽象节点的概念。**Node**不仅可以表示 Provider 和 Consumer 节点，还可以表示注册中心节点。Node 接口中定义了三个非常基础的方法（如下图所示）：
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/4B/F4/Ciqc1F9W942AJdaYAAAlxcqD4vE542.png"/>
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/4B/F4/Ciqc1F9W942AJdaYAAAlxcqD4vE542.png"/> 
+
 
 * getUrl() 方法返回表示当前节点的 URL；
 
@@ -36,7 +46,9 @@ Dubbo 中存在很多概念，但有些理解起来就特别费劲，如本文�
 
 **RegistryService 接口**抽象了注册服务的基本行为，如下图所示：
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/4C/00/CgqCHl9W95SAEiTBAABRqhrI6ig390.png"/>
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/4C/00/CgqCHl9W95SAEiTBAABRqhrI6ig390.png"/> 
+
 
 * register() 方法和 unregister() 方法分别表示**注册** 和**取消注册**一个 URL。
 
@@ -46,7 +58,9 @@ Dubbo 中存在很多概念，但有些理解起来就特别费劲，如本文�
 
 **Registry 接口**继承了 RegistryService 接口和 Node 接口，如下图所示，它表示的就是一个拥有注册中心能力的节点，其中的 reExportRegister() 和 reExportUnregister() 方法都是委托给 RegistryService 中的相应方法。
 
-<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/4B/F4/Ciqc1F9W952Aesi9AAAjKOjjN0I785.png"/>
+
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/4B/F4/Ciqc1F9W952Aesi9AAAjKOjjN0I785.png"/> 
+
 
 **RegistryFactory 接口**是 Registry 的工厂接口，负责创建 Registry 对象，具体定义如下所示，其中 @SPI 注解指定了默认的扩展名为 dubbo，@Adaptive 注解表示会生成适配器类并根据 URL 参数中的 protocol 参数值选择相应的实现。
 
@@ -60,10 +74,14 @@ public interface RegistryFactory {
 
 通过下面两张继承关系图可以看出，每个 Registry 实现类都有对应的 RegistryFactory 工厂实现，每个 RegistryFactory 工厂实现只负责创建对应的 Registry 对象。
 
-<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/4C/00/CgqCHl9W96aAbyVRAAIzHNPLhSM843.png"/>  
+
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/4C/00/CgqCHl9W96aAbyVRAAIzHNPLhSM843.png"/> 
+  
 RegistryFactory 继承关系图
 
-<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/4B/F5/Ciqc1F9W97CAdPcXAAG1fsVxaeI019.png"/>  
+
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/4B/F5/Ciqc1F9W97CAdPcXAAG1fsVxaeI019.png"/> 
+  
 Registry 继承关系图
 
 其中，RegistryFactoryWrapper 是 RegistryFactory 接口的 Wrapper 类，它在底层 RegistryFactory 创建的 Registry 对象外层封装了一个 ListenerRegistryWrapper ，ListenerRegistryWrapper 中维护了一个 RegistryServiceListener 集合，会将 register()、subscribe() 等事件通知到 RegistryServiceListener 监听器。
@@ -170,7 +188,9 @@ subscribe() 方法会将当前节点作为 Consumer 的 URL 以及相关的 Noti
 
 单看 AbstractRegistry 的实现，上述四个基础的注册、订阅方法都是内存操作，但是 Java 有继承和多态的特性，AbstractRegistry 的子类会覆盖上述四个基础的注册、订阅方法进行增强。
 
-<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/4B/F5/Ciqc1F9W9-eAHUVPAACO6kbGAbU855.png"/>
+
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/4B/F5/Ciqc1F9W9-eAHUVPAACO6kbGAbU855.png"/> 
+
 
 #### 3. 恢复/销毁
 
@@ -183,3 +203,4 @@ AbstractRegistry 中还有另外两个需要关注的方法：**recover() 方法
 ### 总结
 
 本课时是 Dubbo 注册中心分析的第一个课时，我们首先介绍了注册中心在整个 Dubbo 架构中的位置，以及 Registry、 RegistryService、 RegistryFactory 等核心接口的功能。接下来我们还详细讲解了 AbstractRegistry 这个抽象类提供的公共能力，主要是从本地缓存、注册/订阅、恢复/销毁这三方面进行了分析。
+

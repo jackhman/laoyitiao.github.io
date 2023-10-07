@@ -1,3 +1,5 @@
+# 第15讲：如何深入理解、应用及扩展Twemproxy？
+
 你好，我是你的缓存课老师陈波，欢迎进入第 15 课时"Twemproxy 框架、应用及扩展"的学习。
 
 ###### Twemproxy 架构及应用
@@ -10,7 +12,9 @@ Twemproxy 是 Twitter 的一个开源架构，它是一个分片资源访问的�
 
 如下图所示， 在应用系统中，Twemproxy 是一个介于 client 端和资源端的中间层。它的后端，支持Memcached 资源池和 Redis 资源池的分片访问。Twemproxy 支持取模分布和一致性 hash 分布，还支持随机分布，不过使用场景较少。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/CC/CgoB5l2lO3yAe8fPAAD79T2nfL4556.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/CC/CgoB5l2lO3yAe8fPAAD79T2nfL4556.png"/> 
+
 
 应用前端在请求缓存数据时，直接访问 Twemproxy 的对应端口，然后 Twemproxy 解析命令得到 key，通过 hash 计算后，按照分布策略，将 key 路由到后端资源的分片。在后端资源响应后，再将响应结果返回给对应的 client。
 
@@ -20,7 +24,9 @@ Twemproxy 是 Twitter 的一个开源架构，它是一个分片资源访问的�
 
 Twemproxy 是基于 epoll 事件驱动模型开发的，架构如下图所示。它是一个单进程、单线程组件。核心进程处理所有的事件，包括网络 IO，协议解析，消息路由等。Twemproxy 可以监听多个端口，每个端口接受并处理一个业务的缓存请求。Twemproxy 支持 Redis、Memcached 协议，支持一致性 hash 分布、取模分布、随机分布三种分布方案。Twemproxy 通过 YAML 文件进行配置，简单清晰，且便于人肉读写。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/EC/CgotOV2lO3yAb15JAACUX73nZuE067.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/EC/CgotOV2lO3yAb15JAACUX73nZuE067.png"/> 
+
 
 Twemproxy 与后端资源通过单个长连接访问，在收到业务大量并发请求后，会通过 pipeline 的方式，将多个请求批量发到后端。在后端资源持续访问异常时，Twemproxy 会将其从正常列表中剔除，并不断探测，待其恢复后再进行请求的路由分发。
 
@@ -34,13 +40,17 @@ Twemproxy 运行中，会持续产生海量请求及响应的消息流，于是�
 
 Twemproxy 监听端口，当有 client 连接进来时，则 accept 新连接，并构建初始化一个 client_conn。当建连完毕，client 发送数据到来时，client_conn 收到网络读事件，则从网卡读取数据，并记入请求消息的缓冲中。读取完毕，则开始按照配置的协议进行解析，解析成功后，就将请求 msg 放入到 client_conn 的 out 队列中。接下来，就对解析的命令 key 进行 hash 计算，并根据分布算法，找到对应 server 分片的连接，即一个 server_conn 结构体，如下图。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/CC/CgoB5l2lO3yAH925AAC54TkIVYU700.png"/>  
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/CC/CgoB5l2lO3yAH925AAC54TkIVYU700.png"/> 
+  
 
 如果 server_conn的 in 队列为空，首先对 server_conn 触发一个写事件。然后将 req msg 存入到 server_conn 的 in 队列。Server_conn 在处理写事件时，会对 in 队列中的 req msg 进行聚合，按照 pipeline 的方式批量发送到后端资源。待发送完毕后，将该条请求 msg 从 server_conn 的 in 队列删除，并插入到 out 队列中。  
 
 后端资源服务完成请求后，会将响应发送给 Twemproxy。当响应到 Twemproxy 后，对应的 server_conn 会收到 epoll 读事件，则开始读取响应 msg。响应读取并解析后，会首先将server_conn 中，out 队列的第一个 req msg 删除，并将这个 req msg 和最新收到的 rsp msg 进行配对。在 req 和 rsp 匹配后，触发 client_conn 的写事件，如下图。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/EC/CgotOV2lO3yAOj8dAAB6Uhh2F5U672.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/EC/CgotOV2lO3yAOj8dAAB6Uhh2F5U672.png"/> 
+
 
 然后 client_conn 在处理 epoll 写事件时，则按照请求顺序，批量将响应发送给 client 端。发送完毕后，将 req msg 从 client 的 out 队列删除。最后，再回收消息缓冲，以及消息结构体，供后续请求处理的时候复用。至此一个请求的处理彻底完成。
 
@@ -70,7 +80,9 @@ Twemproxy 在实际线的使用中，还是存在不少问题的。首先，它�
 
 多进程改造中，可以分别构建一个 master 进程和多个 worker 进程来进行任务处理，如下图所示。每个进程维护自己独立的 epoll 事件驱动。其中 master 进程，主要用于监听端口，accept 新连接，并将连接调度给 worker 进程。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/EC/CgotOV2lO3yAApZHAACxEUrIpz8577.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/EC/CgotOV2lO3yAApZHAACxEUrIpz8577.png"/> 
+
 
 而 worker 进程，基于自己独立的 event_base，管理从 master 调度给自己的所有 client 连接。在 client 发送网络请求到达时，进行命令读取、解析，并在进程内的 IO 队列流转，最后将请求打包，pipeline 给后端的 server。
 
@@ -84,7 +96,9 @@ Twemproxy 在实际线的使用中，还是存在不少问题的。首先，它�
 
 第一种方案，是在 Twemproxy 和业务访问端之间，再增加一组 LVS，作为负载均衡层，通过 LVS 负载均衡层，你可以方便得增加或减少 Twemproxy 实例，由 LVS 负责负载均衡和请求分发，如下图。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/CC/CgoB5l2lO32AO_WQAAD00V71n90349.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/CC/CgoB5l2lO32AO_WQAAD00V71n90349.png"/> 
+
 
 第二种方案，是将 Twemproxy 的 IP 列表加入 DNS。业务 client 通过域名来访问 Twemproxy，每次建连时，DNS 随机返回一个 IP，让连接尽可能均衡。
 
@@ -96,7 +110,9 @@ Twemproxy 在实际线的使用中，还是存在不少问题的。首先，它�
 
 对于 Twemproxy 配置的维护，可以通过增加一个配置中心服务来解决。将 YAML 配置文件中的所有配置信息，包括后端资源的部署信息、访问信息，以配置的方式存储到配置中心，如下图。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/EC/CgotOV2lO32AZAvhAADFfzUIYUo604.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/EC/CgotOV2lO32AZAvhAADFfzUIYUo604.png"/> 
+
 
 Twemproxy 启动时，首先到配置中心订阅并拉取配置，然后解析并正常启动。Twemproxy 将自己的 IP 和监听端口信息，也注册到配置中心。业务 client 从配置中心，获取Twemproxy 的部署信息，然后进行均衡访问。
 
@@ -106,7 +122,9 @@ Twemproxy 启动时，首先到配置中心订阅并拉取配置，然后解析�
 
 前面提到，为了应对突发洪水流量，避免硬件局部故障的影响，对 Mc 访问采用了Master-Slave-L1 架构。可以将该缓存架构体系的访问策略，封装到 Twemproxy 内部。实现方案也比较简单。首先在 servers 配置中，增加 Master、Slave、L1 三层，如下图。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/CC/CgoB5l2lO32AVIRKAACszZ_Nluc455.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/CC/CgoB5l2lO32AVIRKAACszZ_Nluc455.png"/> 
+
 
 Twemproxy 启动时，每个 worker 进程预连所有的 Mc 后端，当收到 client 请求时，根据解析出来的指令，分别采用不同访问策略即可。
 
@@ -124,7 +142,9 @@ Twemproxy 启动时，每个 worker 进程预连所有的 Mc 后端，当收到 
 
 Redis 支持主从复制，为了支持更大并发访问量，同时减少主库的压力，一般会部署多个从库，写操作直接请求 Redis 主库，读操作随机选择一个 Redis 从库。这个逻辑同样可以封装在Twemproxy 中。如下图所示，Redis 的主从配置信息，可以用域名的方式，也可以用 IP 端口的方式记录在配置中心，由 Twemproxy 订阅并实时更新，从而在 Redis 增减 slave、主从切换时，及时对后端进行访问变更。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/EC/CgotOV2lO32AZFmuAADIr6HA6UE775.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/EC/CgotOV2lO32AZFmuAADIr6HA6UE775.png"/> 
+
 
 本课时，讲解了大数据时代下大中型互联网系统的特点，访问 Memcached 缓存时的经典问题及应对方案；还讲解了如何通过分拆缓存池、Master-Slave 双层架构，来解决 Memcached 的容量问题、性能瓶颈、连接瓶颈、局部故障的问题，以及 Master-Slave-L1 三层架构，通过多层、多副本 Memcached 体系，来更好得解决突发洪峰流量和局部故障的问题。
 
@@ -132,9 +152,12 @@ Redis 支持主从复制，为了支持更大并发访问量，同时减少主�
 
 可以参考下面的思维导图，对这些知识点进行回顾和梳理。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/CC/CgoB5l2lO32AAYynAADMMM1Tbrw025.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/99/CC/CgoB5l2lO32AAYynAADMMM1Tbrw025.png"/> 
+
 
 OK，这节课就讲到这里啦，下一课时我将分享"Redis基本原理"，记得按时来听课哈。好，下节课见，拜拜！
 
 <br />
+
 

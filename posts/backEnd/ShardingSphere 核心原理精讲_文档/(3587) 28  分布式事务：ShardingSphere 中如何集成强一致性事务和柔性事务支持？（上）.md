@@ -1,3 +1,5 @@
+# 28分布式事务：ShardingSphere中如何集成强一致性事务和柔性事务支持？（上）
+
 今天我们将在上一课时的基础上，详细展开 ShardingSphere 中分布式事务的具体实现过程。首先，我们将介绍支持强一致性事务的 XAShardingTransactionManager。
 
 ### XAShardingTransactionManager
@@ -131,7 +133,9 @@ public interface DatabaseTypeAwareSPI {
 
 在 ShardingSphere 中，继承 DatabaseTypeAwareSPI 接口的就只有 XADataSourceDefinition 接口，而后者存在一批实现类，整体的类层结构如下所示：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/50/92/Ciqc1F9jCmiAI4cLAAE2ATnYWp4900.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/50/92/Ciqc1F9jCmiAI4cLAAE2ATnYWp4900.png"/> 
+  
 XADataSourceDefinition 的实现类
 
 这里以 MySQLXADataSourceDefinition 为例展开讨论，该类分别实现了 DatabaseTypeAwareSPI 和 XADataSourceDefinition 这两个接口中所定义的三个方法：
@@ -186,7 +190,9 @@ public final class XADataSourceDefinitionFactory {
 
 同样，在 sharding-transaction-xa-core 工程中，我们也发现了如下所示的 SPI 配置信息：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/50/93/Ciqc1F9jCoWAOFRpAACUXKjEF6o633.png"/>  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/50/93/Ciqc1F9jCoWAOFRpAACUXKjEF6o633.png"/> 
+  
 sharding-transaction-xa-core 工程中的 SPI 配置
 
 当根据数据库类型获取了对应的 XADataSourceDefinition 之后，我们就可以根据 XADriverClassName 来创建具体的 XADataSource：
@@ -229,7 +235,9 @@ public interface DataSourcePropertyProvider {
 
 DataSourcePropertyProvider 的实现类有两个，一个是 DefaultDataSourcePropertyProvider，另一个是 HikariCPPropertyProvider。ShardingSphere 默认使用的是 HikariCPPropertyProvider，这点可以从如下所示的 SPI 配置文件中得到确认：
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/50/93/Ciqc1F9jCpSAGChUAAB8-cv8fCU688.png"/>  
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/50/93/Ciqc1F9jCpSAGChUAAB8-cv8fCU688.png"/> 
+  
 DataSourcePropertyProvider 的 SPI 配置
 
 HikariCPPropertyProvider 实现了 DataSourcePropertyProvider 接口，并包含了对这些基础信息的定义：
@@ -280,7 +288,9 @@ public DatabaseAccessConfiguration swap(final DataSource dataSource) {
 
 至此，我们对 XADataSource 的构建过程描述完毕。这个过程不算复杂，但涉及的类比较多，值得我们以 XADataSourceFactory 为中心画一张类图作为总结：
 
-<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/50/93/Ciqc1F9jCqGAYmlZAACYlVXsQ44048.png"/>
+
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/50/93/Ciqc1F9jCqGAYmlZAACYlVXsQ44048.png"/> 
+
 
 #### 2.XAConnection
 
@@ -325,7 +335,9 @@ public interface XAConnectionWrapper {
 
 XAConnectionWrapper 接口只有一个方法，即根据传入的 XADataSource 和一个普通 Connection 对象创建出一个新的 XAConnection 对象。XAConnectionWrapper 接口的类层结构如下所示：
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/50/93/Ciqc1F9jCrCAXTkWAAD4zJLBg8I622.png"/>  
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/50/93/Ciqc1F9jCrCAXTkWAAD4zJLBg8I622.png"/> 
+  
 XAConnectionWrapper 接口的实现类
 
 MySQLXAConnectionWrapper 中的 warp 方法如下所示：
@@ -486,3 +498,4 @@ ShardingSphere 作为一款完全兼容 JDBC 规范的分布式数据库中间�
 XAShardingTransactionManager 的内容很多，下一课时，我们将在今天课时的基础上，继续探讨 XAShardingTransactionManager 的剩余部分内容，以及 ShardingSphere 中另一个分片事务管理器 SeataATShardingTransactionManager。
 
 [课程评价入口，挑选 5 名小伙伴赠送小礼品\~](https://wj.qq.com/s2/7238084/d702/)
+

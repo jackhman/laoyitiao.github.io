@@ -1,3 +1,5 @@
+# 10路由设计：Flutter中是如何实现Scheme跳转的
+
 上一课时我们已经创建好了项目的基础框架结构，其中有一个 router.dart 文件，该文件的作用是实现 App 内的一个路由管理和跳转。本课时是基于该功能模块，着重介绍如何实现 App 内外的路由跳转。
 
 ### Scheme
@@ -305,7 +307,9 @@ void dispose() {
 
 为了验证效果，使用了一个 [github 上创建的测试页面](https://love-flutter.github.io/test-page/index.html)。接下来我们运行下程序，然后在手机模拟器中打开测试页面，可以看到如图 1 所示的效果。
 
-<Image alt="1.gif" src="https://s0.lgstatic.com/i/image/M00/2F/E1/Ciqc1F8IDbaAIpJ7AESu3z7EomU793.gif"/>  
+
+<Image alt="1.gif" src="https://s0.lgstatic.com/i/image/M00/2F/E1/Ciqc1F8IDbaAIpJ7AESu3z7EomU793.gif"/> 
+  
 图 1 Scheme 实现运行效果
 
 以上就实现了 Scheme 可以直接在内外部使用的跳转逻辑。不过 Scheme 在 App 外部存在一些体验方面的问题，比如：
@@ -403,3 +407,4 @@ ios/Runner/info.plist
 下一课时我将介绍 Flutter 中各种导航栏的设计，我会在本课时的基础上增加导航栏功能，其次我也会实现首页和个人页面的代码逻辑。
 
 [点击链接，查看本课时源码。](https://github.com/love-flutter/flutter-column)
+

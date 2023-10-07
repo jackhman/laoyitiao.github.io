@@ -1,3 +1,5 @@
+# 10亲和线程模型：分布式链路追踪，学习SkyWalking就够了
+
 这一讲我将带领你学习 SkyWalking 的线程监控设计。SkyWalking 使用字节码增强技术实现了监控，通常的场景下在应用服务的启动命令中，增加探针属性就能完成接入 SkyWalking 的 APM 监控。
 
 这样简单的部署方案最大化地提升了接入效率，但也让开发人员越来越忽略对 SkyWalking 的学习。久而久之，当接入 SkyWalking 出现问题时，大家解决问题的能力就越来越低了。我处理的最多的咨询问题就是：多线程怎么串联链路，日志里面的全链路 ID 怎么打印不出来？
@@ -19,7 +21,9 @@
 
 **最好的线程管理策略就是使用线程池**，线程池执行过程如下所示。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/3B/17/CioPOWCCfBaAax6SAAKau0ImkMw950.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/3B/17/CioPOWCCfBaAax6SAAKau0ImkMw950.png"/> 
+
 
 整个流程非常简单地分为两部分：
 
@@ -103,7 +107,9 @@ executor.execute(new Runnable() {
 
 我们再一次回顾一下这张图，并再次理解工作线程和任务线程的区别。工作线程有两种状态：执行任务线程与等待任务线程。这两个状态循环交替着：当执行任务线程时，工作线程承载着任务线程执行。可以说，这时两种线程可以看作一个整体。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/3B/0F/Cgp9HWCCfCmAQ6J-AAKau0ImkMw629.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/3B/0F/Cgp9HWCCfCmAQ6J-AAKau0ImkMw629.png"/> 
+
 
 但是，如果把监控放在工作线程就会出现严重问题。因为线程的**监控** 是监控**任务线程执行的生命周期**，而工作线程的生命周期是常驻于进程的。随着线程池策略启动，工作线程就进入了无限等待任务线程和执行任务线程的状态，最后会在应用服务优雅关闭时才停止。
 
@@ -139,10 +145,13 @@ executor.execute(new Runnable() {
 
 本节课，我带你从监控视角温习了线程池。线程池有两个很重要的角色：通过管理策略创建的**工作线程** ，和其他主线程放到阻塞队列的**任务线程**。如下图所示，我们第三次再回顾一下这张图。
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M00/3B/0F/Cgp9HWCCfDaAEbuYAAKau0ImkMw690.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M00/3B/0F/Cgp9HWCCfDaAEbuYAAKau0ImkMw690.png"/> 
+
 
 因为任务线程才是真正执行业务代码的载体，所以 SkyWalking 的**线程监控模型就是监控任务线程的生命周期**。
 
 之后我们讲述了 1.任务线程生命周期中的开始监控 2.任务线程执行中的监控 3.结束监控。以及在这三个重要监控环节中，SkyWalking 是如何实现无侵入监控的。最后我们又结合了一个线程池监控实例，认识到线程监控模型并正确配置监控的重要性。
 
 那么你在工作中使用 SkyWalking 时，遇到过内存泄漏问题吗？你又是怎么解决的？欢迎你在评论区分享你的案例故事，期待与你讨论。
+

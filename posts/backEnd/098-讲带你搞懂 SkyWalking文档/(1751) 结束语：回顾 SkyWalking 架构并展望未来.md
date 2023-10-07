@@ -1,10 +1,14 @@
+# 结束语：回顾SkyWalking架构并展望未来
+
 你好，我是你的 SkyWalking 老师吴小胖，欢迎来到本课程的最后一讲，在本课时中，我们将回顾 SkyWalking 的整体架构，并简单聊一下 SkyWalking 最近的发展情况。
 
 ### SkyWalking 架构回顾
 
 SkyWalking 架构整体上分为了 Agent 和 OAP Server 两个部分。Agent 采用微内核设计，如下图所示，负责动态增强各个开源软件和业务代码，实现 Trace 数据的埋点、收集，并作为 gRPC Client，将 Trace 数据向 SkyWalking OAP 进行传输。
 
-<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/40/28/Ciqc1F8yNUeAAUcXAAEO2o1zrPQ372.png"/>
+
+<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/40/28/Ciqc1F8yNUeAAUcXAAEO2o1zrPQ372.png"/> 
+
 
 SkyWalking Agent 的入口是 apm-agent 模块，Agent 启动的流程如下：
 
@@ -28,7 +32,9 @@ SkyWalking Agent 的入口是 apm-agent 模块，Agent 启动的流程如下：
 
 SkyWalking OAP Server 同样采用了微内核的架构。OAP 使用 ModuleManager 管理多个 Module，一个 Module 可以对应多个 ModuleProvider，ModuleProvider 是 Module 底层真正的实现。一个 ModuleProvider 可能支撑了一个非常复杂的大功能，在一个 ModuleProvider 中，可以包含多个 Service ，一个 Service 实现了一个 ModuleProvider 中的一部分功能，通过将多个 Service 进行组装集成，可以得到 ModuleProvider 的完整功能。
 
-<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/40/34/CgqCHl8yNVGAAcqTAAIc_hSfSbE127.png"/>
+
+<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/40/34/CgqCHl8yNVGAAcqTAAIc_hSfSbE127.png"/> 
+
 
 在本课程的第三部分我们深入介绍了 OAP 中的多个 Module，其中包括对 Agent 的管理、配置的管理、对集群的管理等，还深入分析了 OAP 处理和存储 Metrics、Trace 的底层原理，另外还介绍了 OAL 语言的相关内容。
 
@@ -91,3 +97,4 @@ SkyWalking OAP Server 同样采用了微内核的架构。OAP 使用 ModuleManag
 ### 写在最后
 
 分析开源项目源码，剖析开源项目架构设计的过程固然艰辛，但是现在回头看看，我们现在已经完全吃透了 SkyWalking 的内容，在 SkyWalking 新版本、新协议迭代的过程中，我们也可以快速上手，并洞悉其中的原理。在遇到 APM 系统的时候，我们也能够举一反三，将其核心原理推测个八九不离十，就是深入其代码，也丝毫无所畏惧。最后，更希望你能够根据实际工作遇到的问题，扩展 SkyWalking 或是其他手头上在用的 APM 的功能，甚至贡献给开源社区，做到"沉迷于源码，又不仅仅沉迷于源码"。
+

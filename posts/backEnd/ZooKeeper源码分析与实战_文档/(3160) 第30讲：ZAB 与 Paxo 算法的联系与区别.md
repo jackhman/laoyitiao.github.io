@@ -1,3 +1,5 @@
+# 第30讲：ZAB与Paxo算法的联系与区别
+
 在之前的课程中，我们一直围绕 ZooKeeper 的一致性协议算法 ZAB 协议算法来研究其底层实现原理，而为了能够更加全面地掌握分布式一致性的解决方法，在掌握 ZAB 协议的情况下，我们再进一步学习另一种算法： Paxos 算法。我们会通过研究 Paxos 算法的实现原理，来分析它与 ZAB 协议有什么不同，及它们各自的优缺点。
 
 ### Paxos 算法
@@ -24,13 +26,17 @@ Paxos 算法是基于消息传递的分布式一致性算法，很多大型的�
 
 上面介绍的 Paxos 算法针对事务性会话的处理投票过程与 ZAB 协议十分相似，但不同的是，对于采用 ZAB 协议的 ZooKeeper 集群中发起投票的机器，所采用的是在集群中运行的一台 Leader 角色服务器。而 Paxos 算法则采用多副本的处理方式，即存在多个副本，每个副本分别包含提案者、决策者以及学习者。下图演示了三种角色的服务器之间的关系。
 
-<Image alt="11.png" src="https://s0.lgstatic.com/i/image/M00/41/CF/Ciqc1F82RbqAHPmCAAFicrAh8y0060.png"/>
+
+<Image alt="11.png" src="https://s0.lgstatic.com/i/image/M00/41/CF/Ciqc1F82RbqAHPmCAAFicrAh8y0060.png"/> 
+
 
 #### 事务处理过程
 
 介绍完 Paxos 算法中的服务器角色和投票的处理过程后，接下来我们再来看一下 Paxos 针对一次提案是如何处理的。如下图所示，整个提案的处理过程可以分为三个阶段，分别是提案准备阶段、事务处理阶段、数据同步阶段。我们分别介绍一下这三个阶段的底层处理逻辑。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/41/CD/Ciqc1F82Q0yAQd1UAAB9Sb1EaFg098.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/41/CD/Ciqc1F82Q0yAQd1UAAB9Sb1EaFg098.png"/> 
+
 
 * **提案准备阶段**：该阶段是整个 Paxos 算法的最初阶段，所有接收到的来自客户端的事务性会话在执行之前，整个集群中的 Proposer 角色服务器或者节点，需要将会话发送给 Acceptor 决策者服务器。在 Acceptor 服务器接收到该条询问信息后，需要返回 Promise ，承诺可以执行操作信息给 Proposer 角色服务器。
 
@@ -49,3 +55,4 @@ Paxos 算法是基于消息传递的分布式一致性算法，很多大型的�
 ### 总结
 
 本节课我们主要介绍了 Paxos 算法，该算法在解决分布式一致性问题上被广泛采用。Paxos 算法将集群中的服务器或网络节点分为提议者（Proposer）、决策者（Acceptor）、决策学习者（Learner），在处理事务性会话请求的时候，会针对该会话操作在集群中通过提议者（Proposer）服务器发起询问操作，之后由决策者（Acceptor）服务器决定是否执行。在集群中多数服务器都正确执行会话操作后，决策学习者（Learner）会同步（Acceptor）服务器上的数据，并完成最终的操作。
+

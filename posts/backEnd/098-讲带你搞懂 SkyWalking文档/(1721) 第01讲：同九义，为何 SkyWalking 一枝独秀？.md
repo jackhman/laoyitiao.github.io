@@ -1,3 +1,5 @@
+# 第01讲：同九义，为何SkyWalking一枝独秀？
+
 随着互联网时代的发展，很多企业为了快速响应业务的变化，开始使用微服务架构。微服务架构的系统常常被切分为多个独立的子系统并以集群的方式部署在数十甚至成百上千的机器上。  
 
 <br />
@@ -10,7 +12,9 @@
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6E/3E/CgpOIF5fMbaAYJFNAACF5FQCSZg598.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6E/3E/CgpOIF5fMbaAYJFNAACF5FQCSZg598.png"/> 
+
 
 <br />
 
@@ -22,7 +26,9 @@
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6E/3E/Cgq2xl5fMbaARPc6AAF9cLLO7pM785.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6E/3E/Cgq2xl5fMbaARPc6AAF9cLLO7pM785.png"/> 
+
 
 <br />
 
@@ -39,7 +45,9 @@ Logging\&Metrics\&Tracing
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6E/3E/CgpOIF5fMbeAVBbiAAKBOtXrJgg411.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6E/3E/CgpOIF5fMbeAVBbiAAKBOtXrJgg411.png"/> 
+
 
 <br />
 
@@ -59,7 +67,9 @@ Logging\&Metrics\&Tracing
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6E/3E/Cgq2xl5fMbeAIKO2AABvAar2e5E122.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6E/3E/Cgq2xl5fMbeAIKO2AABvAar2e5E122.png"/> 
+
 
 <br />
 
@@ -67,7 +77,9 @@ Logging\&Metrics\&Tracing
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6E/3E/CgpOIF5fMbeACGYWAABqbqP7vns698.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6E/3E/CgpOIF5fMbeACGYWAABqbqP7vns698.png"/> 
+
 
 常见 APM 系统
 =========
@@ -119,7 +131,9 @@ SkyWalking 的架构图如下所示：
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6E/3E/Cgq2xl5fMbiAd3tdAAa1Trt-kIg886.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6E/3E/Cgq2xl5fMbiAd3tdAAa1Trt-kIg886.png"/> 
+
 
 <br />
 
@@ -139,7 +153,9 @@ SkyWalking 分为三个核心部分：
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6E/3E/CgpOIF5fMbiAIwXlAADOeLbrwsU997.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6E/3E/CgpOIF5fMbiAIwXlAADOeLbrwsU997.png"/> 
+
 
 <br />
 
@@ -158,3 +174,4 @@ SkyWalking 分为三个核心部分：
 <br />
 
 SkyWalking 作为 APM 系统中的佼佼者，我们介绍了 SkyWalking 的整体架构以及 Service、Endpoint、ServiceInstance 等核心概念。
+

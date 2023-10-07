@@ -1,3 +1,5 @@
+# 第22讲：从Epic到UerStory完成需求评审
+
 <br />
 
 传统的需求评审是通过评审会议，产品、开发、测试等各路人马坐在一起来完成市场需求文档（Market Requirements Document，MRD）或产品需求文档（Product Requirements Document，PRD）的评审，以发现如需求缺失、无意义的需求、模棱两可的描述等问题。  
@@ -66,7 +68,9 @@ Epic 在敏捷中应用还是比较普遍的，但不同的人对 Epic 理解是
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/4C/Ciqah16MkFuAa3XkAAUpaiyTZ7k375.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/4C/Ciqah16MkFuAa3XkAAUpaiyTZ7k375.png"/> 
+
 
 图1 用户故事地图示例
 
@@ -76,7 +80,9 @@ Epic 在敏捷中应用还是比较普遍的，但不同的人对 Epic 理解是
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/4C/Ciqah16MkFyALNRXAAHVTmmD7_U363.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/4C/Ciqah16MkFyALNRXAAHVTmmD7_U363.png"/> 
+
 
 图2 特性、Epic、用户故事和任务之间的关系
 
@@ -120,7 +126,9 @@ Epic 在敏捷中应用还是比较普遍的，但不同的人对 Epic 理解是
 
 经过评审之后，修改评审中所提出的问题，就形成了新的、更合理的用户故事地图，如图 3 所示。
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/4C/Ciqah16MkFyAFXDkAAFoeNHP4bo595.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/4C/Ciqah16MkFyAFXDkAAFoeNHP4bo595.png"/> 
+
 
 图3 评审通过的用户故事地图示例
 
@@ -174,7 +182,9 @@ Epic 在敏捷中应用还是比较普遍的，但不同的人对 Epic 理解是
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/4C/Ciqah16MkF2AQsP7AAG3hCtxZXY244.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/0B/4C/Ciqah16MkF2AQsP7AAG3hCtxZXY244.png"/> 
+
 
 图4 用户故事评审过程示意图
 
@@ -215,3 +225,4 @@ Epic 在敏捷中应用还是比较普遍的，但不同的人对 Epic 理解是
 <br />
 
 我经常会举一个简单的例子，你去食堂吃饭，你的同事在路上碰到你，说：帮我买几个馒头回来，我就不去食堂了。"买几个馒头"是用户的需求，还是用户基于某个需求给出的解决方案呢？他的真实需求可能会是哪些呢？这算是留给你的思考题，欢迎留言讨论。
+

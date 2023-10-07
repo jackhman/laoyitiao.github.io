@@ -1,3 +1,5 @@
+# 16DubboSerialize层：多种序列化算法，总有一款适合你
+
 通过前面课时的介绍，我们知道一个 RPC 框架需要通过网络通信实现跨 JVM 的调用。既然需要网络通信，那就必然会使用到序列化与反序列化的相关技术，Dubbo 也不例外。下面我们从 Java 序列化的基础内容开始，介绍一下常见的序列化算法，最后再分析一下 Dubbo 是如何支持这些序列化算法的。
 
 ### Java 序列化基础
@@ -48,7 +50,9 @@ public class Student implements Serializable {
 
 Dubbo 为了支持多种序列化算法，单独抽象了一层 Serialize 层，在整个 Dubbo 架构中处于最底层，对应的模块是 dubbo-serialization 模块。 dubbo-serialization 模块的结构如下图所示：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/4F/68/Ciqc1F9gbIiAdyaqAAB4bHnToKs832.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/4F/68/Ciqc1F9gbIiAdyaqAAB4bHnToKs832.png"/> 
+
 
 dubbo-serialization-api 模块中定义了 Dubbo 序列化层的核心接口，其中最核心的是 Serialization 这个接口，它是一个扩展接口，被 @SPI 接口修饰，默认扩展实现是 Hessian2Serialization。Serialization 接口的具体实现如下：
 
@@ -73,7 +77,9 @@ public interface Serialization {
 
 Dubbo 提供了多个 Serialization 接口实现，用于接入各种各样的序列化算法，如下图所示：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/4F/74/CgqCHl9gbJKAFOslAAFjEeB7nf0890.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/4F/74/CgqCHl9gbJKAFOslAAFjEeB7nf0890.png"/> 
+
 
 这里我们**以默认的 hessian2 序列化方式为例**，介绍 Serialization 接口的实现以及其他相关实现。 Hessian2Serialization 实现如下所示：
 
@@ -96,15 +102,21 @@ public class Hessian2Serialization implements Serialization {
 
 Hessian2Serialization 中的 serialize() 方法创建的 ObjectOutput 接口实现为 Hessian2ObjectOutput，继承关系如下图所示：
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/4F/74/CgqCHl9gbOiAG_1mAABH4c18z9c011.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/4F/74/CgqCHl9gbOiAG_1mAABH4c18z9c011.png"/> 
+
 
 在 DataOutput 接口中定义了序列化 Java 中各种数据类型的相应方法，如下图所示，其中有序列化 boolean、short、int、long 等基础类型的方法，也有序列化 String、byte\[\] 的方法。
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/4F/69/Ciqc1F9gbO6AExKqAAB_Dm_zMt0793.png"/>
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/4F/69/Ciqc1F9gbO6AExKqAAB_Dm_zMt0793.png"/> 
+
 
 ObjectOutput 接口继承了 DataOutput 接口，并在其基础之上，添加了序列化对象的功能，具体定义如下图所示，其中的 writeThrowable()、writeEvent() 和 writeAttachments() 方法都是调用 writeObject() 方法实现的。
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/4F/74/CgqCHl9gbPOATpsmAABH5ZuVc6E438.png"/>
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/4F/74/CgqCHl9gbPOATpsmAABH5ZuVc6E438.png"/> 
+
 
 Hessian2ObjectOutput 中会封装一个 Hessian2Output 对象，需要注意，这个对象是 ThreadLocal 的，与线程绑定。在 DataOutput 接口以及 ObjectOutput 接口中，序列化各类型数据的方法都会委托给 Hessian2Output 对象的相应方法完成，实现如下：
 
@@ -130,7 +142,9 @@ public class Hessian2ObjectOutput implements ObjectOutput {
 
 Hessian2Serialization 中的 deserialize() 方法创建的 ObjectInput 接口实现为 Hessian2ObjectInput，继承关系如下所示：
 
-<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/4F/74/CgqCHl9gbQ6AXSDeAABIcO3u8aY906.png"/>
+
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/4F/74/CgqCHl9gbQ6AXSDeAABIcO3u8aY906.png"/> 
+
 
 Hessian2ObjectInput 具体的实现与 Hessian2ObjectOutput 类似：在 DataInput 接口中实现了反序列化各种类型的方法，在 ObjectInput 接口中提供了反序列化 Java 对象的功能，在 Hessian2ObjectInput 中会将所有反序列化的实现委托为 Hessian2Input。
 
@@ -141,3 +155,4 @@ Hessian2ObjectInput 具体的实现与 Hessian2ObjectOutput 类似：在 DataInp
 在本课时，我们首先介绍了 Java 序列化的基础知识，帮助你快速了解序列化和反序列化的基本概念。然后，介绍了常见的序列化算法，例如，Arvo、Fastjson、Fst、Kryo、Hessian、Protobuf 等。最后，深入分析了 dubbo-serialization 模块对各个序列化算法的接入方式，其中重点说明了 Hessian2 序列化方式。
 
 关于本课时，你若还有什么疑问或想法，欢迎你留言跟我分享。
+

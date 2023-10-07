@@ -1,3 +1,5 @@
+# 第04讲：链表在ApacheKafka中的应用
+
 你好，我是你的数据结构课老师蔡元楠，欢迎进入第 04 课时的内容"链表在 Apache Kafka 中的应用"。  
 
 经过了前三讲的学习之后，我相信你已经对数组和链表有了比较好的了解了。那在这一讲中，我想和你分享一下，数组和链表结合起来的数据结构是如何被大量应用在操作系统、计算机网络，甚至是在 Apache 开源项目中的。
@@ -24,11 +26,15 @@
 
 最简单粗暴的方法，当然就是直接用数组或者链表来维护所有的定时器了。从前面的学习中我们可以知道，在数组中插入一个新的元素所需要的时间复杂度是 O(N)，而在链表的结尾插入一个新的节点所需要的时间复杂度是 O(1)，所以在这里可以选择用链表来维护定时器列表。假设我们要维护的定时器列表如下图所示：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/5B/6F/CgpOIF4EZ5GAGIysAAAwMX46TJ4905.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/5B/6F/CgpOIF4EZ5GAGIysAAAwMX46TJ4905.png"/> 
+
 
 它表示现在系统维护了 3 个定时器，分别会在 3T、T 和 2T 时间之后超时。如果现在用户又插入了一个新定时器，将会在 T 时间后超时，我们会将新的定时器数据结构插入到链表结尾，如下图所示：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/5B/6F/Cgq2xl4EZ5GAOmjhAAAojT2d1yQ153.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/5B/6F/Cgq2xl4EZ5GAOmjhAAAojT2d1yQ153.png"/> 
+
 
 每次经过 T 时间之后，定时器检测进程都会从头到尾扫描一遍这个链表，每扫描到一个节点的时候都会将里面的时间减去 T，然后判断这个节点的值是否等于 0 了，如果等于 0 了，则表示这个定时器超时，执行定时器超时进程并删除定时器，如果不等于，则继续扫描下一个节点。
 
@@ -40,11 +46,15 @@
 
 假设原来的有序定时器列表如下图所示：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/5B/6F/CgpOIF4EZ5GANmf7AAE9ok2RoEk947.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/5B/6F/CgpOIF4EZ5GANmf7AAE9ok2RoEk947.png"/> 
+
 
 当我们要插入一个新的定时器，超时的绝对时间算出为 25 Dec 2019 9:23:34，这时候我们会按照超时时间从小到大的顺序，将定时器插入到定时器列表的开头，如下图所示：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/5B/6F/Cgq2xl4EZ5GAezpLAAG4uRLeH28330.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/5B/6F/Cgq2xl4EZ5GAezpLAAG4uRLeH28330.png"/> 
+
 
 维护一个有序的定时器列表的好处是，每次执行定时器检测进程的时间复杂度为 O(1)，因为每次定时器检测进程只需要判断当前系统时间是否是在链表第一个节点时间之后了，如果是则执行定时器超时进程并删除定时器，如果不是则结束定时器检测进程。
 
@@ -64,19 +74,25 @@
 
 现在的时间我们可以用 S×N + i 来表示，每次我们执行完一次定时器检测进程之后，都会将 i 加 1。当 i 等于 N 的时候，我们将 S 加 1，并且将 i 归零。因为"时间轮"里面的数组索引会一直在 0 到 N－1 中循环，所以我们可以将数组想象成是一个环，例如一个"时间轮"的周期大小为 8 的数组，可以想象成如下图所示的环：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/5B/6F/CgpOIF4EZ5GAXlGMAABboVgG49c716.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/5B/6F/CgpOIF4EZ5GAXlGMAABboVgG49c716.png"/> 
+
 
 那么我们假设现在的时间是 S×N + 2，表示这个"时间轮"的当前周期为 S，数组索引为 2，同时假设这个"时间轮"已经维护了一部分定时器链表，如下图所示：
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/5B/6F/Cgq2xl4EZ5GAfv-zAAEx8tfoD5Q555.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/5B/6F/Cgq2xl4EZ5GAfv-zAAEx8tfoD5Q555.png"/> 
+
 
 如果我们想新插入一个超时时间为 T 的新定时器进这个时间轮，因为 T 小于这个"时间轮"周期的大小 8T，所以表示这个定时器可以被插入到当前的"时间轮"中，插入的位置为当前索引为 1 + 2 % 8 = 3 ，插入新定时器后的"时间轮"如下图所示：
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/5B/6F/CgpOIF4EZ5GAE6MFAAFph4owXi0789.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/5B/6F/CgpOIF4EZ5GAE6MFAAFph4owXi0789.png"/> 
+
 
 如果我们现在又想新插入一个超时时间为 9T 的新定时器进这个"时间轮"，因为 9T 大于或等于这个"时间轮"周期的大小 8T，所以表示这个定时器暂时无法被插入到当前的周期中，我们必须将这个新的定时器放进溢出列表里。溢出列表存放着新定时器还需要等待多少周期才能进入到当前"时间轮"中，我们按照下面公式来计算还需等待的周期和插入的位置：
 
@@ -87,7 +103,9 @@
 
 我们算出了等待周期和新插入数组的索引位置之后，就可以更新溢出列表，如下图所示：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/5B/6F/Cgq2xl4EZ5KAbE3FAAGRd4XWnFs829.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/5B/6F/Cgq2xl4EZ5KAbE3FAAGRd4XWnFs829.png"/> 
+
 
 在"时间轮"的算法中，定时器检测进程只需要判断"时间轮"数组现在所指向的索引里的链表为不为空，如果为空则不执行任何操作，如果不为空则对于这个数组元素链表里的所有定时器执行定时器超时进程。而每当"时间轮"的周期数加 1 的时候，系统都会遍历一遍溢出列表里的定时器是否满足当前周期数，如果满足的话，则将这个位置的溢出列表全部移到"时间轮"相对应的索引位置中。
 
@@ -109,13 +127,17 @@
 
 我们可以使用三个"时间轮"来表示不同颗粒度的时间，分别是小时"时间轮"、分钟"时间轮"和秒"时间轮"，可以称小时"时间轮"为分钟"时间轮"的上一层"时间轮"，秒"时间轮"为分钟"时间轮"的下一层"时间轮"。分层"时间轮"会维护一个"现在时间"，每层"时间轮"都需要各自维护一个当前索引来表示"现在时间"。例如，分层"时间轮"的"现在时间"是22h:20min:30s，它的结构图如下图所示：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/5B/7A/CgpOIF4Efl2Ad4lgAAHYUt39Xk4150.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/5B/7A/CgpOIF4Efl2Ad4lgAAHYUt39Xk4150.png"/> 
+
 
 当每次有新的定时器需要插入进分层"时间轮"的时候，将根据分层"时间轮"的"现在时间"算出一个超时的绝对时间。例如，分层"时间轮"的"现在时间"是 22h:20min:30s，而当我们要插入的新定时器超时时间为 50 分钟 10 秒时，这个超时的绝对时间则为 23h:10min:40s。
 
 我们需要先判断最高层的时间是否一致，如果不一致的话则算出时间差，然后插入定时器到对应层的"时间轮"中，如果一致，则到下一层中的时间中计算，如此类推。在上面的例子中，最高层的时间小时相差了 23－22 = 1 小时，所以需要将定时器插入到小时"时间轮"中的 (1 + 21) % 24 = 22这个索引中，定时器列表里还需要保存下层"时间轮"所剩余的时间 10min:40s，如下图所示：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/5B/7B/Cgq2xl4Efl2AFC8yAAH_xBDJGqM733.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/5B/7B/Cgq2xl4Efl2AFC8yAAH_xBDJGqM733.png"/> 
+
 
 每经过一秒钟，秒"时间轮"的索引都会加 1，并且执行定时器检测进程。定时器检测进程需要判断当前元素里的定时器列表是否为空，如果为空则不执行任何操作，如果不为空则对于这个数组元素列表里的所有定时器执行定时器超时进程。需要注意的是，定时器检测进程只会针对最下层的"时间轮"执行。
 
@@ -123,23 +145,33 @@
 
 在经过一段时间之后，上面的分层"时间轮"会到达以下的一个状态：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/5B/7A/CgpOIF4Efl2AM9mbAAH_RIwfKm8774.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/5B/7A/CgpOIF4Efl2AM9mbAAH_RIwfKm8774.png"/> 
+
 
 这时候上层"时间轮"索引里的列表不为空，将这个定时器加入的索引为 10 的分钟"时间轮"中，并且保存下层"时间轮"所剩余的时间 40s，如下图所示：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/5B/7B/Cgq2xl4Efl2AVj80AAHqhEPdsAo113.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/5B/7B/Cgq2xl4Efl2AVj80AAHqhEPdsAo113.png"/> 
+
 
 如此类推，在经过 10 分钟之后，分层"时间轮"会到达以下的一个状态：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/5B/7A/CgpOIF4Efl2ATWRDAAH0naPN-HA794.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/5B/7A/CgpOIF4Efl2ATWRDAAH0naPN-HA794.png"/> 
+
 
 同样的，我们将这个定时器插入到秒"时间轮"中，如下图所示：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/5B/7B/Cgq2xl4Efl2AIm04AAHF7KzHJcs847.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/5B/7B/Cgq2xl4Efl2AIm04AAHF7KzHJcs847.png"/> 
+
 
 这个时候，再经过 40 秒，秒"时间轮"的索引将会指向一个元素，里面有着非空的定时器列表，然后执行定时器超时进程并将定时器列表里所有的定时器删除。
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/5B/7A/CgpOIF4Efl6AfQaHAAHWoZdqcY4094.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/5B/7A/CgpOIF4Efl6AfQaHAAHWoZdqcY4094.png"/> 
+
 
 我们可以看到，采用了分层"时间轮"算法之后，我们只需要维护一个大小为 24 + 60 + 60 = 144 的数组，而同时保持着执行定时器检测进程还有插入和删除定时器的操作时间复杂度都只有 O(1)。
 
@@ -154,3 +186,4 @@ Apache Kafka 是一个开源的消息系统项目，主要用于提供一个实�
 因为 Kafka 中所有的最大消息超时时间都已经被写在了配置文件里，也就是说我们可以提前知道一个定时器的 MaxInterval，所以新版本的 Purgatory 组件则采用的了我们上面所提到的变种"时间轮"算法，将插入定时器的操作性能大大提升。根据 Kafka 所提供的检测结果，采用 DelayQueue 时所能处理的最大吞吐率为 25000 RPS，采用了变种"时间轮"算法之后，最大吞吐率则达到了 105000 RPS。
 
 OK，这节课就讲到这里啦，下一课时我将分享"哈希函数的本质及生成方式"，记得按时来听课哈。
+

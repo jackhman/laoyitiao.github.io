@@ -1,3 +1,5 @@
+# 第01讲：ZooKeeper数据模型：节点的特性与应用
+
 你好，我是那朋，ZooKeeper 专栏作者。
 
 正如开篇词提到的，ZooKeeper 作为一个分布式协调服务，给出了在分布式环境下一致性问题的工业解决方案，目前流行的很多开源框架技术背后都有 ZooKeeper 的身影。那么 ZooKeeper 是如何做到这一点的，在平时开发中我们应该如何使用 ZooKeeper？要想了解这些问题，我们先要对 ZooKeeper 的基础知识进行全面的掌握。
@@ -48,11 +50,15 @@ create /works
 
 最终在 ZooKeeper 服务器上会得到一个具有层级关系的数据结构，如下图所示，这个数据结构就是 ZooKeeper 中的数据模型。
 
-<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/02/DA/Ciqc1F6yL9OAUUguAAAtBwGI74E989.png"/>
+
+<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/02/DA/Ciqc1F6yL9OAUUguAAAtBwGI74E989.png"/> 
+
 
 ZooKeeper 中的数据模型是一种树形结构，非常像电脑中的文件系统，有一个根文件夹，下面还有很多子文件夹。ZooKeeper 的数据模型也具有一个固定的根节点（/），我们可以在根节点下创建子节点，并在子节点下继续创建下一级节点。ZooKeeper 树中的每一层级用斜杠（/）分隔开，且只能用绝对路径（如"get /work/task1"）的方式查询 ZooKeeper 节点，而不能使用相对路径。具体的结构你可以看看下面这张图：
 
-<Image alt="image (6).png" src="https://s0.lgstatic.com/i/image/M00/02/DA/CgqCHl6yL9uAbpHYAABF_GHyGNc950.png"/>
+
+<Image alt="image (6).png" src="https://s0.lgstatic.com/i/image/M00/02/DA/CgqCHl6yL9uAbpHYAABF_GHyGNc950.png"/> 
+
 
 ### znode 节点类型与特性
 
@@ -68,7 +74,9 @@ ZooKeeper 中的数据模型是一种树形结构，非常像电脑中的文件�
 
 在平时的开发中，我们可以利用临时节点的这一特性来做服务器集群内机器运行情况的统计，将集群设置为"/servers"节点，并为集群下的每台服务器创建一个临时节点"/servers/host"，当服务器下线时该节点自动被删除，最后统计临时节点个数就可以知道集群中的运行情况。如下图所示：
 
-<Image alt="image (7).png" src="https://s0.lgstatic.com/i/image/M00/02/DA/CgqCHl6yL-SAb0zaAABQBLohKvo019.png"/>
+
+<Image alt="image (7).png" src="https://s0.lgstatic.com/i/image/M00/02/DA/CgqCHl6yL-SAb0zaAABQBLohKvo019.png"/> 
+
 
 #### 3、有序节点
 
@@ -82,11 +90,15 @@ ZooKeeper 中的数据模型是一种树形结构，非常像电脑中的文件�
 
 每个节点都有属于自己的状态信息，这就很像我们每个人的身份信息一样，我们打开之前的客户端，执行 stat /zk_test，可以看到控制台输出了一些信息，这些就是节点状态信息。
 
-<Image alt="image (8).png" src="https://s0.lgstatic.com/i/image/M00/02/DA/Ciqc1F6yL-yAKn9QAABsJSpQkFI688.png"/>
+
+<Image alt="image (8).png" src="https://s0.lgstatic.com/i/image/M00/02/DA/Ciqc1F6yL-yAKn9QAABsJSpQkFI688.png"/> 
+
 
 每一个节点都有一个自己的状态属性，记录了节点本身的一些信息，这些属性包括的内容我列在了下面这个表格里：
 
-<Image alt="表.png" src="https://s0.lgstatic.com/i/image/M00/03/C1/Ciqc1F6zbwWAVkt5AAC_yMQVCFo712.png"/>
+
+<Image alt="表.png" src="https://s0.lgstatic.com/i/image/M00/03/C1/Ciqc1F6zbwWAVkt5AAC_yMQVCFo712.png"/> 
+
 
 ### 数据节点的版本
 
@@ -108,11 +120,15 @@ ZooKeeper 中的数据模型是一种树形结构，非常像电脑中的文件�
 
 线程 a 通过成功创建 ZooKeeper 节点"/locks"的方式获取锁后继续执行，如下图所示：
 
-<Image alt="image (9).png" src="https://s0.lgstatic.com/i/image/M00/02/DA/CgqCHl6yL_WAAnymAAB32xbrhxQ973.png"/>
+
+<Image alt="image (9).png" src="https://s0.lgstatic.com/i/image/M00/02/DA/CgqCHl6yL_WAAnymAAB32xbrhxQ973.png"/> 
+
 
 这时进程 b 也要访问临界区资源，于是进程 b 也尝试创建"/locks"节点来获取锁，因为之前进程 a 已经创建该节点，所以进程 b 创建节点失败无法获得锁。
 
-<Image alt="image (10).png" src="https://s0.lgstatic.com/i/image/M00/02/DA/CgqCHl6yL_6AOIONAAB3daUjikw147.png"/>
+
+<Image alt="image (10).png" src="https://s0.lgstatic.com/i/image/M00/02/DA/CgqCHl6yL_6AOIONAAB3daUjikw147.png"/> 
+
 
 这样就实现了一个简单的悲观锁，不过这也有一个隐含的问题，就是当进程 a 因为异常中断导致 /locks 节点始终存在，其他线程因为无法再次创建节点而无法获取锁，这就产生了一个死锁问题。针对这种情况我们可以通过将节点设置为临时节点的方式避免。并通过在服务器端添加监听事件来通知其他进程重新获取锁。
 
@@ -126,7 +142,9 @@ ZooKeeper 中的数据模型是一种树形结构，非常像电脑中的文件�
 
 在 ZooKeeper 的底层实现中，当服务端处理 setDataRequest 请求时，首先会调用 checkAndIncVersion 方法进行数据版本校验。ZooKeeper 会从 setDataRequest 请求中获取当前请求的版本 version，同时通过 getRecordForPath 方法获取服务器数据记录 nodeRecord， 从中得到当前服务器上的版本信息 currentversion。如果 version 为 -1，表示该请求操作不使用乐观锁，可以忽略版本对比；如果 version 不是 -1，那么就对比 version 和 currentversion，如果相等，则进行更新操作，否则就会抛出 BadVersionException 异常中断操作。
 
-<Image alt="image (11).png" src="https://s0.lgstatic.com/i/image/M00/02/DA/CgqCHl6yMBKAZzwGAABPrrtajyI575.png"/>
+
+<Image alt="image (11).png" src="https://s0.lgstatic.com/i/image/M00/02/DA/CgqCHl6yMBKAZzwGAABPrrtajyI575.png"/> 
+
 
 ### 总结
 
@@ -139,3 +157,4 @@ ZooKeeper 中的数据模型是一种树形结构，非常像电脑中的文件�
 >
 > 官网：  
 > <https://zookeeper.apache.org/doc/r3.6.0/zookeeperProgrammers.html>
+

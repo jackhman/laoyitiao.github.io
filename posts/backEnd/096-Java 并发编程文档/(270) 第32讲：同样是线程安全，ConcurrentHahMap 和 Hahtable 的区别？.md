@@ -1,3 +1,5 @@
+# 第32讲：同样是线程安全，ConcurrentHahMap和Hahtable的区别？
+
 在本课时我们主要讲解同样是线程安全，ConcurrentHashMap 与 Hashtable 到底有什么区别呢？
 
 我们都知道 HashMap 不是线程安全的，而 ConcurrentHashMap 和 Hashtable 它们两个确实都是线程安全的，那它们有哪些不同点呢？我们从以下四个角度出发，去分析它们的不同点。
@@ -24,7 +26,9 @@ public synchronized void clear() {
 
 Collections.SynchronizedMap(new HashMap()) 的原理和 Hashtable 类似，也是利用 synchronized 实现的。而我们的 ConcurrentHashMap 实现的原理，却有大大的不同，让我们看一下它在 Java 8 中的结构示意图：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/62/08/Cgq2xl4hTd6AEtyaAAGajAYmoZ8045.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/62/08/Cgq2xl4hTd6AEtyaAAGajAYmoZ8045.png"/> 
+
 
 对于 ConcurrentHashMap 的原理，我们在第 30 课时的时候有过详细的介绍和源码分析，本质上它实现线程安全的原理是利用了 CAS + synchronized + Node 节点的方式，这和 Hashtable 的完全利用 synchronized 的方式有很大的不同。
 
@@ -51,3 +55,4 @@ public T next() {
 所以对于 Hashtable 而言，它是不允许在迭代期间对内容进行修改的。相反，ConcurrentHashMap 即便在迭代期间修改内容，也不会抛出ConcurrentModificationException。
 
 本课时总结了 ConcurrentHashMap 与 Hashtable 的区别，虽然它们都是线程安全的，但是在出现的版本上、实现线程安全的方式上、性能上，以及迭代时是否支持修改等方面都有较大的不同，如果我们有并发的场景，那么使用 ConcurrentHashMap 是最合适的，相反，Hashtable 已经不再推荐使用。
+

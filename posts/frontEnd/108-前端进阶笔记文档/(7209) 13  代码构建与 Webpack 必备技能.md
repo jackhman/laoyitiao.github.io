@@ -1,3 +1,5 @@
+# 13代码构建与Webpack必备技能
+
 最初的页面开发中，前端实现一个页面只需要在一个文件里完成，包括 HTML/CSS/JavaScript 各种内容。后来，通常将常用的静态资源放置在 CDN，并使用`<link>`和`<script>`的 src 属性引入的方式，来减少页面开发过程中的重复代码编写。
 
 如今前端页面的功能越来越复杂，规模也越来越大。为了提升代码的可读性、项目的可维护性，我们会将一些通用的工具和组件进行抽象，代码被有组织地按照一定规则进行划分，比如按照功能划分为页面、组件、工具库、脚本等。
@@ -142,7 +144,9 @@ ES6 模块的特点如下：
 
 对于前端开发来说，我们会用到各式各样的构建/打包工具，比如这些。
 
-<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M01/3F/7C/Cgp9HWCeSsSAHiJFAALlqT5qxqA460.png"/>
+
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M01/3F/7C/Cgp9HWCeSsSAHiJFAALlqT5qxqA460.png"/> 
+
 
 其中，涉及模块化代码打包的主要有 Grunt/Gulp/Webpack/Rollup。很多同学会搞混这几个工具，这里我简单介绍下它们之间的区别。
 
@@ -175,7 +179,9 @@ module.exports = {
 
 实际上， Webpack 会从 entry 开始，通过解析模块间的依赖关系，递归地构建出一个依赖图。我们如果在项目中使用`webpack-bundle-analyzer`插件，也可以看到生成的这样一个依赖图。
 
-<Image alt="图片4.png" src="https://s0.lgstatic.com/i/image6/M00/3F/85/CioPOWCeSrqACnYnABLbVfl-Zds569.png"/>
+
+<Image alt="图片4.png" src="https://s0.lgstatic.com/i/image6/M00/3F/85/CioPOWCeSrqACnYnABLbVfl-Zds569.png"/> 
+
 
 Webpack 会根据依赖图来对各个模块进行整合，最终打包成一个或多个的文件，来提供给浏览器进行加载。
 
@@ -204,7 +210,9 @@ module.exports = {
 
 而不同的应用场景需要不同的 Loader，比如我们经常会使用到的 CSS 相关 Loader 和其他资源 Loader。
 
-<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image6/M01/3F/7C/Cgp9HWCeSqyAWHwvAAHProznCQc246.png"/>
+
+<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image6/M01/3F/7C/Cgp9HWCeSqyAWHwvAAHProznCQc246.png"/> 
+
 
 前面我们说到，ES6 模块需要依赖 Babel 编译和 Webpack 打包，而 Babel 在 Webpack 中就是使用 Loader 的方式来进行编译的。
 
@@ -253,3 +261,4 @@ Webpack 在编译过程中，支持多个 Loader 通过流水线的方式进行�
 对于前端来说，自动化工具的出现，大大降低了应用的开发和维护成本，也因此前端生态也日益丰富和完善。善用这些工具来解决开发过程中的痛点，是作为现代前端开发的必备技能。比如，我们可以使用 Webpack 的 Loader 和插件，实现自己的 AST 语法分析和代码处理过程，这也是许多前端框架在做的事情。
 
 如果你要做一个在编译时自动给 Class 类加上指定装饰器的能力，你认为是应该使用 Loader 还是 Plugins 呢？可以在留言区留下你的想法和实现逻辑。
+

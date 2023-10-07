@@ -1,10 +1,14 @@
+# 第12讲：DVM以及ART是如何对JVM进行优化的？
+
 ### 什么是 Dalvik
 
 Dalvik 是 Google 公司自己设计用于 Android 平台的 Java 虚拟机，Android 工程师编写的 Java 或者 Kotlin 代码最终都是在这台虚拟机中被执行的。在 Android 5.0 之前叫作 DVM，5.0 之后改为 ART（Android Runtime）。
 
 在整个 Android 操作系统体系中，ART 位于以下图中红框位置：
 
-<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/00/CA/CgqCHl6qeUKAa86MAAY44MY5alU343.png"/>
+
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/00/CA/CgqCHl6qeUKAa86MAAY44MY5alU343.png"/> 
+
 > 其实称 DVM/ART 为 Android 版的 Java 虚拟机，这种说法并不是很准确。虚拟机必须符合 Java 虚拟机规范，也就是要通过 JCM（Java Compliance Kit）的测试并获得授权，但是 DVM/ART 并没有得到授权。
 
 DVM 大多数实现与传统的 JVM 相同，但是因为 Android 最初是被设计用于手机端的，对内存空间要求较高，并且起初 Dalvik 目标是只运行在 ARM 架构的 CPU 上。针对这几种情况，Android DVM 有了自己独有的优化措施。
@@ -15,7 +19,9 @@ DVM 大多数实现与传统的 JVM 相同，但是因为 Android 最初是被�
 
 比如在 course12 目录下，分别创建 Dex1.java 和 Dex2.java，如下所示：
 
-<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/00/CA/Ciqc1F6qeV-Adn0UAAEbHYFz0mQ062.png"/>
+
+<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/00/CA/Ciqc1F6qeV-Adn0UAAEbHYFz0mQ062.png"/> 
+
 
 分别通过 javac 命令将它们编译为 .class 文件。
 
@@ -48,14 +54,18 @@ dexdump -d -l plain AllDex.dex
 
 上述命令会将 Dex1 和 Dex2 优化后的字节码显示到控制台，内容较多，部分结果如下：
 
-<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/00/CA/Ciqc1F6qecWAQPyJAAPaD9Cc_ck785.png"/>
+
+<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/00/CA/Ciqc1F6qecWAQPyJAAPaD9Cc_ck785.png"/> 
+
 
 可以看出 Dex1 和 Dex2 的信息都在此 .dex 文件中。
 > 实际上，dex 文件在 App 安装过程中还会被进一步优化为 odex(optimized dex)，此过程还会在后续介绍安装过程时再次提到。
 
 注意：这一优化过程也会伴随着一些副作用，最经典的就是 Android 65535 问题。出现这个问题的根本原因是在 DVM 源码中的 MemberIdsSection.java 类中，有如下一段代码：
 
-<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/00/CA/CgqCHl6qeduARPd9AAFJZeldgmo025.png"/>
+
+<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/00/CA/CgqCHl6qeduARPd9AAFJZeldgmo025.png"/> 
+
 
 如果 items 个数超过 DexFormat.MAX_MEMBER_IDX 则会报错，DexFormat.MAX_MEMBER_IDX 的值为 65535，items 代表 dex 文件中的方法个数、属性个数、以及类的个数。也就是说理论上不止方法数，我们在 java 文件中声明的变量，或者创建的类个数如果也超过 65535 个，同样会编译失败，Android 提供了 MultiDex 来解决这个问题。很多网上的文章说 65535 问题是因为解析 dex 文件到数据结构 DexFile 时，使用了 short 来存储方法的个数，其实这种说法是错误的！
 
@@ -65,15 +75,21 @@ dexdump -d -l plain AllDex.dex
 
 具体看一下 Dalvik 和 JVM 字节码的区别，在上文中提到的 Dex1.java，在 Dex1 中有 add 方法如下：
 
-<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/00/CB/CgqCHl6qeg6AfRvnAABDon1VbNU374.png"/>
+
+<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/00/CB/CgqCHl6qeg6AfRvnAABDon1VbNU374.png"/> 
+
 
 经过编译为 Dex1.class 之后，查看其字节码为下图所示：
 
-<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/00/CB/Ciqc1F6qehmAcmWNAAB3egTLyn0886.png"/>
+
+<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/00/CB/Ciqc1F6qehmAcmWNAAB3egTLyn0886.png"/> 
+
 
 add 方法会使用 4 行指令来完成。而通过 dx 将其优化为 .dex 文件后，再次查看它的 Dalvik 字节码为如下：
 
-<Image alt="image (6).png" src="https://s0.lgstatic.com/i/image/M00/00/CB/Ciqc1F6qeiKAYxCiAAA-QtFxAzw826.png"/>
+
+<Image alt="image (6).png" src="https://s0.lgstatic.com/i/image/M00/00/CB/Ciqc1F6qeiKAYxCiAAA-QtFxAzw826.png"/> 
+
 
 解释说明：
 
@@ -82,7 +98,9 @@ add 方法会使用 4 行指令来完成。而通过 dx 将其优化为 .dex 文
 
 可以看出， Dalvik 字节码只需要 2 行指令。基于寄存器的指令明显会比基于栈的指令少，虽然增加了指令长度但却缩减了指令的数量，执行也更为快速。用一张表格来对比基于栈和基于寄存器的实现方式如下：
 
-<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image/M00/00/CB/Ciqc1F6qe4eAZ1zLAAB2Q6lEkoE595.png"/>
+
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image/M00/00/CB/Ciqc1F6qe4eAZ1zLAAB2Q6lEkoE595.png"/> 
+
 
 ### 内存管理与回收
 
@@ -90,7 +108,9 @@ DVM 与 JVM 另一个比较显著的不同就是内存结构的区别，主要�
 
 Dalvik 虚拟机中的堆被划分为了 2 部分：Active Heap 和 Zygote Heap。如下所示：
 
-<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image/M00/00/CC/CgqCHl6qe9WAY-x4AAHlcF3z4X8795.png"/>
+
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image/M00/00/CC/CgqCHl6qe9WAY-x4AAHlcF3z4X8795.png"/> 
+
 
 上图取自老罗的 Android 源码分析，图中的 Card Table 以及两个 Heap Bitmap 主要是用来记录垃圾收集过程中对象的引用情况，以便实现 Concurrent GC。
 
@@ -100,7 +120,9 @@ Android 系统的第一个 Dalvik 虚拟机是由 Zygote 进程创建的，而�
 
 Zygote 进程是在系统启动时产生的，它会完成虚拟机的初始化，库的加载，预置类库的加载和初始化等操作，而在系统需要一个新的虚拟机实例时，Zygote 通过复制自身，最快速的提供一个进程；另外，对于一些只读的系统库，所有虚拟机实例都和 Zygote 共享一块内存区域，大大节省了内存开销。如下图所示：
 
-<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image/M00/00/CC/CgqCHl6qe-aATBEFAAEFkKPCQb4077.png"/>
+
+<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image/M00/00/CC/CgqCHl6qe-aATBEFAAEFkKPCQb4077.png"/> 
+
 
 解释说明：  
 
@@ -124,3 +146,4 @@ Android 系统使用的 C 库 bionic 使用了 Doug Lea 写的 dlmalloc 内存�
 * [Android Dalvik官方文档](https://source.android.com/devices/tech/dalvik/dalvik-bytecode.html)
 * [Dalvik虚拟机字节码和指令集对照表](http://www.zhangchuany.com/dalvik/dalvik-bytecode-instructionset-comparedtab/)
 * [Dalvik虚拟机Java堆创建过程分析](https://blog.csdn.net/luoshengyang/article/details/41581063)
+

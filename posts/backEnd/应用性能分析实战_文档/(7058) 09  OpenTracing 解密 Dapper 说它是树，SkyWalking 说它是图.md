@@ -1,3 +1,5 @@
+# 09OpenTracing解密Dapper说它是树，SkyWalking说它是图
+
 在专栏 Part 1 部分，我们学习了 7 个最流行的 APM 工具。在工作中，使用这些工具能帮助你高效地解决问题，并激发你对工具的更多兴趣，驱使你去了解原理。那如何"走捷径"快速掌握原理呢？
 
 这就进入专栏 Part 2 部分了。作为过来人，我将手把手带你，通过学习核心设计快速掌握原理。这种学习方式，不仅能免去读源码的麻烦，还能让你高效地掌握 APM 工具的精髓。
@@ -41,7 +43,9 @@ Google 在出具这一经典的分布式追踪模型理论之前，业内对分�
 
 * 当请求传播到 B、C、D、E，再打印监控日志时，监控日志就带着与 A 衍生出来的标记，这样这次用户的请求通过 A 服务生成的标记就很容易被收集起来了。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M01/3B/0F/Cgp9HWCCe6SAcfDJAABhm1rEzis920.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M01/3B/0F/Cgp9HWCCe6SAcfDJAABhm1rEzis920.png"/> 
+
 
 不难看出，标记法的优点是精准；但缺点也显而易见，需要打标记。那你可能就会问了：
 > 我在使用 SkyWalking、Sentinel 时，并没有打标记呀，而且很多博客都是说它们是无侵入的呀！
@@ -79,13 +83,17 @@ Google 在出具这一经典的分布式追踪模型理论之前，业内对分�
 
 树形追踪的链路由一个个代码块打点数据组成，Dapper 论文中称之为 Span。如下图所示：每一个 Span 有这样几个基础属性：代码段执行时间、代码段描述、父 SpanId、当前 SpanID。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/3B/17/CioPOWCCe7KAHSLXAAKzybjRV_A322.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/3B/17/CioPOWCCe7KAHSLXAAKzybjRV_A322.png"/> 
+
 
 这些数据都非常容易理解。每个代码段的连接是这样完成的：通过 RPC 框架暴露出的面向传输消息体，在消息头部中设置 SpanID 就完成了 Span 节点的串联。尤其是在 Java 这种非常成熟的生态环境中，通过框架暴露出的拦截器，就可以轻松实现 SpanID 的埋点。
 
 在现场还原上，常用的富客户端都支持树形数据结构展示，下面是 Dapper 的用户交互页面。
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M01/3B/0F/Cgp9HWCCe7iAUjouAAcbVZEai4U865.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M01/3B/0F/Cgp9HWCCe7iAUjouAAcbVZEai4U865.png"/> 
+
 
 可以看出每一个"加号"按钮，代表链路发生了跨进程。通过点击"加号"或"减号"按钮，可以快速跟踪请求在各个分布式应用服务中的执行情况。
 
@@ -107,7 +115,9 @@ Dapper 追踪的最小维度是 Span，也就是树形结构的每一个节点�
 
 一个典型的场景就是预测系统，通过各个系统的行为数据对产品的未来做出预测，如下图所示。
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M00/3B/17/CioPOWCCe8GALAUFAAGrr9sjvGk368.png"/>
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M00/3B/17/CioPOWCCe8GALAUFAAGrr9sjvGk368.png"/> 
+
 
 用户对各个系统的操作引发了一系列数据，这些数据会推送到消息队列，然后预测服务批量消费。可以看到预测服务的一次预测算法代码块的执行，是由多个业务服务引发的。那从预测服务这个点来看，如何与多个生产者服务串联链路呢？树形追踪模型显然是不能满足的。
 
@@ -135,7 +145,9 @@ SkyWalking 使用图形追踪模型，便是其在分布式链路跟踪最底层
 
 本节课程的内容思路大致如下图所示，可供你回顾参考。
 
-<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M01/3B/DA/Cgp9HWCHc9OAfTM0AALZleEvn0A440.png"/>
+
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M01/3B/DA/Cgp9HWCHc9OAfTM0AALZleEvn0A440.png"/> 
+
 
 今天我先带你先学习了 2010 年的分布式追踪方案。包括无侵入的，但是准确度相对较低的**黑盒方案** ；以及准确度较高，但有侵入的**标记方案**。
 
@@ -146,3 +158,4 @@ SkyWalking 使用图形追踪模型，便是其在分布式链路跟踪最底层
 图形追踪的另一个优势就是**对"断链"场景的支持**。因为我们通常在讨论分布式链路追踪时，预设的场景都是应用服务都接入了 APM 监控。但线上应用集群很难做到 100% 接入，所以断链的场景会非常多。断链后的应用服务在接收请求时，发现没有获取到分布式追踪 ID，会识别为人工请求，造成链路还原度很低，而图形的追踪模型对这种场景的支持则更加友好。
 
 相信你在使用分布式链路监控时，遇到过"断链"或是链路无法绘制的问题也很多，欢迎在评论区写下你的问题和思考，期待与你讨论。
+

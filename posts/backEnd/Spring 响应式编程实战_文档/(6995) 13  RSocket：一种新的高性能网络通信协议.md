@@ -1,3 +1,5 @@
+# 13RSocket：一种新的高性能网络通信协议
+
 前面几讲我们讨论了如何使用 WebFlux 构建响应式 Web 服务的实现方案。WebFlux 和 WebMVC 一样，都是基于 HTTP 协议实现请求-响应式的交互方式。这种交互方案很简单，但不够灵活，也无法应对所有的响应式应用场景。那么，有没有在网络协议层上提供更加丰富的交互方式呢？答案是肯定的，那就是我们今天要讨论的 RSocket 协议。
 
 这一讲，我将从 RSocket 协议的特性、交互模式以及与主流开发框架之间的集成等几个方面来和你讨论，相信学完之后，你就会发现 **RSocket 是一款全新的协议，它基于响应式数据流，为我们提供了高性能的网络通信机制**。
@@ -36,7 +38,9 @@ RSocket 专门设计用来与响应式风格应用程序进行配合使用，在
 
 在交互模式上，与 HTTP 的请求-响应这种单向的交互模式不同，RSocket 倡导的是对等通信，不再使用传统的客户端-服务器端单向通信模式，而是在两端之间可以自由地相互发送和处理请求。RSocket 协议在交互方式上可以参考下图。
 
-<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M01/37/06/CioPOWB1XhiAZv3EAACVQCujHBw318.png"/>  
+
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M01/37/06/CioPOWB1XhiAZv3EAACVQCujHBw318.png"/> 
+  
 RSocket 协议的交互方式
 
 ### 使用 RSocket 实现远程交互
@@ -215,3 +219,4 @@ Flux<Message> stream(Message request) {
 下一讲就要开始讨论响应式数据访问层的构建过程，Spring 家族专门提供了 Spring Boot 框架来实现这一目标，我们下一讲再见。
 > 点击链接，获取课程相关代码 ↓↓↓  
 > [https://github.com/lagoueduCol/ReactiveProgramming-jianxiang.git](https://github.com/lagoueduCol/ReactiveProgramming-jianxiang.git?fileGuid=xxQTRXtVcqtHK6j8)
+

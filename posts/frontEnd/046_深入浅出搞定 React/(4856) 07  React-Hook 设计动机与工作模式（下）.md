@@ -1,3 +1,5 @@
+# 07React-Hook设计动机与工作模式（下）
+
 经过第 6 课时的学习，相信你已经清楚了 React-Hooks 的来头，并理解了其背后的"设计动机"。本课时我们的任务是构建对 React-Hooks 的整体认知。
 
 在本课时的主体部分，我将通过一系列的编码实例来帮助你认识 useState、useEffect 这两个有代表性的 Hook，这一步意在帮助初学者对 React-Hooks 可以快速上手。在此基础上，我们将重新理解"Why React-Hooks"这个问题。在课时的最后，我将结合自身的开发体验，和你分享当下这个阶段，我所认识到的 Hooks 的局限性。
@@ -153,11 +155,15 @@ function IncreasingTodoList() {
 
 通过上面这段代码构造出来的界面在刚刚挂载完毕时，就是如下图所示的样子：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/63/B1/Ciqc1F-WvXSAQpxnAACHqrwRF3k766.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/63/B1/Ciqc1F-WvXSAQpxnAACHqrwRF3k766.png"/> 
+
 
 IncreasingTodoList 是一个只允许增加 item 的 ToDoList（待办事项列表）。按照 useEffect 的设定，每当我们点击"点我增加一个待办项"这个按钮，驱动 count+1 的同时，DOM 结构里也会被追加一个 li 元素。以下是连击按钮三次之后的效果图：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/63/BC/CgqCHl-WvXmAFcc7AADFEkuiF7Y038.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/63/BC/CgqCHl-WvXmAFcc7AADFEkuiF7Y038.png"/> 
+
 
 同样的效果，按照注释里的提示，我们也可以通过编写 class 组件来实现：
 
@@ -388,3 +394,4 @@ Hooks 可以视作是 React 为解决状态逻辑复用这个问题所提供的�
 在本课时，我们结合编码层面的认知，辩证地探讨了 Hooks 带来的利好与局限性。现在，你对于 React-Hooks 的基本形态和前世今生都已经有了透彻的了解，也真刀真枪地感受到了 Hooks 带来的利好。学习至此，相信你已经建立了对 React-Hooks 的学习自信。
 
 接下来，我们将续上本课时结尾处的"悬念"，向 React-Hooks 的执行规则发问，同时也将进入 React-Hooks 知识链路真正的深水区。
+

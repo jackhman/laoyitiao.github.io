@@ -1,3 +1,5 @@
+# 第25讲：Yarn资源调度FairSchedule与CapacityScheduler配置选型
+
 在大数据平台运维中，会经常遇到**集群资源争抢的问题**。因为在公司内部，Hadoop Yarn 集群一般会被多个业务、多个用户同时使用，共享 Yarn 资源。此时，如果不对集群资源做规划和管理的话，那么就会出现 Yarn 的资源被某一个用户提交的 Application（App）占满，而其他用户只能等待；或者也可能会出现集群还有很多剩余资源，但 App 就是无法使用的情况。
 
 如何解决这个问题呢？此时就需要用到 Hadoop 中提供的**资源调度器。**
@@ -22,7 +24,9 @@ Yarn 提供了可插拔的资源调度算法，用于解决 App 之间资源竞�
 
 举个简单的例子，下图是容量调度器中配置好的一个队列树：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/35/54/Ciqc1F8VSH2APIBaAAAlubO9K7M490.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/35/54/Ciqc1F8VSH2APIBaAAAlubO9K7M490.png"/> 
+
 
 上图通过队列树方式对 Yarn 集群资源做了一个划分，可以看到，在 root 队列下面定义了两个子队列 dev 和 test，分别占 30% 和 70% 的 Yarn 集群资源；而 dev 队列又被分成了 dev1 和 dev2 两个子队列，分别占用 dev 队列 30% 中的 40% 和 60% 的 Yarn 集群资源。
 
@@ -38,7 +42,9 @@ Fair Scheduler 将整个 Yarn 的可用资源划分成多个队列资源池，�
 
 资源池以及用户的对应关系如下图所示：
 
-<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/35/5F/CgqCHl8VSJmAU1DfAADOTE-gHkM880.png"/>
+
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/35/5F/CgqCHl8VSJmAU1DfAADOTE-gHkM880.png"/> 
+
 
 在上图中，假设整个 Yarn 集群可用的 CPU 资源为 100vCPU，可用的内存资源为 100GB。现在为三个业务线各自划分一个队列，分别是 Queue1、Queue2 和 Queue3，每个队列可用的资源均为 20vCPU 和 20GB 内存，最后还规划了一个 default 队列，用于运行其他用户和业务提交的任务。可用资源为 40vCPU 和 40GB 内存，这样，四个队列将整个 Yarn 集群资源刚好分配完毕。
 
@@ -221,3 +227,4 @@ Fair Scheduler 将整个 Yarn 的可用资源划分成多个队列资源池，�
 ### 小结
 
 本课时主要介绍了 Yarn 集群中常用的两个资源调度器：**容量调度和公平调度**。通过该课时的学习，我们了解到，在多个用户同时使用 Yarn 集群的时候，合理地设置调度器可以有效利用集群资源，并减少资源争抢，使集群资源利用率达到最大化。
+

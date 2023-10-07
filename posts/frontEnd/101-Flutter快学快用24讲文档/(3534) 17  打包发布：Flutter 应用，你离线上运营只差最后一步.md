@@ -1,3 +1,5 @@
+# 17打包发布：Flutter应用，你离线上运营只差最后一步
+
 本课时主要介绍如何将 Two You App 项目，打包成 apk 和 ipa 文件。在打包前，我们首先需要将 App 的名称和图标进行修改，其次增加一些功能授权，确保我们打包后的文件安装是可用的。
 
 ### 基础配置
@@ -195,7 +197,9 @@ flutter pub get
 
 2.打开后，**点击左侧项目的 Runner**，然后选择右侧的 Singing \& Capabilites，修改 Bundle Id 为对应在苹果开发者中创建的项目 Bundle Id，接下来选择 Team，登录开发者账户，自动查询相应的项目信息，如图 1 截图指引所示；
 
-<Image alt="image (7).png" src="https://s0.lgstatic.com/i/image/M00/3D/C7/Ciqc1F8qoliAHwU5AALSnCYSZPg629.png"/>  
+
+<Image alt="image (7).png" src="https://s0.lgstatic.com/i/image/M00/3D/C7/Ciqc1F8qoliAHwU5AALSnCYSZPg629.png"/> 
+  
 图 1 Xcode 配置指引
 
 3.回到项目根目录中运行下面命令并**执行 Flutter 的命令创建 relase 版本**；
@@ -210,7 +214,9 @@ flutter build ios
 
 * **选中左侧的 Runner**，并打开右侧的 General ，然后配置 Identity 中的版本号 Version 和 Build，如图 2 所示。
 
-<Image alt="image (8).png" src="https://s0.lgstatic.com/i/image/M00/3D/D3/CgqCHl8qopOARENrAAaU0YGW44c040.png"/>  
+
+<Image alt="image (8).png" src="https://s0.lgstatic.com/i/image/M00/3D/D3/CgqCHl8qopOARENrAAaU0YGW44c040.png"/> 
+  
 图 2 配置指引
 
 <br />
@@ -230,3 +236,4 @@ flutter build ios
 下一课时，我将完善我们 App 的整体代码逻辑，其中包括：我的消息、系统设置、搜索等功能。我会通过演示界面效果和绘制组件树来介绍整体代码逻辑，对于其中特殊的点会进一步说明。谢谢。
 
 [点击此链接查看本课时源码](https://github.com/love-flutter/flutter-column)
+

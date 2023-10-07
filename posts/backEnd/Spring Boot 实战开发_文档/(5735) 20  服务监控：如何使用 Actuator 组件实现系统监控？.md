@@ -1,3 +1,5 @@
+# 20服务监控：如何使用Actuator组件实现系统监控？
+
 这一讲我们将介绍 Spring Boot 中一个非常有特色的主题------系统监控。
 
 系统监控是 Spring Boot 中引入的一项全新功能，它对应用程序运行状态的管理非常有效。而 Spring Boot Actuator 组件主要通过一系列 HTTP 端点提供的系统监控功能来实现系统监控。因此，接下来我们将引入 Spring Boot Actuator 组件，介绍如何使用它进行系统监控，以及如何对 Actuator 端点进行扩展。
@@ -141,7 +143,9 @@ management:
 
 根据 Spring Boot Actuator 默认提供的端点列表，我们将部分常见端点的类型、路径和描述梳理在如下表格中，仅供参考。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image2/M01/08/30/Cip5yGAKfl6Af_yWAAIDoRxLU2E765.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image2/M01/08/30/Cip5yGAKfl6Af_yWAAIDoRxLU2E765.png"/> 
+
 
 通过访问上表中的各个端点，我们就可以获取自己感兴趣的监控信息了。例如访问了<http://localhost:8082/actuator/health>端点，我们就可以得到如下所示的 account-service 基本状态。
 
@@ -195,7 +199,9 @@ Info 端点用于暴露 Spring Boot 应用的自身信息。在 Spring Boot 内�
 
 在Spring Boot 中包含了很多自动配置的 InfoContributor 对象，常见的 InfoContributor 及其描述如下表所示：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/90/47/CgqCHmAKfoOARrjaAADoOGMdQb4610.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/90/47/CgqCHmAKfoOARrjaAADoOGMdQb4610.png"/> 
+
 
 以上表中的 EnvironmentInfoContributor 为例，通过在配置文件中添加格式以"info"作为前缀的配置段，我们就可以定义 Info 端点暴露的数据。添加完成后，我们将看到所有在"info"配置段下的属性都将被自动暴露。
 
@@ -415,3 +421,4 @@ Spring Boot 内置的 Actuator 组件使得开发人员在管理应用程序运�
 这里给你留一道思考题：在使用 Spring Boot 时，如何实现自定义的健康监测功能？欢迎你在留言区与我互动、交流。
 
 另外，如果你觉得本专栏有价值，欢迎分享给更多好友看到哦\~
+

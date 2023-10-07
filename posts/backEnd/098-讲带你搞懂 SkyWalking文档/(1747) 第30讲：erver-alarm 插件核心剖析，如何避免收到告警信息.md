@@ -1,3 +1,5 @@
+# 第30讲：erver-alarm插件核心剖析，如何避免收到告警信息
+
 本课时我们将重点介绍 SkyWalking 中的告警系统。要想实现一个简单的告警系统，我们只需要完成下面四件事就可以：
 
 1. 指定告警的规则（Rule）。
@@ -106,7 +108,9 @@ AlarmCore 启动的后台线程也帮我们指明了后续要分析的告警系�
 
 RunningRule 中包含了告警规则的基本信息，其字段与前文介绍的 alarm-settings.yml 文件示例配置一致，另外还提供了一个 Windows 字段（Map\<MetaInAlarm, Window\>类型）用于进行告警检查。MetaInAlarm 是一个抽象类，其中记录了监控指标的一些元数据信息，在接收到一个 Metrics 对象的时候，server-alarm-plugin 插件会将其按照指所属实体进行分类，并转换成相应类型的 MetaInAlarm 实现。OAP 默认提供了三个实现类，如下图所示：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/29/C6/CgqCHl77FaKAbZTaAAC4W_ZFMnE073.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/29/C6/CgqCHl77FaKAbZTaAAC4W_ZFMnE073.png"/> 
+
 
 为了方便后续介绍，这里就以前面 alarm-settings.yml 示例文件中配置的service_resp_time_rule 告警规则为例，重点介绍 demo-webapp 的 service_resp_time 指标在告警流程中的处理。ServiceRespTimeMetrics 属于 Service 级别的监控指标，对应 ServiceMetaInAlarm 实现，其中记录了 serviceId（id 字段）、serviceName（name 字段） 以及指标名（metricsName 字段）。
 
@@ -133,37 +137,53 @@ Window 中有三个核心方法。
 
 下面继续以 service_resp_time_rule 规则为例介绍 RunningRule 结构以及 Window 的工作原理，下图为 RunningRule 的核心结构：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/29/BB/Ciqc1F77FbCAD42wAAFrmYbteBM986.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/29/BB/Ciqc1F77FbCAD42wAAFrmYbteBM986.png"/> 
+
 
 下面是 18:30\~18:31 这两分钟内，demo-webapp 服务对应的 Window 的变化情况。在图【1】中，该 Wondow 会调用 moveTo() 方法将 values 集合中的全部元素填充为 null，更新 endTime 为 18:30。同样是在 18:30 这一分钟内，该 RunningRule 收到了 18:30 对应的 service_resp_time 监控点，如图【2】所示，会通过 Window.add() 方法将其记录到 values 集合中：
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/29/CA/CgqCHl77Gk2AMA0ZAALbFV-nsm8496.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/29/CA/CgqCHl77Gk2AMA0ZAALbFV-nsm8496.png"/> 
+
 
 随着时间的流逝，时间来到 18:31 分，AlarmCore 的后台 check 线程检查到距上次告警检查已经过去 1 分钟，会首先调用 moveTo() 方法更新该 Window 的 endTime 字段并更新 values（即抛弃最老的监控数据），如下图所示：
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/29/CA/CgqCHl77GlSAV1j5AAEkL4shzy4313.png"/>
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/29/CA/CgqCHl77GlSAV1j5AAEkL4shzy4313.png"/> 
+
 
 后台 check 线程完成 values 集合更新后会立即调用该 Window.checkAlarm() 方法进行告警检查，此时只有一个监控点且未达到阈值，不会触发告警。之后（还是在 18:31 这一分钟内）会收到新的监控点，如下图所示，同样会通过 Window.add() 记录到 values 集合中：
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/29/BE/Ciqc1F77GnOAGvmhAAJEKxLQ3E4580.png"/>
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/29/BE/Ciqc1F77GnOAGvmhAAJEKxLQ3E4580.png"/> 
+
 
 后台 check 线程在 18:32 分的行为类似，会更新 Window.endTime、更新 values 集合并进行告警检查，如下图所示，此时只有 18:31 分这一个点超过告警阈值，当前时间窗口依然不符合触发告警的条件。
 
-<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/29/CA/CgqCHl77GnqATDeMAACt8uwPp9k199.png"/>
+
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/29/CA/CgqCHl77GnqATDeMAACt8uwPp9k199.png"/> 
+
 
 在后续两分钟里，demo-webapp 服务的耗时都为 2s，下图展示了该 Window 在这两分钟的对应变化：
 
-<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/29/CA/CgqCHl77GoKAWDomAAKwgRmNiQc249.png"/>
+
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/29/CA/CgqCHl77GoKAWDomAAKwgRmNiQc249.png"/> 
+
 
 在 18：34 分的检查中首次满足告警条件，即当前时间窗口内有 3 个点超过 2s。
 
 demo-webapp 服务在接下来两分钟的耗时分别为 1s 和 2s，该 Window 对应的变化如下图所示：
 
-<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/29/BE/Ciqc1F77GouAKUjQAAKMsltdt1Y452.png"/>
+
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/29/BE/Ciqc1F77GouAKUjQAAKMsltdt1Y452.png"/> 
+
 
 在 18:34\~18:36 连续 3 次检查都符合了告警条件，此时才会真正发送告警信息。之后会进入 2 分钟的沉默期，如下图所示，虽然 18:37 和 18:38 两次检查都符合告警条件，但因为此时在沉默期内，都不会告警消息。
 
-<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/29/CA/CgqCHl77GpOAASBGAAMmjzGJu0o957.png"/>
+
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/29/CA/CgqCHl77GpOAASBGAAMmjzGJu0o957.png"/> 
+
 
 此时已经连续累积了 4 个时间窗口符合告警条件，接下来的 18:39 分检查结果无论是否符合告警条件，都会发送告警消息出去，并再次进入 2 分钟的沉默期，该过程与上述过程类似，不再展开描述。
 
@@ -175,7 +195,9 @@ demo-webapp 服务在接下来两分钟的耗时分别为 1s 和 2s，该 Window
 
 从名字就能看出 AlarmNotifyWorker 与告警相关，OAP 收到的监控点就是通过该 Worker 进入上述告警流程的。当收到一个监控点（即 Metrics 对象）时，会经过如下组件：
 
-<Image alt="9.png" src="https://s0.lgstatic.com/i/image/M00/29/BE/Ciqc1F77GrGAeKDVAAA2LYgGcXw505.png"/>
+
+<Image alt="9.png" src="https://s0.lgstatic.com/i/image/M00/29/BE/Ciqc1F77GrGAeKDVAAA2LYgGcXw505.png"/> 
+
 
 其中 AlarmNotifyWorker、AlarmEnhance 只是简单地转发了 Metrics 对象，并没有做什么特殊处理， NotifyHandler.notfiy() 方法是根据 Metrics 分类创建相应 MetaInAlarm 对象的地方，MetaInAlarm 的相关内容在前面已经介绍过了，这里不再展开。
 
@@ -202,7 +224,9 @@ public void notify(Metrics metrics) {
 
 前文在分析 AlarmCore 启动的后台 check 线程时看到，它会在完成所有告警检查之后，由 AlarmCallback 处理所有告警消息。目前 server-alarm-plugin 提供了两个 AlarmCallback 实现，如下图所示：
 
-<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image/M00/29/BE/Ciqc1F77GruAGZICAAHBhdHdoB8058.png"/>
+
+<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image/M00/29/BE/Ciqc1F77GruAGZICAAHBhdHdoB8058.png"/> 
+
 
 其中 WebhookCallback 是通过 Webhook 的方式将告警消息发送到 SkyWalking Rocketbot。AlarmStandardPersistence 则会将告警消息持久化到 ElasticSearch 中，后续可以通过 query-graphql-plugin 插件提供的接口查询。
 
@@ -248,3 +272,4 @@ remoteEndpoints.forEach(url -> {
 ### AlarmStandardPersistence
 
 告警消息除了会通过 WebhookCallback 发送出去之外，还会通过 AlarmStandardPersistence 进行持久化。在收到 AlarmMessage 之后，AlarmStandardPersistence 会将其转换成 AlarmRecord，并交给 RecordStreamProcessor 进行持久化。AlarmRecord 的核心字段与 AlarmMessage 的字段基本一致，RecordStreamProcessror 的处理过程也已经详细分析过了，这里不再展开。
+

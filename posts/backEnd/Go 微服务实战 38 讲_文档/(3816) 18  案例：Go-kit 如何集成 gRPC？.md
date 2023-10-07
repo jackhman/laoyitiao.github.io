@@ -1,3 +1,5 @@
+# 18案例：Go-kit如何集成gRPC？
+
 在上一课时中，我们对比分析了 gRPC 和 Thrift ，发现二者都缺少了大量的功能，比如：连接池、服务框架、服务发现、服务治理、分布式链路追踪、埋点和上下文日志等，这些功能才是日常开发和运维最常使用的。而 Go-kit 提供了上述的功能，并且还可以和 gRPC 进行结合，所以今天我们就来详细讲解一下 Go-kit 和 gRPC 结合的基本原理和实战案例。
 
 Go-kit 框架可以和 gRPC 结合使用，将 RPC 作为传输层的组件，而自身则提供诸如服务注册和发现、断路器等微服务远程交互的通用功能组件。比如，gRPC 缺乏服务治理的功能，我们就可以通过 Go-kit 结合 gRPC 来弥补这一缺陷。Go-kit 框架抽象的 Endpoint 层设计让开发者可以很容易地封装使用其他微服务组件，比如说服务注册与发现、断路器和负载均衡策略等。
@@ -22,7 +24,9 @@ Go-kit 框架可以和 gRPC 结合使用，将 RPC 作为传输层的组件，�
 
 gRPC 请求的处理过程如下图所示，服务端接收到一个客户端请求后，交由 grpc_transport.Handler 处理，它会调用 DecodeRequestFunc 进行解码，然后交给其 Endpoint 层转换为 Service 层能处理的对象，将返回值通过 EncodeResponseFunc 编码，最后返回给客户端。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/47/A5/CgqCHl9InuGAYQa8AABJDed6WN0517.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/47/A5/CgqCHl9InuGAYQa8AABJDed6WN0517.png"/> 
+  
 Go-kit 过程调用示意图
 
 接下来，我们就按照上述的流程，实现通过 Go-kit 进行 gRPC 调用。
@@ -109,7 +113,9 @@ func EncodeLoginResponse(_ context.Context, r interface{}) (interface{}, error) 
 
 这样做的好处有两点：一是 LoginRequest 和 LoginResponse 是通过 gRPC 生成的，属于 Transport 层，Endpoint 层不需要感知，后续如果技术选型变化了，需要将 gRPC 替换成 Thrift 时就可以只处理 Transport 层的变化，让变更最小化（如下图）；二是后端业务处理时的属性类型和返回给前端的数据属性类型不一定完全一样，比如上述代码中 LoginResult 中的 Ret 是 bool 类型，而返回给前端的 LoginResponse 中 Ret 是 string 类型，从而实现兼容性。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/47/9A/Ciqc1F9InySAYF-DAAAPcyoNePo946.png"/>  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/47/9A/Ciqc1F9InySAYF-DAAAPcyoNePo946.png"/> 
+  
 Go-kit 分层示意图
 
 <br />
@@ -223,3 +229,4 @@ func main() {
 相信你学完本课时后，会发现 Go-kit 可以和 gRPC 框架完美无缝结合，不仅能获得 gRPC 的高性能，还可以获得 Go-kit 作为微服务框架提供的构建微服务项目实例的便捷性，比如使用 Endpoint 的 Middleware 层来获得日志、限流、熔断、链路追踪和服务监控等方面的扩展能力，可以说是一举两得。
 
 最后给你留个思考题：如果要将 gRPC 替换为 Thrift，需要对上述代码做哪些改动呢？欢迎你在留言区积极发言和讨论。
+

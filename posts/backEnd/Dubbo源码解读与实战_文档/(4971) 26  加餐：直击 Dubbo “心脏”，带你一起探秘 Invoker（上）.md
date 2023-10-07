@@ -1,3 +1,5 @@
+# 26加餐：直击Dubbo“心脏”，带你一起探秘Invoker（上）
+
 在前面课时介绍 DubboProtocol 的时候我们看到，上层业务 Bean 会被封装成 Invoker 对象，然后传入 DubboProtocol.export() 方法中，该 Invoker 被封装成 DubboExporter，并保存到 exporterMap 集合中缓存。
 
 在 DubboProtocol 暴露的 ProtocolServer 收到请求时，经过一系列解码处理，最终会到达 DubboProtocol.requestHandler 这个 ExchangeHandler 对象中，该 ExchangeHandler 对象会从 exporterMap 集合中取出请求的 Invoker，并调用其 invoke() 方法处理请求。
@@ -8,7 +10,9 @@ DubboProtocol.protocolBindingRefer() 方法则会将底层的 ExchangeClient 集
 
 首先，我们来看 AbstractInvoker 这个抽象类，它继承了 Invoker 接口，继承关系如下图所示：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/61/07/Ciqc1F-Oq-uAdi4nAABRchTw_kQ666.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/61/07/Ciqc1F-Oq-uAdi4nAABRchTw_kQ666.png"/> 
+  
 AbstractInvoker 继承关系示意图
 
 从图中可以看到，最核心的 DubboInvoker 继承自AbstractInvoker 抽象类，AbstractInvoker 的核心字段有如下几个。
@@ -232,7 +236,9 @@ public static boolean isOneway(URL url, Invocation inv) {
 
 oneway 指的是客户端发送消息后，不需要得到响应。所以，对于那些不关心服务端响应的请求，就比较适合使用 oneway 通信，如下图所示：
 
-<Image alt="Lark20201023-161312.png" src="https://s0.lgstatic.com/i/image/M00/62/8F/CgqCHl-SkLWAaPzTAACgt5rmWHg530.png"/>  
+
+<Image alt="Lark20201023-161312.png" src="https://s0.lgstatic.com/i/image/M00/62/8F/CgqCHl-SkLWAaPzTAACgt5rmWHg530.png"/> 
+  
 oneway 和 twoway 通信方式对比图
 
 可以看到发送 oneway 请求的方式是send() 方法，而后面发送 twoway 请求的方式是 request() 方法。通过之前的分析我们知道，request() 方法会相应地创建 DefaultFuture 对象以及检测超时的定时任务，而 send() 方法则不会创建这些东西，它是直接将 Invocation 包装成 oneway 类型的 Request 发送出去。
@@ -259,3 +265,4 @@ public void received(Channel channel, Object message) throws RemotingException {
 本课时我们重点介绍了 Dubbo 最核心的接口------ Invoker。首先，我们介绍了 AbstractInvoker 抽象类提供的公共能力；然后分析了 RpcContext 的功能和涉及的组件，例如，InternalThreadLocal、InternalThreadLocalMap 等；最后我们说明了 DubboInvoker 对 doinvoke() 方法的实现，并区分了 oneway 和 twoway 两种类型的请求。
 
 下一课时，我们将继续介绍 DubboInvoker 的实现。
+

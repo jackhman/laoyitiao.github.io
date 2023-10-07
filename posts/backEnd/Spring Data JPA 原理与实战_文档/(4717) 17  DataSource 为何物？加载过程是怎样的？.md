@@ -1,3 +1,5 @@
+# 17DataSource为何物？加载过程是怎样的？
+
 最近几年 DataSource 越来越成熟，但当我们做开发的时候对 DataSource 的关心却越来越少，这是因为大多数情况都是利用 application.properties进行简单的数据源配置，项目就可以正常运行了。但是当我们想要解决一些原理性问题的时候，就需要用到 DataSource、连接池等基础知识了。
 
 那么这一讲我将带你揭开 DataSource 的面纱，一起来了解它是什么、如何使用，以及最佳实践是什么呢？
@@ -6,11 +8,15 @@
 
 当我们用第三方工具去连接数据库（Mysql，Oracle 等）的时候，一般都会让我们选择数据源，如下图所示：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/6A/2D/CgqCHl-o5UKAeKojAAMZoym4vVw887.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/6A/2D/CgqCHl-o5UKAeKojAAMZoym4vVw887.png"/> 
+
 
 我们以 MySQL 为例，当选择 MySQL 的时候就会弹出如下图显示的界面：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/6A/22/Ciqc1F-o5UuACyC4AAEVdHsmM98446.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/6A/22/Ciqc1F-o5UuACyC4AAEVdHsmM98446.png"/> 
+
 
 其中，我们在选择了 Driver（驱动）和 Host、UserName、Password 等之后，就可以创建一个 Connection，然后连接到数据库里面了。
 
@@ -32,7 +38,9 @@ Connection getConnection(String username, String password)
 
 那么在程序里面如何实现呢？也有很多第三方的实现方式，常见的有C3P0、BBCP、Proxool、Druid、Hikari，而目前 Spring Boot 里面是采用 Hikari 作为默认数据源。Hikari 的优点是：开源，社区活跃，性能高，监控完整。我们通过工具看一下项目里面DataSource 的实现类有哪些，如下图所示：
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/6A/2D/CgqCHl-o5VuAHBXrAAF5pvcL8BA769.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/6A/2D/CgqCHl-o5VuAHBXrAAF5pvcL8BA769.png"/> 
+
 
 其中，当我采用默认数据源的时候，可以看到数据源的实现类有：h2 里面的 JdbcDataSource、MySQL 连接里面的 MysqlDataSource，以及今天要重点介绍的 HikariDataSource（默认数据源，也是 Spring 社区推荐的最佳数据源）。
 
@@ -102,7 +110,9 @@ public class HikariDataSource extends HikariConfig implements DataSource, Closea
 
 第一个问题，HikariConfig 的配置里面描述了 Hikari 数据源主要的配置属性，我们打开来看一下，如图所示：
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/6A/2D/CgqCHl-o5W6AYziKAALhn9RPD2o391.png"/>
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/6A/2D/CgqCHl-o5W6AYziKAALhn9RPD2o391.png"/> 
+
 
 通过上面的源码我们可以看到数据源的关键配置信息：用户名、密码、连接池的配置、jdbcUrl、驱动的名字，等等，这些字段你可以参考课程开始时我介绍的工具，细心观察的话都可以找到对应关系，也就是创建数据源需要的一些配置项。
 
@@ -126,7 +136,9 @@ public class HikariDataSource extends HikariConfig implements DataSource, Closea
 
 我们用一个图来表示一下：
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/6A/22/Ciqc1F-o5XmADAK4AAC16V3GEqM205.png"/>
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/6A/22/Ciqc1F-o5XmADAK4AAC16V3GEqM205.png"/> 
+
 
 而我们常说的 MySQL 驱动，其实就是 com.mysql.cj.jdbc.Driver，而这个类主要存在于 mysql-connection-java:8.0\* 的 jar 里面，也就是我们经常说的不同的数据库所代表的驱动 jar 包。
 
@@ -206,11 +218,15 @@ public class DataSourceProperties implements BeanClassLoaderAware, InitializingB
 
 我们通过 DatabaseDriver 的源码可以看到 MySQL 的默认驱动 Spring Boot 是采用 com.mysql.cj.jdbc.Driver 来实现的。
 
-<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/6A/22/Ciqc1F-o5Y6AJJGgAADB_oP_Er8606.png"/>
+
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/6A/22/Ciqc1F-o5Y6AJJGgAADB_oP_Er8606.png"/> 
+
 
 同时，@ConfigurationProperties(prefix = "spring.datasource") 也告诉我们，application.properties 里面的 datasource 相关的公共配置可以以 spring.datasource 为开头，这样当启动的时候，DataSourceProperties 就会将 datasource 的一切配置自动加载进来。正如我们前面在 application.properties 里面的配置的一样，如下图所示：
 
-<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/6A/2E/CgqCHl-o5ZWAC7oxAAIk-0v0OKA580.png"/>
+
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/6A/2E/CgqCHl-o5ZWAC7oxAAIk-0v0OKA580.png"/> 
+
 
 这里有 url、username、password、driver-class-name 等关键配置，不同数据源的公共配置也不多。
 
@@ -303,7 +319,9 @@ abstract class DataSourceConfiguration {
 
 所以顺理成章地，我们就可以知道 Hikari 数据源的配置有哪些了，如下图所示：
 
-<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/6A/2E/CgqCHl-o5aqAP6m_AAHuix5hURo100.png"/>
+
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/6A/2E/CgqCHl-o5aqAP6m_AAHuix5hURo100.png"/> 
+
 
 Hikari 的配置比较多，你实际工作中想要了解详细配置，可以看一下官方文档：<https://github.com/brettwooldridge/HikariCP>，这里我只说一下我们最需要关心的配置，有如下几个：
 
@@ -360,11 +378,15 @@ logging.level.com.zaxxer.hikari=TRACE
 
 1.如下日志，显示了Hikari 的 config 配置。
 
-<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/6A/23/Ciqc1F-o5ciAb9jeAAR6M63p8e0177.png"/>
+
+<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/6A/23/Ciqc1F-o5ciAb9jeAAR6M63p8e0177.png"/> 
+
 
 2.当我们执行一个方法的时候，到底要在一个 MySQL 的 connection 上面执行哪些 SQL 呢？通过如下日志我们可以看得出来。
 
-<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image/M00/6A/2F/CgqCHl-o5dqAOiJCAAUvCxtwstQ913.png"/>
+
+<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image/M00/6A/2F/CgqCHl-o5dqAOiJCAAUvCxtwstQ913.png"/> 
+
 
 3.通过开启 com.zaxxer.hikari.pool.HikariPool 类的 debug 级别，可以实时看到连接池的使用情况：软件日志如下（上图也有体现）：
 
@@ -399,11 +421,15 @@ management.metrics.export.prometheus.enabled=true
 
 然后我们启动项目，通过下图中的地址就可以看到，Prometheus 的 Metrics 里面多了很多 HikariCP 的指标。
 
-<Image alt="Drawing 11.png" src="https://s0.lgstatic.com/i/image/M00/6A/2F/CgqCHl-o5euAFtXOAAI2DmhXYZQ057.png"/>
+
+<Image alt="Drawing 11.png" src="https://s0.lgstatic.com/i/image/M00/6A/2F/CgqCHl-o5euAFtXOAAI2DmhXYZQ057.png"/> 
+
 
 当看到这些指标之后，我们就可以根据 Grafana 社区里面提供的 HikariCP 的监控 Dashboards 的配置文档地址：<https://grafana.com/grafana/dashboards/6083>，导入到我们自己的 Grafana 里面，可以通过图表看到如下界面：
 
-<Image alt="Drawing 12.png" src="https://s0.lgstatic.com/i/image/M00/6A/24/Ciqc1F-o5giAf-jFAAIxax2K82w908.png"/>
+
+<Image alt="Drawing 12.png" src="https://s0.lgstatic.com/i/image/M00/6A/24/Ciqc1F-o5giAf-jFAAIxax2K82w908.png"/> 
+
 
 我们通过这种标准的模板就可以知道 JDBC 的连接情况、Hikari 的连接情况，以及每个连接请求时间、使用时间。这样对我们诊断 DB 性能问题非常有帮助。
 
@@ -498,7 +524,9 @@ spring.datasource.druid.filters= #配置多个英文逗号分隔
 
 * SpringImplicitNamingStrategy：默认的 spring data 2.2.3 的策略，只是扩展了 ImplicitNamingStrategyJpaCompliantImpl 里面的 JoinTableName 的方法，如下图所示：
 
-<Image alt="Drawing 13.png" src="https://s0.lgstatic.com/i/image/M00/6A/25/Ciqc1F-o5jmAeh2mAAB0yWE0YWY107.png"/>
+
+<Image alt="Drawing 13.png" src="https://s0.lgstatic.com/i/image/M00/6A/25/Ciqc1F-o5jmAeh2mAAB0yWE0YWY107.png"/> 
+
 
 这里我们只需要关心 SpringImplicitNamingStrategy 就可以了，其他的我们基本上用不到。那么 SpringImplicitNamingStrategy 效果如何呢？我们举个例子看一下 UserInfo 实体，代码如下：
 
@@ -530,7 +558,9 @@ emailAddress -> myAddress
 
 它的实现类负责将逻辑字段转化成带下划线，或者统一给字段加上前缀，又或者加上双引号等格式的数据库字段名字，其主要的接口是：org.hibernate.boot.model.naming.PhysicalNamingStrategy，而它的实现类也只有两个，如下图所示：
 
-<Image alt="Drawing 14.png" src="https://s0.lgstatic.com/i/image/M00/6A/25/Ciqc1F-o5kiAbR_iAAAz6GG2wMk729.png"/>
+
+<Image alt="Drawing 14.png" src="https://s0.lgstatic.com/i/image/M00/6A/25/Ciqc1F-o5kiAbR_iAAAz6GG2wMk729.png"/> 
+
 
 1.PhysicalNamingStrategyStandardImpl：这个类什么都没干，即直接将第一个步骤得到的逻辑字段名字当成数据库的字段名字使用。这个主要的应用场景是，如果某些字段的命名格式不是下划线的格式，我们想通过 @Column 的方式显示声明的话，可以把默认第二步的策略改成 PhysicalNamingStrategyStandardImpl。那么如果再套用第一步的例子，经过这个类的转化会变成如下形式：
 
@@ -562,7 +592,9 @@ Hibernate: create table user_info (id bigint not null, create_time timestamp, cr
 
 你也可以通过在 SpringPhysicalNamingStrategy 类里面设置断点，来一步一步地验证我们的说法，如下图所示：
 
-<Image alt="Drawing 15.png" src="https://s0.lgstatic.com/i/image/M00/6A/25/Ciqc1F-o5mSASabwAADWrC44gPw955.png"/>
+
+<Image alt="Drawing 15.png" src="https://s0.lgstatic.com/i/image/M00/6A/25/Ciqc1F-o5mSASabwAADWrC44gPw955.png"/> 
+
 
 以上就是 Naming 命名策略的详解及其实践，不知道我在这部分开头提到的那几个问题你有没有掌握，如果还是存在疑问，你要多跟着我的步骤实践几次。下面我们了解一下它的加载原理吧。
 
@@ -577,7 +609,9 @@ spring.jpa.hibernate.naming.physical-strategy=org.springframework.boot.orm.jpa.h
 
 如果我们直接搜索：spring.jpa.hibernate 就会发现，其默认配置是在 org.springframework.boot.autoconfigure.orm.jpa.HibernateProerties 这类里面的，如下图所示的方法中进行加载。
 
-<Image alt="Drawing 16.png" src="https://s0.lgstatic.com/i/image/M00/6A/25/Ciqc1F-o5nSAUv1hAAJk2XpXe2k189.png"/>
+
+<Image alt="Drawing 16.png" src="https://s0.lgstatic.com/i/image/M00/6A/25/Ciqc1F-o5nSAUv1hAAJk2XpXe2k189.png"/> 
+
 
 其中，IMPLICIT_NAMING_STRATEGY 和 PHYSICAL_NAMING_STRATEGY 的值如下述代码所示，它是 Hibernate 5 的配置变量，用来改变 Hibernate的 naming 的策略。
 
@@ -607,3 +641,4 @@ spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.Ph
 如果你觉得这一讲对你有帮助，就动动手指分享吧。下一讲我会为你介绍多数据源应该怎么配置，它的最佳实践又是什么呢？你可以先思考一下，也欢迎你在留言区发表自己的看法，让我们一起活跃思维，碰撞出不一样的火花！
 > 点击下方链接查看源码（不定时更新）  
 > <https://github.com/zhangzhenhuajack/spring-boot-guide/tree/master/spring-data/spring-data-jpa>
+

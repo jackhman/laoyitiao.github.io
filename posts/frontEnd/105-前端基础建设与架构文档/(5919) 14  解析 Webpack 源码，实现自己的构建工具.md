@@ -1,3 +1,5 @@
+# 14解析Webpack源码，实现自己的构建工具
+
 前端工程化和基础建设这个话题，自然少不了分析构建工具。作为前端工程中最常见、最经典的构建工具，Webpack 必须要有一个独立小节进行精讲。可是，关于 Webpack 什么样的内容才更有意义呢？当前社区，Webpack 插件编写、loader 编写相关内容已经非常多了，甚至 Tapable 机制也已经有了涉猎。
 
 这一讲，我们独辟蹊径，从 Webpack 的实现入手，帮助你构建一个自己的工程化工具。
@@ -158,7 +160,9 @@ function webpackBundle({ modules, entry }) {
 
 我们通过下图来总结一下 Webpack 风格的打包器原理和流程：
 
-<Image alt="Lark20210125-174549.png" src="https://s0.lgstatic.com/i/image/M00/91/75/Ciqc1GAOlIOAYZLfAAFmQUf14uQ501.png"/>  
+
+<Image alt="Lark20210125-174549.png" src="https://s0.lgstatic.com/i/image/M00/91/75/Ciqc1GAOlIOAYZLfAAFmQUf14uQ501.png"/> 
+  
 Webpack 打包器原理和流程图
 
 讲到这里，我们再扩充一下另一个打包器------Rollup 的打包原理，针对上述代码，Rollup 打包过后的产出为：
@@ -409,6 +413,9 @@ return `${module.id}: {
 
 主要内容总结为下图：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image2/M01/09/65/Cip5yGAOlKiAA3uyAAG87LhMy8s651.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image2/M01/09/65/Cip5yGAOlKiAA3uyAAG87LhMy8s651.png"/> 
+
 
 在实际生产环节，打包器当然功能更多，比如需要考虑：code spliting 甚至 watch mode 以及 reloading 能力等。但是不管什么样的特性和能力，只要我们理清最初心，掌握最基本的思想，任何疑问都会迎刃而解。
+

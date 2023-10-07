@@ -1,3 +1,5 @@
+# 第10讲：ClientCnxn：客户端核心工作类工作原理解析
+
 今天我们开始学习客户端核心工作类的工作原理。
 
 上个课时我们学习了会话的底层实现过程，我们知道会话是在 ZooKeeper 的客户端发起的，而在会话超异常等事件发生时，服务端也会通知给客户端。而我们之所以能够接收到服务端的通知，并向服务端发送请求等操作，是通过 ZooKeeper 客户端实现的。下面我们就深入学习一下客户端核心工作类的实现过程和底层原理。
@@ -8,7 +10,9 @@
 
 在前面的课程中介绍过，向服务端发送创建数据节点或者添加 Watch 监控等操作时，都会先将请求信息封装成 Packet 对象。那么 Packet 是什么呢？其实\*\* Packet 可以看作是一个 ZooKeeper 定义的，用来进行网络通信的数据结构\*\*，其主要作用是封装了网络通信协议层的数据。而 Packet 内部的数据结构如下图所示：
 
-<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/19/3A/CgqCHl7aDQyAEkoJAAB9K_a8-pA768.png"/>
+
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/19/3A/CgqCHl7aDQyAEkoJAAB9K_a8-pA768.png"/> 
+
 
 在 Packet 类中具有一些请求协议的相关属性字段，这些请求字段中分别包括：
 
@@ -91,3 +95,4 @@ class EventThread extends ZooKeeperThread {
 这里留给你一道思考题：我们知道为了向服务端证明客户端是存活的，需要 ZooKeeper 客户端周期性的发送 Ping 操作给 ZooKeeper 服务端。而在 ZooKeeper 服务端收到 Ping 操作后，又做了什么操作呢？
 
 答案是在 ZooKeeper 服务端收到 Ping 操作的请求时，会根据服务端的当前时间重置与客户端的 Session 时间，更新该会话的请求延迟时间等。进而保持客户端与服务端连接状态。
+

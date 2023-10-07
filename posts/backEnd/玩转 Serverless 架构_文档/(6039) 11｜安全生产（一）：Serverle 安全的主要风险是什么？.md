@@ -1,3 +1,5 @@
+# 11｜安全生产（一）：Serverle安全的主要风险是什么？
+
 今天这一讲我想和你聊一聊关于 Serverless 应用安全生产的话题。
 
 根据 [O'Reilly](https://www.oreilly.com/) 的最新调查显示，企业使用 Serverless 最关心的就是安全问题。很多同学也问过我：用 Serverless 开发的应用安全吗？答案是：Serverless 是否安全取决于怎么去做，虽然本质上应用会更安全，但这建立在你正确地进行架构设计、代码实现的基础上。出于很多同学不知道怎么去保证 Serverless 应用的安全，所以我准备了今天这一讲，**希望你能提高安全意识，掌握这份安全生产指导手册。**
@@ -12,7 +14,9 @@
 
 那么对于使用 Serverless 开发的应用，在安全性方面，哪些部分由云厂商负责，哪些部分由开发者负责呢？
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image2/M01/08/44/CgpVE2AKrtGAHEPJAA9UpTZveIw457.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image2/M01/08/44/CgpVE2AKrtGAHEPJAA9UpTZveIw457.png"/> 
+  
 Serverless 安全责任分担模型
 
 从图中可以看到，在 Serverless 架构中，Serverless 提供商（云厂商）负责维护数据中心、计算、存储、网络以及操作系统等云本身的安全性，而运行在云上的应用、代码、数据等，需要应用所有者自己负责。
@@ -45,10 +49,14 @@ Serverless 安全责任分担模型
 
 基于 Serverless 的应用无法访问物理机或虚拟机，因此你无法随意部署传统的安全层，比如端点防护、Web 防火墙等，大多数传统的安全防护方案不兼容 Serverless 应用。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image2/M01/08/42/Cip5yGAKruSAJep6AA4Z0pvq8e4553.png"/>  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image2/M01/08/42/Cip5yGAKruSAJep6AA4Z0pvq8e4553.png"/> 
+  
 传统安全防护方案
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image2/M01/08/44/CgpVE2AKru2ADCkDAAgIPXf-L0M018.png"/>  
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image2/M01/08/44/CgpVE2AKru2ADCkDAAgIPXf-L0M018.png"/> 
+  
 传统安全防护方案与 Serverless 架构不兼容
 
 总的来说，上面几个挑战让 Serverless 应用面临了一些新的安全风险，接下来我就带你了解 Serverless 安全性的主要风险。
@@ -71,7 +79,9 @@ Serverless 架构的应用是由几十甚至上百个函数组成，每个函数
 
 举个例子，如果一个函数提供了公开的 API 给用户使用，并且该 API 也有正确的身份认证逻辑，用户访问函数后，函数内部首先会从云存储读文件，然后将读取后的数据作为输入源调用内部函数，内部函数无须身份认证，如果云存储没有设置合适的身份认证，攻击者可能直接向云存储注入数据进行攻击。
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/90/4F/Ciqc1GAKrvyAcvzwAAlW-r1KZiM211.png"/>  
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/90/4F/Ciqc1GAKrvyAcvzwAAlW-r1KZiM211.png"/> 
+  
 身份认证无效的示例
 
 * **应用配置不安全**
@@ -165,7 +175,9 @@ Content-Type: text/html
 
 3. 函数2 由消息触发器触发执行，函数2 接收到消息后，从消息内容中解析出文件名称，然后对文件进行加密。
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/90/5A/CgqCHmAKryiAcAXoAAZWzgsF--Y088.png"/>  
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/90/5A/CgqCHmAKryiAcAXoAAZWzgsF--Y088.png"/> 
+  
 对用户上传的文件进行加密的应用
 
 对于该应用，恶意用户就可以通过两种方式来操纵应用逻辑：
@@ -188,8 +200,11 @@ Content-Type: text/html
 
 * 对于 Serverless 架构的安全风险需要深入理解，才能更好地规避。
 
-<Image alt="玩转 Serverless 架构11金句.png" src="https://s0.lgstatic.com/i/image/M00/91/88/CgqCHmAOq2iAeo7SAAFEDNPnwwM925.png"/>
+
+<Image alt="玩转 Serverless 架构11金句.png" src="https://s0.lgstatic.com/i/image/M00/91/88/CgqCHmAOq2iAeo7SAAFEDNPnwwM925.png"/> 
+
 
 总的来说，Serverless 虽然可以让我们不用关心底层计算、网络、存储等资源，但由于是一个新的架构，传统安全解决方案不适用 Serverless，在安全上就给我们带来了一些新的风险点，那么如何解决这些风险呢？我们下一讲继续探讨。
 
 今天的课后作业是：除了我在这一讲中提到的 10 种风险类型，你还知道其他的风险吗？欢迎在留言区留言与我一同讨论。
+

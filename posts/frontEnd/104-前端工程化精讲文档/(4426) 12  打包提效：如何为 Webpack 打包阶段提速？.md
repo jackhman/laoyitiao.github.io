@@ -1,3 +1,5 @@
+# 12打包提效：如何为Webpack打包阶段提速？
+
 上节课我们聊了 Webpack 构建流程中第一阶段，也就是编译模块阶段的提效方案，这些方案可以归为三个不同的优化方向。不知道大家课后有没有对照分析自己在项目里用到了其中的哪些方案呢？
 
 今天我们就来继续聊聊 Webpack 构建流程中的第二个阶段，也就是从代码优化到生成产物阶段的效率提升问题（这节课的示例代码参照 [\[12_optimize_efficiency\]](https://github.com/fe-efficiency/lessons_fe_efficiency/tree/master/12_optimize_efficiency)）。
@@ -32,7 +34,9 @@ compilation.hooks[end].tap(PluginName, () => {
 
 使用后的效果如下图所示：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/51/1A/CgqCHl9kV6KAd5qDAACDxSy2vds191.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/51/1A/CgqCHl9kV6KAd5qDAACDxSy2vds191.png"/> 
+
 
 通过这样的插件，我们可以分析目前项目中的效率瓶颈，从而进一步为选取优化方案及评估方案效果提供依据。
 
@@ -40,7 +44,9 @@ compilation.hooks[end].tap(PluginName, () => {
 
 在"第 10 课时\|流程分解：Webpack 的完整构建流程"中，我们提到了下面的这张图。如图所示，整个优化阶段可以细分为 12 个子任务，每个任务依次对数据进行一定的处理，并将结果传递给下一任务：
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/51/1A/CgqCHl9kV6qAUBvfAABnYGwsyYs441.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/51/1A/CgqCHl9kV6qAUBvfAABnYGwsyYs441.png"/> 
+
 
 因此，这一阶段的优化也可以分为两个不同的方向：
 
@@ -64,7 +70,9 @@ Webpack 4 中内置了 [TerserWebpackPlugin](https://www.npmjs.com/package/terse
 
 从本节课示例代码的运行结果（npm run build:jscomp）来看，如下面的表格所示，在不带任何优化配置的情况下，3 个测试文件的构建结果都是 Terser 效果更好。
 
-<Image alt="Lark20200918-161929.png" src="https://s0.lgstatic.com/i/image/M00/51/20/Ciqc1F9kbd6AZL4AAAA8akSVxH8499.png"/>
+
+<Image alt="Lark20200918-161929.png" src="https://s0.lgstatic.com/i/image/M00/51/20/Ciqc1F9kbd6AZL4AAAA8akSVxH8499.png"/> 
+
 
 **Terser 和 UglifyJS 插件中的效率优化**
 
@@ -103,7 +111,9 @@ function(module,exports){function HelloWorld(){var foo="1234";console.log(HelloW
 
 在了解了两个参数对压缩质量的影响之后，我们再来看下它们对效率的影响。以上面表格中的 example-antd 为例，我制作了下面的表格进行对比：
 
-<Image alt="Lark20200918-161934.png" src="https://s0.lgstatic.com/i/image/M00/51/20/Ciqc1F9kbdCALcuwAABCdtCwxuY965.png"/>
+
+<Image alt="Lark20200918-161934.png" src="https://s0.lgstatic.com/i/image/M00/51/20/Ciqc1F9kbdCALcuwAABCdtCwxuY965.png"/> 
+
 
 从结果中可以看到，当**compress** 参数为 false 时，压缩阶段的效率有明显提升，同时对压缩的质量影响较小。在需要对压缩阶段的效率进行优化的情况下，**可以优先选择设置该参数**。
 
@@ -115,7 +125,9 @@ CSS 同样有几种压缩工具可供选择：[OptimizeCSSAssetsPlugin](https://
 
 在压缩效率方面，首先值得一提的是最新发布的 CSSMinimizerWebpackPlugin，它**支持缓存和多进程**，这是另外两个工具不具备的。而在非缓存的普通压缩过程方面，整体上 3 个工具相差不大，不同的参数结果略有不同，如下面的表格所示（下面结果为示例代码中 example-css 的执行构建结果）。
 
-<Image alt="Lark20200918-161938.png" src="https://s0.lgstatic.com/i/image/M00/51/2B/CgqCHl9kbb6AI7F5AABRRdbprbU989.png"/>
+
+<Image alt="Lark20200918-161938.png" src="https://s0.lgstatic.com/i/image/M00/51/2B/CgqCHl9kbb6AI7F5AABRRdbprbU989.png"/> 
+
 > 注：CSSMinimizerWebpackPlugin 中默认开启多进程选项 parallel，但是在测试示例较小的情况下，多进程的通信时间反而可能导致效率的降低。测试中关闭多进程选项后，构建时间明显缩短。
 
 从上面的表格中可以看到，三个插件的构建时间基本相近，在开启 sourceMap 的情况下 CSSMinimizerWebpackPlugin 的构建时间相对较长。但考虑到**只有这一新发布的插件支持缓存和多进程** 等对项目构建效率影响明显的功能，即使在压缩 CSS 的时间较长的情况下，还是**推荐使用它**。
@@ -150,8 +162,12 @@ optimization: {
 
 在这个示例中，有两个入口文件引入了相同的依赖包 lodash，在没有额外设置分包的情况下， lodash 被同时打入到两个产物文件中，在后续的压缩代码阶段耗时 1740ms。**而在设置分包规则为 chunks:'all' 的情况下**，通过分离公共依赖到单独的 Chunk，使得在后续压缩代码阶段，只需要压缩一次 lodash 的依赖包代码，从而减少了压缩时长，总耗时为 1036ms。通过下面两张图片也可以看出这样的变化。
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/51/0F/Ciqc1F9kWAWANNLZAAGM4v1icLA197.png"/>  
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/51/1B/CgqCHl9kWAqAELXZAAG5xisRryc225.png"/>
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/51/0F/Ciqc1F9kWAWANNLZAAGM4v1icLA197.png"/> 
+  
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/51/1B/CgqCHl9kWAqAELXZAAG5xisRryc225.png"/> 
+
 
 这里起作用的是 Webpack 4 中内置的 SplitChunksPlugin，该插件在 production 模式下默认启用。其默认的分包规则为 chunks: '**async**'，作用是分离动态引入的模块 (import('...'))，在处理动态引入的模块时能够自动分离其中的公共依赖。
 
@@ -161,7 +177,9 @@ optimization: {
 
 [Tree Shaking（摇树）](https://webpack.js.org/guides/tree-shaking/)是指在构建打包过程中，移除那些引入但未被使用的无效代码（Dead-code elimination）。这种优化手段最早应用于在 Rollup 工具中，而在 Webpack 2 之后的版本中， Webpack 开始内置这一功能。下面我们先来看一下 Tree Shaking 的例子，如下面的表格所示：
 
-<Image alt="Lark20200918-161943.png" src="https://s0.lgstatic.com/i/image/M00/51/20/Ciqc1F9kbaqAUkjGAACmMR1PvL4711.png"/>
+
+<Image alt="Lark20200918-161943.png" src="https://s0.lgstatic.com/i/image/M00/51/20/Ciqc1F9kbaqAUkjGAACmMR1PvL4711.png"/> 
+
 
 可以看到，引入不同的依赖包（lodash vs lodash-es）、不同的引入方式，以及是否使用 babel 等，都会对 Tree Shaking 的效果产生影响。下面我们就来分析具体原因。
 
@@ -178,3 +196,4 @@ optimization: {
 这节课我们主要讨论了代码优化阶段效率提升的方向和方法。这一阶段的优化方向大致可分为两类：一类是以提升当前任务工作效率为目标的方案，这部分我们讨论了压缩 JS 时选择合适的压缩工具与配置优化项，以及压缩 CSS 时对优化工具的选择。另一类是以提升后续环节工作效率为目标的方案，这部分我们讨论了 splitChunks 的作用和配置项，以及应用 Tree Shaking 的一些注意事项。希望通过本节课的学习，帮助你加深对这一阶段 Webpack 处理逻辑的理解，也能够对其中的一些优化方式有更清晰的理解。
 
 今天的**课后思考题是**：回忆 Tree Shaking 的触发条件有哪些？在自己所在的项目里观察试验一下，看看哪些依赖代码在构建时应用了 Tree Shaking 优化，是否存在应该生效但在打包结果中没有被正确移除的代码？
+

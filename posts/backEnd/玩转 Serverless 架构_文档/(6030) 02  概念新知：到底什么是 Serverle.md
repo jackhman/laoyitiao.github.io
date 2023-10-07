@@ -1,3 +1,5 @@
+# 02概念新知：到底什么是Serverle
+
 上一讲我讲了 Serverless 架构兴起的必然因素，在这个过程中，我简单提到了 Serverless 的概念，相信你对 Serverless 已经有了初步的认知，这节课我将继续深入剖析到底什么是 Serverless。
 
 有不少刚接触 Serverless 的同学会认为 FaaS 就是 Serverless，也有同学认为 PaaS 也是 Serverless，还有同学说使用 Serverless 就没有服务器了。总的来说，很多同学对 Serverless 到底是什么并没有一个很清晰的认知，概念还比较模糊，所以咱们就用一节课的时间，搞定这个概念。
@@ -30,7 +32,9 @@
 
 所以，一个应用如果是 Serverless 架构的，必须要实现自动弹性伸缩和按量付费，**这也是 Serverless 的核心特点。**
 
-<Image alt="Lark20201224-184407.jpeg" src="https://s0.lgstatic.com/i/image2/M01/03/EA/Cip5yF_kcS2ABtOCAATEC7Xd7ds88.jpeg"/>
+
+<Image alt="Lark20201224-184407.jpeg" src="https://s0.lgstatic.com/i/image2/M01/03/EA/Cip5yF_kcS2ABtOCAATEC7Xd7ds88.jpeg"/> 
+
 
 ### 狭义的 Serverless
 
@@ -38,7 +42,9 @@
 
 **在我看来，狭义的 Serverless 是 FaaS 和 BaaS 的组合，为什么呢？**
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/8B/F0/Ciqc1F_i_RCAJMutAAJC6EJRbDI546.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/8B/F0/Ciqc1F_i_RCAJMutAAJC6EJRbDI546.png"/> 
+  
 Serverless 架构图
 
 为了弄清楚这个问题，你需要对 FaaS 和 BaaS 有更多的了解。在 01 讲，我简单地提了 FaaS 和 BaaS 的概念，接下来我从一个案例入手，带你对其进行更深入的剖析。
@@ -72,7 +78,9 @@ FaaS（Function as a Service）本质上是一个函数运行平台，大多 Faa
 
 **FaaS 的第三个特点是按量付费。** FaaS 产品的收费方式，都是按照函数执行次数和执行时消耗的 CPU、内存等资源进行计费的。除此之外，FaaS 在运行函数的时候，会根据并发量自动生成多个函数实例，并且并发理论是没有上限的，**这是它的第四个特点，弹性伸缩。**
 
-<Image alt="Lark20201223-161544.png" src="https://s0.lgstatic.com/i/image/M00/8B/F0/Ciqc1F_i_SGARHu0AAZMti00uz8578.png"/>  
+
+<Image alt="Lark20201223-161544.png" src="https://s0.lgstatic.com/i/image/M00/8B/F0/Ciqc1F_i_SGARHu0AAZMti00uz8578.png"/> 
+  
 FaaS 架构图
 
 基于 FaaS，实现上面的接口就简单了，你只需要写一个函数，然后把代码部署到 FaaS 产品上，设置 HTTP 触发器就可以了。
@@ -185,3 +193,4 @@ Serverless 架构正处于飞速发展的阶段，其开发、调试、部署工
 * **Serverless 架构的主要特点是按量付费、弹性伸缩、不用运维，** 这是区分一个架构是否是 Serverless 架构的关键因素。
 
 本节课的作业是：在没学这一讲之前，你对 Serverless 的理解是什么呢？我总结的 6 个优点具体是什么意思？这个作业可以帮你回顾与梳理这一讲的内容，提高你的归纳总结能力。最后感谢你的阅读，我们下一讲见。
+

@@ -1,3 +1,5 @@
+# 38容器编排技术：如何利用K8和DockerSwarm管理微服务？
+
 作为操作系统的最后一个部分，我选择了三个主题：虚拟化、Linux 的架构哲学和商业操作系统的设计。我还是以探索式教学为主，帮助你建立和掌握虚拟化、程序架构、业务架构三个方向的基本概念。
 
 操作系统的设计者和芯片的制造商们，早就感受到了虚拟化、容器化带来的变化，早早地支持了虚拟化，比如 Linux 的命名空间、Intel 的 VT-X 技术。这一讲作为虚拟化的一个延伸，我们一起讨论一下**如何管理海量的容器，如何去构造一个高可用且具有扩展能力强的集群**。
@@ -18,7 +20,9 @@
 
 如下图所示，为了保证微服务之间是隔离的，且可以快速上线。每个微服务我们都使用一个单独的容器，而一组容器，又包含在一个虚拟机当中，具体的关系如下图所示：
 
-<Image alt="Lark20210129-190005.png" src="https://s0.lgstatic.com/i/image/M00/93/22/Ciqc1GAT7LeAJznRAAKOxTSise8097.png"/>
+
+<Image alt="Lark20210129-190005.png" src="https://s0.lgstatic.com/i/image/M00/93/22/Ciqc1GAT7LeAJznRAAKOxTSise8097.png"/> 
+
 
 上图中的微服务 C 因为只有一个实例存在单点风险，可能会引发单点故障。因此需要为微服务 C 增加副本，通常情况下，我们必须保证每个微服务至少有一个副本，这样才能保证可用性。
 
@@ -38,7 +42,9 @@ Kubernetes（K8s）是一个 Google 开源的容器编排方案。
 
 **K8s 通过集群管理容器**。用户可以通过命令行、配置文件管理这个集群------从而编排容器；用户可以增加节点进行扩容，每个节点是一台物理机或者虚拟机。如下图所示，Kubernetes 提供了两种分布式的节点。Master 节点是集群的管理者，Worker 是工作节点，容器就在 Worker 上工作，一个 Worker 的内部可以有很多个容器。
 
-<Image alt="Lark20210129-190008.png" src="https://s0.lgstatic.com/i/image/M00/93/2E/CgqCHmAT7M-Af_RTAAKzmD-Lpm0018.png"/>
+
+<Image alt="Lark20210129-190008.png" src="https://s0.lgstatic.com/i/image/M00/93/2E/CgqCHmAT7M-Af_RTAAKzmD-Lpm0018.png"/> 
+
 
 在我们为一个微服务扩容的时候，首选并不是去增加 Worker 节点。可以增加这个微服务的容器数量，也可以提升每个容器占用的 CPU、内存存储资源。只有当整个集群的资源不够用的时候，才会考虑增加机器、添加节点。
 
@@ -50,17 +56,23 @@ Master 节点至少需要 2 个，但并不是越多越好。Master 节点主要
 
 Pod 是 K8s 对容器的一个轻量级的封装，每个 Pod 有自己独立的、随机分配的 IP 地址。Pod 内部是容器，可以 1 个或多个容器。目前，Pod 内部的容器主要是 Docker，但是今后可能还会有其他的容器被大家使用，主要原因是 K8s 和 Docker 的生态也存在着竞争关系。总的来说，如下图所示，kubelet 管理 Pod，Pod 管理容器。当用户创建一个容器的时候，实际上在创建 Pod。
 
-<Image alt="Lark20210129-190011.png" src="https://s0.lgstatic.com/i/image/M00/93/22/Ciqc1GAT7NyAI0-5AAEh6UfvPpY109.png"/>
+
+<Image alt="Lark20210129-190011.png" src="https://s0.lgstatic.com/i/image/M00/93/22/Ciqc1GAT7NyAI0-5AAEh6UfvPpY109.png"/> 
+
 
 虽然 K8s 允许同样的应用程序（比如微服务），在一个节点上创建多个 Pod。但是为了保证可用性，通常我们会考虑将微服务分散到不同的节点中去。如下图所示，如果其中一个节点宕机了，微服务 A，微服务 B 还能正常工作。当然，有一些微服务。因为程序架构或者编程语言的原因，只能使用单进程。这个时候，我们也可能会在单一的节点上部署多个相同的服务，去利用更多的 CPU 资源。
 
-<Image alt="Lark20210129-190014.png" src="https://s0.lgstatic.com/i/image/M00/93/2E/CgqCHmAT7OaAeadYAAJEm88_Xg8398.png"/>
+
+<Image alt="Lark20210129-190014.png" src="https://s0.lgstatic.com/i/image/M00/93/2E/CgqCHmAT7OaAeadYAAJEm88_Xg8398.png"/> 
+
 
 #### 负载均衡
 
 Pod 的 IP 地址是动态的，如果要将 Pod 作为内部或者外部的服务，那么就需要一个能拥有静态 IP 地址的节点，这种节点我们称为服务（Service），服务不是一个虚拟机节点，而是一个虚拟的概念------或者理解成一段程序、一个组件。请求先到达服务，然后再到达 Pod，服务在这之间还提供负载均衡。当有新的 Pod 加入或者旧的 Pod 被删除，服务可以捕捉到这些状态，这样就大大降低了分布式应用架构的复杂度。
 
-<Image alt="Lark20210129-190001.png" src="https://s0.lgstatic.com/i/image/M00/93/2E/CgqCHmAT7PeAZRvoAACjdnGXVe0743.png"/>
+
+<Image alt="Lark20210129-190001.png" src="https://s0.lgstatic.com/i/image/M00/93/2E/CgqCHmAT7PeAZRvoAACjdnGXVe0743.png"/> 
+
 
 如上图所示，当我们要提供服务给外部使用时，对安全的考虑、对性能的考量是超过内部服务的。 K8s 解决方案：在服务的上方再提供薄薄的一层控制程序，为外部提供服务------这就是 Ingress。
 
@@ -70,13 +82,17 @@ Pod 的 IP 地址是动态的，如果要将 Pod 作为内部或者外部的服�
 
 Docker Swarm 是 Docker 团队基于 Docker 生态打造的容器编排引擎。下图是 Docker Swarm 整体架构图。
 
-<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/93/2E/CgqCHmAT7QaAcwO7AAJWW_dhVAU264.png"/>
+
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/93/2E/CgqCHmAT7QaAcwO7AAJWW_dhVAU264.png"/> 
+
 
 和 K8s 非常相似，节点被分成了 Manager 和 Worker。Manager 之间的状态数据通过 Raft 算法保证数据的一致性，Worker 内部是 Docker 容器。
 
 和 K8s 的 Pod 类似，Docker Swarm 对容器进行了一层轻量级的封装------任务（Task），然后多个Task 通过服务进行负载均衡。
 
-<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/93/22/Ciqc1GAT7RCAYw67AAGVRE-fcmY185.png"/>
+
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/93/22/Ciqc1GAT7RCAYw67AAGVRE-fcmY185.png"/> 
+
 
 ### 容器编排设计思考
 
@@ -115,3 +131,4 @@ Docker Swarm 是 Docker 团队基于 Docker 生态打造的容器编排引擎。
 **最后我再给你出一道需要查资料的思考题：为什么会有多个容器共用一个 Pod 的需求**？
 
 你可以把你的答案、思路或者课后总结写在留言区，这样可以帮助你产生更多的思考，这也是构建知识体系的一部分。经过长期的积累，相信你会得到意想不到的收获。如果你觉得今天的内容对你有所启发，欢迎分享给身边的朋友。期待看到你的思考！
+

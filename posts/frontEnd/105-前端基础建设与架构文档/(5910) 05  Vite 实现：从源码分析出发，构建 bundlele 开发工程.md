@@ -1,3 +1,5 @@
+# 05Vite实现：从源码分析出发，构建bundlele开发工程
+
 通过上一讲的内容，相信你已经了解了现代化构建流程和处理内容。这一讲，我将结合 Webpack 为主的成熟方案现阶段的"不足"，从源码实现角度带你分析 Vite 的设计哲学，同时为"解析 Webpack 源码，实现自己的构建工具"一讲内容打下基础，循序渐进，最终你将能够开发一个自己的构建工具。
 
 ### Vite 的"横空出世"
@@ -30,9 +32,13 @@ npm run dev
 
 得到以下目录结构和页面内容：
 
-<Image alt="Lark20201225-174521.png" src="https://s0.lgstatic.com/i/image/M00/8C/18/Ciqc1F_ltOCAMzS3AAHqGo5sIeo562.png"/>
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image2/M01/03/A7/Cip5yF_gX_iAUku7AAK-5yeYi0A500.png"/>
+<Image alt="Lark20201225-174521.png" src="https://s0.lgstatic.com/i/image/M00/8C/18/Ciqc1F_ltOCAMzS3AAHqGo5sIeo562.png"/> 
+
+
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image2/M01/03/A7/Cip5yF_gX_iAUku7AAK-5yeYi0A500.png"/> 
+
 
 其中浏览器请求：`http://localhost:3000/`，得到的内容即是我们应用项目中的 index.html 内容。
 
@@ -144,7 +150,9 @@ export function createServer(config: ServerConfig): Server {
 
 我们可以看到，经过 Vite Server 处理 http://localhost:3000/src/main.js 请求后，最终返回了：
 
-<Image alt="Lark20201225-174524.png" src="https://s0.lgstatic.com/i/image/M00/8C/18/Ciqc1F_ltQGAaQZkAAXD68sxUe4161.png"/>
+
+<Image alt="Lark20201225-174524.png" src="https://s0.lgstatic.com/i/image/M00/8C/18/Ciqc1F_ltQGAaQZkAAXD68sxUe4161.png"/> 
+
 
 返回内容和我们项目中的 ./src/main.js 略有差别：
 
@@ -217,7 +225,9 @@ resolvedPlugins.forEach((m) => m && m(context))
 
 我们先看结果，对比项目中的 App.vue，浏览器请求得到的结果显然出现了大变样：
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/8B/C6/Ciqc1F_gYEGAL6S2AASUUhepUGQ785.png"/>
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/8B/C6/Ciqc1F_gYEGAL6S2AASUUhepUGQ785.png"/> 
+
 
 实际上，App.vue 这样的单文件组件对应 script、style 和 template，在经过 Vite Server 处理时，服务端对 script、style 和 template 三部分分别处理，对应中间件为 [serverPluginVue](https://github.com/vitejs/vite/blob/c3ef4f64ec09c6916f4e6b9764362a23843b98b6/src/node/server/serverPluginVue.ts)。这个中间件的实现很简单，即**对 .vue 文件请求进行处理，通过 parseSFC 方法解析单文件组件，并通过 compileSFCMain 方法将单文件组件拆分** 为形如上图内容，对应中间件关键内容可在源码 vuePlugin 中找到。源码中，涉及 [parseSFC](https://github.com/vitejs/vite/blob/c3ef4f64ec09c6916f4e6b9764362a23843b98b6/src/node/server/serverPluginVue.ts#L377) 具体所做的事情，是调用 @vue/compiler-sfc 进行单文件组件解析。精简为我自己的逻辑，帮助你理解：
 
@@ -351,9 +361,13 @@ export function updateStyle(id: string, content: string) {
 
 Vite 这种 bundleless 方案的运行原理图：
 
-<Image alt="Lark20201225-174527.png" src="https://s0.lgstatic.com/i/image2/M01/03/FB/Cip5yF_ltUqAV2zLAADo9NOnOvk745.png"/>
 
-<Image alt="Lark20201225-174517.png" src="https://s0.lgstatic.com/i/image/M00/8C/18/Ciqc1F_ltVCAEgT6AAERxP80SRw964.png"/>
+<Image alt="Lark20201225-174527.png" src="https://s0.lgstatic.com/i/image2/M01/03/FB/Cip5yF_ltUqAV2zLAADo9NOnOvk745.png"/> 
+
+
+
+<Image alt="Lark20201225-174517.png" src="https://s0.lgstatic.com/i/image/M00/8C/18/Ciqc1F_ltVCAEgT6AAERxP80SRw964.png"/> 
+
 
 接下来我们再做一些更细节的总结。
 
@@ -385,9 +399,13 @@ Vite 的打包命令使用了 Rollup 进行，这里并没有什么特别之处�
 
 当浏览器请求 HTML 页面时，服务端通过 [serverPluginHtml](https://github.com/vitejs/vite/blob/master/src/node/server/serverPluginHtml.ts) 插件向 HTML 内容注入一段脚本。如下图所示，我们可以看到， index.html 中就有一段引入 /vite/client 代码，进行 WebSocket 的注册和监听。
 
-<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/8B/C7/Ciqc1F_gZk-AeTAnAAK2AAgChPQ413.png"/>
 
-<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/8B/D2/CgqCHl_gZlWAHmvqAAgRairyZ98357.png"/>
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/8B/C7/Ciqc1F_gZk-AeTAnAAK2AAgChPQ413.png"/> 
+
+
+
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/8B/D2/CgqCHl_gZlWAHmvqAAgRairyZ98357.png"/> 
+
 
 对于 /vite/client 请求的处理，服务端由 [serverPluginClient](https://github.com/vitejs/vite/blob/a47429dabea12e8aa5f4a21209846aaf857d5be0/src/node/server/serverPluginClient.ts) 插件进行处理：
 
@@ -445,7 +463,9 @@ const watcher = chokidar.watch(root, {
 
 更多源码不再一一贴出。这里我总结了一张流程图供你参考：
 
-<Image alt="Lark20201225-175233.png" src="https://s0.lgstatic.com/i/image2/M01/03/FD/CgpVE1_ltm6AN8nCAAMSQ8AjILg631.png"/>  
+
+<Image alt="Lark20201225-175233.png" src="https://s0.lgstatic.com/i/image2/M01/03/FD/CgpVE1_ltm6AN8nCAAMSQ8AjILg631.png"/> 
+  
 Vite 实现 HMR 流程图
 
 ### 总结
@@ -455,3 +475,4 @@ Vite 实现 HMR 流程图
 事实上，Vite 依赖优化的灵感来自 [Snowpack](https://www.snowpack.dev/)，这类 bundleless 工具也代表着一种新趋势、新方向。我认为，技术功底是很重要的一方面，而技术敏感度的培养也非常关键。希望与你共勉！
 
 到此，新编译工具理念------Vite 我们就介绍到这里。接下来我们将进入代码降级编译环节的学习，我们下一讲再见。
+

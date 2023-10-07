@@ -1,3 +1,5 @@
+# 05自动配置：如何正确理解SpringBoot自动配置实现原理？
+
 通过前面几个课时内容的介绍，相信你对 Spring Boot 中的配置体系已经有了全面的了解。Spring Boot 中的配置体系是一套强大而复杂的体系，其中最基础、最核心的要数自动配置（AutoConfiguration）机制了。今天我们将围绕这个话题详细展开讨论，看看 Spring Boot 如何实现自动配置。那我们就先从 @SpringBootApplication 注解开始讲起。
 
 ### @SpringBootApplication 注解
@@ -186,7 +188,9 @@ protected List<String> getCandidateConfigurations(AnnotationMetadata metadata,
 
 从类名上看，AutoConfigurationImportSelector 类是一种选择器，负责从各种配置项中找到需要导入的具体配置类。该类的结构如下图所示：
 
-<Image alt="图片6.png" src="https://s0.lgstatic.com/i/image/M00/73/9F/Ciqc1F_GIU2AGFv2AACsHHV_6h0534.png"/>  
+
+<Image alt="图片6.png" src="https://s0.lgstatic.com/i/image/M00/73/9F/Ciqc1F_GIU2AGFv2AACsHHV_6h0534.png"/> 
+  
 AutoConfigurationImportSelector 类层结构图
 
 显然，AutoConfigurationImportSelector 所依赖的最关键组件就是 SpringFactoriesLoader，下面我们对其进行具体展开。
@@ -199,7 +203,9 @@ AutoConfigurationImportSelector 类层结构图
 
 JDK 提供了用于服务查找的一个工具类 java.util.ServiceLoader 来实现 SPI 机制。当服务提供者提供了服务接口的一种实现之后，我们可以在 jar 包的 META-INF/services/ 目录下创建一个以服务接口命名的文件，该文件里配置着一组 Key-Value，用于指定服务接口与实现该服务接口具体实现类的映射关系。而当外部程序装配这个 jar 包时，就能通过该 jar 包 META-INF/services/ 目录中的配置文件找到具体的实现类名，并装载实例化，从而完成模块的注入。SPI 提供了一种约定，基于该约定就能很好地找到服务接口的实现类，而不需要在代码里硬编码指定。JDK 中 SPI 机制开发流程如下图所示：
 
-<Image alt="图片7.png" src="https://s0.lgstatic.com/i/image/M00/73/AA/CgqCHl_GIVmABagiAAEbqB5E-U0604.png"/>  
+
+<Image alt="图片7.png" src="https://s0.lgstatic.com/i/image/M00/73/AA/CgqCHl_GIVmABagiAAEbqB5E-U0604.png"/> 
+  
 JDK 中 SPI 机制开发流程图
 
 #### SpringFactoriesLoader
@@ -383,3 +389,4 @@ if (onClasses != null) {
 这里给你留一道思考题：在 Spring Boot 中，如何基于 JDK 中的 SPI 机制完成对配置类的自动加载？欢迎你在留言区与我交流、互动。
 
 介绍完配置体系之后，06 讲我们将进入一个全新的主题，即介绍 Spring Boot 中数据访问层的构建方式。
+

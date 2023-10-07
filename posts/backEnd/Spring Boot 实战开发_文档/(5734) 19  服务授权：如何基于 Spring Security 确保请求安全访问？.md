@@ -1,3 +1,5 @@
+# 19服务授权：如何基于SpringSecurity确保请求安全访问？
+
 18 讲中，我们集中讨论了如何通过 WebSecurityConfigurerAdapter 完成对用户认证体系的构建。这一讲我们将继续使用这个配置类完成对服务访问的授权控制。
 
 在日常开发过程中，我们需要对 Web 应用中的不同 HTTP 端点进行不同粒度的权限控制，并且希望这种控制方法足够灵活。而借助 Spring Security 框架，我们就可以对其进行简单实现，下面我们一起来看下。
@@ -44,7 +46,9 @@ protected void configure(HttpSecurity http) throws Exception {
 
 当然，Spring Security 中还提供了很多其他有用的配置方法供开发人员灵活使用，下表中我们进行了列举，一起来看下。
 
-<Image alt="Lark20210119-172757.png" src="https://s0.lgstatic.com/i/image2/M01/06/F3/CgpVE2AGpjqARlFfAAE9RHgwruA457.png"/>
+
+<Image alt="Lark20210119-172757.png" src="https://s0.lgstatic.com/i/image2/M01/06/F3/CgpVE2AGpjqARlFfAAE9RHgwruA457.png"/> 
+
 
 **基于上表中的配置方法，我们就可以通过 HttpSecurity 实现自定义的授权策略。**
 
@@ -267,3 +271,4 @@ public class SpringCssSecurityConfig extends WebSecurityConfigurerAdapter {
 介绍完授权机制后，关于 Spring Boot 安全性的主题内容也就结束了。20 讲我们将引入 Spring Boot 中非常有特色的一款组件，即用于实现系统监控的 Actuator 组件。
 
 这里给你留一道思考题：请你描述一下对请求访问进行授权的三种层级，以及每个层级对应的实现方法。
+

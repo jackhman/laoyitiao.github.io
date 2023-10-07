@@ -1,3 +1,5 @@
+# 15身份认证：使用Serverle实现登录注册功能
+
 从今天开始，我们将进入 Serverless 应用的场景案例篇。这一讲我将带你实现 Serverless 中的身份认证。
 
 我们平时用过那么多的网站和 App，很多都需要登录，登录的过程就是身份认证的过程。以电商网站为例，如果你想下单，先要注册账号，然后输入用户名（可能手机号或邮箱）、密码登录。之后你在一段时间内再访问该电商网站，都不用再登录，只有在连续长时间不登录的情况下（比如一个月），才用登录。这样一来，当你长时间不输入密码，很可能换了电脑或手机后，就忘记密码了。
@@ -28,7 +30,9 @@
 
 * 服务端接收到请求后，从 cookie 获取到 Session ID，然后根据 Session ID 解析出用户信息。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/94/3B/Ciqc1GAXxNGAVJ2eAAHjY3afYhk253.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/94/3B/Ciqc1GAXxNGAVJ2eAAHjY3afYhk253.png"/> 
+  
 Cookie-Session 身份认证流程
 
 这种方案存在两个主要问题：
@@ -41,7 +45,9 @@ Cookie-Session 身份认证流程
 
 于是 Cookie-Session 的身份认证方案就发生了变化：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/94/3B/Ciqc1GAXxOKAJBiFAALzfxQb7r8244.png"/>  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/94/3B/Ciqc1GAXxOKAJBiFAALzfxQb7r8244.png"/> 
+  
 基于共享存储的 Cookie-Session 身份认证流程
 
 与早期方案不同，用户登录时，该方案会把用户信息保存在 Redis 中，而不是内存中，然后服务端依然会将 Session ID 返回给浏览器，浏览器将其保存在 cookie 中。而之后非登录的请求，浏览器依然会将包含 Session ID 的 cookie 放在请求头中发送给服务端，服务端拿到 Session ID 后，从 Redis 中查询出用户信息。这样就可以解决分布式、无状态的系统中用户登录状态共享问题。
@@ -60,7 +66,9 @@ JWT 是（JSON Web Token）的简称，其原理是：
 
 * 服务端接收到 token 后，验证 token 的合法性，并从 token 中解析出用户信息。
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/94/46/CgqCHmAXxOyAImLQAAHmAyEZuFk591.png"/>  
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/94/46/CgqCHmAXxOyAImLQAAHmAyEZuFk591.png"/> 
+  
 JWT 身份认证流程
 
 token 是个比较长字符串，格式为`Header.Payload.Signature`，由`.`分隔为三部分。下面是一个实际的 token 示例：
@@ -411,7 +419,9 @@ Serverless 应用的身份认证，本质上是要将有状态的认证方案改
 
 * 使用无状态的身份认证方案，比如 JWT。
 
-<Image alt="玩转 Serverless 架构15金句.png" src="https://s0.lgstatic.com/i/image6/M01/04/32/CioPOWAj2_2AUoDKAAEU4YVNqFA780.png"/>
+
+<Image alt="玩转 Serverless 架构15金句.png" src="https://s0.lgstatic.com/i/image6/M01/04/32/CioPOWAj2_2AUoDKAAEU4YVNqFA780.png"/> 
+
 
 当然了，除了自己实现应用的身份认证，你也可以使用第三方的身份认证服务，比如 AWS Cognito、Google Firebase 等，基于它们，你就不用自己开发用户管理及身份认证功能了。
 
@@ -426,3 +436,4 @@ Serverless 应用的身份认证，本质上是要将有状态的认证方案改
 * JWT 的认证方式通常是无状态的，所以比较适合 Serverless 应用。
 
 最后，希望通过今天的学习，你能深入了解 Serverless 应用的身份认证，今天留给你的作业就是：亲自动手实现一个 Serverless 的登录注册应用，我们下一讲见。
+

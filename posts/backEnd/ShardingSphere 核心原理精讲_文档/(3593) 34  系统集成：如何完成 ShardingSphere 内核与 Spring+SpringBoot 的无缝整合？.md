@@ -1,3 +1,5 @@
+# 34系统集成：如何完成ShardingSphere内核与Spring+SpringBoot的无缝整合？
+
 今天，我们将进入整个课程中最后一个模块------系统集成模块的介绍。这里所谓的系统集成，指的就是 ShardingSphere 和 Spring 框架的集成。
 
 到目前为止，ShardingSphere 实现了**两种系统集成机制**：一种是命名空间（namespace）机制，即通过扩展 Spring Schema 来实现与 Spring 框架的集成；而另一种则是通过编写自定义的 starter 组件来完成与 Spring Boot 的集成。本课时我将分别讲解这两种系统集成机制。
@@ -12,7 +14,9 @@
 
 基于命名空间机制实现与 Spring 的整合，开发上通常采用的是固定的一个流程，包括如下所示的五大步骤：
 
-<Image alt="image (10).png" src="https://s0.lgstatic.com/i/image/M00/5A/27/Ciqc1F90KhSANChgAACMwNPdi-8838.png"/>
+
+<Image alt="image (10).png" src="https://s0.lgstatic.com/i/image/M00/5A/27/Ciqc1F90KhSANChgAACMwNPdi-8838.png"/> 
+
 
 这些步骤包括：编写业务对象、编写 XSD 文件、编写 BeanDefinitionParser 实现类、编写 NamespaceHandler 实现类，以及编写 spring.handlers 和 spring.schemas 配置文件，我们来看看 ShardingSphere 中实现这些步骤的具体做法。
 
@@ -294,3 +298,4 @@ spring.shardingsphere.datasource.ds1.password=root
 讲完 ShardingSphere 源码解析部分内容之后，下一课时是整个课程的最后一讲，我们将对 ShardingSphere 进行总结，并对它的后续发展进行展望。
 
 [课程评价入口，挑选 5 名小伙伴赠送小礼品\~](https://wj.qq.com/s2/7238084/d702/)
+

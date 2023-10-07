@@ -1,3 +1,5 @@
+# 09VirtualDOM的工作原理是什么？
+
 在面试中，"Virtual DOM 的工作原理是什么？"是经常会被问到的问题。这讲我将带你一起探讨下这个问题应该如何作答。
 
 ### 破题
@@ -10,7 +12,9 @@
 
 根据以上的分析，初步的答题框架出来了：基础部分仍然是"讲说理列"，除此之外，我希望你能加入这个核心点的回答，即引发流行的原因。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image2/M01/03/E9/Cip5yF_kW-SAOjZHAABUt-IaE0c622.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image2/M01/03/E9/Cip5yF_kW-SAOjZHAABUt-IaE0c622.png"/> 
+
 
 当然，在面试中，面试官问到的所有知识点，不可能全都是你知道的内容。这里我们就需要学会推理，即编程开发在答题时应该有自己的**逻辑性**，通过已知的内容推理出未知的内容。
 
@@ -132,7 +136,9 @@ ReactDOM.render(<h1>hi!</h2>, document.getElementById('root'));
 
 整理下答题内容，可以绘制出如下的知识导图。
 
-<Image alt="虚拟DOM工作原理.png" src="https://s0.lgstatic.com/i/image/M00/8C/05/Ciqc1F_kXCaAJS7GAACbWvarErs717.png"/>
+
+<Image alt="虚拟DOM工作原理.png" src="https://s0.lgstatic.com/i/image/M00/8C/05/Ciqc1F_kXCaAJS7GAACbWvarErs717.png"/> 
+
 
 ### 进阶
 
@@ -146,8 +152,11 @@ ReactDOM.render(<h1>hi!</h2>, document.getElementById('root'));
 
 *** ** * ** ***
 
-[<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/72/94/Ciqc1F_EZ0eANc6tAASyC72ZqWw643.png"/>](https://shenceyun.lagou.com/t/mka)
+[
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/72/94/Ciqc1F_EZ0eANc6tAASyC72ZqWw643.png"/> 
+](https://shenceyun.lagou.com/t/mka)
 
 《大前端高薪训练营》
 
 对标阿里 P7 技术需求 + 每月大厂内推，6 个月助你斩获名企高薪 Offer。[点击链接](https://shenceyun.lagou.com/t/mka)，快来领取！
+

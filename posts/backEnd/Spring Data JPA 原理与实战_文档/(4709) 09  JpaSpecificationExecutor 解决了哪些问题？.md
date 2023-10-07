@@ -1,3 +1,5 @@
+# 09JpaSpecificationExecutor解决了哪些问题？
+
 欢迎来到第二个模块，从这一课时开始，我们就要进入高级用法与实战的学习。在进阶高级开发 / 架构师的路上，我将尽可能把经验都传授给你，帮助你少走弯路。
 
 学习完前面 8 个课时，相信作为一名开发人员，你对 JPA 的基本用法已经有了一定的了解。那么从这一课时开始，我们要介绍一些复杂场景的使用，特别是作为一名架构师必须要掌握的内容。
@@ -10,7 +12,9 @@ QueryByExampleExecutor（QBE）是一种用户友好的查询技术，具有简�
 
 下面是一个 UML 图，你可以看到 QueryByExampleExecutor 是 JpaRepository 的父接口，也就是 JpaRespository 里面继承了 QueryByExampleExecutor 的所有方法。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/5D/4B/CgqCHl-EE7WAAfi5AACTjc0iffY586.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/5D/4B/CgqCHl-EE7WAAfi5AACTjc0iffY586.png"/> 
+  
 图一：Repository 类图
 
 #### QBE 的基本语法
@@ -184,7 +188,9 @@ Hibernate: select useraddres0_.id as id1_2_, useraddres0_.address as address2_2_
 
 其中我们可以看到，传进来的参数和最终执行的 SQL，还挺符合我们的预期的，所以我们也能得到正确响应的查询结果，如下图：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/5D/40/Ciqc1F-EFDCAa50VAADEF8jBllY550.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/5D/40/Ciqc1F-EFDCAa50VAADEF8jBllY550.png"/> 
+
 
 也就是一个地址带一个 User 结果。
 
@@ -249,11 +255,15 @@ class TypedExample<T> implements Example<T> {
 
 首先打开 Structure 视图，看看里面对外暴露的方法都有哪些。
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/5D/4C/CgqCHl-EFFGAHjlEAAOzUKkyjE0156.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/5D/4C/CgqCHl-EFFGAHjlEAAOzUKkyjE0156.png"/> 
+
 
 通过 Structure 视图可以很容易地发现，我们要关心的方法都是这些 public 类型的返回 ExampleMatcher 的方法，那么我们把这些方法搞明白了是不是就可以掌握其详细用法了呢？下面看看它的实现类。
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/5D/4C/CgqCHl-EFFeAcXU9AACEfIRngF4284.png"/>
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/5D/4C/CgqCHl-EFFeAcXU9AACEfIRngF4284.png"/> 
+
 
 TypedExampleMatcher 不是 public 类型的，所以我们可以基本上不用看了，主要看一下接口里面给我们暴露了哪些实例化方法。
 
@@ -368,7 +378,9 @@ ExampleMatcher withStringMatcher(StringMatcher defaultStringMatcher);
 
 字符串匹配规则，我们和 JPQL 对应到一起举例，如下表所示：
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/5D/41/Ciqc1F-EFHuAXsn3AABiCE6_I0I978.png"/>
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/5D/41/Ciqc1F-EFHuAXsn3AABiCE6_I0I978.png"/> 
+
 
 相关代码如下：
 
@@ -380,7 +392,9 @@ ExampleMatcher withMatcher(String propertyPath, GenericPropertyMatcher genericPr
 
 如下图，基本可以看出来都是针对字符串属性提供的匹配规则，也就是可以通过这个方法定制不同属性的 StringMatcher 规则。
 
-<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/5D/4C/CgqCHl-EFIiAKEMxAAFkdJSuuX4896.png"/>
+
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/5D/4C/CgqCHl-EFIiAKEMxAAFkdJSuuX4896.png"/> 
+
 
 到这里，语法部分我们就学习完了，下面看一个完整的例子感受一下。
 
@@ -409,7 +423,9 @@ Page<UserAddress> u = userAddressRepository.findAll(Example.of(address,exampleMa
 
 这时候可能会有同学问了，我是怎么知道默认值的呢？我们直接看类的构造方法就可以了，如下所示：
 
-<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/5D/4C/CgqCHl-EFJGAOa8BAAGc6Bk2F3g271.png"/>
+
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/5D/4C/CgqCHl-EFJGAOa8BAAGc6Bk2F3g271.png"/> 
+
 
 从源码中我们可以看到，实现类的构造方法只有一个，就是"赋值默认"的方式。下面我整理了一些在使用这个语法时需要考虑的细节。
 
@@ -427,11 +443,15 @@ Page<UserAddress> u = userAddressRepository.findAll(Example.of(address,exampleMa
 
 怎么分析源码也很简单，我们看一下上面的我们 findAll 的方法调用之处。
 
-<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/5D/4C/CgqCHl-EFJmAO7ItAABKDcL98Uc576.png"/>
+
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/5D/4C/CgqCHl-EFJmAO7ItAABKDcL98Uc576.png"/> 
+
 
 从而找到 findAll 方法的实现类，如下所示：
 
-<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/5D/4C/CgqCHl-EFKCAOUw0AAaMM8yZ64k573.png"/>
+
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/5D/4C/CgqCHl-EFKCAOUw0AAaMM8yZ64k573.png"/> 
+
 
 通过 Debug 断点我们可以看到，我们刚才组合出来的 Example 对象，这个时候被封装成了 ExampleSpecification 对象，那么我们接着往下看方法里面的关键内容。
 
@@ -441,21 +461,29 @@ TypedQuery<S> query = getQuery(new ExampleSpecification<>(example, escapeCharact
 
 getQuery 方法是创建 Query 的关键，因为它里面做了条件的转化逻辑。那么我们再看一下参数 ExampleSpecification 的源码，发现它是接口 Specification 的实现类，并且是非公开的实现类，可以通过接口对外暴露 and、or、not、where 等组合条件的查询条件。
 
-<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/5D/41/Ciqc1F-EFKeAOHpRAASLh36FrZI858.png"/>
+
+<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/5D/41/Ciqc1F-EFKeAOHpRAASLh36FrZI858.png"/> 
+
 
 我们接着看上面的 getQuery 方法的实现，可以看到接收的参数是 Specification`<S>`接口，所以不用关心实现类是什么。
 
-<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image/M00/5D/41/Ciqc1F-EFK2AWfUgAAEJccNGWh4199.png"/>
+
+<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image/M00/5D/41/Ciqc1F-EFK2AWfUgAAEJccNGWh4199.png"/> 
+
 
 我们接着再看这个断点的 getQuery 方法：
 
-<Image alt="Drawing 11.png" src="https://s0.lgstatic.com/i/image/M00/5D/41/Ciqc1F-EFLOAfcLIAAEtDgDfmQU527.png"/>
+
+<Image alt="Drawing 11.png" src="https://s0.lgstatic.com/i/image/M00/5D/41/Ciqc1F-EFLOAfcLIAAEtDgDfmQU527.png"/> 
+
 
 里面有一段代码会调用 applySpecificationToCriteria 生成 root，并由 Root 作为参数生成 Query，从而交给 EM（EntityManager）进行查询。
 
 我们再来看一下关键的 applySpecificationToCriteria 方法。
 
-<Image alt="Drawing 12.png" src="https://s0.lgstatic.com/i/image/M00/5D/4C/CgqCHl-EFLyAJh4iAAFuOV3pYzA214.png"/>
+
+<Image alt="Drawing 12.png" src="https://s0.lgstatic.com/i/image/M00/5D/4C/CgqCHl-EFLyAJh4iAAFuOV3pYzA214.png"/> 
+
 
 根据 Specification 调用 toPredicate 方法，生成 Predicate，从而实现查询需求。
 
@@ -465,7 +493,9 @@ getQuery 方法是创建 Query 的关键，因为它里面做了条件的转化�
 
 正如我们开篇提到的【图一：Repository 类图】，JpaSpecificationExecutor 是 JPA 里面的另一个接口分支。我们先来看看它的基本语法。
 
-<Image alt="Drawing 13.png" src="https://s0.lgstatic.com/i/image/M00/5D/4C/CgqCHl-EFMSABjEBAAEBE-nLmV0807.png"/>
+
+<Image alt="Drawing 13.png" src="https://s0.lgstatic.com/i/image/M00/5D/4C/CgqCHl-EFMSABjEBAAEBE-nLmV0807.png"/> 
+
 
 我们通过查看 JpaSpecificationExecutor 的 Structure 图会发现，方法就有这么几个，细心的同学这个时候会发现它的参数 Specification，正是我们分析 QueryByExampleExecutor 的原理时候使用的 Specification。
 
@@ -488,3 +518,4 @@ getQuery 方法是创建 Query 的关键，因为它里面做了条件的转化�
 总之，保持一颗好奇心，不断深挖，你才能掌握得更加全面。本节课就到这里了，如果你觉得有帮助，欢迎你留言讨论和分享，我们下一课时再见。
 > 点击下方链接查看源码（不定时更新）  
 > <https://github.com/zhangzhenhuajack/spring-boot-guide/tree/master/spring-data/spring-data-jpa>
+

@@ -1,3 +1,5 @@
+# 11服务发布：如何构建一个RESTful风格的Web服务？
+
 通过前面课程的学习，我们已经掌握了构建一个 Spring Boot 应用程序的数据访问层组件实现方法。接下来的几讲，我们将讨论另一层组件，即 Web 服务层的构建方式。
 
 服务与服务之间的交互是系统设计和发展的必然需求，其涉及 Web 服务的发布及消费，今天我们先讨论如何在 Spring Boot 应用程序中发布 Web 服务。
@@ -12,7 +14,9 @@
 
 关于三个服务之间的交互方式，我们先通过一张图了解下，如下图所示：
 
-<Image alt="图片6 (1).png" src="https://s0.lgstatic.com/i/image2/M01/03/C1/CgpVE1_hv2uAGbTPAABvOdgwGhs113.png"/>  
+
+<Image alt="图片6 (1).png" src="https://s0.lgstatic.com/i/image2/M01/03/C1/CgpVE1_hv2uAGbTPAABvOdgwGhs113.png"/> 
+  
 SpringCSS 案例系统中三个服务的交互方式图
 
 实际上，通过上图我们已经可以梳理工单生成 generateCustomerTicket 核心方法的执行流程，这里我们先给出代码的框架，如下代码所示：
@@ -55,7 +59,9 @@ REST（Representational State Transfer，表述性状态转移）本质上只是
 
 下表展示了 RESTful 风格的一些具体示例：
 
-<Image alt="图片1 (2).png" src="https://s0.lgstatic.com/i/image2/M01/03/C0/Cip5yF_hv3eAbVtLAAGhaTfDT5s664.png"/>  
+
+<Image alt="图片1 (2).png" src="https://s0.lgstatic.com/i/image2/M01/03/C0/Cip5yF_hv3eAbVtLAAGhaTfDT5s664.png"/> 
+  
 RESTful 风格示例
 
 另一方面，客户端与服务器端的数据交互涉及序列化问题。关于序列化完成业务对象在网络环境上的传输的实现方式有很多，常见的有文本和二进制两大类。
@@ -232,7 +238,9 @@ public void updateAccount(@RequestBody Account account) {
 
 如果使用 @RequestBody 注解，我们可以在 Postman 中输入一个 JSON 字符串来构建输入对象，如下代码所示：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image2/M01/01/5C/Cip5yF_YgIGACIM7AAAr5-G8i7M764.png"/>  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image2/M01/01/5C/Cip5yF_YgIGACIM7AAAr5-G8i7M764.png"/> 
+  
 使用 Postman 输入 JSON 字符串发起 HTTP 请求示例图
 
 通过以上内容的讲解，我们发现使用注解的操作很简单，接下来我们有必要探讨下控制请求输入的规则。
@@ -243,7 +251,9 @@ public void updateAccount(@RequestBody Account account) {
 
 * 在设计 RESTful API 时，我们需要基于 HTTP 语义设计对外暴露的端点的详细路径。针对常见的 CRUD 操作，我们展示了 RESTful API 与非 RESTful API 的一些区别。
 
-<Image alt="图片3 (1).png" src="https://s0.lgstatic.com/i/image/M00/8B/E8/CgqCHl_hv5yAPnDHAADI8geMxRU064.png"/>  
+
+<Image alt="图片3 (1).png" src="https://s0.lgstatic.com/i/image/M00/8B/E8/CgqCHl_hv5yAPnDHAADI8geMxRU064.png"/> 
+  
 RESTful 风格对比示例
 
 基于以上介绍的控制请求输入的实现方法，我们可以给出 account-service 中 AccountController 类的完整实现过程，如下代码所示：
@@ -339,3 +349,4 @@ public class JpaOrderController {
 这里给你留一道思考题：在使用 Spring Boot 构建 Web 服务时，可以使用哪些注解实现对输入参数的有效控制？
 
 现在，我们已经构建了一个具有 RESTful 风格的 Web 服务。在 12 讲中，我们将介绍 Spring Boot 所提供的另一个模板工具类 RestTemplate 完成对 HTTP 端点的消费。
+

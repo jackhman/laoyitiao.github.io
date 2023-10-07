@@ -1,3 +1,5 @@
+# 16指标体系：Prometheu如何更完美地显示指标体系？
+
 在上一节，我带你了解了日志系统的基本原理和 ELK 是如何进行日志收集和展示的。在本节课，我将带你了解 Prometheus 是如何收集和展示统计指标数据的。
 
 ### 作用
@@ -74,7 +76,9 @@ Prometheus 是一个开源的服务监控系统和时间序列数据库，它是
 
 我们先来看一张 Prometheus 的架构图：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/55/1D/Ciqc1F9pyTGATVArAAFB6U7Uslw981.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/55/1D/Ciqc1F9pyTGATVArAAFB6U7Uslw981.png"/> 
+
 
 根据我在原理中讲到的数据收集、指标聚合、指标查询和规则告警，我们也可以通过这 4 个步骤来了解 Prometheus。
 
@@ -163,7 +167,9 @@ description: "{ { $labels.instance  }} 实例中的请求错误数超过 20 个(
 
 最后我带你简单认识一下 Grafana，它是**一个通过可视化的形式查看指标数据的展示系统**。通过它，你可以快速构建出 dashboard。其数据源就是依赖 Prometheus，通过 PromQL 的查询实现的。如下图所示：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/55/28/CgqCHl9pyVSAaRiNAAFaF113VPU106.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/55/28/CgqCHl9pyVSAaRiNAAFaF113VPU106.png"/> 
+
 
 这张图是官方 demo 所提供的展示内容，可以点击[这里](http://demo.robustperception.io:3000/d/KyOBFkuik/host-stats-prometheus-node-exporter?orgId=1)访问。
 
@@ -174,3 +180,4 @@ Grafana 还支持导入和导出展示模板，你可以下载一些已经很成
 ### 总结
 
 本节我向你介绍了 Prometheus 的功能和使用方法，它是在业务中统计指标时必不可少的系统。那么，你都是如何根据指标来进行告警的，在线上告警时又出现过哪些棘手的问题呢？欢迎你在留言区分享你的故事。
+

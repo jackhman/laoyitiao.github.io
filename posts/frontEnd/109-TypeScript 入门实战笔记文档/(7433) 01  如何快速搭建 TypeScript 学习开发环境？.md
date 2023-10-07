@@ -1,3 +1,5 @@
+# 01如何快速搭建TypeScript学习开发环境？
+
 "工欲善其事，必先利其器。"因此，在正式讲解 TypeScript 之前，我们有必要先掌握 TypeScript 开发环境的搭建及相关注意事项。
 
 ### IDE for TypeScript
@@ -42,7 +44,9 @@ Vim 保存退出后，输入"code 应用路径"（如下所示），我们就可
 
 设置当前窗口使用的 TypeScript 版本的具体操作，如下图所示：
 
-<Image alt="versions.gif" src="https://s0.lgstatic.com/i/image6/M01/3D/AB/Cgp9HWCV_ZaAcBb0ACrQ7VCdLNg442.gif"/>  
+
+<Image alt="versions.gif" src="https://s0.lgstatic.com/i/image6/M01/3D/AB/Cgp9HWCV_ZaAcBb0ACrQ7VCdLNg442.gif"/> 
+  
 可随意切换 TypeScript 版本窗口图
 
 我们也可以在当前应用目录下的 ".VS Code/settings.json" 内添加命令（如下所示）配置 VS Code 默认使用应用目录下安装的 TypeScript 版本，以便提供语法解析和类型检测服务。
@@ -55,24 +59,32 @@ Vim 保存退出后，输入"code 应用路径"（如下所示），我们就可
 
 在实际编写 TypeScript 代码时，我们可以使用"Shift + Command + M"快捷键打开问题面板查看所有的类型错误信息概览，如下图所示：
 
-<Image alt="problems.gif" src="https://s0.lgstatic.com/i/image6/M01/3D/B4/CioPOWCV_aiANRthACtpGH2EbVM328.gif"/>  
+
+<Image alt="problems.gif" src="https://s0.lgstatic.com/i/image6/M01/3D/B4/CioPOWCV_aiANRthACtpGH2EbVM328.gif"/> 
+  
 查看所有的类型错误信息概览图
 
 **这里请注意：不同操作系统、不同 VS Code 版本的默认快捷键可能不一致，我们可以点击菜单栏中的"视图（View）\| 问题（Problems）" 查看具体快捷键。**
 
 当然，VS Code 也基于 TypeScript 语言服务提供了准确的代码自动补全功能，并显示详细的类型定义信息，如下图所示：
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M01/3D/AB/Cgp9HWCV_bqAahbtAASBXpVdoSk110.png"/>  
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M01/3D/AB/Cgp9HWCV_bqAahbtAASBXpVdoSk110.png"/> 
+  
 自动智能补全功能效果图
 
 除了类型定义之外，TypeScript 语言服务还能将使用 JSDoc 语法编写的结构化注释信息提供给 VS Code，而这些信息将在对应的变量或者类型中通过 hover 展示出来，极大地提升了代码的可读性和开发效率，如下图所示：
 
-<Image alt="hover.gif" src="https://s0.lgstatic.com/i/image6/M01/3D/B4/CioPOWCV_c-AUMxiACJEAc_XkjE624.gif"/>  
+
+<Image alt="hover.gif" src="https://s0.lgstatic.com/i/image6/M01/3D/B4/CioPOWCV_c-AUMxiACJEAc_XkjE624.gif"/> 
+  
 JSDoc 信息提示图
 
 我们还可以通过 "Ctrl + \`" 快捷键打开 VS Code 内置的命令行工具，以便在当前应用路径下执行各种操作，如下图所示：
 
-<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image6/M01/3D/AC/Cgp9HWCV_dqAK7K-AALYUhjm47c225.png"/>  
+
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image6/M01/3D/AC/Cgp9HWCV_dqAK7K-AALYUhjm47c225.png"/> 
+  
 VS Code 内置的命令行工具图
 
 以上就是 VS Code 编辑器的基本介绍了，此时有没有蠢蠢欲动的感觉？
@@ -91,12 +103,16 @@ WebStorm 也是基于标准的 TypeScript Language Service 来支持 TypeScript 
 
 比如，它同样可以准确地进行代码自动补全，如下图所示：
 
-<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image6/M01/3D/AC/Cgp9HWCV_eqAU4ipAAUcTPGzEyU020.png"/>  
+
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image6/M01/3D/AC/Cgp9HWCV_eqAU4ipAAUcTPGzEyU020.png"/> 
+  
 代码自动补全效果图
 
 再比如，它同样支持 hover 提示类型及 JSDoc 注释，如下图所示：
 
-<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image6/M01/3D/AC/Cgp9HWCV_fyAO4ZRAASrHcWWn8Y686.png"/>  
+
+<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image6/M01/3D/AC/Cgp9HWCV_fyAO4ZRAASrHcWWn8Y686.png"/> 
+  
 提示类型及注释效果图
 
 因为 WebStorm 毕竟是一款商业化（收钱的）软件，所以它还集成了很多强大的 TypeScript 开发功能，具体内容你[可点击这里查看](https://www.jetbrains.com/zh-cn/webstorm/features/?fileGuid=xxQTRXtVcqtHK6j8)。
@@ -115,7 +131,9 @@ WebStorm 与 VS Code 相比，最大的**优势在于开箱即用**，这点可�
 
 * [点击查看英文版地址](https://www.typescriptlang.org/play?alwaysStrict=false&target=1&module=1&ts=3.9.7#code/Q&fileGuid=xxQTRXtVcqtHK6j8)
 
-<Image alt="Drawing 12.png" src="https://s0.lgstatic.com/i/image6/M01/3D/AC/Cgp9HWCV_gmAJ3BOAAOjOVbf4SY600.png"/>  
+
+<Image alt="Drawing 12.png" src="https://s0.lgstatic.com/i/image6/M01/3D/AC/Cgp9HWCV_gmAJ3BOAAOjOVbf4SY600.png"/> 
+  
 中文版的 TypeScript Playground 效果图
 
 Playground 还为我们提供了分享的功能，比如我们可以把学习成果、遇到的难点通过 URL 的形式分享给他人。
@@ -240,7 +258,9 @@ tsc HelloWorld.ts --strict --alwaysStrict false
 tsc HelloWorld.ts --strict --alwaysStrict false --watch
 ```
 
-<Image alt="Drawing 14.png" src="https://s0.lgstatic.com/i/image6/M00/3D/AC/Cgp9HWCV_iGAYMjOAAVsTWlXVIk512.png"/>  
+
+<Image alt="Drawing 14.png" src="https://s0.lgstatic.com/i/image6/M00/3D/AC/Cgp9HWCV_iGAYMjOAAVsTWlXVIk512.png"/> 
+  
 tsc 转译监听模式效果图
 
 我们也可以直接使用 ts-node 运行 HelloWorld.ts，如下代码所示：
@@ -282,7 +302,9 @@ say(1);
 
 然后 VS Code 会标红这个错误，并在问题（Problems）面板中显示错误信息，如下图所示：
 
-<Image alt="Drawing 16.png" src="https://s0.lgstatic.com/i/image6/M00/3D/AC/Cgp9HWCV_jOAXmPNAAXOxhMuaTs987.png"/>  
+
+<Image alt="Drawing 16.png" src="https://s0.lgstatic.com/i/image6/M00/3D/AC/Cgp9HWCV_jOAXmPNAAXOxhMuaTs987.png"/> 
+  
 VS Code 问题面板显示效果图
 
 最后，通过 tsc 转译或者 ts-node 运行这个示例，我们会看到如下所示的报错信息。
@@ -302,3 +324,4 @@ VS Code 让我们获得一种较为理想的开发体验，不必等到转译阶
 **插播一个思考题：如何选择和设置 VS Code 语言服务需要使用的 TypeScript 版本？欢迎你在留言区与我互动、交流。另外，如果你觉得本专栏有价值，欢迎分享给更多好友哦\~**
 
 到这里，TypeScript 开发环境就已经搭建好了，万事已具备。接下来我们的 TypeScript 学习开发班车就要发车了，你准备好迎接新的技能和新的挑战了吗？
+

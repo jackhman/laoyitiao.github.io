@@ -1,3 +1,5 @@
+# 02SQLvNoSQL：一次搞清楚五花八门的“SQL”
+
 这一讲我们开始讨论有关 SQL 及其变种的前世今生，以及它与分布式数据库之间的纷繁复杂关系。
 
 21 世纪的开发者往往要面对一种窘境：需在众多的数据库中艰难地做出选择。他们其实也想如老一辈技术人一样闭着眼睛去选择 Oracle 或者 DB2，因为它们曾经被证明是"不会出错"的选择，即无论选择哪款数据库，都不会丢工作。
@@ -43,7 +45,9 @@ NoSQL 数据库因具有庞大的数据存储需求，常被用于大数据和 C
 那么 NoSQL 数据库与 SQL 数据库的区别表现在哪呢？如下表所示。  
 表 NoSQL 数据库与 SQL 数据库的区别
 
-<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/8E/05/CgqCHmABUO2ARErIAAC-JxCHpDg212.png"/>
+
+<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/8E/05/CgqCHmABUO2ARErIAAC-JxCHpDg212.png"/> 
+
 
 NoSQL 除了不是 SQL 外，另外一个广泛的解释是 Not Only SQL。其背后暗含：我们没有 SQL，但是有一项比 SQL 要吸引人的东西，那就是------分布式。
 
@@ -128,3 +132,4 @@ SQL 在这漫长的时间内当然不是一成不变的，甚至可以说当今 
 学习完这一讲的内容，我希望你思考这样一个问题：MySQL 8.0 引入的 InnoDB Cluster 应该被归类到哪种类型的分布式数据库呢？
 
 探索事物的本质是一件很有趣的事情，希望你通过学习也能感受到这份乐趣，下一讲我们来聊聊分布式数据库的核心之一------数据分片。到时见。
+

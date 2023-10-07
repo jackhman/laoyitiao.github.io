@@ -1,3 +1,5 @@
+# 第07讲：分布式配置中心-Apollo
+
 本课时我们主要讲解：配置中心解决的业务痛点、Apollo 基础知识以及如何使用、Apollo 架构设计，以及核心源码分析等内容。  
 
 ###### 配置中心
@@ -10,7 +12,9 @@
 
 在没有使用配置中管理配置的时候，我们的配置文件都是跟着项目走的，也就是存放在项目中的目录下，一个项目中可能有多个配置文件。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/D1/CgoB5l28B1SAeUNlAACArRLtcVE240.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/D1/CgoB5l28B1SAeUNlAACArRLtcVE240.png"/> 
+
 
 当项目发布的时候，会先编译打包，同时配置文件也会被打包进去，也就是配置文件会跟着项目一起发布。这样存在的问题是当我们需求修改配置的时候，需要重新在本地修改，然后重新发布才可以让新的配置生效，当请求压力越来越大，你的项目也会从 1 个节点变成多个节点，这个时候如果配置需要发生变化，对应的修改操作也是相同的，只需要在项目中修改一次即可，但对于发布操作工作量就比之前大了很多，因为要发布多个节点。
 
@@ -20,7 +24,9 @@
 
 使用配置中心管理配置后，我们就可以将配置信息从项目中转移到配置中心，一般一个项目会有一个唯一的标识 ID, 也就是身份信息，通过这个 ID 从配置中心获取对应的配置内容。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/F1/CgotOV28B1WAF4S2AACIYGiePW0196.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/F1/CgotOV28B1WAF4S2AACIYGiePW0196.png"/> 
+
 
 主要的流程分为两个步骤，一个是拉取，一个是推送。拉取是在项目启动的时候通过配置中心拉取配置信息，推送则是配置中心必须要有的功能，如果没有推送功能，配置中心就没那么重要了。
 
@@ -100,7 +106,9 @@ Apollo（阿波罗）是携程框架部门研发的分布式配置中心，能�
 
 Spring Cloud 体系中自带的配置中心是 Spring Cloud Config，那为什么我会推荐大家使用 Apollo 来替代 Spring Cloud Config 呢？下面我们来分析下它们各自的特点。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/D1/CgoB5l28B1WASOkYAAA7y7Kuj4o675.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/D1/CgoB5l28B1WASOkYAAA7y7Kuj4o675.png"/> 
+
 
 * 统一配置管理
 
@@ -168,33 +176,47 @@ Spring Cloud Config 没有 Web 管理后台，可以使用 Git 的 Web 界面来
 
 ###### **Spring Boot 集成 Apollo**
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/F1/CgotOV28B1WADhfnAB8q0bmRRTo125.gif"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/F1/CgotOV28B1WADhfnAB8q0bmRRTo125.gif"/> 
+
 
 我们接下来学习如何在 Spring Boot 中集成 Apollo，首先在 pom 中加入 apollo-client 的依赖，然后在 application 属性文件中增加 Apollo 的配置信息，app.id 是项目的唯一标识，跟 Apollo 中的项目一一对应，apollo.meta 就是 meta Server 的地址，namespaces 是我们需要加载的命名空间。这边少了环境的配置，也就是当前的配置读取哪个环境下的信息，是开发环境，还是测试环境，或是生产环境。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/D1/CgoB5l28B1WALZEnAAxQ0fjk4zw209.gif"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/D1/CgoB5l28B1WALZEnAAxQ0fjk4zw209.gif"/> 
+
 
 Apollo 中环境的指定有多种方式，在实际使用中，我推荐将环境和 meta Server 的地址配置在本地磁盘中，Linux 下配置路径是 /opt/settings/server.properties。这边为了演示方式，直接在启动的时候通过 System.setProperty 来指定对应的环境，在启动类中可以看到指定了 DEV 环境。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/F1/CgotOV28B1WAKNDDAB_aoNBv2HE107.gif"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/F1/CgotOV28B1WAKNDDAB_aoNBv2HE107.gif"/> 
+
 
 然后我们来演示下配置的读取，首先来看直接注入 Config 接口，通过接口的 getProperty
 
 方法来获取配置信息，这边获取了配置 key 为 username 的配置，并指定了默认值。当配置中心无此配置时才会用默认值，访问接口可以看到输出的配置内容，然后我们在后台将配置的值修改一下，然后再次访问，可以看到值变成了最新修改的内容，秒级实时生效。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/D1/CgoB5l28B1aAG317AAzM665afCY996.gif"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/D1/CgoB5l28B1aAG317AAzM665afCY996.gif"/> 
+
 
 第二种方式是通过 Spring 的 @Value 注解来读取配置信息，冒号后是默认值，同样的访问接口进行测试。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/F1/CgotOV28B1aAZEtlAB8bZLHtO8E954.gif"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/F1/CgotOV28B1aAZEtlAB8bZLHtO8E954.gif"/> 
+
 
 第三种方式是创建一个配置类，通过 @ConfigurationProperties 来读取，可以指定配置的前缀，将一组配置统一读取，在使用时直接注入这个自定义的配置类，然后访问配置类的 get 方法获取对应的配置信息。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/D1/CgoB5l28B1eAPvH2ACNIdFxKCQE837.gif"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/D1/CgoB5l28B1eAPvH2ACNIdFxKCQE837.gif"/> 
+
 
 第四种是 @ApolloJsonValue 注解的使用，可以将配置的值存储成 JSON 格式，在读取的时候使用 @ApolloJsonValue 将 JSON 格式的值直接转换成对应的实体对象，非常方便。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/F1/CgotOV28B1eARWYpACY4cb3myAE618.gif"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/F1/CgotOV28B1eARWYpACY4cb3myAE618.gif"/> 
+
 
 最后来看下配置变更监听的使用方式，同样的只需要加一个 @ApolloConfigChangeListener
 
@@ -202,7 +224,9 @@ Apollo 中环境的指定有多种方式，在实际使用中，我推荐将环�
 
 ###### Apollo 架构设计
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/D1/CgoB5l28B1eAT_QKAAIrr-cSeiQ864.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/D1/CgoB5l28B1eAT_QKAAIrr-cSeiQ864.png"/> 
+
 
 接下来，我们来介绍下在 Apollo 架构中的一些概念：
 
@@ -244,7 +268,9 @@ Apollo 提供的客户端，用于项目中对配置的获取、更新。通过 
 
 配置中心最重要的一个特性就是实时推送了，正因为有这个特性，我们可以依赖配置中心做很多事情。如图简要描述了配置发布的大致过程。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/F1/CgotOV28B1eAVl80AADzD_Lkc-w754.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/F1/CgotOV28B1eAVl80AADzD_Lkc-w754.png"/> 
+
 
 用户会在 Portal 中进行配置的编辑和发布操作，Portal 会调用 Admin Service 提供的接口进行发布操作。Admin Service 收到请求后，发送 ReleaseMessage 给各个 Config Service，通知 Config Service 配置发生了变化。Config Service 收到 ReleaseMessage 后，通知对应的客户端，基于 HTTP 长连接实现。
 
@@ -254,7 +280,9 @@ ReleaseMessage 消息是通过 MySQL 实现了一个简单的消息队列。之�
 
 如图简要描述了发送 ReleaseMessage 的大致过程。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/D1/CgoB5l28B1iAJa9tAACfTre4O3g300.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/D1/CgoB5l28B1iAJa9tAACfTre4O3g300.png"/> 
+
 
 Admin Service 在配置发布后会往 ReleaseMessage 表插入一条消息记录，Config Service 会启动一个线程定时扫描 ReleaseMessage 表，去查看是否有新的消息记录。Config Service 发现有新的消息记录，那么就会通知所有的消息监听器，消息监听器得到配置发布的信息后，则会通知对应的客户端。
 
@@ -262,7 +290,9 @@ Admin Service 在配置发布后会往 ReleaseMessage 表插入一条消息记�
 
 如图简要描述了 Apollo 客户端的实现原理。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/F1/CgotOV28B1iAHJTnAAFK5jsOc0Q150.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/F1/CgotOV28B1iAHJTnAAFK5jsOc0Q150.png"/> 
+
 
 客户端和服务端保持了一个长连接，编译配置的实时更新推送。定时拉取配置是客户端本地的一个定时任务，默认每 5 分钟拉取一次，也可以通过在运行时指定 System Property: apollo.refreshInterval 来进行覆盖，单位是分钟，采用推送 + 定时拉取的方式就等于双保险。
 
@@ -272,7 +302,9 @@ Admin Service 在配置发布后会往 ReleaseMessage 表插入一条消息记�
 
 Apollo 除了支持 API 方式获取配置，也支持和 Spring/Spring Boot 集成，集成后可以直接通过 Spring 的 @Value 注解获取配置，我们来分析下集成的原理。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/D1/CgoB5l28B1iAJYdPAAC-xjP6WLY903.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/D1/CgoB5l28B1iAJYdPAAC-xjP6WLY903.png"/> 
+
 
 Spring 从 3.1 版本开始增加了 ConfigurableEnvironment 和 PropertySource：
 
@@ -280,7 +312,9 @@ Spring 从 3.1 版本开始增加了 ConfigurableEnvironment 和 PropertySource�
 
 * PropertySource 可以理解为很多个 Key - Value 的属性配置。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/F1/CgotOV28B1iASfMgAAC9F683nHQ059.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/F1/CgotOV28B1iASfMgAAC9F683nHQ059.png"/> 
+
 
 在运行时的结构如图所示，需要注意的是，PropertySource 之间是有优先级顺序的，如果有一个 Key 在多个 PropertySource 中都存在，那么在前面的 PropertySource 优先级高。
 
@@ -288,7 +322,9 @@ Spring 从 3.1 版本开始增加了 ConfigurableEnvironment 和 PropertySource�
 
 ###### 可用性设计
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/D1/CgoB5l28B1iAUjSmAACLZzn0M5k680.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/D1/CgoB5l28B1iAUjSmAACLZzn0M5k680.png"/> 
+
 
 Apollo 在高可用设计这块下了很大的功夫，下面我们来简单的分析下。
 
@@ -340,31 +376,45 @@ Portal 可用部署多台，通过 Nginx 做负载，某台 Portal 下线之后�
 
 以上就是 Apollo 长连接推送的核心原理。下面我们来分析下代码。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/F1/CgotOV28B1iAWyxDABkOCzxySSk513.gif"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/F1/CgotOV28B1iAWyxDABkOCzxySSk513.gif"/> 
+
 
 打开 NotificationControllerV2 类，定义了一个 AddMsg 的方法，发送 ReleaseMessage 的逻辑基于 AddMsg 接口，用于队列存储，测试的时候就调用这个接口模拟配置有更新的情况，发送 ReleaseMessage 消息。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/D1/CgoB5l28B1mAE2PEACNyf_DgdlM536.gif"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/D1/CgoB5l28B1mAE2PEACNyf_DgdlM536.gif"/> 
+
 
 消息发送后，Config Service 会启动一个线程定时扫描 ReleaseMessage 表，去查看是否有新的消息记录，然后通知客户端，这里我们也启动一个线程去扫描 ReleaseMessage 表。打开 ReleaseMessageScanner 类，这里用了一个线程一直负责读取队列，如果读到了数据就调用 NotificationControllerV2 中的 handleMessage 方法。handleMessage 就是当配置发生变化的时候，通知对应的客户端。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/F1/CgotOV28B1mABbzLACEV1Y3rpmc397.gif"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/F1/CgotOV28B1mABbzLACEV1Y3rpmc397.gif"/> 
+
 
 Apollo 的实时推送是基于 Spring DeferredResult 实现的，在 handleMessage() 方法中可以看到是通过 deferredResults 获取 DeferredResult，deferredResults 就是第一行的 Multimap，Key 其实就是消息内容，Value 就是 DeferredResult 的业务包装类 DeferredResultWrapper。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/D1/CgoB5l28B1mAY3zKACn0z-Qllgc346.gif"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/D1/CgoB5l28B1mAY3zKACn0z-Qllgc346.gif"/> 
+
 
 客户端接入流程：NotificationControllerV2 中提供了一个 /getConfig 的接口，客户端在启动的时候会调用这个接口，这个时候会执行 getApolloConfigNotifications() 方法获取是否有配置变更的信息，如果有的话证明配置修改过，直接就通过 deferredResultWrapper.setResult(newNotifications); 返回结果给客户端了，客户端收到结果后重新拉取配置的信息进行覆盖本地的配置。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/F1/CgotOV28B1qAWg5yABKC0bm7mpY637.gif"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/F1/CgotOV28B1qAWg5yABKC0bm7mpY637.gif"/> 
+
 
 如果 getApolloConfigNotifications() 方法没有返回配置修改的信息，证明配置没有发生修改，就将 DeferredResultWrapper 对象添加到 deferredResults 中，等待后续配置发生变化时消息监听器进行通知。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/D1/CgoB5l28B1qANYhRAA5S_s3eu2Q160.gif"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/D1/CgoB5l28B1qANYhRAA5S_s3eu2Q160.gif"/> 
+
 
 在创建 DeferredResult 对象的时候指定了超时的时间和超时后返回的响应码，请求会挂起，如果 60 秒内没有消息监听器进行通知，那么这个请求就会超时，超时后客户端就收到的响应码就是 304。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/F1/CgotOV28B1qAdAIIACT9ajneUpY998.gif"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/A2/F1/CgotOV28B1qAdAIIACT9ajneUpY998.gif"/> 
+
 
 打开 ClientTest，首先启动 /getConfig 接口所在的服务，然后启动客户端，客户端就会发起注册请求，如果有修改直接获取结果，进行配置的更新操作。如果无修改，请求会挂起，这边客户端设置的读取超时时间是 90 秒，大于服务端的 60 秒超时时间。
 
@@ -375,4 +425,5 @@ Apollo 的实时推送是基于 Spring DeferredResult 实现的，在 handleMess
 本课时主要学习了什么是配置中心及配置中心解决的业务痛点然后对比了 Apollo 和 Spring Cloud Config 的优缺点，介绍了 Apollo 的基本概念及如何使用，重点分析了 Apollo 的架构设计，最后分析了 Apollo 的核心源码，希望你在课后能够熟练掌握本课时的内容。
 
 <br />
+
 

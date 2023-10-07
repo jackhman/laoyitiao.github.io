@@ -1,3 +1,5 @@
+# 第05讲：声明式服务调用-Feign
+
 你好，我是你的 Spring Cloud 老师尹吉欢，欢迎来到课时 5 "声明式服务调用-Feign"的学习。本课时我们主要讲解：Feign 基础知识，Feign 的使用以及最佳使用技巧，Feign 源码分析。
 
 在日常工作中，我们经常会遇到需要调用内部 API 或者第三方 API 的情况，主要有以下方式：
@@ -30,7 +32,9 @@ Feign 是一个声明式的 REST 客户端，它的目的就是让 REST 调用�
 
 Feign 有如此强大的功能，离不开内部众多组件的支持，这些组件同时也为 Feign 提供了非常灵活的扩展机制，我们可以根据自身的需求去扩展这些组件，下面我们讲解 Feign 中的重要组件。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9B/86/CgotOV2oGbmAMIEfAAFD417806k525.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9B/86/CgotOV2oGbmAMIEfAAFD417806k525.png"/> 
+
 
 * Contract 契约组件
 
@@ -74,7 +78,9 @@ QueryMapEncoder 是针对实体类参数查询的编码器，可以基于 QueryM
 
 ###### Feign 执行过程
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9B/66/CgoB5l2oGbmACVdMAACewrpciZo953.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9B/66/CgoB5l2oGbmACVdMAACewrpciZo953.png"/> 
+
 
 在使用 feign 时，我们会定义对应的接口类，在接口类上使用 Feign 自带的注解来标识 HTTP 的请求参数信息，当调用接口对应的方法时，Feign 内部会基于面向接口的动态代理方式生成实现类，将请求调用委托到动态代理实现类，负责动态代理的组件是 InvocationHandlerFactory。  
 
@@ -86,7 +92,9 @@ MethodHandler 在执行的时候会生成 Request 对象，在构建 Request 对
 
 ###### 原生 API
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9B/86/CgotOV2oGbmAGk9hAAEqjsNnfEc049.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9B/86/CgotOV2oGbmAGk9hAAEqjsNnfEc049.png"/> 
+
 
 这段代码是我从 Feign 的 GitHub 主页上摘下来的，通过这个简单的示列我们可以感受到 Feign调用 API 的简便性。
 
@@ -98,7 +106,9 @@ MethodHandler 在执行的时候会生成 Request 对象，在构建 Request 对
 
 ###### 自带注解
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9B/66/CgoB5l2oGbmAAxxlAACsHadsFYk931.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9B/66/CgoB5l2oGbmAAxxlAACsHadsFYk931.png"/> 
+
 
 通过前面的示列我们感受到了 Feign 的简便性，通过定义接口，加几个注解就可以轻松完成 API的远程调用，Feign 中自带的注解跟我们平时使用 Spring MVC 的注解不一样，除了前面我们提到的 @RequestLine 注解，Feign 中还有很多其他内置的注解，我整理了一个表格，表格中就是Feign 中内置的注解以及它们的作用。
 
@@ -110,7 +120,9 @@ RequestLine 前面已经讲过了，用来定义请求类型和请求的 URI，P
 
 首先我们开发的 API 都用的是 Spring MVC 的注解，比如 RequestMapping 等，Feign 的注解是单独的一套，所以我们编写调用 Client 接口时，需要根据已有的接口来编写，在 spring-cloud-openfeign 中，实现了 Spring MVC 的一套注解，调用方 Client 接口中的注解和 API 方可以一致，非常方便。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9B/87/CgotOV2oGvSAB6lzACuH262SK0o630.gif"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9B/87/CgotOV2oGvSAB6lzACuH262SK0o630.gif"/> 
+
 
 下面我们来体验下 Spring Cloud 中 Feign 的简便性，在 Spring Cloud 中使用 Feign 主要有三步。
 
@@ -120,23 +132,31 @@ RequestLine 前面已经讲过了，用来定义请求类型和请求的 URI，P
 
 3. 可以直接通过客户端访问接口。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9B/87/CgotOV2oGu2AYbCzAD5-YgFFrj0939.gif"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9B/87/CgotOV2oGu2AYbCzAD5-YgFFrj0939.gif"/> 
+
 
 下面来实际操作一下，创建一个 UserRemoteClient，定义一个 getUser 方法，getUser 方法上的注解跟服务提供方一致即可。然后在接口上增加一个 @FeignClient 的注解，value 指定为服务提供方的服务名称，也就是 Eureka 中的服务名。然后看下启动类，需要增加@EnableFeignClients 注解开启 Feign 的装配。在使用的地方直接注入 UserRemoteClient，然后调用 getUser 方法就可以获取到远程的数据了。
 
 ###### Feign 整合 Hystrix
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9B/67/CgoB5l2oGuCAdFnGAA6QDTT4wB4893.gif"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9B/67/CgoB5l2oGuCAdFnGAA6QDTT4wB4893.gif"/> 
+
 
 在 pom 中增加 spring-cloud-starter-netflix-hystrix 的依赖，然后在配置文件中开启 Feign 对 Hystrix 的支持，配置 feign.hystrix.enabled=true。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9B/87/CgotOV2oGtiAUD-yABz3qehaijk305.gif"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9B/87/CgotOV2oGtiAUD-yABz3qehaijk305.gif"/> 
+
 
 然后为我们的 Feign Client 增加 Fallback，新建一个 UserRemoteClientFallbackFactory，实现 FallbackFactory 接口，泛型传入我们的 Feign Client。在 create 方法中创建 UserRemoteClient 并编写回退逻辑。
 
 最后需要在 @FeignClient 注解中指定我们的 FallbackFactory 类，这样才能让这个 Feign Client应用我们的回退逻辑。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9B/67/CgoB5l2oGr6AGh27ADHEa_iaFU8088.gif"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9B/67/CgoB5l2oGr6AGh27ADHEa_iaFU8088.gif"/> 
+
 
 访问 getUser 接口测试下，将对应的服务先停止，然后我们就可以看到相应的回退内容了。
 
@@ -150,7 +170,9 @@ Feign 的配置在代码中可以指定，我们可以为每个 Feign Client 创
 
 更灵活的配置方式应该是放入配置文件中，建议你在工作中将配置都放入配置文件中，那么 Feign 在配置文件中如何进行配置呢？
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9B/86/CgotOV2oGbqAQfgPAAFRayo3xS8984.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9B/86/CgotOV2oGbqAQfgPAAFRayo3xS8984.png"/> 
+
 
 当然也是有统一的格式的，而且格式也比较简单，前缀都是固定的 feign.client.config，后面接的是 Feign Client 的名称，也就是我们 @FeignClient 注解中的 value。然后是对应的配置项，这样的配置就可以为不同的 Feign Client 配置不同的值。
 
@@ -170,7 +192,9 @@ Feign 的配置在代码中可以指定，我们可以为每个 Feign Client 创
 
 ###### 继承特性-方式一
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9B/66/CgoB5l2oGbqAcCubAAD1tEMB1xw892.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9B/66/CgoB5l2oGbqAcCubAAD1tEMB1xw892.png"/> 
+
 
 因为 Spring Cloud Open Feign 中支持继承的特性，我们可以将 API 的定义提取出来封装成一个单独的接口，给 API 的实现方和调用方共用，在一定程度上简化了重复的代码。  
 
@@ -182,7 +206,9 @@ Feign 的配置在代码中可以指定，我们可以为每个 Feign Client 创
 
 ###### 继承特性-方式二
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9B/86/CgotOV2oGbuASp8GAAC5YoZgIl0061.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9B/86/CgotOV2oGbuASp8GAAC5YoZgIl0061.png"/> 
+
 
 上面的继承方式是我简化之后的，其实在 Spring Cloud Open Feign 的文档中，给出的继承示列还要多一个类，第一步是抽出一个公共的接口，比如我们这边的 UserService，UserService 中定义了要实现的 API 的方法。
 
@@ -190,13 +216,17 @@ Feign 的配置在代码中可以指定，我们可以为每个 Feign Client 创
 
 ###### 拦截器
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9B/66/CgoB5l2oGbuAIUQoAAC9NEkPsms617.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9B/66/CgoB5l2oGbuAIUQoAAC9NEkPsms617.png"/> 
+
 
 Feign 中提供了拦截器机制，我们可以添加自己的拦截器来实现某些场景下的需求。BasicAuth 在 Feign 中默认提供了拦截器，我们只需要配置一下就可以使用，如果我们需要自定义拦截器，可以参考 BasicAuth 的代码，只要实现 RequestInterceptor 接口，在 apply 方法中编写你自己的逻辑就可以了，通过 RequestTemplate 可以进行很多操作，比如添加指定的请求头信息，这个可以用在服务间传递某些信息的时候。  
 
 ###### GET 请求多参数传递
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9B/86/CgotOV2oGbuAG632AACHzF9lMXk706.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9B/86/CgotOV2oGbuAG632AACHzF9lMXk706.png"/> 
+
 
 Feign 中对于 GET 请求传递多个参数，我们可以用多个 @RequestParam 来接收，参数多了对代码的可读性不友好，一般超过 3 个以上的参数我们都会将参数封装在一个实体类中，在 Spring Cloud Open Feign 中要支持对象接收多个参数，但需要增加 @SpringQueryMap 注解才可以。  
 
@@ -218,7 +248,9 @@ Feign 中对于 GET 请求传递多个参数，我们可以用多个 @RequestPar
 
 ###### 异常解码器
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9B/66/CgoB5l2oGbuAFUvrAADJtR7jdKs966.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9B/66/CgoB5l2oGbuAFUvrAADJtR7jdKs966.png"/> 
+
 
 Feign 中提供了异常的解码器，但我们也可以自定义异常解码器，自定义异常解码器可以用于内部服务之间调用的异常传递。比如说 A 服务调用 B 服务，B 服务中出现异常后，会由 B 服务中的全局异常处理器进行处理，然后返回给 A 服务的数据格式是固定的 code 是多少，message 是什么。  
 
@@ -226,15 +258,21 @@ Feign 中提供了异常的解码器，但我们也可以自定义异常解码�
 
 ###### Feign-源码分析
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9B/67/CgoB5l2oGpiAEY_oABwyiU6L1t0316.gif"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9B/67/CgoB5l2oGpiAEY_oABwyiU6L1t0316.gif"/> 
+
 
 首先来看下 Feign 执行请求的源码，从 Feign 这个类开始，通过 Feign 类提供的 Builder 模式，我们可以构建出一个 Feign Client，通过这个 Client 就可以调用远程的 API，看下 Builder 类中的参数信息，如 Logger、Client。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9B/67/CgoB5l2oGomATcVTAErP1s9Xx08760.gif"/>  
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9B/67/CgoB5l2oGomATcVTAErP1s9Xx08760.gif"/> 
+  
 
 接下来看下 target 方法，target 是最终生成代理类的方法，首先会进入 build 方法，在 build 中创建了 ReflectiveFeign 对象，最终调用的是 newInstance 方法，解析出 MethodHandler，然后创建 InvocationHandler 生成代理类，接着查看 SynchronousMethodHandler 类，在 invoke 方法中就是调用远程 API 的逻辑，创建一个 RequestTemplate，然后根据 RequestTemplate 获取对应的Request 记录日志，然后交由 client 执行，得到 response、decode 进行解码。这就是一个大致的整体流程，想要仔细的了解内部的实现细节，课后可以深入的去了解这段代码。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9B/67/CgoB5l2oGlKAYPhyADyseZWK2iI541.gif"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9B/67/CgoB5l2oGlKAYPhyADyseZWK2iI541.gif"/> 
+
 
 然后看下 Feign 中是如何集成 Hystrix，打开源码 FeignClientsConfiguration 类，在HystrixFeignConfiguration 对 Feign.Builder 进行了重新定义，返回的是 HystrixFeign.builder()
 
@@ -245,4 +283,5 @@ Feign 中提供了异常的解码器，但我们也可以自定义异常解码�
 <br />
 
 <br />
+
 

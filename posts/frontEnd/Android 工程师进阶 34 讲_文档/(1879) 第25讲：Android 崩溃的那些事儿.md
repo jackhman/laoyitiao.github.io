@@ -1,3 +1,5 @@
+# 第25讲：Android崩溃的那些事儿
+
 在 Android 开发圈子里，似乎没有一个统一的标准来衡量一个工程师的水平高低，也没有一个标准的规范来表明 App 是好是坏。但有一条不成文的约定，大家似乎都会讨论各家 App 的崩溃率。这在一定程度上也说明了，崩溃问题是衡量 App 质量的决定性考核标准。其实也很容易理解，一个 5 分钟内连续崩溃超过 3 次的 App，被"卸载"几乎是不可避免的了。
 
 好在 Android 系统会输出各种相应的 log 日志，大程度上降低了工程师 debug 崩溃问题的难度。如果要给 crash 日志进行分类，可以分成 2 大类：JVM 异常（Exception）堆栈信息、native 代码崩溃日志。
@@ -15,7 +17,9 @@ Java 异常
 
 对于上述两种异常我们都可以使用 UncaughtExceptionHandler 来进行捕获操作，它是 Thread 的一个内部接口，定义如下：
 
-<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/20/6E/Ciqc1F7ofWiAV2aBAAEGhcbtn98977.png"/>
+
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/20/6E/Ciqc1F7ofWiAV2aBAAEGhcbtn98977.png"/> 
+
 
 从官方对其介绍能够看出，对于传入的 Thread，如果因为"未捕获"异常而导致被终止，uncaughtException 则会被调用。我们可以借助它来间接捕获程序异常，并进行异常信息的记录工作，或者给出更友好的异常提示信息。
 
@@ -23,7 +27,9 @@ Java 异常
 
 自定义类实现 UncaughtExceptionHandler 接口，并实现 uncaughtException 方法：
 
-<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/20/6E/Ciqc1F7ofXaAcZ7MAAK-ubwIhZk797.png"/>
+
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/20/6E/Ciqc1F7ofXaAcZ7MAAK-ubwIhZk797.png"/> 
+
 
 需要注意的几点：
 
@@ -35,13 +41,17 @@ Java 异常
 
 1.收集 crash 现场的相关信息，如下面方法获取当前 App 的版本信息，以及所有手机设备的相关信息。
 
-<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/20/7A/CgqCHl7ofYSAeFGcAAJnMJd645o410.png"/>
+
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/20/7A/CgqCHl7ofYSAeFGcAAJnMJd645o410.png"/> 
+
 
 实际上，除了上述信息，还可以添加额外的自定义信息。
 
 2.日志的记录工作，将收集到的信息保存在本地，比如以文件的方式保存。
 
-<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/20/6E/Ciqc1F7ofYuAEnnPAAGeBy97jW8168.png"/>
+
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/20/6E/Ciqc1F7ofYuAEnnPAAGeBy97jW8168.png"/> 
+
 
 从图中可以看出，除了我们自己收集的日志，还需要将系统抛出的异常信息也保存到文件中，方便后续开发人员分析问题原因。
 
@@ -49,11 +59,15 @@ Java 异常
 
 LagouExceptionHandler 定义好之后，就可以将其初始化，并将主线程注册到 LagouExceptionHandler 中。如下：
 
-<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/20/7A/CgqCHl7ofZmAVDhnAACUY1wtWYQ757.png"/>
+
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/20/7A/CgqCHl7ofZmAVDhnAACUY1wtWYQ757.png"/> 
+
 
 最终保存的 crash 日志信息格式下图所示：
 
-<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/20/6F/Ciqc1F7ofaCAV-N0AAK1uzObDPg259.png"/>
+
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/20/6F/Ciqc1F7ofaCAV-N0AAK1uzObDPg259.png"/> 
+
 > 需要注意的是，因为使用了文件写操作，所以需要动态申请文件操作的权限。
 
 native 异常
@@ -63,19 +77,27 @@ native 异常
 
 比如创建一个模拟 native crash 的项目 LagouNativeCrash，项目结构如下：
 
-<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/20/6F/Ciqc1F7ofa2AOQEoAABoHjKPFO4484.png"/>
+
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/20/6F/Ciqc1F7ofa2AOQEoAABoHjKPFO4484.png"/> 
+
 
 MainActivity 中有一个点击按钮 Button，当点击此按钮时，会调用 crash() 方法触发 native 代码崩溃，如下：
 
-<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/20/6F/Ciqc1F7ofbWACu1SAABHFSC0bhA498.png"/>
+
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/20/6F/Ciqc1F7ofbWACu1SAABHFSC0bhA498.png"/> 
+
 
 native crash 在 native-lib.cpp 文件中声明，如下：
 
-<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/20/7A/CgqCHl7ofbyAMpx-AADl8pNCN4o838.png"/>
+
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/20/7A/CgqCHl7ofbyAMpx-AADl8pNCN4o838.png"/> 
+
 
 当点击 Button，触发 native 崩溃之后，系统会在 /data/tombstones 目录下生成 tombstone 日志文件，可以在此日志文件中，查看详细的报错信息。如下所示：
 
-<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/20/6F/Ciqc1F7ofcWAPr9kAASbO90geqo412.png"/>
+
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/20/6F/Ciqc1F7ofcWAPr9kAASbO90geqo412.png"/> 
+
 
 但是如果 native crash 是偶发现象，并且在模拟器上一时难以复现，那么就需要将工作交给测试工程师在真机上尝试复现。那就需要一种机制，将 native crash 现场的日志信息保存到我们可以访问的手机目录中。目前比较成熟，使用也比较广泛的就是谷歌的 BreakPad。
 
@@ -85,17 +107,23 @@ Breakpad 是一个跨平台的开源库，我们也可以在其 [Breakpad Github
 
 在 Breakpad GitHub 官网上，有一个 README Android 的介绍文件。这个文件专门介绍了如何在 Android 项目中导入 BreakPad。我们可以直接使用 CMake 方式将其编译为一个静态库。
 
-<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/20/7B/CgqCHl7ofdmAexkGAAQt9jC9U2g259.png"/>
+
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/20/7B/CgqCHl7ofdmAexkGAAQt9jC9U2g259.png"/> 
+
 
 在捕获 native crash 之前，需要初始化 Breakpad，主要是设置 BreakPad 保存 crash 日志的路径，如下所示：
 
-<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/20/6F/Ciqc1F7ofeOAOmfAAAI9QS6RESI036.png"/>
+
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/20/6F/Ciqc1F7ofeOAOmfAAAI9QS6RESI036.png"/> 
+
 
 图中传入的 path 就是 Breakpad 保存日志的文件目录，一般情况下保存在外置 SD 卡目录。
 
 初始化好之后，就可以在我们自己的 native 业务层模拟一个崩溃现场，Breakpad 会自动捕获这次 crash，并将生成的 crash 信息保存在所设置的目录中。
 
-<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/20/7B/CgqCHl7ofeuAJlINAADteaIIElo908.png"/>
+
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/20/7B/CgqCHl7ofeuAJlINAADteaIIElo908.png"/> 
+
 
 breakpad 生成的文件是 .dmp 文件，需要将其行转换，如下所示：
 > minidump_stackwalk 生成的 crash.dmp \> result.txt
@@ -113,7 +141,9 @@ breakpad 生成的文件是 .dmp 文件，需要将其行转换，如下所示�
 
 除了 Bugly 之外，还有一些其他的 crash 上报工具。比如 XCrash 和 Sentry。这两者比 Bugly 好的地方就是除了自动拦截界面崩溃事件，还可以主动上报错误信息。以 XCrash 为例，基本使用如下所示：
 
-<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/20/7B/CgqCHl7offuAb-QwAANxaVWOCd8915.png"/>
+
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/20/7B/CgqCHl7offuAb-QwAANxaVWOCd8915.png"/> 
+
 
 可以看出 XCrash 的使用更加灵活，工程师的掌控性更高。可以通过设置不同的过滤方式，针对性地上报相应的 crash 日志。并且在捕获到 crash 之后，可以加入自定义的操作，比如本地保存日志或者直接进行网络上传等。
 > 另外：Sentry 还有一个好处就是可以通过设置过滤，来判断是否上报 crash 日志。这对于 SDK 的开发人员是很有用的。比如一些 SDK 的开发商只是想收集自身 SDK 引入的 crash，对于用户的其他操作导致的 crash 进行过滤，这种情况就可以考虑集成 Sentry。
@@ -121,3 +151,4 @@ breakpad 生成的文件是 .dmp 文件，需要将其行转换，如下所示�
 ### 总结
 
 这节课主要介绍了 Android 崩溃的相关知识。对 Android 工程师来说，crash 可以分 2 类：Java 层和 Native 层。针对这 2 者进行捕获的方式也不尽相同。针对 Java 层一般通过自定义 UncaughtExceptionHandler 进行异常拦截；针对 Native 层可以考虑集成谷歌的 breakpad 进行捕获，并保存日志在本地。最后介绍了几个线上捕获 crash 的工具，实际上这几个工具的实现原理都是基于上文介绍的基础知识。
+

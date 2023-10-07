@@ -1,3 +1,5 @@
+# 12WebClient：如何实现非阻塞式的跨服务远程调用？
+
 在上一讲中，我已经带你在 ReactiveSpringCSS 案例系统中通过 WebFlux 创建了响应式 Web 服务，并给你留下了一道思考题：如何实现非阻塞式的跨服务调用？
 
 我们知道在 Spring 中存在一个功能强大的工具类 RestTemplate，专门用来实现基于 HTTP 协议的远程请求和响应处理。RestTemplate 的主要问题在于不支持响应式流规范，也就无法提供非阻塞式的流式操作。Spring 5 全面引入响应式编程模型，同时也提供了 RestTemplate 的响应式版本，这就是 WebClient 工具类。
@@ -384,3 +386,4 @@ public class ReactiveOrderClient {
 关于远程调用，业界也存在一些协议，在网络通信层面提供非阻塞式的交互体验。RSocket 就是这一领域的主流实现，下一讲我将针对该协议和你一起展开讨论，到时候见。
 > 点击链接，获取课程相关代码↓↓↓  
 > [https://github.com/lagoueduCol/ReactiveProgramming-jianxiang.git](https://github.com/lagoueduCol/ReactiveProgramming-jianxiang.git?fileGuid=xxQTRXtVcqtHK6j8)
+

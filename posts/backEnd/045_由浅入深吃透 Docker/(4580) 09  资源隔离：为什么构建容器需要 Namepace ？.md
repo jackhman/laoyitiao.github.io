@@ -1,3 +1,5 @@
+# 09资源隔离：为什么构建容器需要Namepace？
+
 我们知道， Docker 是使用 Linux 的 Namespace 技术实现各种资源隔离的。那么究竟什么是 Namespace，各种 Namespace 都有什么作用，为什么 Docker 需要 Namespace呢？下面我带你一一揭秘。
 
 首先我们来了解一下什么是 Namespace。
@@ -311,3 +313,4 @@ Linux 内核从 2002 年 2.4.19 版本开始加入了 Mount Namespace，而直�
 到此，相信你已经了解了什么是 Namespace。Namespace 是 Linux 内核的一个特性，该特性可以实现在同一主机系统中对进程 ID、主机名、用户 ID、文件名、网络和进程间通信等资源的隔离。Docker 正是结合了这六种 Namespace 的功能，才诞生了 Docker 容器。
 
 最后，试想下，当我们使用 docker run --net=host 命令启动容器时，容器是否和主机共享同一个 Net Namespace？思考后，可以把你的想法写在留言区。
+

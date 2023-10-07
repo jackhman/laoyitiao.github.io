@@ -1,3 +1,5 @@
+# 19分布式事务（下）：Spanner与Calvin的巅峰对决
+
 上一讲我们介绍了分布式事务最重要的概念------原子提交，并介绍了两阶段、三阶段提交和 Percolator 模型。
 
 而这一讲我将要为你揭示目前业界最著名的两种分布式事务模型，同时它们的作者和追随者之间的论战又为这两种模型增加了一定的传奇性，这一讲让我们来看看它们最终谁能胜出呢？
@@ -30,7 +32,9 @@ Spanner 提供了三种事务模式。
 
 了解了事务模型后，我们深入其内部，看看 Spanner 的核心组件都有哪些。下面是一张 Spanner 的架构图。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/1F/5F/Cgp9HWBRzJSAaOkIAAHp1kcPK04475.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/1F/5F/Cgp9HWBRzJSAaOkIAAHp1kcPK04475.png"/> 
+
 
 其中我们看到，每个 replica 保存了多个 tablet；同时这些 replica 组成了 Paxos Group。Paxos Group 选举出一个 leader 用来在多分片事务中与其他 Paxos Group 的 leader 进行协调（有关 Paxos 算法的细节我将在下一讲中介绍）。
 
@@ -60,7 +64,9 @@ Spanner 引入了很多新技术去改善分布式事务的性能，但我们发
 
 其次，将事务进行排序的组件被称为 sequencer。它搜集事务信息，而后将它们拆解为较小的 epoch，这样做的目的是减小锁竞争，并提高并行度。一旦事务被准备好，sequencer 会将它们发送给 scheduler。scheduler 根据 sequencer 处理的结果，适时地并行执行部分事务步骤，同时也保证顺序执行的步骤不会被并行。因为这些步骤已经排好了顺序，scheduler 执行的时候不需要与 sequencer 进行交互，从而提高了执行效率。Calvin 事务的处理组件如下图所示。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/1F/5F/Cgp9HWBRzJ-AHNkNAAIDRYF-wko605.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/1F/5F/Cgp9HWBRzJ-AHNkNAAIDRYF-wko605.png"/> 
+
 
 Calvin 也使用了 Paxos 算法，不同于 Spanner 每个分片有一个 Paxos Group。Calvin 使用 Paxos 或者异步复制来决定哪个事务需要进入哪个 epoch 里面。
 
@@ -133,3 +139,4 @@ Calvin 也使用了 Paxos 算法，不同于 Spanner 每个分片有一个 Paxos
 从目前发展的角度来说，并没有一方可以完全替代另一方。Calvin 在高度竞争的事务场景中有明显优势，而 Spanner 在读取、会话内事务中的优势不可代替。从它们的原理看，谁最终也无法胜出。而我们其实也不期待一个最终赢家，而是希望未来的事务模型能够从这两个模式中吸取灵感，为我们带来更高效的分布式事务解决方案 。
 
 到此，我们用了两讲的内容，详细介绍了面向数据库的分布式事务。下一讲要说的是模块三的最后一个知识点：共识算法。它是现代分布式系统的核心算法，希望到时和你准时相见。
+

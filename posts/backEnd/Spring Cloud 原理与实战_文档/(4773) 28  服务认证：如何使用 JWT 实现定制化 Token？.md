@@ -1,3 +1,5 @@
+# 28服务认证：如何使用JWT实现定制化Token？
+
 在上一课时中，我们详细介绍了在微服务架构中，如何使用 Token 对服务的访问过程进行权限控制，这里的 Token 是类似"b7c2c7e0-0223-40e2-911d-eff82d125b80"的一种字符串结构。可能你会问，这个字符串中能包含哪些内容呢？是不是所有的 Token 都是这样的结构吗？事实上，在 OAuth2 协议中，并没有对 Token 具体的组成结构有明确的规定。为了解决 Token 的标准化问题，就诞生了今天我们要介绍的 JWT。
 
 ### 什么是 JWT？
@@ -18,7 +20,9 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3NwcmluZ2hlYWx0aC5leGF
 
 显然，我们无法从这个经过 Base64 编码的字符串中获取任何有用的信息。业界也存在一些在线生成和解析 JWT 的工具，这里以[jsjws](http://kjur.github.io/jsjws/tool_jwt.html)[上所提供的在线工具为例来演示 JWT](http://kjur.github.io/jsjws/tool_jwt.html%E4%B8%8A%E6%89%80%E6%8F%90%E4%BE%9B%E7%9A%84%E5%9C%A8%E7%BA%BF%E5%B7%A5%E5%85%B7%E4%B8%BA%E4%BE%8B%E6%9D%A5%E6%BC%94%E7%A4%BAJWT)的内部结构和签名方式。在这个在线工具中，我们首先需要设置一系列的声明（Claim），然后指定签名的算法和键值，如下图所示：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image2/M01/01/53/Cip5yF_Yc4WAH7kqAABfUNZNgrk543.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image2/M01/01/53/Cip5yF_Yc4WAH7kqAABfUNZNgrk543.png"/> 
+  
 生成 JWT 的步骤
 
 一旦我们指定了这些内容之后，就可以获取前面所给出的 JWT 字符串。反之，我们可以使用<http://jwt.calebb.net/>所提供的反向转换原始数据的功能。针对前面的 JWT 字符串，我们可以看到其中所包含的原始 JSON 数据，如下所示：
@@ -57,7 +61,9 @@ Spring Cloud Security 为 JWT 的生成和验证提供了开箱即用的支持�
 
 可以想象，接下来的一步就是提供一个配置类用于完成 JWT 的生成和转换。事实上，在 OAuth2 协议中专门提供了一个接口用于管理 Token 的存储，这个接口就是 TokenStore，该接口的实现类如下所示：
 
-<Image alt="Lark20201224-184609.png" src="https://s0.lgstatic.com/i/image/M00/8C/12/CgqCHl_kcZeANBHuAAKZw9BsRRo761.png"/>  
+
+<Image alt="Lark20201224-184609.png" src="https://s0.lgstatic.com/i/image/M00/8C/12/CgqCHl_kcZeANBHuAAKZw9BsRRo761.png"/> 
+  
 TokenStore 接口的实现类
 
 注意到这里有一个 JwtTokenStore 专门用来存储 JWT Token。对应的，我们也将创建一个用于配置 JwtTokenStore 的配置类。让我们回到 SpringHealth 案例系统中的 auth-server 服务，添加一个 SpringHealthJWTTokenStoreConfig 配置类，如下所示：
@@ -161,7 +167,9 @@ public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws E
 
 我们知道 HTTP 请求是通过在 Header 部分中添加一个"Authorization"消息头来完成对 Token 的传递，所以第一步需要能够从 HTTP 请求中获取这个 JWT Token。然后，我们需要将这个 Token 存储在一个线程安全的地方以便在后续的服务链中进行使用，这是第二步。第三步，也是最关键的一步，就是在通过 RestTemplate 发起请求时，能够把这个 Token 自动嵌入到所发起的每一个 HTTP 请求中。整个实现思路如下图所示：
 
-<Image alt="Lark20201224-184612.png" src="https://s0.lgstatic.com/i/image/M00/8C/07/Ciqc1F_kcaSAR0NjAAEcuT033u0868.png"/>  
+
+<Image alt="Lark20201224-184612.png" src="https://s0.lgstatic.com/i/image/M00/8C/07/Ciqc1F_kcaSAR0NjAAEcuT033u0868.png"/> 
+  
 在服务调用链中传播 JWT Token 的三个实现步骤
 
 实现这一思路需要你对 HTTP 请求的过程和原理有一定的理解，在代码实现上也需要有一些技巧，我来一一进行展开。
@@ -365,3 +373,4 @@ String systemName = jsonObj.getString("system");
 这里给你留一道思考题：如果想要对 JWT 中的数据进行扩展，你有什么办法？
 
 介绍完安全性问题之后，下一课时我们将进入到新的一个主题，即服务监控。我们将首先介绍服务监控基本原理以及引入 Spring Cloud Sleuth 框架。
+

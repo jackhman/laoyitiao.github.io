@@ -1,3 +1,5 @@
+# 11资源节点树：通过Sentinel无侵入实现流量链生成规则
+
 前两个课时，我们重点围绕 SkyWalking 进行了原理解析。讲完了 SkyWalking，接下来我们就进入 Sentinel。
 
 这一讲开始，我将用两个课时围绕 Sentinel 的技术骨架展开，来带你学习它的原理。今天我们先学习 APM 系统的无侵入实现的通用设计，以及 Sentinel 的资源节点树实现原理。
@@ -70,23 +72,31 @@ class Controller{
 
 通过如下的拓扑图，我们可以清晰看到用户通过聚合搜索服务，访问量 baidu 和 google 站点。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/3C/86/CioPOWCKhvSAA1Y4AAFSXRAbAPM344.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/3C/86/CioPOWCKhvSAA1Y4AAFSXRAbAPM344.png"/> 
+
 
 通过 SkyWalking 的链路图，我们可以清晰看到聚合搜索的调用顺序。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M01/3C/7D/Cgp9HWCKhvuAerrVAAEERiqw56A771.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M01/3C/7D/Cgp9HWCKhvuAerrVAAEERiqw56A771.png"/> 
+
 
 #### 2.接入 Sentinel
 
 通过在 pom 文件中，引入并配置 Sentinel 的 webmvc 和 okhttp 适配器的客户端 jar 包，将聚合服务接入 Sentinel 后，我们会得到如下的簇点链路图：
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M01/3C/7D/Cgp9HWCKhwqAa6RgAAIjrJ0VPww951.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M01/3C/7D/Cgp9HWCKhwqAa6RgAAIjrJ0VPww951.png"/> 
+
 
 综上可以看到，两个 APM 产品虽然接入方式不同，但一线开发人员都不需要编写任何监控代码，且两个 APM 工具的链路形态基本一致。
 
 它们织入的监控的流程，如图中红色标识所示：
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M00/3C/86/CioPOWCKhxKAbsJzAALa-MhIbU0965.png"/>
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M00/3C/86/CioPOWCKhxKAbsJzAALa-MhIbU0965.png"/> 
+
 
 Sentinel 的监控流程与 Spring AOP 思想一致，通过 Spring MVC 和 OkHttp 框架暴露出的拦截器，对流量进行面向切面监控。只不过在监控过程中，使用了线程本地变量存储了监控信息，当请求再次被拦截时，识别线程本地变量存储的监控信息，构建出资源树。
 
@@ -99,7 +109,9 @@ Sentinel 的监控流程与 Spring AOP 思想一致，通过 Spring MVC 和 OkHt
 
 Sentinel 就是使用责任链设计模式实现了**功能插槽链**（Slot chain），如下图所示：
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image6/M01/3C/7D/Cgp9HWCKhx2AYh8QAAbUg8otm8U872.png"/>
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image6/M01/3C/7D/Cgp9HWCKhx2AYh8QAAbUg8otm8U872.png"/> 
+
 
 每个被管控的资源，都会创建一系列的功能插槽链，每个功能插槽都有自己的职责，官方提供了 7 个不同职责的插槽链。今天的课程只讲解第一个功能插槽 NodeSelectorSlot，它的职责是构建资源节点树。
 > 关于 Sentinel 的技术骨架的更多内容，你可回顾[《04 \| 流量卫士：Alibaba Sentinel 时刻守卫流量健康》](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=729#/detail/pc?id=7053&fileGuid=xxQTRXtVcqtHK6j8)，深入了解更多设计原理。
@@ -139,7 +151,9 @@ NodeSelectorSlot 是负责收集请求所关联的资源节点的路径，将这
 
 上述示例代码会在内存中，生成如下树形结构：
 
-<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image6/M00/3C/86/CioPOWCKhyeAaqifAACbga2uEV4102.png"/>
+
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image6/M00/3C/86/CioPOWCKhyeAaqifAACbga2uEV4102.png"/> 
+
 
 默认的机器节点关联着 EntranceNode 节点 Entrance 1，Entrance 1 节点关联着 DefaultNode 节点 nodeA。
 
@@ -156,27 +170,37 @@ ContextUtil.enter("entrance2", "appA");
 
 内存中的树形结构就会变成：
 
-<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image6/M00/3C/86/CioPOWCKhy2ATLj3AADDp5GzECs155.png"/>
+
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image6/M00/3C/86/CioPOWCKhy2ATLj3AADDp5GzECs155.png"/> 
+
 
 默认的机器节点关联着两个 EntranceNode 节点：Entrance 1 和 Entrance 2，Entrance 1 和 Entrance 2 节点又分别关联着自己的 DefaultNode 节点 nodeA。需要注意的是，DefaultNode 由资源 ID 和输入的名称来决定唯一性。
 
 现在回到我们课程示例的聚合搜索的节点树构建过程。
 
-<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image6/M01/3C/7D/Cgp9HWCKhzaAZSAzAAIVgLMIdH0640.png"/>
+
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image6/M01/3C/7D/Cgp9HWCKhzaAZSAzAAIVgLMIdH0640.png"/> 
+
 
 当监控搜索工具接收到用户发来的请求时，在 Spring-MVC 适配器中通过 ContextUtil.enter 和 SphU.entry 方法，在内存中生成上下文对象，如下：
 
-<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image6/M00/3C/86/CioPOWCKh0CAZy3ZAADRJhoYYm4469.png"/>
+
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image6/M00/3C/86/CioPOWCKh0CAZy3ZAADRJhoYYm4469.png"/> 
+
 
 上下文存储的当前节点，关联的节点树只有一个搜索入口方法的节点，且当前节点的父节点和子节点都是空。
 
 当请求流量在聚合搜索工具项目中准备搜索 baidu 资源时，在 OkHttp 拦截器会执行 SphU.entry 方法，此时在内存中生上下文对象，如下：
 
-<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image6/M01/3C/7D/Cgp9HWCKh0eALa6DAADn0KaM4g4144.png"/>
+
+<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image6/M01/3C/7D/Cgp9HWCKh0eALa6DAADn0KaM4g4144.png"/> 
+
 
 当接收到 baidu 搜索的响应后，请求流量在聚合搜索工具项目中准备搜索 google 资源时，在 OkHttp 拦截器会同样执行 SphU.entry 方法，此时在内存中生上下文对象，如下：
 
-<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image6/M01/3C/7D/Cgp9HWCKh0-AdllgAAFfk0vnIW4014.png"/>
+
+<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image6/M01/3C/7D/Cgp9HWCKh0-AdllgAAFfk0vnIW4014.png"/> 
+
 
 构造出来的资源节点树，由父节点 Spring-MVC 适配器生成，两个子节点由 OkHttp 适配器生成。在任务线程的生命周期中，开发人员不需要编写任何监控代码，Sentinel 在任务线程的生命周期，通过使用线程本地变量完成资源节点树的构建。
 
@@ -189,3 +213,4 @@ ContextUtil.enter("entrance2", "appA");
 接下来，又我通过聚合搜索工具项目，以及伪代码和流程图，讲述了监控代码的织入位置。最后又回到了 Sentinel 技术骨架，Sentinel 技术骨架使用**责任链设计模式** 实现。本节课讲述了**功能插槽 NodeSelectorSlot** 使用线程本地变量，将**流量构建资源节点树**的过程。
 
 不难发现，线程本地变量在监控场景中是必定会用到的技术，但是在业务需求开发中，我们使用线程本地变量的情况却少之又少。那么你知道为什么吗？欢迎在评论区写下你的思考，期待与你讨论。
+

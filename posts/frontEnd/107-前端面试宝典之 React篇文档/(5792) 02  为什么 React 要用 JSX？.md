@@ -1,3 +1,5 @@
+# 02为什么React要用JSX？
+
 本讲我们一起来聊聊在面试中"为什么 React 要用 JSX?"该如何回答。
 
 ### 破题
@@ -28,7 +30,9 @@
 
 3. 方案对比。与其他的方案对比，说明 React 选用 JSX 的必要性。
 
-<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image/M00/73/A4/Ciqc1F_GJQ-AK9FZAAC_MeElm70712.png"/>
+
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image/M00/73/A4/Ciqc1F_GJQ-AK9FZAAC_MeElm70712.png"/> 
+
 
 ### 入手
 
@@ -219,7 +223,9 @@ JXON 非常类似于当下的 JSX，它的结构是这样的：
 
 大家在学完这讲内容后，就可以对照以下知识导图，检验自己的学习成果了。
 
-<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image/M00/73/A4/Ciqc1F_GJSSAU6odAAFLeX8UyTo307.png"/>
+
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image/M00/73/A4/Ciqc1F_GJSSAU6odAAFLeX8UyTo307.png"/> 
+
 
 ### 进阶
 
@@ -262,8 +268,11 @@ module.exports = function (babel) {
 
 无论是在学习还是完成小作业的过程中遇到任何问题，都可以随时在留言区留言，我将与你共同探讨。
 
-[<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/72/94/Ciqc1F_EZ0eANc6tAASyC72ZqWw643.png"/>](https://shenceyun.lagou.com/t/mka)
+[
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/72/94/Ciqc1F_EZ0eANc6tAASyC72ZqWw643.png"/> 
+](https://shenceyun.lagou.com/t/mka)
 
 《大前端高薪训练营》
 
 对标阿里 P7 技术需求 + 每月大厂内推，6 个月助你斩获名企高薪 Offer。[点击链接](https://shenceyun.lagou.com/t/mka)，快来领取！
+

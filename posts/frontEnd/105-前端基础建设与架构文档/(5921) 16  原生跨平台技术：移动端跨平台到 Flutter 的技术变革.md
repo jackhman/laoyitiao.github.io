@@ -1,3 +1,5 @@
+# 16原生跨平台技术：移动端跨平台到Flutter的技术变革
+
 跨平台其实是一个老生常谈的话题，技术方案也是历经变迁，但始终热点不断，究其原因有二：
 
 * 首先，移动端原生技术需要配备 iOS 和 Android 两套团队和技术栈，且存在**发版周期限制**，开发效率上存在天然缺陷；
@@ -10,7 +12,9 @@
 
 移动端跨平台是一个美好的愿景。我们先来看一下移动端跨平台技术发展的时间线：
 
-<Image alt="Lark20210202-183723.png" src="https://s0.lgstatic.com/i/image/M00/94/AD/Ciqc1GAZK5OADuyQAAIWqX8rFbk913.png"/>
+
+<Image alt="Lark20210202-183723.png" src="https://s0.lgstatic.com/i/image/M00/94/AD/Ciqc1GAZK5OADuyQAAIWqX8rFbk913.png"/> 
+
 
 #### 基于 WebView 到 JSBridge 的 Hybrid 方案发展
 
@@ -46,7 +50,9 @@ Native 调用 JavaScript，实现起来也很简单。因为 Native 实际上是
 
 React Native 脱胎于 React 理念，它将数据与视图相隔离，**React Native 代码中的标签映射为虚拟节点，由原生平台解析虚拟节点并渲染出原生组件**。美好的愿景是：开发者使用 React 语法，同时开发原生应用和 Web 应用，其中组件渲染、动画效果、网络请求等都由原生平台来负责。整体技术架构如下图：
 
-<Image alt="Lark20210202-183726.png" src="https://s0.lgstatic.com/i/image/M00/94/AD/Ciqc1GAZK5-ASl0rAAMYrAXB4Po374.png"/>  
+
+<Image alt="Lark20210202-183726.png" src="https://s0.lgstatic.com/i/image/M00/94/AD/Ciqc1GAZK5-ASl0rAAMYrAXB4Po374.png"/> 
+  
 React Native 技术架构图
 
 如上图，React Native 主要由：
@@ -119,7 +125,9 @@ React Native 技术架构图
 
 比如**携程的 CRN** （Ctrip React Native）。它在 React Native 基础上，抹平了 iOS 和 Android 端组件开发差异，做了大量性能提升的工作。更重要的是，依托于 CRN，它在后续的产品 CRN-Web 也做了 Web 支持和接入。再比如，更加出名的**Alibaba 出品的 WEEX**也是基于 React Native 思想进行的某种改造，只不过 WEEX 基于 Vue，除了支持原生平台，还支持了 Web 平台，实现了端上的大一统。WEEX 技术架构如下图（出自官网）：
 
-<Image alt="Lark20210202-183709.png" src="https://s0.lgstatic.com/i/image/M00/94/AD/Ciqc1GAZK82AKeB3AADlYd3QMbY205.png"/>  
+
+<Image alt="Lark20210202-183709.png" src="https://s0.lgstatic.com/i/image/M00/94/AD/Ciqc1GAZK82AKeB3AADlYd3QMbY205.png"/> 
+  
 WEEX 技术架构图
 
 话题再回到 React Native，针对一些固有缺陷，React Native 进行了技术上的重构，我认为这是基于 OEM Hybrid 方案的 2.0 演进，下面我们进一步探究。
@@ -130,11 +138,15 @@ WEEX 技术架构图
 
 老架构图：
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/94/8A/Ciqc1GAYzjeAD4rFAAxfnuLVOGI871.png"/>
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/94/8A/Ciqc1GAYzjeAD4rFAAxfnuLVOGI871.png"/> 
+
 
 对比新的架构图：
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/94/95/CgqCHmAYzj-ANDk6AAyPBuKOtmk965.png"/>
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/94/95/CgqCHmAYzj-ANDk6AAyPBuKOtmk965.png"/> 
+
 
 基于这个问题，新的 React Native 技术架构将从三个方面进行革新。
 
@@ -172,12 +184,16 @@ WEEX 技术架构图
 
 Flutter**采用了 Dart 编程语言** ，它在技术设计上不同于 React Native 的一个显著特点是：**Flutter 并非使用原生平台组件进行渲染** 。比如在 React Native 中，一个`<view>`组件会被最终编译为 iOS 平台的 UIView Element 以及 Android 平台的 View Element，但在 Flutter 中，Flutter 自身提供一组组件集合，这些组件集合被 Flutter 框架和引擎直接接管。如下图（出自 [Cross-Platform Mobile Development Using Flutter](https://www.codemag.com/Article/1909091/Cross-Platform-Mobile-Development-Using-Flutter)）：
 
-<Image alt="Lark20210202-183731.png" src="https://s0.lgstatic.com/i/image/M00/94/AD/Ciqc1GAZK76AWfZpAApvFObEYiY127.png"/>  
+
+<Image alt="Lark20210202-183731.png" src="https://s0.lgstatic.com/i/image/M00/94/AD/Ciqc1GAZK76AWfZpAApvFObEYiY127.png"/> 
+  
 Flutter 工作原理图
 
 Flutter 组件依靠自身高性能的渲染引擎进行视图的渲染。具体来说，每一个组件会被渲染在 Skia 上，Skia 是一个 2D 的绘图引擎库，具有跨平台特点。Skia 唯一需要的就是**原生平台提供 Canvas 接口，实现绘制**。我们再通过一个横向架构图来了解实现细节：
 
-<Image alt="Lark20210202-183729.png" src="https://s0.lgstatic.com/i/image/M00/94/AD/Ciqc1GAZK9iAVaYlAAna3hqvMhs586.png"/>  
+
+<Image alt="Lark20210202-183729.png" src="https://s0.lgstatic.com/i/image/M00/94/AD/Ciqc1GAZK9iAVaYlAAna3hqvMhs586.png"/> 
+  
 Flutter 技术方案架构图
 
 Flutter 技术方案主要分为三层：Framework、Engine、Embedder。其中**Framework 层由 Dart 语言实现，业务代码直接运行在这一层** 。框架的 Framework 层提供了 Material Design 风格的组件，以及[适合 iOS 的 Cupertino 风格组件](https://flutterchina.club/widgets/cupertino/)。以 Cupertino 风格的 button 组件为例，其[源码](https://github.com/flutter/flutter/blob/master/packages/flutter/lib/src/cupertino/button.dart)如下：
@@ -406,6 +422,9 @@ Framework 的下一层是 Engine 层，这一层是**Flutter 内部核心** ，�
 
 本讲内容如下：
 
-<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/94/8A/Ciqc1GAYznaAGKheAAH7M50bq2I025.png"/>
+
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/94/8A/Ciqc1GAYznaAGKheAAH7M50bq2I025.png"/> 
+
 
 从下一讲开始，我们将进入核心框架原理与代码设计模式的学习，下一讲我们将从设计一个请求库需要考虑的问题出发，带你学习 axios 的设计思想。今天的内容到这里就要结束了，如果有任何疑问欢迎在留言区和我互动，我们下一讲再见！
+

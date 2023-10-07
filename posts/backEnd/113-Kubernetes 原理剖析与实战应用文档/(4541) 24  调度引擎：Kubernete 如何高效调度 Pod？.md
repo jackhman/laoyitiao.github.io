@@ -1,3 +1,5 @@
+# 24调度引擎：Kubernete如何高效调度Pod？
+
 我们已经学会如何部署业务，发布 Pod。但是 Pod 创建好以后，Kubernetes 又如何调度这些 Pod 呢？如果我们希望把一个 Pod 跑在我们期望的节点上，该如何操作呢？如果我们希望把某些关联性强的 Pod 跑在特定的节点上，或者同一个节点上，又该怎么操作呢？
 
 今天我们就来揭晓。
@@ -100,7 +102,9 @@ Kubernetes 提供了如下 3 种类型：
 
 这 3 种亲和性和反亲和性策略支持更广泛的操作符，差异如下表所示：
 
-<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/6F/1C/Ciqc1F-0wO2AaNBNAAB8jlKE3Qo120.png"/>
+
+<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/6F/1C/Ciqc1F-0wO2AaNBNAAB8jlKE3Qo120.png"/> 
+
 
 对于上述的亲和性和反亲和性功能，每种都有 3 种规则可以设置。
 
@@ -250,3 +254,4 @@ tolerations:
 那么，学完这些，你对于调度 Pod 还有什么疑问吗？欢迎在留言区留言。
 
 下一讲，我将带你剖析容器运行时以及 CRI 原理。
+

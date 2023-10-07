@@ -1,3 +1,5 @@
+# 28面向K8编程：如何通过Operator扩展KuberneteAPI？
+
 你好，我是正范。在上一讲，我们学习了如何通过一个 YAML 文件来定义一个 CRD，即扩展 API。这种扩展 API 跟 Kubernetes 内置的其他 API 同等地位，都可以通过 kubectl 或者 REST 接口访问，在使用过程中不会有任何差异。
 
 但只是定义一个 CRD 并没有什么作用。虽说 kube-apiserver 会将其数据存放到 etcd 中，并暴露出相应的 REST 接口，然而并不涉及该对象的核心处理逻辑。
@@ -15,7 +17,9 @@
 
 这里对 Kubernetes 的控制器模式做个简要说明。**Kubernetes 通过声明式 API 来定义对象，各个控制器负责实时查看对应对象的状态，确保达到定义的期望状态**。这就是 Kubernetes 的控制器模式。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/74/A3/Ciqc1F_HAmyACHLHAAHSt7ZcZoY464.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/74/A3/Ciqc1F_HAmyACHLHAAHSt7ZcZoY464.png"/> 
+
 
 kube-controller-manager 就是由这样一组控制器组成的。我们以 StatefulSet 为例来简单说明下控制器的具体逻辑。
 
@@ -29,7 +33,9 @@ kube-controller-manager 就是由这样一组控制器组成的。我们以 Stat
 
 Operator 工作的时候采用上述的控制器模式，会持续地观察 Kubernetes 中的自定义对象，即 CR（Custom Resource）。我们通过 CRD 来定义一个对象，CR 则是 CRD 实例化的对象。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/74/A3/Ciqc1F_HAnWAZUN3AAGfGj4K8Gw651.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/74/A3/Ciqc1F_HAnWAZUN3AAGfGj4K8Gw651.png"/> 
+
 
 Operator 会持续跟踪这些 CR 的变化事件，比如 ADD、UPDATE、DELETE，然后采取一系列操作，使其达到期望的状态。
 
@@ -37,7 +43,9 @@ Operator 会持续跟踪这些 CR 的变化事件，比如 ADD、UPDATE、DELETE
 
 下面就是 Operator 代码层面的工作流程图：
 
-<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/74/ED/CgqCHl_HLoWAHjvEAAPol71Pgh8456.png"/>
+
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/74/ED/CgqCHl_HLoWAHjvEAAPol71Pgh8456.png"/> 
+
 
 如上图所示，上半部分是一个 Informer，它的机制就是不断地 list/watch kube-apiserver 中特定的资源，比如你只关心 Pod，那么就只 list/watch Pod。Informer 主要有两个方法：一个是 ListFunc，一个是 WatchFunc。
 
@@ -143,3 +151,4 @@ make deploy
 到这里，你就完成了对扩展 Kubernetes API 的学习。这一讲的难点不在于 Operator 本身，而是要学会理解它的行为。
 
 如果你对本节课有什么想法或者疑问，欢迎你在留言区留言，我们一起讨论。
+

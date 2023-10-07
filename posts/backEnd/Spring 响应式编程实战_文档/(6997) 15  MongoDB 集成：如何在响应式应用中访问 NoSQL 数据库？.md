@@ -1,3 +1,5 @@
+# 15MongoDB集成：如何在响应式应用中访问NoSQL数据库？
+
 上一讲开始，我们进入了响应式数据访问这一模块的学习，并且引出了 Spring 家族中专门用于实现数据访问的 Spring Data 框架及其响应式版本。我们知道 Spring Data 支持多种响应式 Repository 用来构建全栈响应式编程模型，而 MongoDB 就是其中具有代表性的一种数据存储库。今天，我就将结合案例来给出 Reactive MongoDB 的使用方式。
 
 ### Spring Data MongoDB Reactive 技术栈
@@ -45,12 +47,16 @@ import com.mongodb.reactivestreams.client.MongoCollection;
 
 Spring Data 中的响应式 MongoDB 连接基于 MongoDB 响应式流 Java 驱动程序（mongo-java-driver-reactivestreams）构建。该驱动程序提供具有非阻塞背压的异步流处理。另一方面，响应式驱动程序构建在 MongoDB 异步 Java 驱动程序（mongo-java-driver-async）之上。这个异步驱动程序是低级别的，并且具有基于回调的 API，因此它不像更高级别的响应式流驱动程序那样易于使用。下图展示了 Spring Data 中整个响应式 MongoDB 的技术栈。
 
-<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M01/38/5F/Cgp9HWB5NlyAUZ8vAAEVEX4GDg4227.png"/>  
+
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M01/38/5F/Cgp9HWB5NlyAUZ8vAAEVEX4GDg4227.png"/> 
+  
 Spring Data MongoDB Reactive 技术栈
 
 而下图展示了基于 Maven 依赖所找到的对应的组件库。
 
-<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M01/38/68/CioPOWB5NmeAMPT_AAa3JDFhfRw228.png"/>  
+
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M01/38/68/CioPOWB5NmeAMPT_AAa3JDFhfRw228.png"/> 
+  
 Spring Data MongoDB Reactive 中的组件库
 
 ### 应用 Reactive MongoDB
@@ -72,7 +78,9 @@ Spring Data MongoDB Reactive 中的组件库
 
 然后我们通过 Maven 来查看组件依赖关系可以得到如下所示的组件依赖图。
 
-<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image6/M01/38/68/CioPOWB5NnOAFoIqAAhDv7J-DwA202.png"/>  
+
+<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image6/M01/38/68/CioPOWB5NnOAFoIqAAhDv7J-DwA202.png"/> 
+  
 spring-boot-starter-data-mongodb-reactive 组件依赖图
 
 可以看到 spring-boot-starter-data-mongodb-reactive 组件同时依赖于 spring-data-mongodb、mongodb-driver-reactivestreams 以及 reactor-core 等组件，这点与前面介绍的技术栈是完全一致的。
@@ -298,3 +306,4 @@ MongoDB 是一款主流的 NoSQL 数据库，其提供了实现响应式流的�
 在今天内容的基础上，下一讲我们将基于 Spring Data 框架中的 Spring Data Redis 组件来访问缓存数据库 Redis，并同样结合 ReactiveSpringCSS 案例完成对现有实现方式的重构。
 > 点击链接，获取课程相关代码 ↓↓↓  
 > [https://github.com/lagoueduCol/ReactiveProgramming-jianxiang.git](https://github.com/lagoueduCol/ReactiveProgramming-jianxiang.git?fileGuid=xxQTRXtVcqtHK6j8)
+

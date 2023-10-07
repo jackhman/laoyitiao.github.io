@@ -1,3 +1,5 @@
+# 06@Entity里面的JPA注解有哪些？在Java多态场景下如何使用？
+
 前几课时我为你介绍了 Repository 的用法，其中我经常会提到"实体类"（即我们前面的 User 类），它是对我们数据库中表的 Metadata 映射，那么具体如何映射呢？这一课时我们来讲解。
 
 我们先看一下 Java Persistence API 里面都有哪些重要规定；再通过讲解基本注解，重点介绍一下联合主键和实体之间的继承关系，然后你就会知道 JPA 的实体里面常见的注解有哪些。话不多说，看一下 Entity 的相关规定。
@@ -44,7 +46,9 @@ public String getUserName(){
 
 首先，我们利用 IEDA 工具，打开 @Entity 所在的包，就可以看到 JPA 里面支持的注解有哪些。如下所示：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/56/4E/Ciqc1F9rLPSAFNw1AAQfaEA3Bgo587.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/56/4E/Ciqc1F9rLPSAFNw1AAQfaEA3Bgo587.png"/> 
+
 
 我们可以看到，在 jakarta.persistence-api 的包路径下面大概有一百多个注解，你在没事的时候可以到这里面一个一个地看，也可以到 JPA 的协议里面对照查看文档。
 
@@ -281,11 +285,15 @@ public class UserTopic {
 
 首先，**打开 Persistence 视图，点击 Generate Persistence Mapping\>** ，接着**点击选中数据源**，如下图所示：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/56/5A/CgqCHl9rLS6AK2kJAAGJp8EnMkE910.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/56/5A/CgqCHl9rLS6AK2kJAAGJp8EnMkE910.png"/> 
+
 
 然后，**选择表和字段，并点击 OK**。
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/56/5A/CgqCHl9rLTOAO3rIAAH3r2qRk40730.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/56/5A/CgqCHl9rLTOAO3rIAAH3r2qRk40730.png"/> 
+
 
 这样就可以生成我们想要的实体了，多简单。如果是新库、新表，我们也可以先定义好实体，通过实体配置JPA的spring.jpa.generate-ddl=true，反向直接生成 DDL 操作数据库生成表结构。
 
@@ -725,3 +733,4 @@ Entity 里面常用的基本注解我们就介绍到这里，因为注解太多�
 这一课时我们提到的实体与实体之间的关联关系注解，我将在下一课时为你讲解。
 > 点击下方链接查看源码（不定时更新）  
 > <https://github.com/zhangzhenhuajack/spring-boot-guide/tree/master/spring-data/spring-data-jpa>
+

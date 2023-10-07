@@ -1,3 +1,5 @@
+# 04继承进阶：如何实现new、apply、call、bind的底层逻辑？
+
 我在上一讲介绍了继承的概念，同时你也可以看到，其中综合使用了 new、apply 以及 call 的方法，那么这一讲我们就围绕这几个方法进行更深入的讲解，以便于你清楚这几个核心方法的实现思路，更好地去理解继承的原理。
 
 JavaScript 中的 apply、call 和 bind 方法是前端代码开发中相当重要的概念，并且与 this 的指向密切相关。很多人对它们的理解还比较浅显，如果你想拥有扎实的 JavaScript 编程基础，那么必须要了解这些基础常用的方法。希望通过这一讲的学习，你可以彻底掌握它们。
@@ -81,7 +83,9 @@ console.log(p.name) // Jack
 
 因此我们总结一下：new 关键词执行之后总是会返回一个对象，要么是实例对象，要么是 return 语句指定的对象。
 
-<Image alt="刘烨的js.png" src="https://s0.lgstatic.com/i/image/M00/8E/0F/CgqCHmABa_qAP_2zAAVBMulvP2U718.png"/>
+
+<Image alt="刘烨的js.png" src="https://s0.lgstatic.com/i/image/M00/8E/0F/CgqCHmABa_qAP_2zAAVBMulvP2U718.png"/> 
+
 
 好了，new 这个关键词内容基本就讲到这里了，我们再看一下 apply 和 call 的基本原理。
 
@@ -303,7 +307,9 @@ Function.prototype.bind = function (context, ...args) {
 
 综上，我们可以看到这几个方法是有区别和联系的，通过下面的表格我们再来梳理一下这些方法的异同点，希望你可以更好地理解。
 
-<Image alt="图片5.png" src="https://s0.lgstatic.com/i/image/M00/8E/04/Ciqc1GABa-2AO2DlAAD5wuBLNn8120.png"/>
+
+<Image alt="图片5.png" src="https://s0.lgstatic.com/i/image/M00/8E/04/Ciqc1GABa-2AO2DlAAD5wuBLNn8120.png"/> 
+
 
 在日常的前端开发工作中，大家往往会忽视对这些方法的系统性学习，其实这些方法在高级 JavaScript 编程中经常出现，尤其是你去看一些比较好的开源项目，经常会通过"借用"的方式去复用已有的方法，来节约内存、优化代码。
 
@@ -314,3 +320,4 @@ Function.prototype.bind = function (context, ...args) {
 在后续的课时中，我将继续带领你深入挖掘闭包的原理和底层知识。同时希望你多动手练习以熟练上面的代码，也欢迎你在下方留言讨论自己在学习过程中遇到的困惑，以及学习感悟等，让我们共同进步。
 
 我们下一课时再见\~
+

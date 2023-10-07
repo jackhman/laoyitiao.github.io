@@ -1,3 +1,5 @@
+# 15etcdleae：etcd如何实现租约？
+
 上一讲我们介绍了 etcd Watch 实现的机制，今天我们继续分析 etcd 的另一个重要特性：Lease 租约。它类似 TTL（Time To Live），用于 etcd 客户端与服务端之间进行活性检测。在到达 TTL 时间之前，etcd 服务端不会删除相关租约上绑定的键值对；超过 TTL 时间，则会删除。因此我们**需要在到达 TTL 时间之前续租，以实现客户端与服务端之间的保活**。
 
 Lease 也是 etcd v2 与 v3 版本之间的重要变化之一。etcd v2 版本并没有 Lease 概念，TTL 直接绑定在 key 上面。每个 TTL、key 创建一个 HTTP/1.x 连接，定时发送续期请求给 etcd Server。etcd v3 则在 v2 的基础上进行了重大升级，每个 Lease 都设置了一个 TTL 时间，**具有相同 TTL 时间的 key 绑定到同一个 Lease**，实现了 Lease 的复用，并且基于 gRPC 协议的通信实现了连接的多路复用。
@@ -28,14 +30,18 @@ lease 694d77aa9e38260f already expired
 
 Lease 模块对外提供了 Lessor 接口，其中定义了包括 Grant、Revoke、Attach 和 Renew 等常用的方法，lessor 结构体实现了 Lessor 接口。Lease 模块涉及的主要对象和接口，如下图所示：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M01/1D/0B/Cgp9HWBPGqaAOSvBAAApAR0Pn5s728.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M01/1D/0B/Cgp9HWBPGqaAOSvBAAApAR0Pn5s728.png"/> 
+  
 Lease 模块涉及的主要对象和接口
 
 除此之外，lessor 还启动了两个异步 goroutine：RevokeExpiredLease 和 CheckpointScheduledLease，分别用于撤销过期的租约和更新 Lease 的剩余到期时间。
 
 下图是客户端创建一个指定 TTL 的租约流程，当 etcd 服务端的 gRPC Server 接收到创建 Lease 的请求后，Raft 模块首先进行日志同步；接着 MVCC 调用 Lease 模块的 Grant 接口，保存对应的日志条目到 ItemMap 结构中，接着将租约信息存到 boltdb；最后将 LeaseID 返回给客户端，Lease 创建成功。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M01/1D/08/CioPOWBPGq6AbSSHAAAmYqC-FLA568.png"/>  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M01/1D/08/CioPOWBPGq6AbSSHAAAmYqC-FLA568.png"/> 
+  
 客户端创建一个指定 TTL 租约流程图
 
 那么 Lease 与键值对是如何绑定的呢？
@@ -304,6 +310,9 @@ func testLease() {
 
 本讲内容总结如下：
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M00/1D/0B/Cgp9HWBPGsqAJAozAAE8kcN24Nw326.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M00/1D/0B/Cgp9HWBPGsqAJAozAAE8kcN24Nw326.png"/> 
+
 
 学习完这一讲，我想给大家留一个问题，你知道在 etcd 重启之后，Lease 与键值对的绑定关系是如何重建的吗？欢迎你在留言区和我分享自己的想法。下一讲，我们将从整体来梳理 etcd 启动的过程。
+

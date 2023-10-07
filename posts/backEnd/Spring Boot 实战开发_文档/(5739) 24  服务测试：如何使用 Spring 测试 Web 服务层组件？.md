@@ -1,3 +1,5 @@
+# 24服务测试：如何使用Spring测试Web服务层组件？
+
 23 讲我们介绍了对数据访问层进行测试的方法，这一讲将着重介绍对三层架构中的另外两层（Service 层和 Controller 层）的测试方法。
 
 与位于底层的数据访问层不同，这两层的组件都依赖于它的下一层组件，即 Service 层依赖于数据访问层，而 Controller 层依赖于 Service 层。因此，对这两层进行测试时，我们将使用不同的方案和技术。
@@ -92,7 +94,9 @@ Mock 的意思是模拟，它可以用来对系统、组件或类进行隔离。
 
 使用 Mock 对象完成依赖关系测试的示意图如下所示：
 
-<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M00/02/45/CioPOWAdHoyAZcf6AACLingamrY696.png"/>  
+
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M00/02/45/CioPOWAdHoyAZcf6AACLingamrY696.png"/> 
+  
 Mock 对象与依赖关系测试示意图
 
 从图中可以看出，在形式上，Mock 是在测试代码中直接 Mock 类和定义 Mock 方法的行为，通常测试代码和 Mock 代码放一起。因此，测试代码的逻辑从测试用例的代码上能很容易地体现出来。
@@ -389,7 +393,9 @@ public class CustomerControllerTestsWithAutoConfigureMockMvc {
 
 如下所示表格，我们罗列了一些经常使用的测试注解及其描述。
 
-<Image alt="图片8.png" src="https://s0.lgstatic.com/i/image6/M00/02/47/Cgp9HWAdHqiAdUEbAAG7s2vEMgM538.png"/>
+
+<Image alt="图片8.png" src="https://s0.lgstatic.com/i/image6/M00/02/47/Cgp9HWAdHqiAdUEbAAG7s2vEMgM538.png"/> 
+
 
 ### 小结与预告
 
@@ -404,3 +410,4 @@ public class CustomerControllerTestsWithAutoConfigureMockMvc {
 ### 小编有话说
 
 恭喜你一路坚持到现在，希望你通过这门专栏学到了你想要的知识。如果你觉得课程不错，从中有所收获的话，我想邀请你为课程贡献自己的一份力，参与这份[调查问卷](https://wj.qq.com/s2/7871748/5cee)，帮助我们做得更好，同时也有机会获得精美礼品哦\~你的每一个意见，都值得我们关注。
+

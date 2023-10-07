@@ -1,3 +1,5 @@
+# 第08讲：搭建稳固的MySQL运维体系
+
 本课时主要包含 MySQL 监控要点、MySQL SQL 审核执行、MySQL 备份恢复等内容。
 
 ###### MySQL 监控要点
@@ -20,7 +22,9 @@
 
 其他基础指标还有网络、CPU、内存、磁盘空间、系统负载及文件 fd 数量等。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/91/CgoB5l2h2MCAG5P5AAJ0Tgb1X9g202.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/91/CgoB5l2h2MCAG5P5AAJ0Tgb1X9g202.png"/> 
+
 
 如上图所示，对于每个监控要点都要求有对应的 Linux 工具或系统文件进行查看，你需要熟练使用图上的这些 Linux 性能调优的数据采集来源和封装工具集。
 
@@ -62,15 +66,23 @@
 
 MySQL 常见的数据库连接数监控、QPS、TPS、锁、IBP 等监控指标，如下所示。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/B1/CgotOV2h2MCAV9W7AADW56YaHI4646.png"/>
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/92/CgoB5l2h2MCAa6jrAAGPJ6qvKG8834.png"/>
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/B1/CgotOV2h2MCAV9W7AADW56YaHI4646.png"/> 
+
+
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/92/CgoB5l2h2MCAa6jrAAGPJ6qvKG8834.png"/> 
+
 
 redo log、 replication、semi-Replication 和 PXC 的监控项，如下所示。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/B1/CgotOV2h2MGAeVp_AAE1aDeVH2A336.png"/>
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/92/CgoB5l2h2MGAKYDyAADOa-uD24Q832.png"/>
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/B1/CgotOV2h2MGAeVp_AAE1aDeVH2A336.png"/> 
+
+
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/92/CgoB5l2h2MGAKYDyAADOa-uD24Q832.png"/> 
+
 
 ### 常用监控系统
 
@@ -86,7 +98,9 @@ PMM 是 Percona 推出的 MySQL 监控系统，相比其他系统更聚焦于对
 
 如果你需要自主研发监控告警系统，可以考虑采用推送和拉取结合的架构模式，如下图所示。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/B1/CgotOV2h2MGAQrNyAACb_hINN-Y277.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/B1/CgotOV2h2MGAQrNyAACb_hINN-Y277.png"/> 
+
 
 推送模式在每个需要采集的服务器上部署 Agent 采集程序，Agent 采集程序定期将采集的监控数据推送给配置中心或元数据存储库进行持久化。
 
@@ -229,15 +243,21 @@ MySQL SQL 审核具体可以审核哪些内容呢？主要分为两部分：
 
 上述审核检查项都只是示例，实际支持的审核检查项个数更多，同时可以实现对审核检查项进行评分，来评估提交的待审核 SQL 语句。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/92/CgoB5l2h2MGAKyeOAAAwxPTtr5A564.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/92/CgoB5l2h2MGAKyeOAAAwxPTtr5A564.png"/> 
+
 
 上图是语法检查的结果，只需要提交 SQL 语句即可快速判断 SQL 语句是否存在语法、语义错误。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/B1/CgotOV2h2MKAYDQrAABo5qKQ2ZQ892.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/B1/CgotOV2h2MKAYDQrAABo5qKQ2ZQ892.png"/> 
+
 
 当提交的 SQL 语句存在错误或警告时会提示你具体哪一行需要修改，这个阶段可以嵌入开发规则和自定义规范来规范提交的 SQL 语句。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/92/CgoB5l2h2MKAeCa-AACSi3YXKn0288.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/92/CgoB5l2h2MKAeCa-AACSi3YXKn0288.png"/> 
+
 
 当提交的 SQL 语句没有语法、语义错误并完全满足审核规则时，可以选择 SQL 语句执行流程。通常是由 DEV 发起 SQL 审核，QA/DEV Leader 进行第一次 SQL 审核，DBA 进行第二次 SQL 审核及执行。
 
@@ -255,13 +275,17 @@ SQL 审核执行的关键节点均可以对接适配通知系统，例如发送�
 
 3. 版本 SQL，应用程序发布或发版时，能够自动扫描待发布的 SQL 脚本文件，提取其中的变更 SQL 语句，按照预定义的审核规则，检查 SQL 变更规范性，以及是否存在高危变更操作，避免版本发布导致产生故障。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/B1/CgotOV2h2MKAfKn8AAGE8M8KkB8237.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/B1/CgotOV2h2MKAfKn8AAGE8M8KkB8237.png"/> 
+
 
 如上图所示，代码审核的截图能够显示具体应用调用的模块名、服务名、方法、来源 IP、协议、类型、状态、返回值、执行时间、执行耗时和运维操作等信息。
 
 当某个功能出现问题时，能够清晰打印 SQL 语句和执行的功能模块，示例如下图所示。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/92/CgoB5l2h2MKAefO-AAIoHa-yt4Y677.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/92/CgoB5l2h2MKAefO-AAIoHa-yt4Y677.png"/> 
+
 
 这些 MySQL SQL 审核内容，几乎能够覆盖大部分对 MySQL SQL 审核执行的需求。使用自动化审核执行系统，能够提升 SQL 审核执行的效率和正确性、保证线上系统的安全可靠。
 
@@ -285,7 +309,9 @@ SQL 审核执行的关键节点均可以对接适配通知系统，例如发送�
 
 对于备份恢复策略，可以集中统一使用物理备份和逻辑备份相结合的方式，如下图所示。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/B1/CgotOV2h2MOAJhzFAAEAWAe64mU821.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/B1/CgotOV2h2MOAJhzFAAEAWAe64mU821.png"/> 
+
 
 通常建议使用 Percona Xtrabackup 物理全备和 mysqldump 逻辑备份组合使用。
 
@@ -299,21 +325,29 @@ SQL 审核执行的关键节点均可以对接适配通知系统，例如发送�
 
 对于备份集如何存储也是一个可优化点，我们建议是本地无备份、备份通道机存储最近 N 次备份、历史备份集压缩存储到备份池。备份池使用 MFS 是一个不错的选择，MFS 是一种容错的分布式文件系统，将数据切分成多个数据副本存储在不同的计算机节点里，备份文件的高可用性得到极大的保证。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/92/CgoB5l2h2MOAFj6IAABgowJcfzw368.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/92/CgoB5l2h2MOAFj6IAABgowJcfzw368.png"/> 
+
 
 备份文件的校验是 DBA 特别关注的一个点，不希望存在备份文件无法恢复的场景。因此在备份过程中备份文件提前通过 apply log 进行了恢复，即达到了备份文件校验的同时又加快后期备份恢复的速度。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/B1/CgotOV2h2MOAJndNAAA4zfZOqEA897.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/B1/CgotOV2h2MOAJndNAAA4zfZOqEA897.png"/> 
+
 
 基于这些备份恢复关注点进行 MySQL 自动化备份恢复系统开发，通过系统配置集群备份恢复变得简单。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/92/CgoB5l2h2MOAOynJAAJbOLzenxc197.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/92/CgoB5l2h2MOAOynJAAJbOLzenxc197.png"/> 
+
 
 当集群新上线或变更时， DBA 在管理平台进行备份任务部署前，需要一个指标检查：是否部署专用备份网卡。任务配置后台入库后，集群服务器上部署的 Agent 访问配置中心获取任务信息并根据规则发起备份任务，实例调度备份以流的方式向同机房备份机传输，任务结束后逐一向上层返回任务状态信息，最终在 Web 平台进行界面信息展示。
 
 同时备份文件会在同机房备份机进行压缩，以 RSYNC 的方式同步到 MFS 备份池。至此，一次备份任务完成。DBA 只需要部署备份任务、查看任务状态即可，不再需要过多的人工介入备份任务中。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/B1/CgotOV2h2MSACXlZAAGT71aB4Sg117.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/B1/CgotOV2h2MSACXlZAAGT71aB4Sg117.png"/> 
+
 
 Arkcontrol 的备份恢复中心就是一个 MySQL 自动化备份恢复系统。它不仅解决了常见问题还进行了定制化优化，核心功能如下。
 
@@ -347,7 +381,9 @@ Arkcontrol 的备份恢复中心就是一个 MySQL 自动化备份恢复系统�
 
 首先我们梳理下对数据库使用方的需求。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/92/CgoB5l2h2MSAQYuTAAKr38IGBvg495.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/92/CgoB5l2h2MSAQYuTAAKr38IGBvg495.png"/> 
+
 
 对于开发人员和测试人员而言，MySQL 自动化管理平台能提供全链路、全生命周期的统一管理和资源交付。如左图所示，从最开始按需从资源池申请资源、资源部署到软硬件交付，开发测试到应用发版上线，线上系统数据变更的自动审核执行、操作审计和报表展示，所有 MySQL 实例的申请分配、部署交付、维护托管、数据变更都能在平台完成，对用户而言实现集团统一管控，可追踪、可升级，满足用户快速交付，高可用、高性能的使用需求。
 
@@ -389,7 +425,9 @@ Arkcontrol 的备份恢复中心就是一个 MySQL 自动化备份恢复系统�
 
 综上所述，如下是MySQL自动化管理平台Arkcontrol的示例图和描述，供大家学习参考。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/B1/CgotOV2h2MSAMZK3AAHurrtI1S0034.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/98/B1/CgotOV2h2MSAMZK3AAHurrtI1S0034.png"/> 
+
 
 Arkcontrol 用于破解企业内部复杂数据库管理的效率瓶颈和安全问题，助力企业私有云构建，提供集群化、自动化、服务化、智能化的技术能力，帮助企业快速建立"高可靠、高性能、高效率、易使用"的数据库全维度管理体系。
 
@@ -418,4 +456,5 @@ Arkcontrol 用于破解企业内部复杂数据库管理的效率瓶颈和安全
 <br />
 
 <br />
+
 

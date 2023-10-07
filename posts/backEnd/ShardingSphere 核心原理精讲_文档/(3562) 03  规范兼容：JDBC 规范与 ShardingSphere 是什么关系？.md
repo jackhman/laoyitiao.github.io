@@ -1,3 +1,5 @@
+# 03规范兼容：JDBC规范与ShardingSphere是什么关系？
+
 我们知道 ShardingSphere 是一种典型的客户端分片解决方案，而客户端分片的实现方式之一就是重写 JDBC 规范。在上一课时中，我们也介绍了，ShardingSphere 在设计上从一开始就完全兼容 JDBC 规范，ShardingSphere 对外暴露的一套分片操作接口与 JDBC 规范中所提供的接口完全一致。
 
 讲到这里，你可能会觉得有点神奇，**ShardingSphere 究竟是通过什么方式，实现了与 JDBC 规范完全兼容的 API 来提供分片功能呢？**
@@ -8,7 +10,9 @@
 
 ShardingSphere 提供了与 JDBC 规范完全兼容的实现过程，在对这一过程进行详细展开之前，先来回顾一下 JDBC 规范。**JDBC（Java Database Connectivity）的设计初衷是提供一套用于各种数据库的统一标准**，而不同的数据库厂家共同遵守这套标准，并提供各自的实现方案供应用程序调用。作为统一标准，JDBC 规范具有完整的架构体系，如下图所示：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/26/42/CgqCHl7xtaiASay6AAB0vuO1kAA457.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/26/42/CgqCHl7xtaiASay6AAB0vuO1kAA457.png"/> 
+
 
 JDBC 架构中的 Driver Manager 负责加载各种不同的驱动程序（Driver），并根据不同的请求，向调用者返回相应的数据库连接（Connection）。而应用程序通过调用 JDBC API 来实现对数据库的操作。**对于开发人员而言，JDBC API 是我们访问数据库的主要途径，也是 ShardingSphere 重写 JDBC 规范并添加分片功能的入口**。如果我们使用 JDBC 开发一个访问数据库的处理流程，常见的代码风格如下所示：
 
@@ -55,13 +59,17 @@ public interface DataSource  extends CommonDataSource, Wrapper {
 
 可以看到，DataSource 接口提供了两个获取 Connection 的重载方法，并继承了 CommonDataSource 接口，该接口是 JDBC 中关于数据源定义的根接口。除了 DataSource 接口之外，它还有两个子接口：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/26/42/CgqCHl7xtbuALDZqAABj4c2IofU664.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/26/42/CgqCHl7xtbuALDZqAABj4c2IofU664.png"/> 
+
 
 其中，DataSource 是官方定义的获取 Connection 的基础接口，ConnectionPoolDataSource 是从连接池 ConnectionPool 中获取的 Connection 接口。而 XADataSource 则用来实现在分布式事务环境下获取 Connection，我们在讨论 ShardingSphere 的分布式事务时会接触到这个接口。
 
 **请注意，DataSource 接口同时还继承了一个 Wrapper 接口**。从接口的命名上看，可以判断该接口应该起到一种包装器的作用，事实上，由于很多数据库供应商提供了超越标准 JDBC API 的扩展功能，所以，Wrapper 接口可以把一个由第三方供应商提供的、非 JDBC 标准的接口包装成标准接口。以 DataSource 接口为例，如果我们想要实现自己的数据源 MyDataSource，就可以提供一个实现了 Wrapper 接口的 MyDataSourceWrapper 类来完成包装和适配：
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/26/42/CgqCHl7xtdOAZEGNAABnV-ZtNrk288.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/26/42/CgqCHl7xtdOAZEGNAABnV-ZtNrk288.png"/> 
+
 
 在 JDBC 规范中，除了 DataSource 之外，Connection、Statement、ResultSet 等核心对象也都继承了这个接口。显然，ShardingSphere 提供的就是非 JDBC 标准的接口，所以也应该会用到这个 Wrapper 接口，并提供了类似的实现方案。
 
@@ -81,7 +89,9 @@ JDBC 规范中的 Statement 存在两种类型，一种是**普通的 Statement*
 
 作为总结，我们梳理了基于 JDBC 规范进行数据库访问的开发流程图，如下图所示：
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/26/36/Ciqc1F7xteqAQsj5AAB1bj_eu10085.png"/>
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/26/36/Ciqc1F7xteqAQsj5AAB1bj_eu10085.png"/> 
+
 
 ShardingSphere 提供了与 JDBC 规范完全兼容的 API。也就是说，开发人员可以基于这个开发流程和 JDBC 中的核心接口完成分片引擎、数据脱敏等操作，我们来看一下。
 
@@ -91,11 +101,15 @@ ShardingSphere 提供了与 JDBC 规范完全兼容的 API。也就是说，开�
 
 作为一套适配 JDBC 规范的实现方案，ShardingSphere 需要对上面介绍的 JDBC API 中的 DataSource、Connection、Statement 及 ResultSet 等核心对象都完成重写。虽然这些对象承载着不同功能，但重写机制应该是共通的，否则就需要对不同对象都实现定制化开发，显然，这不符合我们的设计原则。为此，ShardingSphere 抽象并开发了一套基于适配器模式的实现方案，整体结构是这样的，如下图所示：
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/26/36/Ciqc1F7xtfeAIlV7AABhpWkSy7c199.png"/>
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/26/36/Ciqc1F7xtfeAIlV7AABhpWkSy7c199.png"/> 
+
 
 首先，我们看到这里有一个 JdbcObject 接口，这个接口泛指 JDBC API 中的 DataSource、Connection、Statement 等核心接口。前面提到，这些接口都继承自包装器 Wrapper 接口。ShardingSphere 为这个 Wrapper 接口提供了一个实现类 WrapperAdapter，这点在图中得到了展示。在 ShardingSphere 代码工程 sharding-jdbc-core 的 org.apache.shardingsphere.shardingjdbc.jdbc.adapter 包中包含了所有与 Adapter 相关的实现类：
 
-<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/26/36/Ciqc1F7xtgWAb3PaAAAW8D9SY1w475.png"/>
+
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/26/36/Ciqc1F7xtgWAb3PaAAAW8D9SY1w475.png"/> 
+
 
 在 ShardingSphere 基于适配器模式的实现方案图的底部，有一个 ShardingJdbcObject 类的定义。这个类也是一种泛指，代表 ShardingSphere 中用于分片的 ShardingDataSource、ShardingConnection、ShardingStatement 等对象。
 
@@ -111,13 +125,17 @@ ShardingSphere 提供了与 JDBC 规范完全兼容的 API。也就是说，开�
 
 ShardingConnection 是对 JDBC 中 Connection 的适配和包装，所以它需要提供 Connection 接口中定义的方法，包括 createConnection、getMetaData、各种重载的 prepareStatement 和 createStatement 以及针对事务的 setAutoCommit、commit 和 rollback 方法等。ShardingConnection 对这些方法都进行了重写，如下图所示：
 
-<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/26/42/CgqCHl7xthSAHp4DAACJDJsvmyk879.png"/>  
+
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/26/42/CgqCHl7xthSAHp4DAACJDJsvmyk879.png"/> 
+  
 
 ShardingConnection 中的方法列表图
 
 ShardingConnection 类的一条类层结构支线就是适配器模式的具体应用，这部分内容的类层结构与前面介绍的重写机制的类层结构是完全一致的，如下图所示：
 
-<Image alt="111.jpeg" src="https://s0.lgstatic.com/i/image/M00/48/93/CgqCHl9MudqAOb9wAAEeGv0YTn807.jpeg"/>
+
+<Image alt="111.jpeg" src="https://s0.lgstatic.com/i/image/M00/48/93/CgqCHl9MudqAOb9wAAEeGv0YTn807.jpeg"/> 
+
 
 #### AbstractConnectionAdapter
 
@@ -280,3 +298,4 @@ JDBC 规范是理解和应用 ShardingSphere 的基础，ShardingSphere 对 JDBC
 这里给你留一道思考题：ShardingSphere如何基于适配器模式实现对JDBC中核心类的重写？
 
 JDBC 规范与 ShardingSphere 的兼容性概念至关重要。在掌握了这个概念之后，下一课时将介绍应用集成方面的话题，即在业务系统中使用 ShardingSphere 的具体方式。
+

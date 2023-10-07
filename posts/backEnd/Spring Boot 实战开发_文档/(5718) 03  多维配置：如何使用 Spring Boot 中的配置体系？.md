@@ -1,3 +1,5 @@
+# 03多维配置：如何使用SpringBoot中的配置体系？
+
 配置体系是基于 Spring Boot 框架开发应用程序的基础，而自动配置也是该框架的核心功能之一。今天我将带领大家梳理使用 Spring Boot 配置体系的系统方法。我们先从创建和运行第一个 Web 应用程序开始吧。
 
 ### 创建第一个 Spring Boot Web 应用程序
@@ -6,7 +8,9 @@
 
 初始化使用操作：直接访问 Spring Initializer 网站（<http://start.spring.io/>），选择创建一个 Maven 项目并指定相应的 Group 和 Artifact，然后在添加的依赖中选择 Spring Web，点击生成即可。界面效果下图所示：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/71/0D/Ciqc1F-83-KAYTQAAADMrUH44hQ767.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/71/0D/Ciqc1F-83-KAYTQAAADMrUH44hQ767.png"/> 
+  
 使用 Spring Initializer 创建 Web 应用程序示意图
 
 当然，对于有一定开发经验的同学而言，我们完全可以基于 Maven 本身的功能特性和结构，来生成上图中的代码工程。
@@ -46,7 +50,9 @@ Postman 提供了强大的 Web API 和 HTTP 请求调试功能，界面简洁明
 
 这时我们通过 Postman 访问"<http://localhost:8083/customers/1>"端点，可以得到如下图所示的HTTP响应结果，说明整个服务已经启动成功。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/71/0D/Ciqc1F-83_CAMxyvAABNmxMQRXc212.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/71/0D/Ciqc1F-83_CAMxyvAABNmxMQRXc212.png"/> 
+
 
 好了，现在我们已经明白如何构建、打包以及运行一个简单的 Web 应用程序了，这是一切开发工作的起点，后续所有的案例代码我们都将通过这种方式展现在你面前，包括接下来要介绍的 Spring Boot 配置体系也是一样。
 
@@ -90,7 +96,9 @@ spring.datasource.password=root
 
 显然，类似这样的数据源通常会根据环境的不同而存在很多套配置。假设我们存在如下所示的配置文件集合：
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/71/19/CgqCHl-83_2AOKfAAAAKdvXQRn8485.png"/>  
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/71/19/CgqCHl-83_2AOKfAAAAKdvXQRn8485.png"/> 
+  
 多配置文件示意图
 
 注意，这里有一个全局的 application.yml 配置文件以及多个局部的 profile 配置文件。那么，如何指定当前所使用的那一套配置信息呢？在 Spring Boot 中，我们可以在主 application.properties 中使用如下的配置方式来激活当前所使用的 Profile：
@@ -219,3 +227,4 @@ logging.level.com.springcss.customer=INFO
 这里给你留一道思考题：在使用 Spring Boot 时，使用 Profile 的方式具体有哪些？
 
 尽管 Spring Boot 内置了大量的默认配置信息，但在日常开发过程中，我们还通常会需要设置各种自定义的配置信息。04 讲我们将继续讨论 Spring Boot 中的配置体系，并关注创建和使用自定义配置信息的各种实现方法。
+

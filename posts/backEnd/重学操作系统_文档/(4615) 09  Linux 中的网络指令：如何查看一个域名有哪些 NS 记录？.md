@@ -1,3 +1,5 @@
+# 09Linux中的网络指令：如何查看一个域名有哪些NS记录？
+
 **我看到过一道关于 Linux 指令的面试题：如何查看一个域名有哪些 NS 记录**？
 
 这类题目是根据一个场景，考察一件具体的事情如何处理。虽然你可以通过查资料找到解决方案，但是，这类问题在面试中还是有必要穿插一下，用于确定求职者技能是否熟练、经验是否丰富。特别是计算机网络相关的指令，平时在远程操作、开发、联调、Debug 线上问题的时候，会经常用到。
@@ -26,11 +28,15 @@ Linux 中提供了不少网络相关的指令，因为网络指令比较分散�
 
 有一种场景需要远程登录一个 Linux 系统，这时我们会用到`ssh`指令。比如你想远程登录一台机器，可以使用`ssh user@ip`的方式，如下图所示：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/5A/68/CgqCHl92j8GAMNHAAAPCrIyhHHk744.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/5A/68/CgqCHl92j8GAMNHAAAPCrIyhHHk744.png"/> 
+
 
 上图中，我在使用`ssh`指令从机器`u1`登录我的另一台虚拟机`u2`。这里`u1`和`u2`对应着 IP 地址，是我在`/etc/hosts`中设置的，如下图所示：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/5A/68/CgqCHl92j8mAIMPdAACTOATTrQM694.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/5A/68/CgqCHl92j8mAIMPdAACTOATTrQM694.png"/> 
+
 
 `/etc/hosts`这个文件可以设置 IP 地址对应的域名。我这里是一个小集群，总共有两台机器，因此我设置了方便记忆和操作的名字。
 
@@ -40,7 +46,9 @@ Linux 中提供了不少网络相关的指令，因为网络指令比较分散�
 
 比如从`u1`拷贝家目录下的文件`a.txt`到`u2`。家目录有一个简写，就是用`~`。具体指令见下图：
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/5A/5D/Ciqc1F92j9OADjTcAAPER8w5DNg904.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/5A/5D/Ciqc1F92j9OADjTcAAPER8w5DNg904.png"/> 
+
 
 输入 scp 指令之后会弹出一个提示，要求输入密码，系统验证通过后文件会被成功拷贝。
 
@@ -56,7 +64,9 @@ Linux 中提供了不少网络相关的指令，因为网络指令比较分散�
 
 下图是我的 ubuntu 虚拟机用 ifconfig 查看网络接口信息。
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/5A/5D/Ciqc1F92j9yAaioXAAbz00ZJYlw555.png"/>
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/5A/5D/Ciqc1F92j9yAaioXAAbz00ZJYlw555.png"/> 
+
 
 可以看到我的这台 ubuntu 虚拟机一共有 2 个网卡，ens33 和 lo。`lo`是本地回路（local lookback），发送给`lo`就相当于发送给本机。`ens33`是一块连接着真实网络的虚拟网卡。
 
@@ -68,11 +78,15 @@ Linux 中提供了不少网络相关的指令，因为网络指令比较分散�
 
 不传任何参数的`netstat`帮助查询所有的本地 socket，下图是`netstat | less`的结果。
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/5A/5D/Ciqc1F92j-aAAZlfAAizLye7uc4727.png"/>
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/5A/5D/Ciqc1F92j-aAAZlfAAizLye7uc4727.png"/> 
+
 
 如上图，我们看到的是 socket 文件。socket 是网络插槽被抽象成了文件，负责在客户端、服务器之间收发数据。当客户端和服务端发生连接时，客户端和服务端会同时各自生成一个 socket 文件，用于管理这个连接。这里，可以用`wc -l`数一下有多少个`socket`。
 
-<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/5A/5D/Ciqc1F92j-2AVEYjAAA8xcVMQzc068.png"/>
+
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/5A/5D/Ciqc1F92j-2AVEYjAAA8xcVMQzc068.png"/> 
+
 
 你可以看到一共有 615 个 socket 文件，因为有很多 socket 在解决进程间的通信。就是将两个进程一个想象成客户端，一个想象成服务端。并不是真的有 600 多个连接着互联网的请求。
 
@@ -80,11 +94,15 @@ Linux 中提供了不少网络相关的指令，因为网络指令比较分散�
 
 如果想看有哪些 TCP 连接，可以使用`netstat -t`。比如下面我通过`netstat -t`看`tcp`协议的网络情况：
 
-<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/5A/68/CgqCHl92j_aAbxdlAAEAdzG3a2s636.png"/>
+
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/5A/68/CgqCHl92j_aAbxdlAAEAdzG3a2s636.png"/> 
+
 
 这里没有找到连接中的`tcp`，因为我们这台虚拟机当时没有发生任何的网络连接。因此我们尝试从机器`u2`（另一台机器）ssh 登录进`u1`，再看一次：
 
-<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/5A/68/CgqCHl92kAaAMuMDAAFWQdSNGfk978.png"/>
+
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/5A/68/CgqCHl92kAaAMuMDAAFWQdSNGfk978.png"/> 
+
 
 如上图所示，可以看到有一个 TCP 连接了。
 
@@ -92,7 +110,9 @@ Linux 中提供了不少网络相关的指令，因为网络指令比较分散�
 
 还有一种非常常见的情形，我们想知道某个端口是哪个应用在占用。如下图所示：
 
-<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/5A/5D/Ciqc1F92kBKAHr2RAAEnmEOZ8RM010.png"/>
+
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/5A/5D/Ciqc1F92kBKAHr2RAAEnmEOZ8RM010.png"/> 
+
 
 这里我们看到 22 端口被 sshd，也就是远程登录模块被占用了。`-n`是将一些特殊的端口号用数字显示，`-t`是指看 TCP 协议，`-l`是只显示连接中的连接，`-p`是显示程序名称。
 
@@ -104,7 +124,9 @@ Linux 中提供了不少网络相关的指令，因为网络指令比较分散�
 
 想知道本机到某个网站的网络延迟，就可以使用`ping`指令。如下图所示：
 
-<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/5A/68/CgqCHl92kB-ARKR5AAP30Xk0nBg068.png"/>
+
+<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/5A/68/CgqCHl92kB-ARKR5AAP30Xk0nBg068.png"/> 
+
 
 `ping`一个网站需要使用 ICMP 协议。因此你可以在上图中看到 icmp 序号。 这里的时间`time`是往返一次的时间。`ttl`叫作 time to live，是封包的生存时间。就是说，一个封包从发出就开始倒计时，如果途中超过 128ms，这个包就会被丢弃。如果包被丢弃，就会被算进丢包率。
 
@@ -114,11 +136,15 @@ Linux 中提供了不少网络相关的指令，因为网络指令比较分散�
 
 有时候我们想知道本机到某个 IP + 端口的网络是否通畅，也就是想知道对方服务器是否在这个端口上提供了服务。这个时候可以用`telnet`指令。 如下图所示：
 
-<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image/M00/5A/68/CgqCHl92kCmAcPQzAADcRdxOtdw609.png"/>
+
+<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image/M00/5A/68/CgqCHl92kCmAcPQzAADcRdxOtdw609.png"/> 
+
 
 telnet 执行后会进入一个交互式的界面，比如这个时候，我们输入下图中的文字就可以发送 HTTP 请求了。如果你对 HTTP 协议还不太了解，建议自学一下 HTTP 协议。如果希望和林老师一起学习，可以等待下我之后的《**计算机网络**》专栏。
 
-<Image alt="Drawing 11.png" src="https://s0.lgstatic.com/i/image/M00/5A/5D/Ciqc1F92kDKAcYUbAASLFyOyBg4948.png"/>
+
+<Image alt="Drawing 11.png" src="https://s0.lgstatic.com/i/image/M00/5A/5D/Ciqc1F92kDKAcYUbAASLFyOyBg4948.png"/> 
+
 
 如上图所示，第 5 行的`GET` 和第 6 行的`HOST`是我输入的。 拉勾网返回了一个 301 永久跳转。这是因为拉勾网尝试把`http`协议链接重定向到`https`。
 
@@ -130,7 +156,9 @@ telnet 执行后会进入一个交互式的界面，比如这个时候，我们�
 
 host 就是一个 DNS 查询工具。比如我们查询拉勾网的 DNS，如下图所示：
 
-<Image alt="Drawing 12.png" src="https://s0.lgstatic.com/i/image/M00/5A/5D/Ciqc1F92kD6AOJPQAAGW1va0D9c041.png"/>
+
+<Image alt="Drawing 12.png" src="https://s0.lgstatic.com/i/image/M00/5A/5D/Ciqc1F92kD6AOJPQAAGW1va0D9c041.png"/> 
+
 
 我们看到拉勾网 [www.lagou.com](http://www.lagou.comw) 是一个别名，它的原名是 lgmain 开头的一个域名，这说明拉勾网有可能在用 CDN 分发主页（关于 CDN，我们《计算机网络》专栏见）。
 
@@ -138,13 +166,17 @@ host 就是一个 DNS 查询工具。比如我们查询拉勾网的 DNS，如下
 
 如果想追查某种类型的记录，可以使用`host -t`。比如下图我们追查拉勾的 AAAA 记录，因为拉勾网还没有部署 IPv6，所以没有找到。
 
-<Image alt="Drawing 13.png" src="https://s0.lgstatic.com/i/image/M00/5A/68/CgqCHl92kFWAHIqAAACvpo6qaOs100.png"/>
+
+<Image alt="Drawing 13.png" src="https://s0.lgstatic.com/i/image/M00/5A/68/CgqCHl92kFWAHIqAAACvpo6qaOs100.png"/> 
+
 
 #### dig
 
 `dig`指令也是一个做 DNS 查询的。不过`dig`指令显示的内容更详细。下图是`dig`拉勾网的结果。
 
-<Image alt="Drawing 14.png" src="https://s0.lgstatic.com/i/image/M00/5A/69/CgqCHl92kGaADOhxAAR-BfryZ5g689.png"/>
+
+<Image alt="Drawing 14.png" src="https://s0.lgstatic.com/i/image/M00/5A/69/CgqCHl92kGaADOhxAAR-BfryZ5g689.png"/> 
+
 
 从结果可以看到[www.lagou.com](http://www.lagou.c) 有一个别名，用 CNAME 记录定义 lgmain 开头的一个域名，然后有 3 条 A 记录，通常这种情况是为了均衡负载或者分发内容。
 
@@ -158,7 +190,9 @@ host 就是一个 DNS 查询工具。比如我们查询拉勾网的 DNS，如下
 
 我们可以直接使用 curl 请求一个网址，获取资源，比如我用 curl 直接获取了拉勾网的主页，如下图所示：
 
-<Image alt="Drawing 15.png" src="https://s0.lgstatic.com/i/image/M00/5A/5D/Ciqc1F92kG-AJPyrAANJZYQ4u5w784.png"/>
+
+<Image alt="Drawing 15.png" src="https://s0.lgstatic.com/i/image/M00/5A/5D/Ciqc1F92kG-AJPyrAANJZYQ4u5w784.png"/> 
+
 
 如果只想看 HTTP 返回头，可以使用`curl -I`。
 
@@ -201,3 +235,4 @@ curl在向`localhost:3000`发送 POST 请求。`-d`后面跟着要发送的数�
 **最后我再给你出一道需要查资料的思考题目：如何查看正在 TIME_WAIT 状态的连接数量**？
 
 你可以把你的答案、思路或者课后总结写在留言区，这样可以帮助你产生更多的思考，这也是构建知识体系的一部分。经过长期的积累，相信你会得到意想不到的收获。如果你觉得今天的内容对你有所启发，欢迎分享给身边的朋友。期待看到你的思考！
+

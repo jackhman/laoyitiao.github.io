@@ -1,3 +1,5 @@
+# 01APM引领者：ApacheSkyWalking的开放、共享精神
+
 你好，欢迎你来到专栏第一课。这一讲我将带领你学习 Apache SkyWalking，那为什么我会以 Apache SkyWalking 作为第一讲呢？
 
 首先 Apache SkyWalking 在国际上是非常受欢迎的 [APM](https://github.com/topics/apm?fileGuid=xxQTRXtVcqtHK6j8) 系统，在 APM 的核心领域（如[全链路追踪](https://github.com/topics/distributed-tracing?fileGuid=xxQTRXtVcqtHK6j8)、[网站性能](https://github.com/topics/web-performance?fileGuid=xxQTRXtVcqtHK6j8)）都非常具有前瞻性。
@@ -71,7 +73,9 @@ SkyWalking 项目从 2017 年 12 月进入 Apache 孵化器，到现在的 8.X �
 
 我将上述内容整理为下表可供你参考：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M01/27/BF/Cgp9HWBdpeaAYqHMAAImIKpX6kY556.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M01/27/BF/Cgp9HWBdpeaAYqHMAAImIKpX6kY556.png"/> 
+
 
 回顾 SkyWalking 过去三年的发展历史，可以看出 SkyWalking 每次大版本迭代，都是使用通用的设计方案实践 APM 领域的前沿技术。以 8.0 版本 SkyWalking 发布新的数据协议为例，在官方发版前，社区内的各个语言探针，就以极快的速度完成了新数据协议升级。云厂商 AlibabaCloud 也计划发布新版本，来支持 8.0 未发布的新协议。
 
@@ -154,3 +158,4 @@ APM 监控存储的数据都是海量级别的。如果全记录下来，需要�
 由于 SkyWalking 采用的是"无侵入字节码增强"方式去实现 APM 监控数据的采集，而非"拦截器接口"这一方式，所以在应用框架大版本迭代后会很难兼容。因此，请你注意 Apache SkyWalking 是否支持相应监控的应用框架版本号。
 
 如果你遇到了此类问题，可以通过[Apache SkyWalking 团队的联系方式](https://github.com/apache/skywalking/tree/v8.3.0#contact-us?fileGuid=xxQTRXtVcqtHK6j8)或在留言区与我讨论。
+

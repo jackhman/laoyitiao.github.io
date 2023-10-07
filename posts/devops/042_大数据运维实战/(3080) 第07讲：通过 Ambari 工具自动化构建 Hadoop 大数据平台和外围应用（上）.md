@@ -1,3 +1,5 @@
+# 第07讲：通过Ambari工具自动化构建Hadoop大数据平台和外围应用（上）
+
 本课时主要讲"通过 Ambari 工具自动化构建大数据运维平台"的内容。
 
 ### 大数据运维工具 Ambari
@@ -26,7 +28,9 @@ Ambari 是一个分布式架构的应用工具，主要由三部分组成，即 
 
 下图是 Ambari 整体架构图：
 
-<Image alt="image001.png" src="https://s0.lgstatic.com/i/image/M00/0C/2E/Ciqc1F7CNJ2AAbPcAABouWB_IQI850.png"/>
+
+<Image alt="image001.png" src="https://s0.lgstatic.com/i/image/M00/0C/2E/Ciqc1F7CNJ2AAbPcAABouWB_IQI850.png"/> 
+
 
 从图中可以看出，Ambari 主要分为四个部分，每个部分实现功能如下所示。
 
@@ -47,7 +51,9 @@ Ambari 是一个分布式架构的应用工具，主要由三部分组成，即 
 
 安装之前需要先规划好主机及角色，这里以 5 台主机为例作为安装环境，采用 Centos7.7 版本系统，各主机 IP、功能分配如下表所示：
 
-<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/0C/47/Ciqc1F7CQ2SAS5tFAAE5dJODjnQ541.png"/>
+
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/0C/47/Ciqc1F7CQ2SAS5tFAAE5dJODjnQ541.png"/> 
+
 
 在这个主机规划中，增加了一台 gateway.hdp 主机，此主机是提交分析任务到 Hadoop 集群的一个接口，开发或测试人员可通过登录这台机器，将自己的数据分析任务提交到 Hadoop 上运行，所以此主机也称为**网关机**。
 
@@ -73,7 +79,7 @@ Yum 仓库可以在任意一台服务器上部署，这个服务跟 Hadoop 集�
 
 以 nginx 作为 http server 为例，需要安装 nginx server，这里在 172.16.213.239 主机上安装 nginx，操作如下：
 
-```html
+```sql
 [root@server239 soft]#yum install nginx
 ```
 
@@ -103,7 +109,7 @@ server {
 
 最后，重启 nginx 服务器即可：
 
-```html
+```sql
 [root@server239 soft]# systemctl  start nginx
 ```
 
@@ -121,7 +127,7 @@ server {
 
 假定已经指定了 yum 仓库的根目录为 /usr/share/nginx/html/soft，为了让 yum 能识别这些目录，需要创建 yum 索引库，创建索引库需要一个命令 createrepo。因此要先安装这个命令，然后再创建索引库，操作过程如下：
 
-```html
+```sql
 [root@server239 ~]# yum install createrepo -y
 [root@server239 ~]# createrepo /usr/share/nginx/html/soft
 ```
@@ -132,7 +138,7 @@ createrepo 命令执行完毕后，会在 soft 目录下产生一个 repodata �
 
 在另一台客户端机器上，创建一个 yum 源文件 local.repo，内容如下：
 
-```html
+```sql
 #VERSION_NUMBER=2.7.4.0-118
 [ambari-2.7.4.0]
 #json.url = http://public-repo-1.hortonworks.com/HDP/hdp_urlinfo.json
@@ -146,7 +152,7 @@ priority=1
 
 将这个文件放到客户端主机的 /etc/yum.repos.d 路径下，然后执行如下命令：
 
-```html
+```sql
 [root@server239 ~]# yum clean all
 [root@server239 ~]# yum makecache
 [root@server239 ~]# yum repolist
@@ -154,7 +160,7 @@ priority=1
 
 最后，执行一个在线安装测试：
 
-```html
+```sql
 [root@server239 ~]# yum install ambari
 ```
 
@@ -166,19 +172,19 @@ Ambari 使用的默认数据库是 PostgreSQL，不过它也支持 MySQL。下�
 
 [点击这里](https://dev.mysql.com/downloads/repo/yum/)下载 MySQL 的 yum 源，然后安装 rpm 文件，执行如下操作：
 
-```html
+```sql
 [root@ambariserver ~]# rpm -ivh mysql80-community-release-el7-3.noarch.rpm
 ```
 
 此 yum 源安装后，会在 /etc/yum.repos.d/ 下生成一个 mysql-community.repo 文件，此仓库包含了 MySQL 的各个版本，默认开启的是 8.0 版本，可选择开启需要的版本，我这里开启的是 5.7 版本。接着，就可以通过 yum 安装 MySQL 了，操作如下：
 
-```html
+```sql
 [root@ambariserver ~]# yum install -y mysql-server mysql
 ```
 
 安装完成后，执行启动 MySQL 服务：
 
-```html
+```sql
 [root@ambariserver ~]#  systemctl  start mysqld
 ```
 
@@ -205,7 +211,7 @@ mysql> FLUSH PRIVILEGES;
 
 准备了这么多，下面开始安装 Ambari。在这之前，先安装 ambari 的依赖包，执行如下命令：
 
-```html
+```sql
 [root@ambariserver ~]# yum install openssh wget vim openssh-clients openssl gcc* openssh-server mysql-connector-odbc mysql-connector-java python-devel*
 ```
 
@@ -213,7 +219,7 @@ mysql> FLUSH PRIVILEGES;
 
 然后安装 Ambari，执行如下命令：
 
-```html
+```sql
 [root@ambariserver ~]# yum install  -y ambari-server
 ```
 
@@ -221,7 +227,7 @@ ambari-server 安装会自动下载 postgresql 包，先不用管它，后面我
 
 最后对 Ambari 进行配置，执行如下命令进入交互模式：
 
-```html
+```sql
 [root@ambariserver ~]# ambari-server setup
 [root@ambariserver java]# ambari-server setup
 Using python  /usr/bin/python
@@ -292,7 +298,7 @@ mysql>  source /var/lib/ambari-server/resources/Ambari-DDL-MySQL-CREATE.sql;
 
 ambari 基础数据导入完成后，就可以启动 ambari server 服务了，执行如下命令：
 
-```html
+```sql
 [root@ambariserver ~]# ambari-server start
 ```
 
@@ -306,15 +312,21 @@ Ambari Web 默认会启动一个 8080 端口，可通过 <http://ambariserver:80
 
 当你成功登录 Ambari Web 之后，会看到如下默认界面：
 
-<Image alt="image003.png" src="https://s0.lgstatic.com/i/image/M00/0C/3A/CgqCHl7CNOOAEe_oAADNcQ32Y7w137.png"/>
+
+<Image alt="image003.png" src="https://s0.lgstatic.com/i/image/M00/0C/3A/CgqCHl7CNOOAEe_oAADNcQ32Y7w137.png"/> 
+
 
 点击上图的"LAUNCH INSTALL WIZARD"，就可以开始创建一个大数据集群了，如下图所示：
 
-<Image alt="image005.png" src="https://s0.lgstatic.com/i/image/M00/0C/3A/CgqCHl7CNOyAfuZOAAAyXqHhXgw529.png"/>
+
+<Image alt="image005.png" src="https://s0.lgstatic.com/i/image/M00/0C/3A/CgqCHl7CNOyAfuZOAAAyXqHhXgw529.png"/> 
+
 
 需要定义一个集群的名字，这里我命名为 mybigdata，接着进入下图界面：
 
-<Image alt="image007.png" src="https://s0.lgstatic.com/i/image/M00/0C/2F/Ciqc1F7CNPOAB-FgAADXFWnj7QU337.png"/>
+
+<Image alt="image007.png" src="https://s0.lgstatic.com/i/image/M00/0C/2F/Ciqc1F7CNPOAB-FgAADXFWnj7QU337.png"/> 
+
 
 图中需选择要安装的 HDP 版本，以及安装 HDP 的 yum 仓库地址，HDP 版本选择目前最新的 3.1.4 版，而 HDP 仓库可以选择官方的 yum 地址，也可以用本地的 yum 源地址。由于安装 HDP 需要下载的软件很多，而官方 yum 地址下载速度很慢，因此建议搭建本地仓库，可以点击如下 HDP 的三个压缩包下载，然后解压放入本地仓库即可：
 
@@ -330,13 +342,17 @@ Ambari Web 默认会启动一个 8080 端口，可通过 <http://ambariserver:80
 
 上图配置完成后，点击"下一步"按钮，进入下图界面：
 
-<Image alt="image009.png" src="https://s0.lgstatic.com/i/image/M00/0C/3A/CgqCHl7CNP2ACZkeAAEKwJO8J_s274.png"/>
+
+<Image alt="image009.png" src="https://s0.lgstatic.com/i/image/M00/0C/3A/CgqCHl7CNP2ACZkeAAEKwJO8J_s274.png"/> 
+
 
 此步骤需要配置的有两个，第一个是安装 hdp 集群的主机列表，这里我通过主机名进行定义，一行一个主机名，当然这些主机名是可以解析到 IP 地址的。第二个是指定 ambari server 主机的私钥，可以通过上传私钥文件或者贴出私钥文件的内容这两种方式，最后一部分是配置 ambari server 主机登录到 agent 主机的用户和端口，保持默认即可。
 
 配置完成，点击"下一步"按钮，进入下图所示界面：
 
-<Image alt="image011.png" src="https://s0.lgstatic.com/i/image/M00/0C/2F/Ciqc1F7CNQWABkUjAADgHYiTCqc655.png"/>
+
+<Image alt="image011.png" src="https://s0.lgstatic.com/i/image/M00/0C/2F/Ciqc1F7CNQWABkUjAADgHYiTCqc655.png"/> 
+
 
 这个步骤最容易出错，因为此步骤首先进行无密码登录验证，也就是从 ambari server 主机登录到所有 hdp 集群节点。如果能够登录到 hdp 节点，那么将进行一系列注册操作，主要包括从 ambari server 拷贝多个 Python 脚本、创建 ambari 源、安装 ambari agent 等任务。
 
@@ -344,75 +360,103 @@ Ambari Web 默认会启动一个 8080 端口，可通过 <http://ambariserver:80
 
 配置完成后，点击"下一步"按钮，来到下图所示界面：
 
-<Image alt="image013.png" src="https://s0.lgstatic.com/i/image/M00/0C/3A/CgqCHl7CNQ2AKguyAAEuZwB5VL8842.png"/>
+
+<Image alt="image013.png" src="https://s0.lgstatic.com/i/image/M00/0C/3A/CgqCHl7CNQ2AKguyAAEuZwB5VL8842.png"/> 
+
 
 这个步骤是选择要安装的集群服务，其中，HDFS 是必选项，然后在选择服务中看到有非常多的可选服务，要根据实际环境中需要的服务，选择安装即可。这些服务之间有依赖性，比如你选择了 YARN+MapReduce2，那么必须要选择 ZooKeeper 服务，安装向导会检测这种依赖性并提示你进行安装，当然，有很多服务是没有必要安装的，如 Atlas、Ranger、SmartSense 等，如果没有安装这些服务，那么安装向导有如下提示：
 
-<Image alt="image015.png" src="https://s0.lgstatic.com/i/image/M00/0C/3A/CgqCHl7CNReAddbKAABGTWAFM6M738.png"/>
+
+<Image alt="image015.png" src="https://s0.lgstatic.com/i/image/M00/0C/3A/CgqCHl7CNReAddbKAABGTWAFM6M738.png"/> 
+
 
 这里选择 PROCEED ANYWAY 即可，这样就跳过安装了，但有些服务像"流氓"一样，必须强制安装，如 SmartSense，没关系，先安装上，所有安装完成后，再卸载了它即可。
 
 本例中我选择了 HDFS、YARN+Mapreduce2、ZooKeeper、Ambari Metrics 这些基础服务，其他服务暂时不选，等基础服务安装完成后，再单独安装其他外围服务。要安装的服务选择完毕后，就进入了下图界面中：
 
-<Image alt="image017.png" src="https://s0.lgstatic.com/i/image/M00/0C/3A/CgqCHl7CNSGAPzm4AAFvhuhvhKo101.png"/>
+
+<Image alt="image017.png" src="https://s0.lgstatic.com/i/image/M00/0C/3A/CgqCHl7CNSGAPzm4AAFvhuhvhKo101.png"/> 
+
 
 此步骤是建立 hdp 服务和主机的对应关系，也就是这些服务分别安装在哪些主机上，这其实就是我之前介绍的主机角色规划，根据之前的功能规划，将不同服务选择安装到对应的主机上即可。一个基本的分配原则是分布式存储和分布式计算功能分开，这里可以看到，出现了一个 SNameNode 服务，此服务可以为 NameNode 提供冷备功能。要和 NameNode 服务部署在不同的主机上，另外，还需要为 ZooKeeper Server 选择三台独立的主机，而 Grafana 是一个美观、强大的可视化监控指标展示工具，放在一个负载不高的节点即可。最后，剩余的其他服务都跟 resourcemanager 有关，因此统一放到一个主机上即可。
 
 接着，就进入了如下界面：
 
-<Image alt="image019.png" src="https://s0.lgstatic.com/i/image/M00/0C/3B/CgqCHl7CNSiAOx84AACyjrWomLA596.png"/>
+
+<Image alt="image019.png" src="https://s0.lgstatic.com/i/image/M00/0C/3B/CgqCHl7CNSiAOx84AACyjrWomLA596.png"/> 
+
 
 此步骤是分配集群的 slave 节点和 client 节点，slave 节点主要对应 Datanode 和 Nodemanager 服务，可以将这两个服务同时部署到一台主机上。而 client 节点就是上面介绍过的外围机功能，为必选项，这里选择 slave002.hdp 主机作为 hdp 集群的外围主机。
 
 接着，安装向导就来到了如下界面：
 
-<Image alt="image021.png" src="https://s0.lgstatic.com/i/image/M00/0C/3B/CgqCHl7CNS-AQQpqAABpv88b6ro363.png"/>
+
+<Image alt="image021.png" src="https://s0.lgstatic.com/i/image/M00/0C/3B/CgqCHl7CNS-AQQpqAABpv88b6ro363.png"/> 
+
 
 此步骤是设置 Grafana 登录的密码，统一设置一个密码即可，然后进入下一步，如下图所示：
 
-<Image alt="image023.png" src="https://s0.lgstatic.com/i/image/M00/0C/2F/Ciqc1F7CNTaALMalAACv30O7fUE630.png"/>
+
+<Image alt="image023.png" src="https://s0.lgstatic.com/i/image/M00/0C/2F/Ciqc1F7CNTaALMalAACv30O7fUE630.png"/> 
+
 
 此步骤是设置 HDFS、Yarn、MapReduce2、ZooKeeper 等应用的数据存储路径和日志存储路径，这些存储路径需要提前规划好，这里我将 HDFS 数据块存储在每个 datanode 节点的 /data1 和 /data2 目录了，这两个路径对应的是两个独立的磁盘。同时将 HDFS 元数据存储在 Namenode 主机的 /data1 和 /data2 目录下，这两个目录对应的是两组独立的 RAID1 磁盘组，最大限度保证元数据的安全。其他日志路径保持默认即可。
 
 同理，还需要设置 Yarn 的几个路径信息，如下图所示：
 
-<Image alt="image025.png" src="https://s0.lgstatic.com/i/image/M00/0C/3B/CgqCHl7CNT2Af_3pAADLFw2WhtE949.png"/>
+
+<Image alt="image025.png" src="https://s0.lgstatic.com/i/image/M00/0C/3B/CgqCHl7CNT2Af_3pAADLFw2WhtE949.png"/> 
+
 
 重点设置的是 Yarn 中 nodemanager 的 local directories、log directories 的路径，其中，local directories 用来设置 application 在分布式计算过程中的中间数据存储路径，建议分为多个磁盘来存储；而 log directories 是配置 nodemanager 上 container 运行的本地日志存储路径，这两个路径都是本地文件系统上的路径。
 
 接着，还要简单设置下 ZooKeeper 的数据存储路径，如下图所示：
 
-<Image alt="image027.png" src="https://s0.lgstatic.com/i/image/M00/0C/3B/CgqCHl7CNUaAXX4HAABfxhsGYJE431.png"/>
+
+<Image alt="image027.png" src="https://s0.lgstatic.com/i/image/M00/0C/3B/CgqCHl7CNUaAXX4HAABfxhsGYJE431.png"/> 
+
 
 此步骤配置 ZooKeeper 的数据存储目录以及日志存储目录，配置完成，进入下一步操作，如下图所示：
 
-<Image alt="image029.png" src="https://s0.lgstatic.com/i/image/M00/0C/3B/CgqCHl7CNUyAEMzBAACa9bBv-Ec128.png"/>
+
+<Image alt="image029.png" src="https://s0.lgstatic.com/i/image/M00/0C/3B/CgqCHl7CNUyAEMzBAACa9bBv-Ec128.png"/> 
+
 
 此步骤是配置用 ambari 管理 hdp 集群服务的账号和组，即针对不同的服务，分别有不同的用户和组进行服务的启动管理工作。保持默认即可。
 
 点击"下一步"按钮，进入下图界面：
 
-<Image alt="image031.png" src="https://s0.lgstatic.com/i/image/M00/0C/2F/Ciqc1F7CNVWASQmDAAD9szxPuuI615.png"/>
+
+<Image alt="image031.png" src="https://s0.lgstatic.com/i/image/M00/0C/2F/Ciqc1F7CNVWASQmDAAD9szxPuuI615.png"/> 
+
 
 此步骤非常重要，主要用来配置 HDFS、Yarn、MapReduce2、ZooKeeper 等一些 JVM 内存参数和优化参数，可以在这个界面进行基础参数设置，如何自定义配置参数，可点击上面的"ADVANCED"进入高级配置部分。这里我就配置几个基础参数，主要是 NameNode java head size 和 datanode maximum java head size，一般 NameNode java head size 要足够大，这里我设置为 20G，datanode maximum java head size 设置 4GB 基本可满足一般需求。
 
 接着，还需要对 yarn 进行内存和 CPU 的资源配置，如下图所示：
 
-<Image alt="image033.png" src="https://s0.lgstatic.com/i/image/M00/0C/3B/CgqCHl7CNV-AX1O3AAD5026NpZI545.png"/>
+
+<Image alt="image033.png" src="https://s0.lgstatic.com/i/image/M00/0C/3B/CgqCHl7CNV-AX1O3AAD5026NpZI545.png"/> 
+
 
 此界面中，有两个配置需要特别注意，第一个是 Memory 项，它主要设置每个 nodemanager 节点可最大使用的内存量，对应的参数是 yarn.nodemanager.resource.memory-mb；另一个是 CPU 项，它主要配置每个 nodemanager 节点可最大使用的虚拟 CPU 核数，对应的参数为 yarn.nodemanager.resource.cpu-vcores。
 
 所有相关参数配置完成后，点击"下一步"按钮，进入下图界面：
 
-<Image alt="image035.png" src="https://s0.lgstatic.com/i/image/M00/0C/3B/CgqCHl7CNWmAGVY1AADdmEQK00g998.png"/>
+
+<Image alt="image035.png" src="https://s0.lgstatic.com/i/image/M00/0C/3B/CgqCHl7CNWmAGVY1AADdmEQK00g998.png"/> 
+
 
 此步骤是一个安装预览界面，直接点击"下一步"按钮，如下图所示：
 
-<Image alt="image037.png" src="https://s0.lgstatic.com/i/image/M00/0C/2F/Ciqc1F7CNXKAFciOAACW0WP84Ic442.png"/>
+
+<Image alt="image037.png" src="https://s0.lgstatic.com/i/image/M00/0C/2F/Ciqc1F7CNXKAFciOAACW0WP84Ic442.png"/> 
+
 
 从此步骤开始，正式进入了 hdp 集群安装过程，安装过程可能会出现问题，如果出现错误，可点击 Message 列下面的链接来查看具体出错信息。我在安装过程中，在 hdpyarn.hdp 主机上出现了错误，点击主机对应的 Message 列链接，发现了错误的具体信息，如下图所示：
 
-<Image alt="image039.png" src="https://s0.lgstatic.com/i/image/M00/0C/3B/CgqCHl7CNXuAQBGTAACGoVbhLDg200.png"/>
+
+<Image alt="image039.png" src="https://s0.lgstatic.com/i/image/M00/0C/3B/CgqCHl7CNXuAQBGTAACGoVbhLDg200.png"/> 
+
 
 这个错误提示此主机上 53 端口被占用，导致 YARN Registry DNS 服务无法启动，于是登录此主机检查 53 端口，发现被 dnsmasq 服务占用了，于是关闭 dnsmasq 服务，重启 YARN Registry DNS 服务就恢复正常了。
 
@@ -420,7 +464,9 @@ Ambari Web 默认会启动一个 8080 端口，可通过 <http://ambariserver:80
 
 由于我这里使用的是本地 yum 源，因此安装过程应该很快，如果没有任何报错信息，那么hdp集群就安装成功了。下图是安装完成后的一个界面图：
 
-<Image alt="image041.png" src="https://s0.lgstatic.com/i/image/M00/0C/2F/Ciqc1F7CNYWAU5iZAAHHj42gdlE872.png"/>
+
+<Image alt="image041.png" src="https://s0.lgstatic.com/i/image/M00/0C/2F/Ciqc1F7CNYWAU5iZAAHHj42gdlE872.png"/> 
+
 
 接下来，我们就可以在这个平台上对 hdp 集群进行配置与管理了。
 
@@ -430,30 +476,45 @@ Ambari Web 默认会启动一个 8080 端口，可通过 <http://ambariserver:80
 
 首先，在 Ambari 主界面点击左侧导航栏 Hosts 项，然后在右上角的"ACTIONS"按钮选择"Add New Hosts"，如下图所示：
 
-<Image alt="image043.png" src="https://s0.lgstatic.com/i/image/M00/0C/30/Ciqc1F7CNZCAYEGwAAFzfxZv3A4232.png"/>
+
+<Image alt="image043.png" src="https://s0.lgstatic.com/i/image/M00/0C/30/Ciqc1F7CNZCAYEGwAAFzfxZv3A4232.png"/> 
+
 
 接着，就会出现如下图所示的界面：
 
-<Image alt="image045.png" src="https://s0.lgstatic.com/i/image/M00/0C/30/Ciqc1F7CNZmAG6PzAAEhC-QCHk8354.png"/>
+
+<Image alt="image045.png" src="https://s0.lgstatic.com/i/image/M00/0C/30/Ciqc1F7CNZmAG6PzAAEhC-QCHk8354.png"/> 
+
 
 这个界面似曾熟悉，其实就是配置要扩容的主机地址，以及如何无密码登录到此主机，在加入此主机前，要配置好 Ambari 主机到 hadoopgateway.hdp 主机的密钥登录认证，配置完毕后，点击"下一步"按钮即可进入下图所示的界面中：
 
-<Image alt="image047.png" src="https://s0.lgstatic.com/i/image/M00/0C/3B/CgqCHl7CNaKALxqHAAB44wzvzFE553.png"/>
+
+<Image alt="image047.png" src="https://s0.lgstatic.com/i/image/M00/0C/3B/CgqCHl7CNaKALxqHAAB44wzvzFE553.png"/> 
+
 
 此步骤开始自动注册此主机，所谓注册，就是拷贝一些 Python 脚本到这个主机，并安装 Ambari Agent 服务，还有就是对此主机的环境检测，如果环境检测发现问题，还给出警告提示。我这里就检测出了几个问题，如下图所示：
 
-<Image alt="image049.png" src="https://s0.lgstatic.com/i/image/M00/0C/3B/CgqCHl7CNaqAL033AAE9lapp86E768.png"/>
+
+<Image alt="image049.png" src="https://s0.lgstatic.com/i/image/M00/0C/3B/CgqCHl7CNaqAL033AAE9lapp86E768.png"/> 
+
 
 这个错误提示此主机 iptables 没有关闭，根据提示关闭防火墙即可，然后单击"RERUN CHECK"按钮重新检查。主机注册成功后，点击"下一步"按钮进入下图所示的界面：
 
-<Image alt="image051.png" src="https://s0.lgstatic.com/i/image/M00/0C/30/Ciqc1F7CNbSATRpSAAB7zZn6PCk802.png"/>
+
+<Image alt="image051.png" src="https://s0.lgstatic.com/i/image/M00/0C/30/Ciqc1F7CNbSATRpSAAB7zZn6PCk802.png"/> 
+
 
 此步骤是选择主机的角色，因为这个主机是作为 Hadoop 外围机使用的，也就是开发、测试人员都通过此主机提交任务到 Hadoop 集群。所以这里选择 Client 即可。继续点击"下一步"按钮，进入下图所示的界面：
 
-<Image alt="image053.png" src="https://s0.lgstatic.com/i/image/M00/0C/3C/CgqCHl7CNbyAAOelAABuMVIlFEE057.png"/>
+
+<Image alt="image053.png" src="https://s0.lgstatic.com/i/image/M00/0C/3C/CgqCHl7CNbyAAOelAABuMVIlFEE057.png"/> 
+
 
 此步骤是配置将新增主机加入那个配置组中，保持默认即可，点击"下一步"按钮，进入安装预览界面，继续点击"下一步"按钮，开始进行安装，如下图所示的界面：
 
-<Image alt="image055.png" src="https://s0.lgstatic.com/i/image/M00/0C/30/Ciqc1F7CNcOARRrsAACIyOTRFOU131.png"/>
+
+<Image alt="image055.png" src="https://s0.lgstatic.com/i/image/M00/0C/30/Ciqc1F7CNcOARRrsAACIyOTRFOU131.png"/> 
+
 
 这样，一个新增主机就添加到集群中了，可以根据这个方法，添加多个 datanode 节点或 nodemanager 节点到集群中。
+

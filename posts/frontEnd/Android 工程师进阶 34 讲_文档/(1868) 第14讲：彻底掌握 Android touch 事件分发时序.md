@@ -1,3 +1,5 @@
+# 第14讲：彻底掌握Androidtouch事件分发时序
+
 Android touch 事件的分发是 Android 工程师必备技能之一。关于事件分发主要有几个方向可以展开深入分析：
 
 1. touch 事件是如何从驱动层传递给 Framework 层的 InputManagerService；
@@ -39,7 +41,9 @@ View 是一个单纯的控件，不能再被细分，内部也并不会存在子
 
 先从宏观角度，纵览整个 dispatch 的源码如下：
 
-<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/04/0D/Ciqc1F6zq76AYtJPAADS4BOo8VM039.png"/>
+
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/04/0D/Ciqc1F6zq76AYtJPAADS4BOo8VM039.png"/> 
+
 
 如代码中的注释，dispatch 主要分为 3 大步骤：
 
@@ -53,7 +57,9 @@ View 是一个单纯的控件，不能再被细分，内部也并不会存在子
 
 #### 步骤 1 的具体代码如下
 
-<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/04/0D/Ciqc1F6zq86AZd-ZAAHnUYfq8iQ886.png"/>
+
+<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/04/0D/Ciqc1F6zq86AZd-ZAAHnUYfq8iQ886.png"/> 
+
 
 图中红框标出了是否需要拦截的条件：
 
@@ -65,7 +71,9 @@ View 是一个单纯的控件，不能再被细分，内部也并不会存在子
 
 #### 步骤 2 具体代码如下
 
-<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/04/0D/Ciqc1F6zq9mAMTcTAAdFapIjIMc616.png"/>
+
+<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/04/0D/Ciqc1F6zq9mAMTcTAAdFapIjIMc616.png"/> 
+
 
 仔细看上述的代码可以看出：
 
@@ -79,7 +87,9 @@ View 是一个单纯的控件，不能再被细分，内部也并不会存在子
 
 #### 步骤 3 具体代码如下
 
-<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/04/0E/Ciqc1F6zq-OAV7ZcAAbboCsB_8o465.png"/>
+
+<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/04/0E/Ciqc1F6zq-OAV7ZcAAbboCsB_8o465.png"/> 
+
 
 步骤 3 有 2 个分支判断。
 
@@ -91,15 +101,21 @@ View 是一个单纯的控件，不能再被细分，内部也并不会存在子
 
 定义如下布局文件：
 
-<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/04/0E/Ciqc1F6zq_GANeaVAAKS6a5wrDA923.png"/>
+
+<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/04/0E/Ciqc1F6zq_GANeaVAAKS6a5wrDA923.png"/> 
+
 
 DownInterceptedGroup 和 CaptureTouchView 是两个自定义 View，它们的源码分别如下：
 
-<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/04/0E/CgqCHl6zq_mAFXqUAAVCCMHCxbY587.png"/>
+
+<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/04/0E/CgqCHl6zq_mAFXqUAAVCCMHCxbY587.png"/> 
+
 
 手指触摸 CaptureTouchView 并滑动一段距离后抬起，最终打印 log 如下：
 
-<Image alt="image (6).png" src="https://s0.lgstatic.com/i/image/M00/04/0E/CgqCHl6zrAGAWq9uAAWUXplsW3M487.png"/>
+
+<Image alt="image (6).png" src="https://s0.lgstatic.com/i/image/M00/04/0E/CgqCHl6zrAGAWq9uAAWUXplsW3M487.png"/> 
+
 
 上图中在 DOWN 事件中，DownInterceptGroup 的 onInterceptTouchEvent 被触发一次；然后在子 View CaptureTouchView 的 dispatchTouchEvent 中返回 true，代表它捕获消费了这个 DOWN 事件。这种情况下 CaptureTouchView 会被添加到父视图（DownInterceptGroup）中的 mFirstTouchTarget 中。因此后续的 MOVE 和 UP 事件都会经过 DownInterceptGroup 的 onInterceptTouchEvent 进行拦截判断。 详细源码可以参考：[CaptureTouchView.java](https://github.com/McoyJiang/LagouAndroidShare/blob/master/course14_%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91/LagouTouchExplanation/app/src/main/java/material/danny_jiang/com/lagoutouchexplanation/views/CaptureTouchView.java)
 
@@ -113,7 +129,9 @@ DownInterceptedGroup 和 CaptureTouchView 是两个自定义 View，它们的源
 
 mFirstTouchTarget 的部分源码如下：
 
-<Image alt="image (7).png" src="https://s0.lgstatic.com/i/image/M00/04/0E/Ciqc1F6zrAqAHqzwAAFLLP0HYng235.png"/>
+
+<Image alt="image (7).png" src="https://s0.lgstatic.com/i/image/M00/04/0E/Ciqc1F6zrAqAHqzwAAFLLP0HYng235.png"/> 
+
 
 可以看出其实 mFirstTouchTarget 是一个 TouchTarget 类型的**链表**结构。而这个 TouchTarget 的作用就是用来记录捕获了 DOWN 事件的 View，具体保存在上图中的 child 变量。可是为什么是链表类型的结构呢？因为 Android 设备是支持多指操作的，每一个手指的 DOWN 事件都可以当做一个 TouchTarget 保存起来。在步骤 3 中判断如果 mFirstTouchTarget 不为 null，则再次将事件分发给相应的 TouchTarget。
 
@@ -121,13 +139,17 @@ mFirstTouchTarget 的部分源码如下：
 
 在上面的步骤 3 中，继续向子 View 分发事件的代码中，有一段比较有趣的逻辑：
 
-<Image alt="image (8).png" src="https://s0.lgstatic.com/i/image/M00/04/0E/Ciqc1F6zrBKACMw7AAINKPG9H7g994.png"/>
+
+<Image alt="image (8).png" src="https://s0.lgstatic.com/i/image/M00/04/0E/Ciqc1F6zrBKACMw7AAINKPG9H7g994.png"/> 
+
 
 上图红框中表明已经有子 View 捕获了 touch 事件，但是蓝色框中的 intercepted boolean 变量又是 true。这种情况下，事件主导权会重新回到父视图 ViewGroup 中，并传递给子 View 的分发事件中传入一个 cancelChild == true。
 
 看一下 dispatchTransformedTouchEvent 方法的部分源码如下：
 
-<Image alt="image (9).png" src="https://s0.lgstatic.com/i/image/M00/04/0E/CgqCHl6zrBqAQOmTAAGn_cFIxaU530.png"/>
+
+<Image alt="image (9).png" src="https://s0.lgstatic.com/i/image/M00/04/0E/CgqCHl6zrBqAQOmTAAGn_cFIxaU530.png"/> 
+
 
 因为之前传入参数 cancel 为 true，并且 child 不为 null，**最终这个事件会被包装为一个 ACTION_CANCEL 事件传给 child**。
 
@@ -140,17 +162,23 @@ mFirstTouchTarget 的部分源码如下：
 
 比如以下代码：
 
-<Image alt="image (10).png" src="https://s0.lgstatic.com/i/image/M00/04/0E/Ciqc1F6zrCKAVemaAAQcKt0yEQc281.png"/>
+
+<Image alt="image (10).png" src="https://s0.lgstatic.com/i/image/M00/04/0E/Ciqc1F6zrCKAVemaAAQcKt0yEQc281.png"/> 
+
 
 CaptureTouchView 是一个自定义的 View，其源码如下：
 
-<Image alt="image (11).png" src="https://s0.lgstatic.com/i/image/M00/04/0E/CgqCHl6zrCqAU5jRAAHMKJUl2y4204.png"/>
+
+<Image alt="image (11).png" src="https://s0.lgstatic.com/i/image/M00/04/0E/CgqCHl6zrCqAU5jRAAHMKJUl2y4204.png"/> 
+
 
 CaptureTouchView 的 onTouchEvent 返回 true，表示它会将接收到的 touch 事件进行捕获消费。
 
 上述代码执行后，当手指点击屏幕时 DOWN 事件会被传递给 CaptureTouchView，手指滑动屏幕将 ScrollView 上下滚动，刚开始 MOVE 事件还是由 CaptureTouchView 来消费处理，但是当 ScrollView 开始滚动时，CaptureTouchView 会接收一个 CANCEL 事件，并不再接收后续的 touch 事件。具体打印 log 如下：
 
-<Image alt="image (12).png" src="https://s0.lgstatic.com/i/image/M00/04/0E/CgqCHl6zrDGAW0S9AAKvCBLfnyM142.png"/>
+
+<Image alt="image (12).png" src="https://s0.lgstatic.com/i/image/M00/04/0E/CgqCHl6zrDGAW0S9AAKvCBLfnyM142.png"/> 
+
 > 因此，我们平时自定义View时，尤其是有可能被ScrollView或者ViewPager嵌套使用的控件，不要遗漏对CANCEL事件的处理，否则有可能引起UI显示异常。
 
 ### 总结
@@ -170,4 +198,5 @@ CaptureTouchView 的 onTouchEvent 返回 true，表示它会将接收到的 touc
 * mFirstTouchTarget 的作用：记录捕获消费 touch 事件的 View，是一个链表结构；
 
 * CANCEL 事件的触发场景：当父视图先不拦截，然后在 MOVE 事件中重新拦截，此时子 View 会接收到一个 CANCEL 事件。
+
 

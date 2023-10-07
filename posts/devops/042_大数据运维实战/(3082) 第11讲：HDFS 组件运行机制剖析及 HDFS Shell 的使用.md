@@ -1,3 +1,5 @@
+# 第11讲：HDFS组件运行机制剖析及HDFSShell的使用
+
 ### **HDFS 的基本架构**
 
 Hadoop 中的分布式文件系统 HDFS 为大数据平台提供了统一的存储，它主要由三部分构成，分别是 NameNode、DataNode 和 SecondaryNameNode。如果是 HA 架构，那么还有 StandbyNameNode 和 JournalNode。
@@ -10,7 +12,9 @@ Hadoop 中的分布式文件系统 HDFS 为大数据平台提供了统一的存�
 
 下图是 HDFS 分布式文件系统图：
 
-<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/16/18/CgqCHl7U4HOAXZEFAAJszKiTB6o267.png"/>
+
+<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/16/18/CgqCHl7U4HOAXZEFAAJszKiTB6o267.png"/> 
+
 
 由图可知，NameNode、DataNode 和 SecondaryNameNode 构成了分布式文件系统 HDFS。其中 SecondaryNameNode 是可选服务，如果通过 StandbyNameNode 构建 HA 架构的话，那么可以不需要 SecondaryNameNode。
 
@@ -50,7 +54,9 @@ Edit Log 文件记录了对文件的创建、删除、重命名等操作日志�
 
 SecondaryNameNode 实现有两个功能，即对 NameNode 元数据的备份以及将 Edit Log 合并到 Fsimage 中，这种实现机制比较简单，下面通过一张图来了解这种实现机制，如下图所示：
 
-<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/16/0D/Ciqc1F7U4FSAZPkNAAG0gIoCEHE433.png"/>
+
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/16/0D/Ciqc1F7U4FSAZPkNAAG0gIoCEHE433.png"/> 
+
 
 由图可知，SecondaryNameNode 实现对元数据备份，主要分为 5 个步骤：
 
@@ -68,7 +74,9 @@ SecondaryNameNode 总是周期性的去检查是否符合触发 checkpoint 的�
 
 元数据在 NameNode 中有 3 种存储形式，即内存、Edit Log 文件和 Fsimage 文件。最完整且最新的元数据一定是内存中的这一部分，理解这一点非常重要。那么元数据的目录结构是什么样的呢，打开元数据目录（我这里是 /data1/hadoop/dfs/name/current），可以看到文件或目录，如下图所示：
 
-<Image alt="image3.png" src="https://s0.lgstatic.com/i/image/M00/15/D2/CgqCHl7UqTmAazCJAACxChYVipc532.png"/>
+
+<Image alt="image3.png" src="https://s0.lgstatic.com/i/image/M00/15/D2/CgqCHl7UqTmAazCJAACxChYVipc532.png"/> 
+
 
 由图可知，有大量以 edits_ 开头的文件，这些就是 Edit Log 文件。记录在 Edit Log 之中的每一个操作又称为一个事务，每个事务都有一个整数形式的事务 id 作为编号。这些 edits_ 开头的文件名类似 edits_${start_txid}-${end_txid}，并且多个 Edit Log 之间通过 txid 首尾相连。
 
@@ -103,7 +111,9 @@ JournalNode 只在 HDFS 的 HA 模式下出现，其作为一个守护进程，�
 
 HDFS 文件名也有对应的格式，随便登录一个 DataNode 节点，找到数据块存储路径，如下图所示：
 
-<Image alt="image4.png" src="https://s0.lgstatic.com/i/image/M00/15/C7/Ciqc1F7UqUOAMiyxAAB6XluvVzs412.png"/>
+
+<Image alt="image4.png" src="https://s0.lgstatic.com/i/image/M00/15/C7/Ciqc1F7UqUOAMiyxAAB6XluvVzs412.png"/> 
+
 
 可以看出，HDFS 数据块文件名组成格式为：
 
@@ -114,7 +124,9 @@ HDFS 文件名也有对应的格式，随便登录一个 DataNode 节点，找�
 
 介绍了 HDFS 的数据块结构后，下面介绍下 HDFS 是如何读取数据的。下图是 HDFS 读取数据的一个流程图：
 
-<Image alt="4.png" src="https://s0.lgstatic.com/i/image/M00/16/19/CgqCHl7U4LaAYHtjAAHdezX8IO8904.png"/>
+
+<Image alt="4.png" src="https://s0.lgstatic.com/i/image/M00/16/19/CgqCHl7U4LaAYHtjAAHdezX8IO8904.png"/> 
+
 
 从上图可以看出，HDFS 读取文件基本分为 5 个步骤，每个步骤含义如下：
 
@@ -126,7 +138,9 @@ HDFS 文件名也有对应的格式，随便登录一个 DataNode 节点，找�
 
 可以看出，HDFS 读取文件的流程非常简单。接着，再来看看 HDFS 是如何写入数据的，这个过程稍微复杂，如下图所示：
 
-<Image alt="3.png" src="https://s0.lgstatic.com/i/image/M00/16/18/CgqCHl7U4IWAbSbsAAIQMoyHI-s874.png"/>
+
+<Image alt="3.png" src="https://s0.lgstatic.com/i/image/M00/16/18/CgqCHl7U4IWAbSbsAAIQMoyHI-s874.png"/> 
+
 
 从上图可以看出，HDFS 写入文件基本分为 7 个步骤，每个步骤含义如下所示。
 
@@ -148,7 +162,7 @@ HDFS 上的 Shell 操作命令跟 Linux 下的 Shell 命令基本类似，相关
 
 要查看 HDFS 上的文件，可以通过如下几个命令实现：
 
-```html
+```sql
 [root@yarnserver ~]# hadoop fs -ls /
 [root@yarnserver ~]# hadoop fs -ls /user
 [root@yarnserver ~]# hadoop fs -cat  /logs/demo10.txt 
@@ -160,7 +174,7 @@ HDFS 上的 Shell 操作命令跟 Linux 下的 Shell 命令基本类似，相关
 
 要添加文件到 HDFS 上，可以通过如下几个命令实现：
 
-```html
+```sql
 [root@yarnserver ~]# hadoop fs -touch   /logs/demo101.txt
 [root@yarnserver ~]# hadoop fs -mkdir   /logs/demo 
 [root@yarnserver ~]# hadoop fs -put /local/demo10.tar.gz   /logs/demo #这里的 /local/demo10.tar.gz 是本地路径
@@ -174,7 +188,7 @@ hadoop fs -cp /logs/demo/demo10.tar.gz /tmp #这个命令中两个路径均为 H
 
 移动文件可以实现本地磁盘文件移动到 HDFS，HDFS 上各个路径之间的移动、文件改名等操作。看下面两个例子：
 
-```html
+```sql
 [root@yarnserver ~]# hadoop fs -mv /logs/demo/demo10.tar.gz /tmp #这个命令中两个路径均为 HDFS 上路径
 [root@yarnserver ~]# hadoop fs -moveFromLocal /tmp/spark-2.4.5-bin-hadoop2.7.tgz  /logs/demo/ #这个命令中 /tmp/spark-2.4.5-bin-hadoop2.7.tgz 路径为本地路径
 ```
@@ -183,7 +197,7 @@ hadoop fs -cp /logs/demo/demo10.tar.gz /tmp #这个命令中两个路径均为 H
 
 无论是文件或者目录，都可以通过如下命令进行删除：
 
-```html
+```sql
 [root@yarnserver ~]# hadoop fs -rm -r  /logs/demo/demo10.tar.gz
 ```
 
@@ -191,13 +205,13 @@ hadoop fs -cp /logs/demo/demo10.tar.gz /tmp #这个命令中两个路径均为 H
 
 如果你确定某个文件可以删除，不需要进入回收站的话，可以执行如下命令：
 
-```html
+```sql
 [root@yarnserver ~]# hadoop fs -rm -r -skipTrash /tmp/hive_test
 ```
 
 要清空回收站，可执行如下命令：
 
-```html
+```sql
 [root@yarnserver ~]# hadoop fs -expunge
 ```
 
@@ -205,7 +219,7 @@ hadoop fs -cp /logs/demo/demo10.tar.gz /tmp #这个命令中两个路径均为 H
 
 HDFS 上的文件不能修改，但可以在文件最后追加内容，可通过如下命令实现：
 
-```html
+```sql
 [root@yarnserver ~]# hadoop fs -appendToFile  aa1.log /logs/aa.log
 ```
 
@@ -215,7 +229,7 @@ HDFS 上的文件不能修改，但可以在文件最后追加内容，可通过
 
 对文件或目录进行授权，主要使用了 Linux 上的两个命令 chown 和 chmod。HDFS 上授权文件的用法如下：
 
-```html
+```sql
 [root@yarnserver ~]# hadoop fs -chown -R hadoop:hadoop /logs/aa.log
 [root@yarnserver ~]# hadoop fs -chmod 744 /logs/aa.log
 ```
@@ -225,3 +239,4 @@ HDFS 上的文件不能修改，但可以在文件最后追加内容，可通过
 ### 总结
 
 本课时主要讲解了 HDFS 的基本架构，以及 Namenode 和 SecondaryNameNode 的工作机制、Namenode 下元数据的管理，以及 HDFS 读、写数据的流程。理解这些原理和架构对于我们排查 Hadoop 集群故障和调优有很大帮助。
+

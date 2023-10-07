@@ -1,3 +1,5 @@
+# 第24讲：jvm-receiver插件探秘，不仅有Trace还可以有监控
+
 在第 11 课时中，我介绍了 Agent 中 JVMService 的核心原理，它会定期通过 JMX 获取 JVM 监控信息，然后通过 JVMMetricReportService 这个 gRPC 接口上报到后端 OAP 集群。
 
 本节课我将深入分析 SkyWalking OAP 对 JVM 监控数据的处理。
@@ -8,7 +10,9 @@
 
 首先，会通过 TimeBucket 工具类整理对齐每个 JVMMetric 所在的时间窗口，TimeBucket 会根据指定的 DownSampling 精度生成不同格式的时间窗口，如下图所示：
 
-<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/18/79/Ciqc1F7YtnGAMAYGAAJwEbFWmzY337.png"/>
+
+<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/18/79/Ciqc1F7YtnGAMAYGAAJwEbFWmzY337.png"/> 
+
 
 JVMMetricReportServiceHandler 中默认使用的 DownSampling 值为 Minute。
 
@@ -37,7 +41,9 @@ void sendMetric(int serviceInstanceId, long minuteTimeBucket,
 
 同理，JVMMetric 中关于 CPU、Memory、MemoryPool 的三类监控数据分别填充到了 ServiceInstanceJVMCPU、ServiceInstanceJVMMemory、ServiceInstanceJVMMemoryPool 对象中，继承关系如下图所示：
 
-<Image alt="image (6).png" src="https://s0.lgstatic.com/i/image/M00/18/79/Ciqc1F7YtoOABepsAAEMFZwAVUo208.png"/>
+
+<Image alt="image (6).png" src="https://s0.lgstatic.com/i/image/M00/18/79/Ciqc1F7YtoOABepsAAEMFZwAVUo208.png"/> 
+
 
 ### Dispatcher \& DispatcherManager
 
@@ -64,7 +70,9 @@ public void dispatch(ServiceInstanceJVMGC source) {
 
 这里的 doInstanceJvm\*() 方法是将 ServiceInstanceJVMGC 转换成相应的 Metrics ，我们可以看到，在 ServiceInstanceJVMGC 中包含了 GCPhrase、GC 时间、 GC 次数三个维度的数据，而转换后的一个 Metrics 子类型只表示一个维度的监控数据。这里涉及的 Metrics 子类如下图所示：
 
-<Image alt="image (7).png" src="https://s0.lgstatic.com/i/image/M00/18/79/Ciqc1F7Ytp6AYxkTAAE2IyTdv1A381.png"/>
+
+<Image alt="image (7).png" src="https://s0.lgstatic.com/i/image/M00/18/79/Ciqc1F7Ytp6AYxkTAAE2IyTdv1A381.png"/> 
+
 
 在前面的"SkyWalking OAP 存储体系剖析"课时中提到了 Metrics 抽象类，你可以回顾一下，Metrics 抽象类是所有监控指标的顶级抽象，其中定义了一个 TimeBucket 字段（long 类型），用于记录该监控数据所在的分钟级窗口。
 
@@ -99,7 +107,9 @@ SkyWalking OAP 中很多其他类型的监控数据，例如：
 
 最后，依旧以 InstanceJvmOldGcTimeMetrics 为例，看看 Metrics 实现类中定义的 ElasticSearch 索引名称以及各个字段对应的 Field 名称：
 
-<Image alt="image (8).png" src="https://s0.lgstatic.com/i/image/M00/18/85/CgqCHl7YtreATj7GAARBmbdpdkw991.png"/>
+
+<Image alt="image (8).png" src="https://s0.lgstatic.com/i/image/M00/18/85/CgqCHl7YtreATj7GAARBmbdpdkw991.png"/> 
+
 
 回到 GC 监控数据的处理流程中，在 doInstanceJvmOldGcTime() 方法完成监控数据粒度的细分之后，会将细分后的 InstanceJvmOldGcTimeMetrics 对象交给 MetricsStreamProcessor 处理。
 
@@ -133,7 +143,9 @@ private Map<Class<? extends Metrics>, MetricsAggregateWorker> entryWorkers = new
 
 MetricsStreamProcessor 初始化 entryWorkers 集合的核心逻辑也是在 create() 方法中，下图展示了 InstanceJvmOldGcTimeMetrics 对应的 Worker 链结构：
 
-<Image alt="image (9).png" src="https://s0.lgstatic.com/i/image/M00/18/7A/Ciqc1F7Yts6AUU4bAABZiou-upc728.png"/>
+
+<Image alt="image (9).png" src="https://s0.lgstatic.com/i/image/M00/18/7A/Ciqc1F7Yts6AUU4bAABZiou-upc728.png"/> 
+
 
 具体代码如下：
 
@@ -181,7 +193,9 @@ private SWCollection<DATA> windowDataB;
 
 SWCollection 接口定义了缓冲队列的基本行为，下面是其继承关系图：
 
-<Image alt="image (10).png" src="https://s0.lgstatic.com/i/image/M00/18/7A/Ciqc1F7YtumAfQZeAAFcY5KP8TM078.png"/>
+
+<Image alt="image (10).png" src="https://s0.lgstatic.com/i/image/M00/18/7A/Ciqc1F7YtumAfQZeAAFcY5KP8TM078.png"/> 
+
 
 这里重点分析 MergeDataCollection 实现类，它底层是通过一个 HashMap 实现的，一对 KV 中的 Key 和 Value 指向的是同一个 StreamData 对象。MergeDataCollection 暴露了 Map 的基本方法，例如：put、get、containKey 等方法。另外，它还封装了两个 volatile boolean 类型的字段 ------ reading、writing，用于标记该缓冲队列的状态，也提供了这两个状态字段相应的 getter/setter 方法。简单说明一下这两个状态字段的含义：
 
@@ -241,7 +255,9 @@ LimitedSizeDataCache 与 MergeDataCache 的实现有些类似，但功能上有�
 
 回到 InstanceJvmOldGcTimeMetrics 的处理流程上继续分析，Worker 链中的第一个是 MetricsAggregateWorker，其功能就是进行简单的聚合，模型如下图所示：
 
-<Image alt="image (11).png" src="https://s0.lgstatic.com/i/image/M00/18/86/CgqCHl7YtwqAOhwEAAGQdRPvCuM193.png"/>
+
+<Image alt="image (11).png" src="https://s0.lgstatic.com/i/image/M00/18/86/CgqCHl7YtwqAOhwEAAGQdRPvCuM193.png"/> 
+
 
 MetricsAggregateWorker 在收到 Metrics 数据的时候，会先写到内部的 DataCarrier 中缓存，然后由 Consumer 线程（都属于名为 "METRICS_L1_AGGREGATION" 的 BulkConsumePool）消费并进行聚合，并将聚合结果写入到 MergeDataCache 中的 current 队列暂存。
 
@@ -325,7 +341,9 @@ public void in(Metrics metrics) {
 
 MetricsPersistentWorker 主要负责 Metrics 数据的持久化，其核心结构如下图所示：
 
-<Image alt="image (12).png" src="https://s0.lgstatic.com/i/image/M00/18/7A/Ciqc1F7YtziAPKFvAAFUA42eQDc822.png"/>
+
+<Image alt="image (12).png" src="https://s0.lgstatic.com/i/image/M00/18/7A/Ciqc1F7YtziAPKFvAAFUA42eQDc822.png"/> 
+
 
 与前文介绍的 MetricsAggregateWorker 处理流程类似，MetricsPersistentWorker 在接收到 Metrics 数据的时候先将其暂存到 DataCarrier 中，然后由后续 Consumer 线程消费。
 
@@ -333,7 +351,9 @@ MetricsPersistentWorker 主要负责 Metrics 数据的持久化，其核心结�
 
 Consumer 线程实际上调用的是 PersistenceWorker.onWork() 方法，PersistenceWorker是 MetricsPersistentWorker 的父类，继承关系如下图所示：
 
-<Image alt="image (13).png" src="https://s0.lgstatic.com/i/image/M00/18/86/CgqCHl7Yt0SAW_XHAAGAflXWY6Q440.png"/>
+
+<Image alt="image (13).png" src="https://s0.lgstatic.com/i/image/M00/18/86/CgqCHl7Yt0SAW_XHAAGAflXWY6Q440.png"/> 
+
 
 RecordPersistenceWorker 等子类在后面会详细分析。
 
@@ -433,7 +453,9 @@ public void batchPersistence(List<?> batchCollection) {
 
 到这里，SkyWalking OAP 处理 Metrics 监控数据的整个流程就分析完了。下面通过一张图总结整个处理流程：
 
-<Image alt="image (14).png" src="https://s0.lgstatic.com/i/image/M00/18/7B/Ciqc1F7Yt2OAJnGpAABb_jqSXp0511.png"/>
+
+<Image alt="image (14).png" src="https://s0.lgstatic.com/i/image/M00/18/7B/Ciqc1F7Yt2OAJnGpAABb_jqSXp0511.png"/> 
+
 
 JVMMetricReportServiceHandler 在收到 JVM Metrics 请求时，由 DispatcherManager 对 JVMMetric 进行分类（ CPU、Memory、MemoryPool、GC 四类）并转换成相应的 Source 对象，接下来根据 Source 类型查找相应的 SourceDispatcher 集合进行处理。
 
@@ -446,3 +468,4 @@ MetricsRemoteWorker 通过底层的 RemoteSenderService 将 Metrics 数据送到
 MetricsTransWorker 会将 Metrics 数据复制多份，转发到各个 DownSampling 对应的 MetricsPersistentWorker 中实现持久化。
 
 MetricsPersistentWorker 会先将数据缓存在 MergeDataCache 中，当缓存数据量到达一定阈值，执行批量写入（或更新） ElasticSearch 操作，批量操作是通过 High Level Client 中的 BulkProcessor 实现的。
+

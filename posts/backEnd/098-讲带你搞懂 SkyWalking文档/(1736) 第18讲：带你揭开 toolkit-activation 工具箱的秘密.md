@@ -1,3 +1,5 @@
+# 第18讲：带你揭开toolkit-activation工具箱的秘密
+
 在前面两课时中，我们详细介绍了 tomcat-7.x-8.x-plugin 插件以及 dubbo-2.7.x-plugin 插件的核心实现。但是在有些场景中，不仅需要通过插件收集开源组件的 Trace 数据，还需要收集某些关键业务逻辑的 Trace 数据。我们可以通过开发新插件的方式来实现该需求，但是成本是非常高的，尤其是当业务代码发生重构时（例如，方法名或是类名改变了），插件也需要随之修改、发布 jar 包，非常麻烦。
 
 ### toolkit-trace 插件
@@ -42,17 +44,23 @@ public class HelloWorldController {
 
 接下来访问 "localhost:8000/hello/xxx" 这个地址等待片刻之后，即可在 SkyWalking Rocketbot 界面中看到相应的 Span 数据，如下图所示：
 
-<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/04/26/CgqCHl6zvL-AJxsiAALX11rEFcE040.png"/>
+
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/04/26/CgqCHl6zvL-AJxsiAALX11rEFcE040.png"/> 
+
 
 点击该 Span，可以看到具体的 Tag 信息以及 Log 信息，如下图所示：
 
-<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/04/26/Ciqc1F6zvMeAIijwAAG4HeGpP1w020.png"/>
+
+<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/04/26/Ciqc1F6zvMeAIijwAAG4HeGpP1w020.png"/> 
+
 
 #### 深入工具类原理
 
 了解了 @Trace 注解的使用之后，我们来分析其底层实现。首先我们跳转到 SkyWalking 项目的 apm-toolkit-trace 模块，如下图所示：
 
-<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/04/26/CgqCHl6zvNCANNntAAF2iT3mNig327.png"/>
+
+<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/04/26/CgqCHl6zvNCANNntAAF2iT3mNig327.png"/> 
+
 
 该模块就有前面使用到的 @Trace 注解以及 ActiveSpan、TraceContext 工具类，打开这两个工具类会发现，全部是空实现，那添加 Tag、获取 Trace ID 等操作是如何完成的呢？我在前面介绍 SkyWalking 源码各个模块功能时提到，apm-application-toolkit 模块类似于暴露 API 定义，对应的处理逻辑在 apm-sniffer/apm-toolkit-activation 模块中实现。
 
@@ -65,7 +73,9 @@ public class HelloWorldController {
 
 这四个 ClassEnhancePluginDefine 实现类的继承关系如下图所示：
 
-<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/04/26/CgqCHl6zvNmAEeMhAAHH-Xli_I8395.png"/>
+
+<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/04/26/CgqCHl6zvNmAEeMhAAHH-Xli_I8395.png"/> 
+
 
 TraceAnnotationActivation 会拦截所有被 @Trace 注解标记的方法所在的类，在 TraceAnnotationActivation 覆盖的 enhanceClass() 方法中可以看到相关实现：
 
@@ -83,7 +93,9 @@ TraceContextActivation 拦截的是 TraceContext.traceId() 这个 static 静态�
 
 ActiveSpanActivation 会拦截 ActiveSpan 类中 static 静态方法并交给不同的 Interceptor 进行增强，具体的 static 静态方法与 Interceptor 之间的映射关系如下：
 
-<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/04/26/CgqCHl6zvOSAJMFjAAIONP7amFM561.png"/>
+
+<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/04/26/CgqCHl6zvOSAJMFjAAIONP7amFM561.png"/> 
+
 
 这里以 tag() 方法为例，在 ActiveSpanTagInterceptor 的 beforeMethod() 方法中，会获取 activeSpanStack 栈顶的 Span 对象，并调用其 tag() 方法记录 Tag 信息。其他的 ActiveSpan\*Interceptor 会通过 Span.log() 方法记录 Log，这里不再展开。
 
@@ -116,11 +128,15 @@ public class HelloWorldController {
 
 此时再访问 "<http://localhost:8000/hello/xxx>" 地址，稍等片刻之后，会在 SkyWalking Rocketbot 上看到下图这种分叉的 Trace，其中下面那条 Trace 分支就是通过跨线程传播过去的：
 
-<Image alt="跨线程传播.png" src="https://s0.lgstatic.com/i/image/M00/04/26/Ciqc1F6zvO-AEq9VAAFo-ZWXkGM186.png"/>
+
+<Image alt="跨线程传播.png" src="https://s0.lgstatic.com/i/image/M00/04/26/Ciqc1F6zvO-AEq9VAAFo-ZWXkGM186.png"/> 
+
 
 除了通过 RunnableWrapper 包装 Runnable 之外，我们可以通过 CallableWrapper 包装 Callable 实现 Trace 的跨线程传播。下图展示了 Trace 信息跨线程传播的核心原理：
 
-<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/04/26/Ciqc1F6zvPqAKHZ1AAFedhJrbC8809.png"/>
+
+<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/04/26/Ciqc1F6zvPqAKHZ1AAFedhJrbC8809.png"/> 
+
 
 下面来看 RunnableWrapper 和 CallableWrapper 的实现原理。toolkit-trace-activation 中的 CallableOrRunnableActivation 会拦截被 @TraceCrossThread 注解标记的类（RunnableWrapper 和 CallableWrapper 都标注了 @TraceCrossThread 注解）。
 
@@ -176,7 +192,9 @@ application-toolkit 工具箱目前支持 logback、log4j-1.x、log4j-2.x 三个
 
 接下来在 resource 目录下添加 logback.xml 配置文件，指定日志的输出格式：
 
-<Image alt="image (6).png" src="https://s0.lgstatic.com/i/image/M00/04/26/CgqCHl6zvQeAdq60AAJd-oywE_o373.png"/>
+
+<Image alt="image (6).png" src="https://s0.lgstatic.com/i/image/M00/04/26/CgqCHl6zvQeAdq60AAJd-oywE_o373.png"/> 
+
 
 该配置文件有两个地方需要注意，一个是使用的 layout 为 TraceIdPatternLogbackLayout，该类位于 apm-toolkit-logback-1.x.jar 这个依赖包中，另一个在 pattern 配置中添加了 \[%tid\] 占位符。
 
@@ -195,7 +213,9 @@ public String hello(@PathVariable("words") String words)
 
 最后重启 demo-webapp 项目，访问 "localhost:8000/hello/xxx" 这个地址，就可以在控制台看到如下输出：
 
-<Image alt="image (7).png" src="https://s0.lgstatic.com/i/image/M00/04/26/Ciqc1F6zvRKAMCK4AAHOkonOBic764.png"/>
+
+<Image alt="image (7).png" src="https://s0.lgstatic.com/i/image/M00/04/26/Ciqc1F6zvRKAMCK4AAHOkonOBic764.png"/> 
+
 
 #### Logback 核心概念
 
@@ -207,7 +227,9 @@ Logback 日志框架分为三个模块：logback-core、logback-classic 和 logb
 
 Logback 日志框架中有三个核心类：Logger、Appender 和 Layout。Logger 主要用来接收要输出的日志内容。每个 Logger 实例都有名字，而 Logger 的继承关系与其名称的层级关系保持一致。例如，现在有 3 个 Logger 实例 L1、L2、L3，L1 的名字为 "com"，L2 的名字为 "com.xxx"，L3 的名字为 "com.xxx.Main"，那么三者的继承关系如下图所示：
 
-<Image alt="image (8).png" src="https://s0.lgstatic.com/i/image/M00/04/26/Ciqc1F6zvRqAVReiAAEEjIqgllA872.png"/>
+
+<Image alt="image (8).png" src="https://s0.lgstatic.com/i/image/M00/04/26/Ciqc1F6zvRqAVReiAAEEjIqgllA872.png"/> 
+
 
 其中，名为 "ROOT" 的 Logger 实例是顶层 Logger，它是所有其他 Logger 实例的祖先。
 
@@ -238,7 +260,9 @@ Appender 是对日志输出目的地的抽象，在示例中使用的 ConsoleApp
 
 最常用的 Encoder 实现是 PatternLayoutEncoder，继承关系如下图所示。
 
-<Image alt="image (9).png" src="https://s0.lgstatic.com/i/image/M00/04/26/CgqCHl6zvSWAA-ZRAAB1DP_LB58112.png"/>
+
+<Image alt="image (9).png" src="https://s0.lgstatic.com/i/image/M00/04/26/CgqCHl6zvSWAA-ZRAAB1DP_LB58112.png"/> 
+
 
 从 LayoutWrapperEncoder 中 encode() 方法的实现就可以看出，上述 Encoder 底层还是依赖 Layout 确定日志的格式：
 
@@ -324,3 +348,4 @@ public Object afterMethod(EnhancedInstance objInst, Method method,
 ### 总结
 
 本课时重点介绍了 SkyWalking 中 application-toolkit 工具箱的核心原理。首先介绍了 toolkit-trace 模块中 @Trace 注解、 TraceContext 以及 ActiveSpan 工具类的使用方式，然后深入介绍了它们的核心实现。接下来，通过示例介绍了 SkyWalking 与 Logback 日志框架集成方式，深入分析了 Logback 日志框架的核心概念，最后深入介绍了 toolkit-trace-activation 模块的核心原理。
+

@@ -1,3 +1,5 @@
+# 第23讲：Selenium框架安装与使用
+
 <br />
 
 本课时我们开始进入对 Selenium 的学习，首先我们先来介绍 Selenium 的架构以及用途是什么。
@@ -5,7 +7,9 @@
 Selenium 架构
 -----------
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/51/Cgq2xl5XdQqASMVjAAJMtC1ch8w140.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/51/Cgq2xl5XdQqASMVjAAJMtC1ch8w140.png"/> 
+
 
 <br />
 
@@ -13,7 +17,9 @@ Selenium 架构
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/51/CgpOIF5XdQqABom0AAWpUWFCL9U037.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/51/CgpOIF5XdQqABom0AAWpUWFCL9U037.png"/> 
+
 
 <br />
 
@@ -21,7 +27,9 @@ Selenium 架构
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/51/Cgq2xl5XdQuAJAjuAAJjfIjEy-g112.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/51/Cgq2xl5XdQuAJAjuAAJjfIjEy-g112.png"/> 
+
 
 <br />
 
@@ -69,7 +77,9 @@ which chromedriver
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/51/CgpOIF5XdQuAD2BtAAEl9-suV4c986.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/51/CgpOIF5XdQuAD2BtAAEl9-suV4c986.png"/> 
+
 
 <br />
 
@@ -86,7 +96,9 @@ Selenium IDE 用例录制
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/51/Cgq2xl5XdQuAVz6sAAKblXP8tyI978.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/51/Cgq2xl5XdQuAVz6sAAKblXP8tyI978.png"/> 
+
 
 <br />
 
@@ -94,7 +106,9 @@ Selenium IDE 用例录制
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/51/CgpOIF5XdQyAf7PQAACQCI3a-kQ436.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/51/CgpOIF5XdQyAf7PQAACQCI3a-kQ436.png"/> 
+
 
 <br />
 
@@ -102,7 +116,9 @@ Selenium IDE 用例录制
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/51/Cgq2xl5XdQyAC8k-AACZDEmccGQ088.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/51/Cgq2xl5XdQyAC8k-AACZDEmccGQ088.png"/> 
+
 
 <br />
 
@@ -110,7 +126,9 @@ Selenium IDE 用例录制
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/51/CgpOIF5XdQyAKJlnAAV6yXtz99U647.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/51/CgpOIF5XdQyAKJlnAAV6yXtz99U647.png"/> 
+
 
 <br />
 
@@ -118,7 +136,9 @@ Selenium IDE 用例录制
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/51/Cgq2xl5XdQ2AdivkAAJA1ScCkT0000.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/51/Cgq2xl5XdQ2AdivkAAJA1ScCkT0000.png"/> 
+
 
 <br />
 
@@ -126,7 +146,9 @@ Selenium IDE 用例录制
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/51/CgpOIF5XdQ2AGCo7AAD6eAHDv5E107.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/51/CgpOIF5XdQ2AGCo7AAD6eAHDv5E107.png"/> 
+
 
 <br />
 
@@ -134,7 +156,9 @@ Selenium IDE 用例录制
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/51/Cgq2xl5XdQ2AELvoAAB-QkG4QpI596.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/51/Cgq2xl5XdQ2AELvoAAB-QkG4QpI596.png"/> 
+
 
 <br />
 
@@ -142,7 +166,9 @@ Selenium IDE 用例录制
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/51/CgpOIF5XdQ6AVm4-AACESAhC6pk075.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/51/CgpOIF5XdQ6AVm4-AACESAhC6pk075.png"/> 
+
 
 <br />
 
@@ -150,7 +176,9 @@ Selenium IDE 用例录制
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/51/Cgq2xl5XdQ6AbisiAAPTPW9S2xw151.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/51/Cgq2xl5XdQ6AbisiAAPTPW9S2xw151.png"/> 
+
 
 <br />
 
@@ -184,7 +212,9 @@ Selenium IDE 用例录制
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/51/CgpOIF5XdQ6AKCaIAAOYa3sFEvM410.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/6B/51/CgpOIF5XdQ6AKCaIAAOYa3sFEvM410.png"/> 
+
 
 <br />
 
@@ -203,4 +233,5 @@ Selenium IDE 用例录制
 但随着测试用例的增多，断言的增加，或是你的公司需要的测试越来越复杂，这个时候 Selenium IDE 可能就无法满足你的需求了，我们就需要使用 Page Object模式来解决问题了，关于 Page Object 的使用我会在后面的课时进行详细的讲解。
 
 <br />
+
 

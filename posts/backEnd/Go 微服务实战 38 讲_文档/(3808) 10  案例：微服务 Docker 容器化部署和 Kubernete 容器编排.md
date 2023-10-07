@@ -1,3 +1,5 @@
+# 10案例：微服务Docker容器化部署和Kubernete容器编排
+
 今天我们主要来介绍微服务 Docker 容器化部署和 Kubernetes 容器编排的案例。
 
 微服务架构"分而治之"的手段将大型系统按业务分割为多个互相协作的微服务，每个微服务关注于自身业务职责，可独立开发、部署和维护，从而更好地应对频繁的需求变更和迭代。但是数量众多的微服务实例给运维带来了巨大的挑战，如果没有好的办法快速部署和启动微服务，那么微服务架构带来的好处将所剩无几。而**容器化** 和**容器编排**的兴起正好填补了这个缺点。
@@ -141,7 +143,9 @@ docker run -itd --name user --network host user
 
 Kubernetes 主要有由两类节点组成：Master 节点主要负责管理和控制，是 Kubernetes 的调度中心；Node 节点受 Master 节点管理，属于工作节点，负责运行具体的容器应用。整体结构图如下所示：
 
-<Image alt="10_Kubernetes_集群架构图.png" src="https://s0.lgstatic.com/i/image/M00/3B/6F/CgqCHl8j-j-AL1E1AADTHvJdwEQ723.png"/>  
+
+<Image alt="10_Kubernetes_集群架构图.png" src="https://s0.lgstatic.com/i/image/M00/3B/6F/CgqCHl8j-j-AL1E1AADTHvJdwEQ723.png"/> 
+  
 Kubernetes 集群架构图
 
 Master 节点主要由以下几部分组成：
@@ -293,3 +297,4 @@ kubectl set image deployment/user-service redis=redis:6.0
 在本课时中，我们首先介绍了 Docker 和通过 Docker 部署了 user 服务以及它的依赖服务，接着介绍了 Kubernetes 和使用 Kubernetes 将 user 服务以及它的依赖服务的容器打包到同一个 Pod 中进行容器编排。希望通过本课时的学习，能够加深你对容器运行和编排的认识，我们案例应用的微服务也会采用容器化的方式进行部署和运维，简化微服务部署和运维的工作成本。
 
 最后，对于 Docker 和 Kubernetes，你有什么独到的见解？欢迎在评论区与我分享。
+

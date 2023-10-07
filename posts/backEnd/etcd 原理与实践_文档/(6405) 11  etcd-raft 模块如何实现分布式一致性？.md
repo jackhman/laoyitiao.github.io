@@ -1,3 +1,5 @@
+# 11etcd-raft模块如何实现分布式一致性？
+
 上一讲我们介绍了etcd 读写操作的底层实现，但关于 etcd 集群如何实现分布式数据一致性并没有详细介绍。在分布式环境中，常用**数据复制**来避免单点故障，实现多副本，提高服务的高可用性以及系统的吞吐量。
 
 etcd 集群中的多个节点不可避免地会出现相互之间数据不一致的情况。但不管是同步复制、异步复制还是半同步复制，都会存在可用性或者一致性的问题。我们一般会使用**共识算法**来解决多个节点数据一致性的问题，常见的共识算法有 Paxos和Raft。ZooKeeper 使用的是 ZAB 协议，etcd 使用的共识算法就是Raft。
@@ -66,7 +68,9 @@ rn *RawNode
 
 我们接着看 etcd raft 状态转换。etcd-raft StateMachine 封装在 raft机构体中，其状态转换如下图：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M01/0F/10/Cgp9HWA9EIqAVw9QAABJGq2-dl4448.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M01/0F/10/Cgp9HWA9EIqAVw9QAABJGq2-dl4448.png"/> 
+  
 etcd raft 状态转换示意图
 
 raft 状态转换的接口都在 raft.go 中，其定义如下：
@@ -134,7 +138,9 @@ Message结构体相关的数据类型为 MessageType，MessageType 有 19 种。
 
 我将其中常用的协议（即不同的消息类型）的用途总结成如下的表格：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M01/0F/10/Cgp9HWA9EJ2ABd9rAAO37xDchBs024.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M01/0F/10/Cgp9HWA9EJ2ABd9rAAO37xDchBs024.png"/> 
+
 
 上表列出了消息的类型对应的功能、消息接收者的节点 ID 和消息发送者的节点 ID。在收到消息之后，根据消息类型检索此表，可以帮助我们理解 raft 算法的操作。
 
@@ -182,7 +188,9 @@ raft 算法的第一步是**选举出 Leader**，即使在 Leader 出现故障�
 
 我们回顾一下前面讲的 etcd 读写请求的处理流程。并结合下图说明日志复制的流程：
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M01/0F/0D/CioPOWA9ELSAZR1_AACDc7CHoj4319.png"/>  
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M01/0F/0D/CioPOWA9ELSAZR1_AACDc7CHoj4319.png"/> 
+  
 日志复制的流程图 ①
 
 * 收到客户端请求之后，etcd Server 的 KVServer 模块会向 raft 模块提交一个类型为 MsgProp 的提案消息。
@@ -195,7 +203,9 @@ raft 算法的第一步是**选举出 Leader**，即使在 Leader 出现故障�
 
 接下来我们看看 Leader 如何将日志数据复制到 Follower 节点。
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M00/0F/0E/CioPOWA9ENOAQLFKAAB3Zn9Qj4Q619.png"/>  
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M00/0F/0E/CioPOWA9ENOAQLFKAAB3Zn9Qj4Q619.png"/> 
+  
 日志复制的流程图 ②
 
 * Follower 节点收到 AppendEntries 请求后，与 Leader 节点一样，在本地添加一条新的日志，此时日志也没有提交。
@@ -222,8 +232,11 @@ raft 算法的第一步是**选举出 Leader**，即使在 Leader 出现故障�
 
 本讲内容总结如下：
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image6/M00/0F/0E/CioPOWA9ENyARGJxAAG3ZxiXwp0220.png"/>
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image6/M00/0F/0E/CioPOWA9ENyARGJxAAG3ZxiXwp0220.png"/> 
+
 
 除此之外，etcd 还有安全性限制，以保证日志选举和日志复制的正确性，比如 raft 算法中，并不是所有节点都能成为 Leader。一个节点要想成为 Leader，需要得到集群中半数以上节点的投票，而一个节点会投票给另一个节点，其中一个充分条件是：**进行选举的节点，其日志需要比本节点的日志更新**。此外还有判断日志的新旧以及提交前面任期的日志条目等措施。
 
 学习完这一讲，我给大家留一个问题，哪些情况下会出现选举超时且没有任何一个节点成为 Leader？欢迎你在留言区和我分享你的观点。下一讲，我们将介绍 etcd 存储多版本控制 MVCC 如何实现。
+

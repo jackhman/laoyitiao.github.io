@@ -1,3 +1,5 @@
+# 第08讲：MySQL数据库如何实现XA规范？
+
 本课时我们来讨论 MySQL 的 XA 规范有哪些应用相关的内容。
 
 MySQL 为我们提供了分布式事务解决方案，在前面的内容中提到过 binlog 的同步，其实是 MySQL XA 规范的一个应用，那么 XA 规范是如何定义的，具体又是如何应用的呢？
@@ -40,7 +42,9 @@ show binary logs;
 
 XA 是由 X/Open 组织提出的分布式事务规范，XA 规范主要定义了事务协调者（Transaction Manager）和资源管理器（Resource Manager）之间的接口。
 
-<Image alt="分布式8.png" src="https://s0.lgstatic.com/i/image3/M01/17/A2/Ciqah16n5eWABApiAACuPsJ6_T0711.png"/>
+
+<Image alt="分布式8.png" src="https://s0.lgstatic.com/i/image3/M01/17/A2/Ciqah16n5eWABApiAACuPsJ6_T0711.png"/> 
+
 
 **事务协调者（Transaction Manager**），因为 XA 事务是基于两阶段提交协议的，所以需要有一个协调者，来保证所有的事务参与者都完成了准备工作，也就是 2PC 的第一阶段。如果事务协调者收到所有参与者都准备好的消息，就会通知所有的事务都可以提交，也就是 2PC 的第二阶段。
 
@@ -89,7 +93,9 @@ MySQL 外部 XA 主要应用在数据库代理层，实现对 MySQL 数据库的
 
 下面来看看 Binlog 下的事务提交过程，整体过程是先写 redo log，再写 binlog，并以 binlog 写成功为事务提交成功的标志。
 
-<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image3/M01/17/9E/Ciqah16n4WSAMCkOAAEJyX3OrOY183.png"/>
+
+<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image3/M01/17/9E/Ciqah16n4WSAMCkOAAEJyX3OrOY183.png"/> 
+
 
 当有事务提交时：
 
@@ -104,3 +110,4 @@ MySQL 外部 XA 主要应用在数据库代理层，实现对 MySQL 数据库的
 ### 总结
 
 这一课时介绍了 MySQL 一致性相关的几种日志，并分享了 MySQL 的 XA 规范相关内容，以及内外部 XA 事务如何实现。
+

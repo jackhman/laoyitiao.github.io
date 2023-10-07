@@ -1,3 +1,5 @@
+# 13服务守护进程：如何在Kubernete中运行DaemonSet守护进程？
+
 通过前面课程的学习，我们对 Kubernetes 中一些常见工作负载已经有所了解。比如无状态工作负载 Dployment 可以帮助我们运行指定数目的服务副本，并维护其状态，而对于有状态服务来说，我们同样可以采用 StatefulSet 来做到这一点。
 
 但是，在实际使用的时候，有些场景，比如监控各个节点的状态，使用 Deployment 或者 StatefulSet 都无法满足我们的需求，因为这个时候我们可能会有以下这些需求。
@@ -12,7 +14,9 @@
 
 Kubernetes 提供的 DaemonSet 就可以完美地解决上述问题，其主要目的就是可以在集群内的每个节点上（或者指定的一堆节点上）都只运行一个副本，即 Pod 和 Node 是一一对应的关系。DaemonSet 会结合节点的情况来帮助你管理这些 Pod，见下面的拓扑结构：
 
-<Image alt="Lark20201009-105149.png" src="https://s0.lgstatic.com/i/image/M00/5B/9B/Ciqc1F9_0FqACmcBAABg43Rbbow934.png"/>
+
+<Image alt="Lark20201009-105149.png" src="https://s0.lgstatic.com/i/image/M00/5B/9B/Ciqc1F9_0FqACmcBAABg43Rbbow934.png"/> 
+
 
 今天我们就来学习一下 DaemonSet，先来看看其主要的使用场景。
 
@@ -123,7 +127,9 @@ DESIRED 代表该 DaemonSet 期望要创建的 Pod 个数，即我们需要几�
 
 现在我们来看看如何限定一个 DaemonSet，让其只在某些节点上运行，比如只在带有 `app=logging-node ` 的节点上运行，可以看这张图：
 
-<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/59/81/Ciqc1F9xnpWAKFwRAAB-Lq1l0YU648.png"/>
+
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/59/81/Ciqc1F9xnpWAKFwRAAB-Lq1l0YU648.png"/> 
+
 
 此时，我们就可以通过 DaemonSet 的 selector 来实现：
 
@@ -287,3 +293,4 @@ spec:
 同时 DaemonSet 也帮助我们解决了集群中节点动态变化时业务实例的部署和运维能力，比如扩容、缩容、节点宕机等场景。
 
 好的，如果你对本节课有什么想法或者疑问，欢迎你在留言区留言，我们一起讨论。
+

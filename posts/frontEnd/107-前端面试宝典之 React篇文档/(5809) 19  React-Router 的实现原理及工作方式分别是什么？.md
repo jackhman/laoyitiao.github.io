@@ -1,3 +1,5 @@
+# 19React-Router的实现原理及工作方式分别是什么？
+
 如果你在社区留言询问 React 的状态管理库用什么，那评论区的回复会直接争破头，"Redux 天下第一""Mobx 万岁"，当然还有使用 Hooks 的 useReducer 派。但如果说起 React 路由，那毫无争议就是 React Router 了，别无二家。对于这样一个在生态中具有统治地位的常用库，我们就必须严肃对待了，因为在面试中大概率会被问到，而问的方向往往会从实现原理与工作方式两个维度去展开。这一讲我们就来具体分析下这个问题应该如何作答。
 
 ### 审题
@@ -18,7 +20,9 @@
 
 2. 工作方式，包含整体设计模式与关键模块的实现方案。那如何定义关键模块呢？最简单的方案莫过于打开官方文档扫一眼提到过的模块，那就是最常用且最容易被提问的知识点。当然你也许会想，这样去准备会不会太简单了，面试官不会拿更冷门儿的内容来提问吗？要知道，生僻冷门的知识点在面试中就算考倒了应聘者也没有什么意义。面试是为了甄别应聘者的技能熟练度，所以只要抓住常用内容就好了。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image2/M01/0A/A0/CgpVE2ASbeOAT09tAABSj878oCQ150.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image2/M01/0A/A0/CgpVE2ASbeOAT09tAABSj878oCQ150.png"/> 
+
 
 ### 破题
 
@@ -61,7 +65,9 @@ Hash 路由在实践上非常成功，使得**开发者的注意力得以从前�
 
 翻开 React Router 的代码，你会发现 React Router 提供了三个库，分别是 react-router、react-router-dom 及 react-router-native。但如果细看，你会发现 react-router 是没有 UI 层的，react-router-dom = react-router + Dom UI，而 react-router-native = react-router + native UI。DOM 版本与 Native 版本最大限度地复用了同一个底层路由逻辑，如下图所示。
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/92/B5/CgqCHmASbgeAENJNAAAVuHLm4y4724.png"/>
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/92/B5/CgqCHmASbgeAENJNAAAVuHLm4y4724.png"/> 
+
 
 在 DOM 版本中提供的基础路由是 **BrowserRouter**，它的源码是这样的：
 
@@ -88,15 +94,21 @@ class BrowserRouter extends React.Component {
 
 要理解 React Router 的设计模式，我们不妨先看一下代码目录结构。如下图所示，整个代码被分割成了四个文件夹，这四个文件夹又各自是一个库，那这四个库如何联动的呢？这里用到了**Monorepo**的设计。
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/92/B5/CgqCHmASbiOABcqaAAEoQ_5ks_g452.png"/>
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/92/B5/CgqCHmASbiOABcqaAAEoQ_5ks_g452.png"/> 
+
 
 与 Monorepo 相对的概念是**Multirepo** 。Multirepo 就是我们常用的开发模式，**一个仓库对应一个工程** ，**子团队自行维护** 。如果这几个工程存在强协同，需要在一个迭代周期中完成新功能上线，那沟通协调成本就非常大了，你需要等别的工程发布更新后才能开发。所以在这里 React Router 使用了 Monorepo 的工程架构，使工程代码对团队中的每一个人都**具备透明度**。在同一次迭代中，库之间互相引用代码也更为容易。关于 Multirepo 和 Monorepo 的区别如下图所示：
 
-<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/92/AA/Ciqc1GASbiuAZi47AAMc6IEs2Ww683.png"/>
+
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/92/AA/Ciqc1GASbiuAZi47AAMc6IEs2Ww683.png"/> 
+
 
 通常会使用 **Lerna** 作为开发管理 Monorepo 的开发工具，它的主要用户包括 Babel、React、umi、React Router 等。个人感觉最有意思的点是 Lerna 这个名字非常贴切。Lerna 是希腊神话中的九头蛇，赫拉克勒斯的十二功绩之一就是猎杀九头蛇。看着九头蛇这个形象，像不像一个仓库里面存放了多个可用的库呢？
 
-<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image2/M01/0A/A1/CgpVE2ASbjKAWA1yAAaff6ihcKs486.png"/>  
+
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image2/M01/0A/A1/CgpVE2ASbjKAWA1yAAaff6ihcKs486.png"/> 
+  
 图片源自 React 官网
 
 **Context**
@@ -125,7 +137,9 @@ class BrowserRouter extends React.Component {
 >
 > 在关键模块上，主要分为三类组件：第一类是 Context 容器，比如 Router 与 MemoryRouter；第二类是消费者组件，用以匹配路由，主要有 Route、Redirect、Switch 等；第三类是与平台关联的功能组件，比如 Link、NavLink、DeepLinking 等。
 
-<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image2/M01/0A/9E/Cip5yGASblWAeI84AAESDjKgi9U468.png"/>
+
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image2/M01/0A/9E/Cip5yGASblWAeI84AAESDjKgi9U468.png"/> 
+
 
 ### 总结
 
@@ -137,8 +151,11 @@ class BrowserRouter extends React.Component {
 
 *** ** * ** ***
 
-[<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/72/94/Ciqc1F_EZ0eANc6tAASyC72ZqWw643.png"/>](https://shenceyun.lagou.com/t/mka)
+[
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/72/94/Ciqc1F_EZ0eANc6tAASyC72ZqWw643.png"/> 
+](https://shenceyun.lagou.com/t/mka)
 
 《大前端高薪训练营》
 
 对标阿里 P7 技术需求 + 每月大厂内推，6 个月助你斩获名企高薪 Offer。[点击链接](https://shenceyun.lagou.com/t/mka)，快来领取！
+

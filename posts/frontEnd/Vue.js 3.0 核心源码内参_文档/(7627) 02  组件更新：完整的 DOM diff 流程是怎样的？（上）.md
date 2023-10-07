@@ -1,3 +1,5 @@
+# 02组件更新：完整的DOMdiff流程是怎样的？（上）
+
 上一节课我们梳理了组件渲染的过程，本质上就是把各种类型的 vnode 渲染成真实 DOM。我们也知道了组件是由模板、组件描述对象和数据构成的，数据的变化会影响组件的变化。组件的渲染过程中创建了一个带副作用的渲染函数，当数据变化的时候就会执行这个渲染函数来触发组件的更新。那么接下来，我们就具体分析一下组件的更新过程。
 
 ### 副作用渲染函数更新组件的过程
@@ -348,7 +350,9 @@ const patchChildren = (n1, n2, container, anchor, parentComponent, parentSuspens
 
 * 如果新子节点是 vnode 数组，那么先把旧子节点的文本清空，再去旧子节点的父容器下添加多个新子节点。
 
-<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/31/18/Ciqc1F8MBDWAfUAXAADe59XvjHY701.png"/>
+
+<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/31/18/Ciqc1F8MBDWAfUAXAADe59XvjHY701.png"/> 
+
 
 接下来看一下**旧子节点是空**的情况：
 
@@ -358,7 +362,9 @@ const patchChildren = (n1, n2, container, anchor, parentComponent, parentSuspens
 
 * 如果新子节点是 vnode 数组，那么直接去旧子节点的父容器下添加多个新子节点即可。
 
-<Image alt="3.png" src="https://s0.lgstatic.com/i/image/M00/31/23/CgqCHl8MBEOANnFmAADYr-_R5mM894.png"/>
+
+<Image alt="3.png" src="https://s0.lgstatic.com/i/image/M00/31/23/CgqCHl8MBEOANnFmAADYr-_R5mM894.png"/> 
+
 
 最后来看一下**旧子节点是 vnode 数组**的情况：
 
@@ -368,7 +374,9 @@ const patchChildren = (n1, n2, container, anchor, parentComponent, parentSuspens
 
 * 如果新子节点也是 vnode 数组，那么就需要做完整的 diff 新旧子节点了，这是最复杂的情况，内部运用了核心 diff 算法。
 
-<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/31/23/CgqCHl8MBCuAUZksAADplAU2718113.png"/>
+
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/31/23/CgqCHl8MBCuAUZksAADplAU2718113.png"/> 
+
 
 下节课我们就来深入探究一下这个复杂的 diff 算法。
 > **本节课的相关代码在源代码中的位置如下：**   
@@ -376,3 +384,4 @@ const patchChildren = (n1, n2, container, anchor, parentComponent, parentSuspens
 > packages/runtime-core/src/renderer.ts  
 >
 > packages/runtime-core/src/componentRenderUtils.ts
+

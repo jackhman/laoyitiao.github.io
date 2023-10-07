@@ -1,3 +1,5 @@
+# 05单线程的JavaScript如何管理任务？
+
 如果说 JavaScript 代码运行过程中的语法分析阶段、编译阶段和执行阶段属于微观层面的运行逻辑，那么今天我来介绍下宏观角度下的 JavaScript 运行过程，包括 JavaScript 的单线程设计、事件循环的并发模型设计。
 
 要怎么理解 JavaScript 是单线程这个概念呢？大概需要从浏览器来说起。
@@ -42,7 +44,9 @@ JavaScript 最初被设计为浏览器脚本语言，主要用途包括对页面
 
 由于栈的容量是有限制的，所以当我们没有合理调用函数的时候，可能会导致爆栈异常，此时控制台便会抛出错误：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/37/A1/Cgp9HWB4EDeACyjFAAAW-kfzUR0259.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/37/A1/Cgp9HWB4EDeACyjFAAAW-kfzUR0259.png"/> 
+
 
 这样的一个函数调用栈结构，可以理解为 JavaScript 中同步任务的执行环境，同步任务也可以理解为 JavaScript 代码片段的执行。
 
@@ -92,7 +96,9 @@ JavaScript 有一个基于事件循环的并发模型，称为事件循环（Eve
 
 JavaScript 的运行过程，可以借用 Philip Roberts 演讲《Help, I'm stuck in an event-loop》中经典的一张图来描述：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/37/A1/Cgp9HWB4EESAQnXYAAClWLdHiXU406.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/37/A1/Cgp9HWB4EESAQnXYAAClWLdHiXU406.png"/> 
+
 
 如图，主线程运行的时候，会产生堆（heap）和栈（stack），其中堆为内存、栈为函数调用栈。我们能看到，Event Loop 负责执行代码、收集和处理事件以及执行队列中的子任务，具体包括以下过程。
 
@@ -151,7 +157,9 @@ Node.js 中的事件循环执行过程为：
    └───────────────────────────┘
 ```
 
-<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M01/38/42/CioPOWB5CK-Ae-ZRAAG6BriFZRI860.png"/>  
+
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M01/38/42/CioPOWB5CK-Ae-ZRAAG6BriFZRI860.png"/> 
+  
 
 由于事件循环阶段划分不一致，Node.js 和浏览器在对宏任务和微任务的处理上也不一样。
 
@@ -223,3 +231,4 @@ console.log("script end");
 要知道，浏览器中在执行 JavaScript 代码的时候不会进行页面渲染，如果一项任务花费的时间太长，浏览器将无法执行其他任务（例如处理用户事件）。因此，当存在大量复杂的计算、或导致了死循环的编程错误时，甚至会使页面终止。
 
 我们可以更合理地利用这些机制来拆分任务，比如考虑将多次触发的数据变更通过微任务收集起来，再一起进行 UI 的更新和渲染，便可以降低浏览器渲染的频率，提升浏览器的性能，给到用户更好的体验。
+

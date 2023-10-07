@@ -1,3 +1,5 @@
+# 第42讲：AtomicInteger和ynchronized的异同点？
+
 在上一课时中，我们说明了原子类和 synchronized 关键字都可以用来保证线程安全，在本课时中，我们首先分别用原子类和 synchronized 关键字来解决一个经典的线程安全问题，给出具体的代码对比，然后再分析它们背后的区别。
 
 ### 代码对比
@@ -129,4 +131,5 @@ public class Lesson42Syn implements Runnable {
 值得注意的是，synchronized 的性能随着 JDK 的升级，也得到了不断的优化。synchronized 会从无锁升级到偏向锁，再升级到轻量级锁，最后才会升级到让线程阻塞的重量级锁。因此synchronized 在竞争不激烈的情况下，性能也是不错的，不需要"谈虎色变"。
 
 <br />
+
 

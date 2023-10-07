@@ -1,3 +1,5 @@
+# 043大主流系统框架：由浅入深分析Expre、Koa和Egg.j
+
 上一讲我们没有应用任何框架实现了一个简单后台服务，以及一个简单版本的 MSVC 框架。本讲将介绍一些目前主流框架的设计思想，同时介绍其核心代码部分的实现，为后续使用框架优化我们上一讲实现的 MSVC 框架做一定的准备。
 
 ### 主流框架介绍
@@ -10,7 +12,9 @@
 
 洋葱我们都知道，一层包裹着一层，层层递进，但是现在不是看其立体的结构，而是需要将洋葱切开来，从切开的平面来看，如图 1 所示。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/17/0C/CioPOWBHM5qAFpsgAA9oKfFNTFM895.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/17/0C/CioPOWBHM5qAFpsgAA9oKfFNTFM895.png"/> 
+  
 图 1 洋葱切面图
 
 可以看到要从洋葱中心点穿过去，就必须先一层层向内穿入洋葱表皮进入中心点，然后再从中心点一层层向外穿出表皮，这里有个特点：进入时穿入了多少层表皮，出去时就必须穿出多少层表皮。先穿入表皮，后穿出表皮，符合我们所说的栈列表，**先进后出**的原则。
@@ -35,7 +39,9 @@ touch app.js
 
 然后输入以下代码，其中的 app.use 部分的就是 3 个中间件，从上到下代表的是洋葱的从外向内的各个层：**1 是最外层** ，**2 是中间层** ，**3 是最内层**。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/17/10/Cgp9HWBHM6eAF1p7AAG-YifWNQg212.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/17/10/Cgp9HWBHM6eAF1p7AAG-YifWNQg212.png"/> 
+
 
 接下来我们运行如下命令，启动项目。
 
@@ -253,7 +259,9 @@ Express 涉及 app 函数、中间件、Router 和视图四个核心部分，这
 
 我们先来看一个图，图 2 是 Express 核心代码结构部分：
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M01/17/0D/CioPOWBHM7-AN7gmAABaG7HpWG8493.png"/>  
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M01/17/0D/CioPOWBHM7-AN7gmAABaG7HpWG8493.png"/> 
+  
 图 2 Express 核心代码
 
 它涉及的源码不多，其中：
@@ -357,7 +365,9 @@ http://127.0.0.1:3000/a
 
 再来看下 Express 代码实现，如图 3 所示：
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M01/17/10/Cgp9HWBHM-CAYcukAAFHHQytNag202.png"/>  
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M01/17/10/Cgp9HWBHM-CAYcukAAFHHQytNag202.png"/> 
+  
 图 3 Express app.use 代码实现
 
 当没有传入 path 时，会默认设置 path 为 / ，而 / 则是**匹配任何路径**，最终都是调用 router.use 将 fn 中间件函数传入到 router 中。
@@ -368,19 +378,25 @@ http://127.0.0.1:3000/a
 
 这个文件在当前目录 router 下的 index.js 中，有一个方法叫作 proto.use，即 application.js 中调用的 router.use 。
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image6/M01/17/0D/CioPOWBHM-eAT835AAFGYW1HaL0653.png"/>  
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image6/M01/17/0D/CioPOWBHM-eAT835AAFGYW1HaL0653.png"/> 
+  
 图 4 中间件 push 实现
 
 图 4 中的代码经过一系列处理，最终将中间件函数通过 Layer 封装后放到栈列表中。就完成了中间件的处理，最后我们再来看下用户请求时，是如何在栈列表执行的。
 
 所有请求进来后都会调用 application.js 中的 **app.handle** 方法，该方法最终调用的是 router/index.js 中的 **proto.handle** 方法，所以我们主要看下 router.handle 的实现。在这个函数中有一个 next 方法非常关键，用于判断执行**下一层中间件的逻辑**，它的原理是从栈列表中取出一个 layer 对象，判断是否满足当前匹配，如果满足则执行该中间件函数，如图 5 所示。
 
-<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image6/M01/17/0D/CioPOWBHM_CAGrfhAAEAXbjYjVU402.png"/>  
+
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image6/M01/17/0D/CioPOWBHM_CAGrfhAAEAXbjYjVU402.png"/> 
+  
 图 5 中间件执行逻辑
 
 接下来我们再看看 layer.handle_request 的代码逻辑，如图 6 所示。
 
-<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image6/M01/17/10/Cgp9HWBHM_iAAdIdAACdFAXr7Tg707.png"/>  
+
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image6/M01/17/10/Cgp9HWBHM_iAAdIdAACdFAXr7Tg707.png"/> 
+  
 图 6 handle_request 代码实现
 
 图 6 中的代码释放了一个很重要的逻辑，就是在代码 try 部分，会执行 fn 函数，而 fn 中的 next 为下一个中间件，因此中间件栈执行代码，过程如下所示：
@@ -499,8 +515,11 @@ Express 和 KOA 的源代码还有很多，这里就不一一分析了，其他�
 
 *** ** * ** ***
 
-[<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M00/12/FA/CioPOWBBrAKAAod-AASyC72ZqWw233.png"/>](https://shenceyun.lagou.com/t/mka)
+[
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M00/12/FA/CioPOWBBrAKAAod-AASyC72ZqWw233.png"/> 
+](https://shenceyun.lagou.com/t/mka)
 
 **《大前端高薪训练营》**
 
 对标阿里 P7 技术需求 + 每月大厂内推，6 个月助你斩获名企高薪 Offer。[点击链接](https://shenceyun.lagou.com/t/mka)，快来领取！
+

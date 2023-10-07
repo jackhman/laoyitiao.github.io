@@ -1,3 +1,5 @@
+# 18数据处理：基于Serverle开发高可用音视频处理系统
+
 在推广 Serverless 的过程中，经常有同学问我：除了用来开发后端接口、服务端渲染应用等场景，Serverless 还能用来做什么呢？
 
 其实，Serverless 的应用场景非常广泛，除了上述几种，它还可以用于大数据计算、物联网应用、音视频处理等。为了让你了解到更多的 Serverless 的应用场景，我准备了今天的内容。
@@ -12,7 +14,9 @@
 
 得益于云计算的发展，有些云厂商推出了对应的视频解决方案，因此你现在要搭建一个视频处理程序是很容易的（下图就是一个典型的视频处理方案）：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M01/07/36/Cgp9HWAzRsKAW-EAAATCejrS5YI741.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M01/07/36/Cgp9HWAzRsKAW-EAAATCejrS5YI741.png"/> 
+  
 传统视频处理解决方案
 
 在该方案中，我们用 OSS 来存储海量的视频内容，视频上传后用视频转码服务将不同来源的视频进行转码，以适配各种终端，然后利用 CDN 提升客户端访问视频的速度。
@@ -31,7 +35,9 @@
 
 下图就是基于 Serverless 的视频处理系统解决方案：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M01/07/36/Cgp9HWAzRsuAb0gaAAGQSnOzXmk655.png"/>  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M01/07/36/Cgp9HWAzRsuAb0gaAAGQSnOzXmk655.png"/> 
+  
 基于 Serverless 的视频处理系统
 
 用户将视频上传后 OSS 后，触发函数计算中的视频转码函数执行，该函数对视频进行转码后，将元数据存入数据库，然后将转码后的视频再保存到 OSS 中。
@@ -354,3 +360,4 @@ $ fun invoke get_duration
 * 对于添加水印、视频转码等消耗资源的操作，需要为函数设置较大的内存和超时时间。
 
 最后，本节课我留给你的作业是：亲自动手实现课上所学的视频处理程序。
+

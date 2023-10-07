@@ -1,3 +1,5 @@
+# 结束语以终为始：SpringBoot总结和展望
+
 终于到了课程的最后一讲啦，这一讲我们将对整个 Spring Boot 课程进行总结。
 
 Spring Boot 不仅是 Spring 家族的重要组成成员，也是一款业界领先的应用程序开发框架。通过 Spring Boot 提供的多项核心功能，我们能够快速构建一个完整的 Web 服务开发解决方案。
@@ -58,7 +60,9 @@ Spring 5 中内嵌了与数据管理相关的响应式数据访问、与系统�
 
 以支持响应式 Web 的 Spring WebFlux 为例，这里我们给出它的架构图，如下图所示：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/02/32/Cgp9HWAdAZCAB17fAACQeZA8Cyk925.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/02/32/Cgp9HWAdAZCAB17fAACQeZA8Cyk925.png"/> 
+  
 Spring WebFlux 架构图（来自 Spring 官网）
 
 在图中我们可以看到，上图左侧为基于 Spring Webflux 的技术栈，右侧为基于 Spring MVC 的技术栈。我们知道传统的 Spring MVC 是在 Java EE 的 Servlet 标准之上进行构建的，该标准本身就是阻塞式和同步式。而 Spring WebFlux 基于响应式流进行构建，因此我们可以使用它来构建异步非阻塞的服务。
@@ -71,7 +75,9 @@ Spring WebFlux 架构图（来自 Spring 官网）
 
 下面我们再来看一下 Spring Boot 2 的另一张官网架构图，如下图所示：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/02/30/CioPOWAdAZ2AMVhnAACWjgTTFkY662.png"/>  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/02/30/CioPOWAdAZ2AMVhnAACWjgTTFkY662.png"/> 
+  
 Spring Boot 2 架构图（来自 Spring 官网）
 
 从图中我们可以看到，上图底部将 Spring Data 明确划分为两大类型：一类是支持 JDBC、JPA 和部分 NoSQL 的传统 Spring Data Repository，另一类则是支持 Mongo、Cassandra、Redis、Couchbase 等的响应式 Spring Data Reactive Repository。
@@ -81,3 +87,4 @@ Spring Boot 2 架构图（来自 Spring 官网）
 未来，让我们一起期待响应式编程技术与 Spring Boot 框架之间更加紧密的整合吧。
 
 至此，整个《Spring Boot 实战开发》课程就全部介绍完毕了。最后，祝大家在各自的岗位上更上一层楼！
+

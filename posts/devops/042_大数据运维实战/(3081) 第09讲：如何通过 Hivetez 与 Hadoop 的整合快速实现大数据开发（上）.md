@@ -1,3 +1,5 @@
+# 第09讲：如何通过Hivetez与Hadoop的整合快速实现大数据开发（上）
+
 ### **Hive 功能介绍**
 
 Hive 是基于 Hadoop 的一个外围数据仓库分析组件，可以把 Hive 理解为一个数据仓库，但这和传统的数据库是有差别的。
@@ -14,7 +16,9 @@ Hive 通过将结构化的数据文件映射到一张数据库表上，然后通
 
 下图展示了 Hive 的运行和实现架构：
 
-<Image alt="image1.png" src="https://s0.lgstatic.com/i/image/M00/10/FC/Ciqc1F7LdZGAR9tAAAC6e95LBXg140.png"/>
+
+<Image alt="image1.png" src="https://s0.lgstatic.com/i/image/M00/10/FC/Ciqc1F7LdZGAR9tAAAC6e95LBXg140.png"/> 
+
 
 由图可知，Hive 主要由 Metastore、DB 和 Hiveserver2、Hive CLI 几部分组成。其中，Metastore 是 Hive 的核心，所有外围客户端比如 Beeline、Hue、Impala 最终都会连接到 Metastore，而 Metastore 再去访问 DB。
 
@@ -46,7 +50,9 @@ HiveServer2 服务是 Hive 推荐的使用模式，因为它更加安全并且�
 
 Hive CLI 表示命令行接口，也就是以命令行的形式输入 SQL 语句进行数据查询操作。例如，你直接登录到 Hive 所在的服务器，然后在命令行中执行 hive 命令，如下图所示：
 
-<Image alt="image2.png" src="https://s0.lgstatic.com/i/image/M00/11/08/CgqCHl7LdaiAR0y9AACfQqms-MA564.png"/>
+
+<Image alt="image2.png" src="https://s0.lgstatic.com/i/image/M00/11/08/CgqCHl7LdaiAR0y9AACfQqms-MA564.png"/> 
+
 
 这种使用模式是 Hive CLI，这种客户端模式是最古老的一种 Hive 访问模式，它将 SQL 在本地编译，然后直接访问 MetaStore，属于**重客户端模式**。
 
@@ -106,7 +112,9 @@ Hive Metastore 的三种配置模式，其实也就是 Hive 的三种运行方�
 
 这里以 Apache Hadoop 发行版本为例，介绍如何实现 Hadoop 与 Hive 的整合，Hive 版本同样采用 Apache Hive 发行版本。我这里的部署环境如下：
 
-<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/11/EB/Ciqc1F7MzxeAV5c6AAC5xf3Kkhs081.png"/>
+
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/11/EB/Ciqc1F7MzxeAV5c6AAC5xf3Kkhs081.png"/> 
+
 
 从这个规划中可知，我将 Hivemetastore 和 Hiveserver2 服务都运行在 HiveDB 主机上，另外单独一台主机用来运行 Hive 客户端服务，还有一台用来运行 MySQL 服务。
 
@@ -200,7 +208,9 @@ jdbc:mysql://localhost:3306/hive?createDatabaseIfNotExist=true&amp;useSSL=false
 
 这里我们采用 MySQL 作为 Hive Metastore 的存储介质，并且 MySQL 独立安装在一台机器上， 这里 MySQL 的安装过程略去，我安装的版本是 8.0，安装完成后，需要[点击这里下载一个 mysql jdbc 包](https://dev.mysql.com/downloads/connector/j/)，如下图所示：
 
-<Image alt="image3.png" src="https://s0.lgstatic.com/i/image/M00/10/FD/Ciqc1F7LdbqAEr64AAFM6XIDC7U776.png"/>
+
+<Image alt="image3.png" src="https://s0.lgstatic.com/i/image/M00/10/FD/Ciqc1F7LdbqAEr64AAFM6XIDC7U776.png"/> 
+
 
 将下载下来的压缩包传到 HiveDB 和 Hiveclient 两个机器上，然后执行如下操作：
 
@@ -214,7 +224,7 @@ jdbc:mysql://localhost:3306/hive?createDatabaseIfNotExist=true&amp;useSSL=false
 
 接着，启动 MySQL 数据库，创建一个 mysql 用户用于 hive 连接，操作过程如下：
 
-```html
+```sql
 [root@mysqldb ~]# systemctl start mysqld
 [root@mysqldb ~]# mysql -u root --p
 mysql> create user 'hive'@'localhost' identified by 'hivepasswd';
@@ -282,6 +292,9 @@ hive.metastore.uris 参数其实就是指定了 hiveclient 主机连接 Metastor
 
 最后，直接在 hiveclient 主机执行 hive 命令，如下图所示：
 
-<Image alt="image4.png" src="https://s0.lgstatic.com/i/image/M00/10/FD/Ciqc1F7LdcWATtNmAACkNxQpQb8304.png"/>
+
+<Image alt="image4.png" src="https://s0.lgstatic.com/i/image/M00/10/FD/Ciqc1F7LdcWATtNmAACkNxQpQb8304.png"/> 
+
 
 由图可知，命令执行后，可以正常进入 hive 命令行，并且对数据库做查询，也能返回结果，说明 Hiveclient 主机通过 Metastore 服务正常查询到了元数据库的内容。
+

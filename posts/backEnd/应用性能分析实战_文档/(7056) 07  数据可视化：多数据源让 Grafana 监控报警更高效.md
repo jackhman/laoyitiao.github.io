@@ -1,3 +1,5 @@
+# 07数据可视化：多数据源让Grafana监控报警更高效
+
 这一讲我将带领你学习可视化监控套件 Grafana。Grafana 是一个开源的数据可视化的平台，所以它既不会监控应用，也不会产生监控数据，更不会对接原始数据进行分析存储。**它仅专注数据可视化本身**。
 
 本节内容，会先通过与上一节 Kibana 可视化套件对比，来讲述 Grafana 的核心设计。然后以实战视角，分享应用服务如何使用 Grafana 生成应用监控指标和落地实践。
@@ -52,7 +54,9 @@ Grafana**报警规则的设计**是通过后台的一个调度程序，定时地
 
 下图为在平均响应时间超过 250 毫秒时，进行报警规则呈现。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/37/53/CioPOWB2rFaAc3AqAAGWdoD5bZo254.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/37/53/CioPOWB2rFaAc3AqAAGWdoD5bZo254.png"/> 
+
 
 除了**可视化** 面板这一特色，Grafana 基于**多种数据源数据指标**的联动，更具备了多维度报警这一优势。基于丰富的数据源驱动的支持，一线开发通过 Grafana 便能快速完成应用服务的指标监控。这便是 Grafana 区别其他可视化监控平台的重要设计。
 
@@ -70,7 +74,9 @@ Grafana 就是不二之选，受益于协同开发和丰富数据源的设计，
 
 常见生命周期分为如下图的 5 层，从用户接触产品到遗忘产品的整个过程中，我们可以通过监控分析用户在不同阶段的表现，有的放矢地优化产品体验，引导用户完成运营策略。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M01/37/4B/Cgp9HWB2rGCACurDAAFei_kgyOE245.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M01/37/4B/Cgp9HWB2rGCACurDAAFei_kgyOE245.png"/> 
+
 
 以电商 App 为例，通过 Grafana 快速构建起用户生命周期监控。
 
@@ -153,3 +159,4 @@ Grafana 是非常易用的可视化监控平台，在多数据的支撑下，项
 相信你在工作中使用 Grafana 落地监控可视化的场景非常多。那么在仪表盘中，你整合了哪些数据源？完成了哪些监控场景？过程中得到了哪些收益，又遇到了哪些问题呢？
 
 欢迎在评论区写下你的思考，期待与你讨论～
+

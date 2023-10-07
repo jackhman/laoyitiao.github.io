@@ -1,3 +1,5 @@
+# 01组件渲染：vnode到真实DOM是如何转变的？
+
 在 Vue.js 中，组件是一个非常重要的概念，整个应用的页面都是通过组件渲染来实现的，但是你知道当我们编写这些组件的时候，它的内部是如何工作的吗？从我们编写组件开始，到最终真实的 DOM 又是怎样的一个转变过程呢？这节课，我们将会学习 Vue.js 3.0 中的组件是如何渲染的，通过学习，你的这些问题将会迎刃而解。
 
 首先，组件是一个抽象的概念，它是对一棵 DOM 树的抽象，我们在页面中写一个组件节点：
@@ -20,7 +22,9 @@
 
 所以，从表现上来看，组件的模板决定了组件生成的 DOM 标签，而在 Vue.js 内部，一个组件想要真正的渲染生成 DOM，还需要经历"创建 vnode - 渲染 vnode - 生成 DOM" 这几个步骤：
 
-<Image alt="1111.png" src="https://s0.lgstatic.com/i/image/M00/2D/FE/Ciqc1F8EO_OAOS86AABTGXEAHqA770.png"/>
+
+<Image alt="1111.png" src="https://s0.lgstatic.com/i/image/M00/2D/FE/Ciqc1F8EO_OAOS86AABTGXEAHqA770.png"/> 
+
 
 你可能会问，什么是 vnode，它和组件什么关系呢？先不要着急，我们在后面会详细说明。这里，你只需要记住它就是一个可以描述组件信息的 JavaScript 对象即可。
 
@@ -606,7 +610,9 @@ OK，到这里我们这一节的学习也要结束啦，这节课我们主要分
 
 这里，我用一张图来带你更加直观地感受下整个组件渲染流程：
 
-<Image alt="122.png" src="https://s0.lgstatic.com/i/image/M00/2E/0A/CgqCHl8EPLKAF8u5AAJHdNl56bM640.png"/>
+
+<Image alt="122.png" src="https://s0.lgstatic.com/i/image/M00/2E/0A/CgqCHl8EPLKAF8u5AAJHdNl56bM640.png"/> 
+
 
 最后，给你留一道思考题目，我们平时开发页面就是把页面拆成一个个组件，那么组件的拆分粒度是越细越好吗？为什么呢？欢迎你在留言区与我分享。
 > **本节课的相关代码在源代码中的位置如下：**   
@@ -620,3 +626,4 @@ OK，到这里我们这一节的学习也要结束啦，这节课我们主要分
 > packages/runtime-core/src/renderer.ts  
 >
 > packages/runtime-dom/src/nodeOps.ts
+

@@ -1,3 +1,5 @@
+# 开篇词如何深入掌握Kubernete？
+
 你好，我是正范，曾任 IBM 资深工程师，目前在国内某一线大厂任架构师。我平时非常喜欢研究工作中遇到的技术难题，积极参与各大开源项目。比如在云原生方面，我深度参与了[Kubernetes](http://github.com/kubernetes/kubernetes)、Helm、Prometheus 等开源项目，并贡献了诸多核心代码。
 
 ### 为什么要学习 Kubernetes
@@ -10,8 +12,12 @@
 
 转头再来看国内，不管是阿里、头条这些互联网大厂，还是小米等以硬件为主的厂商，以及快手、Shopee 等后起之秀，都在大量招聘 Kubernetes 相关人才，而且起薪还不低。
 
-<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/45/B0/Ciqc1F9DXw2AbVbEAAUV0CqQDuQ392.png"/>  
-<Image alt="image (6).png" src="https://s0.lgstatic.com/i/image/M00/45/BB/CgqCHl9DXyGAXmmqAAHDUqw7jCo427.png"/>  
+
+<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/45/B0/Ciqc1F9DXw2AbVbEAAUV0CqQDuQ392.png"/> 
+  
+
+<Image alt="image (6).png" src="https://s0.lgstatic.com/i/image/M00/45/BB/CgqCHl9DXyGAXmmqAAHDUqw7jCo427.png"/> 
+  
 （来源：拉勾网 Kubernetes 相关职位）
 
 ### 如何学习 Kubernetes
@@ -63,3 +69,4 @@
 希望这个专栏，可以带你入局，让你不仅掌握 Kubernetes 并能够落地到自己的项目中，还可以感悟一些学习方法。接下来，我们一起更新自己的技术栈，迎接技术带来的新的机遇。
 
 另外，欢迎你和我交流关于 Kubernetes、云原生的各种话题，或者你实践中的困惑与经验，我在留言区等你。
+

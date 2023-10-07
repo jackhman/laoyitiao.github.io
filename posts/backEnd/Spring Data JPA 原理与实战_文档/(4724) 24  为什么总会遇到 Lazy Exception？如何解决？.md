@@ -1,3 +1,5 @@
+# 24为什么总会遇到LazyException？如何解决？
+
 你好，欢迎学习第 24 讲。在我们的实际工作中，经常会遇到 Lazy Exception，所谓的 Lazy Exception 具体一点就是 LazyInitializationException。我经常看到有些同事会遇到这一问题，而他们的处理方式都很复杂，并非最佳实践。那么这一讲，我们就来剖析一下这一概念的原理以及解决方式。
 
 我们先从一个案例入手，看一下什么是 LazyInitializationException。
@@ -91,7 +93,9 @@ org.hibernate.LazyInitializationException: failed to lazily initialize a collect
 
 PersistentCollection 是一个集合类的接口，实现类包括如下几种，如下图所示。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/75/11/Ciqc1F_HTamAUlWuAADQNwt-UxI634.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/75/11/Ciqc1F_HTamAUlWuAADQNwt-UxI634.png"/> 
+
 
 也就是说 Hibernate 通过 PersistentCollection 的实现类 AbstractPersistentCollection 的所有子类，对 JDK 里面提供的 List、Map、SortMap、Array、Set、SortedSet 进行了扩展，从而实现了具有懒加载的特性。所以在 Hibernate 里面支持的关联关系的类型只有下面五种。
 
@@ -171,21 +175,29 @@ public class PersistentBag extends AbstractPersistentCollection implements List 
 
 所以我们发生的 LazyInitializationExcetion 基本都是从这个类里面抛出来的，从源码里面可以看到其严重依赖当前的 Session，关键源码如下图所示。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/75/12/Ciqc1F_HTbOAXgh4AAEtSArhDWw293.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/75/12/Ciqc1F_HTbOAXgh4AAEtSArhDWw293.png"/> 
+
 
 所以在默认的情况下，如果我们把 Session 关闭了，想利用 Lazy 的机制加载管理关系，就会发生异常了。我们通过实例看一下，在上面例子的 Controller 上加一个 debug 断点，可以看到如下图显示的内容：我们的 Address 指向了 PersistentBag 代理实例类。
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/75/1D/CgqCHl_HTbeARnVnAAFroRKKQe4214.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/75/1D/CgqCHl_HTbeARnVnAAFroRKKQe4214.png"/> 
+
 
 同时我们再设置断点的话也可以看到，PersistentBag 被初始化的时候，会传进来 Session 的上下文，即包含 Datasource 和需要执行 Lazy 的 sql。
 
 而需要执行 Lazy 的 sql，我们通过 debug 的栈信息可以看到其中有个 instantiate，有兴趣的同学可以 debug 看一下，关键断点信息如下图所示。
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/75/1D/CgqCHl_HTb2ARhUkAAQSJOfdHvc744.png"/>
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/75/1D/CgqCHl_HTb2ARhUkAAQSJOfdHvc744.png"/> 
+
 
 再继续 debug 的话，也会看到调用 AbstractPersistentCollection 的初始化 Lazy 的方法，如下所示。
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/75/12/Ciqc1F_HTcSALyT5AADMzJ35Sgg935.png"/>
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/75/12/Ciqc1F_HTcSALyT5AADMzJ35Sgg935.png"/> 
+
 
 通过源码分析和实例讲解，你已经基本上知道了 Lazy 的原理，也就是需要 Lazy 的关联关系会初始化成 PersistentCollection，并且依赖持有的 Session。而当操作 List、Map 等集合类的一些基本方法的时候会触发 read()，并利用当前的 Session 进行懒加载。
 
@@ -361,7 +373,9 @@ spring.jpa.properties.hibernate.enable_lazy_load_no_trans=true
 
 我们顺藤摸瓜，可以看到 LazyInitializationException 是 HibernateException 里面的，也可以看到 HibernateException 的父类 Javax.persistence.PersistenceException 下面有很多细分的异常，如下图所示。
 
-<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/75/1D/CgqCHl_HTdmADLLsAAJrRYrE3Gk475.png"/>
+
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/75/1D/CgqCHl_HTdmADLLsAAJrRYrE3Gk475.png"/> 
+
 
 当我们遇到异常的时候不要慌张，仔细看日志基本就能知道是什么问题了。
 
@@ -376,3 +390,4 @@ spring.jpa.properties.hibernate.enable_lazy_load_no_trans=true
 总之遇到问题不要慌，看一下源码，想一下我们讲的原理知识，或许你就能找到答案。下一讲我们来聊聊经典的 N+1 的 SQL 问题。到时见。
 > 点击下方链接查看源码（不定时更新）  
 > <https://github.com/zhangzhenhuajack/spring-boot-guide/tree/master/spring-data/spring-data-jpa>
+

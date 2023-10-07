@@ -1,3 +1,5 @@
+# 第02讲：HahMap底层实现原理是什么？JDK8做了哪些优化？
+
 HashMap 是使用频率最高的类型之一，同时也是面试经常被问到的问题之一，这是因为 HashMap 的知识点有很多，同时它又属于 Java 基础知识的一部分，因此在面试中经常被问到。
 
 本课时的面试题是，HashMap 底层是如何实现的？在 JDK 1.8 中它都做了哪些优化？
@@ -5,7 +7,9 @@ HashMap 是使用频率最高的类型之一，同时也是面试经常被问到
 ### 典型回答
 
 在 JDK 1.7 中 HashMap 是以数组加链表的形式组成的，JDK 1.8 之后新增了红黑树的组成结构，当链表大于 8 并且容量大于 64 时，链表结构会转换成红黑树结构，它的组成结构如下图所示：  
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/73/D9/Cgq2xl5rDYmAM-0hAABv6sMsyOQ867.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/73/D9/Cgq2xl5rDYmAM-0hAABv6sMsyOQ867.png"/> 
+
 
 数组中的元素我们称之为哈希桶，它的定义如下：
 
@@ -213,7 +217,9 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
 
 新增方法的执行流程，如下图所示：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/73/D9/CgpOIF5rDYmATP43AAB3coc0R64799.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/73/D9/CgpOIF5rDYmATP43AAB3coc0R64799.png"/> 
+
 
 HashMap 第三个重要的方法是**扩容方法**，源码如下：
 
@@ -325,7 +331,9 @@ final Node<K,V>[] resize() {
 
 这时候得到的结果，高一位为 1，当结果为 1 时，表示元素在扩容时位置发生了变化，新的下标位置等于原下标位置 + 原数组长度，如下图所示：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/73/D9/Cgq2xl5rDYmAXoWFAAArXO_oe8c713.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/73/D9/Cgq2xl5rDYmAXoWFAAArXO_oe8c713.png"/> 
+
 
 其中红色的虚线图代表了扩容时元素移动的位置。
 
@@ -355,7 +363,9 @@ void transfer(Entry[] newTable, boolean rehash) {
 
 当 t1 重新获得执行权之后，先执行 newTalbe\[i\] = e 把 key(3) 的 next 设置为 key(7)，而下次循环时查询到 key(7) 的 next 元素为 key(3)，于是就形成了 key(3) 和 key(7) 的循环引用，因此就导致了死循环的发生，如下图所示：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/73/D9/CgpOIF5rDYmAPR1lAABl-qSxBYs115.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/73/D9/CgpOIF5rDYmAPR1lAABl-qSxBYs115.png"/> 
+
 
 当然发生死循环的原因是 JDK 1.7 链表插入方式为首部倒序插入，这个问题在 JDK 1.8 得到了改善，变成了尾部正序插入。
 
@@ -364,3 +374,4 @@ void transfer(Entry[] newTable, boolean rehash) {
 ### 小结
 
 本课时介绍了 HashMap 的底层数据结构，在 JDK 1.7 时 HashMap 是由数组和链表组成的，而 JDK 1.8 则新增了红黑树结构，当链表长度达到 8 并且容器达到 64 时会转换为红黑树存储，以提升元素的操作性能。同时还介绍了 HashMap 的三个重要方法，查询、添加和扩容，以及 JDK 1.7 resize() 在并发环境下导致死循环的原因。
+

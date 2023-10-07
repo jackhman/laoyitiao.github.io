@@ -1,3 +1,5 @@
+# 03etcdctl：客户端操作etcd服务端的工具
+
 上一讲我们介绍了 etcd 的几种安装部署方式以及 TLS 安全加密等知识点。安装好 etcd 后，我们将开始体验如何使用 etcd。这一讲，我将会基于 etcd 自带的客户端工具------etcdctl 来演示 etcd 常用的一些操作，帮助你快速入手 etcd。
 
 ### etcdctl 客户端
@@ -29,11 +31,15 @@ API VERSION:
 
 COMMANDS:
 
-<Image alt="Lark20210201-172927.png" src="https://s0.lgstatic.com/i/image/M00/94/3B/Ciqc1GAXykaAefV0AAoX29H6c7o817.png"/>
+
+<Image alt="Lark20210201-172927.png" src="https://s0.lgstatic.com/i/image/M00/94/3B/Ciqc1GAXykaAefV0AAoX29H6c7o817.png"/> 
+
 
 OPTIONS:
 
-<Image alt="Lark20210201-172932.png" src="https://s0.lgstatic.com/i/image/M00/94/3C/Ciqc1GAXylSANvfVAAYmlJl-aDo653.png"/>
+
+<Image alt="Lark20210201-172932.png" src="https://s0.lgstatic.com/i/image/M00/94/3C/Ciqc1GAXylSANvfVAAYmlJl-aDo653.png"/> 
+
 
 etcdctl 支持的命令大体上分为**数据库操作和非数据库操作**两类。其中数据库的操作命令是最常用的命令，我们将在下面具体介绍。其他的命令如用户、角色、授权、认证相关，你可以根据语法自己尝试一下。
 
@@ -396,6 +402,9 @@ lease 694d71ddacfda22c granted with TTL(300s), remaining(220s), attached keys([f
 
 本讲内容如下：
 
-<Image alt="Lark20210201-172935.png" src="https://s0.lgstatic.com/i/image2/M01/0C/36/CgpVE2AXynmAbZxPAAEoYddgUBM139.png"/>
+
+<Image alt="Lark20210201-172935.png" src="https://s0.lgstatic.com/i/image2/M01/0C/36/CgpVE2AXynmAbZxPAAEoYddgUBM139.png"/> 
+
 
 学完这一讲内容，想必你对 etcd 的常用功能已经有了一个整体的了解，但是如果在 etcd 集群信息变更的情况下，etcdctl 如何稳定地访问 etcd 服务实例，非 gRPC 客户端又该如何访问 etcd 服务端呢？这也是我们下一讲的主要内容，希望你能提前思考，也欢迎你在留言区和我交流，我们下一讲再见。
+

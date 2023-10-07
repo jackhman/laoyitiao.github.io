@@ -1,6 +1,10 @@
+# 第06讲：API网关服务-Zuul
+
 本课时我们主要讲解：网关的必要性，Zuul 简介及如何自定义过滤器，Zuul 容错与回退，Zuul 使用经验分享，以及 Zuul 控制路由实例选择等内容。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9F/A6/CgoB5l2yzFGAEIQCAACesr5ZON8263.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9F/A6/CgoB5l2yzFGAEIQCAACesr5ZON8263.png"/> 
+
 
 首先，我们来了解网关是什么？其实，API 网关是对外提供服务的一个入口，并且隐藏了内部架构的实现，是微服务架构中必不可少的一个组件。API 网关可以为我们管理大量的 API 接口，负责对接客户、协议适配、安全认证、路由转发、流量限制、日志监控、防止爬虫、灰度发布等功能。
 
@@ -14,7 +18,9 @@ API 网关也是随着架构演进衍生出的一个框架，是最简单的单�
 
 动态路由是动态的将客户端的请求路由到后端不同的服务上，如果没有网关去做统一的路由，那么客户端就需要关注后端 N 个服务。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9F/C6/CgotOV2yzFKAbTymAAE9eECzbLs575.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9F/C6/CgotOV2yzFKAbTymAAE9eECzbLs575.png"/> 
+
 
 左边的图没有使用网关，客户端调用服务时就需要访问服务各自的接口，如客户端调用 A 服务的接口就需要请求 a.com，而对需要访问服务的客户端来说访问流程越简单越好，现在需要关注多个 API 提供方，无疑提高了访问的复杂度。
 
@@ -26,7 +32,9 @@ API 网关也是随着架构演进衍生出的一个框架，是最简单的单�
 
 请求监控可以对整个系统的请求进行监控，详细地记录请求响应日志，可以实时统计当前系统的访问量及监控状态。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9F/A6/CgoB5l2yzFKAMhJuAADDrRk--Cs646.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9F/A6/CgoB5l2yzFKAMhJuAADDrRk--Cs646.png"/> 
+
 
 如果没有使用网关的话，记录请求信息需要在各个服务中去做。当网关出现在我们的架构中后，所有客户端的请求都会经过网关来做路由分发，入口统一了，很多事情也就好处理了，我们只需要在网关中统一进行请求信息的记录，就可以基于这些记录做实时的数据分析，比如并发调用量，根据数据分析决定是否要动态限流，分析是否有爬虫请求等多维数据结果。给业务方提供正确实时的决策信息，是非常有价值的。
 
@@ -34,7 +42,9 @@ API 网关也是随着架构演进衍生出的一个框架，是最简单的单�
 
 认证鉴权可以对每一个访问请求做认证，拒绝非法请求，保护后端的服务。微服务架构下，如果没有使用网关，那么客户端需要直接跟多个服务进行交互，当请求到达对应的服务时，就必须验证当前的请求有没有登录，有没有权限访问。访问 A 服务需要验证一次，访问 B 服务也需要验证一次，每个服务都要做重复的工作。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9F/A6/CgoB5l2yzFKAMhJuAADDrRk--Cs646.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9F/A6/CgoB5l2yzFKAMhJuAADDrRk--Cs646.png"/> 
+
 
 当我们使用网关后，就可以在网关中做统一的验证逻辑了，唯一要做的工作就是在网关验证完成后，需要将用户信息传递给后端服务，后端服务默认相信当前的请求已经在网关中通过验证，它不会再去做验证的逻辑，但是当前请求对应的用户信息要告诉后端服务，可以将用户信息通过 HTTP 请求头传递给路由的后端服务。
 
@@ -42,7 +52,9 @@ API 网关也是随着架构演进衍生出的一个框架，是最简单的单�
 
 压力测试是一项很重要的工作，像一些电商公司需要模拟更多真实的用户并发量来保证大促时系统的稳定，通过 Zuul 可以动态地将测试请求转发到后端服务的集群中，还可以识别测试流量和真实流量，用来做一些特殊处理。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9F/A6/CgoB5l2yzFKAe9wtAAEaJgA80DA706.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9F/A6/CgoB5l2yzFKAe9wtAAEaJgA80DA706.png"/> 
+
 
 对于测试请求，可以在请求头中添加标识，让网关能够识别这是一个测试请求，当识别到测试请求后，根据对应的规则进行路由，这里可以用配置中心存储规则，测试请求路由到测试服务，测试服务会有单独的测试数据库，这样测试的请求就不会影响到正式的服务和数据库了。
 
@@ -50,7 +62,9 @@ API 网关也是随着架构演进衍生出的一个框架，是最简单的单�
 
 灰度发布可以保障整体系统的稳定性，在初始灰度的时候就可以及时发现、调整问题，以降低影响范围。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9F/C6/CgotOV2yzFKAVLC_AAE1Ij_9Yow275.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9F/C6/CgotOV2yzFKAVLC_AAE1Ij_9Yow275.png"/> 
+
 
 当需要发布新版本的时候，不会立即将老的服务停止，去发布新的服务。而是先发布新版本的服务，比如之前的版本是 1.0，那么现在发布的版本就是 1.1，发布后，需要通过测试请求对 1.1 版本的服务进行测试，如果没发现什么问题，就可以将正常的请求转发过来了。如果测试中发现问题，可以直接停掉 1.1 版本的服务，就算不停掉也没关系，不会影响到正常用户的使用。
 
@@ -58,7 +72,9 @@ API 网关也是随着架构演进衍生出的一个框架，是最简单的单�
 
 Zuul 也是 Netflix OSS 中的一员，是一个基于 JVM 路由和服务端的负载均衡器。提供了路由、监控、弹性、安全等服务。Zuul 能够与 Eureka、Ribbon、Hystrix 等组件配合使用。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9F/A6/CgoB5l2yzFKAKGeOAAGndrQg2bE012.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9F/A6/CgoB5l2yzFKAKGeOAAGndrQg2bE012.png"/> 
+
 
 Zuul 于 2012 年开源，目前在 GitHub 上有超过 8000 多颗星的关注，经过 Netflix 在生产环境中长期的使用和改进，Zuul 的稳定性非常好。
 
@@ -80,13 +96,17 @@ Zuul 于 2012 年开源，目前在 GitHub 上有超过 8000 多颗星的关注�
 
 当一个请求进来时，会先进入 pre 过滤器，在 pre 过滤器执行完后，接着就到了 routing 过滤器中，开始路由到具体的服务中，路由完成后，接着就到了 post 过滤器中，然后将请求结果返回给客户端。如果在这个过程中出现异常，则会进入 error 过滤器中，这就是请求在整个 Zuul 中的生命周期。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9F/C6/CgotOV2yzFKALGjnAAEfSfAim3o535.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9F/C6/CgotOV2yzFKALGjnAAEfSfAim3o535.png"/> 
+
 
 对应的源码在 ZuulServlet 中，我们可以打开 ZuulServlet 的源码，service 方法中就是执行过滤器的逻辑，首先是 preRoute 方法，也就是执行 pre 过滤器，如果异常了就会执行 error 过滤器和 post 过滤器，接着就是 routing 过滤器，这就是整个过滤器执行流程对应的源码部分。
 
 ###### Zuul 的使用
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9F/C6/CgotOV2yzI6AJcs6AFm-WMdMAzE612.gif"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9F/C6/CgotOV2yzI6AJcs6AFm-WMdMAzE612.gif"/> 
+
 
 我们快速体验下 Zuul 的路由功能，首先在 pom 中增加 spring-cloud-starter-netflix-zuul 的依赖，加完依赖之后，在启动类上增加 @EnableZuulProxy 注解。然后打开我们的配置文件，配置一个固定的路由 Zuul，.routes 是固定的前缀，yinjihuan 是命名，path 是映射的 URL 地址，URL 是要路由的地址。启动项目在浏览器中访问<http://localhost:8087/cxytiandi>，可以看到打开了 cxytiandi.com 的主页。这就是一个简单的路由示列。
 
@@ -116,7 +136,9 @@ Zuul 于 2012 年开源，目前在 GitHub 上有超过 8000 多颗星的关注�
 
 过滤器是 Zuul 中的核心内容，很多高级的扩展都需要自定义过滤器来实现，在 Zuul 中自定义一个过滤器只需要继承 ZuulFilter，然后重写 ZuulFilter 的四个方法即可。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9F/C6/CgotOV2yzFKARVycAADyi7HDY0s663.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9F/C6/CgotOV2yzFKARVycAADyi7HDY0s663.png"/> 
+
 
 首先来重写 shouldFilte 方法，shouldFilter 方法决定了是否执行该过滤器，true 为执行，false 为不执行，这个也可以利用配置中心来做，达到动态的开启或关闭过滤器。
 
@@ -170,13 +192,17 @@ Zuul 中默认采用信号量隔离机制，如果想要换成线程，需要配
 
 ###### Zuul Debug
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9F/C6/CgotOV2yzFKAA6-IAAJL-BGCWm4337.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9F/C6/CgotOV2yzFKAA6-IAAJL-BGCWm4337.png"/> 
+
 
 Zuul 中自带了一个 DebugFilter，会将执行过程中的一些信息记录起来，方便调试和问题排查，我们可以通过配置 zuul.include-debug-header=true 来开启这个 Debug 模式，然后在访问请求的时候，在后面追加一个 debug=true 的参数告诉 Zuul 当前请求的调试信息需要通过响应头进行输出，这样在这个请求的响应头中就有了 Debug 相关的信息。  
 
 ###### 跨域配置
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9F/A6/CgoB5l2yzFOAB1qqAAIJI02w_nQ520.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9F/A6/CgoB5l2yzFOAB1qqAAIJI02w_nQ520.png"/> 
+
 
 网关是负责跟外部对接的一个桥梁，外部有 APP、网页应用等，如果是网页应用需要调用网关的 API，不在同一个域名下会存在跨域的问题，可以在 Zuul 中增加跨域的配置，允许跨域请求。  
 
@@ -194,7 +220,9 @@ Zuul 中会默认为 Eureka 中所有的服务都进行路由转发，这种方�
 
 Zuul 支持过滤器动态修改加载功能，Filter 需要使用 Groovy 编写才可以被动态加载。动态加载的实现原理是定期扫描存放 Groovy Filter 文件的目录，如果发现有新 Groovy Filter 文件或者 Groovy Filter 源码有改动，那么就会对 Groovy 文件进行编译加载。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9F/C6/CgotOV2yzFOAAazFAAGQ15EC0VY427.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9F/C6/CgotOV2yzFOAAazFAAGQ15EC0VY427.png"/> 
+
 
 要实现动态过滤器，首先需要在项目中增加 Groovy 的依赖，然后在项目启动后设置 Groovy 的动态加载任务，这样就会定时的动态加载指定目录的 Groovy 文件了。
 
@@ -210,17 +238,23 @@ Zuul 支持过滤器动态修改加载功能，Filter 需要使用 Groovy 编写
 
 Zuul 中也是集成了 Ribbon 来做负载均衡的，Ribbon 中又提供了自定义算法策略来让我们控制服务实例的选择，技术方案很明显我们需要自定义 Ribbon 的算法策略来实现这个需求。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9F/A6/CgoB5l2yzK2AcG7gAD4G9yHcYkM467.gif"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9F/A6/CgoB5l2yzK2AcG7gAD4G9yHcYkM467.gif"/> 
+
 
 创建一个自定义策略类，这边直接采用了 RoundRobinRule 类，目的是为了在选取不出对应的服务实例时，可以直接使用 RoundRobinRule 的策略作为默认值。在 choose 方法中就是我们的主要逻辑了，首先会通过 RequestContext 获取 request 并转换成 HttpServletRequest，因为这样才能拿到请求头的信息，或者可以在 Zuul 的过滤器中获取，然后设置到 RequestContext 中。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9F/C6/CgotOV2yzLqAOifdADPJYsusPcA659.gif"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9F/C6/CgotOV2yzLqAOifdADPJYsusPcA659.gif"/> 
+
 
 这边需要注意的是获取 request 只能在信号量隔离下使用，线程隔离下 ThreadLocal 无法使用，会触发空指针异常。解决方案大家可以参考我的这篇文章，在 Hystrix 课时中也讲到过这个问题。除了文章中介绍的解决方案，还有其他的方案也可以实现这个需求，这个在后面专门讲灰度发布的时候给大家分析如何跨线程池传递数据到 Hystrix 中。
 
 * <http://cxytiandi.com/blog/detail/18782>
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9F/A6/CgoB5l2yzMiAfNk4AFxTR3S4aO4848.gif"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/9F/A6/CgoB5l2yzMiAfNk4AFxTR3S4aO4848.gif"/> 
+
 
 接着就是获取请求头 header 的值，获取到后就从 Eureka 中获取服务信息，然后对比 Metadata
 
@@ -229,4 +263,5 @@ Zuul 中也是集成了 Ribbon 来做负载均衡的，Ribbon 中又提供了自
 这里只是做了一个简单的示列，让大家明白如何去控制服务实例的选择，明白这个原理后，你就可以根据自己的需求去实现想要的效果了，比如传递进来的是 IP + 端口的参数进行选择，也可以基于配置中心做全局动态配置等。
 
 好了，到这里课时 6 的内容就全部讲完啦，本课时主要学习网关的必要性，Zuul 简介及如何自定义过滤器，Zuul 容错与回退，Zuul 使用经验分享，以及 Zuul 控制路由实例选择等内容，希望你在课后能够熟练掌握源码及 Feign 的使用。
+
 

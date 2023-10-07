@@ -1,3 +1,5 @@
+# 第09讲：玩转Webpack高级特性应对项目优化需求（上）
+
 今天我将和你分享 Webpack 的两个高级特性，分别是 Tree Shaking 和 sideEffects。
 
 它们都属于 Webpack 打包结果优化的必备特性，而且现在应用的也十分广泛。
@@ -74,13 +76,15 @@ export const Heading = level => {
 
 我们打开命令行终端，这里我们尝试以 production 模式运行打包，具体命令如下：
 
-```html
+```sql
 $ npx webpack --mode=production
 ```
 
 Webpack 的 Tree-shaking 特性在生产模式下会自动开启。打包完成以后我们打开输出的 bundle.js，具体结果如下：
 
-<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/0C/24/CgqCHl7CJgCAODEAAAL-CbA2wi8995.png"/>
+
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/0C/24/CgqCHl7CJgCAODEAAAL-CbA2wi8995.png"/> 
+
 
 通过搜索你会发现，components 模块中冗余的代码根本没有输出。这就是经过 Tree-shaking 处理过后的效果。
 
@@ -94,19 +98,23 @@ Webpack 的 Tree-shaking 特性在生产模式下会自动开启。打包完成�
 
 这里还是上述的案例结构，我们再次运行 Webpack 打包，不过这一次我们不再使用 production 模式，而是使用 none，也就是不开启任何内置功能和插件，具体命令如下：
 
-```html
+```sql
 $ npx webpack --mode=none
 ```
 
 打包完成过后，我们再次找到输出的 bundle.js 文件，具体结果如下：
 
-<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/0C/18/Ciqc1F7CJg2AWdwCAARsXLiQbZg849.png"/>
+
+<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/0C/18/Ciqc1F7CJg2AWdwCAARsXLiQbZg849.png"/> 
+
 
 这里的打包结果跟我们在第二讲中分析的是一样的，源代码中的一个模块对应这里的一个函数。
 
 我们这里注意一下 components 对应的这个模块，虽然外部没有使用这里的 Link 函数和 Heading 函数，但是仍然导出了它们，具体如下图所示：
 
-<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/0C/19/Ciqc1F7CJuSAWnoVAALlDoFDv_I403.png"/>
+
+<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/0C/19/Ciqc1F7CJuSAWnoVAALlDoFDv_I403.png"/> 
+
 
 显然这种导出是没有任何意义的。
 
@@ -127,7 +135,9 @@ module.exports = {
 
 配置完成后，重新打包，然后我们再来看一下输出的 bundle.js，具体结果如下图：
 
-<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/0C/24/CgqCHl7CJhaAYA52AAPjj4F6_IY241.png"/>
+
+<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/0C/24/CgqCHl7CJhaAYA52AAPjj4F6_IY241.png"/> 
+
 
 此时你会发现 components 模块所对应的函数，就不再导出 Link 和 Heading 这两个函数了，那它们对应的代码就变成了未引用代码。而且如果你使用的是 VS Code，会发现 VS Code 将这两个函数名的颜色变淡了，这是为了表示它们未被引用。
 
@@ -150,7 +160,9 @@ module.exports = {
 
 然后再次回到命令行重新运行打包，具体结果如下图所示：
 
-<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/0C/25/CgqCHl7CJviAEtOzAANZJYj6ZSM190.png"/>
+
+<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/0C/25/CgqCHl7CJviAEtOzAANZJYj6ZSM190.png"/> 
+
 
 仔细查看打包结果，你会发现，Link 和 Heading 这些未引用代码都被自动移除了。
 
@@ -191,7 +203,9 @@ module.exports = {
 
 然后回到命令行终端再次运行打包。那此时 bundle.js 中就不再是一个模块对应一个函数了，而是把所有的模块都放到了一个函数中，具体结果如下：
 
-<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/0C/25/CgqCHl7CJwSAD4A7AAKMt-CKLKo558.png"/>
+
+<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/0C/25/CgqCHl7CJwSAD4A7AAKMt-CKLKo558.png"/> 
+
 
 这个特性又被称为 Scope Hoisting，也就是作用域提升，它是 Webpack 3.0 中添加的一个特性。
 
@@ -211,7 +225,9 @@ module.exports = {
 
 很多时候，我们为了更好的兼容性，会选择使用 [babel-loader](https://github.com/babel/babel-loader) 去转换我们源代码中的一些 ECMAScript 的新特性。而 Babel 在转换 JS 代码时，很有可能处理掉我们代码中的 ES Modules 部分，把它们转换成 CommonJS 的方式，如下图所示：
 
-<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/0C/1E/Ciqc1F7CKjiAeXTAAABAsbetEV0413.png"/>
+
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/0C/1E/Ciqc1F7CKjiAeXTAAABAsbetEV0413.png"/> 
+
 
 当然了，Babel 具体会不会处理 ES Modules 代码，取决于我们有没有为它配置使用转换 ES Modules 的插件。
 
@@ -250,7 +266,9 @@ module.exports = {
 
 配置完成过后，我们打开命令行终端，运行 Webpack 打包命令，然后再找到 bundle.js，具体结果如下：
 
-<Image alt="image (7).png" src="https://s0.lgstatic.com/i/image/M00/0C/25/CgqCHl7CJyKAIcvUAAPfiYLuH3k609.png"/>
+
+<Image alt="image (7).png" src="https://s0.lgstatic.com/i/image/M00/0C/25/CgqCHl7CJyKAIcvUAAPfiYLuH3k609.png"/> 
+
 
 仔细查看你会发现，结果并不是像刚刚说的那样，这里 usedExports 功能仍然正常工作了，此时，如果我们压缩代码，这些未引用的代码依然会被移除。这也就说明 Tree-shaking 并没有失效。
 
@@ -258,13 +276,17 @@ module.exports = {
 
 其实，这是因为在最新版本（8.x）的 babel-loader 中，已经自动帮我们关闭了对 ES Modules 转换的插件，你可以参考对应版本 babel-loader 的[源码](https://github.com/babel/babel-loader/blob/v8.1.0/src/injectCaller.js)，核心代码如下：
 
-<Image alt="image (8).png" src="https://s0.lgstatic.com/i/image/M00/0C/25/CgqCHl7CJyuAXIeGAAIXqPpxX4w402.png"/>
+
+<Image alt="image (8).png" src="https://s0.lgstatic.com/i/image/M00/0C/25/CgqCHl7CJyuAXIeGAAIXqPpxX4w402.png"/> 
+
 
 通过查阅 babel-loader 模块的源码，我们发现它已经在 injectCaller 函数中标识了当前环境支持 ES Modules。
 
 然后再找到我们所使用的 @babal/preset-env 模块源码，部分核心代码如下：
 
-<Image alt="image (9).png" src="https://s0.lgstatic.com/i/image/M00/0C/25/CgqCHl7CJzSARd1WAAHTUcAc7ig911.png"/>
+
+<Image alt="image (9).png" src="https://s0.lgstatic.com/i/image/M00/0C/25/CgqCHl7CJzSARd1WAAHTUcAc7ig911.png"/> 
+
 
 在这个模块中，根据环境标识自动禁用了对 ES Modules 的转换插件，所以**经过 babel-loader 处理后的代码默认仍然是 ES Modules，那 Webpack 最终打包得到的还是 ES Modules 代码，Tree-shaking 自然也就可以正常工作了**。
 
@@ -305,7 +327,9 @@ module.exports = {
 
 完成以后，我们再次打开命令行终端，运行 Webpack 打包。然后找到 bundle.js，结果如下：
 
-<Image alt="image (10).png" src="https://s0.lgstatic.com/i/image/M00/0C/25/CgqCHl7CJz6AAc34AAKFOT56VyQ546.png"/>
+
+<Image alt="image (10).png" src="https://s0.lgstatic.com/i/image/M00/0C/25/CgqCHl7CJz6AAc34AAKFOT56VyQ546.png"/> 
+
 
 此时，你就会发现 usedExports 没法生效了。即便我们开启压缩代码，Tree-shaking 也会失效。
 
@@ -368,13 +392,17 @@ document.body.appendChild(Button())
 
 我们打开命令行终端，尝试运行打包，打包完成过后找到打包结果，具体结果如下：
 
-<Image alt="image (11).png" src="https://s0.lgstatic.com/i/image/M00/0C/26/CgqCHl7CJ0yAGDd6AAIWFCrr50U502.png"/>
+
+<Image alt="image (11).png" src="https://s0.lgstatic.com/i/image/M00/0C/26/CgqCHl7CJ0yAGDd6AAIWFCrr50U502.png"/> 
+
 
 根据打包结果发现，所有的组件模块都被打包进了 bundle.js。
 
 此时如果我们开启 Tree-shaking 特性（只设置 useExports），这里没有用到的导出成员其实最终也可以被移除，打包效果如下：
 
-<Image alt="image (12).png" src="https://s0.lgstatic.com/i/image/M00/0C/26/CgqCHl7CJ1WAHn9oAANiI-_U6Uw344.png"/>
+
+<Image alt="image (12).png" src="https://s0.lgstatic.com/i/image/M00/0C/26/CgqCHl7CJ1WAHn9oAANiI-_U6Uw344.png"/> 
+
 
 但是由于这些成员所属的模块中有副作用代码，所以就导致最终 Tree-shaking 过后，这些模块并不会被完全移除。
 
@@ -427,7 +455,9 @@ module.exports = {
 
 完成以后我们再次运行打包，然后同样找到打包输出的 bundle.js 文件，结果如下：
 
-<Image alt="image (13).png" src="https://s0.lgstatic.com/i/image/M00/0C/1A/Ciqc1F7CJ2GAd6ktAALO5DYhwXo465.png"/>
+
+<Image alt="image (13).png" src="https://s0.lgstatic.com/i/image/M00/0C/1A/Ciqc1F7CJ2GAd6ktAALO5DYhwXo465.png"/> 
+
 
 此时那些没有用到的模块就彻底不会被打包进来了。那这就是 sideEffects 的作用。
 
@@ -470,7 +500,9 @@ console.log((8).pad(3)) // => '0008'
 
 此时如果我们还是通过 package.json 标识我们代码没有副作用，那么再次打包过后，就会出现问题。我们可以找到打包结果，如下图所示：
 
-<Image alt="image (14).png" src="https://s0.lgstatic.com/i/image/M00/0C/1A/Ciqc1F7CJ2qAEv1ZAAFrFf6WvFI346.png"/>
+
+<Image alt="image (14).png" src="https://s0.lgstatic.com/i/image/M00/0C/1A/Ciqc1F7CJ2qAEv1ZAAFrFf6WvFI346.png"/> 
+
 
 我们看到，对 Number 的扩展模块并不会打包进来。
 
@@ -517,3 +549,4 @@ Tree-shaking 的本身没有太多需要你理解和思考的地方，你只需�
 总之不管是 Tree-shaking 还是 sideEffects，我个人认为，它们都是为了弥补 JavaScript 早期在模块系统设计上的不足。随着 Webpack 这类技术的发展，JavaScript 的模块化确实越来越好用，也越来越合理。
 
 除此之外，我还想强调一点，当你对这些特性有了一定的了解之后，就应该意识到：尽可能不要写影响全局的副作用代码。
+

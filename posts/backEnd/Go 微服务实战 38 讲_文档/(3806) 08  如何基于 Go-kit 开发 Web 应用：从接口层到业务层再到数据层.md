@@ -1,3 +1,5 @@
+# 08如何基于Go-kit开发Web应用：从接口层到业务层再到数据层
+
 在前面两个课时，我们回顾了 Go 的基础语法和 Go 的并发编程相关的知识，相信你对如何编写一个简单的 Go 程序已经有了足够的知识积累。但是你可能并没有完整开发过一个 Go 应用项目，因此本课时我们就通过开发一个 User Web 应用来学习如何进行 Go Web 项目开发。
 
 ### 使用 Go Modules 管理项目依赖
@@ -75,7 +77,9 @@ require github.com/jinzhu/gorm v1.9.14 // indirect
 
 User 应用的项目结构如下图所示：
 
-<Image alt="image (8).png" src="https://s0.lgstatic.com/i/image/M00/37/B7/CgqCHl8aeCmARuM4AADVx9E2eA4809.png"/>
+
+<Image alt="image (8).png" src="https://s0.lgstatic.com/i/image/M00/37/B7/CgqCHl8aeCmARuM4AADVx9E2eA4809.png"/> 
+
 
 由图我们可以看到 User 应用的项目结构分别由以下"包"组成：
 
@@ -339,3 +343,4 @@ return user, err
 随着 Go 的快速发展和应用，Go 被越来越多地应用到大型项目的开发中，Go 的工程化经验和能力也在不断积累和提升。通过本节课的学习，希望你能够掌握基本的 Go 项目开发能力，为后续微服务应用的开发实践打下良好的基础。
 
 最后，关于 Go-kit 开发，你有什么经验和想法？欢迎你在留言区和我交流分享。
+

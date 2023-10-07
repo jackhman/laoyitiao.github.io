@@ -1,8 +1,12 @@
+# 12HelmChart：如何在生产环境中释放部署生产力？
+
 通过前面的课程，相信你对 Kubernetes 中的对象有了很多了解。Kubernetes 是一个强大的容器调度系统，你可以通过一些声明式的定义，很方便地在 Kubernetes 中部署业务。
 
 现在你一定很想尝试在 Kubernetes 中部署一个稍微复杂的系统，比如下面这个典型的三层架构：前端、后端和数据层。
 
-<Image alt="image (7).png" src="https://s0.lgstatic.com/i/image/M00/56/EA/Ciqc1F9sPOKACHGPAADXdRLPJwo750.png"/>  
+
+<Image alt="image (7).png" src="https://s0.lgstatic.com/i/image/M00/56/EA/Ciqc1F9sPOKACHGPAADXdRLPJwo750.png"/> 
+  
 
 （<https://docs.bitnami.com/tutorials/_next/static/images/three-tier-kubernetes-architecture-28861dab09dbb6c2dd6ddb986f3a42d4.png.webp>）
 
@@ -100,7 +104,9 @@ version.BuildInfo{Version:"v3.3.1", GitCommit:"249e5215cde0c3fa72e27eb7a30e8d55c
 
 Helm 2 于 2015 年在 KubeCon 上亮相。其架构如下图所示，是个常见的 CS 架构，由 Helm Client 和 Tiller 两部分组成。
 
-<Image alt="image (8).png" src="https://s0.lgstatic.com/i/image/M00/56/F6/CgqCHl9sPQ2AWA7kAAKDpOtvIDk020.png"/>  
+
+<Image alt="image (8).png" src="https://s0.lgstatic.com/i/image/M00/56/F6/CgqCHl9sPQ2AWA7kAAKDpOtvIDk020.png"/> 
+  
 
 （<https://medium.com/dwarves-foundation/kubernetes-helm-101-78f70eeb0d1>）
 
@@ -229,3 +235,4 @@ brigade/kashti                0.4.0         v0.4.0      A Helm chart for Kuberne
 目前 Helm 是 CNCF 基金会旗下已经"毕业"的独立的项目。它简化了 Kubernetes 应用的部署和管理，大大提高了效率，越来越多的人在生产环境中使用 Helm 来部署和管理应用，所以我在这里用一个课时来专门讲解它的原理和使用，想让你在使用 Kubernetes 时如虎添翼。
 
 如果你对本节课有什么想法或者疑问，欢迎你在留言区留言，我们一起讨论。
+

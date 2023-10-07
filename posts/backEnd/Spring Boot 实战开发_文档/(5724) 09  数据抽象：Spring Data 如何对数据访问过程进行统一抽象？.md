@@ -1,3 +1,5 @@
+# 09数据抽象：SpringData如何对数据访问过程进行统一抽象？
+
 事实上，JdbcTemplate 是相对偏底层的一个工具类，作为系统开发最重要的基础功能之一，数据访问层组件的开发方式在 Spring Boot 中也得到了进一步简化，并充分发挥了 Spring 家族中另一个重要成员 Spring Data 的作用。
 
 前面我们通过两个课时介绍了 Spring 框架用于访问关系型数据库的 JdbcTemplate 模板类，今天我们将对 Spring Data 框架中所提供的数据访问方式展开讨论。
@@ -17,7 +19,9 @@ public interface Repository<T, ID> {
 
 在以上代码中，我们看到 Repository 接口只是一个空接口，通过泛型指定了领域实体对象的类型和 ID。在 Spring Data 中，存在一大批 Repository 接口的子接口和实现类，该接口的部分类层结构如下所示：
 
-<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/84/21/CgqCHl_TH_mAIaaLAABBNaldOqE595.png"/>  
+
+<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/84/21/CgqCHl_TH_mAIaaLAABBNaldOqE595.png"/> 
+  
 Repository 接口的部分类层结构图
 
 可以看到 CrudRepository 接口是对 Repository 接口的最常见扩展，添加了对领域实体的 CRUD 操作功能，具体定义如下代码所示：
@@ -163,14 +167,18 @@ public interface AccountRepository extends JpaRepository<Account,
 
 首先我们需要指定一些查询关键字，常见的关键字如下表所示：
 
-<Image alt="Lark20201215-174017.png" src="https://s0.lgstatic.com/i/image2/M01/01/5E/Cip5yF_YhK6AcrMVAAQOamtdsF0627.png"/>  
+
+<Image alt="Lark20201215-174017.png" src="https://s0.lgstatic.com/i/image2/M01/01/5E/Cip5yF_YhK6AcrMVAAQOamtdsF0627.png"/> 
+  
 方法名衍生查询中查询关键字列表
 
 有了这些查询关键字后，在方法命名上我们还需要指定查询字段和一些限制性条件。例如，在前面的示例中，我们只是基于"fistName"和"lastName"这两个字段做查询。
 
 事实上，我们可以查询的内容非常多，下表列出了更多的方法名衍生查询示例，你可以参考下。
 
-<Image alt="Lark20201215-174023.png" src="https://s0.lgstatic.com/i/image2/M01/01/5E/Cip5yF_YhLiAbg0pAAEzy-P0ZVA978.png"/>  
+
+<Image alt="Lark20201215-174023.png" src="https://s0.lgstatic.com/i/image2/M01/01/5E/Cip5yF_YhLiAbg0pAAEzy-P0ZVA978.png"/> 
+  
 方法名衍生查询示例
 
 在 Spring Data 中，方法名衍生查询的功能非常强大，上表中罗列的这些也只是全部功能中的一小部分而已。
@@ -211,7 +219,9 @@ public interface QueryLookupStrategy {
 
 在 Spring Data 的官方网站<https://spring.io/projects/spring-data> 中，列出了其提供的所有组件，如下图所示：
 
-<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/84/22/CgqCHl_TICWAOAMHAAAkcFfMwis206.png"/>  
+
+<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/84/22/CgqCHl_TICWAOAMHAAAkcFfMwis206.png"/> 
+  
 Spring Data 所提供的组件列表（来自 Spring Data 官网）
 
 根据官网介绍，Spring Data 中的组件可以分成四大类：核心模块（Main modules）、社区模块（Community modules）、关联模块（Related modules）和正在孵化的模块（Modules in Incubation）。例如，前面介绍的 Respository 和多样化查询功能就在核心模块 Spring Data Commons 组件中。
@@ -225,3 +235,4 @@ Spring Data 所提供的组件列表（来自 Spring Data 官网）
 这里给你留一道思考题：在使用 Spring Data 时，针对查询操作可以使用哪些高效的实现方法？
 
 在今天内容的基础上，下一课时我们将基于 Spring Data 框架中的 Spring Data JPA 来访问关系型数据库，并结合 SpringCSS 案例完成对现有实现方式的重构。
+

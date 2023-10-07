@@ -1,3 +1,5 @@
+# 11TreeShaking：移除JavaScript上下文中的未引用代码
+
 时至今日，Tree Shaking 对于前端工程师来说，已经不是一个陌生的名词了。顾名思义：Tree Shaking 译为"摇树"，它通常用于描述移除 JavaScript 上下文中的未引用代码（dead-code）。
 
 据我观察，Tree Shaking 也经常出现在诸多候选人的简历当中。然而可惜的是，大部分候选人都知道 Tree Shaking 的定义，但"知其然不知其所以然"，并没有在工程中真正实践过 Tree Shaking 技术，更没有深入理解 Tree Shaking 这个概念。社区上一些好的文章，比如[《你的 Tree-Shaking 并没什么卵用》](https://github.com/wuomzfx/tree-shaking-test)发布于 2018 年初，但就目前来看，其中内容也有些"过期"了。
@@ -345,8 +347,12 @@ function init(options) {
 
 PostCSS 原理如下图：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image2/M01/05/E0/Cip5yGABPraACuJCAAGHB98AwXg855.png"/>  
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/8D/F3/Ciqc1GABPsGAfsSVAAGgxx7GqrU331.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image2/M01/05/E0/Cip5yGABPraACuJCAAGHB98AwXg855.png"/> 
+  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/8D/F3/Ciqc1GABPsGAfsSVAAGgxx7GqrU331.png"/> 
+  
 PostCSS 原理图
 
 这里给大家推荐 [purgecss-webpack-plugin](https://github.com/FullHuman/purgecss/tree/master/packages/purgecss-webpack-plugin)，其原理也很简单：
@@ -409,8 +415,11 @@ public walkThroughCSS(
 
 本小节，我们分析了 Tree Shaking 相关知识，我们发现这一理论内容还需要配合构建工具完成落地，而这一系列过程不只是想象中那样简单。
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/8D/F3/Ciqc1GABPt6AAFyMAAGLjLOlwJM945.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/8D/F3/Ciqc1GABPt6AAFyMAAGLjLOlwJM945.png"/> 
+
 
 这里我想给你留一个思考题，Rollup 是如何实现 Tree Shaking 的呢？欢迎在留言区和我分享你的观点。
 
 更多内容，我们会结合下一讲"如何理解 AST 实现和编译原理？"，带你实现一个真实的 AST 的落地场景，完成一个简易版 Tree Shaking 实现。我们下一讲再见！
+

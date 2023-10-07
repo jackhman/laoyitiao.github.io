@@ -1,3 +1,5 @@
+# 第27课：应用安全：基于HTTP、HTTPS请求过程中常见waf攻防策略
+
 上个课时讲解的 iptables 安全主要是4 层协议规则。除了 4 层安全外，7 层的安全攻击也是我们必须掌握的。那么在本课时我们基于 HTTP、HTTPS 请求过程中常见的安全防护问题来讲解 7 层应用安全。
 
 ### 常见的 7 层安全类攻击疑难点
@@ -76,17 +78,23 @@ server {
 
 接下来讲解第 2 个常见的应用 HTTP 协议的攻击：HTTP 内容劫持。它是指用户正常发起的一个 HTTP 请求的访问，由于服务端返回的内容被第三方（通常可以是运营商）劫持了这些数据包，并且修改了 HTTP 返回的数据，这样就可能导致用户收不到预期的返回结果。所以当用户受到这样的攻击时，就会导致用户的正常访问受到影响，另外也有可能导致用户数据发生泄漏，甚至其他更严重的安全影响。
 
-<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/14/76/Ciqc1F7Q6YiASMiTAAB4a-LuU8A861.png"/>
+
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/14/76/Ciqc1F7Q6YiASMiTAAB4a-LuU8A861.png"/> 
+
 
 那么怎么来解决呢？我们可以通过使用 HTTPS 协议来代替 HTTP，采用 HTTPS 协议会在 HTTP 协议的基础上加了一层 TLS 防护，使得传输的数据进行加密， 劫持端无法分析和篡改内容。所以 HTTPS 这种方式可以保护我们的数据不被劫持，值得特殊注意的它是无法解决域名劫持的问题，对于基于域名劫持行为我们还需要考虑其他一些访问策略。
 
-<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/14/76/Ciqc1F7Q6Z6AEwfFAAD8F-GMrW4529.png"/>
+
+<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/14/76/Ciqc1F7Q6Z6AEwfFAAD8F-GMrW4529.png"/> 
+
 
 ### CSRF 跨站请求伪造及其防护策略
 
 第 3 个就是 CSRF 跨站请求伪造 。我们首先来讲一下什么是 CSRF 跨站请求伪造行为。这里我画了一张图：
 
-<Image alt="3.png" src="https://s0.lgstatic.com/i/image/M00/14/82/CgqCHl7Q6f-AQensAAE6SboBoZM422.png"/>
+
+<Image alt="3.png" src="https://s0.lgstatic.com/i/image/M00/14/82/CgqCHl7Q6f-AQensAAE6SboBoZM422.png"/> 
+
 
 左边是客户端，右边的上端是受信任的网站 A（www.aaa.com），下面是一个危害的网站B（www.bbb. com）。我们来讲一讲这三者之间的关系，并且结合这张图的访问过程来讲一讲 CSRF 这种伪造请求是如何攻击并且导致用户受到影响。
 
@@ -142,3 +150,4 @@ SELECT first_name, last_name FROM users WHERE user_id = '1' union select databas
 除了研发层需要考虑以外，运维层通常也可以考虑一些安全类的产品，比如我们可以购买一些应用类的安全防火墙服务（包含：硬件、软件类型的），这些都可以帮助我们来解决这样的问题，或者可以直接建一套基于 SQL 的敏感词过滤的入口网关系统。
 
 如：Nginx 结合 LUA 这个常见语言自行开发，把 SQL 在 HTTP 协议里面发起的请求类的关键词进行过滤，比如 select、from、 Information 、Schema，tables 等关键词。这些关键词恰恰是正常网站请求里很少会携带的字符参数，我们可以基于这样的一些字符来整体做屏蔽。如果是在请求过程中发现这样的一些关键词请求，直接就在入口网关层就进行拒绝返回一个 403，这样就可以通过自建的一套敏感词入口网关的防火墙服务来防止你的后台网站被 SQL 攻击。
+

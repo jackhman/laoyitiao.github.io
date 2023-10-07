@@ -1,3 +1,5 @@
+# 23npmcript：打造一体化的构建和部署流程
+
 之前我们提到过，一个顺畅的基建流程离不开 npm scripts。npm scripts 将工程化的各个环节串联起来，相信任何一个现代化的项目都有自己的 npm scripts 设计。那么作为架构师或资深开发者，我们如何设计并实现项目配套的 npm scripts 呢？关于 npm scripts 我们如何进行封装抽象，做到复用或基建统一呢？
 
 这一讲，我们就围绕如何使用 npm scripts，打造一体化的构建和部署流程展开。
@@ -452,8 +454,11 @@ process.exit(go())
 
 本讲内容总结如下：
 
-<Image alt="npm scripts：打造一体化的构建和部署流程.png" src="https://s0.lgstatic.com/i/image6/M01/0A/8E/Cgp9HWA3ZvSAGD15AAITBEgOZ_c039.png"/>
+
+<Image alt="npm scripts：打造一体化的构建和部署流程.png" src="https://s0.lgstatic.com/i/image6/M01/0A/8E/Cgp9HWA3ZvSAGD15AAITBEgOZ_c039.png"/> 
+
 
 说到底，npm scripts 就是一个 Shell，我们以前端开发者所熟悉的 Node.js 来实现 npm scripts，当然这还不够。事实上，npm scripts 的背后是对一整套工程化体系的理解，比如我们需要通过 npm scripts 来抽象 Babel 方案、抽象 Rollup 方案等。相信通过这一讲的学习，你会有所收获。
 
 下一讲，我们将深入工程化体系的一个重点细节------自动化代码检查，并反过来使用 lucas-scripts 再实现一套智能的代码 Lint 脚本，请你继续学习。
+

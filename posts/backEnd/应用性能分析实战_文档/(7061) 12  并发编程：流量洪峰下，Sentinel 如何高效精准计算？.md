@@ -1,3 +1,5 @@
+# 12并发编程：流量洪峰下，Sentinel如何高效精准计算？
+
 目前市面上的应用集群稳定性的工具，不仅有 Sentinel 还有 Hystrix。前者是 Alibaba 出品，后者是 Spring-Cloud 生态使用的稳定性组件。
 
 两者都是通过控制流量（熔断、限流、降级等手段），在流量洪峰或异常情况下，实现应用服务稳定性。但它们使用原理封装出的策略，及用户体验都截然不同。
@@ -30,7 +32,9 @@ Hystrix 提供了多种实现策略，这些策略的设计主旨是**监控应�
 
 * 并在出现异常或是验证策略失败时，执行注解或继承中降级策略。
 
-<Image alt="202156-1579.png" src="https://s0.lgstatic.com/i/image6/M01/3D/3A/Cgp9HWCTlcmAW02OAACQw3pf9vU693.png"/>
+
+<Image alt="202156-1579.png" src="https://s0.lgstatic.com/i/image6/M01/3D/3A/Cgp9HWCTlcmAW02OAACQw3pf9vU693.png"/> 
+
 
 可以看出 Hystrix 的执行原理非常清晰。正因为 Sentinel 和 Hystrix 的架构实现都非常简单，一经发布就在社区得到了非常多用户的拥趸。
 
@@ -42,7 +46,9 @@ Hystrix 提供了多种实现策略，这些策略的设计主旨是**监控应�
 
 下图是 Sentinel 官方对 Sentinel 和 Hystrix 的对比。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M01/3C/86/CioPOWCKiAGAC9RhAAHoNdERHTI462.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M01/3C/86/CioPOWCKiAGAC9RhAAHoNdERHTI462.png"/> 
+
 > 可进入["官方 Sentinel 和 Hystrix 对比"](https://sentinelguard.io/zh-cn/blog/sentinel-vs-hystrix.html?fileGuid=xxQTRXtVcqtHK6j8)了解更多。
 
 #### 1.并发隔离
@@ -80,7 +86,9 @@ Hystrix 提供了多种实现策略，这些策略的设计主旨是**监控应�
 
   由于线程池技术的存在，被执行单元支持在异步线程池排队。在任务线程执行超时时，可以主动断掉工作线程等场景，但这样也会使线程模型架构更加复杂。
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M01/3C/86/CioPOWCKiBCALmjFAAKau0ImkMw506.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M01/3C/86/CioPOWCKiBCALmjFAAKau0ImkMw506.png"/> 
+
 
 #### 2.并发控制
 
@@ -98,7 +106,9 @@ Hystrix 提供了多种实现策略，这些策略的设计主旨是**监控应�
 
 如下图所示，其原理就是利用哈希算法分散操作 CAS 对象带来的竞争。
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M01/3C/7E/Cgp9HWCKiByANXwuAAD-l4OAyPk504.png"/>
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M01/3C/7E/Cgp9HWCKiByANXwuAAD-l4OAyPk504.png"/> 
+
 
 * 在使用 AtomicLong 计算并发流量的 QPS 时，所有线程都会访问同一个 CAS 变量进行 CAS 操作。
 
@@ -116,7 +126,9 @@ Hystrix 提供了多种实现策略，这些策略的设计主旨是**监控应�
 
 **1）Hystrix 控制台**
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image6/M01/3C/7E/Cgp9HWCKiCmAUw79AAbA5hMcjKA409.png"/>
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image6/M01/3C/7E/Cgp9HWCKiCmAUw79AAbA5hMcjKA409.png"/> 
+
 
 上图为 Hystrix 的示例控制台，图中展示了九个区域。
 
@@ -133,7 +145,9 @@ Hystrix 提供了多种实现策略，这些策略的设计主旨是**监控应�
 
 **2）Sentinel 控制台**
 
-<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image6/M01/3C/86/CioPOWCKiDGARqU1AAIjrJ0VPww924.png"/>
+
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image6/M01/3C/86/CioPOWCKiDGARqU1AAIjrJ0VPww924.png"/> 
+
 
 Sentinel 控制台不仅可以对并发流量进行实时监控，它还有很多其他的丰富功能。
 
@@ -152,3 +166,4 @@ Sentinel 控制台不仅可以对并发流量进行实时监控，它还有很�
 今天，我先带你学习了 Hystrix 的架构原理；之后又学习了稳定性工具在并发编程上的常用技术手段，包括信号量隔离技术、线程池隔离技术、高性能并发控制对象的设计等；最后通过产品功能，全面对比了 Sentinel 和 Hystrix，并得出 Sentinel 相对更优的结论。
 
 在工作中，你肯定也使用过 Sentinel 和 Hystrix。那么你使用了什么规则呢？又应用到什么场景呢？欢迎你在评论区写下你的思考，非常期待与你讨论。
+

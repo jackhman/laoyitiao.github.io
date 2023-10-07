@@ -1,3 +1,5 @@
+# 第41讲：Jenkin系统安装与使用
+
 本课时我们开始进入 Jenkins 搭建与配置章节。
 
 首先，我们来看一下 Jenkins 是如何进行部署的，进入 Jenkins 官方网站（Jenkins.io），可以看到 Jenkins 是一个开源的领先的持续集成平台，可以帮你完成构建、部署和自动化工作。
@@ -8,7 +10,9 @@
 
 安装 Jenkins，第一个办法是官方推荐使用的 Docker，我个人也建议你使用 Docker 来进行部署。关于 Docker 的具体部署，你可以看一下官方文档，下面有对应命令、细节等内容。
 
-<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/0A/C5/Ciqc1F6-byKALv2EAAR1VSL27rM786.png"/>
+
+<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/0A/C5/Ciqc1F6-byKALv2EAAR1VSL27rM786.png"/> 
+
 
 接下来，我来教你几个简单的安装方法。
 
@@ -20,7 +24,9 @@ docker 部署的方式可参考我图中提到的命令，你也可以用本地�
 
 #### 手动部署
 
-<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/0A/C5/Ciqc1F6-bzmAauztAAHn5CtWGbQ563.png"/>
+
+<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/0A/C5/Ciqc1F6-bzmAauztAAHn5CtWGbQ563.png"/> 
+
 
 如果我不想使用 docker，可以自己独立下载 war 包，它在我刚才给你看到的官网中的最后一个下载地址，点开发现是一个通用的 Java 的 war 包，把它下载下来，放到你的 tomcat 或 jetty 下面就可以了。你可以很简单地在本地用 java-jar 直接启动，非常便捷。
 
@@ -30,15 +36,21 @@ docker 部署的方式可参考我图中提到的命令，你也可以用本地�
 
 等jenkins启动完成之后，这里可以看到一个页面，Jenkins 第一次安装时，会给你一个管理员密码，这个密码也是需要的，你需要把它从docker的log中找到并复制到web界面里。
 
-<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/0A/C5/CgqCHl6-b0SARPOEAAFPx1Xi2IY790.png"/>
 
-<Image alt="image (6).png" src="https://s0.lgstatic.com/i/image/M00/0A/C5/Ciqc1F6-b02AMJb7AAGfo97c2I8514.png"/>
+<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/0A/C5/CgqCHl6-b0SARPOEAAFPx1Xi2IY790.png"/> 
+
+
+
+<Image alt="image (6).png" src="https://s0.lgstatic.com/i/image/M00/0A/C5/Ciqc1F6-b02AMJb7AAGfo97c2I8514.png"/> 
+
 
 接下来会进入第二步，就是自定义 Jenkins。
 
 选第一个选项系统会按照一些推荐插件，你也可以对插件列表进行自定义。注意，如果你是在国内，第一次安装推荐的插件时，因为需要连接海外服务器，会非常慢，所以可能安装起来比较耗时。如果想更快地安装，你可以选择什么插件都不装，先启动起来，然后配置插件的代理地址，配完之后再去安装插件，就会快很多。两个办法取决于你的实际情况。
 
-<Image alt="image (7).png" src="https://s0.lgstatic.com/i/image/M00/0A/C5/Ciqc1F6-b1yARPpFAAGQtQWZq-0515.png"/>
+
+<Image alt="image (7).png" src="https://s0.lgstatic.com/i/image/M00/0A/C5/Ciqc1F6-b1yARPpFAAGQtQWZq-0515.png"/> 
+
 
 配完之后就到了这个界面，在这个界面里，最后安装完成之后就会进入 Jenkins 的首界面，这就是它的整个安装流程。
 
@@ -48,8 +60,11 @@ docker 部署的方式可参考我图中提到的命令，你也可以用本地�
 
 下面是源代码控制，你只有装了git 才会有 git 相关配置，所以这里我们需要安装插件。第三个是构建，如何构建，我希望设置为周期构建，以及根据代码变进行构建。
 
-<Image alt="image (8).png" src="https://s0.lgstatic.com/i/image/M00/0A/C5/Ciqc1F6-b2WAe1vsAABljoYJtk4105.png"/>
+
+<Image alt="image (8).png" src="https://s0.lgstatic.com/i/image/M00/0A/C5/Ciqc1F6-b2WAe1vsAABljoYJtk4105.png"/> 
+
 
 构建之后我们需要将文件进行存档，然后点击 save 就可以了。
 
 这就是一个简单的项目，我可以先触发一下 build now，它就可以运行起来。点击进来你可以看到它的执行结果，在 console output 里面，我所配置的命令现在就已经完成了，你可以看到里面有 demo，有 hello from hogwarts，这就是这个项目的基本配置。
+

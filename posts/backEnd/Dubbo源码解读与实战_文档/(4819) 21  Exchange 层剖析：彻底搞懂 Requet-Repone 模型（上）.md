@@ -1,3 +1,5 @@
+# 21Exchange层剖析：彻底搞懂Requet-Repone模型（上）
+
 在前面的课程中，我们深入介绍了 Dubbo Remoting 中的 Transport 层，了解了 Dubbo 抽象出来的端到端的统一传输层接口，并分析了以 Netty 为基础的相关实现。当然，其他 NIO 框架的接入也是类似的，本课程就不再展开赘述了。
 
 在本课时中，我们将介绍 Transport 层的上一层，也是 Dubbo Remoting 层中的最顶层------ Exchange 层。**Dubbo 将信息交换行为抽象成 Exchange 层，官方文档对这一层的说明是：封装了请求-响应的语义，即关注一问一答的交互模式，实现了同步转异步**。在 Exchange 这一层，以 Request 和 Response 为中心，针对 Channel、ChannelHandler、Client、RemotingServer 等接口进行实现。
@@ -48,12 +50,16 @@ public class Response {
 
 在前面的课时中，我们介绍了 Channel 接口的功能以及 Transport 层对 Channel 接口的实现。在 Exchange 层中定义了 ExchangeChannel 接口，它在 Channel 接口之上抽象了 Exchange 层的网络连接。ExchangeChannel 接口的定义如下：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/5A/32/Ciqc1F90Q-OAE4K1AADklLgEs0k481.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/5A/32/Ciqc1F90Q-OAE4K1AADklLgEs0k481.png"/> 
+  
 ExchangeChannel 接口
 
 其中，request() 方法负责发送请求，从图中可以看到这里有两个重载，其中一个重载可以指定请求的超时时间，返回值都是 Future 对象。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/5A/3D/CgqCHl90Q_SAIt4sAAAzhH5TZiw571.png"/>  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/5A/3D/CgqCHl90Q_SAIt4sAAAzhH5TZiw571.png"/> 
+  
 HeaderExchangeChannel 继承关系图
 
 **从上图中可以看出，HeaderExchangeChannel 是 ExchangeChannel 的实现**，它本身是 Channel 的装饰器，封装了一个 Channel 对象，其 send() 方法和 request() 方法的实现都是依赖底层修饰的这个 Channel 对象实现的。
@@ -207,12 +213,16 @@ private void notifyTimeout(DefaultFuture future) {
 
 **HeaderExchangeHandler 是 ExchangeHandler 的装饰器**，其中维护了一个 ExchangeHandler 对象，ExchangeHandler 接口是 Exchange 层与上层交互的接口之一，上层调用方可以实现该接口完成自身的功能；然后再由 HeaderExchangeHandler 修饰，具备 Exchange 层处理 Request-Response 的能力；最后再由 Transport ChannelHandler 修饰，具备 Transport 层的能力。如下图所示：
 
-<Image alt="Lark20201013-153600.png" src="https://s0.lgstatic.com/i/image/M00/5D/D2/Ciqc1F-FWUqAVkr0AADiEwO4wK4124.png"/>  
+
+<Image alt="Lark20201013-153600.png" src="https://s0.lgstatic.com/i/image/M00/5D/D2/Ciqc1F-FWUqAVkr0AADiEwO4wK4124.png"/> 
+  
 ChannelHandler 继承关系总览图
 
 HeaderExchangeHandler 作为一个装饰器，其 connected()、disconnected()、sent()、received()、caught() 方法最终都会转发给上层提供的 ExchangeHandler 进行处理。这里我们需要聚焦的是 HeaderExchangeHandler 本身对 Request 和 Response 的处理逻辑。
 
-<Image alt="Lark20201013-153557.png" src="https://s0.lgstatic.com/i/image/M00/5D/D2/Ciqc1F-FWVeAbsckAAGeD-_NNHc225.png"/>  
+
+<Image alt="Lark20201013-153557.png" src="https://s0.lgstatic.com/i/image/M00/5D/D2/Ciqc1F-FWVeAbsckAAGeD-_NNHc225.png"/> 
+  
 received() 方法处理的消息分类
 
 结合上图，我们可以看到在**received() 方法**中，对收到的消息进行了分类处理。
@@ -273,3 +283,4 @@ void handleRequest(final ExchangeChannel channel, Request req) throws RemotingEx
 本课时我们重点介绍了 Dubbo Exchange 层中对 Channel 和 ChannelHandler 接口的实现。
 
 我们首先介绍了 Exchange 层中请求-响应模型的基本抽象，即 Request 类和 Response 类。然后又介绍了 ExchangeChannel 对 Channel 接口的实现，同时还说明了发送请求之后得到的 DefaultFuture 对象，这也是上一课时遗留的小问题。最后，讲解了 HeaderExchangeHandler 是如何将 Transporter 层的 ChannelHandler 对象与上层的 ExchangeHandler 对象相关联的。
+

@@ -1,3 +1,5 @@
+# 第04讲：如何利用插件机制横向扩展Webpack的构建能力？
+
 上回说到 Webpack 的 Loader 机制，今天我要跟你分享 Webpack 的另外一个重要的核心特性：插件机制。
 
 Webpack 插件机制的目的是为了增强 Webpack 在项目自动化构建方面的能力。通过上一讲的介绍你应该知道，Loader 就是负责完成项目中各种各样资源模块的加载，从而实现整体项目的模块化，而 Plugin 则是用来解决项目中除了资源模块打包以外的其他自动化工作，所以说 Plugin 的能力范围更广，用途自然也就更多。
@@ -115,7 +117,9 @@ module.exports = {
 
 最后我们回到命令行终端，再次运行打包命令，此时打包过程中就会自动生成一个 index.html 文件到 dist 目录。我们找到这个文件，可以看到文件中的内容就是一段使用了 bundle.js 的空白 HTML，具体结果如下：
 
-<Image alt="1.png" src="https://s0.lgstatic.com/i/image3/M01/09/76/CgoCgV6mUnaAde1lAAEPswbjvdg271.png"/>  
+
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image3/M01/09/76/CgoCgV6mUnaAde1lAAEPswbjvdg271.png"/> 
+  
 
 至此，Webpack 就可以动态生成应用所需的 HTML 文件了，但是这里仍然存在一些需要改进的地方：
 
@@ -153,7 +157,9 @@ module.exports = {
 
 完成以后回到命令行终端，再次打包，然后我们再来看一下生成的 HTML 文件，此时这里的 title 和 meta 标签就会根据配置生成，具体结果如下：
 
-<Image alt="2.png" src="https://s0.lgstatic.com/i/image3/M01/09/76/CgoCgV6mUuaAYMySAAFCwyyCVRE614.png"/>
+
+<Image alt="2.png" src="https://s0.lgstatic.com/i/image3/M01/09/76/CgoCgV6mUuaAYMySAAFCwyyCVRE614.png"/> 
+
 
 如果需要对 HTML 进行大量的自定义，更好的做法是在源代码中添加一个用于生成 HTML 的模板，然后让 html-webpack-plugin 插件根据这个模板去生成页面文件。
 
@@ -202,7 +208,9 @@ module.exports = {
 
 完成以后我们回到命令行终端，运行打包命令，然后再来看一下生成的 HTML 文件，此时 HTML 中就都是根据模板生成的内容了，具体结果如下：
 
-<Image alt="3.png" src="https://s0.lgstatic.com/i/image3/M01/09/77/CgoCgV6mUzmAXCllAAH_iep7GfI751.png"/>
+
+<Image alt="3.png" src="https://s0.lgstatic.com/i/image3/M01/09/77/CgoCgV6mUzmAXCllAAH_iep7GfI751.png"/> 
+
 
 至此，你应该了解了如何通过 html-webpack-plugin 自定义输出 HTML 文件内容。
 
@@ -293,7 +301,9 @@ module.exports = {
 
 钩子机制也特别容易理解，它有点类似于 Web 中的事件。在 Webpack 整个工作过程会有很多环节，为了便于插件的扩展，Webpack 几乎在每一个环节都埋下了一个钩子。这样我们在开发插件的时候，通过往这些不同节点上挂载不同的任务，就可以轻松扩展 Webpack 的能力。
 
-<Image alt="4.gif" src="https://s0.lgstatic.com/i/image3/M01/16/A6/Ciqah16mU4KAX07hABBXsBqlv1U403.gif"/>
+
+<Image alt="4.gif" src="https://s0.lgstatic.com/i/image3/M01/16/A6/Ciqah16mU4KAX07hABBXsBqlv1U403.gif"/> 
+
 
 具体有哪些预先定义好的钩子，我们可以参考官方文档的 API：
 
@@ -307,7 +317,9 @@ module.exports = {
 
 这里我的需求是，希望我们开发的这个插件能够自动清除 Webpack 打包结果中的注释，这样一来，我们的 bundle.js 将更容易阅读，如下图所示：
 
-<Image alt="5.png" src="https://s0.lgstatic.com/i/image3/M01/16/A6/Ciqah16mU7eAe9FhAANSGI-INmg120.png"/>
+
+<Image alt="5.png" src="https://s0.lgstatic.com/i/image3/M01/16/A6/Ciqah16mU7eAe9FhAANSGI-INmg120.png"/> 
+
 
 那这里我们同样在项目根目录下添加一个单独的 JS 文件。
 
@@ -340,7 +352,9 @@ class RemoveCommentsPlugin {
 
 我们的需求是删除 bundle.js 中的注释，也就是说只有当 Webpack 需要生成的 bundle.js 文件内容明确过后才可能实施。
 
-<Image alt="6.png" src="https://s0.lgstatic.com/i/image3/M01/09/77/CgoCgV6mU-uAK0ADAAC9ZzsLxNA415.png"/>
+
+<Image alt="6.png" src="https://s0.lgstatic.com/i/image3/M01/09/77/CgoCgV6mU-uAK0ADAAC9ZzsLxNA415.png"/> 
+
 
 那根据 API 文档中的介绍，我们找到一个叫作 emit 的钩子，这个钩子会在 Webpack 即将向输出目录输出文件时执行，非常符合我们的需求。
 
@@ -370,7 +384,9 @@ class RemoveCommentsPlugin {
 
 完成以后，我们将这个插件应用到 Webpack 的配置中，然后回到命令行重新打包，此时打包过程就会打印我们输出的文件名称，代码如下：
 
-<Image alt="7.png" src="https://s0.lgstatic.com/i/image3/M01/16/A6/Ciqah16mVA2AXtYNAAIJVZqL4l0487.png"/>
+
+<Image alt="7.png" src="https://s0.lgstatic.com/i/image3/M01/16/A6/Ciqah16mVA2AXtYNAAIJVZqL4l0487.png"/> 
+
 
 我们再回到代码中，来打印一下每个资源文件的内容，文件内容需要通过遍历的值对象中的 source 方法获取，具体代码如下：
 
@@ -418,7 +434,9 @@ class RemoveCommentsPlugin {
 
 完成以后回到命令行终端，再次打包，打包完成过后，我们再来看一下 bundle.js，此时 bundle.js 中每行开头的注释就都被移除了。
 
-<Image alt="8.png" src="https://s0.lgstatic.com/i/image3/M01/16/A6/Ciqah16mVDaAdaknAAKANs8CYJM313.png"/>
+
+<Image alt="8.png" src="https://s0.lgstatic.com/i/image3/M01/16/A6/Ciqah16mVDaAdaknAAKANs8CYJM313.png"/> 
+
 
 以上就是我们实现一个移除注释插件的过程，通过这个过程我们了解了：插件都是通过往 Webpack 生命周期的钩子中挂载任务函数实现的。
 
@@ -429,3 +447,4 @@ class RemoveCommentsPlugin {
 首先，我们简单了解了几个非常常用的插件，这些插件一般都适用于任何类型的项目。不管你有没有使用框架，或者使用的是哪一个框架，它们基本上都会用到，所以说，在这之后你最好能够仔细过一遍这些插件的官方说明，看看它们还可以有哪些特别的用法，做到心中有数。
 
 除此之外，社区中还提供了成百上千的插件，你并不需要也不可能全部认识。当你遇到一些具体的构建需求时，再去提炼你需求中的关键词然后搜索它们，例如，我想要压缩输出的图片，我会搜索 imagemin webpack plugin。虽然说每个插件的作用不尽相同，但是在用法上基本都是类似的。
+

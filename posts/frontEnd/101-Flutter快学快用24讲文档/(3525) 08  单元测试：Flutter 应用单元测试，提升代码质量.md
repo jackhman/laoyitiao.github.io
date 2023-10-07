@@ -1,3 +1,5 @@
+# 08单元测试：Flutter应用单元测试，提升代码质量
+
 之前已经讲解了 Flutter 所有基础的知识点，本课时介绍如何保证组件代码的质量，以此来确保我们在代码开发过程中或者在重构过程中的代码质量。
 
 ### 单元测试
@@ -8,7 +10,9 @@
 
 为了保持一致性，我们在 test 单元测试目录，创建与项目结构目录一致的结构，如图 1 所示。
 
-<Image alt="image (9).png" src="https://s0.lgstatic.com/i/image/M00/2B/C9/Ciqc1F7_AHGAJ8__AABUPoaGi10666.png"/>  
+
+<Image alt="image (9).png" src="https://s0.lgstatic.com/i/image/M00/2B/C9/Ciqc1F7_AHGAJ8__AABUPoaGi10666.png"/> 
+  
 
 图 1 单元测试目录结构
 
@@ -237,3 +241,4 @@ void main() {
 下一课时我将把我们基础部分的所有基础知识汇总会一个脚手架，规范和统一基础模块。谢谢。
 
 [点击此链接查看本课时源码](https://github.com/love-flutter/flutter-column)
+

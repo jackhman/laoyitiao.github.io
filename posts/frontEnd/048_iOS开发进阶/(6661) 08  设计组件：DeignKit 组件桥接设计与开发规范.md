@@ -1,3 +1,5 @@
+# 08设计组件：DeignKit组件桥接设计与开发规范
+
 在上一模块"配置与规范"中，我主要介绍了如何统一项目的配置，以及如何制定统一开发和设计规范。
 
 接下来我们将进入基础组件设计模块，我会为你介绍一些在 iOS 开发过程中，工程化实践需要用的组件，比如设计组件、路由组件。除此之外，我还会聊聊在开发中如何支持多语言、动态字体和深色模式等辅助功能，让你的 App 既有国际范，获取更多用户，还能提升用户体验，获得更多好评。
@@ -93,7 +95,9 @@ pod 'DesignKit', :path => './Frameworks/DesignKit', :inhibit_warnings => false
 ```
 
 当执行`bundle exec pod install`命令以后，CocoaPods 会在 Pods 项目下建立一个**Development Pods** 文件夹来存放所有内部库的相关文件。  
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/1F/4C/Cgp9HWBRveSAYt47AASIGxbwB9s124.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/1F/4C/Cgp9HWBRveSAYt47AASIGxbwB9s124.png"/> 
+
 
 有了 CocoaPods，我们新建、管理和使用公共组件库就会变得非常简单。下面我们介绍下如何开发设计组件 DesignKit。
 
@@ -101,7 +105,9 @@ pod 'DesignKit', :path => './Frameworks/DesignKit', :inhibit_warnings => false
 
 DesignKit 是一个设计组件，用于封装与 UI 相关的公共组件。为了方便维护，每次新增一个组件，我们最好都建立一个独立的文件夹，例如把 Spacing.swift 放在新建的 Spacing 文件夹中。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/1F/4C/Cgp9HWBRve-AVJZSAACVtoXExgU145.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/1F/4C/Cgp9HWBRve-AVJZSAACVtoXExgU145.png"/> 
+
 
 下面以几乎每个 App 都会使用到的三个组件：间距（Spacing）、头像（Avatar）和点赞按钮（Favorite Button）为例子，介绍下如何封装基础设计组件。
 
@@ -175,7 +181,9 @@ public extension UIImageView {
 ```
 
 这是人像组件的显示效果，可以在内部菜单查看。  
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M00/1F/49/CioPOWBRvgqAL1THABqNofQMQ_4461.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M00/1F/49/CioPOWBRvgqAL1THABqNofQMQ_4461.png"/> 
+
 
 #### 点赞按钮
 
@@ -230,7 +238,9 @@ private extension UIButton {
 ### 总结
 
 前面我介绍了如何封装公共功能组件库，以及以怎样封装基础设计组件，希望对你有所帮助。合理使用功能组件可以让你的开发事半功倍。  
-<Image alt="思维导图+二维码.png" src="https://s0.lgstatic.com/i/image6/M00/1F/73/Cgp9HWBR3wyAAnwjAAcCv2pASBs854.png"/>  
+
+<Image alt="思维导图+二维码.png" src="https://s0.lgstatic.com/i/image6/M00/1F/73/Cgp9HWBR3wyAAnwjAAcCv2pASBs854.png"/> 
+  
 
 不过，在封装组件的时候，我还需要提醒你注意这么几点。
 
@@ -249,3 +259,4 @@ private extension UIButton {
 
 源码地址：
 > DesignKit 源代码：[https://github.com/lagoueduCol/iOS-linyongjian/tree/main/Frameworks/DesignKit](https://github.com/lagoueduCol/iOS-linyongjian/tree/main/Frameworks/DesignKit?fileGuid=xxQTRXtVcqtHK6j8)
+

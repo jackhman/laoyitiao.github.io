@@ -1,3 +1,5 @@
+# 18用户认证：如何基于SpringSecurity构建用户认证体系？
+
 在 17 讲中，我们梳理了 Web 应用程序的安全性需求，并引出了 Spring Security 这款 Spring 家族中专门用于处理安全性需求的开发框架，同时也明确了认证和授权是安全性框架的核心功能。
 
 这一讲我们将先讨论与认证相关的话题，并给出 Spring Security 认证机制及其使用方法。因为 Spring Security 是日常开发过程中的基础组件，所以我们也会对如何实现数据加解密的过程做一些展开。
@@ -17,7 +19,9 @@
 
 例如，在 SpringCSS 案例的 account-service 中，我们知道存在一个 AccountController ，且它暴露了一个"accounts/ /{accountId}"端点。现在，我们启动 account-service 服务并访问上述端点，弹出了如下图所示的界面内容：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/8D/FA/CgqCHmABN02AZfgTAAAR0uEiE5U744.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/8D/FA/CgqCHmABN02AZfgTAAAR0uEiE5U744.png"/> 
+  
 添加 Spring Security 之后自动出现的登录界面
 
 同时，在系统的启动控制台日志中，我们发现了如下所示的新的日志信息。
@@ -30,7 +34,9 @@ Using generated security password: 17bbf7c4-456a-48f5-a12e-a680066c8f80
 
 如果我们使用了 Postman 可视化 HTTP 请求工具，可以设置授权类型为"Basic Auth"并输入对应的用户名和密码完成对 HTTP 端点的访问，设置界面如下图所示：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/8D/FA/CgqCHmABN1uAC5vsAAA3VhGEBJY812.png"/>  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/8D/FA/CgqCHmABN1uAC5vsAAA3VhGEBJY812.png"/> 
+  
 使用 Postman 来完成认证信息的设置
 
 事实上，在引入 spring-boot-starter-security 依赖之后，Spring Security 会默认创建一个用户名为"user"的账号。很显然，每次启动应用时，通过 Spring Security 自动生成的密码都会有所变化，因此它不适合作为一种正式的应用方法。
@@ -93,7 +99,9 @@ public InMemoryUserDetailsManagerConfigurer<AuthenticationManagerBuilder> inMemo
 
 这里的 InMemoryUserDetailsManagerConfigurer 内部又使用到了 InMemoryUserDetailsManager 对象，而通过深入该类，我们可以获取 Spring Security 中与用户认证相关的一大批核心对象，它们之间的关系如下图所示：
 
-<Image alt="图片3 (1).png" src="https://s0.lgstatic.com/i/image2/M01/05/EE/Cip5yGABYdOAHvU6AADbh8te5-8316.png"/>  
+
+<Image alt="图片3 (1).png" src="https://s0.lgstatic.com/i/image2/M01/05/EE/Cip5yGABYdOAHvU6AADbh8te5-8316.png"/> 
+  
 Spring Security 中用户认证相关类结构图
 
 首先，我们来看上图中代表用户详细信息的 UserDetails 接口，如下代码所示：
@@ -241,7 +249,9 @@ public interface PasswordEncoder {
 
 Spring Security 中内置了一大批 PasswordEncoder 接口的实现类，如下图所示：
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/8D/FB/CgqCHmABN4qACniMAAB2uCwQA6M741.png"/>  
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/8D/FB/CgqCHmABN4qACniMAAB2uCwQA6M741.png"/> 
+  
 Spring Security 中的 PasswordEncoder 实现类
 
 上图中，比较常用的算法如 SHA-256 算法的 StandardPasswordEncoder、bcrypt 强哈希算法的 BCryptPasswordEncoder 等。而在实际案例中，我们使用的是 BCryptPasswordEncoder，它的 encode 方法如下代码所示：
@@ -391,3 +401,4 @@ public class SpringCssSecurityConfig extends WebSecurityConfigurerAdapter {
 这里给你留一道思考题：你能简要描述 Spring Security 中与用户认证相关的核心类及其它们之间的关联关系吗？欢迎你在留言区进行互动。
 
 另外，如果你觉得本专栏有价值，欢迎分享给更多好友哦～
+

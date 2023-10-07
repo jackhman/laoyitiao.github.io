@@ -1,3 +1,5 @@
+# 14增量构建：Webpack中的增量构建
+
 开始课程前，我先来解答上一节课的思考题：课程中介绍的几种支持缓存的插件（TerserWebpackPlugin，CSSMinimizerWebpackPlugin）和 Loader（babel-loader，cache-loader）在缓存方面有哪些相同的配置项呢？
 
 通过对比不难发现，这些工具通常至少包含两个配置项：第一项用于指定是否开启缓存，以及指定缓存目录（值为 true 时使用默认目录，指定目录时也表示开启），配置名称通常是 cache 或 cacheDirectory；第二项用于指定缓存标识符的计算参数，通常默认值是一个包含多维度参数的对象，例如这个工具模块的版本号、配置项对象、文件路径和内容等。这个配置项是为了确保缓存使用的安全性，防止当源代码不变但相关构建参数发生变化时对旧缓存的误用。
@@ -12,8 +14,12 @@
 
 上述只构建改动文件的处理过程在 Webpack 中是实际存在的，你可能也很熟悉，那就是在**开启 devServer** 的时候，当我们执行 webpack-dev-server 命令后，Webpack 会进行一次初始化的构建，构建完成后启动服务并进入到等待更新的状态。当本地文件有变更时，Webpack 几乎瞬间将变更的文件进行编译，并将编译后的代码内容推送到浏览器端。你会发现，这个文件变更后的处理过程就符合上面所说的只编译打包改动的文件的操作，这就称为"**增量构建"** 。我们通过示例代码进行验证（*npm run dev*），如下面的图片：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/57/0E/CgqCHl9sTsWAbetxAAGoldlDrIw704.png"/>  
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/57/03/Ciqc1F9sTsmAJc8YAADz9x_Zsvo780.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/57/0E/CgqCHl9sTsWAbetxAAGoldlDrIw704.png"/> 
+  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/57/03/Ciqc1F9sTsmAJc8YAADz9x_Zsvo780.png"/> 
+
 
 可以看到，在开发服务模式下，初次构建编译了 47 个模块，完整的构建时间为 3306ms。当我们改动其中一个源码文件后，日志显示 Webpack 只再次构建了这一个模块，因此再次构建的时间非常短（24ms）。那么为什么在开发服务模式下可以实现增量构建的效果，而在生产环境下不行呢？下面我们来分析影响结果的因素。
 
@@ -23,8 +29,12 @@
 
 在上面的增量构建过程中，第一个想到的就是**需要监控文件的变化** 。显然，只有得知变更的是哪个文件后，才能进行后续的针对性处理。要实现这一点也很简单，在"第 2 课时\|界面调试：热更新技术如何开着飞机修引擎？"中已经介绍过，在 Webpack 中**启用 watch 配置** 即可，此外在使用 devServer 的情况下，该选项会**默认开启** 。那么，如果在生产模式下开启 watch 配置，是不是再次构建时，就会按增量的方式执行呢？我们仍然通过示例验证（*npm run build:watch*），如下面的图片所示：
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/57/0E/CgqCHl9sTtOAPzPRAAHMQJnGHlo474.png"/>  
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/57/0E/CgqCHl9sTtiAB2seAAG0v0B0ORQ594.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/57/0E/CgqCHl9sTtOAPzPRAAHMQJnGHlo474.png"/> 
+  
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/57/0E/CgqCHl9sTtiAB2seAAG0v0B0ORQ594.png"/> 
+
 
 从结果中可以发现，在生产模式下开启 watch 配置后，相比初次构建，再次构建所编译的模块数量并未减少，即使只改动了一个文件，也仍然会对所有模块进行编译。因此可以得出结论，在生产环境下只开启 watch 配置后的再次构建**并不能**实现增量构建。
 
@@ -34,8 +44,12 @@
 
 下面我们就来看一下，在生产模式下，如果watch 和 cache 都为 true，结果会如何（npm run build:watch-cache）？如下面的图片所示：
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/57/0F/CgqCHl9sTuuAc0_4AAHBe2Lt3do732.png"/>  
-<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/57/03/Ciqc1F9sTvCAY2NvAAEtJYxCA_8121.png"/>
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/57/0F/CgqCHl9sTuuAc0_4AAHBe2Lt3do732.png"/> 
+  
+
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/57/03/Ciqc1F9sTvCAY2NvAAEtJYxCA_8121.png"/> 
+
 
 正如我们所期望的，再次构建时，在编译模块阶段只对有变化的文件进行了重新编译，实现了**增量编译**的效果。
 
@@ -43,8 +57,12 @@
 
 体积最大的 react、react-dom 等模块和入口模块打入了同一个 Chunk 中，即使修改的模块是单独分离的 bar.js，但它的产物名称的变化仍然需要反映在入口 Chunk 的 runtime 模块中。因此入口 Chunk 也需要跟着重新压缩而无法复用压缩缓存数据。根据前面几节课的知识点，我们对配置再做一些优化，将 vendor 分离后再来看看效果，如下面的图片所示：
 
-<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/57/0F/CgqCHl9sTvqAP1oIAAG2kbb-DGY688.png"/>  
-<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/57/0F/CgqCHl9sTv6AYxTKAAFAsmUEZMg953.png"/>
+
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/57/0F/CgqCHl9sTvqAP1oIAAG2kbb-DGY688.png"/> 
+  
+
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/57/0F/CgqCHl9sTv6AYxTKAAFAsmUEZMg953.png"/> 
+
 
 可以看到，通过上面这一系列的配置后（**watch + cache** ），在生产模式下，最终呈现出了我们期望的**增量构建**效果：有文件发生变化时会自动编译变更的模块，并只对该模块影响到的少量 Chunk 进行优化并更新产物文件版本，而其他产物文件则保持之前的版本。如此，整个构建过程的速度大大提升。
 
@@ -160,3 +178,4 @@ createChunkAssets() {
 从内部原理的角度分析，watch 的作用是保留进程，使得初次构建后的数据对象能够在再次构建时复用。而 cache 的作用则体现在构建过程中，在添加模块与生成产物代码时可以利用 cache 对象进行相应阶段结果数据的读写。显然，这种基于内存的缓存方式无法在生产环境下广泛使用。
 
 今天的**课后思考题**是：在启用增量构建的情况下有时候可能还会遇到 rebuild 很慢的情况，试着分析原因。
+

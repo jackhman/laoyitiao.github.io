@@ -1,3 +1,5 @@
+# 第04讲：实战掌握ByteBuddy，体验代码生成的顺畅
+
 在上一课时介绍 Java Agent 技术时，结合 Byte Buddy 技术实现了统计方法执行时间的功能。本课时将深入介绍 Byte Buddy 的一些基础知识，为后续分析 SkyWalking Agent 实现扫清障碍。
 
 ### 为什么需要运行时代码生成
@@ -33,7 +35,9 @@ Byte Buddy 提供了一种非常灵活且强大的领域特定语言，通过编
 
 下表是 Byte Buddy 官网给出的数据，显示了上述代码生成库的基本性能，以纳秒为单位，标准偏差在括号内附加：
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/36/Cgq2xl5wS6eAEhhvAABWkAaOdsc174.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/36/Cgq2xl5wS6eAEhhvAABWkAaOdsc174.png"/> 
+
 
 代码生成库需要在"生成快速的代码"与"快速生成代码"之间进行折中。Byte Buddy 折中的考虑是：类型动态创建不是程序中的常见步骤，并不会对长期运行的应用程序产生重大性能影响，但方法调用等操作却在程序中随处可见。所以，Byte Buddy 的主要侧重点在于生成更快速的代码。
 
@@ -152,7 +156,9 @@ System.out.println(dynamicFoo.foo(null));
 ```
 
 这里 method() 方法出现了三次，且每次出现后面都跟着的 intercept() 方法使用的 Implementation 参数都不同。Byte Buddy 会按照栈的方式将后定义 method() 方法在栈顶，先定义的方法在栈底。在匹配方法的时候，按照下图执行出栈流程逐一匹配：  
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/34/CgpOIF5wSpuAZ3eOAAEl5LR7yUY040.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/76/34/CgpOIF5wSpuAZ3eOAAEl5LR7yUY040.png"/> 
+
 
 所以上例的输出结果是：
 
@@ -397,3 +403,4 @@ Byte Buddy 相关的基础入门就介绍完了，本课时的内容已经覆盖
 ### 总结
 
 本课时首先说明了运行时生成代码技术存在的必要性，然后简单介绍了当前市面上流行的 Java 代码生成库，并简单比较了它们各自优缺点，最后通过多组示例演示了 Byte Buddy 库的基本使用方式，对其中的 API 以及常用注解进行了详细的介绍。
+

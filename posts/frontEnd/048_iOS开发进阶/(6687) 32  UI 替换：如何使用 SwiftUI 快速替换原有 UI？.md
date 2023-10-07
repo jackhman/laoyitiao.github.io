@@ -1,8 +1,12 @@
+# 32UI替换：如何使用SwiftUI快速替换原有UI？
+
 如今苹果公司力推的 SwiftUI 越来越流行，例如 Widget 等一些新功能只能使用 SwiftUI 进行开发，再加上 SwiftUI 又变得越来越稳定，可以说现在是学习和使用 SwiftUI 的良好时机。但并不是每个 App 都可以很方便地升级技术栈，幸运的是，Moments App 使用了 MVVM 的架构，该架构为我们提供了良好的灵活性和可扩展性，下面我们一起看看如何把 Moments App 的 UI 层从 UIKit 替换成 SwiftUI。
 
 在前面[第 16 讲](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=657&sid=20-h5Url-0&buyFrom=2&pageId=1pz4#/detail/pc?id=6669&fileGuid=xxQTRXtVcqtHK6j8)里，我们讲了如何使用 MVVM 模式来架构 Moments App。在这一讲中，我准备把 UIViewController 和 UIView 从 View 层移除，替换成 SwiftUI 的实现，如下图所示：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M01/44/1B/Cgp9HWC90WWALsfHAAMRfIFPUjA184.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M01/44/1B/Cgp9HWC90WWALsfHAAMRfIFPUjA184.png"/> 
+
 
 可以看到，除了 View 层以外，其他模块（包括 ViewModel 和 Model 层等）都没有做任何的改动。下面我们就来剖析下这个实现原理和步骤。
 
@@ -146,7 +150,9 @@ struct ParentView: View {
 
 下面一起来看看使用 SwiftUI 开发 View 层的系统架构图。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/44/23/CioPOWC90amACsvfAAHhOfaicTI452.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/44/23/CioPOWC90amACsvfAAHhOfaicTI452.png"/> 
+
 
 该架构图由两部分组成，分别是左边的 View 模块和右边的 ViewModel 模块。由于 View 模块依赖了 ViewModel 模块，所以这里我们就先看右边的 ViewModel 模块。该模块包含了`MomentsTimelineViewModel`、`ListItemViewModel`、`MomentListItemViewModel`和`UserProfileListItemViewModel`四个原有的 ViewModel，因为它们具有良好的可扩展性，所以我们无须对它们进行任何的改动。
 
@@ -197,7 +203,9 @@ struct IdentifiableListItemViewModel: Identifiable {
 
 接着再来看看 View 模块，该模块由`SwiftUIMomentsTimelineView`、`SwiftUIMomentsListItemView`、`SwiftUIMomentListItemView`和`SwiftUIUserProfileListItemView`所组成，你可以结合下图了解它们之间的嵌套关系。
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M01/44/1B/Cgp9HWC90b-AAGkCAAdM0BD6GgE546.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M01/44/1B/Cgp9HWC90b-AAGkCAAdM0BD6GgE546.png"/> 
+
 
 `SwiftUIMomentsTimelineView`是一个容器视图，包含了多个`SwiftUIMomentsListItemView`。`SwiftUIMomentsListItemView`会根据 ViewModel 的具体类型来显示`SwiftUIUserProfileListItemView`或者`SwiftUIMomentListItemView`。
 
@@ -271,7 +279,9 @@ struct SwiftUIUserProfileListItemView: View {
 
 为了更好地理解布局的代码实现，我们可以结合下面的图来看看各个组件之间的嵌套关系。
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M01/44/1B/Cgp9HWC90d-AH97-AAYCP8Dw-HE675.png"/>
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M01/44/1B/Cgp9HWC90d-AH97-AAYCP8Dw-HE675.png"/> 
+
 
 因为我们要把名字和头像放在底部，所以使用了用于垂直布局的`VStack`。在该`VStack`里先放一个`Spacer`，这样能把下面的`HStack`压到底部。`HStack`用于水平布局，我们可以通过`Spacer`把其他视图推到右边，右边是用于显示名字的`Text`和显示头像的`KFImage`控件。这所有的布局代码都存放在`body`属性里，如下所示：
 
@@ -353,7 +363,9 @@ var body: some View {
 
 看完用户属性视图的实现后，下面我们一起看看一条朋友圈信息是如何显示的，首先看一下它的布局图。
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image6/M01/44/1C/Cgp9HWC90huAF_a6AAIy6uuggTs430.png"/>
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image6/M01/44/1C/Cgp9HWC90huAF_a6AAIy6uuggTs430.png"/> 
+
 
 外层是一个`ZStack`，这样能保证`Toggle`可以一直浮动在右下角。`ZStack`还包含一个`HStack`，在`HStack`的左边是一张用于显示朋友头像的图片，右边是一个`VStack`。`VStack`里依次放了显示朋友名字的`Text`、显示标题的`Text`、显示图片的`KFImage`、显示时间的`Text`，以及最底层的`HStack`，这个`HStack`放置了一个心形图片和多个点赞人的头像。其布局代码如下所示， 你可以结合上面的图来理解。
 
@@ -490,7 +502,9 @@ private struct LikeToggleBackground<S: Shape>: View {
 
 到此为止，我们已经使用 SwiftUI 实现了整个 View 层了，最后看一下实现的效果，如下动图：
 
-<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image6/M00/44/24/CioPOWC90g2ANeBIAAWrFoNi17Q433.png"/>
+
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image6/M00/44/24/CioPOWC90g2ANeBIAAWrFoNi17Q433.png"/> 
+
 
 ### 总结
 
@@ -507,3 +521,4 @@ private struct LikeToggleBackground<S: Shape>: View {
 
 **源码地址**
 > SwiftUI 实现的 PR：[https://github.com/lagoueduCol/iOS-linyongjian/pull/13](https://github.com/lagoueduCol/iOS-linyongjian/pull/13?fileGuid=xxQTRXtVcqtHK6j8)
+

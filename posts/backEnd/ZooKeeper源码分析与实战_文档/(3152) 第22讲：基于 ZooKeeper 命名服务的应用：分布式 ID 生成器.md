@@ -1,3 +1,5 @@
+# 第22讲：基于ZooKeeper命名服务的应用：分布式ID生成器
+
 在上个课时中，我们讲解了如何利用 ZooKeeper 实现一个分布式锁，并解决在分布式环境下，网络中多线程之间的事务问题。今天我们利用 ZooKeeper 来解决分布式系统环境的另一个实际应用场景：使用 ZooKeeper 实现一个分布式 ID 生成器。
 
 无论是单机环境还是分布式环境，都有使用唯一标识符标记某一资源的使用场景。比如在淘宝、京东等购物网站下单时，系统会自动生成订单编号，这个订单编号就是一个分布式 ID 的使用。
@@ -6,7 +8,9 @@
 
 我们先来介绍一下什么是 ID 生成器。**分布式 ID 生成器就是通过分布式的方式，实现自动生成分配 ID 编码的程序或服务** 。在日常开发中，Java 语言中的 UUID 就是生成一个 32 位的 ID 编码生成器。根据日常使用场景，**我们生成的 ID 编码一般具有唯一性、递增性、安全性、扩展性这几个特性**。
 
-<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/34/29/CgqCHl8RWyyAP_5_AACcEDVnsPc537.png"/>
+
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/34/29/CgqCHl8RWyyAP_5_AACcEDVnsPc537.png"/> 
+
 
 **唯一性**：ID 编码作为标记分布式系统重要资源的标识符，在整个分布式系统环境下，生成的 ID 编码应该具有全局唯一的特性。如果产生两个重复的 ID 编码，就无法通过 ID 编码准确找到对应的资源，这也是一个 ID 编码最基本的要求。
 
@@ -34,7 +38,9 @@ UUID 在本地应用中生成，速度比较快，不依赖于其他服务，网
 
 TDDL 生成 ID 编码的大致过程如下图所示。首先，作为 ID 生成器的机器，数据库中会存在一张sequence 序列化表，用于记录当前已经被占用的 ID 最大值。之后每个需要 ID 编码的客户端在请求 ID 编码生成器后，编码服务器会返回给该客户端一段 ID 地址区间。并更新 sequence 表中的信息。
 
-<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/34/1E/Ciqc1F8RWzqAT1UwAACcwktuN0M073.png"/>
+
+<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/34/1E/Ciqc1F8RWzqAT1UwAACcwktuN0M073.png"/> 
+
 
 在接收一段 ID 编码后，客户端会将该编码存储在内存中。在本机需要使用 ID 编码时，会首先使用内存中的 ID 编码。如果内存中的 ID 编码已经完全被占用，则再重新向编码服务器获取。
 
@@ -46,7 +52,9 @@ TDDL 生成 ID 编码的大致过程如下图所示。首先，作为 ID 生成�
 
 首先，我们通过 ZooKeeper 自身的客户端和服务器运行模式，来实现一个分布式网络环境下的 ID 请求和分发过程。**每个需要 ID 编码的业务服务器可以看作是 ZooKeeper 的客户端**。ID 编码生成器可以作为 ZooKeeper 的服务端。客户端通过发送请求到 ZooKeeper 服务器，来获取编码信息，服务端接收到请求后，发送 ID 编码给客户端。
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/34/18/CgqCHl8RTBGAB7QNAAAvwu3rspw007.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/34/18/CgqCHl8RTBGAB7QNAAAvwu3rspw007.png"/> 
+
 
 在代码层面的实现中，如上图所示。我们可以利用 ZooKeeper 数据模型中的顺序节点作为 ID 编码。客户端通过调用 create 函数创建顺序节点。服务器成功创建节点后，会响应客户端请求，把创建好的节点信息发送给客户端。客户端用数据节点名称作为 ID 编码，进行之后的本地业务操作。
 
@@ -60,7 +68,9 @@ snowflake 算法是 Twitter 公司开源的一种用来生成分布式 ID 编码
 
 毫秒流水号、符号位这几个元素生成最终的编码。
 
-<Image alt="3.png" src="https://s0.lgstatic.com/i/image/M00/34/1E/Ciqc1F8RW0aAMpWeAACkxZm34vQ563.png"/>
+
+<Image alt="3.png" src="https://s0.lgstatic.com/i/image/M00/34/1E/Ciqc1F8RW0aAMpWeAACkxZm34vQ563.png"/> 
+
 
 在计算编码的过程中，首先获取机器的毫秒数，并存储为 41 位，之后查询机器的工作 ID，存储在后面的 10 位字节中。剩余的 12 字节就用来存储毫秒内的流水号和表示位符号值 0。
 
@@ -73,3 +83,4 @@ snowflake 算法是 Twitter 公司开源的一种用来生成分布式 ID 编码
 在本节课中，我们通过 ZooKeeper 实现了一个编码生成器，其主要原理是利用数据模型中顺序节点的特性。在具体的实现中也比较简单，并没有使用特定的算法实现 ID 编码。
 
 这里给你留一个作业：结合上面介绍的 snowflake 算法，实现一个更加高效的编码服务器。
+

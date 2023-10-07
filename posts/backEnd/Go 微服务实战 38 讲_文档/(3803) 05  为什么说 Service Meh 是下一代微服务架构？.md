@@ -1,3 +1,5 @@
+# 05为什么说ServiceMeh是下一代微服务架构？
+
 在前面第 2 课时我们介绍过，Service Mesh（服务网格） 是云原生的代表技术之一，并且在后面的组件案例实践中，Service Mesh 也是其中的"主角"，因此我们非常有必要重点介绍下 Service Mesh 的诞生背景、相关特性以及三种常见的开源组件。
 
 ### Service Mesh 背后的诉求
@@ -8,7 +10,9 @@
 
 在微服务架构中，应用系统往往被拆分成很多个微服务（可以多达成百上千），数量庞大的微服务实例使得服务治理具有一定的挑战，比如说常见的服务注册、服务发现、服务实例的负载均衡，以及为了保护服务器实现熔断、重试等基础功能。除此之外，应用程序中还加上了大量的非功能性代码。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/32/9C/CgqCHl8OniqAaOpTAABLWy0eR68344.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/32/9C/CgqCHl8OniqAaOpTAABLWy0eR68344.png"/> 
+  
 
 微服务架构的基础功能
 
@@ -47,7 +51,9 @@ Service Mesh 的第一代产品，如 Linkerd 1 和 Envoy，天然支持虚拟�
 
 在云原生架构下，应用系统可能由数百个微服务组成，微服务一般又是多实例部署，并且每一个实例都可能处于不断变化的状态，因为它们是由 Kubernetes 之类的资源调度系统动态调度。 Kubernetes 中的 Service Mesh 实现模式被命名为 **Sidecar**（边车模式，因为类似连接到摩托车的边车）。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/32/92/Ciqc1F8OnrqAWCmyAAWNZlJGJJQ859.png"/>  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/32/92/Ciqc1F8OnrqAWCmyAAWNZlJGJJQ859.png"/> 
+  
 
 边车
 
@@ -55,7 +61,9 @@ Service Mesh 的第一代产品，如 Linkerd 1 和 Envoy，天然支持虚拟�
 
 在 Sidecar 模式中，"边车"与父应用程序（即业务服务）是两个独立的进程，二者生命周期相同，同时被创建和退出。"边车"附加到业务服务，并为应用提供支持功能，如微服务架构中的基本通信。Service Mesh 一般的架构如下图所示：
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/32/92/Ciqc1F8OnsOAa3MVAABY1memBaA509.png"/>  
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/32/92/Ciqc1F8OnsOAa3MVAABY1memBaA509.png"/> 
+  
 
 Service Mesh 架构图
 
@@ -81,7 +89,9 @@ Istio 功能十分丰富，包括：
 
 Istio 专为可扩展性而设计，可满足多种部署需求。它通过拦截和配置 Mesh 网络流量来做到这一点，架构图如下所示：
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/32/92/Ciqc1F8OntCAXtNNAARr5zliZpw986.png"/>  
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/32/92/Ciqc1F8OntCAXtNNAARr5zliZpw986.png"/> 
+  
 
 Istio 架构图
 
@@ -106,3 +116,4 @@ Linkerd 作为 Service Mesh 的先驱开源组件，在生产环境得到了大�
 因此，对于微服务规模较大、内部服务存在异构的业务场景，非常推荐你使用 Service Mesh，不需要对服务做特殊的改造，所有业务之外的功能都由 Service Mesh 去做了。Service Mesh 是微服务架构的升级，它使得业务开发者更加关注自身业务服务的实现，微服务的基础设施则由 Service Mesh 来负责，业务开发团队得以回归业务。
 
 但 Service Mesh 不是银弹，那学完本课时，在理解 Service Mesh 架构模式的基础上，你知道 Service Mesh 有哪些局限性吗？欢迎你在留言区分享你的想法。
+

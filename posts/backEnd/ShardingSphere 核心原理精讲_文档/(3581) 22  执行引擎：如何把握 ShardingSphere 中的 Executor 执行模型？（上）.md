@@ -1,6 +1,10 @@
+# 22执行引擎：如何把握ShardingSphere中的Executor执行模型？（上）
+
 在上一课时中，我们对 ShardingGroupExecuteCallback 和 SQLExecuteTemplate 做了介绍。从设计上讲，前者充当 ShardingExecuteEngine 的回调入口；而后者则是一个模板类，完成对 ShardingExecuteEngine 的封装并提供了对外的统一入口，这些类都位于底层的 sharding-core-execute 工程中。
 
-<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/47/4A/CgqCHl9HalOAccqPAACp0Ky_Tl8886.png"/>
+
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/47/4A/CgqCHl9HalOAccqPAACp0Ky_Tl8886.png"/> 
+
 
 从今天开始，我们将进入到 sharding-jdbc-core 工程，来看看 ShardingSphere 中执行引擎上层设计中的几个核心类。
 
@@ -92,7 +96,9 @@ protected final <T> List<T> executeCallback(final SQLExecuteCallback<T> executeC
 
 AbstractStatementExecutor 有两个实现类：一个是普通的 StatementExecutor，一个是 PreparedStatementExecutor，接下来我将分别进行讲解。
 
-<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/47/3F/Ciqc1F9HamWACCzmAABPdP2Sna8714.png"/>
+
+<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/47/3F/Ciqc1F9HamWACCzmAABPdP2Sna8714.png"/> 
+
 
 ### StatementExecutor
 
@@ -201,7 +207,9 @@ ConnectionMode connectionMode = maxConnectionsSizePerQuery < sqlUnits.size() ? C
 
 关于这个判断条件，我们可以使用一张简单的示意图来进行说明，如下所示：
 
-<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/47/3F/Ciqc1F9HaoaAYskMAACJIb5G6C8859.png"/>
+
+<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/47/3F/Ciqc1F9HaoaAYskMAACJIb5G6C8859.png"/> 
+
 
 如上图所示，我们可以看到如果每个数据库连接所指向的 SQL 数多于一条时，走的是内存限制模式，反之走的是连接限制模式。
 
@@ -396,3 +404,4 @@ public final class SQLExecuteCallbackFactory {
 这里给大家留一道思考题：ShardingSphere 中连接模式的概念和作用是什么？欢迎你在留言区与大家讨论，我将逐一点评解答。
 
 从类层结构而言，StatementExecutor 和 PreparedStatementExecutor 都属于底层组件，在下一课时，我们会介绍包括 ShardingStatement 和 PreparedShardingStatement 在内的位于更加上层的执行引擎组件。
+

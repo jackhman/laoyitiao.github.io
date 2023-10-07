@@ -1,3 +1,5 @@
+# 第21讲：ZooKeeper分布式锁：实现和原理解析
+
 从本课时开始，我们就进入 ZooKeeper 专栏课程的实战篇。在实战篇中，我们主要介绍在实际生成环境中应该如何使用和设计 ZooKeeper 服务，并给出一些常见的问题以及解决方案。
 
 在基础篇第 2 课时介绍 Watch 监控机制时，我为你介绍了一个利用 ZooKeeper 中的 Watch 机制实现一个简单的分布式锁的例子。这个例子当时是为了说明 Watch 机制的主要特点和作用。但在实际生产开发的过程中，这种分布式锁作
@@ -40,13 +42,17 @@
 
 首先，我们通过在 ZooKeeper 服务器上创建数据节点的方式来创建一个共享锁。其实无论是共享锁还是排他锁，在锁的实现方式上都是一样的。唯一的区别在于，**共享锁为一个数据事务创建两个数据节点，来区分是写入操作还是读取操作**。如下图所示，在 ZooKeeper 数据模型上的 Locks_shared 节点下创建临时顺序节点，临时顺序节点的名称中带有请求的操作类型分别是 R 读取操作、W 写入操作。
 
-<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/32/74/CgqCHl8Oc56AEMuZAAAsuQwHWCY999.png"/>
+
+<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/32/74/CgqCHl8Oc56AEMuZAAAsuQwHWCY999.png"/> 
+
 
 #### 获取锁
 
 当某一个事务在访问共享数据时，首先需要获取锁。ZooKeeper 中的所有客户端会在 Locks_shared 节点下创建一个临时顺序节点。根据对数据对象的操作类型创建不同的数据节点，如果是读操作，就创建名称中带有 R 标志的顺序节点，如果是写入操作就创建带有 W 标志的顺序节点。
 
-<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/32/69/Ciqc1F8Oc6aAH44DAAA1aVd9UXo732.png"/>
+
+<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/32/69/Ciqc1F8Oc6aAH44DAAA1aVd9UXo732.png"/> 
+
 
 #### 释放锁
 
@@ -56,7 +62,9 @@
 
 这种实现方式正好和上面介绍的死锁的两种处理方式相对应。到目前为止，我们就利用 ZooKeeper 实现了一个比较完整的共享锁。如下图所示，在这个实现逻辑中，首先通过创建数据临时数据节点的方式实现获取锁的操作。创建数据节点分为两种，分别是读操作的数据节点和写操作的数据节点。当锁节点删除时，注册了该 Watch 监控的其他客户端也会收到通知，重新发起创建临时节点尝试获取锁。当事务逻辑执行完成，客户端会主动删除该临时节点释放锁。
 
-<Image alt="X.png" src="https://s0.lgstatic.com/i/image/M00/32/EB/CgqCHl8O5rOADPbBAACVhsBN-NU550.png"/>
+
+<Image alt="X.png" src="https://s0.lgstatic.com/i/image/M00/32/EB/CgqCHl8O5rOADPbBAACVhsBN-NU550.png"/> 
+
 
 ### 总结
 
@@ -65,3 +73,4 @@
 在具体实现的过程中，我们利用 ZooKeeper 数据模型的临时顺序节点和 Watch 监控机制，在客户端通过创建数据节点的方式来获取锁，通过删除数据节点来释放锁。
 
 这里我给你留一个问题，作为我们课后的作业：在分布式共享锁的实现中，获得锁的线程执行完释放锁后，其他等待资源的线程客户端收到 Watch 通知机制，会尝试获取锁。但是如果等待线程过多，那么频繁的 Watch 通知也会占用系统的网络资源和内存，有没有什么好的办法可以优化呢？在保证共享锁的实现下，减少 Watch 通知次数，这里留给你在本地进行优化。
+

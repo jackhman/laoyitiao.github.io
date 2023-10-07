@@ -1,10 +1,14 @@
+# 12从应用到原理：如何高效阅读ShardingSphere源码？
+
 从本课时开始，专栏将进入："ShardingSphere 源码解析之基础设施"的模块。在介绍完 ShardingSphere 所具备的分库分表、读写分离、分布式事务、数据脱敏等各项核心功能之后，我将带领你全面剖析这些核心功能背后的实现原理和机制。我们将通过深入解析 ShardingSphere 源码这一途径来实现这一目标。
 
 ### 如何系统剖析 ShardingSphere 的代码结构？
 
 在阅读开源框架时，我们碰到的一大问题在于，**常常会不由自主地陷入代码的细节而无法把握框架代码的整体结构**。市面上主流的、被大家所熟知而广泛应用的代码框架肯定考虑得非常周全，其代码结构不可避免存在一定的复杂性。对 ShardingSphere 而言，情况也是一样，我们发现 ShardingSphere 源码的一级代码结构目录就有 15 个，而这些目录内部包含的具体 Maven 工程则多达 50 余个：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/37/55/CgqCHl8ZTt2ASVxWAAAShIkwDl8738.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/37/55/CgqCHl8ZTt2ASVxWAAAShIkwDl8738.png"/> 
+  
 
 ShardingSphere 源码一级代码结构目录
 
@@ -12,7 +16,9 @@ ShardingSphere 源码一级代码结构目录
 
 本课时我们将对如何系统剖析 ShardingSphere 代码结构这一话题进行抽象，梳理出应对这一问题的六大系统方法（如下图）：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/37/55/CgqCHl8ZTuuACx6KAACdjxhg0lw729.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/37/55/CgqCHl8ZTuuACx6KAACdjxhg0lw729.png"/> 
+
 
 接下来，我们将结合 ShardingSphere 框架对这些方法进行展开。
 
@@ -20,7 +26,9 @@ ShardingSphere 源码一级代码结构目录
 
 ShardingSphere 在设计上采用了微内核架构模式来确保系统具有高度的可扩展性，并使用了 JDK 提供的 SPI 机制来具体实现微内核架构。在 ShardingSphere 源代码的根目录下，存在一个独立工程 shardingsphere-spi。显然，从命名上看，这个工程中应该包含了 ShardingSphere 实现 SPI 的相关代码。该工程中存在一个 TypeBasedSPI 接口，它的类层结构比较丰富，课程后面将要讲到的很多核心接口都继承了该接口，包括实现配置中心的 ConfigCenter、注册中心的 RegistryCenter 等，如下所示：
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/37/55/CgqCHl8ZTvyAET3QAABeRzWl3zI113.png"/>  
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/37/55/CgqCHl8ZTvyAET3QAABeRzWl3zI113.png"/> 
+  
 
 ShardingSphere 中 TypeBasedSPI 接口的类层结构
 
@@ -38,7 +46,9 @@ ShardingSphere 中 TypeBasedSPI 接口的类层结构
 
 而 sharding-core-entry 则位于更高的层次，提供了 PreparedQueryShardingEngine 和 SimpleQueryShardingEngine 类，分包结构如下所示：
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/37/4A/Ciqc1F8ZTxWAcdkRAACUdiRq_TI476.png"/>
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/37/4A/Ciqc1F8ZTxWAcdkRAACUdiRq_TI476.png"/> 
+
 
 图中我们可以看到两个清晰的代码结构层次关系，这是 ShardingSphere 中普遍采用的分包原则中，具有代表性的一种，即根据类的所属层级来组织包结构。
 
@@ -62,7 +72,9 @@ public final class ShardingDataSourceFactory {
 
 事实上，在 ShardingSphere 中存在一批 DataSourceFactory 工厂类以及对应的 DataSource 类：
 
-<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/37/4A/Ciqc1F8ZTyqAEYJUAACZMuFSODk999.png"/>
+
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/37/4A/Ciqc1F8ZTyqAEYJUAACZMuFSODk999.png"/> 
+
 
 在阅读 ShardingSphere 源码时，JDBC 规范所提供的核心接口及其实现类，为我们高效梳理代码入口和组织方式提供了一种途径。
 
@@ -74,7 +86,9 @@ public final class ShardingDataSourceFactory {
 
 对于框架内部的代码组织结构而言，实际上也存在着核心流程的概念。最典型的就是 ShardingSphere 的分片引擎结构，整个分片引擎执行流程可以非常清晰的分成五个组成部分，**分别是解析引擎、路由引擎、改写引擎、执行引擎和归并引擎**：
 
-<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/37/4A/Ciqc1F8ZTzuASMVSAACEHFtHTxA442.png"/>
+
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/37/4A/Ciqc1F8ZTzuASMVSAACEHFtHTxA442.png"/> 
+
 
 ShardingSphere 对每个引擎都进行了明确地命名，在代码工程的组织结构上也做了对应的约定，例如 sharding-core-route 工程用于实现路由引擎；sharding-core-execute 工程用于实现执行引擎；sharding-core-merge 工程用于实现归并引擎等。这是从框架内部实现机制角度梳理的一种主流程。
 
@@ -110,7 +124,9 @@ ShardingSphere 经历了从 1.X 到 4.X 版本的发展，功能越来越丰富�
 
 随着架构的演进，我们也可以在原有 EncryptSQLRewriteContextDecorator 的基础上添加新的面向数据脱敏的功能，这就体现了一种架构演进的过程。通过阅读这两个装饰器类，以及 SQL 改写上下文对象 SQLRewriteContext，我们就能更好地把握代码的设计思想和实现原理：
 
-<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image/M00/37/4A/Ciqc1F8ZT32ASVKBAACFTeG0vcw337.png"/>
+
+<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image/M00/37/4A/Ciqc1F8ZT32ASVKBAACFTeG0vcw337.png"/> 
+
 
 关于数据脱敏以及装饰器模式的具体实现细节我们会在《数据脱敏：如何基于改写引擎实现低侵入性数据脱敏方案？》中进行详细展开。
 
@@ -122,7 +138,9 @@ ShardingSphere 经历了从 1.X 到 4.X 版本的发展，功能越来越丰富�
 
 我们先以分布式事务为例，ShardingSphere 提供了一个 sharding-transaction-core 代码工程，用于完成对分布式事务的抽象。然后又针对基于两阶段提交的场景，提供了 sharding-transaction-2pc 代码工程，以及针对柔性事务提供了 sharding-transaction-base 代码工程。而在 sharding-transaction-2pc 代码工程内部，又包含了如下所示的 5 个子代码工程。
 
-<Image alt="Drawing 12.png" src="https://s0.lgstatic.com/i/image/M00/37/55/CgqCHl8ZT5KASWyUAAAJVU7jHKk131.png"/>  
+
+<Image alt="Drawing 12.png" src="https://s0.lgstatic.com/i/image/M00/37/55/CgqCHl8ZT5KASWyUAAAJVU7jHKk131.png"/> 
+  
 
 sharding-transaction-2pc 代码工程下的子工程
 
@@ -167,3 +185,4 @@ ShardingSphere 中包含了很多技术体系，在本课程中，我们将从�
 这里给你留一道思考题：在剖析 ShardingSphere 的各种方法中，你能针对每个方法列举一两个具体的示例吗？
 
 本课时的内容就到这里，从下一课时开始，我们将进入 ShardingSphere 中基础架构类技术体系的讨论，先要讨论的是微内核架构及其实现原理，记得按时来听课。
+

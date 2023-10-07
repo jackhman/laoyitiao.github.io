@@ -1,3 +1,5 @@
+# 第24讲：ZooKeeper在Kafka和Dubbo中的工业级实现案例分析
+
 在前面的课程中，我们学习了如何使用 ZooKeeper 实现分布式 ID 生成器，以及负载均衡的分布式环境下常用的解决方案。为了更进一步地提高用 ZooKeeper 解决问题的能力，我们再来分析一下在主流开源框架中如何使用 ZooKeeper。本节课主要选择业界最为流行的两个框架，一个是 RPC 框架 Dubbo，另一个是分布式发布订阅消息系统 Kafka。下面我们先来分析这两个框架都分别利用 ZooKeeper 解决了哪些问题。
 
 ### Dubbo 与 ZooKeeper
@@ -16,7 +18,9 @@ Dubbo 是阿里巴巴开发的一套开源的技术框架，**是一款高性能
 
 下图展示了整个 Dubbo 服务的连通过程。整个服务的调用过程主要分为**服务的消费端** 和**服务的提供方**。首先，服务的提供方向 Registry 注册中心注册所能提供的服务信息，接着服务的消费端会向 Registry 注册中心订阅该服务，注册中心再将服务提供者地址列表返回给消费者。如果有变更，注册中心将基于长连接将变更数据推送给消费者，从而通过服务的注册机制实现远程过程调用。
 
-<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/37/B6/Ciqc1F8ah0qASFC-AAELMLv7sPQ672.png"/>
+
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/37/B6/Ciqc1F8ah0qASFC-AAELMLv7sPQ672.png"/> 
+
 
 #### ZooKeeper 注册中心
 
@@ -24,19 +28,25 @@ Dubbo 是阿里巴巴开发的一套开源的技术框架，**是一款高性能
 
 如下图所示，在整个 Dubbo 服务的启动过程中，服务提供者会在启动时向 /dubbo/com.foo.BarService/providers 目录写入自己的 URL 地址，这个操作可以看作是一个 ZooKeeper 客户端在 ZooKeeper 服务器的数据模型上创建一个数据节点。服务消费者在启动时订阅 /dubbo/com.foo.BarService/providers 目录下的提供者 URL 地址，并向 /dubbo/com.foo.BarService/consumers 目录写入自己的 URL 地址。该操作是通过 ZooKeeper 服务器在 /consumers 节点路径下创建一个子数据节点，然后再在请求会话中发起对 /providers 节点的 watch 监控。
 
-<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/37/B6/Ciqc1F8ah1WAW9KEAAIW9hNPw3Y360.png"/>
+
+<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/37/B6/Ciqc1F8ah1WAW9KEAAIW9hNPw3Y360.png"/> 
+
 
 ### Kafka 与 ZooKeeper
 
 接下来我们再看一下 ZooKeeper 在另一个开源框架 Kafka 中的应用。Kafka 是一种高吞吐量的分布式发布订阅消息系统，它可以处理消费者在网站中的所有动作流数据，经常用来解决大量数据日志的实时收集以及 Web 网站上用户 PV 数统计和访问记录等。我们可以把 Kafka 看作是一个数据的高速公路，利用这条公路，数据可以低延迟、高效地从一个地点到达另一个地点。
 
-<Image alt="3.png" src="https://s0.lgstatic.com/i/image/M00/37/C1/CgqCHl8ah16Ac117AAKJOqYuJ28381.png"/>
+
+<Image alt="3.png" src="https://s0.lgstatic.com/i/image/M00/37/C1/CgqCHl8ah16Ac117AAKJOqYuJ28381.png"/> 
+
 
 #### Kafka 实现过程
 
 在介绍 ZooKeeper 在 Kafka 中如何使用之前，我们先来简单地了解一下 Kafka 的一些关键概念，以便之后的学习。如下图所示，整个 Kafka 的系统架构主要由 Broker、Topic、Partition、Producer、Consumer、Consumer Group 这几个核心概念组成，下面我们来分别进行介绍。
 
-<Image alt="4.png" src="https://s0.lgstatic.com/i/image/M00/37/B6/Ciqc1F8ah26APMkMAAH5xDJ2qz0508.png"/>
+
+<Image alt="4.png" src="https://s0.lgstatic.com/i/image/M00/37/B6/Ciqc1F8ah26APMkMAAH5xDJ2qz0508.png"/> 
+
 
 **Broker**
 
@@ -64,7 +74,9 @@ Consumer 即消费者，是 Kafka 框架内部对信息对接收方的定义。C
 
 介绍完 Kafka 的相关概念和服务运行原理后，接下来我们学习 ZooKeeper 在 Kafka 框架下的应用。在 Kafka 中 ZooKeeper 几乎存在于每个方面，如下图所示，Kafka 会将我们上面介绍的流程架构存储为一个 ZooKeeper 上的数据模型。
 
-<Image alt="5.png" src="https://s0.lgstatic.com/i/image/M00/37/C1/CgqCHl8ah3iASZ2-AAEGN0oprwQ428.png"/>
+
+<Image alt="5.png" src="https://s0.lgstatic.com/i/image/M00/37/C1/CgqCHl8ah3iASZ2-AAEGN0oprwQ428.png"/> 
+
 
 由于 Broker 服务器采用分布式集群的方式工作，那么在服务的运行过程中，难免出现某台机器因异常而关闭的状况。为了保证整个 Kafka 集群的可用性，需要在系统中监控整个机器的运行情况。而 Kafka 可以通过 ZooKeeper 中的数据节点，将网络中机器的运行统计存储在数据模型中的 brokers 节点下。
 
@@ -134,3 +146,4 @@ zk.create("/pyzk/study/node", b"a value")
 在实际的生产中 ZooKeeper 还能解决很多其他的问题，而这些问题本质上都是围绕分布式环境下一致性、可用性和分区容错性这三个分布式环境问题产生的。
 
 这里给你留一个作业：试着使用 ZooKeeper 来解决在你在工作中遇到的问题，并尝试提升系统的安全性和稳定性。
+

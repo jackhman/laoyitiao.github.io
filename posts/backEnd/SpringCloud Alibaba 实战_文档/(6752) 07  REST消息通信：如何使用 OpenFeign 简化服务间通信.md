@@ -1,3 +1,5 @@
+# 07REST消息通信：如何使用OpenFeign简化服务间通信
+
 上一讲我们学习了 Ribbon 与 RestTemplate 两个组件。Ribbon 提供了客户端负载均衡，而 RestTemplate 则封装了 HTTP 的通讯，简化了发送请求的过程。两者相辅相成构建了服务间的高可用通信。
 
 不过在使用后，你也应该会发现 RestTemplate，它只是对 HTTP 的简单封装，像 URL、请求参数、请求头、请求体这些细节都需要我们自己处理，如此底层的操作都暴露出来这肯定不利于项目团队间协作，因此就需要一种封装度更高、使用更简单的技术屏蔽通信底层复杂度。好在 Spring Cloud 团队提供了 OpenFeign 技术，大幅简化了服务间高可用通信处理过程。本讲将主要介绍三部分：
@@ -16,7 +18,9 @@ Spring Cloud OpenFeign 并不是独立的技术。它底层基于 Netflix Feign�
 
 为了便于理解，我们模拟实际案例进行说明。假设某电商平台日常订单业务中，为保证每一笔订单不会超卖，在创建订单前订单服务（order-service）首先去仓储服务（warehouse-service）检查对应商品 skuId（品类编号）的库存数量是否足够，库存充足创建订单，不存不足 App 前端提示"库存不足"。
 
-<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M00/29/69/CioPOWBhSD6AVJ1jAADZb3zB8iU341.png"/>  
+
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M00/29/69/CioPOWBhSD6AVJ1jAADZb3zB8iU341.png"/> 
+  
 订单与仓储服务处理流程
 
 在这个业务中，订单服务依赖于仓储服务，那仓储服务就是服务提供者，订单服务是服务消费者。下面我们通过代码还原这个场景。
@@ -109,7 +113,9 @@ public class WarehouseController {
 
 可以看到 WarehouseController 就是普通的 Spring MVC 控制器，对外暴露了 stock 接口，当应用启动后，查看 Nacos 服务列表，已出现 warehouse-service 实例。
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M00/1E/2B/Cgp9HWBQbJSAduJQAAI73U_ruyQ393.png"/>  
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M00/1E/2B/Cgp9HWBQbJSAduJQAAI73U_ruyQ393.png"/> 
+  
 Nacos 注册成功
 
 访问下面的 URL 可看到 Stock 对象 JSON 序列化数据。
@@ -147,7 +153,9 @@ http://192.168.31.111/stock?skuId=1101
 
 这里关键在于服务消费者依赖了 spring-cloud-starter-openfeign，在 Spring Boot 工程会自动引入 Spring Cloud OpenFeign 与 Netflix Feign 的 Jar 包。这里有个重要细节，当我们引入 OpenFeign 的时候，在 Maven 依赖中会出现 netflix-ribbon 负载均衡器的身影。
 
-<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image6/M00/1E/28/CioPOWBQbKGAVNY5AAOIqVeLiUM338.png"/>  
+
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image6/M00/1E/28/CioPOWBQbKGAVNY5AAOIqVeLiUM338.png"/> 
+  
 OpenFeign 内置 Ribbon 实现负载均衡
 
 没错，OpenFeign 为了保证通信高可用，底层也是采用 Ribbon 实现负载均衡，其原理与 Ribbon+RestTemplate 完全相同，只不过相较 RestTemplate，OpenFeign 封装度更高罢了。
@@ -422,3 +430,4 @@ feign:
 这里给你留一道思考题：目前跨进程通信主要有两种方式，基于 HTTP 协议的 RESTful 通信与基于二进制通信的 RPC 远程调用，请你梳理两者的特点与适用场景，可以写在评论区中大家一起探讨。
 
 下一节课，我们将介绍 Alibaba 自家的 RPC 框架 Dubbo 是如何与微服务生态整合的，敬请期待。
+

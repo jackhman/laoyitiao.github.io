@@ -1,10 +1,14 @@
+# 12安全生产（二）：如何提高Serverle应用的安全性？
+
 今天我们继续聊一聊关于 Serverless 应用安全生产的话题。
 
 上一讲，我们讨论了 Serverless 应用安全性面临的挑战，以及主要风险，相信你对 Serverless 应用的安全性已经有了初步的了解，这一讲我就带你针对性地规避这些风险。
 
 我们先简单回顾一下上一讲中 10 个主要的风险：
 
-<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image/M00/92/44/Ciqc1GARKLOAQ01ZAAKkVYv1kfc133.png"/>
+
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image/M00/92/44/Ciqc1GARKLOAQ01ZAAKkVYv1kfc133.png"/> 
+
 
 针对这 10 个风险，我总结了一些应对措施，主要涉及减少代码漏洞、正确使用访问控制、增强数据安全防护、提升应用可观测性四个方面。
 
@@ -50,7 +54,9 @@
 
 **基于 Serverless 构建 API 时，我建议你将函数和 API 网关一起使用。** API 网关可以用来创建、发布、维护、监控和保护 API，通过 API 网关可以很容易实现 API 的流量控制、监控报警、版本记录等功能。几乎所有 FaaS 平台都支持通过 API 网关触发函数执行。基于 API 网关触发器时，用户发起一个请求后，请求首先会被 API 网关处理，然后 API 网关将请求转发到函数，这样就达到了保护 API 的目的。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/90/4F/Ciqc1GAKr9uAM8zoAAGDujlP-TA203.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/90/4F/Ciqc1GAKr9uAM8zoAAGDujlP-TA203.png"/> 
+  
 API 网关触发器
 
 ### 正确使用访问控制
@@ -197,10 +203,15 @@ module.exports.handler = function (event, context, callback) {
 
 今天，我针对 11 讲提及的10个主要风险，分享了一些实践经验，希望让你有所收获，因为11 讲和 12 讲的信息偏多，所以我整理了一张导图，帮你回顾上两讲的重点内容：
 
-<Image alt="Serverless 安全生产-竖.png" src="https://s0.lgstatic.com/i/image/M00/92/40/CgqCHmARAaKAdEvcAAzvYrkQgpQ210.png"/>
+
+<Image alt="Serverless 安全生产-竖.png" src="https://s0.lgstatic.com/i/image/M00/92/40/CgqCHmARAaKAdEvcAAzvYrkQgpQ210.png"/> 
+
 
 由于国外 Serverless 技术起步比较早，大家对安全性也比较重视，所以国外已经有一些第三方的 Serverless 安全性相关的产品，比如 [Prisma Cloud](https://www.paloaltonetworks.com/prisma/cloud/cloud-workload-protection-platform)、[CloudGuard](https://www.checkpoint.com/products/cloudguard-serverless-security/)、[Aquasec](https://www.aquasec.com/products/serverless-container-functions/)，而国内目前几乎是一片空白，很多安全防护方案都需要开发者自己建设，所以"怎么提高 Serverless 应用的安全性？ "在我看来，就是多了解云厂商 Serverless 相关产品的功能和使用方式，**用好，用对才是最重要。**
 
-<Image alt="玩转 Serverless 架构11金句.png" src="https://s0.lgstatic.com/i/image/M00/92/4F/CgqCHmARKJiAS7WoAAE8KFXevfk360.png"/>
+
+<Image alt="玩转 Serverless 架构11金句.png" src="https://s0.lgstatic.com/i/image/M00/92/4F/CgqCHmARKJiAS7WoAAE8KFXevfk360.png"/> 
+
 
 本节课我留给你的作业是，除了本节课中讲到的，你还知道哪些针对 Serverless 架构中的安全风险的解决方案呢？感谢你的阅读，我们下一讲见。
+

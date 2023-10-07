@@ -1,3 +1,5 @@
+# 23告别依赖，MockServer必杀技
+
 在上一课时，我们详细了解了微服务下的测试分层实践，也讲解了微服务给测试带来的挑战。你会发现，其中最重要的一条挑战，便是微服务独立开发、独立部署这一特性。由于各个微服务都是独立开发和部署，增大了微服务联调测试时的难度。
 
 在实践中，大部分微服务被拆分到不同的小型开发和测试团队。而各个团队由于各自的KPI导向不同，势必会产生对同一个Task， 两个团队设定有不同的优先级。这样就导致了**开发节奏不一致， 联调测试变得更加困难了**。
@@ -6,7 +8,9 @@
 
 下图是本讲的知识脑图，可供你学习参考。
 
-<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image/M00/71/5D/Ciqc1F--FzGAXZ6WAAMdoZK9qV4023.png"/>
+
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image/M00/71/5D/Ciqc1F--FzGAXZ6WAAMdoZK9qV4023.png"/> 
+
 
 ### 什么是 Mock？
 
@@ -60,21 +64,29 @@ Mock Server 的搭建有两种方式，分别是借助第三方工具直接提�
 
 （1）打开 Postman， 点击"+New" button。
 
-<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image/M00/71/68/CgqCHl--Fx6ARgtQAAJ9oo1jikM473.png"/>
+
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image/M00/71/68/CgqCHl--Fx6ARgtQAAJ9oo1jikM473.png"/> 
+
 
 （2）在弹出来的"Create New"选项中点击 Mock Server 。
 
-<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image/M00/71/5D/Ciqc1F--FzyAMKe3AAJtlj-EnM4677.png"/>
+
+<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image/M00/71/5D/Ciqc1F--FzyAMKe3AAJtlj-EnM4677.png"/> 
+
 
 （3）Postman支持"Create a new API"或者"Use collection from this workspace"两种方式来创建 Mock Server。
 
 简单起见，我们选择"Create a new API"。在下图中我们选择请求方法，可以是 GET、POST、UPDATE，也可以是 DELETE，也就是我们常说的增删查改。然后输入请求路径，需要返回的 HTTP 响应码，以及响应的 Body，可以模拟多个 API 接口。全部设置好后点击下一步。
 
-<Image alt="图片4.png" src="https://s0.lgstatic.com/i/image/M00/71/69/CgqCHl--F0WATe6SAAIT0U9K5xI725.png"/>
+
+<Image alt="图片4.png" src="https://s0.lgstatic.com/i/image/M00/71/69/CgqCHl--F0WATe6SAAIT0U9K5xI725.png"/> 
+
 
 （4）然后，你将看到下图 4 个需要配置的地方。
 
-<Image alt="图片5.png" src="https://s0.lgstatic.com/i/image/M00/71/5D/Ciqc1F--F02AUHoXAAI1JkHHCBM654.png"/>
+
+<Image alt="图片5.png" src="https://s0.lgstatic.com/i/image/M00/71/5D/Ciqc1F--F02AUHoXAAI1JkHHCBM654.png"/> 
+
 
 * 输入 Mock Server 的名称。
 
@@ -88,7 +100,9 @@ Mock Server 的搭建有两种方式，分别是借助第三方工具直接提�
 
 （5）当你看到如下界面，说明配置成功。此时你的简易版 Mock Server 就生成了。记录下生成的 URL，然后在你的测试中调用相应的 URL 地址即可。
 
-<Image alt="图片6.png" src="https://s0.lgstatic.com/i/image/M00/71/5D/Ciqc1F--F1WAG2HEAAIVgTJq3fU557.png"/>
+
+<Image alt="图片6.png" src="https://s0.lgstatic.com/i/image/M00/71/5D/Ciqc1F--F1WAG2HEAAIVgTJq3fU557.png"/> 
+
 
 在本例中，我在第（3）步设置了 echo 这个接口，它是个 GET 请求，你就可以直接在浏览器输入 http://mock-server-url/echo 这样的方式来访问，需要替换这里 mock-server-url 为图中的地址。
 
@@ -119,7 +133,9 @@ pip install flask
 
 （2）创建一个 Python 文件，比如叫 easyMock.py.，代码如下：
 
-<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/70/B7/CgqCHl-7kfKAPZUaAAG9yxU5oGo024.png"/>
+
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/70/B7/CgqCHl-7kfKAPZUaAAG9yxU5oGo024.png"/> 
+
 
 这段代码实现了这一功能：访问 <http://127.0.0.1:5000>，直接返回"hello world"。
 
@@ -221,3 +237,4 @@ Mock Server 作为破除环境依赖的利器，能够大大提升我们的测�
 *** ** * ** ***
 
 [课程评价入口，挑选 5 名小伙伴赠送小礼品～](https://wj.qq.com/s2/7506053/9b01)
+

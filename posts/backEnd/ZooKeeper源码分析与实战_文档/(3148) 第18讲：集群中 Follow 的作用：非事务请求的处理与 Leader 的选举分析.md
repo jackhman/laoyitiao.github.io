@@ -1,3 +1,5 @@
+# 第18讲：集群中Follow的作用：非事务请求的处理与Leader的选举分析
+
 在上节课中，我们学习了 ZooKeeper 集群中 Leader 角色服务器的作用。在 ZooKeeper 集群中，Leader 服务器主要负责处理来自客户端的事务性会话请求，并在处理完事务性会话请求后，管理和协调 ZooKeeper 集群中 Follow 和 Observer 等角色服务器的数据同步。因此，在 ZooKeeper 集群中，Leader 服务器是最为核心的服务器，一个 ZooKeeper 服务在集群模式下运行，必须存在一个 Leader 服务器。而在 ZooKeeper 集群中，是通过崩溃选举的方式来保证 ZooKeeper 集群能够一直存在一个 Leader 服务器对外提供服务的。那么在 ZooKeeper 集群选举出 Leader 的过程中，Follow 服务器又做了哪些工作？
 
 对这些问题的研究，有助于我们掌握整个 ZooKeeper 集群服务的运行过程，清楚不同状态下服务器的处理逻辑和相关操作。使我们在日常工作中，更好地开发 ZooKeeper 相关服务，并在运维过程中快速定位问题，搭建更加高效稳定的 ZooKeeper 服务器。
@@ -22,7 +24,9 @@
 
 如下图所示，该 FollowerZooKeeperServer 类继承了 LearnerZooKeeperServer 。在一个 FollowerZooKeeperServer 类内部，定义了一个核心的 ConcurrentLinkedQueue 类型的队列字段，用于存放接收到的会话请求。
 
-<Image alt="image (10).png" src="https://s0.lgstatic.com/i/image/M00/2B/CB/Ciqc1F7_AqmAchKvAABHDmj-uIc721.png"/>
+
+<Image alt="image (10).png" src="https://s0.lgstatic.com/i/image/M00/2B/CB/Ciqc1F7_AqmAchKvAABHDmj-uIc721.png"/> 
+
 
 在定义了 FollowerZooKeeperServer 类之后，在该类的 setupRequestProcessors 函数中，定义了我们之前一直反复提到的处理责任链，指定了该处理链上的各个处理器。如下面的代码所示，分别按顺序定义了起始处理器 FollowerRequestProcessor 、提交处理器 CommitProcessor、同步处理器 SendAckRequestProcessor 以及最终处理器 FinalProcessor。
 
@@ -45,7 +49,9 @@ protected void setupRequestProcessors() {
 
 **ZooKeeper 集群重新选举 Leader 的过程本质上只有 Follow 服务器参与工作**。而在 ZooKeeper 集群重新选举 Leader 节点的过程中，如下图所示。主要可以分为 Leader 失效发现、重新选举 Leader 、Follow 服务器角色变更、集群同步这几个步骤。
 
-<Image alt="image (11).png" src="https://s0.lgstatic.com/i/image/M00/2B/D7/CgqCHl7_ArmAD4KYAABMANi9AkA539.png"/>
+
+<Image alt="image (11).png" src="https://s0.lgstatic.com/i/image/M00/2B/D7/CgqCHl7_ArmAD4KYAABMANi9AkA539.png"/> 
+
 
 #### Leader 失效发现
 
@@ -91,7 +97,9 @@ default:
 
 之后，在 ZooKeeper 集群选举 Leader 服务器时，是通过 FastLeaderElection 类实现的。该类实现了 TCP 方式的通信连接，用于在 ZooKeeper 集群中与其他 Follow 服务器进行协调沟通。
 
-<Image alt="image (12).png" src="https://s0.lgstatic.com/i/image/M00/2B/CB/Ciqc1F7_AtCAVRpLAABYUblVD80124.png"/>
+
+<Image alt="image (12).png" src="https://s0.lgstatic.com/i/image/M00/2B/CB/Ciqc1F7_AtCAVRpLAABYUblVD80124.png"/> 
+
 
 如上图所示，FastLeaderElection 类继承了 Election 接口，定义其是用来进行选举的实现类。而在其内部，又定义了选举通信相关的一些配置参数，比如 finalizeWait 最终等待时间、最大通知间隔时间 maxNotificationInterval 等。
 
@@ -123,3 +131,4 @@ static public class ToSend {
 通过本课时的学习，我们知道在 ZooKeeper 集群中 Follow 服务器的功能和作用。Follow 服务器在 ZooKeeper 集群服务运行的过程中，负责处理来自客户端的查询等非事务性的请求操作。当 ZooKeeper 集群中旧的 Leader 服务器失效时，作为投票者重新选举出新的 Leader 服务器。
 
 这里我们要注意一个问题，那就是在重新选举 Leader 服务器的过程中，ZooKeeper 集群理论上是无法进行事务性的请求处理的。因此，发送到 ZooKeeper 集群中的事务性会话会被挂起，暂时不执行，等到选举出新的 Leader 服务器后再进行操作。
+

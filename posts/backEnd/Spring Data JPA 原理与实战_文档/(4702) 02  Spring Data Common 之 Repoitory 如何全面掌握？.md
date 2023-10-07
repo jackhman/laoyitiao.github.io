@@ -1,3 +1,5 @@
+# 02SpringDataCommon之Repoitory如何全面掌握？
+
 通过上一课时，我们知道了 Spring Data 对整个数据操作做了很好的封装，其中 Spring Data Common 定义了很多公用的接口和一些相对数据操作的公共实现（如分页排序、结果映射、Autiting 信息、事务等），而 Spring Data JPA 就是 Spring Data Common 的关系数据库的查询实现。
 
 所以本课时我们来了解一下 Spring Data Common 的核心内容------Repository。我将从 Repository 的所有子类着手，带领你逐步掌握 CrudRepository、PageingAndSortingRepository、JpaRepository的使用。
@@ -8,7 +10,9 @@
 
 我们通过 Gradle 看一下项目依赖，了解一下 Spring Data Common 的依赖关系。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/50/6F/Ciqc1F9i18OABIgzAAGVeUj3uCU674.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/50/6F/Ciqc1F9i18OABIgzAAGVeUj3uCU674.png"/> 
+
 
 通过上图的项目依赖，不难发现，数据库连接用的是 JDBC，连接池用的是 HikariCP，强依赖 Hibernate；Spring Boot Starter Data JPA 依赖 Spring Data JPA；而 Spring Data JPA 依赖 Spring Data Commons。
 
@@ -40,7 +44,9 @@ Spring 在做动态代理的时候，只要是它的子类或者实现类，再�
 
 **首先，我们用工具 Intellij Idea，打开类 Repository.class，然后依次导航 → Hierchy 类型，会得到如下图所示的结果：**
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/50/7B/CgqCHl9i1-eADg-VAAL1Uy4EvRE891.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/50/7B/CgqCHl9i1-eADg-VAAL1Uy4EvRE891.png"/> 
+
 
 通过该层次结构视图，你就会明白基类 Repository 的用意，由此可知，存储库分为以下 4 个大类。
 
@@ -54,7 +60,9 @@ Spring 在做动态代理的时候，只要是它的子类或者实现类，再�
 
 然后，通过 Intellij Idea，我们也可以打开类 UserRepository.java（第一课时"Spring Data JPA 初识"里面的案例），在此类里面，鼠标右键点击 Show Diagram 显示层次结构图，用图表的方式查看类的关系层次，打开后如下图（Repository 继承关系图）所示：
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/50/70/Ciqc1F9i2AGAReiKAACJ2nYY8aw248.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/50/70/Ciqc1F9i2AGAReiKAACJ2nYY8aw248.png"/> 
+
 
 在这里简单介绍一下，我们需要掌握和使用到的类如下所示。
 
@@ -99,11 +107,15 @@ public interface UserRepository extends Repository<User,Integer> {
 
 由于 Repository 接口里面没有任何方法，所以此 UserRepository 对外只有两个可用方法，如上面的代码一样。Service 里面只能调用到 findByName 和 findByEmailAndName 两个方法，我们通过 IDEA 的 Structure 也可以看到对外只有两个方法可用，如下所示：
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/50/7B/CgqCHl9i2BCAOCRBAADotul53XM199.png"/>
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/50/7B/CgqCHl9i2BCAOCRBAADotul53XM199.png"/> 
+
 
 这时，我在第 01 课时中"Spring Boot 和 Spring Data JPA 的 Demo 演示"的例子里，提到过的 Controller 中引用 userRepository 的 save 和 findAll 方法就会报错。
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/50/7B/CgqCHl9i2BWAKgsoAADcQgdoISs764.png"/>
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/50/7B/CgqCHl9i2BWAKgsoAADcQgdoISs764.png"/> 
+
 
 上面这个实例通过继承 Repository，使 Spring 容器知道 UserRepository 是 DB 操作的类，是我们可以对 User 对象进行 CURD 的操作。这时我们对 Repository 有了一定的掌握，接下来再来看看它的直接子类 CurdRepository 接口都为我们提供了哪些方法。
 
@@ -111,7 +123,9 @@ public interface UserRepository extends Repository<User,Integer> {
 
 下面我们通过 IDEA 工具，看下 CrudRepository 为我们提供的方法有哪些。
 
-<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/50/7B/CgqCHl9i2B-AcA4zAADw4REfVrA348.png"/>
+
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/50/7B/CgqCHl9i2B-AcA4zAADw4REfVrA348.png"/> 
+
 
 通过上图，你可以看到其中展示的一些方法，在这里一一说明一下：
 
@@ -157,7 +171,9 @@ public interface UserRepository extends CrudRepository<User,Long> {
 
 我们通过 UserRepository 继承 CrudRepository，这个时候我们的 UserRepository 就会有 CrudRepository 里面的所有方法，如下图所示：
 
-<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/50/7C/CgqCHl9i2PKAdUmeAASdzFspsBQ747.png"/>
+
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/50/7C/CgqCHl9i2PKAdUmeAASdzFspsBQ747.png"/> 
+
 
 这里我们需要注意一下 save 和 deleteById 的实现逻辑，分别看看一下这两种方法是怎么实现的：
 
@@ -254,7 +270,9 @@ public Iterable<User> getAllUsersWithSort() {
 
 到这里可以进入到分水岭了，上面的那些都是 Spring Data 为了兼容 NoSQL 而进行的一些抽象封装，而从 JpaRepository 开始是对关系型数据库进行抽象封装。从类图可以看出来它继承 PagingAndSortingRepository 类，也就继承了其所有方法，并且其实现类也是 SimpleJpaRepository。从类图上还可以看出 JpaRepository 继承和拥有了 QueryByExampleExecutor 的相关方法，我们先来看一下 JpaRepository 有哪些方法。一样的道理，我们直接看它的源码，看 Structure 即可，如下图所示：
 
-<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/50/7C/CgqCHl9i2RKAfFGjAAGKTsMkBdw667.png"/>
+
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/50/7C/CgqCHl9i2RKAfFGjAAGKTsMkBdw667.png"/> 
+
 
 涉及 QueryByExample 的部分我们在 11 课时"JpaRepository 如何自定义"再详细介绍，而 JpaRepository 里面重点新增了批量删除，优化了批量删除的性能，类似于之前 SQL 的 batch 操作，并不是像上面的 deleteAll 来 for 循环删除。其中 flush() 和 saveAndFlush() 提供了手动刷新 session，把对象的值立即更新到数据库里面的机制。
 
@@ -277,7 +295,9 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
 我们可以通过 Debug 视图看一下动态代理过程，如下面【类的继承关系图】所示：
 
-<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/50/7C/CgqCHl9i2SCAeilgAAZs6DPtWQM598.png"/>
+
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/50/7C/CgqCHl9i2SCAeilgAAZs6DPtWQM598.png"/> 
+
 
 你会发现 UserRepository 的实现类是 Spring 启动的时候，利用 Java 动态代理机制帮我们生成的实现类，而真正的实现类就是 SimpleJpaRepository。
 
@@ -304,7 +324,9 @@ public class SimpleJpaRepository<T, ID> implements JpaRepository<T, ID>, JpaSpec
 
 上面我们讲到利用 Java 动态代理机制帮我们生成的实现类，那么关于动态代理的实现，我们可以在 RepositoryFactorySupport 设置一个断点，启动的时候，在我们的断点处就会发现 UserRepository 的接口会被动态代理成 SimpleJapRepository 的实现，如下图所示：
 
-<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/50/7C/CgqCHl9i2S2AC9AXAAWAo3HVeSY110.png"/>
+
+<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/50/7C/CgqCHl9i2S2AC9AXAAWAo3HVeSY110.png"/> 
+
 
 这里需要注意的是每一个 Repository 的子类，都会通过这里的动态代理生成实现类，在实际工作中 debug 看源码的时候，希望上面介绍的内容可以帮助到你。
 
@@ -324,10 +346,15 @@ public class SimpleJpaRepository<T, ID> implements JpaRepository<T, ID>, JpaSpec
 
 补充一个TIPS：课程中的案例是依赖 lombok 插件的，如下图所示：
 
-<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image/M00/50/7C/CgqCHl9i2TWAJZg_AABb1DeHmt4363.png"/>
+
+<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image/M00/50/7C/CgqCHl9i2TWAJZg_AABb1DeHmt4363.png"/> 
+
 
 并开启 annotation processing。
 
-<Image alt="Drawing 11.png" src="https://s0.lgstatic.com/i/image/M00/50/7C/CgqCHl9i2TuAT9DcAACj394zaUc082.png"/>
+
+<Image alt="Drawing 11.png" src="https://s0.lgstatic.com/i/image/M00/50/7C/CgqCHl9i2TuAT9DcAACj394zaUc082.png"/> 
+
 > 点击下方链接查看源码（不定时更新）  
 > <https://github.com/zhangzhenhuajack/spring-boot-guide/tree/master/spring-data/spring-data-jpa>
+

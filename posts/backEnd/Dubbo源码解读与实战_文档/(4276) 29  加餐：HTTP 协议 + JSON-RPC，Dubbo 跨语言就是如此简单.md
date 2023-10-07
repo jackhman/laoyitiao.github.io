@@ -1,6 +1,10 @@
+# 29加餐：HTTP协议+JSON-RPC，Dubbo跨语言就是如此简单
+
 在前面课时介绍 Protocol 和 Invoker 实现时，我们重点介绍了 AbstractProtocol 以及 DubboInvoker 实现。其实，Protocol 还有一个实现分支是 AbstractProxyProtocol，如下图所示：
 
-<Image alt="Lark20201103-162545.png" src="https://s0.lgstatic.com/i/image/M00/67/57/CgqCHl-hFBOAU2UWAAFM9gWuXAk914.png"/>  
+
+<Image alt="Lark20201103-162545.png" src="https://s0.lgstatic.com/i/image/M00/67/57/CgqCHl-hFBOAU2UWAAFM9gWuXAk914.png"/> 
+  
 AbstractProxyProtocol 继承关系图
 
 从图中我们可以看到：gRPC、HTTP、WebService、Hessian、Thrift 等协议对应的 Protocol 实现，都是继承自 AbstractProxyProtocol 抽象类。
@@ -269,17 +273,23 @@ public <T> Exporter<T> export(final Invoker<T> invoker) throws RpcException {
 
 在 HttpProtocol 的 doExport() 方法中，与前面介绍的 DubboProtocol 的实现类似，也要启动一个 RemotingServer。为了适配各种 HTTP 服务器，例如，Tomcat、Jetty 等，Dubbo 在 Transporter 层抽象出了一个 HttpServer 的接口。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/67/4C/Ciqc1F-hFD-ATNiiAABhOjw9PMM486.png"/>  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/67/4C/Ciqc1F-hFD-ATNiiAABhOjw9PMM486.png"/> 
+  
 dubbo-remoting-http 模块位置
 
 dubbo-remoting-http 模块的入口是 HttpBinder 接口，它被 @SPI 注解修饰，是一个扩展接口，有三个扩展实现，默认使用的是 JettyHttpBinder 实现，如下图所示：
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/67/4C/Ciqc1F-hFEaAUtnPAABBFL3GfzE890.png"/>  
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/67/4C/Ciqc1F-hFEaAUtnPAABBFL3GfzE890.png"/> 
+  
 JettyHttpBinder 继承关系图
 
 HttpBinder 接口中的 bind() 方法被 @Adaptive 注解修饰，会根据 URL 的 server 参数选择相应的 HttpBinder 扩展实现，不同 HttpBinder 实现返回相应的 HttpServer 实现。HttpServer 的继承关系如下图所示：
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/67/57/CgqCHl-hFFSAApv5AABUwFas2rw795.png"/>  
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/67/57/CgqCHl-hFFSAApv5AABUwFas2rw795.png"/> 
+  
 HttpServer 继承关系图
 
 这里我们以 JettyHttpServer 为例简单介绍 HttpServer 的实现，在 JettyHttpServer 中会初始化 Jetty Server，其中会配置 Jetty Server 使用到的线程池以及处理请求 Handler：
@@ -338,7 +348,9 @@ protected void service(HttpServletRequest request, HttpServletResponse response)
 
 在 HttpProtocol.doExport() 方法中会通过 HttpBinder 创建前面介绍的 HttpServer 对象，并记录到 serverMap 中用来接收 HTTP 请求。这里初始化 HttpServer 以及处理请求用到的 HttpHandler 是 HttpProtocol 中的内部类，在其他使用 HTTP 协议作为基础的 RPC 协议实现中也有类似的 HttpHandler 实现类，如下图所示：
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/67/57/CgqCHl-hFGCARUTkAABNZnY-dJg331.png"/>  
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/67/57/CgqCHl-hFGCARUTkAABNZnY-dJg331.png"/> 
+  
 HttpHandler 继承关系图
 
 在 HttpProtocol.InternalHandler 中的 handle() 实现中，会将请求委托给 skeletonMap 集合中记录的 JsonRpcServer 对象进行处理：
@@ -441,3 +453,4 @@ protected <T> Invoker<T> protocolBindingRefer(final Class<T> type, final URL url
 本课时重点介绍了在 Dubbo 中如何通过"HTTP 协议 + JSON-RPC"的方案实现跨语言调用。首先我们介绍了 JSON-RPC 中请求和响应的基本格式，以及其实现库 jsonrpc4j 的基本使用；接下来我们还详细介绍了 Dubbo 中 AbstractProxyProtocol、HttpProtocol 等核心类，剖析了 Dubbo 中"HTTP 协议 + JSON-RPC"方案的落地实现。
 
 下一课时，我们将介绍 Dubbo 中 Filter 接口相关的实现。
+

@@ -1,3 +1,5 @@
+# 10ORM集成：如何使用SpringDataJPA访问关系型数据库？
+
 在前面的课程中，我们详细介绍了如何使用 Spring 所提供的 JdbcTemplate 模板工具类实现数据访问的实现方法。相较 JDBC 所提供的原生 API，JdbcTemplate 做了一层封装，大大简化了数据的操作过程。而在 09 讲中，我们又进一步引入了 Spring Data 框架，可以说 Spring Data 框架是基于 JdbcTemplate 上另一层更高级的封装。
 
 今天，我们将基于 Spring Data 中的 Spring Data JPA 组件介绍如何集成 ORM 框架实现关系型数据库访问。
@@ -288,3 +290,4 @@ public JpaOrder getOrderByOrderNumberBySpecification(String orderNumber) {
 这里给你留一道思考题：在使用 Spring Data JPA 时，如何正确使用 QueryByExample 和 Specification 机制实现灵活的自定义查询？
 
 介绍完数据访问层组件之后，我们将继续讨论如何实现服务与服务之间的远程方案，11 讲我们会先给出构建一个 RESTful 风格的 Web 服务的实现方法。
+

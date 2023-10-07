@@ -1,3 +1,5 @@
+# 16API：基于Servele构建弹性可扩展的RetfulAPI
+
 今天我想和你聊一聊怎么基于 Serverless 构建弹性可扩展的 Restful API。
 
 API 是使用 Serverless 最常见，也是最适合的场景之一。和 Serverful 架构的 API 相比，用 Serverless 开发 API 好处很多：
@@ -36,13 +38,17 @@ API 是使用 Serverless 最常见，也是最适合的场景之一。和 Server
 
 基于 JWT 的身份认证方案、数据存储方案，我们可以画出 Serverless 的内容管理系统架构图：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image2/M01/0C/35/CgpVE2AXxXCASAwbAAKdD1n4Tyk774.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image2/M01/0C/35/CgpVE2AXxXCASAwbAAKdD1n4Tyk774.png"/> 
+
 
 **图中主要表达的意思是：** 通过 API 网关承接用户请求，并驱动函数执行。每个函数分别实现一个具体功能，并通过 JWT 实现身份认证，最后表格存储作为数据库。
 
 其中，数据库中存储的数据主要是用户数据和文章数据。假设用户有 username（用户名） 和 password（密码） 两个属性；文章有 article_id（文章 ID）、username（创建者）、title（文章标题）、content（文章内容）、create_date（创建时间）、update_date（更新时间）这几个属性。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image2/M01/0C/35/CgpVE2AXxXyAUsksAAD9II6PlcU787.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image2/M01/0C/35/CgpVE2AXxXyAUsksAAD9II6PlcU787.png"/> 
+
 
 接下来，你可以在表格存储中创建对应的数据表（你可以在表格存储控制台创建，也可以直接用我提供的这段代码进行创建）：
 
@@ -424,7 +430,9 @@ $ curl http://a88f7e84f71749958100997b77b3e2f6-cn-beijing.alicloudapi.com/user/r
 
 返回 `{"success": true}` ，说明用户注册成功。这时在表格存储控制台也可以看到刚注册的用户。
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/94/46/CgqCHmAXxaeAe89-AADufUP1UJA961.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/94/46/CgqCHmAXxaeAe89-AADufUP1UJA961.png"/> 
+
 
 #### 用户登录
 
@@ -612,7 +620,9 @@ $ curl http://a88f7e84f71749958100997b77b3e2f6-cn-beijing.alicloudapi.com/articl
 
 在测试时，我们需要将 token 放在 HTTP 请求头的 Authorization 属性中。文章发布成功后，你就可以在表格存储中看到对应的数据了。
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/94/3B/Ciqc1GAXxceARRiPAACAwtaSp94526.png"/>
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/94/3B/Ciqc1GAXxceARRiPAACAwtaSp94526.png"/> 
+
 
 #### 查询文章
 
@@ -834,3 +844,4 @@ curl http://a88f7e84f71749958100997b77b3e2f6-cn-beijing.alicloudapi.com/article/
 * Serverless 函数需要保持简单、独立、单一职责。
 
 最后，我留给你的作业就是，亲自动手实现一个基于 Serverless 的具有 Restful API 的内容管理系统。我们下一讲见。
+

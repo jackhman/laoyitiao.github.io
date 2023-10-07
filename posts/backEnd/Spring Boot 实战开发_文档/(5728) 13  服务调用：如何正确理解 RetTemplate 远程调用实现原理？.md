@@ -1,3 +1,5 @@
+# 13服务调用：如何正确理解RetTemplate远程调用实现原理？
+
 在 12 讲中，我们详细描述了如何使用 RestTemplate 访问 HTTP 端点的使用方法，它涉及 RestTemplate 初始化、发起请求及获取响应结果等核心环节。今天，我们将基于上一课时中的这些环节，从源码出发让你真正理解 RestTemplate 实现远程调用的底层原理。
 
 ### 初始化 RestTemplate 实例
@@ -60,7 +62,9 @@ public abstract class HttpAccessor {
 
 最后，针对这部分内容我们再来梳理下 RestTemplate 的类层结构，如下图所示：
 
-<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image2/M01/04/34/Cip5yF_q_YOAHp35AAB_-PnTOp8699.png"/>  
+
+<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image2/M01/04/34/Cip5yF_q_YOAHp35AAB_-PnTOp8699.png"/> 
+  
 RestTemplate 的类层结构
 
 在 RestTemplate 的类层结构中，我们能快速理解它的设计思想。整个类层结构清晰地分成两条支线，左边支线用于完成与 HTTP 请求相关的实现机制，而右边支线提供了基于 RESTful 风格的操作入口，并使用了面向对象中的接口和抽象类完成这两部分功能的聚合。
@@ -211,7 +215,9 @@ response = request.execute();
 
 这里的 request 就是前面创建的 SimpleBufferingClientHttpRequest 类，我们可以先来看一下该类的类层结构，如下图所示：
 
-<Image alt="图片5.png" src="https://s0.lgstatic.com/i/image2/M01/04/36/CgpVE1_q_XeAF3WjAABzAH8vhP8188.png"/>  
+
+<Image alt="图片5.png" src="https://s0.lgstatic.com/i/image2/M01/04/36/CgpVE1_q_XeAF3WjAABzAH8vhP8188.png"/> 
+  
 SimpleBufferingClientHttpRequest 类层结构图
 
 在上图的 AbstractClientHttpRequest 中，定义了如下代码所示的 execute 方法。
@@ -430,3 +436,4 @@ RestTemplate 中提供了创建请求对象、执行远程调用及处理响应�
 这里给你留一道思考题：在 RestTemplate 中，如何通过 HttpMessageConverter 实现对响应结果的转换处理？
 
 介绍完 Web 服务的构建和消费后，我们需要把目光转到一个应用程序的中间层组件，对于中间层组件而言，其一大应用场景是处理消息通信相关的需求。因此，从 14 讲开始我们将基于 Spring Boot 框架对目前主流的消息中间件及其使用方式进行逐一展开。
+

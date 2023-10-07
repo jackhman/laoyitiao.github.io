@@ -1,3 +1,5 @@
+# 第19讲：DubbovSpringCloud：两大技术栈如何选型？
+
 提到微服务开源框架，不可不说的是 Dubbo 和 Spring Cloud，这两大框架应该是大家最熟悉的微服务解决方案，也是面试中的热点。这一课时就梳理下 Dubbo 和 Spring Cloud 的应用特性，以及两个组件的功能对比。
 
 ### Dubbo 应用
@@ -8,7 +10,9 @@ Dubbo 是阿里开源的一个分布式服务框架，目的是支持高性能�
 
 下面这张图包含了 Dubbo 核心组件和调用流程：
 
-<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/1B/D3/Ciqc1F7fT3eAFWKFAAWh1hAU8J8466.png"/>
+
+<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/1B/D3/Ciqc1F7fT3eAFWKFAAWh1hAU8J8466.png"/> 
+
 
 包括了下面几个角色：
 
@@ -48,7 +52,9 @@ Spring Cloud 基于 Spring Boot，是一系列组件的集成，为微服务开�
 
 Spring Cloud 的微服务组件都有多种选择，典型的架构图如下图所示：
 
-<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/1B/DE/CgqCHl7fT5CATRxXAAJPeC8Jmc8564.png"/>
+
+<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/1B/DE/CgqCHl7fT5CATRxXAAJPeC8Jmc8564.png"/> 
+
 
 整体服务调用流程如下：
 
@@ -108,3 +114,4 @@ Dubbo 的服务发现通过注册中心实现，支持多种注册中心，另�
 这一课时的内容对比了微服务的两大技术栈，分别介绍了 Dubbo 和 Spring Cloud 的架构，以及应用特性。
 
 Spring Cloud 从发展到现在，社区一直保持高度活跃，各类解决方案越来越丰富，另外，Dubbo 在近几年又重启维护，发布了新的版本，并且也官宣了新的升级计划，相信在两大开源框架的加持下，会更好地提高大家的开发效率。
+

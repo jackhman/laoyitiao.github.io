@@ -1,3 +1,5 @@
+# 01SpringDataJPA初识
+
 课程正式开始了，这里我会以一个案例的形式来和你讲解如何通过 Spring Boot 结合 Spring Data JPA 快速启动一个项目、如何使用 UserRepository 完成对 User 表的操作、如何写测试用例等几个知识点，同时带你体验一下 Spring Data JPA 的优势。通过这个课时，希望你能够对 JPA 建立一个整体的认识。
 > 提示：在本课程中如果没有特殊说明，JPA 就是指 Spring Data JPA。
 
@@ -11,7 +13,9 @@
 
 点击"菜单" \| New Project 命令，选择 Spring Initializr 选项，如下图所示。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/4E/AE/Ciqc1F9fAriAOBKCAAG7xhrHi_E023.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/4E/AE/Ciqc1F9fAriAOBKCAAG7xhrHi_E023.png"/> 
+
 
 这里我们利用 Spring 官方的 Start 来创建一个项目，接下来**选择 Spring Boot 的依赖：**
 
@@ -27,11 +31,15 @@
 
 然后通过下图操作界面选择上面提到的这些依赖，如下图所示：
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/4E/AE/Ciqc1F9fAsKAbYHaAAMUVRZwyEY667.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/4E/AE/Ciqc1F9fAsKAbYHaAAMUVRZwyEY667.png"/> 
+
 
 **第二步：通过 IDEA 的图形化界面，一路单击 Next 按钮，然后单击 Finsh 按钮，得到一个工程，完成后结构如下图所示：**
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/4E/BA/CgqCHl9fAsmAbD28AAR6C6uyIWs848.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/4E/BA/CgqCHl9fAsmAbD28AAR6C6uyIWs848.png"/> 
+
 
 现在我们已经可以创建一个 Spring Boot + JPA 的项目了，那么接下来我们看看怎么对 User 表进行增删改查操作。
 
@@ -104,7 +112,9 @@ public class UserController {
 
 最终，我们的项目结构变成如下图所示的模样：
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/4E/AE/Ciqc1F9fAt2AKc-oAALnw7dehT4454.png"/>
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/4E/AE/Ciqc1F9fAt2AKc-oAALnw7dehT4454.png"/> 
+
 
 上图中，appliaction.properties 里面的内容是空的，到现在三步搞定，其他什么都不需要配置，直接点击 JpaApplication 这个类，就可启动我们的项目了。
 
@@ -125,7 +135,9 @@ GET http://127.0.0.1:8080/api/v1/users?size=3&page=0
 
 点击"运行"按钮，效果如下图所示：
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/4E/AF/Ciqc1F9fAueAaffMAAEEcHlhpSo686.png"/>
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/4E/AF/Ciqc1F9fAueAaffMAAEEcHlhpSo686.png"/> 
+
 
 运行结果如下：
 
@@ -199,7 +211,9 @@ Response code: 200; Time: 59ms; Content length: 449 bytes
 
 **关于 IDEA 运行 Gradle 项目的小技巧：** 在实际工作中，我们启动运行或者是跑测试用例的时候，经常以 Gradle 的方式运行，或者用 Application 的方式运行，两种方式进行随意切换，需要设置的地方如下图所示：
 
-<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/4E/AF/Ciqc1F9fAvaAJ7MtAANtS5uq_NY272.png"/>
+
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/4E/AF/Ciqc1F9fAvaAJ7MtAANtS5uq_NY272.png"/> 
+
 
 通过以上案例，我们知道了 Spring Data JPA 可以帮我们做数据的 CRUD 操作，掌握到了JPA + Spring Boot 如何启动和集成 JPA，以及对如何创建一个数据库操作也有了一定的了解。那么接下来，我们看下是如何切换默认数据源的，如切换成 MySQL。
 
@@ -222,11 +236,15 @@ spring.jpa.generate-ddl=true
 
 第二处改动，删除 H2 数据源，新增 MySQL 数据库驱动：
 
-<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/4E/BA/CgqCHl9fAyiAPQf3AADCrCOm25k666.png"/>
+
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/4E/BA/CgqCHl9fAyiAPQf3AADCrCOm25k666.png"/> 
+
 
 调整完毕之后，我们重启这个项目，以同样的方式测试上面的两个接口依然 OK。
 
-<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/4E/BA/CgqCHl9fAy2AL0EuAADDLkFVehk043.png"/>
+
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/4E/BA/CgqCHl9fAy2AL0EuAADDLkFVehk043.png"/> 
+
 
 其实这个时候可以发现一件事情，那就是我没有手动去创建任何表，而 JPA 自动帮我创建了数据库的 DDL，并新增了 User 表，所以当我们用 JPA 之后创建表的工作就不会那么复杂了，我们只需要把实体写好就可以了。
 
@@ -262,7 +280,9 @@ public class UserRepositoryTest {
 
 第二步，我们可直接运行测试用例，进行真实的 DB 操作，通过控制台来看下我们的测试用例是否能够跑通，如下图所示：
 
-<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/4E/BA/CgqCHl9fAzqAKH25AADMO537plI734.png"/>
+
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/4E/BA/CgqCHl9fAzqAKH25AADMO537plI734.png"/> 
+
 
 通过上图可以看到，测试的时候执行的 SQL 有哪些，那么我们到底是连接的 MySQL 做的测试用例，还是连接的 H2 做的测试呢？在后面的第 30 课时（单元测试和集成测试）的时候我会为你详细揭晓，到时你会发现测试用例写起来也是如此简单。
 
@@ -276,7 +296,9 @@ public class UserRepositoryTest {
 
 下表是市场上比较流行的 ORM 框架，这里我罗列了 MyBatis、Hibernate、Spring Data JPA 等，并对比了下它们的优缺点。
 
-<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/4E/B1/Ciqc1F9fBfeANrGuAAOa8Y2E5fU233.png"/>
+
+<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/4E/B1/Ciqc1F9fBfeANrGuAAOa8Y2E5fU233.png"/> 
+
 
 经过对比，你可以看到我们正在学习的 Spring Data JPA 还是比较前卫的，很受欢迎，继承了 Hibernate 的很多优点，上手又比较简单。所以，我非常建议你好好学习一下。
 
@@ -304,7 +326,9 @@ JPA 是 JDK 5.0 新增的协议，通过相关持久层注解（@Entity 里面�
 
 JPA 的宗旨是为 POJO 提供持久化标准规范，可以集成在 Spring 的全家桶使用，也可以直接写独立 application 使用，任何用到 DB 操作的场景，都可以使用，极大地方便开发和测试，所以 JPA 的理念已经深入人心了。Spring Data JPA、Hibernate 3.2+、TopLink 10.1.3 以及 OpenJPA、QueryDSL 都是实现 JPA 协议的框架，他们之间的关系结构如下图所示：
 
-<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/4E/AF/Ciqc1F9fA1uARUnvAAB2ZNS1UXc485.png"/>
+
+<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/4E/AF/Ciqc1F9fA1uARUnvAAB2ZNS1UXc485.png"/> 
+
 
 俗话说得好："未来已经来临，只是尚未流行"，大神资深开发用 Spring Data JPA，编程极客者用 JPA；而普通 Java 开发者，不想去挑战的 Java"搬砖者"用 Mybatis。
 
@@ -328,7 +352,9 @@ Spring Data 不仅对传统的数据库访问技术如 JDBC、Hibernate、JDO、
 
 下图为目前 Spring Data 的框架分类结构图，里面都有哪些模块可以一目了然，也可以知道哪些是我们需要关心的项目。
 
-<Image alt="Drawing 11.png" src="https://s0.lgstatic.com/i/image/M00/4E/BA/CgqCHl9fA2iAJZruAAEOKPj_-ZU042.png"/>
+
+<Image alt="Drawing 11.png" src="https://s0.lgstatic.com/i/image/M00/4E/BA/CgqCHl9fA2iAJZruAAEOKPj_-ZU042.png"/> 
+
 
 主要项目（Main Modules）：
 
@@ -389,9 +415,14 @@ Spring Data 不仅对传统的数据库访问技术如 JDBC、Hibernate、JDO、
 对于本课时所讲的知识点，欢迎你在下方留言区表达自己的学习感悟，大家一起讨论，共同进步。
 > 补充一个TIPS：课程中的案例是依赖 lombok 插件的，如下图所示：
 
-<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/4F/DD/CgqCHl9hfQKAEXs0AABb1DeHmt4598.png"/>
+
+<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/4F/DD/CgqCHl9hfQKAEXs0AABb1DeHmt4598.png"/> 
+
 > 并开启 annotation processing。
 
-<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/4F/D2/Ciqc1F9hfQmAFGFzAACj394zaUc225.png"/>
+
+<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/4F/D2/Ciqc1F9hfQmAFGFzAACj394zaUc225.png"/> 
+
 > 点击下方链接查看源码（不定时更新）  
 > <https://github.com/zhangzhenhuajack/spring-boot-guide/tree/master/spring-data/spring-data-jpa>
+

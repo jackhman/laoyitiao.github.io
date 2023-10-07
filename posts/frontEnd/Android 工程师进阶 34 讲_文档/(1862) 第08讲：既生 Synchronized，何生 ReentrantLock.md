@@ -1,3 +1,5 @@
+# 第08讲：既生Synchronized，何生ReentrantLock
+
 synchronized 关键字相信每一位 Java 工程师都不会陌生。而 ReentrantLock 作为大神 Doug Lea 编写的 concurrent 包中的重要一员，也在众多项目中发挥重要功能。因为这两者实在是太重要，所以专门使用一课时的内容来对它们做一个详细的比较。后续两课时将会着重介绍它们各自的实现细节与原理。
 
 synchronized
@@ -13,7 +15,9 @@ synchronized 可以用来修饰以下 3 个层面：
 
 ### synchronized 修饰实例方法
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/89/8E/Cgq2xl6X-CGAVC61AABX0U421kk161.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/89/8E/Cgq2xl6X-CGAVC61AABX0U421kk161.png"/> 
+
 
 <br />
 
@@ -21,7 +25,9 @@ synchronized 可以用来修饰以下 3 个层面：
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/03/49/CgoCgV6X-CGAX3UPAALcuyvYTr0464.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/03/49/CgoCgV6X-CGAX3UPAALcuyvYTr0464.png"/> 
+
 
 <br />
 
@@ -29,7 +35,9 @@ synchronized 可以用来修饰以下 3 个层面：
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/10/78/Ciqah16X-CGAcrKiAAHaIMHzqvs482.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/10/78/Ciqah16X-CGAcrKiAAHaIMHzqvs482.png"/> 
+
 
 <br />
 
@@ -41,7 +49,9 @@ synchronized 可以用来修饰以下 3 个层面：
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/89/8E/Cgq2xl6X-CGAXyrZAAK14-hA_p0053.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/89/8E/Cgq2xl6X-CGAXyrZAAK14-hA_p0053.png"/> 
+
 
 <br />
 
@@ -49,7 +59,9 @@ synchronized 可以用来修饰以下 3 个层面：
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/03/49/CgoCgV6X-CKADxv6AAK2n8Hb_oI699.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/03/49/CgoCgV6X-CKADxv6AAK2n8Hb_oI699.png"/> 
+
 
 <br />
 
@@ -65,7 +77,9 @@ synchronized 可以用来修饰以下 3 个层面：
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/10/78/Ciqah16X-CKAdo5PAAGlZwFDsJM251.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/10/78/Ciqah16X-CKAdo5PAAGlZwFDsJM251.png"/> 
+
 
 <br />
 
@@ -73,7 +87,9 @@ synchronized 可以用来修饰以下 3 个层面：
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/89/8E/Cgq2xl6X-CKAa6FcAAJ44oCVs3Q021.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/89/8E/Cgq2xl6X-CKAa6FcAAJ44oCVs3Q021.png"/> 
+
 
 <br />
 
@@ -85,7 +101,9 @@ synchronized 可以用来修饰以下 3 个层面：
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/03/49/CgoCgV6X-CKAV1oUAAGejxzGQ6g680.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/03/49/CgoCgV6X-CKAV1oUAAGejxzGQ6g680.png"/> 
+
 
 <br />
 
@@ -97,7 +115,9 @@ synchronized 既可以作用于方法，也可以作用于某一代码块。但�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/10/78/Ciqah16X-CKAZaaeAABaozQldl0900.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/10/78/Ciqah16X-CKAZaaeAABaozQldl0900.png"/> 
+
 
 <br />
 
@@ -105,7 +125,9 @@ synchronized 既可以作用于方法，也可以作用于某一代码块。但�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/89/8E/Cgq2xl6X-COAC4hMAAEjW40t64s500.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/89/8E/Cgq2xl6X-COAC4hMAAEjW40t64s500.png"/> 
+
 
 <br />
 
@@ -117,7 +139,9 @@ synchronized 既可以作用于方法，也可以作用于某一代码块。但�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/10/78/Ciqah16X-COACexhAAD00Tr1LPM127.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/10/78/Ciqah16X-COACexhAAD00Tr1LPM127.png"/> 
+
 
 <br />
 
@@ -135,7 +159,9 @@ synchronized 既可以作用于方法，也可以作用于某一代码块。但�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/89/8E/Cgq2xl6X-COAEskYAABd1Qkprak432.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/89/8E/Cgq2xl6X-COAEskYAABd1Qkprak432.png"/> 
+
 
 <br />
 
@@ -150,7 +176,9 @@ ReentrantLock 的使用同 synchronized 有点不同，它的加锁和解锁操�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/03/49/CgoCgV6X-COAM0TsAAHIQYMakhA463.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/03/49/CgoCgV6X-COAM0TsAAHIQYMakhA463.png"/> 
+
 
 <br />
 
@@ -158,7 +186,9 @@ ReentrantLock 的使用同 synchronized 有点不同，它的加锁和解锁操�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/10/78/Ciqah16X-COAO3ZBAAClbs36w3w694.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/10/78/Ciqah16X-COAO3ZBAAClbs36w3w694.png"/> 
+
 
 <br />
 
@@ -174,7 +204,9 @@ ReentrantLock 有一个带参数的构造器，如下：
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/89/8E/Cgq2xl6X-CSAAdUqAACzsvj2pFg758.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/89/8E/Cgq2xl6X-CSAAdUqAACzsvj2pFg758.png"/> 
+
 
 <br />
 
@@ -186,7 +218,9 @@ ReentrantLock 有一个带参数的构造器，如下：
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/03/49/CgoCgV6X-CSAR23jAAG2SZgQKY0744.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/03/49/CgoCgV6X-CSAR23jAAG2SZgQKY0744.png"/> 
+
 
 <br />
 
@@ -194,7 +228,9 @@ ReentrantLock 有一个带参数的构造器，如下：
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/10/78/Ciqah16X-CSAR8MxAAI0mD5blog517.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/10/78/Ciqah16X-CSAR8MxAAI0mD5blog517.png"/> 
+
 
 <br />
 
@@ -224,7 +260,9 @@ ReentrantLock 有一个带参数的构造器，如下：
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/89/8E/Cgq2xl6X-CSAfAiHAAAlGuwPEXA557.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/89/8E/Cgq2xl6X-CSAfAiHAAAlGuwPEXA557.png"/> 
+
 
 <br />
 
@@ -232,7 +270,9 @@ ReentrantLock 有一个带参数的构造器，如下：
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/03/49/CgoCgV6X-CWAEmShAAApkBH8nBM233.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/03/49/CgoCgV6X-CWAEmShAAApkBH8nBM233.png"/> 
+
 
 <br />
 
@@ -240,7 +280,9 @@ ReentrantLock 有一个带参数的构造器，如下：
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/10/78/Ciqah16X-CWAHTM4AACOosEvECg851.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/10/78/Ciqah16X-CWAHTM4AACOosEvECg851.png"/> 
+
 
 <br />
 
@@ -248,7 +290,9 @@ ReentrantLock 有一个带参数的构造器，如下：
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/89/8E/Cgq2xl6X-CWAYv9FAATloxYxrXs824.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/89/8E/Cgq2xl6X-CWAYv9FAATloxYxrXs824.png"/> 
+
 
 <br />
 
@@ -266,7 +310,9 @@ ReentrantLock 有一个带参数的构造器，如下：
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/03/49/CgoCgV6X-CaAdEWVAAI1D9-ghzQ492.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/03/49/CgoCgV6X-CaAdEWVAAI1D9-ghzQ492.png"/> 
+
 
 <br />
 
@@ -276,3 +322,4 @@ ReentrantLock 有一个带参数的构造器，如下：
 ===
 
 这课时我们主要学习了 Java 中两个实现同步的方式 synchronized 和 ReentrantLock。其中 synchronized 使用更简单，加锁和释放锁都是由虚拟机自动完成，而 ReentrantLock 需要开发者手动去完成。但是很显然 ReentrantLock 的使用场景更多，公平锁还有读写锁都可以在复杂场景中发挥重要作用。
+

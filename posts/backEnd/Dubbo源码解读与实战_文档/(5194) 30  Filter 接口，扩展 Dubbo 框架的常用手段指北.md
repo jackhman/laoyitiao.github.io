@@ -1,3 +1,5 @@
+# 30Filter接口，扩展Dubbo框架的常用手段指北
+
 在前面的第 27 课时中，我们介绍了 ProtocolFilterWrapper 的具体实现，这里简单回顾一下。在 buildInvokerChain() 方法中，ProtocolFilterWrapper 会加载 Dubbo 以及应用程序提供的 Filter 实现类，然后构造成 Filter 链，最后通过装饰者模式在原有 Invoker 对象基础上添加执行 Filter 链的逻辑。
 
 Filter 链的组装逻辑设计得非常灵活，其中可以通过"-"配置手动剔除 Dubbo 原生提供的、默认加载的 Filter，通过"default"来代替 Dubbo 原生提供的 Filter，这样就可以很好地控制哪些 Filter 要加载，以及 Filter 的真正执行顺序。
@@ -6,7 +8,9 @@ Filter 链的组装逻辑设计得非常灵活，其中可以通过"-"配置手�
 
 在开始介绍 Filter 接口实现之前，我们需要了解一下 Filter 在 Dubbo 架构中的位置，这样才能明确 Filter 链处理请求/响应的位置，如下图红框所示：
 
-<Image alt="Lark20201106-191028.png" src="https://s0.lgstatic.com/i/image/M00/68/FD/CgqCHl-lLz2APEb2ABSTPPnfqGQ345.png"/>  
+
+<Image alt="Lark20201106-191028.png" src="https://s0.lgstatic.com/i/image/M00/68/FD/CgqCHl-lLz2APEb2ABSTPPnfqGQ345.png"/> 
+  
 Filter 在 Dubbo 架构中的位置
 
 ### ConsumerContextFilter
@@ -344,7 +348,9 @@ private void processWithServiceLogger(Set<AccessLogData> logSet) {
 
 在 LoggerFactory 中维护了一个 LOGGERS 集合（Map\<String, FailsafeLogger\> 类型），其中维护了当前使用的全部 FailsafeLogger 对象；FailsafeLogger 对象中封装了一个 Logger 对象，这个 Logger 接口是 Dubbo 自己定义的接口，Dubbo 针对每种第三方框架都提供了一个 Logger 接口的实现，如下图所示：
 
-<Image alt="Lark20201106-191032.png" src="https://s0.lgstatic.com/i/image/M00/68/F2/Ciqc1F-lL4eAGvorAAEnucS-mWg399.png"/>  
+
+<Image alt="Lark20201106-191032.png" src="https://s0.lgstatic.com/i/image/M00/68/F2/Ciqc1F-lL4eAGvorAAEnucS-mWg399.png"/> 
+  
 Logger 接口的实现
 
 FailsafeLogger 是 Logger 对象的装饰器，它在每个 Logger 日志写入操作之外，都添加了 try/catch 异常处理。其他的 Dubbo Logger 实现类则是封装了相应第三方的 Logger 对象，并将日志输出操作委托给第三方的 Logger 对象完成。这里我们以 Log4j2Logger 为例进行简单分析：
@@ -387,7 +393,9 @@ public static void setLoggerAdapter(String loggerAdapter) {
 
 LoggerAdapter 被 @SPI 注解修饰，是一个扩展接口，如下图所示，LoggerAdapter 对应每个第三方框架的一个相应实现，用于创建相应的 Dubbo Logger 实现对象。
 
-<Image alt="Lark20201106-191036.png" src="https://s0.lgstatic.com/i/image/M00/68/FE/CgqCHl-lL4GAWy4JAAFMZJwzrp8801.png"/>  
+
+<Image alt="Lark20201106-191036.png" src="https://s0.lgstatic.com/i/image/M00/68/FE/CgqCHl-lL4GAWy4JAAFMZJwzrp8801.png"/> 
+  
 LoggerAdapter 接口实现
 
 以 Log4j2LoggerAdapter 为例，其核心在 getLogger() 方法中，主要是创建 Log4j2Logger 对象，具体实现如下：
@@ -663,3 +671,4 @@ version-consumer=org.apache.dubbo.demo.consumer.JarVersionConsumerFilter
 本课时重点介绍了 Dubbo 中 Filter 接口的相关实现。首先，我们回顾了 Filter 链的加载流程实现；然后详细分析了 Dubbo 中多个内置的 Filter 实现，这些内置 Filter 对于实现 Dubbo 核心功能是不可或缺的；最后，我们还阐述了自定义 Filter 扩展 Dubbo 功能的流程，并通过一个统计 jar 包版本的示例进行说明。
 
 在下一课时，我们将开始介绍 Dubbo 中 Cluster 层的内容。
+

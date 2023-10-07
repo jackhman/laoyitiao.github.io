@@ -1,3 +1,5 @@
+# 第02讲：如何使用Webpack实现模块化打包？
+
 相信通过上一课时内容的学习，你应该对前端模块化有了更完整的认识。在上一课时的最后我们提出了对模块化打包方案或工具的设想或者说是诉求：
 
 * 能够将散落的模块打包到一起；
@@ -6,7 +8,9 @@
 
 * 能够支持不同种类的前端资源模块。
 
-<Image alt="1.png" src="https://s0.lgstatic.com/i/image3/M01/04/CD/CgoCgV6dE8qATeN7AAHuGzEsqjI585.png"/>
+
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image3/M01/04/CD/CgoCgV6dE8qATeN7AAHuGzEsqjI585.png"/> 
+
 
 目前，前端领域有一些工具能够很好的满足以上这 3 个需求，其中最为主流的就是 Webpack、Parcel 和 Rollup，我们以 Webpack 为例：
 
@@ -100,7 +104,9 @@ $ npx webpack
 
 完成之后，控制台会提示：顺着 index.js 有两个 JS 文件被打包到了一起。与之对应的就是项目的根目录下多出了一个 dist 目录，我们的打包结果就存放在这个目录下的 main.js 文件中，具体操作如下图所示：
 
-<Image alt="2.png" src="https://s0.lgstatic.com/i/image3/M01/11/FC/Ciqah16dFAaAMNccAADOAanBuOA265.png"/>
+
+<Image alt="2.png" src="https://s0.lgstatic.com/i/image3/M01/11/FC/Ciqah16dFAaAMNccAADOAanBuOA265.png"/> 
+
 
 这里我们回到 index.html 中修改引入文件的路径，由于打包后的代码就不会再有 import 和 export 了，所以我们可以删除 type="module"。再次回到浏览器中，查看这个页面，这时我们的代码仍然可以正常工作，index.html 的代码如下所示：
 
@@ -233,10 +239,14 @@ module.exports = config
 ```
 
 没有智能提示的效果，如下所示：  
-<Image alt="没有智能提示.gif" src="https://s0.lgstatic.com/i/image3/M01/8B/55/Cgq2xl6dX_6AS601AGOWR9tvy7w230.gif"/>
+
+<Image alt="没有智能提示.gif" src="https://s0.lgstatic.com/i/image3/M01/8B/55/Cgq2xl6dX_6AS601AGOWR9tvy7w230.gif"/> 
+
 
 加上类型标注实现智能提示的效果，如下所示：  
-<Image alt="加上智能提示.gif" src="https://s0.lgstatic.com/i/image3/M01/05/10/CgoCgV6dX8WAT4jvAJhTWS1vldA516.gif"/>
+
+<Image alt="加上智能提示.gif" src="https://s0.lgstatic.com/i/image3/M01/05/10/CgoCgV6dX8WAT4jvAJhTWS1vldA516.gif"/> 
+
 
 使用 import 语句导入 Configuration 类型的方式固然好理解，但是在不同的环境中还是会有各种各样的问题，例如我们这里在 Node.js 环境中，就必须要额外注释掉这个导入类型的语句，才能正常工作。
 
@@ -290,30 +300,40 @@ production 模式下 Webpack 内部会自动启动一些优化插件，例如，
 
 按照 none 模式打包完成后，我们打开最终生成的 bundle.js 文件，如下图所示：
 
-<Image alt="3.png" src="https://s0.lgstatic.com/i/image3/M01/8B/13/Cgq2xl6dFMCAIUxiAAGa_XXbqjc578.png"/>
+
+<Image alt="3.png" src="https://s0.lgstatic.com/i/image3/M01/8B/13/Cgq2xl6dFMCAIUxiAAGa_XXbqjc578.png"/> 
+
 
 我们可以先把代码全部折叠起来，以便于了解整体的结构，如下图所示：
 > TIPS：  
 >
 > -VSCode 中折叠代码的快捷键是 Ctrl + K，Ctrl + 0 （macOS：Command + K，Command + 0）
 
-<Image alt="4.png" src="https://s0.lgstatic.com/i/image3/M01/11/FD/Ciqah16dFM-AVj_BAABXnvvMgEs140.png"/>
+
+<Image alt="4.png" src="https://s0.lgstatic.com/i/image3/M01/11/FD/Ciqah16dFM-AVj_BAABXnvvMgEs140.png"/> 
+
 
 整体生成的代码其实就是一个立即执行函数，这个函数是 Webpack 工作入口（webpackBootstrap），它接收一个 modules 参数，调用时传入了一个数组。
 
 展开这个数组，里面的元素均是参数列表相同的函数。这里的函数对应的就是我们源代码中的模块，也就是说每个模块最终被包裹到了这样一个函数中，从而实现模块私有作用域，如下图所示：
 
-<Image alt="5.png" src="https://s0.lgstatic.com/i/image3/M01/04/CE/CgoCgV6dFNiAE5w5AACemkpDN74095.png"/>
+
+<Image alt="5.png" src="https://s0.lgstatic.com/i/image3/M01/04/CE/CgoCgV6dFNiAE5w5AACemkpDN74095.png"/> 
+
 
 我们再来展开 Webpack 工作入口函数，如下图所示：
 
-<Image alt="6.png" src="https://s0.lgstatic.com/i/image3/M01/8B/13/Cgq2xl6dFOOASkRMAAKy8jLkXaM933.png"/>
+
+<Image alt="6.png" src="https://s0.lgstatic.com/i/image3/M01/8B/13/Cgq2xl6dFOOASkRMAAKy8jLkXaM933.png"/> 
+
 
 这个函数内部并不复杂，而且注释也很清晰，最开始定义了一个 installedModules 对象用于存放或者缓存加载过的模块。紧接着定义了一个 require 函数，顾名思义，这个函数是用来加载模块的。再往后就是在 require 函数上挂载了一些其他的数据和工具函数，这些暂时不用关心。
 
 这个函数执行到最后调用了 require 函数，传入的模块 id 为 0，开始加载模块。模块 id 实际上就是模块数组的元素下标，也就是说这里开始加载源代码中所谓的入口模块，如下图所示：
 
-<Image alt="7.png" src="https://s0.lgstatic.com/i/image3/M01/8B/13/Cgq2xl6dFOyAHCNzAAKy8jLkXaM393.png"/>
+
+<Image alt="7.png" src="https://s0.lgstatic.com/i/image3/M01/8B/13/Cgq2xl6dFOyAHCNzAAKy8jLkXaM393.png"/> 
+
 
 为了更好的理解 bundle.js 的执行过程，你可以把它运行到浏览器中，然后通过 Chrome 的 Devtools 单步调试一下。调试过程我单独录制了一个视频，详情见视频（19分11秒）。
 
@@ -336,4 +356,5 @@ production 模式下 Webpack 内部会自动启动一些优化插件，例如，
 3. Webpack 工作模式特性的作用。
 
 4. 通过 Webpack 打包后的结果是如何运行起来的？
+
 

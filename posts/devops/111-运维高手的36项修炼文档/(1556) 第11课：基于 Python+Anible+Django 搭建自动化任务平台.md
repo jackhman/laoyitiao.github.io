@@ -1,3 +1,5 @@
+# 第11课：基于Python+Anible+Django搭建自动化任务平台
+
 在上课时我们讲解了一套 Devops 理念的工程它的 CMDB 是如何实现的。CMDB 可以把所有的资产做一个收集。有了资产，就好比一个仓库里面所有的货物已经准备好了，那么接下来该怎么去进行分门别类的管理和维护等操作呢？这个时候就涉及自动化的任务。  
 
 <br />
@@ -31,7 +33,9 @@ Ansible 的应用通常有两种方式，第 1 种是 adhoc（命令模式），
 
 ### playbook
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHCARXKPAAEGxYJzasw197.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHCARXKPAAEGxYJzasw197.png"/> 
+
 
 <br />
 
@@ -51,7 +55,9 @@ tasks 是 playbook 具体执行的任务，这里任务是执行 shell:touch /tm
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHCAXLU8AAFRHO4gLxc907.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHCAXLU8AAFRHO4gLxc907.png"/> 
+
 
 <br />
 
@@ -112,7 +118,9 @@ templates 里面主要放一些模板和相关的配置，我们可以把一些 
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHCARtpTAAHVwx-gTak127.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHCARtpTAAHVwx-gTak127.png"/> 
+
 
 <br />
 
@@ -140,7 +148,9 @@ templates 里面主要放一些模板和相关的配置，我们可以把一些 
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHGAdMFQAADEpb7Dwsw655.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHGAdMFQAADEpb7Dwsw655.png"/> 
+
 
 <br />
 
@@ -152,7 +162,9 @@ views.py 视图里面定义了一个 adhoc_task() 函数，它会来负责接收
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHGAJLotAAFmNJ-edRA051.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHGAJLotAAFmNJ-edRA051.png"/> 
+
 
 <br />
 
@@ -181,7 +193,9 @@ PlayBookResultsCollector(CallbackBase) 跟前面类是一样的，只不过它�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHGAVPdAAADGi3JVaHk602.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHGAVPdAAADGi3JVaHk602.png"/> 
+
 
 <br />
 
@@ -189,7 +203,9 @@ PlayBookResultsCollector(CallbackBase) 跟前面类是一样的，只不过它�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHKAPwtfAACH5Q2NW3o196.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHKAPwtfAACH5Q2NW3o196.png"/> 
+
 
 <br />
 
@@ -197,7 +213,9 @@ PlayBookResultsCollector(CallbackBase) 跟前面类是一样的，只不过它�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHKAO35aAAGx4BbLhL0386.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHKAO35aAAGx4BbLhL0386.png"/> 
+
 
 <br />
 
@@ -205,7 +223,9 @@ PlayBookResultsCollector(CallbackBase) 跟前面类是一样的，只不过它�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHOATKf0AATlRJB7cOI285.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHOATKf0AATlRJB7cOI285.png"/> 
+
 
 <br />
 
@@ -213,7 +233,9 @@ PlayBookResultsCollector(CallbackBase) 跟前面类是一样的，只不过它�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7A/CA/Cgq2xl55wHOAH6vtAAMlclXaedE645.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7A/CA/Cgq2xl55wHOAH6vtAAMlclXaedE645.png"/> 
+
 
 <br />
 
@@ -225,7 +247,9 @@ mod_type 是直接执行 adhoc 的模块方式，这里我执行的是 Shell 的
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7A/CA/Cgq2xl55wHOACyO2AAXukl_6PSE019.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7A/CA/Cgq2xl55wHOACyO2AAXukl_6PSE019.png"/> 
+
 
 <br />
 
@@ -233,7 +257,9 @@ mod_type 是直接执行 adhoc 的模块方式，这里我执行的是 Shell 的
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHSAPhPbAANojZQK3YM533.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHSAPhPbAANojZQK3YM533.png"/> 
+
 
 <br />
 
@@ -241,7 +267,9 @@ mod_type 是直接执行 adhoc 的模块方式，这里我执行的是 Shell 的
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHSAYKeEAAJCjs_ILvU244.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/01/B4/Ciqah155wHSAYKeEAAJCjs_ILvU244.png"/> 
+
 
 <br />
 
@@ -256,4 +284,5 @@ mod_type 是直接执行 adhoc 的模块方式，这里我执行的是 Shell 的
 本专栏课中的所有案例配置及源代码，你可以课后通过这个地址 http://www.jesonc.com/jeson/2020/02/07/ywgs36/ 自己下载，密码为：mukelaoshi。
 
 <br />
+
 

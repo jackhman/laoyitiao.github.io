@@ -1,3 +1,5 @@
+# 08配置管理：Kubernete管理业务配置方式有哪些？
+
 通过前面几节课的学习，我们已经对 Kubernetes 中的 Pod 以及一些业务负载有所了解。你可以根据课程中提供的示例，自己动手尝试在集群中实践起来。
 
 在使用过程中，我们常常需要对 Pod 进行一些配置管理，比如参数配置文件怎么使用，敏感数据怎么保存传递，等等。有些人可能会觉得，为什么不把这些配置（不限于参数、配置文件、密钥等）打包到镜像中去啊？乍一听，好像有点可行，但是这种做法"硬伤"太多。
@@ -16,7 +18,9 @@
 
 首先我们来讲一下 ConfigMap 这个对象，它主要用来保存一些非敏感数据，可以用作环境变量、命令行参数或者挂载到存储卷中。
 
-<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/4F/8C/Ciqc1F9gkFGAAFxaAAB80T5b-WU361.png"/>  
+
+<Image alt="image (2).png" src="https://s0.lgstatic.com/i/image/M00/4F/8C/Ciqc1F9gkFGAAFxaAAB80T5b-WU361.png"/> 
+  
 
 （<https://matthewpalmer.net/kubernetes-app-developer/articles/configmap-diagram.gif>）
 
@@ -439,3 +443,4 @@ ConfigMap 和 Secret 是 Kubernetes 常用的保存配置数据的对象，你�
 对于这个问题，社区其实也一直在讨论比较好的解法，我们可以拭目以待。
 
 好的，如果你对本节课有什么想法或者疑问，欢迎你在留言区留言，我们一起讨论。
+

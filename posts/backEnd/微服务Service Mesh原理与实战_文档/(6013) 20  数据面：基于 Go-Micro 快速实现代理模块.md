@@ -1,3 +1,5 @@
+# 20数据面：基于Go-Micro快速实现代理模块
+
 今天我要和你分享的内容是：如何自研 Service Mesh 中的数据面，这里我们选择用 Go-Micro 框架实现 Sidecar 中最核心的代理模块。
 
 在本讲中，我们选用了 Go 语言实现数据面。在常见的开源数据面中，Envoy 使用 C++ 实现，Linkerd 早期版本使用 Java，新版本使用 Rust 实现，而 MOSN 和 Maesh 都使用 Go 语言实现。从这些技术选型可以看出，Go 语言在数据面的实现中占有一席之地，主要是**较高的性能和较少的内存占用**，比较适合 Sidecar 的应用场景。
@@ -10,7 +12,9 @@
 
 首先进入 Go 语言官网，根据环境下载合适的版本<https://golang.google.cn/dl/>，因为 Go-Micro 的旧版本依赖问题，这里我们选择 Go 1.14 版本。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/07/7C/Cgp9HWAzh5aAdgqCAAGppXYgA2M543.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/07/7C/Cgp9HWAzh5aAdgqCAAGppXYgA2M543.png"/> 
+
 
 代码中我们并没有使用最新的 v3 版本，因为 Go-Micro 框架的母公司转向云平台的开发模式，Go-Micro 的 v3 版本转移到了个人项目下，但这个版本还有诸多问题，缺少以前的很多特性，所以这里还是采用了 v1 版本。
 
@@ -229,7 +233,9 @@ RawContent        : HTTP/1.1 200 OK
 
 下面我们再请求 8082 端口，模拟一下完整的 Mesh 过程。整个过程如下图所示：
 
-<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M00/08/FF/CioPOWA1hs6AX1jDAAB6NkWYyhA014.png"/>  
+
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M00/08/FF/CioPOWA1hs6AX1jDAAB6NkWYyhA014.png"/> 
+  
 完整 Mesh 过程示意图
 
 请求8082端口：
@@ -295,8 +301,11 @@ func main() {
 
 本讲内容总结如下：
 
-<Image alt="金句.png" src="https://s0.lgstatic.com/i/image6/M00/09/02/Cgp9HWA1hrWAMQuCAAGBGu1j9ok772.png"/>
+
+<Image alt="金句.png" src="https://s0.lgstatic.com/i/image6/M00/09/02/Cgp9HWA1hrWAMQuCAAGBGu1j9ok772.png"/> 
+
 
 结合今天内容的讲解，如果让你研发一个 Mesh 的数据面，你会用什么语言和框架呢。欢迎在留言区和我分享你的观点。
 
 今天的内容到这里就结束了，下一讲我们开始讲解控制面：实现 xDS 配置管理。下一讲我会实现 Service Mesh 的控制面，并将本讲实现的 Sidecar 和控制面进行通信，用于展示完整的 Service Mesh 过程。我们下一讲再见。
+

@@ -1,3 +1,5 @@
+# 开篇词从零开始：为什么要学习SpringBoot？
+
 你好，我是鉴湘，有 10 年以上大型 Java EE 和分布式系统构建和优化的经验，曾带领百人团队完成基于 Spring 家族技术体系的亿级用户规模互联网应用系统的建设工作，对基于 Spring 框架进行系统开发和维护有着丰富的实践经验。
 
 在我的从业生涯中，曾经带过不少项目，以我所带领的电商项目开发团队为例，开发团队从接收产品需求、开发联调再到测试上线，整个过程往往要求在短短几天之内完成，这样的挑战就倒逼我们要保证开发过程的简单性，其中最核心的一点就是"快"：如何快速、高效地实现系统功能，成了一个非常现实且棘手的问题。
@@ -18,8 +20,12 @@
 
 你也可以上拉勾网站查看相关岗位职责，基本都有这条限制，以下是我截取的两份 Java 开发工程师岗的招聘要求：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/70/88/Ciqc1F-7VTmAcByzAAGG1shcgSQ296.png"/>  
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/70/94/CgqCHl-7VT2ABxE5AABvwZSxw-k496.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/70/88/Ciqc1F-7VTmAcByzAAGG1shcgSQ296.png"/> 
+  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/70/94/CgqCHl-7VT2ABxE5AABvwZSxw-k496.png"/> 
+  
 （职位信息来源：拉勾网）
 
 **可以说，深入了解并掌握 Spring Boot 是你成功进入大公司、斩获高薪 Offer 的一个重要砝码。**
@@ -40,7 +46,9 @@
 
 基于如下图所示的 Web 应用程序的拆分维度，我把整个课程设计为 8 大部分，基于目前最主流的 Java EE 领域开发框架 Spring Boot，向你介绍如何从零构建一个 Web 应用程序。
 
-<Image alt="Lark20201123-142325.png" src="https://s0.lgstatic.com/i/image/M00/70/88/Ciqc1F-7VWqAIEwvAAFG005-D-w990.png"/>  
+
+<Image alt="Lark20201123-142325.png" src="https://s0.lgstatic.com/i/image/M00/70/88/Ciqc1F-7VWqAIEwvAAFG005-D-w990.png"/> 
+  
 Web 应用程序的拆分维度
 
 * **第 1 部分，开启 Spring 框架的学习之旅**。这部分将介绍 Spring 家族的整个生态系统和技术体系，并提供一个 Spring Customer Service System（简称 SpringCSS） 案例来贯穿整个 Spring Boot 框架的学习过程。
@@ -69,8 +77,11 @@ Web 应用程序的拆分维度
 
 最后，我也会在留言区等你分享 Spring 框架方面的经历和经验，一起加油吧！
 
-[<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/6D/3E/CgqCHl-s60-AC0B_AAhXSgFweBY762.png"/>](https://shenceyun.lagou.com/t/Mka)
+[
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/6D/3E/CgqCHl-s60-AC0B_AAhXSgFweBY762.png"/> 
+](https://shenceyun.lagou.com/t/Mka)
 
 **《Java 工程师高薪训练营》**
 
 实战训练+面试模拟+大厂内推，想要提升技术能力，进大厂拿高薪，[点击链接，提升自己](https://shenceyun.lagou.com/t/Mka)！
+

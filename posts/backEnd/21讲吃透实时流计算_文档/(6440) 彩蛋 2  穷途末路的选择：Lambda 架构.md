@@ -1,3 +1,5 @@
+# 彩蛋2穷途末路的选择：Lambda架构
+
 在前面的课时中，我们都是在讨论实时计算的问题。但真实的世界里，很多事情都不尽人愿。有时候，因为算法复杂度过高、数据量过大，我们并不能通过直接的实时计算，获得想要的结果。比如，二度关联图谱计算以及一些复杂的统计学习模型或机器学习模型训练等。在这种情况下，我们该如何制定出一个可以真实落地的系统架构方案呢？
 
 这个时候，我们就需要用到压箱底的 Lambda 架构了。
@@ -6,7 +8,9 @@
 
 什么是 Lambda 架构呢？下面的图 1 进行了说明。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/2D/98/CioPOWBmuM6AEJQwAAIYIcuicaY318.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/2D/98/CioPOWBmuM6AEJQwAAIYIcuicaY318.png"/> 
+  
 图 1 Lambda 系统架构图
 
 从上面的图 1 可以看出，Lambda 架构总体上分为三层：批处理层（batch layer）、快速处理层（speed layer）和服务层（serving layer），其中：
@@ -33,7 +37,9 @@ Lambda 架构是一种架构设计思路，针对每一层的技术组件选型�
 
 下面的图 2 展示了 Kappa 架构的工作原理。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M01/2D/90/Cgp9HWBmuNqAeyzOAAIVhE-o3d0639.png"/>  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M01/2D/90/Cgp9HWBmuNqAeyzOAAIVhE-o3d0639.png"/> 
+  
 图 2 Kappa 系统架构图
 
 从上面的图 2 可以看出，Kappa 架构相比 Lambda 架构的最大改进，就是将批处理层也用快速处理层的流计算技术所取代。这样一来，批处理层和快速处理层**使用相同的流计算逻辑，并有更统一的计算框架**，从而降低了开发、测试和运维的成本。
@@ -195,4 +201,7 @@ SELECT product, sum(v_count) as s_count from
 
 下面是本课时的知识脑图。
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M00/2D/98/CioPOWBmuPiAemNQAAhVcWpIr6g122.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M00/2D/98/CioPOWBmuPiAemNQAAhVcWpIr6g122.png"/> 
+
+

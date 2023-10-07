@@ -1,3 +1,5 @@
+# 04运行原理：Serverle应用是怎么运行的？
+
 前段时间，团队有个同学在用 Serverless 实时处理日志时遇到了一个问题：每次处理结果都是相同的。后来问过我之后才发现是由于函数执行过程可能存在执行上下文重用，导致每次拉取到的都是同一份数据。归根究底是因为他对 Serverless 应用的运行原理理解得不够深入，而这也是很多刚开始学 Serverless 的同学经常遇到的共性问题，所以我准备了这节课，希望能让你有所收获。
 
 这一讲，我会先介绍一下案例背景，然后再针对这个案例讲解 Serverless 的运行原理。这样一来，当你学完这一讲之后，就能知道案例的问题所在，并在今后的工作中学会避免这个问题。
@@ -6,7 +8,9 @@
 
 当时我们的用户访问日志是存储在日志服务中的，每次有用户请求，都会记录一条日志。由于日志量巨大，直接从原始日志查询每分钟、每小时的用户 PV、UV 速度极慢。所以团队小伙伴打算以一分钟为时间窗口，查询一分钟内的用户 PV、UV 并存入 MySQL，这样很方便分析。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image2/M01/03/D5/CgpVE1_jBoGAAsYzAAE8RY39kMY756.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image2/M01/03/D5/CgpVE1_jBoGAAsYzAAE8RY39kMY756.png"/> 
+  
 日志处理流程
 
 当时的代码大致如下：
@@ -61,7 +65,9 @@ exports.handler = (event, callback) => {
 
 要弄清楚其中缘由，就需深入理解 Serverless 的运行原理。要知道，Serverless 应用本质上是由一个个 FaaS 函数组成的，Serverless 应用的每一次运行，其实是单个或多个函数的运行，**所以 Serverelss 的运行原理，本质上就是函数的运行原理。** 为了让你了解得更透彻，我将从函数的调用链路、调用方式、生命周期三个角度，讲解 Serverelss 的运行原理。
 
-<Image alt="Lark20201230-191339.png" src="https://s0.lgstatic.com/i/image2/M01/04/4A/Cip5yF_sYQSAXdR4AAD19QiJ91A556.png"/>
+
+<Image alt="Lark20201230-191339.png" src="https://s0.lgstatic.com/i/image2/M01/04/4A/Cip5yF_sYQSAXdR4AAD19QiJ91A556.png"/> 
+
 
 ### 函数调用链路：事件驱动函数执行
 
@@ -71,7 +77,9 @@ exports.handler = (event, callback) => {
 
 对于 FaaS 函数来说，一方面可以通过事件来触发执行，另一方面也可以直接调用 API 来执行。FaaS 平台都提供了执行函数的 API。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image2/M01/03/D5/CgpVE1_jBpOAMAz-AAXvQ_MAGcc183.png"/>  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image2/M01/03/D5/CgpVE1_jBpOAMAz-AAXvQ_MAGcc183.png"/> 
+  
 函数调用链路
 
 ### 函数调用方式 ：同步调用与异步调用
@@ -80,7 +88,9 @@ exports.handler = (event, callback) => {
 
 同步调用指的是客户端发起调用后，需要等到函数执行完毕并得到执行结果。FaaS 平台收到同步调用后，会立即为函数分配运行环境并执行函数。
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image2/M01/03/D5/CgpVE1_jBp6AZ2oVAACRAFaQNlE797.png"/>  
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image2/M01/03/D5/CgpVE1_jBp6AZ2oVAACRAFaQNlE797.png"/> 
+  
 同步调用
 
 下面是使用函数计算 [Node.js SDK](https://github.com/aliyun/fc-nodejs-sdk) 来同步调用函数的一个示例：
@@ -112,7 +122,9 @@ await client.invokeFunction(serviceName, funcName, 'event');
 
 而异步调用是指客户端发起调用后，FaaS 会将事件放在内部队列中而不是立即执行。异步调用时，FaaS 会直接返回，不需要等待函数执行完毕。这意味着异步调用无法直接获取返回结果，所以它适用于运行时间比较长的场景。**对于函数计算来说，定时触发器就是异步调用的。** 此外，OSS 触发器、MNS 消息触发器也是异步的。
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/8B/FD/CgqCHl_jBrOAJAYzAAFjiWGxvas566.png"/>
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/8B/FD/CgqCHl_jBrOAJAYzAAFjiWGxvas566.png"/> 
+
 
 当然，你也可以通过 API 实现异步调用。异步调用只需要把 x-fc-invocation-type 设置为 Async 就行了。异步调用的返回结果如下：
 
@@ -134,7 +146,9 @@ await client.invokeFunction(serviceName, funcName, 'event');
 
 **讲到这儿，我们再来思考一下刚刚的案例。** 在函数中需要去查询日志，如果一分钟内的日志量也非常大，导致查询时间很长，进而造成函数执行时间需要 3 分钟甚至更长，你要怎么办呢？你肯定想到为函数设置更长的超时时间，比如 10 分钟。那问题又来了，函数是每分钟执行一次，但函数本身执行需要 3 分钟，那运行中的函数岂不是会越来越多？
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/8B/FD/CgqCHl_jBsiAO921AACTC8qX880555.png"/>
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/8B/FD/CgqCHl_jBsiAO921AACTC8qX880555.png"/> 
+
 
 确实是这样，但 FaaS 平台不会让你的函数实例无限生成下去，一般会默认最多只会存在 100 个运行中的实例。超过限制后，事件队列就需要等待其他函数实例执行完毕后，再生成新的函数实例。
 
@@ -148,7 +162,9 @@ await client.invokeFunction(serviceName, funcName, 'event');
 
 在 FaaS 平台中，函数默认是不运行的，也不会分配任何资源。甚至 FaaS 中都不会保存函数代码。只有当 FaaS 接收到触发器的事件后，才会启动并运行函数。整个函数的运行过程可以分为四个阶段。
 
-<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/8B/F2/Ciqc1F_jBtaAeftsAAF0kkX3yIE639.png"/>  
+
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/8B/F2/Ciqc1F_jBtaAeftsAAF0kkX3yIE639.png"/> 
+  
 函数启动过程
 
 * **下载代码：** FaaS 平台本身不会存储代码，而是将代码放在对象存储中，需要执行函数的时候，再从对象存储中将函数代码下载下来并解压，因此 FaaS 平台一般都会对代码包的大小进行限制，通常代码包不能超过 50MB。
@@ -165,7 +181,9 @@ await client.invokeFunction(serviceName, funcName, 'event');
 
 下面是一个函数的请求示意图，其中 "请求1" "请求3" 是冷启动，"请求2" 是热启动。
 
-<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image2/M01/03/D5/CgpVE1_jBuSAeXMZAAG9vZ52nJ0090.png"/>
+
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image2/M01/03/D5/CgpVE1_jBuSAeXMZAAG9vZ52nJ0090.png"/> 
+
 
 函数执行完毕后销毁运行环境，虽然对首次函数执行的性能有损耗，但极大提高了资源利用效率，只有需要执行代码的时候才初始化环境、消耗硬件资源。并且如果你的应用请求量比较大，则大部分时候函数的执行可能都是热启动。
 
@@ -192,3 +210,4 @@ await client.invokeFunction(serviceName, funcName, 'event');
 * 执行上下文重用可以提高 Serverless 应用性能，但在编写代码时要注意执行上下文重用带来的风险。
 
 相信通过本节课的学习，你已经知道了本文实时处理日志这个案例存在的两个问题，一个是函数并发限制导致函数执行时间延迟，另一个是执行上下文重用导致每次处理的都是同一份数据。那么今天的作业，就是修改这份代码的 Bug，让它成为一个真正可线上运行的 Serverless 应用吧。
+

@@ -1,3 +1,5 @@
+# 第25讲：ElaticSearch是如何建立索引的？
+
 前面讲到了 NoSQL 数据库的应用，在关系型数据库和 NoSQL 数据库之外，还有一类非常重要的存储中间件，那就是**文件索引**。当你在电商网站搜索商品，或者在搜索引擎搜索资料时，都离不开基于文件索引的各种检索框架的支持。
 
 这一课时我们就一起来看下以 ElasticSearch 为代表的文件索引相关的知识。
@@ -18,7 +20,9 @@ ElasticSearch 对搜索的支持非常好，但是和 NoSQL 数据库一样，�
 
 下面是一个实际开发中，常见的数据库-索引-缓存系统架构图：
 
-<Image alt="25.png" src="https://s0.lgstatic.com/i/image/M00/2B/B8/Ciqc1F7-68eAeYw2AAF83MZQ2m0681.png"/>
+
+<Image alt="25.png" src="https://s0.lgstatic.com/i/image/M00/2B/B8/Ciqc1F7-68eAeYw2AAF83MZQ2m0681.png"/> 
+
 
 可以看到，ElasticSearch 一般是作为持久性数据库的辅助存储，是和 SQL \& NoSQL 数据库一起使用，对外提供索引查询功能。关系型数据库保证数据更新的准确性，在关系型数据库更新以后，通过 binlog 同步结合消息队列分发的方式，来更新文件索引，提供一致性保证。
 
@@ -77,7 +81,9 @@ ElasticSearch 索引的实现基于 Lucene，使用倒排索引的结构，倒�
 
 具体到数据结构的实现，可以通过实现一个字典树，也就是 Trie 树，对字典树进行扩展，额外存储对应的数据块地址，定位到具体的数据位置。
 
-<Image alt="3.png" src="https://s0.lgstatic.com/i/image/M00/29/C1/CgqCHl77Do-AXYgbAABfeRIU95w684.png"/>
+
+<Image alt="3.png" src="https://s0.lgstatic.com/i/image/M00/29/C1/CgqCHl77Do-AXYgbAABfeRIU95w684.png"/> 
+
 
 #### 对比 B+ 树
 
@@ -94,3 +100,4 @@ MySQL InnoDB 引擎的索引实现是基于 B+ 树，那么同样是索引，倒
 这一课时介绍了 ElasticSearch 存储组件及其应用，日志分析的三大件之 ELK 技术栈，以及倒排索引是如何实现的。
 
 虽然 ElasticSearch 技术可以实现高效的检索，但是也带来了相应的部署以及一致性维护成本，在一些小型项目中，还是会用数据库模糊匹配的方式实现关键词检索。你可以思考一下，在你负责的项目中，是如何实现关键词检索的？欢迎留言分享。
+

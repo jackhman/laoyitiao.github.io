@@ -1,6 +1,10 @@
+# 17案例实战：教你快速搭建Kubernete监控平台
+
 [Prometheus](https://prometheus.io/) 和 [Grafana](https://grafana.com/) 可以说是 Kubernetes 监控解决方案中最知名的两个。Prometheus 负责收集、存储、查询数据，而 Grafana 负责将 Prometheus 中的数据进行可视化展示，当然 Grafana 还支持其他平台，比如 [ElasticSearch](https://grafana.com/docs/grafana/latest/datasources/elasticsearch/)、[InfluxDB](https://grafana.com/docs/grafana/latest/datasources/influxdb/)、[Graphite](https://grafana.com/docs/grafana/latest/datasources/graphite/) 等。[CNCF 博客](https://www.cncf.io/blog/2020/04/24/prometheus-and-grafana-the-perfect-combo/)也将这两者称为黄金组合，目前一些公有云提供的托管式 Kubernetes （Managed Kubernetes） 都已经默认安装了 Prometheus 和 Grafana。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/61/14/CgqCHl-OrgyAPH_iAAFeouU_wAY811.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/61/14/CgqCHl-OrgyAPH_iAAFeouU_wAY811.png"/> 
+
 
 我们今天就来学习如何在 Kubernetes 集群中搭建 Prometheus 和 Grafana，使之帮我们监控 Kubernetes 集群。
 
@@ -88,7 +92,9 @@ prometheus-stack-prometheus-node-exporter-l7pr9        1/1     Running   0      
 
 这里有一个名为prometheus-stack-kube-prom-operator-6998d5c5b7-kgv8b的 Pod，它是 [prometheus-operator](https://github.com/prometheus-operator/prometheus-operator) 的一个实例，主要用于为我们创建、管理和维护 Prometheus 集群，其具体架构图如下。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/61/09/Ciqc1F-OrkWAXJsQAAEHWw6G6rM837.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/61/09/Ciqc1F-OrkWAXJsQAAEHWw6G6rM837.png"/> 
+
 
 （[https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/user-guides/images/architecture.png）](https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/user-guides/images/architecture.png%EF%BC%89)
 
@@ -141,7 +147,9 @@ prometheus-operator 以 Deployment 的形式部署，并帮助我们创建了名
 kubectl port-forward -n monitor prometheus-prometheus-stack-kube-prom-prometheus-0 9090
 ```
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/61/14/CgqCHl-OrlyAf9PiAAW6ru2bHZI707.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/61/14/CgqCHl-OrlyAf9PiAAW6ru2bHZI707.png"/> 
+
 
 同样地，我们也可以使用如下命令，在本地通过 <http://127.0.0.1:3000> 来访问 Grafana：
 
@@ -149,7 +157,9 @@ kubectl port-forward -n monitor prometheus-prometheus-stack-kube-prom-prometheus
 kubectl port-forward -n monitor prometheus-stack-grafana-5b6dd6b5fb-rtp6z 3000
 ```
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/61/14/CgqCHl-OrmeAXd8PABEbqH6I_pE362.png"/>
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/61/14/CgqCHl-OrmeAXd8PABEbqH6I_pE362.png"/> 
+
 
 这里默认用户名是 admin，密码是 prom-operator。当然你也可以通过 Grafana 的配置来拿到，我们来看看如何操作。
 
@@ -208,15 +218,21 @@ prom-operator
 
 使用上述用户名和密码登录，进来后就可以看到 grafana 的主页面了。
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/61/14/CgqCHl-OroiAZBPUABgqqawSub0949.png"/>
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/61/14/CgqCHl-OroiAZBPUABgqqawSub0949.png"/> 
+
 
 按照上述图示点进来，你就可以看到已经配置好的各个 Dashboard：
 
-<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/61/14/CgqCHl-OrpKAG4VoAAs8370oK_k082.png"/>
+
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/61/14/CgqCHl-OrpKAG4VoAAs8370oK_k082.png"/> 
+
 
 这些都是`prometheus-community/kube-prometheus-stack`这个 Chart 预先配置好的，基本上包括我们对 Kubernetes 的各项监控大盘，你可以随意点击几个 Dashboard 进行了解。
 
-<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/61/14/CgqCHl-OrtSASkD9ABXvtUrLlxI610.png"/>
+
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/61/14/CgqCHl-OrtSASkD9ABXvtUrLlxI610.png"/> 
+
 
 你可以参考[官方文档](https://grafana.com/docs/grafana/latest/dashboards/)学习 Dashboard 的创建和数据展示能力。
 
@@ -230,13 +246,17 @@ kube-state-metrics 可以帮助我们汇聚 Kubernetes 集群中的各大信息�
 $ kubectl port-forward -n monitor prometheus-stack-kube-state-metrics-c7c69c8c9-bhgjv 8080
 ```
 
-<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/61/14/CgqCHl-Oru-AevJ5AB_ZvYnlO60668.png"/>
+
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/61/14/CgqCHl-Oru-AevJ5AB_ZvYnlO60668.png"/> 
+
 
 #### 各节点的监控指标
 
 各个节点承载着 Pod 的运行，因此对各个节点的监控至关重要，比如节点的 CPU 使用率、内存使用率、平均工作负载等。你可以通过上面 Chart 预配置好的 Node dashboard 来查看：
 
-<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/61/09/Ciqc1F-OrvaARKZ2ABNH_bHh8sg135.png"/>
+
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/61/09/Ciqc1F-OrvaARKZ2ABNH_bHh8sg135.png"/> 
+
 
 你可以通过切换节点来查看不同节点的状态，或者单独创建一个 Dashboard，添加一些指标，诸如：
 
@@ -252,7 +272,9 @@ $ kubectl port-forward -n monitor prometheus-stack-kube-state-metrics-c7c69c8c9-
 
 除了监控指标的收集和展示以外，我们还需要设置报警（Alert）。你可以通过设置合适的 Alert rules，在触发的时候通过钉钉、邮件、Slack、PagerDuty 等多种方式通知你。
 
-<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/61/14/CgqCHl-Orv6ACQ9XAAqhwgoMegs538.png"/>
+
+<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/61/14/CgqCHl-Orv6ACQ9XAAqhwgoMegs538.png"/> 
+
 
 在此不做太多介绍，可以通过[官方文档](https://grafana.com/docs/grafana/latest/alerting/create-alerts/)来设置你的 Alert。
 
@@ -261,3 +283,4 @@ $ kubectl port-forward -n monitor prometheus-stack-kube-state-metrics-c7c69c8c9-
 在这一小节，我们介绍了快速搭建基于 Prometheus + Grafana 的 Kubernetes 监控体系。当然安装的方式有很多，今天这里只写了最方便、最快捷的方式。Chart 里预先配置了多个 Dashboard，方便你开箱即用。
 
 如果你对本节课有什么想法或者疑问，欢迎你在留言区留言，我们一起讨论。
+

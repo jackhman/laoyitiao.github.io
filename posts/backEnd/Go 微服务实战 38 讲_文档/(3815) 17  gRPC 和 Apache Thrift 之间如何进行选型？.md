@@ -1,3 +1,5 @@
+# 17gRPC和ApacheThrift之间如何进行选型？
+
 在上一课时中，我们已经对 Go 语言原生 RPC 的使用和具体实现原理进行了详细讲解，并指出其缺少超时熔断、链接管理和服务注册发现等功能，达不到生产环境"开箱即用"的水准，不过官方已经不再为其扩充新功能了，而是推荐使用 gRPC。
 
 其实，除了 gRPC 外，Facebook 开源的 Thrift 框架也是业界较为流行的 RPC 方案，比如 HBase 就是使用它来提供 API 支持的。
@@ -22,7 +24,9 @@ gRPC 是由 Google 开源的高性能 RPC 框架。自 2015 年发布以来，gR
 
 * **提供多种语言支持**。gRPC 支持多种语言，如 C、C++、Go 、Python、Ruby、Java 、PHP 、C# 和 Node.js 等，并且能够基于 ProtoBuf 定义自动生成相应的客户端和服务端代码。目前已提供了 Java 语言版本的 gRPC-Java 和 Go 语言版本的 gRPC-Go。
 
-<Image alt="grpc_language.png" src="https://s0.lgstatic.com/i/image/M00/46/C9/CgqCHl9GF-WAbunfAADemgWlVgo940.png"/>  
+
+<Image alt="grpc_language.png" src="https://s0.lgstatic.com/i/image/M00/46/C9/CgqCHl9GF-WAbunfAADemgWlVgo940.png"/> 
+  
 gRPC 调用示意图
 
 结合上面的 gRPC 调用示意图，我们可以看到，一个 C++ 语言的服务器可以通过 gRPC 分别与 Ruby 语言开发的桌面客户端和 Java 语言开发的 Android 客户端进行交互。
@@ -217,14 +221,18 @@ server.Serve()
 
 整个 Thrift 框架中，可供用户选择和配置的项目如下图所示，由此可见，Thrift 具备丰富的配置项，可以为开发者提供尽可能多的选择。
 
-<Image alt="thrift_structure.png" src="https://s0.lgstatic.com/i/image/M00/46/BF/Ciqc1F9GGH6AYzO_AACRpMJ8K94764.png"/>  
+
+<Image alt="thrift_structure.png" src="https://s0.lgstatic.com/i/image/M00/46/BF/Ciqc1F9GGH6AYzO_AACRpMJ8K94764.png"/> 
+  
 Thrift 框架示意图
 
 ### gRPC 和 Thrift 的区别和选择
 
 Thrift 是 RPC 领域的老牌开源项目，而 gRPC 后来者居上，逐渐超越了 Thrift，二者目前在社区欢迎度和使用度上的对比可以通过 StackShare 网站查看，截至 2020 年 7 月的数据如下图所示：
 
-<Image alt="gprc_vs_thrift.jpg" src="https://s0.lgstatic.com/i/image/M00/46/BF/Ciqc1F9GGIiAJCt0AAHADfLpvVw269.jpg"/>  
+
+<Image alt="gprc_vs_thrift.jpg" src="https://s0.lgstatic.com/i/image/M00/46/BF/Ciqc1F9GGIiAJCt0AAHADfLpvVw269.jpg"/> 
+  
 Thrift 和 gRPC在社区的欢迎度和使用度对比
 
 可以看出，gRPC 拥有更加良好的生态环境和社区规模，而且更多的公司开始将自身技术栈迁移到 gRPC，比如 Dropbox。那为什么会出现这种"后来者反而居上"的情况呢？
@@ -246,3 +254,4 @@ Thrift 和 gRPC在社区的欢迎度和使用度对比
 但是对比二者，你会发现它们也都缺少了大量的功能，比如：连接池、服务框架、服务发现、服务治理、分布式链路追踪、埋点和上下文日志等，而这些功能才是日常开发和运维最常使用的。不过本课程的后面我们都会一一讲述上述功能，为你拼接出最为详细和完整的 Go 微服务架构全貌。
 
 关于本课时，你有什么经验或想法呢？欢迎你在留言区和我分享。
+

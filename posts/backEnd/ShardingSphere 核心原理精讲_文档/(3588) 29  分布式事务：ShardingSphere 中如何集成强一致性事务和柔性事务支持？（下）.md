@@ -1,3 +1,5 @@
+# 29分布式事务：ShardingSphere中如何集成强一致性事务和柔性事务支持？（下）
+
 在上一课时中，我们针对 ShardingSphere 中支持强一致性事务的 XAShardingTransactionManager 的部分内容进行了详细的展开，今天我们继续讲解该类的剩余内容，同时也会介绍支持柔性事务的 SeataATShardingTransactionManager。
 
 ### XAShardingTransactionManager
@@ -177,7 +179,9 @@ public final class BitronixXATransactionManager implements XATransactionManager 
 
 作为总结，我们在上一课时的基础上，进一步梳理了 XA 两阶段提交相关的核心类之间的关系，如下图所示：
 
-<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/53/AB/CgqCHl9oXe6AK8JkAAByEfwPBs0489.png"/>
+
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image/M00/53/AB/CgqCHl9oXe6AK8JkAAByEfwPBs0489.png"/> 
+
 
 #### 2.ShardingConnection
 
@@ -284,7 +288,9 @@ private void initSeataRPCClient() {
 
 而在命名上，Seata 更为直接明了，使用 DataSourceProxy 和 ConnectionProxy 这种代理对象。以 DataSourceProxy 为例，我们可以梳理它的类层结构如下：
 
-<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/53/AB/CgqCHl9oXgKACi15AAA7sb7XKlo735.png"/>
+
+<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image/M00/53/AB/CgqCHl9oXgKACi15AAA7sb7XKlo735.png"/> 
+
 
 可以看到 DataSourceProxy 实现了自己定义的 Resource 接口，然后继承了抽象类 AbstractDataSourceProxy，而后者则实现了 JDBC 中的 DataSource 接口。
 
@@ -427,3 +433,4 @@ sharding-transaction-base-seata-at 工程中的代码实际上就只有这些内
 介绍完分布式事务之后，我们将进入"ShardingSphere 中编排治理方面的源码解析"模块，从下一课时开始，我将要介绍数据脱敏模块的实现原理。
 
 [课程评价入口，挑选 5 名小伙伴赠送小礼品\~](https://wj.qq.com/s2/7238084/d702/)
+

@@ -1,10 +1,14 @@
+# 04应用集成：在业务系统中使用ShardingSphere的方式有哪些？
+
 在上一课时中，我详细介绍了 ShardingSphere 与 JDBC 规范之间的兼容性关系，我们知道 ShardingSphere 对 JDBC 规范进行了重写，并嵌入了分片机制。基于这种兼容性，开发人员使用 ShardingSphere 时就像在使用 JDBC 规范所暴露的各个接口一样。这一课时，我们将讨论如何在业务系统中使用 ShardingSphere 的具体方式。
 
 ### 如何抽象开源框架的应用方式？
 
 当我们自己在设计和实现一款开源框架时，如何规划它的应用方式呢？作为一款与数据库访问相关的开源框架，ShardingSphere 提供了多个维度的应用方式，我们可以对这些应用方式进行抽象，从而提炼出一种模版。这个模版由四个维度组成，分别是**底层工具、基础规范、开发框架和领域框架**，如下图所示：
 
-<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/28/F7/CgqCHl75qv-AFbZvAACz7F_yXRM280.png"/>
+
+<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/28/F7/CgqCHl75qv-AFbZvAACz7F_yXRM280.png"/> 
+
 
 #### 底层工具
 
@@ -81,7 +85,9 @@ spring.shardingsphere.datasource.test_datasource.password=root
 
 在介绍开发框架的具体集成方式之前，我们来设计一个简单的应用场景。假设系统中存在一个用户表 User，这张表的数据量比较大，所以我们将它进行分库分表处理，计划分成两个数据库 ds0 和 ds1，然后每个库中再分成两张表 user0 和 user1：
 
-<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/28/EB/Ciqc1F75qxSADY5yAADgZQ5r488284.png"/>
+
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/28/EB/Ciqc1F75qxSADY5yAADgZQ5r488284.png"/> 
+
 
 接下来，让我们来看一下如何基于 Java 原生、Spring 及 Spring Boot 开发框架针对这一场景实现分库分表。
 
@@ -350,3 +356,4 @@ public class UserApplication
 这里给你留一道思考题：为了实现框架的易用性，ShardingSphere 为开发人员提供了哪些工具和规范的集成？
 
 另一方面，在今天的课程中，我们也看到，使用 ShardingSphere 的主要方式事实上就是基于它所提供的配置体系，来完成各种配置项的创建和设置。可以说，配置工作是使用 ShardingSphere 进行开发的主要工作。
+

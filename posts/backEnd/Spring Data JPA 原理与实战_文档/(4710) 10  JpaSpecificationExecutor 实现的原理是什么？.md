@@ -1,3 +1,5 @@
+# 10JpaSpecificationExecutor实现的原理是什么？
+
 通过上一课时，我们了解到 JpaSpecificationExecutor 给我们提供了动态查询或者写框架的一种思路，那么这节课我们来看一下 JpaSpecificationExecutor 的详细用法和原理，及其实战应用场景中如何实现自己的框架。
 
 在开始讲解之前，请先思考几个问题：
@@ -167,7 +169,9 @@ Hibernate: select user0_.id as id1_1_, user0_.age as age2_1_, user0_.create_date
 
 此 SQL 的参数如下：
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/5E/C7/Ciqc1F-Hw4GAVwjvAACBlHuTFN0497.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/5E/C7/Ciqc1F-Hw4GAVwjvAACBlHuTFN0497.png"/> 
+
 
 此 SQL 就是查询 User inner Join user_address 之后组合成的查询 SQL，基本符合我们的预期，即不同的查询条件。我们通过这个例子大概知道了 JpaSpecificationExecutor 的用法，那么它具体是什么呢？
 
@@ -192,7 +196,9 @@ public interface JpaSpecificationExecutor<T> {
 
 其返回结果和 Pageable、Sort，我们在前面课时都有介绍过，这里我们重点关注一下 Specification。看一下 Specification 接口的代码。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/5E/C7/Ciqc1F-Hw4uAGaD2AADHMlVN_q0440.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image/M00/5E/C7/Ciqc1F-Hw4uAGaD2AADHMlVN_q0440.png"/> 
+
 
 通过看其源码就会发现里面提供的方法很简单。其中，下面一段代码表示组合的 and 关系的查询条件。
 
@@ -230,7 +236,9 @@ toPredicate 这个方法是我们用到的时候需要自己去实现的，接�
 
 首先我们在刚才的 Demo 里面设置一个断点，看到如下界面。
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/5E/C7/Ciqc1F-Hw5SAeoXKAAMzN3mF_8I181.png"/>
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/5E/C7/Ciqc1F-Hw5SAeoXKAAMzN3mF_8I181.png"/> 
+
 
 这里可以分别看到 Root 的实现类是 RootImpl，CriteriaQuery 的实现类是 CriteriaQueryImpl，CriteriaBuilder 的实现类是 CriteriaBuilderImpl。
 
@@ -264,7 +272,9 @@ org.hibernate.query.criteria.internal.CriteriaBuilderImpl
 
 代表一个 specific 的顶层查询对象，它包含着查询的各个部分，比如 select 、from、where、group by、order by 等。CriteriaQuery 对象只对实体类型或嵌入式类型的 Criteria 查询起作用。简单理解为，它提供了查询 ROOT 的方法。常用的方法有如下几种：
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/5E/C7/Ciqc1F-Hw6uAJmdyAALVLoSlnLQ418.png"/>
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/5E/C7/Ciqc1F-Hw6uAJmdyAALVLoSlnLQ418.png"/> 
+
 
 ```java
 正如我们上面where的用法：query.where(.....）一样
@@ -272,7 +282,9 @@ org.hibernate.query.criteria.internal.CriteriaBuilderImpl
 
 这个语法比较简单，我们在其方法后面加上相应的参数即可。下面看一个 group by 的例子。
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/5E/D2/CgqCHl-Hw7SAYWLnAAEIg0u_SOc872.png"/>
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image/M00/5E/D2/CgqCHl-Hw7SAYWLnAAEIg0u_SOc872.png"/> 
+
 
 如上图所示，我们加入 groupyBy 某个字段，SQL 也会有相应的变化。那么我们再来看第三个参数。
 
@@ -280,11 +292,15 @@ org.hibernate.query.criteria.internal.CriteriaBuilderImpl
 
 CriteriaBuilder 是用来构建 CritiaQuery 的构建器对象，其实就相当于条件或者条件组合，并以 Predicate 的形式返回。它基本上提供了所有常用的方法，如下所示：
 
-<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/5E/C7/Ciqc1F-Hw7yAZgOYAASXGLn8fS0352.png"/>
+
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/5E/C7/Ciqc1F-Hw7yAZgOYAASXGLn8fS0352.png"/> 
+
 
 我们直接通过此类的 Structure 视图就可以看到都有哪些方法。其中，and、any 等用来做查询条件的组合；类似 between、equal、exist、ge、gt、isEmpty、isTrue、in 等用来做查询条件的查询，类似下图的一些方法。
 
-<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/5E/D3/CgqCHl-Hw8KAS41dAAKQ7MNjups722.png"/>
+
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image/M00/5E/D3/CgqCHl-Hw8KAS41dAAKQ7MNjups722.png"/> 
+
 
 而其中 Expression 很简单，都是通过 root.get(...) 某些字段即可返回，正如下面的用法。
 
@@ -306,7 +322,9 @@ Predicate p3=cb.gt(root.get("age").as(Integer.class), uqm.getAge());
 
 我们先看一下 JpaSpecificationExecutor 的类图。
 
-<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/5E/C7/Ciqc1F-Hw9KAPLUnAAEGAy5X1Y8192.png"/>
+
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/5E/C7/Ciqc1F-Hw9KAPLUnAAEGAy5X1Y8192.png"/> 
+
 
 从图中我们可以看得出来：
 
@@ -320,15 +338,21 @@ Predicate p3=cb.gt(root.get("age").as(Integer.class), uqm.getAge());
 
 那么我们再直观地看一下 JpaSpecificationExecutor 接口里面的方法 findAll 对应的 SimpleJpaRepository 里面的实现方法 findAl，我们通过工具可以很容易地看到相应的实现方法，如下所示：
 
-<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/5E/D3/CgqCHl-Hw9uAHAiHAAFZTdcBw2Y564.png"/>
+
+<Image alt="Drawing 8.png" src="https://s0.lgstatic.com/i/image/M00/5E/D3/CgqCHl-Hw9uAHAiHAAFZTdcBw2Y564.png"/> 
+
 
 你要知道，得到 TypeQuery 就可以直接操作JPA协议里面相应的方法了，那么我们看下 getQuery（spec，pageable）的实现过程。
 
-<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/5E/C7/Ciqc1F-Hw-qAcTArAACqAeHRq3M302.png"/>
+
+<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/5E/C7/Ciqc1F-Hw-qAcTArAACqAeHRq3M302.png"/> 
+
 
 之后一步一步 debug 就可以了。
 
-<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image/M00/5E/D3/CgqCHl-Hw_KAU1wCAAW1BokuNt8728.png"/>
+
+<Image alt="Drawing 10.png" src="https://s0.lgstatic.com/i/image/M00/5E/D3/CgqCHl-Hw_KAU1wCAAW1BokuNt8728.png"/> 
+
 
 到了上图所示这里，就可以看到：
 
@@ -560,3 +584,4 @@ public class SpecificationsBuilder<Entity> {
 本课时到这就结束了，欢迎你在下面留言讨论或分享。下节课，我会为你讲解如何自定义 Repository。
 > 点击下方链接查看源码（不定时更新）  
 > <https://github.com/zhangzhenhuajack/spring-boot-guide/tree/master/spring-data/spring-data-jpa>
+

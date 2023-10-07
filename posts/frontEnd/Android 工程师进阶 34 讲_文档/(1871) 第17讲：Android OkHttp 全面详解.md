@@ -1,3 +1,5 @@
+# 第17讲：AndroidOkHttp全面详解
+
 OkHttp 是一套处理 HTTP 网络请求的依赖库，由 Square 公司设计研发并开源，目前可以在 Java 和 Kotlin 中使用。对于 Android App 来说，OkHttp 现在几乎已经占据了所有的网络请求操作，RetroFit + OkHttp 实现网络请求似乎成了一种标配。因此它也是每一个 Android 开发工程师的必备技能，了解其内部实现原理可以更好地进行功能扩展、封装以及优化。
 > 因为是 HTTP 网络请求的依赖库，所以需要有一定的网络知识基础，这里我推荐一本入门级的书籍《网络是怎样连接的》（由日本作者户根勤所著）。这本书对入门级开发人员极为友好，能够快速帮你梳理从前端到服务器间的整套网络流程。
 
@@ -7,11 +9,15 @@ OkHttp 是一套处理 HTTP 网络请求的依赖库，由 Square 公司设计�
 
 先看下 OkHttp 的基本使用：
 
-<Image alt="image001.png" src="https://s0.lgstatic.com/i/image/M00/0D/2B/Ciqc1F7Dk-eAItVSAADuEPXjYPo944.png"/>
+
+<Image alt="image001.png" src="https://s0.lgstatic.com/i/image/M00/0D/2B/Ciqc1F7Dk-eAItVSAADuEPXjYPo944.png"/> 
+
 
 除了直接 new OkHttpClient 之外，还可以使用内部工厂类 Builder 来设置 OkHttpClient。如下所示：
 
-<Image alt="image003.png" src="https://s0.lgstatic.com/i/image/M00/0D/2B/Ciqc1F7Dk--AZk_0AADHHDXvjvc960.png"/>
+
+<Image alt="image003.png" src="https://s0.lgstatic.com/i/image/M00/0D/2B/Ciqc1F7Dk--AZk_0AADHHDXvjvc960.png"/> 
+
 
 请求操作的起点从 OkHttpClient.newCall().enqueue() 方法开始：
 
@@ -19,30 +25,40 @@ OkHttp 是一套处理 HTTP 网络请求的依赖库，由 Square 公司设计�
 
 这个方法会返回一个 RealCall 类型的对象，通过它将网络请求操作添加到请求队列中。
 
-<Image alt="image005.png" src="https://s0.lgstatic.com/i/image/M00/0D/2B/Ciqc1F7Dk_mAeO5DAABcf9D4khg568.png"/>
+
+<Image alt="image005.png" src="https://s0.lgstatic.com/i/image/M00/0D/2B/Ciqc1F7Dk_mAeO5DAABcf9D4khg568.png"/> 
+
 
 * **RealCall.enqueue**
 
 调用 Dispatcher 的入队方法，执行一个异步网络请求的操作。
 
-<Image alt="image007.png" src="https://s0.lgstatic.com/i/image/M00/0D/2B/Ciqc1F7DlACAZ0ypAAD7tUY7Aps196.png"/>
+
+<Image alt="image007.png" src="https://s0.lgstatic.com/i/image/M00/0D/2B/Ciqc1F7DlACAZ0ypAAD7tUY7Aps196.png"/> 
+
 
 可以看出，最终请求操作是委托给 Dispatcher的enqueue 方法内实现的。
 > Dispatcher 是 OkHttpClient 的调度器，是一种门户模式。主要用来实现执行、取消异步请求操作。本质上是内部维护了一个线程池去执行异步操作，并且在 Dispatcher 内部根据一定的策略，保证最大并发个数、同一 host 主机允许执行请求的线程个数等。
 
 Dispatcher的enqueue 方法的具体实现如下：
 
-<Image alt="image009.png" src="https://s0.lgstatic.com/i/image/M00/0D/2B/Ciqc1F7DlAeAY_UjAADrZmzFV74873.png"/>
+
+<Image alt="image009.png" src="https://s0.lgstatic.com/i/image/M00/0D/2B/Ciqc1F7DlAeAY_UjAADrZmzFV74873.png"/> 
+
 
 可以看出，实际上就是使用线程池执行了一个 AsyncCall，而 AsyncCall 实现了 Runnable 接口，因此整个操作会在一个子线程（非 UI 线程）中执行。
 
 继续查看 AsyncCall 中的 run 方法如下：
 
-<Image alt="image011.png" src="https://s0.lgstatic.com/i/image/M00/0D/2B/Ciqc1F7DlA-AXkBNAAPgqEik5MY052.png"/>
+
+<Image alt="image011.png" src="https://s0.lgstatic.com/i/image/M00/0D/2B/Ciqc1F7DlA-AXkBNAAPgqEik5MY052.png"/> 
+
 
 在 run 方法中执行了另一个 execute 方法，而真正获取请求结果的方法是在 getResponseWithInterceptorChain 方法中，从名字也能看出其内部是一个拦截器的调用链，具体代码如下：
 
-<Image alt="image013.png" src="https://s0.lgstatic.com/i/image/M00/0D/2B/Ciqc1F7DlBqAHUznAAJGJV3xQJg366.png"/>
+
+<Image alt="image013.png" src="https://s0.lgstatic.com/i/image/M00/0D/2B/Ciqc1F7DlBqAHUznAAJGJV3xQJg366.png"/> 
+
 
 每一个拦截器的作用如下。
 
@@ -61,15 +77,21 @@ Dispatcher的enqueue 方法的具体实现如下：
 
 a. 根据 Request 获取当前已有缓存的 Response（有可能为 null），并根据获取到的缓存 Response，创建 CacheStrategy 对象。
 
-<Image alt="image015.png" src="https://s0.lgstatic.com/i/image/M00/0D/37/CgqCHl7DlCOAdC6cAAEawroM0Uo610.png"/>
+
+<Image alt="image015.png" src="https://s0.lgstatic.com/i/image/M00/0D/37/CgqCHl7DlCOAdC6cAAEawroM0Uo610.png"/> 
+
 
 b. 通过 CacheStrategy 判断当前缓存中的 Response 是否有效（比如是否过期），如果缓存 Response 可用则直接返回，否则调用 chain.proceed() 继续执行下一个拦截器，也就是发送网络请求从服务器获取远端 Response。具体如下：
 
-<Image alt="image017.png" src="https://s0.lgstatic.com/i/image/M00/0D/37/CgqCHl7DlCuAWirnAAITtFPlLeA709.png"/>
+
+<Image alt="image017.png" src="https://s0.lgstatic.com/i/image/M00/0D/37/CgqCHl7DlCuAWirnAAITtFPlLeA709.png"/> 
+
 
 c. 如果从服务器端成功获取 Response，再判断是否将此 Response 进行缓存操作。
 
-<Image alt="image019.png" src="https://s0.lgstatic.com/i/image/M00/0D/37/CgqCHl7DlDKAXXltAAG2Dz3ktBs683.png"/>
+
+<Image alt="image019.png" src="https://s0.lgstatic.com/i/image/M00/0D/37/CgqCHl7DlDKAXXltAAG2Dz3ktBs683.png"/> 
+
 
 #### 通过 Cache 实现缓存功能
 
@@ -77,11 +99,15 @@ c. 如果从服务器端成功获取 Response，再判断是否将此 Response �
 
 OkHttp 提供了一个默认的缓存类 Cache.java，我们可以在构建 OkHttpClient 时，直接使用 Cache 来实现缓存功能。只需要指定缓存的路径，以及最大可用空间即可，如下所示：
 
-<Image alt="image021.png" src="https://s0.lgstatic.com/i/image/M00/0D/37/CgqCHl7DlDuAbKKmAACUEzX0A2k986.png"/>
+
+<Image alt="image021.png" src="https://s0.lgstatic.com/i/image/M00/0D/37/CgqCHl7DlDuAbKKmAACUEzX0A2k986.png"/> 
+
 
 上述代码使用 Android app 内置 cache 目录作为缓存路径，并设置缓存可用最大空间为 20M。实际上在 Cache 内部使用了 DiskLruCach 来实现具体的缓存功能，如下所示：
 
-<Image alt="image023.png" src="https://s0.lgstatic.com/i/image/M00/0D/37/CgqCHl7DlEKAfkCcAADcFHFhEIE069.png"/>
+
+<Image alt="image023.png" src="https://s0.lgstatic.com/i/image/M00/0D/37/CgqCHl7DlEKAfkCcAADcFHFhEIE069.png"/> 
+
 
 DiskLruCache 最终会以 journal 类型文件将需要缓存的数据保存在本地。如果感觉 OkHttp 自带的这套缓存策略太过复杂，我们可以设置使用 DiskLruCache 自己实现缓存机制。
 
@@ -89,7 +115,9 @@ DiskLruCache 最终会以 journal 类型文件将需要缓存的数据保存在�
 
 CallServerInterceptor 是 OkHttp 中最后一个拦截器，也是 OkHttp 中最核心的网路请求部分，其 intercept 方法如下：
 
-<Image alt="image025.png" src="https://s0.lgstatic.com/i/image/M00/0D/37/CgqCHl7DlEyAAYQ5AANbdjxrvDk061.png"/>
+
+<Image alt="image025.png" src="https://s0.lgstatic.com/i/image/M00/0D/37/CgqCHl7DlEyAAYQ5AANbdjxrvDk061.png"/> 
+
 
 如上图所示，主要分为 2 部分。蓝线以上的操作是向服务器端发送请求数据，蓝线以下代表从服务端获取相应数据并构建 Response 对象。
 
@@ -101,7 +129,9 @@ CallServerInterceptor 是 OkHttp 中最后一个拦截器，也是 OkHttp 中最
 
 **a.** 继承 ResponseBody
 
-<Image alt="image027.png" src="https://s0.lgstatic.com/i/image/M00/0D/38/CgqCHl7DlFiAfsCnAANPz4157cU538.png"/>
+
+<Image alt="image027.png" src="https://s0.lgstatic.com/i/image/M00/0D/38/CgqCHl7DlFiAfsCnAANPz4157cU538.png"/> 
+
 
 其中 progressListener 是一个自定义的进度监听器，通过它向上层汇报网络请求的进度。
 
@@ -109,7 +139,9 @@ CallServerInterceptor 是 OkHttp 中最后一个拦截器，也是 OkHttp 中最
 
 代码如下：
 
-<Image alt="image029.png" src="https://s0.lgstatic.com/i/image/M00/0D/2C/Ciqc1F7DlGCADNj3AAJmGXwuBs4793.png"/>
+
+<Image alt="image029.png" src="https://s0.lgstatic.com/i/image/M00/0D/2C/Ciqc1F7DlGCADNj3AAJmGXwuBs4793.png"/> 
+
 
 解释说明：
 
@@ -123,17 +155,23 @@ getProgressBarClient 通过添加一个拦截器，并且在 intercept 方法中
 
 我们甚至可以将上面自定义的 ProgressBarClient 用在 Square 公司另外一个请求库---Picasso。Picasso 是 Square 公司研发用来从网络端获取图片数据的依赖库，内部实质上是使用 OkHttp 来实现请求操作的。因此我们可以将 ProgressBarClient 替换 Picasso 中的 OkHttpClient，这样就能获取下载图片的进度，代码如下：
 
-<Image alt="image031.png" src="https://s0.lgstatic.com/i/image/M00/0D/2C/Ciqc1F7DlGqAAo5gAAD01zTM0Cg633.png"/>
+
+<Image alt="image031.png" src="https://s0.lgstatic.com/i/image/M00/0D/2C/Ciqc1F7DlGqAAo5gAAD01zTM0Cg633.png"/> 
+
 
 后续只要通过 getPicasso 方法即可获得一个自带下载进度的 Picasso 对象，因为 OkHttp、Picasso、Okio 都来自 Square 公司，所以我将这些工具栏的 get 方法放在一个 SquareUtils 类中，我已经上传到代码仓库中，详细代码可以查看：[SquareUtils.java](https://github.com/McoyJiang/LagouAndroidShare/blob/master/course17_OkHttp/SquareUtils.java)
 
 如果结合第 15 课时用过的 PieImageView，我们就可以实现一个带进度提示的图片下载效果，代码如下：
 
-<Image alt="image033.png" src="https://s0.lgstatic.com/i/image/M00/0D/38/CgqCHl7DlHKAWCgpAAECSW93DuE778.png"/>
+
+<Image alt="image033.png" src="https://s0.lgstatic.com/i/image/M00/0D/38/CgqCHl7DlHKAWCgpAAECSW93DuE778.png"/> 
+
 
 最终运行效果如下：
 
-<Image alt="image035.gif" src="https://s0.lgstatic.com/i/image/M00/0D/2C/Ciqc1F7DlH-AKnYgACIcXjP9IHk410.gif"/>
+
+<Image alt="image035.gif" src="https://s0.lgstatic.com/i/image/M00/0D/2C/Ciqc1F7DlH-AKnYgACIcXjP9IHk410.gif"/> 
+
 
 ### 总结
 
@@ -142,4 +180,5 @@ getProgressBarClient 通过添加一个拦截器，并且在 intercept 方法中
 * 首先 OkHttp 内部是一个门户模式，所有的下发工作都是通过一个门户 Dispatcher 来进行分发。
 * 然后在网络请求阶段通过责任链模式，链式的调用各个拦截器的 intercept 方法。其中我重点介绍了 2 个比较重要的拦截器：CacheInterceptor 和 CallServerInterceptor。它们分别用来做请求缓存和执行网络请求操作。
 * 最后我们在理解源码实现的基础上，对 OkHttp 的功能进行了一些扩展，实现了网络请求进度的实现。
+
 

@@ -1,3 +1,5 @@
+# 06CompletableFuture：如何理解Java8新引入的异步编程类？
+
 今天，我们一起来看下如何理解 Java8 引入的新异步编程类，CompletableFuture。
 
 在第 05 时，我们直接用"线程"和"阻塞队列"构建实现了一个简单的流计算框架。这个框架帮助我们理解了流计算系统的基本实现原理，但是它用起来不是非常方便，需要配合框架写一些业务无关的代码。
@@ -119,7 +121,9 @@ CompletableFuture<Void> cf4 = cf3.thenAcceptAsync(x -> print("world"), executor4
 ```
 
 通过阅读 JDK 源码，并借助于 IDE 的断点（比如 Mac 环境下 IntelliJ IDEA 的 F7 和 F8 功能键逐步调试）调试功能，可以追踪出以上代码生成 CompletableFuture 异步调用链的过程，如下图 1 所示。  
-<Image alt="image.png" src="https://s0.lgstatic.com/i/image6/M00/03/AF/CioPOWAfiwmAHcIUAAG_KuwEUzE583.png"/>
+
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image6/M00/03/AF/CioPOWAfiwmAHcIUAAG_KuwEUzE583.png"/> 
+
 
 具体来说，CompletableFuture 的异步调用链是这样形成的。
 
@@ -184,11 +188,16 @@ CompletableFuture
 所以，关于 CompletableFuture 类你还有什么疑问或想法呢？可以在课程的留言区将你的问题或想法写下来，我在看到后会进行分析和讲解，或者在后续的课程中进一步补充说明。
 > 本课时精华：
 
-<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M00/03/AC/Cgp9HWAfhe6AfThAAAovbNRgJ50808.png"/>
+
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M00/03/AC/Cgp9HWAfhe6AfThAAAovbNRgJ50808.png"/> 
+
 
 [点击此链接查看本课程所有课时的源码](https://github.com/alain898/realtime_stream_computing_course)
 
 *** ** * ** ***
 
-[<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image2/M01/0C/98/CgpVE2AZCKKAa8TbAAUCrlmIuEw611.png"/>](https://kaiwu.lagou.com/data_enhancement.html?utm_source=lagouedu&utm_medium=zhuanlan&utm_campaign=%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5#/index)  
+[
+<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image2/M01/0C/98/CgpVE2AZCKKAa8TbAAUCrlmIuEw611.png"/> 
+](https://kaiwu.lagou.com/data_enhancement.html?utm_source=lagouedu&utm_medium=zhuanlan&utm_campaign=%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5#/index)  
 [PB 级企业大数据项目实战 + 拉勾硬核内推，5 个月全面掌握大数据核心技能。点击链接，全面赋能！](https://kaiwu.lagou.com/data_enhancement.html?utm_source=lagouedu&utm_medium=zhuanlan&utm_campaign=%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91%E9%AB%98%E8%96%AA%E8%AE%AD%E7%BB%83%E8%90%A5#/index)
+

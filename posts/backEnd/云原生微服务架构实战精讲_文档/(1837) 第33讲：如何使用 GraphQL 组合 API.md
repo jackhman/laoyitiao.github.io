@@ -1,3 +1,5 @@
+# 第33讲：如何使用GraphQL组合API
+
 在第 32 课时中介绍了 REST API 在使用上的局限性。由于请求和响应格式的固定，当 API 的使用者的需求发生改变时，需要 API 提供者先做出修改，API 使用者才能进行所需的改动。这种耦合关系降低了整体的开发效率，对于开放 API 来说，这种情况会更加严重。当 API 的使用者很多时，不同使用者的需求可能会产生冲突。从 API 实现者的角度来说，只能在这些冲突的需求中进行取舍，客观上也造成了部分 API 使用者的困难。Backend For Frontend 模式和 API 版本化可以解决一部分问题，但也使得 API 的维护变得更加复杂。
 
 对于 REST API 的问题，我们需要新的解决方案，[GraphQL](https://graphql.org/) 和 Netflix Falcor 都是可以替代的方案，这两种方案对客户端都提供了更高的要求。REST API 的优势在于对客户端的要求很低，使得它有很强的兼容性，这也是 REST API 流行的一个重要原因。随着 JavaScript 的广泛使用，客户端可以承担更多的职责，这使得 GraphQL 这样的技术有了流行起来的基础。本课时将对 GraphQL 进行基本的介绍，并用 GraphQL 实现乘客管理界面所需的 API。
@@ -182,7 +184,9 @@ input CreateUserAddressRequest {
 
 下面介绍如何使用 GraphQL 来实现乘客管理界面的 API。后台实现使用的是 Java 语言，基于 GraphQL 的 Java 实现库 [graphql-java](https://www.graphql-java.com/)，以及相应的 Spring Boot 集成库 [graphql-spring-boot](https://github.com/graphql-java-kickstart/graphql-spring-boot)。在实际的数据获取时，使用的是不同微服务 API 的 Java 客户端。完整的实现请参考 GitHub 上源代码中示例应用的 happyride-passenger-web-api-graphql 模块。下图是 GraphQL 服务的架构示意图。
 
-<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/2E/CF/Ciqc1F8Fpv-AZk1NAABk0f47qTs188.png"/>
+
+<Image alt="image (5).png" src="https://s0.lgstatic.com/i/image/M00/2E/CF/Ciqc1F8Fpv-AZk1NAABk0f47qTs188.png"/> 
+
 
 #### 模式
 
@@ -384,8 +388,11 @@ public class SchemaConfig {
 
 下图是使用 Insomnia 查询 GraphQL 时的截图。
 
-<Image alt="insomnia.png" src="https://s0.lgstatic.com/i/image/M00/2E/CF/Ciqc1F8Fp3yAHFszAAMallAEM2s704.png"/>
+
+<Image alt="insomnia.png" src="https://s0.lgstatic.com/i/image/M00/2E/CF/Ciqc1F8Fp3yAHFszAAMallAEM2s704.png"/> 
+
 
 ### 总结
 
 作为一个新的开放 API 的方式，GraphQL 释放了客户端的查询能力，已经得到了广泛的流行。通过本课时的学习，你可以了解 GraphQL 中的基本概念，包括查询和修改，以及如何编写 GraphQL 模式，还可以掌握如何使用 Java 来实现基于 Spring Boot 的 GraphQL 服务器。
+

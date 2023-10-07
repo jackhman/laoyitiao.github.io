@@ -1,10 +1,14 @@
+# 第19讲：tartActivity启动过程分析
+
 在 13 课时中我介绍了几个与 Activity 交互相关的问题，包括不同 taskAffinity、不同 process 配置的情况。本课时我们来看一下 startActivity 过程的具体流程，课程中引用的源码版本是 android-28。
 
 在手机桌面应用中点击某一个 icon 之后，实际上最终就是通过 startActivity 去打开某一个 Activity 页面。我们知道 Android 中的一个 App 就相当于一个进程，所以 startActivity 操作中还需要判断，目标 Activity 的进程是否已经创建，如果没有，则在显示 Activity 之前还需要将进程 Process 提前创建出来。
 
 假设是从 ActivityA 跳转到另一个 App 中的 ActivityB，过程如下图所示：
 
-<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image/M00/11/F8/CgqCHl7M0DeAQyu5AAC-zBQ1yGY981.png"/>
+
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image/M00/11/F8/CgqCHl7M0DeAQyu5AAC-zBQ1yGY981.png"/> 
+
 
 整个 startActivity 的流程分为 3 大部分，也涉及 3 个进程之间的交互：
 
@@ -16,13 +20,17 @@
 
 这一过程并不复杂，用一张图表示具体过程如下：
 
-<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image/M00/11/F9/CgqCHl7M0D6APUSnAACBNzm-sQM664.png"/>
+
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image/M00/11/F9/CgqCHl7M0D6APUSnAACBNzm-sQM664.png"/> 
+
 
 接下来看下源码中做了哪些操作。
 
 #### **Activity 的 startActivity**
 
-<Image alt="image005.png" src="https://s0.lgstatic.com/i/image/M00/11/EE/Ciqc1F7M0PGAcw9-AAE81TfpJpM106.png"/>
+
+<Image alt="image005.png" src="https://s0.lgstatic.com/i/image/M00/11/EE/Ciqc1F7M0PGAcw9-AAE81TfpJpM106.png"/> 
+
 
 最终调用了 startActivityForResult 方法，传入的 -1 表示不需要获取 startActivity 的结果。
 
@@ -30,7 +38,9 @@
 
 具体代码如下所示：
 
-<Image alt="image007.png" src="https://s0.lgstatic.com/i/image/M00/11/FA/CgqCHl7M0P2ACMETAAIirdxF28c620.png"/>
+
+<Image alt="image007.png" src="https://s0.lgstatic.com/i/image/M00/11/FA/CgqCHl7M0P2ACMETAAIirdxF28c620.png"/> 
+
 
 startActivityForResult 也很简单，调用 Instrumentation.execStartActivity 方法。剩下的交给 Instrumentation 类去处理。
 
@@ -44,7 +54,9 @@ startActivityForResult 也很简单，调用 Instrumentation.execStartActivity �
 
 方法如下：
 
-<Image alt="image009.png" src="https://s0.lgstatic.com/i/image/M00/11/EE/Ciqc1F7M0QSAHomcAAIQnVgFPtE390.png"/>
+
+<Image alt="image009.png" src="https://s0.lgstatic.com/i/image/M00/11/EE/Ciqc1F7M0QSAHomcAAIQnVgFPtE390.png"/> 
+
 
 在 Instrumentation 中，会通过 ActivityManger.getService 获取 AMS 的实例，然后调用其 startActivity 方法，实际上这里就是通过 AIDL 来调用 AMS 的 startActivity 方法，至此，startActivity 的工作重心成功地从进程 A 转移到了系统进程 AMS 中。
 
@@ -62,7 +74,9 @@ startActivityForResult 也很简单，调用 Instrumentation.execStartActivity �
 
 #### AMS 的 startActivity
 
-<Image alt="image011.png" src="https://s0.lgstatic.com/i/image/M00/11/EE/Ciqc1F7M0Q6AMyfdAARpsDnCyTE397.png"/>
+
+<Image alt="image011.png" src="https://s0.lgstatic.com/i/image/M00/11/EE/Ciqc1F7M0Q6AMyfdAARpsDnCyTE397.png"/> 
+
 
 从上图可以看出，经过多个方法的调用，最终通过 obtainStarter 方法获取了 ActivityStarter 类型的对象，然后调用其 execute 方法。在 execute 方法中，会再次调用其内部的 startActivityMayWait 方法。
 
@@ -70,7 +84,9 @@ startActivityForResult 也很简单，调用 Instrumentation.execStartActivity �
 
 ActivityStarter 这个类看名字就知道它专门负责一个 Activity 的启动操作。它的主要作用包括解析 Intent、创建 ActivityRecord、如果有可能还要创建 TaskRecord。startActivityMayWait 方法的部分实现如下：
 
-<Image alt="image013.png" src="https://s0.lgstatic.com/i/image/M00/11/FA/CgqCHl7M0RWAZHYRAAJHlEvv_wE375.png"/>
+
+<Image alt="image013.png" src="https://s0.lgstatic.com/i/image/M00/11/FA/CgqCHl7M0RWAZHYRAAJHlEvv_wE375.png"/> 
+
 
 从上图可以看出获取目标 Activity 信息的操作由 mSupervisor 来实现，它是 ActivityStackSupervisor 类型，从名字也能猜出它主要是负责 Activity 所处栈的管理类。
 > 在上图中的 resolveIntent 中实际上是调用系统 PackageManagerService 来获取最佳 Activity。有时候我们通过隐式 Intent 启动 Activity 时，系统中可能存在多个 Activity 可以处理 Intent，此时会弹出一个选择框让用户选择具体需要打开哪一个 Activity 界面，就是此处的逻辑处理结果。
@@ -79,7 +95,9 @@ ActivityStarter 这个类看名字就知道它专门负责一个 Activity 的启
 
 #### **ActivityStarter 的 startActivityUnchecked**
 
-<Image alt="image015.png" src="https://s0.lgstatic.com/i/image/M00/11/EE/Ciqc1F7M0RyAFd6pAAQ31DVvONo737.png"/>
+
+<Image alt="image015.png" src="https://s0.lgstatic.com/i/image/M00/11/EE/Ciqc1F7M0RyAFd6pAAQ31DVvONo737.png"/> 
+
 
 解释说明：
 
@@ -89,7 +107,9 @@ ActivityStarter 这个类看名字就知道它专门负责一个 Activity 的启
 
 **computeLaunchingTaskFlags 方法具体如下：**
 
-<Image alt="image017.png" src="https://s0.lgstatic.com/i/image/M00/11/FA/CgqCHl7M0SSAdSouAAW_3GUY-eQ064.png"/>
+
+<Image alt="image017.png" src="https://s0.lgstatic.com/i/image/M00/11/FA/CgqCHl7M0SSAdSouAAW_3GUY-eQ064.png"/> 
+
 
 这个方法的主要作用是计算启动 Activity 的 Flag，不同的 Flag 决定了启动 Activity 最终会被放置到哪一个 Task 集合中。
 
@@ -100,25 +120,33 @@ ActivityStarter 这个类看名字就知道它专门负责一个 Activity 的启
 
 #### ActivityStackSupervisor 的 startActivityLocked
 
-<Image alt="image019.png" src="https://s0.lgstatic.com/i/image/M00/11/FA/CgqCHl7M0SyAHThkAAGCqi7Itl4134.png"/>
+
+<Image alt="image019.png" src="https://s0.lgstatic.com/i/image/M00/11/FA/CgqCHl7M0SyAHThkAAGCqi7Itl4134.png"/> 
+
 
 方法中会调用 insertTaskAtTop 方法尝试将 Task 和 Activity 入栈。如果 Activity 是以 newTask 的模式启动或者 TASK 堆栈中不存在该 Task id，则 Task 会重新入栈，并且放在栈的顶部。需要注意的是：Task 先入栈，之后才是 Activity 入栈，它们是包含关系。
 
 这里一下子涌出了好几个概念 Stack、Task、Activity，其实它们都是在 AMS 内部维护的数据结构，可以用一张图来描述它们之间的关系。
 
-<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image/M00/11/F9/CgqCHl7M0EuAVf_JAADSUISYTcg351.png"/>
+
+<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image/M00/11/F9/CgqCHl7M0EuAVf_JAADSUISYTcg351.png"/> 
+
 
 关于它们之间实际操作过程可以参考 [Android 8.0 Activity启动流程](https://mp.weixin.qq.com/s/Z14PtsmQXgIuTrbC6VVLiw) 这篇文章，不过需要注意这篇文章中分析的是基于 android-27 版本。
 
 #### **ActivityStack 的 resumeFocusedStackTopActivityLocked**
 
-<Image alt="image023.png" src="https://s0.lgstatic.com/i/image/M00/11/FA/CgqCHl7M0TeAG9CxAAOqoKoCVs4175.png"/>
+
+<Image alt="image023.png" src="https://s0.lgstatic.com/i/image/M00/11/FA/CgqCHl7M0TeAG9CxAAOqoKoCVs4175.png"/> 
+
 
 经过一系列调用，最终代码又回到了 ActivityStackSupervisor 中的 startSpecificActivityLocked 方法。
 
 **ActivityStackSupervisor 的 startSpecificActivityLocked**
 
-<Image alt="image025.png" src="https://s0.lgstatic.com/i/image/M00/11/FA/CgqCHl7M0USAePMwAAON3-KEv3k905.png"/>
+
+<Image alt="image025.png" src="https://s0.lgstatic.com/i/image/M00/11/FA/CgqCHl7M0USAePMwAAON3-KEv3k905.png"/> 
+
 
 解释说明：
 
@@ -129,7 +157,9 @@ ActivityStarter 这个类看名字就知道它专门负责一个 Activity 的启
 
 #### ActivityStackSupervisor 的 realStartActivityLocked
 
-<Image alt="image027.png" src="https://s0.lgstatic.com/i/image/M00/11/EF/Ciqc1F7M0U2AAICUAAao-5K1pRk024.png"/>
+
+<Image alt="image027.png" src="https://s0.lgstatic.com/i/image/M00/11/EF/Ciqc1F7M0U2AAICUAAao-5K1pRk024.png"/> 
+
 
 这个方法在 android-27 和 android-28 版本的区别很大，从 android-28 开始 Activity 的启动交给了事务（Transaction）来完成。
 
@@ -138,11 +168,15 @@ ActivityStarter 这个类看名字就知道它专门负责一个 Activity 的启
 
 Activity 启动事务的执行是由 ClientLifecycleManager 来完成的，具体代码如下：
 
-<Image alt="image029.png" src="https://s0.lgstatic.com/i/image/M00/11/EF/Ciqc1F7M0VSAXsYKAAFfrOR1IPg495.png"/>
+
+<Image alt="image029.png" src="https://s0.lgstatic.com/i/image/M00/11/EF/Ciqc1F7M0VSAXsYKAAFfrOR1IPg495.png"/> 
+
 
 可以看出实际上是调用了启动事务 ClientTransaction 的 schedule 方法，而这个 transaction 实际上是在创建 ClientTransaction 时传入的 app.thread 对象，也就是 ApplicationThread。如下所示：
 
-<Image alt="image031.png" src="https://s0.lgstatic.com/i/image/M00/11/EF/Ciqc1F7M0V2ANz0ZAAFoMcrH_0s503.png"/>
+
+<Image alt="image031.png" src="https://s0.lgstatic.com/i/image/M00/11/EF/Ciqc1F7M0V2ANz0ZAAFoMcrH_0s503.png"/> 
+
 
 解释说明：
 
@@ -155,35 +189,49 @@ Activity 启动事务的执行是由 ClientLifecycleManager 来完成的，具�
 
 刚才我们已近分析了 AMS 将启动 Activity 的任务作为一个事务 ClientTransaction 去完成，在 ClientLifecycleManager 中会调用 ClientTransaction的schedule() 方法，如下：
 
-<Image alt="image033.png" src="https://s0.lgstatic.com/i/image/M00/11/FA/CgqCHl7M0WSActGMAABPx89XqHk745.png"/>
+
+<Image alt="image033.png" src="https://s0.lgstatic.com/i/image/M00/11/FA/CgqCHl7M0WSActGMAABPx89XqHk745.png"/> 
+
 
 而 mClient 是一个 IApplicationThread 接口类型，具体实现是 ActivityThread 的内部类 ApplicationThread。因此后续执行 Activity 生命周期的过程都是由 ApplicationThread 指导完成的，scheduleTransaction 方法如下：
 
-<Image alt="image035.png" src="https://s0.lgstatic.com/i/image/M00/11/EF/Ciqc1F7M0WuAa5IlAADUR_OeUoU094.png"/>
+
+<Image alt="image035.png" src="https://s0.lgstatic.com/i/image/M00/11/EF/Ciqc1F7M0WuAa5IlAADUR_OeUoU094.png"/> 
+
 
 可以看出，这里还是调用了ActivityThread 的 scheduleTransaction 方法。但是这个方法实际上是在 ActivityThread 的父类 ClientTransactionHandler 中实现，具体如下：
 
-<Image alt="image037.png" src="https://s0.lgstatic.com/i/image/M00/11/EF/Ciqc1F7M0XSAeFFqAAD7J6wlcMQ127.png"/>
+
+<Image alt="image037.png" src="https://s0.lgstatic.com/i/image/M00/11/EF/Ciqc1F7M0XSAeFFqAAD7J6wlcMQ127.png"/> 
+
 
 调用 sendMessage 方法，向 Handler 中发送了一个 EXECUTE_TRANSACTION 的消息，并且 Message 中的 obj 就是启动 Activity 的事务对象。而这个 Handler 的具体实现是 ActivityThread 中的 **mH** 对象。具体如下：
 
-<Image alt="image039.png" src="https://s0.lgstatic.com/i/image/M00/11/FA/CgqCHl7M0XuAMKd9AAEjo1qJnfI037.png"/>
+
+<Image alt="image039.png" src="https://s0.lgstatic.com/i/image/M00/11/FA/CgqCHl7M0XuAMKd9AAEjo1qJnfI037.png"/> 
+
 
 最终调用了事务的 execute 方法，execute 方法如下：
 
-<Image alt="image041.png" src="https://s0.lgstatic.com/i/image/M00/11/FA/CgqCHl7M0YOAcmFnAAM8Nf303oA942.png"/>
+
+<Image alt="image041.png" src="https://s0.lgstatic.com/i/image/M00/11/FA/CgqCHl7M0YOAcmFnAAM8Nf303oA942.png"/> 
+
 
 在 executeCallback 方法中，会遍历事务中的 callback 并执行 execute 方法，这些 callbacks 是何时被添加的呢？
 
 还记得 ClientTransaction 是如何创建被创建的吗？重新再看一遍：
 
-<Image alt="image043.png" src="https://s0.lgstatic.com/i/image/M00/11/FA/CgqCHl7M0YqAGMs9AAH0LruWIOY446.png"/>
+
+<Image alt="image043.png" src="https://s0.lgstatic.com/i/image/M00/11/FA/CgqCHl7M0YqAGMs9AAH0LruWIOY446.png"/> 
+
 
 在创建 ClientTransaction 时，通过 addCallback 方法传入了 Callback 参数，从图中可以看出其实是一个 LauncherActivityItem 类型的对象。
 
 #### LaunchActivityItem 的 execute()
 
-<Image alt="image045.png" src="https://s0.lgstatic.com/i/image/M00/11/EF/Ciqc1F7M0ZOACmIWAAHGPsshAdU987.png"/>
+
+<Image alt="image045.png" src="https://s0.lgstatic.com/i/image/M00/11/EF/Ciqc1F7M0ZOACmIWAAHGPsshAdU987.png"/> 
+
 
 终于到了跟 Activity 生命周期相关的方法了，图中 client 是 ClientTransationHandler 类型，实际实现类就是 ActivityThread。因此最终方法又回到了 ActivityThread。
 
@@ -191,7 +239,9 @@ Activity 启动事务的执行是由 ClientLifecycleManager 来完成的，具�
 
 这是一个比较重要的方法，Activity 的生命周期方法就是在这个方法中有序执行，具体如下：
 
-<Image alt="image047.png" src="https://s0.lgstatic.com/i/image/M00/11/FB/CgqCHl7M0ZyAPWYRAAdkYWgxWUQ790.png"/>
+
+<Image alt="image047.png" src="https://s0.lgstatic.com/i/image/M00/11/FB/CgqCHl7M0ZyAPWYRAAdkYWgxWUQ790.png"/> 
+
 
 解释说明：
 
@@ -210,4 +260,5 @@ Activity 启动事务的执行是由 ClientLifecycleManager 来完成的，具�
 * 首先进程 A 通过 Binder 调用 AMS 的 startActivity 方法。
 * 然后 AMS 通过一系列的计算构造目标 Intent，然后在 ActivityStack 与 ActivityStackSupervisor 中处理 Task 和 Activity 的入栈操作。
 * 最后 AMS 通过 Binder 机制，调用目标进程中 ApplicationThread 的方法来创建并执行 Activity 生命周期方法，实际上 ApplicationThread 是 ActivityThread 的一个内部类，它的执行最终都调用到了 ActivityThread 中的相应方法。
+
 

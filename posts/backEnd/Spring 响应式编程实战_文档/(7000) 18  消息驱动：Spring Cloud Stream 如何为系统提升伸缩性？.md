@@ -1,3 +1,5 @@
+# 18消息驱动：SpringCloudStream如何为系统提升伸缩性？
+
 请你回想一下我在"[01 \| 追本溯源：响应式编程究竟是一种什么样的技术体系](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=753#/detail/pc?id=6983&fileGuid=xxQTRXtVcqtHK6j8)"中提到的，响应式宣言认为，响应式系统的价值在于提供了即时响应性、可维护性和扩展性，表现的形式是回弹性和弹性，而实现的手段则是消息驱动。
 
 今天，我们将讨论与消息驱动相关的话题，并引出 Spring 家族中另一个重要成员，即 Spring Cloud Stream。Spring Cloud Stream 专门用于构建低耦合的事件驱动架构，并提供了响应式编程组件。我将从 Spring Cloud Stream 的基本架构说起，介绍它与主流消息中间件之间的集成关系，并分别给出实现响应式消息发布者和消息消费者的具体方法。
@@ -10,7 +12,9 @@ Spring Cloud Streams 为异步跨服务消息通信提供了简化的编程模�
 
 Spring Cloud Stream 中有三个角色，即消息的发布者、消费者以及消息通信系统本身，以消息通信系统为中心，整个工作流程表现为一种对称结构，如下图所示。
 
-<Image alt="图片7.png" src="https://s0.lgstatic.com/i/image6/M00/3A/E1/CioPOWCBSkeATpnCAAD7HNvxzLk301.png"/>  
+
+<Image alt="图片7.png" src="https://s0.lgstatic.com/i/image6/M00/3A/E1/CioPOWCBSkeATpnCAAD7HNvxzLk301.png"/> 
+  
 Spring Cloud Stream 工作流程图
 
 在上图中，充当消息发布者的服务 A 根据业务需要产生消息发送的需求，Spring Cloud Stream 中的 Source 组件是真正生成消息的组件，然后消息通过 Channel 传送到 Binder，这里的 Binder 是一个抽象组件，通过 Binder，Channel 可以与特定的消息中间件进行通信。在 Spring Cloud Stream 中，目前已经内置集成的消息中间件实现工具包括 RabbitMQ 和 Kafka。
@@ -244,3 +248,4 @@ Spring Cloud Stream 是 Spring Cloud 中针对消息处理的一款平台型框�
 在明确了 Reactive Spring Cloud Stream 的基本架构之后，在接下来的两讲中，我将结合 ReactiveSpringCSS 案例为你介绍如何使用它来实现响应式消息发布者和消费者，我们到时候见。
 > 点击链接，获取课程相关代码 ↓↓↓  
 > [https://github.com/lagoueduCol/ReactiveProgramming-jianxiang.git](https://github.com/lagoueduCol/ReactiveProgramming-jianxiang.git?fileGuid=xxQTRXtVcqtHK6j8)
+

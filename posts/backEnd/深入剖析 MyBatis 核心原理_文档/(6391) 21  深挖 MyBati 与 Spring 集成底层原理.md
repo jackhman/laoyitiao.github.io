@@ -1,3 +1,5 @@
+# 21深挖MyBati与Spring集成底层原理
+
 在实际开发过程中，一般我们不会只使用单个的开源框架，而是会使用多种开源框架和开源工具相互配合来实现需求。在 Java 世界中，最出名的开源框架就要数 Spring 了。Spring 是 2002 年出现的一个轻量级 Java 框架，它最开始就是为了替换掉 EJB 这种复杂的企业开发框架。时至 2021 年，几乎所有的 Java 后端项目都会使用到 Spring，Spring 已经成为业界标准，我们在**实践中常用的 SSM 三层架构其实就是 Spring、Spring MVC和MyBatis这三个核心框架的简称**。
 
 搭建一个 SSM 环境是非常简单的，今天这一讲我们不仅要搭建 SSM 开发环境，还要深入剖析这三个框架能够协同工作的原理。不过，在开始讲解 SSM 开发环境搭建之前，我们先来简单介绍一下 Spring 和 Spring MVC 的基础知识。
@@ -30,7 +32,9 @@ Spring MVC 是 Spring 生态中的一个 Web 框架，也是现在市面上用�
 
 所谓 MVC 架构模式指的就是 Model、View和Controller 三部分，其中，Model 负责封装业务逻辑以及业务数据；View 只负责展示数据，其中不包含任何逻辑代码或只会包含非常简单的、与展示相关的逻辑控制代码；Controller 用来接收用户发起的请求，调用设计的 Service 层来完成具体的业务逻辑，产生的数据会返回到 View上进行展示。下图展示了 MVC 架构中三个核心组件的关系：
 
-<Image alt="图片4.png" src="https://s0.lgstatic.com/i/image6/M00/2D/C0/CioPOWBm42OAMsTnAAB8rm0kBPE187.png"/>  
+
+<Image alt="图片4.png" src="https://s0.lgstatic.com/i/image6/M00/2D/C0/CioPOWBm42OAMsTnAAB8rm0kBPE187.png"/> 
+  
 MVC 模式示意图
 
 在 Spring MVC 框架中，Model 层一般使用普通的 Service Bean 对象，View 层目前常用的是一些前端框架，以实现更好的渲染效果，Controller 是由 Spring MVC 特殊配置过的 Servlet，它会将用户请求分发给 Model，将响应转发给 View。
@@ -41,7 +45,9 @@ MVC 模式示意图
 
 下图展示了 Spring MVC 处理一次 HTTP 请求的完整流程：
 
-<Image alt="图片5.png" src="https://s0.lgstatic.com/i/image6/M00/2D/BF/CioPOWBm4tWAJ8Q7AADjcFqA6pg123.png"/>  
+
+<Image alt="图片5.png" src="https://s0.lgstatic.com/i/image6/M00/2D/BF/CioPOWBm4tWAJ8Q7AADjcFqA6pg123.png"/> 
+  
 <br />
 
 Spring MVC 处理请求示意图
@@ -62,11 +68,15 @@ Spring MVC 处理请求示意图
 
 了解了 Spring 以及 Spring MVC 的基本概念之后，我们开始搭建 SSM 的开发环境（建议结合示例代码一起学习，效果更佳），最终搭建的SSM 项目结构如下图所示：
 
-<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M00/2D/B7/Cgp9HWBm4oyAb_0sAAGjG5-F_08343.png"/>  
+
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M00/2D/B7/Cgp9HWBm4oyAb_0sAAGjG5-F_08343.png"/> 
+  
 SSM 项目结构图
 
 首先，在 IDEA 中创建一个新的 Maven Web 项目，具体选项如下图所示：  
-<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image6/M00/2D/BF/CioPOWBm4nqAPHJhAAZEuIjSepQ931.png"/>  
+
+<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image6/M00/2D/BF/CioPOWBm4nqAPHJhAAZEuIjSepQ931.png"/> 
+  
 选择 Web 类型的 Maven 项目
 
 Maven 项目创建完成之后，我们就可以编写项目中的核心配置文件。
@@ -259,8 +269,11 @@ ClassPathMapperScanner.scan() 这个扫描方法底层会调用其 doScan() 方�
 
 *** ** * ** ***
 
-[<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/6D/3E/CgqCHl-s60-AC0B_AAhXSgFweBY762.png"/>](https://shenceyun.lagou.com/t/Mka)
+[
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/6D/3E/CgqCHl-s60-AC0B_AAhXSgFweBY762.png"/> 
+](https://shenceyun.lagou.com/t/Mka)
 
 **《Java 工程师高薪训练营》**
 
 实战训练+面试模拟+大厂内推，想要提升技术能力，进大厂拿高薪，[点击链接，提升自己](https://shenceyun.lagou.com/t/Mka)！
+

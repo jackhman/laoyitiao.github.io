@@ -1,8 +1,12 @@
+# 第29讲：深入query-graphql插件，SWRocketbot背后的英雄（下）
+
 ### TopN 查询
 
 在 aggregation.graphqls 和 top-n-records.graphqls 两个 GraphQL Schema 文件中定义了所有关于 TopN 数据的查询，如下图所示：
 
-<Image alt="Drawing 12.png" src="https://s0.lgstatic.com/i/image/M00/26/46/CgqCHl7xuW2AVBsLAAa7U3_glbg954.png"/>
+
+<Image alt="Drawing 12.png" src="https://s0.lgstatic.com/i/image/M00/26/46/CgqCHl7xuW2AVBsLAAa7U3_glbg954.png"/> 
+
 
 在分析 MultiScopesSpanListener 的课时中，我们了解到 OAP 可以从存储请求的相关 Trace 中解析得到慢查询信息并转换成 TopNDatabaseStatement 存储到 ES 中。 这里定义的 getTopNRecords() 方法就是用来查询此类 TopN 数据的，为了便于理解，这里以 DB 慢查询为例分析 getTopNRecords() 方法的实现。
 
@@ -35,7 +39,9 @@ SearchResponse response = getClient().search(metricName, sourceBuilder);
 
 除了上述 DB 慢查询的 TopN 查询之外，在 AggregationQuery 中还提供了为 Service 、ServiceInstance 以及 Endpoint 提供了其他维度的 TopN查询，如下图所示：
 
-<Image alt="Drawing 13.png" src="https://s0.lgstatic.com/i/image/M00/26/46/CgqCHl7xuYaALcPBAAQkaAzAsZQ746.png"/>
+
+<Image alt="Drawing 13.png" src="https://s0.lgstatic.com/i/image/M00/26/46/CgqCHl7xuYaALcPBAAQkaAzAsZQ746.png"/> 
+
 
 简单介绍下这些方法的功能：
 
@@ -45,7 +51,9 @@ SearchResponse response = getClient().search(metricName, sourceBuilder);
 
 在 SkyWalking Rocketbot 中我们可以看到 Global Top Throughout 的监控，如下图所示：
 
-<Image alt="Drawing 14.png" src="https://s0.lgstatic.com/i/image/M00/26/3B/Ciqc1F7xuZKAHD0IAAA25djPgC4804.png"/>
+
+<Image alt="Drawing 14.png" src="https://s0.lgstatic.com/i/image/M00/26/3B/Ciqc1F7xuZKAHD0IAAA25djPgC4804.png"/> 
+
 
 其底层是通过 getServiceTopN() 方法统计指定时间段内所有 Service 的 CPM 平均值并获取 Top10 实现的。这里就以该示例为主线介绍 AggregationQuery 查询的核心流程。
 
@@ -97,31 +105,43 @@ AggregationQuery 提供的其他 TopN 查询与 getServiceTopN() 方法实现基
 
 在 SkyWalking Rocketbot 中有一个"拓扑图"的视图，如下所示：
 
-<Image alt="Drawing 15.png" src="https://s0.lgstatic.com/i/image/M00/26/46/CgqCHl7xuayAIvTUAAJojFh6YyE235.png"/>
+
+<Image alt="Drawing 15.png" src="https://s0.lgstatic.com/i/image/M00/26/46/CgqCHl7xuayAIvTUAAJojFh6YyE235.png"/> 
+
 
 该拓扑图中展示的拓扑关系以及调用链上的指标数据是通过 query-graphql-plugin 插件提供的三个 get\*Topology() 方法实现的，如下图所示：
 
-<Image alt="Drawing 16.png" src="https://s0.lgstatic.com/i/image/M00/26/3B/Ciqc1F7xubKAVtfzAAC2lq_kx4o043.png"/>
+
+<Image alt="Drawing 16.png" src="https://s0.lgstatic.com/i/image/M00/26/3B/Ciqc1F7xubKAVtfzAAC2lq_kx4o043.png"/> 
+
 
 在上述拓扑图展示的时候只需要请求 getGlobalTopology() 方法即可，在 TopologyQueryService.getGlobalTopology() 方法中会通过下面两个方法完成查询。
 
 * loadServerSideServiceRelations() 方法：查询 Index 别名为 service_relation_server_side 的 Index，该类 Index 中只记录了服务端视角的调用关系，并没有记录其他指标信息。在前面示例中，该查询的结果如下图所示：
 
-<Image alt="Drawing 17.png" src="https://s0.lgstatic.com/i/image/M00/26/46/CgqCHl7xubuAU0x0AApr3mz8Xig844.png"/>
+
+<Image alt="Drawing 17.png" src="https://s0.lgstatic.com/i/image/M00/26/46/CgqCHl7xubuAU0x0AApr3mz8Xig844.png"/> 
+
 
 * loadClientSideServiceRelations() 方法：查询 Index 别名为 service_relation_client_side 的 Index，该类 Index 中只记录了客户端视角的调用关系，并没有记录其他指标信息。在前面示例中，该查询的结果如下图所示：
 
-<Image alt="Drawing 18.png" src="https://s0.lgstatic.com/i/image/M00/26/46/CgqCHl7xucOAKVAYAAcAU9rWAdI587.png"/>
+
+<Image alt="Drawing 18.png" src="https://s0.lgstatic.com/i/image/M00/26/46/CgqCHl7xucOAKVAYAAcAU9rWAdI587.png"/> 
+
 
 接下来，TopologyQueryService 会将上述两个查询结果集合进行合并和整理，最终得到一个 Topology 对象。在 Topology 对象中包含两个集合。
 
 * nodes 集合：包含了拓扑图中所有的节点信息，示例中的结果如下图所示，总共有 3 个节点，分别是 User、demo-webapp、demo-provider：
 
-<Image alt="Drawing 19.png" src="https://s0.lgstatic.com/i/image/M00/26/3B/Ciqc1F7xucuAZ-UvAAiQRLtPrz8281.png"/>
+
+<Image alt="Drawing 19.png" src="https://s0.lgstatic.com/i/image/M00/26/3B/Ciqc1F7xucuAZ-UvAAiQRLtPrz8281.png"/> 
+
 
 * calls 集合：包含了拓扑图中所有的边（即调用关系），示例中的结果如下图所示，总共有 2 条边，一条边是 User 调用 demo-webapp（即 1_2），另一条边是 demo-webapp 调用 demo-provider（即2_3）：
 
-<Image alt="Drawing 20.png" src="https://s0.lgstatic.com/i/image/M00/26/3B/Ciqc1F7xudSAYy9DAAzv4IcETLc263.png"/>
+
+<Image alt="Drawing 20.png" src="https://s0.lgstatic.com/i/image/M00/26/3B/Ciqc1F7xudSAYy9DAAzv4IcETLc263.png"/> 
+
 
 在侦察端面板中展示的监控图都是通过 getLinearIntValues() 方法查询相应 Index 实现的，例如上图中侦察端面板中展示的"平均响应时间"监控图，就是查询别名为 service_relation_server_resp_time 的这组 Index 实现的，其中指定了 entity_id 为 "2_3"（即 demo-webapp 调用 demo-provider 的这条调用链路的平均响应时间）。
 
@@ -131,11 +151,15 @@ AggregationQuery 提供的其他 TopN 查询与 getServiceTopN() 方法实现基
 
 在 SkyWalking Rocketbot 的"追踪"面板中，我们可以查询到所有收集到的 Trace 信息，如下图所示：
 
-<Image alt="Drawing 21.png" src="https://s0.lgstatic.com/i/image/M00/26/3B/Ciqc1F7xueKAMOe1AAOBgdOJVb0240.png"/>
+
+<Image alt="Drawing 21.png" src="https://s0.lgstatic.com/i/image/M00/26/3B/Ciqc1F7xueKAMOe1AAOBgdOJVb0240.png"/> 
+
 
 该面板可以分为三个区域，在区域 1 中，我们可以选择 TraceSegment 关联的 Service、ServiceInstance 以及 Endpoint，这些下拉表中的数据是通过前文介绍的 MetadataQuery 查询到的。在区域 2 中展示了 TraceSegment 的简略信息，通过 queryBasicTraces() 方法查询得到，如下图所示。在区域 3 中展示了一条完整 Trace 的详细信息，通过 queryTrace() 方法查询得到，如下图所示。
 
-<Image alt="Drawing 23.png" src="https://s0.lgstatic.com/i/image/M00/26/3B/Ciqc1F7xue6AFKXNAAEBPbJC8sE357.png"/>
+
+<Image alt="Drawing 23.png" src="https://s0.lgstatic.com/i/image/M00/26/3B/Ciqc1F7xue6AFKXNAAEBPbJC8sE357.png"/> 
+
 
 TraceQuery.queryBasicTraces() 方法的入参被封装成了一个 TraceQueryCondition
 
@@ -256,6 +280,9 @@ return trace;
 
 下面通过一个示例描述该递归排序 Span 的大致执行逻辑：
 
-<Image alt="Drawing 24.png" src="https://s0.lgstatic.com/i/image/M00/26/47/CgqCHl7xuheAOMFAAATOX_NF5CU262.png"/>
+
+<Image alt="Drawing 24.png" src="https://s0.lgstatic.com/i/image/M00/26/47/CgqCHl7xuheAOMFAAATOX_NF5CU262.png"/> 
+
 
 query-graphql-plugin 插件的分析就到此结束了，我们下一课时见。
+

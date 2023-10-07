@@ -1,3 +1,5 @@
+# 第31讲：Android自动化测试
+
 本课时我们开始进入安卓自动化测试的学习。先来看一下我们今天要完成一个什么样的测试用例。
 
 测试用例流程
@@ -7,7 +9,9 @@
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7D/25/Cgq2xl59sz2AKoYiAAEr8ygrgJ4203.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7D/25/Cgq2xl59sz2AKoYiAAEr8ygrgJ4203.png"/> 
+
 
 <br />
 
@@ -32,7 +36,9 @@ setup class清理完成之后，在每个 case 执行之前是不需要的特殊
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/04/0F/Ciqah159sz6AGAm0AAKGvsO9tKE752.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/04/0F/Ciqah159sz6AGAm0AAKGvsO9tKE752.png"/> 
+
 
 <br />
 
@@ -44,7 +50,9 @@ setup class清理完成之后，在每个 case 执行之前是不需要的特殊
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7D/25/Cgq2xl59sz6AP07bAADDUIEwdpo263.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7D/25/Cgq2xl59sz6AP07bAADDUIEwdpo263.png"/> 
+
 
 <br />
 
@@ -57,7 +65,9 @@ setup class清理完成之后，在每个 case 执行之前是不需要的特殊
 定义 PO 方法
 --------
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/04/0F/Ciqah159sz6AdUbtAAI8jHMpT38488.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/04/0F/Ciqah159sz6AdUbtAAI8jHMpT38488.png"/> 
+
 
 <br />
 
@@ -69,7 +79,9 @@ case 已经有了，接下来我们看一下我们的 PO 是怎么定义的？�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7D/25/Cgq2xl59sz6AVWrHAAFAcjrGWBw650.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7D/25/Cgq2xl59sz6AVWrHAAFAcjrGWBw650.png"/> 
+
 
 <br />
 
@@ -77,7 +89,9 @@ case 已经有了，接下来我们看一下我们的 PO 是怎么定义的？�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/04/0F/Ciqah159sz-AUJoRAAKvg7LyF0E349.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/04/0F/Ciqah159sz-AUJoRAAKvg7LyF0E349.png"/> 
+
 
 <br />
 
@@ -85,7 +99,9 @@ case 已经有了，接下来我们看一下我们的 PO 是怎么定义的？�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7D/25/Cgq2xl59sz-ADVN-AACXfE2-Gbo785.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7D/25/Cgq2xl59sz-ADVN-AACXfE2-Gbo785.png"/> 
+
 
 <br />
 
@@ -97,7 +113,9 @@ case 已经有了，接下来我们看一下我们的 PO 是怎么定义的？�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/04/0F/Ciqah159sz-AbJbMAADS-gkexMw138.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/04/0F/Ciqah159sz-AbJbMAADS-gkexMw138.png"/> 
+
 
 <br />
 
@@ -110,7 +128,9 @@ case 已经有了，接下来我们看一下我们的 PO 是怎么定义的？�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7D/26/Cgq2xl59sz-AU5OvAAMSO79Ly5U199.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7D/26/Cgq2xl59sz-AU5OvAAMSO79Ly5U199.png"/> 
+
 
 <br />
 
@@ -122,7 +142,9 @@ case 已经有了，接下来我们看一下我们的 PO 是怎么定义的？�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/04/0F/Ciqah159s0CAKyj5AAKWY0uK9rc541.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/04/0F/Ciqah159s0CAKyj5AAKWY0uK9rc541.png"/> 
+
 
 <br />
 
@@ -130,7 +152,9 @@ case 已经有了，接下来我们看一下我们的 PO 是怎么定义的？�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7D/26/Cgq2xl59s0CAaQCBAADtbVlyq0I589.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7D/26/Cgq2xl59s0CAaQCBAADtbVlyq0I589.png"/> 
+
 
 <br />
 
@@ -138,7 +162,9 @@ case 已经有了，接下来我们看一下我们的 PO 是怎么定义的？�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/04/10/Ciqah159s0CANLswAAKXzKHJq4I759.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/04/10/Ciqah159s0CANLswAAKXzKHJq4I759.png"/> 
+
 
 <br />
 
@@ -150,7 +176,9 @@ case 已经有了，接下来我们看一下我们的 PO 是怎么定义的？�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7D/26/Cgq2xl59s0CAfF5-AAI4LbdDTfU795.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7D/26/Cgq2xl59s0CAfF5-AAI4LbdDTfU795.png"/> 
+
 
 <br />
 
@@ -175,7 +203,9 @@ case 已经有了，接下来我们看一下我们的 PO 是怎么定义的？�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/04/10/Ciqah159s0GABODDAAidrBN-cQc279.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/04/10/Ciqah159s0GABODDAAidrBN-cQc279.png"/> 
+
 
 <br />
 
@@ -183,11 +213,15 @@ case 已经有了，接下来我们看一下我们的 PO 是怎么定义的？�
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7D/26/Cgq2xl59s0GAHTFiAAX5lkTH17E494.png"/>  
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/7D/26/Cgq2xl59s0GAHTFiAAX5lkTH17E494.png"/> 
+  
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/04/10/Ciqah159s0KAML3HAAbK8lo3vyo570.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/04/10/Ciqah159s0KAML3HAAbK8lo3vyo570.png"/> 
+
 
 <br />
 
@@ -213,3 +247,4 @@ case 已经有了，接下来我们看一下我们的 PO 是怎么定义的？�
 <br />
 
 Ok，经过这样的演示，相信你已经从整体上知道该怎么去编写一个安卓的测试用例，以及在这个过程中需要用到哪些技巧了。
+

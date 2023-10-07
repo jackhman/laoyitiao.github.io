@@ -1,3 +1,5 @@
+# 开篇寄语：建立完整的MySQL知识体系
+
 你好，欢迎来到由拉勾和极数云舟联合出品的「高性能 MySQL 实战」课程，我是讲师周彦伟。
 
 自我介绍下，我从事数据库开发和运维工作近 15 年，先后曾担任人人网数据库主管和去哪儿网数据库总监，在数据库的架构设计、性能调优、大规模数据库集群运维等方面积累了丰富的实战经验。
@@ -14,7 +16,9 @@
 
 直到互联网公司崛起，互联网公司的业务增长已经不再是传统公司的线性模式，而是指数级爆发式的增长。为了应对这种业务增长速度，服务海量的用户，最早像谷歌、Amazon、Facebook、阿里等等国内外的互联网巨头纷纷选择用 X86 通用服务器、开源数据库 MySQL，以及分布式存储代替 IOE 架构，经过 10 多年的发展，这股风潮已经逐渐从互联网企业蔓延到传统企业。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/66/CgotOV13fcSAVN-JAACBcfi-W-o479.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/66/CgotOV13fcSAVN-JAACBcfi-W-o479.png"/> 
+
 
 <br />
 
@@ -28,7 +32,9 @@
 
 为了能够使大家真正高效学好 MySQL，我们对整门课程做了精心的规划。下面来看一下这门课的整体设计。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/BB/CgoB5l14lsGAVvSHAAKCwxf_FfY611.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/BB/CgoB5l14lsGAVvSHAAKCwxf_FfY611.png"/> 
+
 
 <br />
 
@@ -50,13 +56,17 @@
 
 MySQL 是数据库的一种，你要学习 MySQL、掌握 MySQL，首先要了解下主流数据库。如下图所示，根据数据库的类型或者功能或者数据库的发展方向，可以把数据库大致分成两类。即关系型数据库和非关系性数据库，或者叫 SQL 和 NoSQL，当然了关系型数据库又可以分为传统的关系型数据库和 NewSQL。图中列举了平时你所能听到的几乎所有的数据库类型，可以看到一个巨大的数据库图谱。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/DA/CgotOV14lsaAYAmXAATErxhTlj4672.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/DA/CgotOV14lsaAYAmXAATErxhTlj4672.png"/> 
+
 
 ###### **MySQL 的重要地位**
 
 而 MySQL 在整个数据库图谱中占有非常重要的地位。据全球著名分析公司 Gartner 提供的数据，已有超过 63% 的用户已经部署或者将要部署 MySQL。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/BB/CgoB5l14lsuAfEMDAAOahOKproU295.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/BB/CgoB5l14lsuAfEMDAAOahOKproU295.png"/> 
+
 
 <br />
 
@@ -66,7 +76,9 @@ MySQL 是数据库的一种，你要学习 MySQL、掌握 MySQL，首先要了�
 
 如下图，来看一下 MySQL 的主流分支。MySQL 从最初的 1.0、3.1 到后来的 5.0，发生了各种各样的变化。被 Oracle 收购后，MySQL 的版本其实主要有几个分支，除了需要付费的 MySQL 企业版本，还有很多 MySQL 社区版本。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/BB/CgoB5l14ltCAN9k-AAQ_Fm7r2hs508.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/BB/CgoB5l14ltCAN9k-AAQ_Fm7r2hs508.png"/> 
+
 
 <br />
 
@@ -96,7 +108,9 @@ MySQL 是数据库的一种，你要学习 MySQL、掌握 MySQL，首先要了�
 
 如果你从事研发及 MySQL 编程或者运维支持的工作，那么你一定碰到过下图这些坑。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/BB/CgoB5l14ltSANuQ5AAS3xE9DkWY594.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/BB/CgoB5l14ltSANuQ5AAS3xE9DkWY594.png"/> 
+
 
 <br />
 
@@ -108,7 +122,9 @@ MySQL 是数据库的一种，你要学习 MySQL、掌握 MySQL，首先要了�
 
 另外，为了帮助大家理清学习思路，我整理了一个比较全面的 MySQL 知识点全景图如下，包括系统、网络、硬件、到性能优化、高可用、架构设计等等方面，这些知识点会贯穿整个课程。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/BB/CgoB5l14lteAeN8fAAGRMPWGOx8609.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/BB/CgoB5l14lteAeN8fAAGRMPWGOx8609.png"/> 
+
 
 <br />
 
@@ -120,7 +136,9 @@ MySQL 是数据库的一种，你要学习 MySQL、掌握 MySQL，首先要了�
 
 在讲课的过程中，我会推荐一些讲解技术要点的书籍，这里先列举一些。非常推荐的是《MySQL官方手册》，我希望你能至少通读一遍，最好是英文版，因为它原汁原味，讲解得也更加清晰。另外，我也推荐《MySQL运维内参》，里面详细介绍了MySQL运维中的很多痛点，同时也是分析了MySQL内核的一些知识。第三本是《MySQL 8 Cookbook》，这本书内容比较浅显，但对你掌握MySQL8的技术要点一定有所帮助。还有下面这几本书也建议你仔细看一遍。
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/BB/CgoB5l14ltuAbmp8AAHpklwjkOA912.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8A/BB/CgoB5l14ltuAbmp8AAHpklwjkOA912.png"/> 
+
 
 <br />
 
@@ -130,7 +148,10 @@ MySQL 是数据库的一种，你要学习 MySQL、掌握 MySQL，首先要了�
 
 <br />
 
-<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/55/CgotOV149kqAOobiAAHtOV8A2q8036.png"/>
+
+<Image alt="" src="http://s0.lgstatic.com/i/image2/M01/8B/55/CgotOV149kqAOobiAAHtOV8A2q8036.png"/> 
+
 
 <br />
+
 

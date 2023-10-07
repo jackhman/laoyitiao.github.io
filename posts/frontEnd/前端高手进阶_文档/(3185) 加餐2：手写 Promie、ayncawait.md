@@ -1,3 +1,5 @@
+# 加餐2：手写Promie、ayncawait
+
 Promise、async/await 已经逐渐成为主流的异步处理方式，所以了解其实现原理非常重要。这一课时我们就来讲讲 Promise 和 async/await 的实现。
 
 ### Promise/A+ 规范
@@ -303,7 +305,9 @@ resolve(x);
 
 测试结果如下图所示：
 
-<Image alt="image (16).png" src="https://s0.lgstatic.com/i/image/M00/2B/DD/CgqCHl7_DEeALZgpAAALJ4MkJtQ487.png"/>
+
+<Image alt="image (16).png" src="https://s0.lgstatic.com/i/image/M00/2B/DD/CgqCHl7_DEeALZgpAAALJ4MkJtQ487.png"/> 
+
 
 ### async/await
 
@@ -395,3 +399,4 @@ function generator2promise(generatorFn) {
 本课时通过代码实例深入分析了 Promise/A+ 规范以及 async/await 的实现原理。对于手写 Promise 的过程，重点不在于实现结果，而在于实现过程，即先理解清楚规范，然后根据规范一步一步地去实现和优化。对于 async/await 语法糖，结合 Generator 函数，理解其封装原理即可。
 
 最后布置一道练习题：学完本课时内容后，试着自己动手写一个 Promise，看看能否通过测试用例。
+

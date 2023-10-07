@@ -1,3 +1,5 @@
+# 04JavaScript引擎如何执行JavaScript代码？
+
 JavaScript 在运行过程中与其他语言有所不一样，如果你不理解 JavaScript 的词法环境、执行上下文等内容，很容易会在开发过程中埋下"莫名奇妙"的 Bug，比如`this`指向和预期不一致、某个变量不知道为什么被改了，等等。所以今天我就跟大家聊一聊 JavaScript 代码的运行过程。
 
 大家都知道，JavaScript 代码是需要在 JavaScript 引擎中运行的。我们在说到 JavaScript 运行的时候，常常会提到执行环境、词法环境、作用域、执行上下文、闭包等内容。这些概念看起来都差不多，却好像又不大容易区分清楚，它们分别都在描述什么呢？
@@ -119,7 +121,9 @@ bar[[scope]] = [fooContext, globalContext];
 
 运行上述代码，我们可以在控制台看到符合预期的输出：
 
-<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M01/37/18/Cgp9HWB1uyGAAaZIAAK9qHI3wvE362.png"/>
+
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M01/37/18/Cgp9HWB1uyGAAaZIAAK9qHI3wvE362.png"/> 
+
 
 可以看到：
 
@@ -255,7 +259,9 @@ console.log(b()); // 1
 
 根据 JavaScript 中函数的调用方式不同，`this`的指向分为以下情况。
 
-<Image alt="this 指向.png" src="https://s0.lgstatic.com/i/image6/M01/37/18/Cgp9HWB1uzSAQvuHAAJh7k1PAh8263.png"/>
+
+<Image alt="this 指向.png" src="https://s0.lgstatic.com/i/image6/M01/37/18/Cgp9HWB1uzSAQvuHAAJh7k1PAh8263.png"/> 
+
 
 * 在全局环境中，`this`指向全局对象（在浏览器中为`window`）
 
@@ -306,3 +312,4 @@ foo();
 你能说出整段代码的运行过程分别是怎样的，变量对象 AO/VO、作用域链、this 指向在各个阶段中又会怎样表现呢？可以把你的想法写在留言区。
 
 其实，JavaScript 的运行过程和 EventLoop 结合可以有更好的理解，关于 EventLoop 我会在下一讲进行介绍，你也可以在学习之后再来结合本讲内容进行总结。
+

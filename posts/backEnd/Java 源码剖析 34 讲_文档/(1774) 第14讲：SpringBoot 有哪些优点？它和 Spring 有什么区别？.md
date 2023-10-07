@@ -1,3 +1,5 @@
+# 第14讲：SpringBoot有哪些优点？它和Spring有什么区别？
+
 Spring 和 Spring Boot 的区别很多新手容易搞混，从这道简单的面试题也可以很轻易试探出你的 Java 基础功底，如果连这个问题都答不上来的话，通常就没有什么下文了，因为这已经是用人单位对面试者的最低要求了，所以本课时我们就来看一下二者的区别，以及 Spring Boot 的特性。
 
 我们本课时的面试题是，Spring 和 Spring Boot 有什么区别？Spring Boot 的优点有哪些？
@@ -53,7 +55,9 @@ Spring Boot 提供了更多的 Starters 用于快速构建业务框架，**Start
 
 Spring Boot 提供了起步依赖，也就是在创建 Spring Boot 时可以直接勾选依赖模块，这样在项目初始化时就会把相关依赖直接添加到项目中，大大缩短了查询并添加依赖的时间，如下图所示：
 
-<Image alt="image.png" src="https://s0.lgstatic.com/i/image3/M01/07/A6/CgoCgV6iUq2AVmIhAAGjN3d9ZEI221.png"/>
+
+<Image alt="image.png" src="https://s0.lgstatic.com/i/image3/M01/07/A6/CgoCgV6iUq2AVmIhAAGjN3d9ZEI221.png"/> 
+
 
 #### Spring Boot 特性三：内嵌容器支持
 
@@ -218,7 +222,9 @@ public ConfigurableApplicationContext run(String... args) {
 
 Spring Boot 启动时会打印 Banner 图片，如下图所示：
 
-<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image3/M01/14/D9/Ciqah16iVnqAFdGvAABQamtevj4608.png"/>
+
+<Image alt="image (1).png" src="https://s0.lgstatic.com/i/image3/M01/14/D9/Ciqah16iVnqAFdGvAABQamtevj4608.png"/> 
+
 
 此 banner 信息是在 SpringBootBanner 类中定义的，我们可以通过实现 Banner 接口来自定义 banner 信息，然后通过代码 setBanner() 方法设置 Spring Boot 项目使用自己自定义 Banner 信息，或者是在 resources 下添加一个 banner.txt，把 banner 信息添加到此文件中，就可以实现自定义 banner 的功能了。
 
@@ -269,3 +275,4 @@ Spring Boot 启动时会打印 Banner 图片，如下图所示：
 ### 小结
 
 本课时首先讲了 Spring 和 Spring Boot 的区别，Spring Boot 本质上是 Spring 的延伸，它是基于 Spring 的，它为快速构建和开发 Spring 提供了有力的支撑；接着介绍了 Spring Boot 的四大特性：更快速的构建能力、起步依赖、内嵌容器支持、Actuator 监控支持等，最后 还介绍了 Spring Boot 启动的 18 个步骤。
+

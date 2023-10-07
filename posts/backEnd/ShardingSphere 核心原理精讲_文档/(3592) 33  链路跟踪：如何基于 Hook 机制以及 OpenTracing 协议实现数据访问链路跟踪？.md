@@ -1,3 +1,5 @@
+# 33链路跟踪：如何基于Hook机制以及OpenTracing协议实现数据访问链路跟踪？
+
 今天我们来讨论 ShardingSphere 中关于编排治理的另一个主题，即链路跟踪。在分布式系统开发过程中，链路跟踪是一项基础设施类的功能。作为一款分布式数据库中间件，ShardingSphere 中也内置了简单而完整的链路跟踪机制。
 
 ### 链路跟踪基本原理和工具
@@ -298,3 +300,4 @@ public interface SQLExecutionHook {
 在下一个课时中，我们将介绍 ShardingSphere 源码解析部分的最后一个主题，即 ShardingSphere 的内核如何与 Spring 框架进行无缝集成以降低开发人员的学习成本。
 
 [课程评价入口，挑选 5 名小伙伴赠送小礼品\~](https://wj.qq.com/s2/7238084/d702/)
+

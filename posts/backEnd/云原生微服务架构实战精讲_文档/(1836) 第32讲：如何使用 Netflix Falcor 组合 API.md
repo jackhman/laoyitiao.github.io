@@ -1,3 +1,5 @@
+# 第32讲：如何使用NetflixFalcor组合API
+
 上一课时介绍了 API 组合的基本概念，以及如何用 Spring Cloud Gateway 来实现 API 组合，不过 Spring Cloud Gateway 的做法，本质上与一般的 REST API 并没有区别，REST API 的特点是，对于特定的请求，所对应的响应结构是固定的。在设计 REST API 时，就已经严格定义了请求和响应的结构，也是调用者和提供者之间的交互协议。这一点在 OpenAPI 规范中可以清楚地看到。这种结构上的确定性，虽然方便了使用者，但也带来了一定的局限性。
 
 在大部分情况下，REST API 所返回的数据结构，与使用者对数据的要求并不完全匹配。当 API 所提供的数据多于使用者的需要时，处理方式还比较简单，只需要忽略多余的数据即可，但是传输多余的数据也会导致更长时间的网络延迟和更多的内存消耗。这些消耗对桌面客户端还可以接受，但是对移动客户端就不能轻易忽略，影响的不仅仅是流量，还包括电池消耗。
@@ -126,7 +128,9 @@ JSON 图支持 3 种不同的抽象操作，即读取（Get）、设置（Set）
 
 JSON 图是一个抽象的结构，在实际的开发中，需要使用的是具体的数据源、模型和路由器。接下来我会对这三者展开讲解。下图是 Falcor 中不同组成部分的架构图。
 
-<Image alt="image (8).png" src="https://s0.lgstatic.com/i/image/M00/2B/C2/CgqCHl7-6leAYwDZAABWO8EqY4w340.png"/>
+
+<Image alt="image (8).png" src="https://s0.lgstatic.com/i/image/M00/2B/C2/CgqCHl7-6leAYwDZAABWO8EqY4w340.png"/> 
+
 
 ### 数据源
 
@@ -266,3 +270,4 @@ model
 ### 总结
 
 Netflix Falcor 把后端的数据以 JSON 图的形式来开放，允许客户端以更加灵活的方式来对数据进行查询和修改。通过本课时的学习，你可以了解如何更好地让客户端来使用开放数据，以及 Falcor 中的基本概念，并使用 Falcor 来设计和实现复杂的 API。
+

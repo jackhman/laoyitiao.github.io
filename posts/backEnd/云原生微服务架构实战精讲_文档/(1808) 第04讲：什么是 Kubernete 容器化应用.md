@@ -1,3 +1,5 @@
+# 第04讲：什么是Kubernete容器化应用
+
 本课时我将带你学习 Kubernetes 的相关内容。  
 
 <br />
@@ -19,7 +21,9 @@ Kubernetes 集群
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/04/39/Ciqah1595s2ANX-fAABk4rHlqxA992.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/04/39/Ciqah1595s2ANX-fAABk4rHlqxA992.png"/> 
+
 
 <br />
 
@@ -29,7 +33,9 @@ Kubernetes 集群
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/04/39/Ciqah1595vqAHKWMAAA0p9KyiHI337.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/04/39/Ciqah1595vqAHKWMAAA0p9KyiHI337.png"/> 
+
 
 <br />
 
@@ -43,7 +49,9 @@ Kubernetes 集群
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/04/21/Ciqah159xA6AU1_bAAC_2Bqc9uM667.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/04/21/Ciqah159xA6AU1_bAAC_2Bqc9uM667.png"/> 
+
 
 <br />
 
@@ -267,7 +275,9 @@ spec:
 
 <br />
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/04/39/Ciqah1595zWAa7SbAABbO7aQF0w788.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/04/39/Ciqah1595zWAa7SbAABbO7aQF0w788.png"/> 
+
 
 <br />
 
@@ -521,3 +531,4 @@ spec:
 ---
 
 Kubernetes是本专栏所介绍的云原生微服务应用的运行平台。本课时对Kubernetes中的基本概念进行了介绍，包括Kubernetes集群、Pod、副本集、部署、有状态集、守护程序集等，还介绍了服务、存储卷、任务和定时任务、以及配置表的相关内容。通过本课时，可以让你对Kubernetes有基本的了解。
+

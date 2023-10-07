@@ -1,3 +1,5 @@
+# 04核心定义：Kubernete是如何搞定“不可变基础设施”的？
+
 在上一节课，我们已经了解了 Kubernetes 集群的搭建方式。从现在开始，我们就要跟 Kubernetes 集群打交道了。本节课我们会学习 Kubernetes 中最重要、也最核心的对象------Pod。
 
 在了解 Pod 之前，我们先来看一下CNCF 官方是怎么定义云原生的。
@@ -37,7 +39,9 @@
 
 Pod 由一个或多个容器组成，如下图所示。Pod 中的容器不可分割，会作为一个整体运行在一个 Node 节点上，也就是说 Pod 是你在 Kubernetes 中可以创建和部署的最原子化的单位。
 
-<Image alt="image (19).png" src="https://s0.lgstatic.com/i/image/M00/4A/31/CgqCHl9QuZeAeFxvAAtms5EcUcs313.png"/>  
+
+<Image alt="image (19).png" src="https://s0.lgstatic.com/i/image/M00/4A/31/CgqCHl9QuZeAeFxvAAtms5EcUcs313.png"/> 
+  
 
 （<https://github.com/kubernetes/website/blob/master/content/en/docs/tutorials/kubernetes-basics/public/images/module_03_pods.svg>）
 
@@ -53,7 +57,9 @@ Pod 由一个或多个容器组成，如下图所示。Pod 中的容器不可分
 
 我们来看看[官方文档中给的一个例子](https://kubernetes.io/zh/docs/concepts/workloads/pods/#pod-%E6%80%8E%E6%A0%B7%E7%AE%A1%E7%90%86%E5%A4%9A%E4%B8%AA%E5%AE%B9%E5%99%A8)。这个 Pod 里面运行了两个容器 File Puller 和 Web Server。其中 File Puller 负责定期地从外部 Content Manager 同步内容，更新到挂载的共享存储卷（Volume）中，而 Web Server 只负责对外提供访问服务。两个容器之间通过共享的存储卷共享数据。
 
-<Image alt="image (20).png" src="https://s0.lgstatic.com/i/image/M00/4A/31/CgqCHl9QuaWAHvj5AACaJbulm4c584.png"/>  
+
+<Image alt="image (20).png" src="https://s0.lgstatic.com/i/image/M00/4A/31/CgqCHl9QuaWAHvj5AACaJbulm4c584.png"/> 
+  
 
 （<https://d33wubrfki0l68.cloudfront.net/aecab1f649bc640ebef1f05581bfcc91a48038c4/728d6/images/docs/pod.svg>）
 
@@ -185,3 +191,4 @@ $ kubectl exec twocontainers -c shell -i -t -- bash
 Pod 是 Kubernetes 项目中实现"容器设计模式"的最佳实践之一，也是 Kubernetes 进行复杂应用编排的基础依赖。引入 Pod 主要基于可管理性和资源共享的目的，希望你能够仔细理解和揣摩 Pod 的这种设计思想，对今后的容器化改造颇有受益。
 
 我们在后续的课程中会逐渐接触到更为复杂、弹性的应用。下一节课，我将带你实践 Pod。如果你对本节课有什么想法或者疑问，欢迎你在留言区留言，我们一起讨论。
+

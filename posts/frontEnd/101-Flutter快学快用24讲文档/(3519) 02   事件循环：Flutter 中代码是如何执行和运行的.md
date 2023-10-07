@@ -1,3 +1,5 @@
+# 02事件循环：Flutter中代码是如何执行和运行的
+
 上节课介绍了 Dart 基础数据类型、基础运算符、类以及库与调用。本课时着重通过实践带你掌握 Dart 的运行原理。
 
 ### Dart 单线程
@@ -24,7 +26,9 @@
 
 4. 在微任务和事件任务执行过程中，同样会产生微任务和事件任务，因此需要再次判断是否需要插入微任务队列和事件任务队列。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/1D/7D/Ciqc1F7h_D2ARi2aAAJ2G36y8Ng725.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image/M00/1D/7D/Ciqc1F7h_D2ARi2aAAJ2G36y8Ng725.png"/> 
+
 
 图 1 Dart 事件循环机制
 
@@ -75,7 +79,9 @@ event
 
 为了更清晰描述，可以我们使用图 2 动画来演示。
 
-<Image alt="flutter-flow-new.gif" src="https://s0.lgstatic.com/i/image/M00/1D/8A/CgqCHl7h_RmAFXa9AAnXFc-CvdQ552.gif"/>
+
+<Image alt="flutter-flow-new.gif" src="https://s0.lgstatic.com/i/image/M00/1D/8A/CgqCHl7h_RmAFXa9AAnXFc-CvdQ552.gif"/> 
+
 
 图 2 Dart 主线程运行逻辑
 
@@ -148,7 +154,9 @@ event in microtask
 
 为了更形象来描述，我使用图 3 动画来演示。
 
-<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/21/33/Ciqc1F7p3BCAAutpABeCx2dZvOo916.gif"/>
+
+<Image alt="image" src="https://s0.lgstatic.com/i/image/M00/21/33/Ciqc1F7p3BCAAutpABeCx2dZvOo916.gif"/> 
+
 
 图 3 多微任务和事件任务执行流程
 
@@ -426,3 +434,4 @@ l4-1 task complete
 以上就是本课时的主要内容，下一课时，我将用"三步法"带你掌握 Flutter ，并开始你的第一个应用，这也是我们即将开始实际的代码编程的第一步。
 
 点击这里下载本课时源码，Flutter 专栏，源码地址：<https://github.com/love-flutter/flutter-column>
+

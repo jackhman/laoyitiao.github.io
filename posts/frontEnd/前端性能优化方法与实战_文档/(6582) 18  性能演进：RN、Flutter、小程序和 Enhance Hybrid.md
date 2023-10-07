@@ -1,3 +1,5 @@
+# 18性能演进：RN、Flutter、小程序和EnhanceHybrid
+
 前面讲的性能优化方案，基本都立足于 Hybrid。这一讲我们来聊聊多端场景下的性能优化方案------RN、Flutter 和小程序。
 
 RN 即 ReactNative，是 Facebook 开发的开源移动应用架构，它可以让开发者基于 Javascript 和 React.js 开发跨平台移动应用。近一年 RN 非常火，其优势之一是多端开发，另一个最大特点就是渲染性能，我曾使用 RN 做了一个个人中心解决方案，首屏性能可以提升 50%。
@@ -52,7 +54,9 @@ RN 会把应用的 JS 代码（包括依赖的 framework）编译成一个 buddl
 
 请看下方 Flutter 架构实现图。
 
-<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M00/3A/33/CioPOWB-eO6AeAyPAAC8SpzlFUM337.png"/>
+
+<Image alt="图片1.png" src="https://s0.lgstatic.com/i/image6/M00/3A/33/CioPOWB-eO6AeAyPAAC8SpzlFUM337.png"/> 
+
 
 Flutter 框架整体上使用 Dart 语言来实现，并且有着清晰的分层架构。这个分层架构除了让我们调用 Flutter 时更便捷之外，还可以分层调用甚至修改每次层的实现。
 
@@ -94,7 +98,9 @@ Flutter 官方也提供了 Performane Overlay，缺点是无法提供在线监�
 
 以下是小程序的架构设计：
 
-<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image6/M00/3A/33/CioPOWB-eOSAG59aAAChoXBKxOY460.png"/>
+
+<Image alt="图片3.png" src="https://s0.lgstatic.com/i/image6/M00/3A/33/CioPOWB-eOSAG59aAAChoXBKxOY460.png"/> 
+
 
 小程序的渲染层使用 WebView 进行渲染，开发者的 JS 逻辑运行在一个独立的 Jscore 线程中。
 
@@ -120,7 +126,9 @@ Flutter 官方也提供了 Performane Overlay，缺点是无法提供在线监�
 
 好了，以上就是 RN、Flutter、小程序等的优化方案。在具体的实施过程中，我们遭遇了不少坑，最大的坑是 RN 方案接入期遇到的。我们在新技术生命周期的"早期采用者"阶段就已经介入了。
 
-<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M00/3A/2A/Cgp9HWB-eNuAKyT9AAC2PWHXEiY575.png"/>
+
+<Image alt="图片2.png" src="https://s0.lgstatic.com/i/image6/M00/3A/2A/Cgp9HWB-eNuAKyT9AAC2PWHXEiY575.png"/> 
+
 
 这个阶段 BAT 都没有大规模使用，出现问题后（如页面报错）需要去向 Facebook 开发同学提issue 去解决，往往解决一个问题就需要 2 周时间，业务往往等不及，严重影响了项目进入生产环境的进度。所以建议你以后在采用新技术方案时，尽量在上图的"早期大众"阶段再进入，这个时期很多常见的坑都蹚过了， Flutter 方案我们就是这么做的。
 
@@ -128,3 +136,4 @@ Flutter 官方也提供了 Performane Overlay，缺点是无法提供在线监�
 > 你们现在使用的多端方案有哪些性能优化手段呢？
 
 好了，欢迎在评论区和我沟通，马上进入下一讲，前端技术专业能力与业务产出平衡。
+

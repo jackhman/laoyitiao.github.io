@@ -1,3 +1,5 @@
+# 15高级进阶：WebView层及代码架构层面优化
+
 上一讲我介绍了图片骨架屏和 SSR 这两种优化方案，它主要聚焦于白屏优化，接下来这一讲我将介绍 WebView 层面的优化和前端架构性能方面的调优。
 
 为什么是这两个方面呢？首先 WebView 是我们经常使用到的工具，在我们开发 App 过程中起到非常重要的载体作用，甚至我还曾见过专门招聘 WebView 开发工程师的信息。而前端架构的某些因素也会严重影响我们的前端性能体验，所以，这一讲我就重点来介绍下它们。
@@ -106,7 +108,9 @@ module.exports = {
 
 做完以上操作后，运行 npm run build --report，即可后生成一个分析报告。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/31/1F/Cgp9HWBsJq2AXSKWAAfeHG3LQqY567.png"/>
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/31/1F/Cgp9HWBsJq2AXSKWAAfeHG3LQqY567.png"/> 
+
 
 当我们拿着鼠标在上面滑动时，就可以看到整个包的组成部分，以及每部分的信息。一般我们可以找内容比较大的方面，然后分析原因进行优化。
 
@@ -120,3 +124,4 @@ module.exports = {
 > 目前你一般对 WebView 进行哪些方面的优化？
 
 欢迎在评论区和我沟通，下一讲我将介绍预请求、预加载及预渲染机制方面的内容。
+

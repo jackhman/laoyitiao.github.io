@@ -1,10 +1,14 @@
+# 14红点组件：如何将红点设计做成Flutter组件
+
 上一课时我们完善了首页推荐功能，本课时将完善个人页面。个人页面涉及红点组件的知识点，因此本课时在完善个人页面的同时，会着重介绍下该功能的实现。
 
 ### 实现效果
 
 我们先来看下本课时要完成的一个界面效果，如图 1 动画所示。
 
-<Image alt="20200712_160246.gif" src="https://s0.lgstatic.com/i/image/M00/37/AD/Ciqc1F8aewCAIDGrAAocYK2ZqIo350.gif"/>  
+
+<Image alt="20200712_160246.gif" src="https://s0.lgstatic.com/i/image/M00/37/AD/Ciqc1F8aewCAIDGrAAocYK2ZqIo350.gif"/> 
+  
 
 图 1 本课时目标效果
 
@@ -20,11 +24,15 @@
 
 根据图 2 的界面效果，我们将页面拆分图 3 组件树。
 
-<Image alt="image (9).png" src="https://s0.lgstatic.com/i/image/M00/37/B9/CgqCHl8aeySAO1UTAAIF-lgAvBA674.png"/>  
+
+<Image alt="image (9).png" src="https://s0.lgstatic.com/i/image/M00/37/B9/CgqCHl8aeySAO1UTAAIF-lgAvBA674.png"/> 
+  
 
 图 2 个人页面效果
 
-<Image alt="image (10).png" src="https://s0.lgstatic.com/i/image/M00/37/AD/Ciqc1F8aezCAA5btAACFxGz_UhM158.png"/>  
+
+<Image alt="image (10).png" src="https://s0.lgstatic.com/i/image/M00/37/AD/Ciqc1F8aezCAA5btAACFxGz_UhM158.png"/> 
+  
 
 图 3 个人页面组件树设计
 
@@ -316,7 +324,9 @@ class UserPageButtonList extends StatelessWidget {
 
 上面代码中的第 28 行就是点击触发消息消除，接下来我们运行看下效果，如图 4 的动效所示。
 
-<Image alt="20200712_160246 (1).gif" src="https://s0.lgstatic.com/i/image/M00/37/AE/Ciqc1F8ae4WASR5LAAocYK2ZqIo031.gif"/>  
+
+<Image alt="20200712_160246 (1).gif" src="https://s0.lgstatic.com/i/image/M00/37/AE/Ciqc1F8ae4WASR5LAAocYK2ZqIo031.gif"/> 
+  
 
 图 4 红点效果图
 
@@ -329,3 +339,4 @@ class UserPageButtonList extends StatelessWidget {
 在本课时之前，所有的 API 接口都是一个假接口数据，下一课时我们将介绍如何进行网络请求，来完善 API 部分功能。谢谢大家。
 
 [点击此链接查看本课时源码](https://github.com/love-flutter/flutter-column)
+

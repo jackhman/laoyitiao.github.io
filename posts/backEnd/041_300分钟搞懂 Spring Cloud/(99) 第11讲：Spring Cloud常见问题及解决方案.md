@@ -1,3 +1,5 @@
+# 第11讲：SpringCloud常见问题及解决方案
+
 本课时我们主要讲解 Eureka 服务发现慢的原因，Spring Cloud 组件的重试和调优，以及 Zuul 动态路由、Feign 动态日志级别等内容。  
 
 Eureka 服务快速发现的背景
@@ -14,7 +16,9 @@ Eureka 服务快速发现的背景
 Eureka 服务发现慢的原因
 ===============
 
-<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/87/D3/Cgq2xl6UKu-AWCOVAAGDqNRLidI263.png"/>
+
+<Image alt="" src="https://s0.lgstatic.com/i/image3/M01/87/D3/Cgq2xl6UKu-AWCOVAAGDqNRLidI263.png"/> 
+
 
 Eureka 服务发现慢的原因主要有两个，一部分是因为服务缓存导致的，另一部分是因为客户端缓存导致的。
 
@@ -182,3 +186,4 @@ Feign 动态日志级别
 <br />
 
 好了，本课时的内容就全部讲完了，下一课时也是本专栏的最后一个课时，我分享一个 Spring Cloud 综合案例，记得按时来听课啊，下节课见。
+

@@ -1,3 +1,5 @@
+# 08深入React-Hook工作机制：“原则”的背后，是“原理”
+
 React 团队面向开发者给出了两条 React-Hooks 的使用原则，原则的内容如下：
 
 1. 只在 React 函数中调用 Hook；
@@ -55,11 +57,15 @@ export default PersonalInfoComponent;
 
 这个 PersonalInfoComponent 组件渲染出来的界面长这样：
 
-<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/89/5F/Ciqc1F_YT0uAT1kZAACw9EfbQe8557.png"/>
+
+<Image alt="1.png" src="https://s0.lgstatic.com/i/image/M00/89/5F/Ciqc1F_YT0uAT1kZAACw9EfbQe8557.png"/> 
+
 
 PersonalInfoComponent 用于对个人信息进行展示，这里展示的内容包括姓名、年龄、职业。出于测试效果需要，PersonalInfoComponent 还允许你点击"修改姓名"按钮修改姓名信息。点击一次后，"修言"会被修改为"秀妍"，如下图所示：
 
-<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/89/6A/CgqCHl_YT1qAUSuVAAC-xZcsk54138.png"/>
+
+<Image alt="2.png" src="https://s0.lgstatic.com/i/image/M00/89/6A/CgqCHl_YT1qAUSuVAAC-xZcsk54138.png"/> 
+
 
 到目前为止，组件的行为都是符合我们的预期的，一切看上去都是那么的和谐。但倘若我对代码做一丝小小的改变，把一部分的 useState 操作放进 if 语句里，事情就会变得大不一样。改动后的代码如下：
 
@@ -109,13 +115,17 @@ export default PersonalInfoComponent;
 
 修改后的组件在初始渲染的时候，界面与上个版本无异：
 
-<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/67/64/CgqCHl-hJDaAC6-qAACIdJOIg3E041.png"/>
+
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image/M00/67/64/CgqCHl-hJDaAC6-qAACIdJOIg3E041.png"/> 
+
 
 注意，你在自己电脑上模仿这段代码的时候，千万不要漏掉 if 语句里面`// eslint-disable-next-line`这个注释------因为目前大部分的 React 项目都在内部预置了对 React-Hooks-Rule（React-Hooks 使用规则）的强校验，而示例代码中把 Hooks 放进 if 语句的操作作为一种不合规操作，会被直接识别为 Error 级别的错误，进而导致程序报错。这里我们只有将相关代码的 eslint 校验给禁用掉，才能够避免校验性质的报错，从而更直观地看到错误的效果到底是什么样的，进而理解错误的原因。
 
 修改后的组件在初始挂载的时候，实际执行的逻辑内容和上个版本是没有区别的，都涉及对 name、age、career 三个状态的获取和渲染。理论上来说，**变化应该发生在我单击"修改姓名"之后触发的二次渲染里**：二次渲染时，isMounted 已经被置为 true，if 内部的逻辑会被直接跳过。此时按照代码注释中给出的设计意图，这里我希望在二次渲染时，只获取并展示 career 这一个状态。那么事情是否会如我所愿呢？我们一起来看看单击"修改姓名"按钮后会发生什么：
 
-<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/67/64/CgqCHl-hJEOAMfdIAAJ8aDhIGdA549.png"/>
+
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image/M00/67/64/CgqCHl-hJEOAMfdIAAJ8aDhIGdA549.png"/> 
+
 
 组件不仅没有像预期中一样发生界面变化，甚至直接报错了。报错信息提醒我们，这是因为"**组件渲染的 Hooks 比期望中更少**"。
 
@@ -125,13 +135,17 @@ export default PersonalInfoComponent;
 
 首先我将界面重置回初次挂载的状态，观察控制台的输出，如下图所示：
 
-<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/67/64/CgqCHl-hJHSAL8SuAAHP-0rTPKY784.png"/>
+
+<Image alt="Drawing 9.png" src="https://s0.lgstatic.com/i/image/M00/67/64/CgqCHl-hJHSAL8SuAAHP-0rTPKY784.png"/> 
+
 
 这里我把关键的 isMounted 和 career 两个变量用红色框框圈了出来：isMounted 值为 false，说明是初次渲染；career 值为"我是一个前端，爱吃小熊饼干"，这也是没有问题的。
 
 接下来单击"修改姓名"按钮后，我们再来看一眼两个变量的内容，如下图所示：
 
-<Image alt="图片11.png" src="https://s0.lgstatic.com/i/image/M00/67/64/CgqCHl-hJRiAP2doAAKt-ZhwxQ0744.png"/>
+
+<Image alt="图片11.png" src="https://s0.lgstatic.com/i/image/M00/67/64/CgqCHl-hJRiAP2doAAKt-ZhwxQ0744.png"/> 
+
 
 二次渲染时，isMounted 为 true，这个没毛病。但是 career 竟然被修改为了"秀妍"，这也太诡异了？代码里面可不是这么写的。赶紧回头确认一下按钮单击事件的回调内容，代码如下所示：
 
@@ -163,7 +177,9 @@ export default PersonalInfoComponent;
 
 首先要说明的是，React-Hooks 的调用链路在首次渲染和更新阶段是不同的，这里我将两个阶段的链路各总结进了两张大图里，我们依次来看。首先是首次渲染的过程，请看下图：
 
-<Image alt="图片12.png" src="https://s0.lgstatic.com/i/image/M00/67/59/Ciqc1F-hJYCAWVjCAAEtNT9pGHA170.png"/>
+
+<Image alt="图片12.png" src="https://s0.lgstatic.com/i/image/M00/67/59/Ciqc1F-hJYCAWVjCAAEtNT9pGHA170.png"/> 
+
 
 在这个流程中，useState 触发的一系列操作最后会落到 mountState 里面去，所以我们重点需要关注的就是 mountState 做了什么事情。以下我为你提取了 mountState 的源码：
 
@@ -226,7 +242,9 @@ function mountWorkInProgressHook() {
 
 接下来我们再看更新过程的大图：
 
-<Image alt="图片13.png" src="https://s0.lgstatic.com/i/image/M00/67/59/Ciqc1F-hJTGANs5yAAD4e6ACv8Q643.png"/>
+
+<Image alt="图片13.png" src="https://s0.lgstatic.com/i/image/M00/67/59/Ciqc1F-hJTGANs5yAAD4e6ACv8Q643.png"/> 
+
 
 根据图中高亮部分的提示不难看出，首次渲染和更新渲染的区别，在于调用的是 mountState，还是 updateState。mountState 做了什么，你已经非常清楚了；而 updateState 之后的操作链路，虽然涉及的代码有很多，但其实做的事情很容易理解：**按顺序去遍历之前构建好的链表，取出对应的数据信息进行渲染**。
 
@@ -296,7 +314,9 @@ export default PersonalInfoComponent;
 
 这三个调用在首次渲染的时候都会发生，伴随而来的链表结构如图所示：
 
-<Image alt="图片14.png" src="https://s0.lgstatic.com/i/image/M00/67/59/Ciqc1F-hJUWAe27kAAC_6mxli_Q918.png"/>
+
+<Image alt="图片14.png" src="https://s0.lgstatic.com/i/image/M00/67/59/Ciqc1F-hJUWAe27kAAC_6mxli_Q918.png"/> 
+
 
 当首次渲染结束，进行二次渲染的时候，实际发生的 useState 调用只有一个：
 
@@ -306,13 +326,17 @@ useState("我是一个前端，爱吃小熊饼干")
 
 而此时的链表情况如下图所示：
 
-<Image alt="图片15.png" src="https://s0.lgstatic.com/i/image/M00/67/65/CgqCHl-hJeCAY_aoAAF7Tt5bK8k880.png"/>
+
+<Image alt="图片15.png" src="https://s0.lgstatic.com/i/image/M00/67/65/CgqCHl-hJeCAY_aoAAF7Tt5bK8k880.png"/> 
+
 
 我们再复习一遍更新（二次渲染）的时候会发生什么事情：updateState 会依次遍历链表、读取数据并渲染。注意这个过程就像从数组中依次取值一样，是完全按照顺序（或者说索引）来的。因此 React 不会看你命名的变量名是 career 还是别的什么，它只认你这一次 useState 调用，于是它难免会认为：**喔，原来你想要的是第一个位置的 hook 啊**。
 
 然后就会有下面这样的效果：
 
-<Image alt="图片16.png" src="https://s0.lgstatic.com/i/image/M00/67/65/CgqCHl-hJe2ATIhGAAHpze3gFHg893.png"/>
+
+<Image alt="图片16.png" src="https://s0.lgstatic.com/i/image/M00/67/65/CgqCHl-hJe2ATIhGAAHpze3gFHg893.png"/> 
+
 
 如此一来，career 就自然而然地取到了链表头节点 hook 对象中的"秀妍"这个值。
 
@@ -323,3 +347,4 @@ useState("我是一个前端，爱吃小熊饼干")
 在过去的三个课时里，我们摸排了"动机"，认知了"工作模式"，最后更是结合源码、深挖了一把 React-Hooks 的底层原理。我们所做的这所有的努力，都是为了能够真正吃透 React-Hooks，不仅要确保实践中不出错，还要做到面试时有底气。
 
 接下来，我们就将进入整个专栏真正的"深水区"，逐步切入"虚拟 DOM → Diff 算法 → Fiber 架构"这个知识链路里来。在后续的学习中，我们将延续并且强化这种"刨根问底"的风格，紧贴源码、原理和面试题来向 React 最为核心的部分发起挑战。真正的战斗，才刚刚开始，大家加油\~
+

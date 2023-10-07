@@ -1,3 +1,5 @@
+# 02高屋建瓴：Kubernete的架构为什么是这样的？
+
 通过上一课时的学习，我们已经对 Kubernetes 的前世今生有所了解。接下来，我们开始具体学习如何将 Kubernetes 应用到自己的项目中，首先就需要了解 Kubernetes 的架构。所以，在本节课程中，我们会一起学习 Kubernetes 的架构设计，以及背后的设计哲学。
 
 Google 使用 Linux 容器有超过 15 年的时间，期间共创建了三套容器调度管理系统，分别是 Borg、Omega 和 Kubernetes。虽然是出于某些特殊诉求偏好先后开发出来的，但是在差异中我们仍然可以看到，后代系统中存在着前一代系统的影子，也就是说，它们之间传承了很多优良的设计。这也是为什么 Kubernetes 在登场之初，就可以吸引到诸多大厂的关注，自此一炮而红，名震江湖。
@@ -16,7 +18,9 @@ Cluster 即集群，一个数据中心可以同时运行一个或者多个集群
 
 有了上面这两个概念，我们再来看看下面这幅 Borg 的架构图。
 
-<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/46/5C/CgqCHl9E1ASAbkKKAAKzRXDsLZM764.png"/>  
+
+<Image alt="image (3).png" src="https://s0.lgstatic.com/i/image/M00/46/5C/CgqCHl9E1ASAbkKKAAKzRXDsLZM764.png"/> 
+  
 （图片来自\[https://research.google/pubs/pub43438/\]）
 
 Borg 采用了分布式系统中比较常见的 Server/Agent 架构，主要模块包括 BorgMaster、Borglet 和调度器，这些组件都是通过 C++ 来实现的。
@@ -39,7 +43,9 @@ Borg 在这里面有个特殊的设计，BorgMaster 和 Borglet 之间的交互�
 
 Kubernetes 借鉴了 Borg 的整体架构思想，主要由 Master 和 Node 共同组成。
 
-<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/46/50/Ciqc1F9E1BOABW52AAHPVgKdC98447.png"/>  
+
+<Image alt="image (4).png" src="https://s0.lgstatic.com/i/image/M00/46/50/Ciqc1F9E1BOABW52AAHPVgKdC98447.png"/> 
+  
 （官方的架构图）
 
 我们需要注意 Master 和 Node 两个概念。其中 Master 是控制节点，部署着 Kubernetes 的控制面，负责整个集群的管理和控制。Node 为计算节点，或者叫作工作负载节点，每个 Node 上都会运行一些负载容器。
@@ -105,3 +111,4 @@ Kubernetes 中各个组件都是以 APIServer 为中心，通过松耦合的方�
 好的，这里这节课就结束了。从后面的课程开始，我们将深入实践并掌握 Kubernetes 的各种对象及使用技巧。
 
 如果你对本节课有什么想法或者疑问，欢迎你在留言区留言，我们一起讨论。
+

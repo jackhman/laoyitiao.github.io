@@ -1,3 +1,5 @@
+# 14工具应用：使用clinicj工具实现通用性安全检查
+
 在该模块的几讲中，我们都是先有问题，然后再定位分析解决问题，那么是否有方法能够在出现问题之前检测问题呢？那就需要用到本讲要介绍的 clinicjs 工具，在上线之前通过自动化的方式来发现问题。
 
 ### clinicjs 是什么
@@ -55,14 +57,18 @@ clinic bubbleprof --on-port "wrk http://127.0.0.1:3000/local-cache/no" -- node a
 
 我们先来看图 1 所示的结果。
 
-<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/37/90/Cgp9HWB37a2AKhPmAAJeXJvA1Tg457.png"/>  
+
+<Image alt="Drawing 0.png" src="https://s0.lgstatic.com/i/image6/M00/37/90/Cgp9HWB37a2AKhPmAAJeXJvA1Tg457.png"/> 
+  
 图 1 clinicjs 无异常检测结果
 
 从图 1 可以看到一个总结性的话，正如第一行 Detected no issue 表明，本次测试没有任何问题，具体可以再看下四个结果：**CPU 占用、内存占用、事件延迟和句柄**。
 
 我们再来看一种异常的情况，如图 2 所示的结果。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/37/98/CioPOWB37bmAOY3WAAKiAW23OY4348.png"/>  
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/37/98/CioPOWB37bmAOY3WAAKiAW23OY4348.png"/> 
+  
 图 2 clinicjs 异常检测结果
 
 上图的第一行很清晰地告诉我们，**存在 CPU 问题、内存问题和事件延迟的情况**，看到以上问题后，我们接下来怎么处理呢？
@@ -89,7 +95,9 @@ clinic doctor --on-port "wrk http://127.0.0.1:3000/local-cache/no" -- node app.j
 
 首先来整理一个流程图，来分析下我们应该如何实现这个功能。
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M00/37/98/CioPOWB37cOAdvHkAAJjWOy1L2Y825.png"/>  
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M00/37/98/CioPOWB37cOAdvHkAAJjWOy1L2Y825.png"/> 
+  
 图 3 自动化方案流程图
 
 我们分析一下以上流程的每个过程：
@@ -110,12 +118,16 @@ clinic doctor --on-port "wrk http://127.0.0.1:3000/local-cache/no" -- node app.j
 
 根据以上的流程，我们画一个逻辑执行过程来更清晰描述下这个过程。
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M00/37/90/Cgp9HWB37cyAPGhrAAEXls5qfQY168.png"/>  
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image6/M00/37/90/Cgp9HWB37cyAPGhrAAEXls5qfQY168.png"/> 
+  
 图 4 自动化方案逻辑执行图
 
 上面的逻辑和流程图基本上是一个过程，**只是这里用函数和模块来表示了** ，具体我们可以看下部分代码的实现，如图 5 所示，源码在[GitHub](https://github.com/love-flutter/nodejs-column?fileGuid=xxQTRXtVcqtHK6j8)中的 bin/clinic_test.js 文件中。
 
-<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image6/M00/37/98/CioPOWB37dKAaCSYAALhCgAFm2U761.png"/>  
+
+<Image alt="Drawing 4.png" src="https://s0.lgstatic.com/i/image6/M00/37/98/CioPOWB37dKAaCSYAALhCgAFm2U761.png"/> 
+  
 图 5 startTestLink 代码实现
 
 在图 5 中的第 57-63 行逻辑中，主要是在组装 clinicjs 的测试命令，最终的命令会变成以下的命令行。
@@ -138,7 +150,9 @@ exit
 
 接下来我们看下 parseResult 的方法实现，代码如图 6 所示。
 
-<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image6/M00/37/98/CioPOWB37eWAX1KsAAFcIAG2wp8914.png"/>  
+
+<Image alt="Drawing 5.png" src="https://s0.lgstatic.com/i/image6/M00/37/98/CioPOWB37eWAX1KsAAFcIAG2wp8914.png"/> 
+  
 图 6 parseResult 代码实现
 
 **这里有个小技巧，就是在 Node.js 中可以模拟浏览器去读取一个 html 文件，如果 html 文件不是通过 Javascript 动态生成的，那么你可以直接 fs.readFile 去获取，如果是动态生成的则必须用 puppeteer 模拟浏览器解析 html DOM 结构了**。
@@ -203,7 +217,9 @@ node clinic_test.js
 
 从原来的分析来看也是这样的结果，因为我们对 cache/local 和 local-cache/yes 做了缓存优化，所以无任何异常问题，而 local-cache/no 存在性能问题，然后我们打开 .clinic/21097.clinic-doctor.html 这个文件，可以看到如图 7 所示的结果。
 
-<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image6/M00/37/90/Cgp9HWB37e-APupPAAJ0RW3kNww550.png"/>  
+
+<Image alt="Drawing 6.png" src="https://s0.lgstatic.com/i/image6/M00/37/90/Cgp9HWB37e-APupPAAJ0RW3kNww550.png"/> 
+  
 图 7 local-cache/no 检测结果
 
 如果遇到了 CPU 占用和事件延迟这类问题就使用 clinic flame 来进一步分析，我们从刚才的运行结果中，取出测试方法，把 doctor 修改为 flame 即可，如下命令所示（请注意要回到项目根目录去运行，不要在当前 bin 目录）。
@@ -214,7 +230,9 @@ clinic flame --on-port "wrk http://127.0.0.1:3000/local-cache/no" -- node app.js
 
 成功运行后，打开相应的 html 文件，可以看到如图 8 所示的结果。
 
-<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image6/M00/37/90/Cgp9HWB37fiAX8tvAAJ_iWJXzkU653.png"/>  
+
+<Image alt="Drawing 7.png" src="https://s0.lgstatic.com/i/image6/M00/37/90/Cgp9HWB37fiAX8tvAAJ_iWJXzkU653.png"/> 
+  
 图 8 clinic flame 运行结果
 
 在图 8 中我们可以非常清晰地看到提示，具体在 localCache.js 中的第 20 行占用的问题，你都不用去详细分析就可以轻松得到结论。
@@ -234,3 +252,4 @@ npm run clinic-test
 我们本讲实现的自动化工具，还可以继续抽离细化，希望你可以根据自己的想法生成一个比较通用的工具，如果有人抽离出来后，请给出 GitHub 地址，让大家可以一起来使用，一起来维护。
 
 下一讲我们将进入实战模块，基本把当前 Node.js 的相关知识都介绍完了，我们也开始进行一些项目尝试。
+

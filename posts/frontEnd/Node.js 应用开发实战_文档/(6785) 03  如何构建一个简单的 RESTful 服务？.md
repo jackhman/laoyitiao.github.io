@@ -1,3 +1,5 @@
+# 03如何构建一个简单的RESTful服务？
+
 前面几讲都是一些知识点的阐述，本讲将应用前面讲到的知识点，来实现一个简单版本的 RESTful 系统架构，并在此架构上实现一些简单的应用。
 
 ### 基础技术点
@@ -22,7 +24,9 @@ RESTful（Representational State Transfer）是一种架构的**约束条件** �
 
 我们应该都比较熟知 MVC 架构，它在前后端分离中起到了非常重要的作用，我们先来看下传统的 MVC 架构的模式，如图 1 所示。
 
-<Image alt="图片 2.png" src="https://s0.lgstatic.com/i/image6/M00/17/08/CioPOWBHMl-ASR4aAAAg3opNISU640.png"/>
+
+<Image alt="图片 2.png" src="https://s0.lgstatic.com/i/image6/M00/17/08/CioPOWBHMl-ASR4aAAAg3opNISU640.png"/> 
+
 
 此模式中：
 
@@ -34,14 +38,18 @@ RESTful（Representational State Transfer）是一种架构的**约束条件** �
 
 但是在目前服务划分较细的情况下，M 层不仅仅是数据库操作，因此这种架构模式显得有些力不从心，导致开发的数据以及业务逻辑有时候在 M 层，有时候却在 C 层。出现这类情况的核心原因是 C 与 C 之间无法进行复用，如果需要复用则需要放到 M 层，那么业务逻辑就会冗余在 M，代码会显得非常繁杂，如图 2 所示。
 
-<Image alt="图片 4.png" src="https://s0.lgstatic.com/i/image6/M00/17/0C/Cgp9HWBHMnaAG42WAAA3-AZ5WeM867.png"/>  
+
+<Image alt="图片 4.png" src="https://s0.lgstatic.com/i/image6/M00/17/0C/Cgp9HWBHMnaAG42WAAA3-AZ5WeM867.png"/> 
+  
 图 2 MVC 模式问题
 
 为了解决以上问题，在经过一些实践后，我在研发过程中提出了一套新的架构模式，当然也有他人提到过（比如 Eggjs 框架中的模式）。这种模式也会应用在本专栏的整个架构体系中，我们暂且叫作 MSVC（Model、Service、View、Controller）。
 
 我们先来看下 MSVC 的架构模式，如图 3 所示。
 
-<Image alt="图片 6.png" src="https://s0.lgstatic.com/i/image6/M00/17/09/CioPOWBHMomAfpfmAABDDmUKgC4829.png"/>
+
+<Image alt="图片 6.png" src="https://s0.lgstatic.com/i/image6/M00/17/09/CioPOWBHMomAfpfmAABDDmUKgC4829.png"/> 
+
 
 将所有数据相关的操作都集中于 M 层，而 M 层复用的业务逻辑则转到新的 S 层，C 层则负责核心业务处理，可以调用 M 和 S 层。以上是相关知识点，接下来我们进行架构的实践设计。
 
@@ -55,7 +63,9 @@ RESTful（Representational State Transfer）是一种架构的**约束条件** �
 
 为了更清晰些，我绘制了一个时序图来表示，如图 4 所示。
 
-<Image alt="图片 7.png" src="https://s0.lgstatic.com/i/image6/M00/17/0C/Cgp9HWBHMpOASLZ7AACJ0Un2XOA103.png"/>  
+
+<Image alt="图片 7.png" src="https://s0.lgstatic.com/i/image6/M00/17/0C/Cgp9HWBHMpOASLZ7AACJ0Un2XOA103.png"/> 
+  
 图 4 例子系统时序图
 
 在图 4 中详细的过程是：
@@ -157,7 +167,9 @@ const server = http.createServer(async (req, res) => {
 
 在 MongoDB 中查询到具体的 contents 后，再调用 filterUserinfo 这个函数将 contents 中的 user_id 转化为 userinfo，具体代码如图 5 所示（为了代码简洁，我使用了截图，源代码请参考 [GitHub](https://github.com/love-flutter/nodejs-column) 上的）：
 
-<Image alt="图片 8.png" src="https://s0.lgstatic.com/i/image6/M01/17/09/CioPOWBHMqSAeQfTAAF5ba4WuFA603.png"/>  
+
+<Image alt="图片 8.png" src="https://s0.lgstatic.com/i/image6/M01/17/09/CioPOWBHMqSAeQfTAAF5ba4WuFA603.png"/> 
+  
 图 5 filterUserinfo 代码实现
 
 在上面代码中的第 52 行是调用 API server 将用户的 userIds 转化为 userinfos，最后在 64 行，将获取的 userinfos 添加到 contents 中。
@@ -176,7 +188,9 @@ http://127.0.0.1:5000/v1/userinfos?user_ids=1001,1002
 
 你将会看到一个 JSON 的返回结构，如图 6 所示。
 
-<Image alt="图片 9.png" src="https://s0.lgstatic.com/i/image6/M00/17/0D/Cgp9HWBHMqyAFEfxAACiD747m4U810.png"/>  
+
+<Image alt="图片 9.png" src="https://s0.lgstatic.com/i/image6/M00/17/0D/Cgp9HWBHMqyAFEfxAACiD747m4U810.png"/> 
+  
 图 6 API server 返回信息
 
 接下来我们访问如下地址，并且打开 chrome 的控制台的 network 状态栏。
@@ -187,7 +201,9 @@ http://127.0.0.1:5000/v1/test
 
 你将会看到返回的状态码是 404，如图 7 所示，这也是 restful 的规范之一，即正确地使用 http 状态码。
 
-<Image alt="图片 10.png" src="https://s0.lgstatic.com/i/image6/M01/17/0D/Cgp9HWBHMrWAHu5_AAFIdt9MME4795.png"/>  
+
+<Image alt="图片 10.png" src="https://s0.lgstatic.com/i/image6/M01/17/0D/Cgp9HWBHMrWAHu5_AAFIdt9MME4795.png"/> 
+  
 图 7 异常响应返回
 
 接下来我们请求 restful server 的 API，同样使用浏览器打开如下接口地址：
@@ -198,7 +214,9 @@ http://127.0.0.1:4000/v1/contents
 
 你将会看到如图 8 所示的响应结果。
 
-<Image alt="图片 11.png" src="https://s0.lgstatic.com/i/image6/M01/17/0D/Cgp9HWBHMr-AKdSMAAFW1ay8vPI075.png"/>  
+
+<Image alt="图片 11.png" src="https://s0.lgstatic.com/i/image6/M01/17/0D/Cgp9HWBHMr-AKdSMAAFW1ay8vPI075.png"/> 
+  
 图 8 contents 响应结果
 
 以上就实现了一个简单 restful 服务的功能，你可以看到代码都堆积在 index.js 中，并且代码逻辑还比较简单，如果稍微复杂一些，这种架构模式根本没法进行团队合作，或者后期维护，因此就需要 MVC 和 MVCS 架构模式来优化这种场景。
@@ -213,7 +231,9 @@ http://127.0.0.1:4000/v1/contents
 
 既然是 M 和 C，我们就先思考下，上面的 restful server 中哪些是 M 层的逻辑，哪些是 C 层的逻辑。
 
-<Image alt="图片 12.png" src="https://s0.lgstatic.com/i/image6/M01/17/0D/Cgp9HWBHMsyAF-PaAAB-xAx-32s648.png"/>
+
+<Image alt="图片 12.png" src="https://s0.lgstatic.com/i/image6/M01/17/0D/Cgp9HWBHMsyAF-PaAAB-xAx-32s648.png"/> 
+
 
 以上是所有的逻辑，根据表格，我们首先创建两个目录分别是 **model** 和 **Controller**：
 
@@ -246,7 +266,9 @@ const routerMapping = {
 
 路由配置完成以后，就需要根据路由配置，将请求路径、转发到处理相应功能的模块或者类、函数中去，代码如图 9 所示。
 
-<Image alt="图片 13.png" src="https://s0.lgstatic.com/i/image6/M01/17/0D/Cgp9HWBHMtiAAs7YAAJNxih_ssE949.png"/>  
+
+<Image alt="图片 13.png" src="https://s0.lgstatic.com/i/image6/M01/17/0D/Cgp9HWBHMtiAAs7YAAJNxih_ssE949.png"/> 
+  
 图 9 index 核心逻辑
 
 * 第一个红色框内的部分，判断的是路由是否在配置内，不存在则返回 404；
@@ -265,12 +287,16 @@ const routerMapping = {
 
 我们来看下这部分代码，如图 10 所示。
 
-<Image alt="图片 14.png" src="https://s0.lgstatic.com/i/image6/M01/17/0B/CioPOWBHMxSAAxc8AAF_MvEbU10031.png"/>  
+
+<Image alt="图片 14.png" src="https://s0.lgstatic.com/i/image6/M01/17/0B/CioPOWBHMxSAAxc8AAF_MvEbU10031.png"/> 
+  
 图 10 Controller 基类
 
 功能还是比较简单的，只是提炼了一些 Controller 共同的部分。接下来我们再来实现 content.js 这个 Controller，代码如图 11 所示：
 
-<Image alt="图片 15.png" src="https://s0.lgstatic.com/i/image6/M01/17/0E/Cgp9HWBHMwaAMQK8AAD-onTOdVQ611.png"/>  
+
+<Image alt="图片 15.png" src="https://s0.lgstatic.com/i/image6/M01/17/0E/Cgp9HWBHMwaAMQK8AAD-onTOdVQ611.png"/> 
+  
 图 11 content.js Controller
 
 我们在初次实现时，可以不关注图 11 中的第 2 和 3 行，实现红色框内的代码即可。可以将 list 暂时设置为空，实现完成后，我们在根目录运行以下命令，启动服务。
@@ -297,12 +323,16 @@ http://127.0.0.1:3000/v1/test
 
 接下来我们再来实现 Model 层部分，和 Controller 类似，我们也需要一个基类来处理 Model 层相似的逻辑，然后其他 Model 来继承这个基类，这部分如图 12 所示。
 
-<Image alt="图片 16.png" src="https://s0.lgstatic.com/i/image6/M00/17/0B/CioPOWBHMx2AHsKzAAEYhjLBhO4974.png"/>  
+
+<Image alt="图片 16.png" src="https://s0.lgstatic.com/i/image6/M00/17/0B/CioPOWBHMx2AHsKzAAEYhjLBhO4974.png"/> 
+  
 图 12 Model 基类
 
 这个基类首先设置了 db 名称，其次定义了一个 GET 方法来获取表的操作句柄，这部分代码与上面简单 restful 服务的类似。完成基类后，我们再来完善 model 中的 content.js 逻辑。
 
-<Image alt="图片 17.png" src="https://s0.lgstatic.com/i/image6/M01/17/0E/Cgp9HWBHMyeAPElfAAEk45BmKsI006.png"/>  
+
+<Image alt="图片 17.png" src="https://s0.lgstatic.com/i/image6/M01/17/0E/Cgp9HWBHMyeAPElfAAEk45BmKsI006.png"/> 
+  
 图 13 model content.js 代码实现
 
 这部分代码主要方法是 **getList**，原理和简单 restful server 中的查询类似，在第 11 行通过父类的 GET 方法获取表 content 的操作句柄，再调用 MongoDB 的 find 方法查询 contents。有了 model content 后，我们再回去完善 content.js Controller 中的 list 函数部分逻辑，代码封装的比较简洁，如下所示：
@@ -324,7 +354,9 @@ http://127.0.0.1:3000/v1/test
 
 在上面的代码中存在一个问题，就是 _filterUserinfo 是放在 Controller 来处理，这个方法又会涉及调用 API server 的逻辑，看起来也是数据处理部分，从原理上说这部分不适合放在 Controller。其次在其他 Controller 也需要 _filterUserinfo 时，这时候就比较懵逼了，比如我们现在有另外一个 Controller 叫作 recommend.js，这里面也是拉取推荐的 content，也需要这个 _filterUserinfo 方法，如图 14 所示。
 
-<Image alt="图片 18.png" src="https://s0.lgstatic.com/i/image6/M00/17/0B/CioPOWBHMzCANv2nAAFcFfow9m4167.png"/>  
+
+<Image alt="图片 18.png" src="https://s0.lgstatic.com/i/image6/M00/17/0B/CioPOWBHMzCANv2nAAFcFfow9m4167.png"/> 
+  
 图 14 MVC 复用性问题例子
 
 其中左边是存在的矛盾，因为 _filterUserinfo 在 Controller 是私有方法，recommend Controller 调用不到，那么为了复用，我们只能将该方法封装到 content-model 中，并且将数据也集中在 Model 层去。
@@ -337,7 +369,9 @@ http://127.0.0.1:3000/v1/test
 
 为了解决这个问题，有一个新的概念------Service 层，具体如图 15 所示。
 
-<Image alt="图片 19.png" src="https://s0.lgstatic.com/i/image6/M00/17/0E/Cgp9HWBHMzqAc1JJAAFspSJGcu8417.png"/>  
+
+<Image alt="图片 19.png" src="https://s0.lgstatic.com/i/image6/M00/17/0E/Cgp9HWBHMzqAc1JJAAFspSJGcu8417.png"/> 
+  
 图 15 MSVC 优化效果
 
 * 图中的浅红色框内，就是新架构模式的 M 层；
@@ -379,8 +413,11 @@ http://127.0.0.1:3000/v1/test
 
 *** ** * ** ***
 
-[<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M00/12/FA/CioPOWBBrAKAAod-AASyC72ZqWw233.png"/>](https://shenceyun.lagou.com/t/mka)
+[
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image6/M00/12/FA/CioPOWBBrAKAAod-AASyC72ZqWw233.png"/> 
+](https://shenceyun.lagou.com/t/mka)
 
 **《大前端高薪训练营》**
 
 对标阿里 P7 技术需求 + 每月大厂内推，6 个月助你斩获名企高薪 Offer。[点击链接](https://shenceyun.lagou.com/t/mka)，快来领取！
+

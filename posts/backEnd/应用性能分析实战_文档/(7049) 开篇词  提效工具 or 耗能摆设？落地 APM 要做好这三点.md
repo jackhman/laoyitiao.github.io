@@ -1,3 +1,5 @@
+# 开篇词提效工具or耗能摆设？落地APM要做好这三点
+
 你好，我是赵禹光，欢迎来到我的《应用性能分析实战》专栏。正式开讲前，我先介绍一下我自己，以及我们这个专栏的主角 APM。
 
 我是贝壳找房 APM 架构师，目前在贝壳找房从事了三年的 APM 研发工作。我从 0 到 1 设计搭建的 APM 平台，在贝壳找房内部监控着数千个应用服务，并支撑着二手房、新房、租房、装修等多个核心业务线。
@@ -65,7 +67,9 @@ APM "**不好用**"的局面也是这样发生的：全体动员部署后，由�
 
 工具是 APM 的基础和重点，我会讲述各个 APM 领域 TOP 1 的开源产品。无论是现在走在前沿、社区非常强大的，还是企业背书，迭代较慢但存量较大的 APM 工具，我都会详解其产品功能、业务特色，及其学习路径和落地方法。让你在线上问题出现时，能不犹豫地选择适当工具剖析问题，定位故障。
 
-<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/27/BC/CioPOWBdpX2AGGVvAAMJn3ATN2U215.png"/>
+
+<Image alt="Drawing 1.png" src="https://s0.lgstatic.com/i/image6/M00/27/BC/CioPOWBdpX2AGGVvAAMJn3ATN2U215.png"/> 
+
 
 **Part 2. 不读源码学原理**
 
@@ -99,4 +103,7 @@ APM "**不好用**"的局面也是这样发生的：全体动员部署后，由�
 
 最后希望这个《应用性能分析实战》专栏，能够帮助更多 APM 使用者，拨云见日，成为解决问题的专家，实现解决问题的正向循环。
 
-<Image alt="应用性能分析实战金句-开篇词.png" src="https://s0.lgstatic.com/i/image6/M00/29/AE/Cgp9HWBhkMWAK31sAAE7pLNtneE876.png"/>
+
+<Image alt="应用性能分析实战金句-开篇词.png" src="https://s0.lgstatic.com/i/image6/M00/29/AE/Cgp9HWBhkMWAK31sAAE7pLNtneE876.png"/> 
+
+

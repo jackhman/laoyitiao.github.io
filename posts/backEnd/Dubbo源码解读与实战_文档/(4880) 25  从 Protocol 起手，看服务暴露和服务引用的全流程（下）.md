@@ -1,3 +1,5 @@
+# 25从Protocol起手，看服务暴露和服务引用的全流程（下）
+
 在上一课时，我们以 DubboProtocol 实现为基础，详细介绍了 Dubbo 服务发布的核心流程。在本课时，我们继续介绍 DubboProtocol 中**服务引用**相关的实现。
 
 ### refer 流程
@@ -49,12 +51,16 @@ private ExchangeClient[] getClients(URL url) {
 
 当使用独享连接的时候，对每个 Service 建立固定数量的 Client，每个 Client 维护一个底层连接。如下图所示，就是针对每个 Service 都启动了两个独享连接：
 
-<Image alt="Lark20201020-171207.png" src="https://s0.lgstatic.com/i/image/M00/61/11/CgqCHl-OqnqAD_WFAAGYtk5Nou4688.png"/>  
+
+<Image alt="Lark20201020-171207.png" src="https://s0.lgstatic.com/i/image/M00/61/11/CgqCHl-OqnqAD_WFAAGYtk5Nou4688.png"/> 
+  
 Service 独享连接示意图
 
 当使用共享连接的时候，会区分不同的网络地址（host:port），一个地址只建立固定数量的共享连接。如下图所示，Provider 1 暴露了多个服务，Consumer 引用了 Provider 1 中的多个服务，共享连接是说 Consumer 调用 Provider 1 中的多个服务时，是通过固定数量的共享 TCP 长连接进行数据传输，这样就可以达到减少服务端连接数的目的。
 
-<Image alt="Lark20201020-171159.png" src="https://s0.lgstatic.com/i/image/M00/61/06/Ciqc1F-OqoOAHURKAAF2m0HX5qU972.png"/>  
+
+<Image alt="Lark20201020-171159.png" src="https://s0.lgstatic.com/i/image/M00/61/06/Ciqc1F-OqoOAHURKAAF2m0HX5qU972.png"/> 
+  
 Service 共享连接示意图
 
 那怎么去创建共享连接呢？**创建共享连接的实现细节是在 getSharedClient() 方法中** ，它首先从 referenceClientMap 缓存（Map\<String, List`<ReferenceCountExchangeClient>`\> 类型）中查询 Key（host 和 port 拼接成的字符串）对应的共享 Client 集合，如果查找到的 Client 集合全部可用，则直接使用这些缓存的 Client，否则要创建新的 Client 来补充替换缓存中不可用的 Client。示例代码如下：
@@ -104,7 +110,9 @@ private List<ReferenceCountExchangeClient> getSharedClient(URL url, int connectN
 
 ReferenceCountExchangeClient 中除了持有被修饰的 ExchangeClient 对象外，还有一个 referenceCount 字段（AtomicInteger 类型），用于记录该 Client 被应用的次数。从下图中我们可以看到，在 ReferenceCountExchangeClient 的构造方法以及 incrementAndGetCount() 方法中会增加引用次数，在 close() 方法中则会减少引用次数。
 
-<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/61/06/Ciqc1F-OqqeAHAStAAF3BXy1LnA608.png"/>  
+
+<Image alt="Drawing 2.png" src="https://s0.lgstatic.com/i/image/M00/61/06/Ciqc1F-OqqeAHAStAAF3BXy1LnA608.png"/> 
+  
 referenceCount 修改调用栈
 
 这样，对于同一个地址的共享连接，就可以满足两个基本需求：
@@ -148,7 +156,9 @@ private void replaceWithLazyClient() {
 
 LazyConnectExchangeClient 也是 ExchangeClient 的装饰器，它会在原有 ExchangeClient 对象的基础上添加懒加载的功能。LazyConnectExchangeClient 在构造方法中不会创建底层持有连接的 Client，而是在需要发送请求的时候，才会调用 initClient() 方法进行 Client 的创建，如下图调用关系所示：
 
-<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/61/11/CgqCHl-OqrqAHcvUAAC9KpqKEBQ887.png"/>  
+
+<Image alt="Drawing 3.png" src="https://s0.lgstatic.com/i/image/M00/61/11/CgqCHl-OqrqAHcvUAAC9KpqKEBQ887.png"/> 
+  
 initClient() 方法的调用位置
 
 initClient() 方法的具体实现如下：
@@ -229,3 +239,4 @@ ConfigurationUtils.getServerShutdownTimeout() 方法返回的阻塞时长默认�
 本课时我们继续上一课时的话题，以 DubboProtocol 为例，介绍了 Dubbo 在 Protocol 层实现服务引用的核心流程。我们首先介绍了 DubboProtocol 初始化 Client 的核心逻辑，分析了共享连接和独立连接的模型，后续还讲解了ReferenceCountExchangeClient、LazyConnectExchangeClient 等装饰器的功能和实现，最后说明了 destroy() 方法释放底层资源的相关实现。
 
 关于 DubboProtocol，你若还有什么疑问或想法，欢迎你留言跟我分享。下一课时，我们将开始深入介绍 Dubbo 的"心脏"------ Invoker 接口的相关实现，这是我们的一篇加餐文章，记得按时来听课。
+

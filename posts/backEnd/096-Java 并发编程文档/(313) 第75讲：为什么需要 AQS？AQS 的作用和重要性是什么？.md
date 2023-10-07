@@ -1,10 +1,14 @@
+# 第75讲：为什么需要AQS？AQS的作用和重要性是什么？
+
 本课时我们主要讲解 AQS 的重要性，为什么需要 AQS，以及它的作用。
 
 #### AQS 的重要性
 
 我们先来介绍一下 AQS（AbstractQueuedSynchronizer）的重要性，来看看 AQS 被用在了哪些类里面。
 
-<Image alt="并发1.png" src="https://s0.lgstatic.com/i/image3/M01/16/C4/Ciqah16mdUSAMRBKAAMgEaW4ZPQ663.png"/>
+
+<Image alt="并发1.png" src="https://s0.lgstatic.com/i/image3/M01/16/C4/Ciqah16mdUSAMRBKAAMgEaW4ZPQ663.png"/> 
+
 
 如图所示，AQS 在 **ReentrantLock、ReentrantReadWriteLock、Semaphore、CountDownLatch、ThreadPoolExcutor 的 Worker** 中都有运用（JDK 1.8），AQS 是这些类的底层原理。
 
@@ -54,11 +58,15 @@
 
 这里模拟候选人参加校招面试的场景。对公司而言，面试一般需要面试官和 HR 参加。通常有两种面试，一种是群面，一种是单面，群面是指多个同学一起参加的面试，例如规定是 10 个人一起面试，那群面规则就是先凑齐 10 个人，再统一面试。
 
-<Image alt="并发2.png" src="https://s0.lgstatic.com/i/image3/M01/09/99/CgoCgV6meLSAIJhqAAFbtx6oz1U847.png"/>
+
+<Image alt="并发2.png" src="https://s0.lgstatic.com/i/image3/M01/09/99/CgoCgV6meLSAIJhqAAFbtx6oz1U847.png"/> 
+
 
 而单面往往是流水线形式的、一对一的面试。假设我们一共有 5 个面试官进行单面，即这 5 个面试官同时分别面试一个候选人，在面试过程中，候选人会进行排队，前面的候选人面试完了以后，后面候选人就跟上，找空闲的面试官开始面试，这就是单面的场景。
 
-<Image alt="并发3.png" src="https://s0.lgstatic.com/i/image3/M01/16/C8/Ciqah16meL6AWGzVAAEpniT-r2k348.png"/>
+
+<Image alt="并发3.png" src="https://s0.lgstatic.com/i/image3/M01/16/C8/Ciqah16meL6AWGzVAAEpniT-r2k348.png"/> 
+
 
 乍看起来，群面和单面的面试规则是很不一样的：前者是多人一起面试，而后者是逐个面试。但也其实，**群面和单面也有很多相同的地方** （或者称为流程或环节），而这些相同的地方往往都是由 HR 负责的。比如面试者来了，HR 需要安排候选人**签到、就坐等待、排队，然后 HR 要按顺序叫号**，从而避免发生多个候选人冲突的情况，同时 HR 还要确保等待的同学最终都会被叫到，这一系列的内容都由 HR 负责，而这些内容无论是单面还是群面都是一样的。这些 HR 在面试中所做的工作，其实就可以比作是 AQS 所干的活儿。
 
@@ -79,3 +87,4 @@
 #### 总结
 
 在本课时中，我们主要介绍了学习 AQS 的思路，为什么需要 AQS，以及 AQS 的作用，利用 AQS 可以很方便的实现线程协作工具类，而且 AQS 被广泛应用在了 JUC 包中。
+
