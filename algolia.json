@@ -5,9 +5,9 @@
   "maxDepth": 10,
   "selectors": {
     "lvl0": {
-      "selector": ".sidebar > .sidebar-links > .sidebar-link .sidebar-link-item.active",
+      "selector": ".VPSidebarNav .title",
       "global": true,
-      "default_value": "Documentation"
+      "default_value": "专栏"
     },
     "lvl1": ".content h1",
     "lvl2": ".content h2",
