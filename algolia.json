@@ -4,13 +4,10 @@
   "rateLimit": 8,
   "maxDepth": 10,
   "selectors": {
-    "lvl0": [{
-      "selector": "",
-      "defaultValue": "Documentation"
-    },{
+    "lvl0": {
       "selector": ".content p.docIndex details a.VPLink",
-      "defaultValue": "专栏"
-    }],
+      "defaultValue": "文章"
+    },
     "lvl1": ".content h1",
     "lvl2": ".content h2",
     "lvl3": ".content h3",
