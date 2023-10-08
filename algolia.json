@@ -4,11 +4,7 @@
   "rateLimit": 8,
   "maxDepth": 10,
   "selectors": {
-    "lvl0": {
-      "selector": "#VPSidebarNav .title strong",
-      "global": true,
-      "default_value": "专栏"
-    },
+    "lvl0": "#VPSidebarNav .title strong",
     "lvl1": ".content h1",
     "lvl2": ".content h2",
     "lvl3": ".content h3",
