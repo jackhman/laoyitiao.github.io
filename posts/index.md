@@ -27,7 +27,7 @@ function changeTitle(str){
 
 <br/>
 
-# 文章索引
+# 文章专栏
 
 <p v-for="(post,pk) in data.folder" class="docIndex">
 

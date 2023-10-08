@@ -5,36 +5,28 @@
   "maxDepth": 10,
   "selectors": {
     "lvl0": {
-      "selector": ".content .docIndex a",
-      "default_value": "专栏",
-      "global": true
+      "selector": ".VPContent .docIndex a",
+      "default_value": "专栏"
     },
     "lvl1": {
-      "selector": ".content h1",
-      "default_value": "文章",
+      "selector": ".VPContent .content h1",
       "global": true
     },
     "lvl2": {
-      "selector": ".content h2",
-      "default_value": "文章",
-      "global": true
+      "selector": ".VPContent .content h2"
     },
     "lvl3": {
-      "selector": ".content h3",
-      "default_value": "文章",
-      "global": true
+      "selector": ".VPContent .content h3"
     },
     "lvl4": {
-      "selector": ".content h4",
-      "default_value": "文章",
-      "global": true
+      "selector": ".VPContent .content h4"
     },
     "lvl5": {
-      "selector": ".content h5",
-      "default_value": "文章",
-      "global": true
+      "selector": ".VPContent .content h5"
     },
-    "text": ".content p,.content li",
+    "content": {
+      "selector": ".VPContent .content p,.VPContent .content li"
+    },
     "lang": {
       "selector": "/html/@lang",
       "type": "xpath",
@@ -42,7 +34,6 @@
       "default_value": "zh-CN"
     }
   },
-  "indexHeadings": true,
   "custom_settings": {
     "attributesForFaceting": ["lang"]
   }
