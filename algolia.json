@@ -4,6 +4,11 @@
   "rateLimit": 8,
   "maxDepth": 10,
   "selectors": {
+    "lvl0": {
+      "selector": ".sidebar > .sidebar-links > .sidebar-link .sidebar-link-item.active",
+      "global": true,
+      "default_value": "Documentation"
+    },
     "lvl1": ".content h1",
     "lvl2": ".content h2",
     "lvl3": ".content h3",
