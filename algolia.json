@@ -4,29 +4,19 @@
   "rateLimit": 8,
   "maxDepth": 10,
   "selectors": {
-    "lvl0": {
-      "selector": ".VPContent .docIndex a",
-      "default_value": "专栏"
-    },
-    "lvl1": {
-      "selector": ".VPContent .content h1",
-      "global": true
-    },
-    "lvl2": {
-      "selector": ".VPContent .content h2"
-    },
-    "lvl3": {
-      "selector": ".VPContent .content h3"
-    },
-    "lvl4": {
-      "selector": ".VPContent .content h4"
-    },
-    "lvl5": {
-      "selector": ".VPContent .content h5"
-    },
-    "content": {
-      "selector": ".VPContent .content p,.VPContent .content li"
-    },
+    "lvl0": [{
+      "selector": "",
+      "defaultValue": "Documentation"
+    },{
+      "selector": ".content p.docIndex details a.VPLink",
+      "defaultValue": "专栏"
+    }],
+    "lvl1": ".content h1",
+    "lvl2": ".content h2",
+    "lvl3": ".content h3",
+    "lvl4": ".content h4",
+    "lvl5": ".content h5",
+    "content": ".content p, .content li",
     "lang": {
       "selector": "/html/@lang",
       "type": "xpath",
