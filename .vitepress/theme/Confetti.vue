@@ -7,7 +7,7 @@ onMounted(() => {
   const confettiElement = document.getElementById('confetti-holder');
   const confettiSettings = {
     "target": confettiElement,
-    "max": "30",
+    "max": "40",
     "size": "1.5",
     "animate": true,
     "props": ["circle", "square", "triangle"],
@@ -29,16 +29,6 @@ onMounted(() => {
       "src": "/confettiWidget/panda.png",
       "size": 40,
       "weight": .2
-    },{
-      "type": "svg",
-      "src": "/confettiWidget/panda-bear.png",
-      "size": 40,
-      "weight": .1
-    },{
-      "type": "svg",
-      "src": "/confettiWidget/happy-face.png",
-      "size": 40,
-      "weight": .1
     },{
       "type": "svg",
       "src": "/confettiWidget/love-birds.png",

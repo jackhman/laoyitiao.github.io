@@ -5,18 +5,14 @@ title: 首页
 hero:
   name: Jun的静态博客
   text: 不积硅步无以至千里
-  tagline: b.2023
   image:
     src: /logo/sloth512.png
     alt: VitePress
   
   actions:
     - theme: brand
-      text: 瞄一哈
+      text: 文章阅读
       link: /posts/
-    - theme: sponsor
-      text: 在GitHub上查看
-      link: https://github.com/laoyitiao/laoyitiao.github.io
 
 features:
   - icon:
@@ -50,11 +46,11 @@ features:
     z-index: -10;
 }
 
-#Confetti:after{
+.dark #Confetti:after{
     position: absolute;
     inset: 0;
     z-index: 1;
     content: '';
-    /*background-color: rgba(0,0,0,.1)*/
+    background-color: rgba(0,0,0,.3)
 }
 </style>

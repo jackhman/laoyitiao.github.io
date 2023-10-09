@@ -54,7 +54,7 @@ function changeTitle(str){
 
 如果您愿意提供好的设计或建议[点击此处留言](https://github.com/laoyitiao/laoyitiao.github.io/issues/new?title=主题设计)
 
-文章内容来自互联网，经HTML转换为Markdown后，由VitePress生成SPA，转换后的Markdown内容与VitePress已`基本兼容`。
+文章内容来自互联网，由HTML转换为Markdown后，由VitePress生成SPA，转换后的Markdown内容与VitePress已`基本兼容`。
 
 ::: warning 但仍存在以下问题【不影响使用】
 - :sweat:markdown`内容格式`[标题混乱]，`主题风格`[胡乱使用引用、列表等]都不够统一，不够美观且影响插件编写

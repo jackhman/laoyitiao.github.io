@@ -49,8 +49,8 @@ export default defineConfig({
             }
         },
         docFooter: {
-            prev: '上一页',
-            next: '下一页'
+            prev: '上一篇',
+            next: '下一篇'
         },
         nav: [
             {text: '首页', link: '/'},
@@ -67,7 +67,7 @@ export default defineConfig({
                 appId: 'FXWJW2H1XK',
                 apiKey: '7ed21ca5ac0fcda5a3dad33d19c7bec3',
                 indexName: 'docs_index',
-                maxResultsPerGroup: 20,
+                maxResultsPerGroup: 30,
                 locales: {
                     root: {
                         placeholder: '搜索文章',
