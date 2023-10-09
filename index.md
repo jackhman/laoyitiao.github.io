@@ -14,7 +14,7 @@ hero:
     - theme: brand
       text: 瞄一哈
       link: /posts/
-    - theme: alt
+    - theme: sponsor
       text: 在GitHub上查看
       link: https://github.com/laoyitiao/laoyitiao.github.io
 

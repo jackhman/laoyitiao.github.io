@@ -4,7 +4,11 @@
   "rateLimit": 8,
   "maxDepth": 10,
   "selectors": {
-    "lvl0": "#VPSidebarNav .title strong",
+    "lvl0": {
+      "selector": "#VPSidebarNav .title strong",
+      "global": true,
+      "defaultValue": "Documentation"
+    },
     "lvl1": ".content h1",
     "lvl2": ".content h2",
     "lvl3": ".content h3",
