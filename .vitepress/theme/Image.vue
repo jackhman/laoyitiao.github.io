@@ -8,6 +8,7 @@ const srcList = [src]
   <div class="demo-image__preview">
     <el-image
         :alt="alt"
+        lazy
         :hide-on-click-modal="true"
         :src="src"
         :zoom-rate="1.2"

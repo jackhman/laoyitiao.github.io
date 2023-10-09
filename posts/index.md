@@ -46,9 +46,15 @@ function changeTitle(str){
 
 
 ::: tip TIP:
-目前基本使用`VitePress`默认主题，有点单调，有时间会重新定制`自定义主题`，如果您愿意提供好的设计请[点击此处留言](https://github.com/laoyitiao/laoyitiao.github.io/issues/new?title=主题设计)
+目前基本使用`VitePress`默认主题，有点单调，有时间会去定制`自定义主题`，这将包括但不限于：
+- :star_struck:全新的布局设计，提升交互体验
+- :kissing_heart:更友好的搜索，支持分类分页近义词等...
+- :sunglasses:支持关键字索引，文档自动归类等...
+- :broken_heart:放弃`Gitalk`评论组件，自行开发评论服务，提升网络体验。[服务器到期了，啥时候有服务器用了啥时候加:sweat_smile:，可能会被攻击不一定上]
 
-内容来自互联网，经HTML转换为Markdown后，由VitePress生成SPA，转换后的Markdown内容与VitePress已`基本兼容`。
+如果您愿意提供好的设计或建议[点击此处留言](https://github.com/laoyitiao/laoyitiao.github.io/issues/new?title=主题设计)
+
+文章内容来自互联网，经HTML转换为Markdown后，由VitePress生成SPA，转换后的Markdown内容与VitePress已`基本兼容`。
 
 ::: warning 但仍存在以下问题【不影响使用】
 - :sweat:markdown`内容格式`[标题混乱]，`主题风格`[胡乱使用引用、列表等]都不够统一，不够美观且影响插件编写

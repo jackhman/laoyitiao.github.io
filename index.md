@@ -16,30 +16,21 @@ hero:
       link: /posts/
     - theme: alt
       text: 在GitHub上查看
-      link: https://github.com/laoyitiao/docs
+      link: https://github.com/laoyitiao/laoyitiao.github.io
 
 features:
   - icon:
       src: /confettiWidget/panda.png
-    title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-    linkText: 百度
-    link: http://www.baidu.com
-    rel: external
+    title: 完整
+    details: 所有知识点深入剖析，深入浅出
   - icon:
       src: /confettiWidget/cute.png
-    title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-    linkText: 前往查看
-    link: http://www.baidu.com
-    rel: external
+    title: 全面
+    details: 包含frontEnd、backEnd、devops的方方面面
   - icon:
       src: /confettiWidget/love-birds.png
-    title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-    linkText: 百度
-    link: http://www.baidu.com
-    rel: external
+    title: 干净
+    details: Docs不会收集您的任何信息
 ---
 
 
