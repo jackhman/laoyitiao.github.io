@@ -94,19 +94,22 @@ router.onAfterRouteChanged=(to)=>{
     </template>
   </DefaultTheme.Layout>
 
-  <el-dialog
-      v-model="dialogVisible"
-      title="提醒"
-      width="30%"
-  >
-    <p>您即将离开Docs,前往:  <el-text class="mx-1" type="warning">{{externalLink}}</el-text></p>
-    <template #footer>
+  <ClientOnly>
+    <el-dialog
+        v-model="dialogVisible"
+        title="提醒"
+        width="30%"
+    >
+      <p>您即将离开Docs,前往:  <el-text class="mx-1" type="warning">{{externalLink}}</el-text></p>
+      <template #footer>
       <span class="dialog-footer">
         <el-button @click="dialogVisible = false">取消</el-button>
         <el-button type="primary" @click="confirm">
           确定
         </el-button>
       </span>
-    </template>
-  </el-dialog>
+      </template>
+    </el-dialog>
+  </ClientOnly>
+
 </template>
