@@ -8,6 +8,9 @@ next: false
 title: '阅读推荐'
 ---
 
+::: warning
+内容来源于互联网，请自行甄别风险
+:::
 ## 语言无关
 
 ### <a id="version-control-systems"></a><a id="git"></a><a id="svn"></a><a id="subversion"></a><a id="mercurial"></a>版本控制

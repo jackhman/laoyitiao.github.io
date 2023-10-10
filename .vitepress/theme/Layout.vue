@@ -6,10 +6,17 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
 import Url from 'url-parse'
+
 const route = useRoute()
 const router = useRouter();
 const title = ref('');
 
+const dialogVisible = ref(false)
+const externalLink = ref("")
+function confirm(){
+  dialogVisible.value = false
+  window.open(externalLink.value,"_blank");
+}
 
 function changeTitle(){
   const routeSplit = route.data.relativePath.split("/");
@@ -30,7 +37,8 @@ function t(e){
       window.open(e.target.href,"_self");
       return true
     }else {
-      window.open("/externalLinks?target="+e.target.href+"&alt="+e.target.innerText, '_blank');
+      externalLink.value = e.target.href
+      dialogVisible.value = true
       return false;
     }
   }
@@ -48,6 +56,7 @@ function removeClickListener() {
     a.removeEventListener("click",t)
   })
 }
+
 
 onMounted(()=>{
   preventAClick()
@@ -85,4 +94,19 @@ router.onAfterRouteChanged=(to)=>{
     </template>
   </DefaultTheme.Layout>
 
+  <el-dialog
+      v-model="dialogVisible"
+      title="提醒"
+      width="30%"
+  >
+    <p>您即将离开Docs,前往:  <el-text class="mx-1" type="warning">{{externalLink}}</el-text></p>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="dialogVisible = false">取消</el-button>
+        <el-button type="primary" @click="confirm">
+          确定
+        </el-button>
+      </span>
+    </template>
+  </el-dialog>
 </template>
