@@ -72,7 +72,7 @@ onBeforeUnmount(()=>{
 })
 
 
-NProgress.configure({ showSpinner: false }); // 显示右上角螺旋加载提示
+NProgress.configure({ showSpinner: true }); // 显示右上角螺旋加载提示
 router.onBeforeRouteChange=(to)=>{
   removeClickListener()
   NProgress.start();

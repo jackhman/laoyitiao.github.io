@@ -1,15 +1,15 @@
 
 #nprogress .bar {
-    background-color: var(--vp-c-indigo-1)!important;
+    background-color: var(--vp-c-brand-1)!important;
     height: 2px!important;
 }
 #nprogress .bar .peg{
-    box-shadow: 0 0 10px var(--vp-c-indigo-2), 0 0 5px var(--vp-c-indigo-2)!important;
+    box-shadow: 0 0 10px var(--vp-c-brand-1), 0 0 5px var(--vp-c-brand-1)!important;
 }
 
 #nprogress .spinner .spinner-icon {
-    border-top-color: var(--vp-c-indigo-3)!important;
-    border-left-color: var(--vp-c-indigo-3)!important;
+    border-top-color: var(--vp-c-brand-1)!important;
+    border-left-color: var(--vp-c-brand-1)!important;
 }
 
  :root {
