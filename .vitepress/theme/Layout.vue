@@ -57,15 +57,17 @@ function removeClickListener() {
   })
 }
 
-
+let width = ref('360')
 onMounted(()=>{
   preventAClick()
   window.onpopstate = ()=>{
     setTimeout(preventAClick,500)
   }
+  window.onresize = function (){
+    width.value = document.body.clientWidth >= 1100 ? '30%' : '80%'
+  }
+  width.value = document.body.clientWidth >= 1100 ? '30%' : '80%'
 })
-
-
 
 onBeforeUnmount(()=>{
   removeClickListener()
@@ -98,7 +100,7 @@ router.onAfterRouteChanged=(to)=>{
     <el-dialog
         v-model="dialogVisible"
         title="提醒"
-        width="30%"
+        :width="width"
     >
       <p>您即将离开Docs,前往:  <el-text class="mx-1" type="warning">{{externalLink}}</el-text></p>
       <template #footer>
